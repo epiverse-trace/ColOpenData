@@ -1,4 +1,4 @@
-Package: packagetemplate
+Package: ColOpenData
 Title: ColOpenData
 Version: 0.0.1
 Authors@R: c(
@@ -11,12 +11,12 @@ Authors@R: c(
     person(given = "Mauricio", family = "Santos", , email = "om.santos@uniandes.edu.co", role = c("ctb")
   )
 Description: ColOpenData is a package that acquires, standardizes, and wrangles Colombian
-socioeconomic, climate and land cover data. It solves the problem of
-Colombian data being issued in different web pages and formats by using functions that
-allow the user to select the desired database and download it without having to do the
-exhausting acquisition process. Also, it allows these datasets to be merged so multiple
-operations, such as calculating statistics, can be made, taking into account information
-from different datasets.  
+    socioeconomic, climate and land cover data. It solves the problem of
+    Colombian data being issued in different web pages and formats by using functions that
+    allow the user to select the desired database and download it without having to do the
+    exhausting acquisition process. Also, it allows these datasets to be merged so multiple
+    operations, such as calculating statistics, can be made, taking into account information
+    from different datasets.  
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
