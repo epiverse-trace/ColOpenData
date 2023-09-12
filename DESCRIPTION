@@ -17,7 +17,6 @@ allow the user to select the desired database and download it without having to 
 exhausting acquisition process. Also, it allows these datasets to be merged so multiple
 operations, such as calculating statistics, can be made, taking into account information
 from different datasets.  
-    following format: Author et al. (2023) <doi:10.5281/zenodo.6619350>.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
