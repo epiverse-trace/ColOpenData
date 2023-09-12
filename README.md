@@ -5,7 +5,8 @@
 <!-- `packagename` is extracted from the DESCRIPTION file -->
 <!-- `gh_repo` is extracted via a special environment variable in GitHub Actions -->
 
-# packagetemplate <img src="man/figures/logo.svg" align="right" width="120" />
+# ColOpenData 
+<!-- <img src="man/figures/logo.svg" align="right" width="120" /> -->
 
 <!-- badges: start -->
 
@@ -17,12 +18,18 @@ coverage](https://codecov.io/gh/epiverse-trace/ColOpenData/branch/main/graph/bad
 [![lifecycle-concept](https://raw.githubusercontent.com/reconverse/reconverse.github.io/master/images/badge-concept.svg)](https://www.reconverse.org/lifecycle.html#concept)
 <!-- badges: end -->
 
-packagetemplate provides functions to ….
+ColOpenData is a package that acquires, standardizes, and wrangles Colombian
+socioeconomic, climate and land cover data. It solves the problem of
+Colombian data being issued in different web pages and formats by using functions that
+allow the user to select the desired database and download it without having to do the
+exhausting acquisition process. Also, it allows these datasets to be merged so multiple
+operations, such as calculating statistics, can be made, taking into account information
+from different datasets.
 
 <!-- This sentence is optional and can be removed -->
 
-packagetemplate is developed at the [CENTER\|similar](url) at the
-[UNIVERSITY\|similar](url) as part of the [Epiverse-TRACE
+ColOpenData is developed at the [Universidad de Los
+Andes](https://uniandes.edu.co/) as part of the [Epiverse-TRACE
 program](https://data.org/initiatives/epiverse/).
 
 ## Installation
@@ -34,12 +41,6 @@ You can install the development version of packagetemplate from
 # install.packages("pak")
 pak::pak("epiverse-trace/ColOpenData")
 ```
-
-## Example
-
-These examples illustrate some of the current functionalities
-
-## Development
 
 ### Lifecycle
 
