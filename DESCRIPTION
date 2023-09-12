@@ -3,8 +3,8 @@ Title: ColOpenData
 Version: 0.0.1
 Authors@R: c(
     person(given = "Maria Camila", family = "Tavera", , email = "mc.tavera@uniandes.edu.co", role = c("aut", "cre")),
-    person(given = "Juan Daniel", family = "Umaña", , email = "jd.umana10@uniandes.edu.co", role = c("aut")),
-    person(given = "Julián", family = "Otero", , email = "avinash@data.org", role = c("aut")),
+    person(given = "Juan Daniel", family = "Uma?a", , email = "jd.umana10@uniandes.edu.co", role = c("aut")),
+    person(given = "Julian", family = "Otero", , email = "jd.otero10@uniandes.org", role = c("aut")),
     person(given = "Juan Felipe", family = "Montenegro", , email = "jf.montenegro@uniandes.edu.co", role = c("aut"),
     person(given = "Juan Manuel", family = "Cordovez", , email = "jucordov@uniandes.edu.co", role = c("ctb"),
     person(given = "Catalina", family = "Gonzalez", , email = "cgonzalez@uniandes.edu.co", role = c("ctb"),
