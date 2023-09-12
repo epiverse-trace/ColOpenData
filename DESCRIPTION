@@ -1,22 +1,22 @@
 Package: packagetemplate
-Title: Your Package Title in Titlecase
+Title: ColOpenData
 Version: 0.0.1
 Authors@R: c(
-    person(given = "Thibaut", family = "Jombart", , email = "thibaut@data.org", role = c("aut", "cre")),
-    person(given = "Avinash", family = "Laddha", , email = "avinash@data.org", role = c("aut")),
-    person(given = "James M.", family = "Azam", , email = "james.azam@lshtm.ac.uk", role = c("aut"),
-           comment = c(ORCID = "https://orcid.org/0000-0001-5782-7330")),
-    person(given = "Jaime A.", family = "Pavlich-Mariscal", , email = "jpavlich@javeriana.edu.co", role = c("ctb"),
-           comment = c(ORCID = "https://orcid.org/0000-0002-3892-6680")),
-    person(given = "Pratik", family = "Gupte", email = "pratik.gupte@lshtm.ac.uk", role = c("aut"), 
-           comment = c(ORCID = "https://orcid.org/0000-0001-5294-7819")),
-    person(given = "Joshua W.", family = "Lambert", email = "joshua.lambert@lshtm.ac.uk", role = c("aut"),
-           comment = c(ORCID = "0000-0001-5218-3046")),
-    person(given = "Hugo", family = "Gruson", email = "hugo.gruson+R@normalesup.org", role = c("aut"),
-           comment = c(ORCID = "https://orcid.org/0000-0002-4094-1476"))
+    person(given = "Maria Camila", family = "Tavera", , email = "mc.tavera@uniandes.edu.co", role = c("aut", "cre")),
+    person(given = "Juan Daniel", family = "Umaña", , email = "jd.umana10@uniandes.edu.co", role = c("aut")),
+    person(given = "Julián", family = "Otero", , email = "avinash@data.org", role = c("aut")),
+    person(given = "Juan Felipe", family = "Montenegro", , email = "jf.montenegro@uniandes.edu.co", role = c("aut"),
+    person(given = "Juan Manuel", family = "Cordovez", , email = "jucordov@uniandes.edu.co", role = c("ctb"),
+    person(given = "Catalina", family = "Gonzalez", , email = "cgonzalez@uniandes.edu.co", role = c("ctb"),
+    person(given = "Mauricio", family = "Santos", , email = "om.santos@uniandes.edu.co", role = c("ctb")
   )
-Description: Your package description. It must end with a period (".") and
-    include relevant bibliographical references if applicable, using the 
+Description: ColOpenData is a package that acquires, standardizes, and wrangles Colombian
+socioeconomic, climate and land cover data. It solves the problem of
+Colombian data being issued in different web pages and formats by using functions that
+allow the user to select the desired database and download it without having to do the
+exhausting acquisition process. Also, it allows these datasets to be merged so multiple
+operations, such as calculating statistics, can be made, taking into account information
+from different datasets.  
     following format: Author et al. (2023) <doi:10.5281/zenodo.6619350>.
 License: MIT + file LICENSE
 Encoding: UTF-8
