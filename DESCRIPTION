@@ -2,13 +2,13 @@ Package: ColOpenData
 Title: ColOpenData
 Version: 0.0.1
 Authors@R: c(
-    person(given = "Maria Camila", family = "Tavera", , email = "mc.tavera@uniandes.edu.co", role = c("aut", "cre")),
-    person(given = "Juan Daniel", family = "Uma?a", , email = "jd.umana10@uniandes.edu.co", role = c("aut")),
+    person(given = "Maria Camila", family = "Tavera Cifuentes", , email = "mc.tavera@uniandes.edu.co", role = c("aut", "cre")),
+    person(given = "Juan D.", family = "Umana", , email = "jd.umana10@uniandes.edu.co", role = c("aut")),
     person(given = "Julian", family = "Otero", , email = "jd.otero10@uniandes.org", role = c("aut")),
-    person(given = "Juan Felipe", family = "Montenegro", , email = "jf.montenegro@uniandes.edu.co", role = c("aut"),
-    person(given = "Juan Manuel", family = "Cordovez", , email = "jucordov@uniandes.edu.co", role = c("ctb"),
-    person(given = "Catalina", family = "Gonzalez", , email = "cgonzalez@uniandes.edu.co", role = c("ctb"),
-    person(given = "Mauricio", family = "Santos", , email = "om.santos@uniandes.edu.co", role = c("ctb")
+    person(given = "Juan F.", family = "Montenegro", , email = "jf.montenegro@uniandes.edu.co", role = c("aut")),
+    person(given = "Juan Manuel", family = "Cordovez", , email = "jucordov@uniandes.edu.co", role = c("ctb")),
+    person(given = "Catalina", family = "Gonzalez Uribe", , email = "cgonzalez@uniandes.edu.co", role = c("ctb")),
+    person(given = "Mauricio", family = "Santos-Vega", , email = "om.santos@uniandes.edu.co", role = c("ctb"))
   )
 Description: ColOpenData is a package that acquires, standardizes, and wrangles Colombian
     socioeconomic, climate and land cover data. It solves the problem of
