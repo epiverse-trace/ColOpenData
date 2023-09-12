@@ -34,7 +34,7 @@ program](https://data.org/initiatives/epiverse/).
 
 ## Installation
 
-You can install the development version of packagetemplate from
+You can install the development version of ColOpenData from
 [GitHub](https://github.com/) with:
 
 ``` r
@@ -56,7 +56,7 @@ requests](https://github.com/epiverse-trace/ColOpenData/pulls).
 
 ### Code of Conduct
 
-Please note that the packagetemplate project is released with a
+Please note that the ColOpenData project is released with a
 [Contributor Code of
 Conduct](https://github.com/epiverse-trace/.github/blob/main/CODE_OF_CONDUCT.md).
 By contributing to this project, you agree to abide by its terms.
