@@ -1,0 +1,46 @@
+# -----------------------------------------------------------
+# CITATION file created with {cffr} R package, v0.5.0
+# See also: https://docs.ropensci.org/cffr/
+# -----------------------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "ColOpenData" in publications use:'
+type: software
+license: MIT
+title: 'ColOpenData: ColOpenData'
+version: 0.0.1
+abstract: ColOpenData is a package that acquires, standardizes, and wrangles Colombian
+  socioeconomic, climate and land cover data. It solves the problem of Colombian data
+  being issued in different web pages and formats by using functions that allow the
+  user to select the desired database and download it without having to do the exhausting
+  acquisition process. Also, it allows these datasets to be merged so multiple operations,
+  such as calculating statistics, can be made, taking into account information from
+  different datasets.
+references:
+- type: software
+  title: spelling
+  abstract: 'spelling: Tools for Spell Checking in R'
+  notes: Suggests
+  url: https://docs.ropensci.org/spelling/
+  repository: https://CRAN.R-project.org/package=spelling
+  authors:
+  - family-names: Ooms
+    given-names: Jeroen
+    email: jeroen@berkeley.edu
+    orcid: https://orcid.org/0000-0002-4035-0289
+  - family-names: Hester
+    given-names: Jim
+    email: james.hester@rstudio.com
+  year: '2023'
+- type: software
+  title: testthat
+  abstract: 'testthat: Unit Testing for R'
+  notes: Suggests
+  url: https://testthat.r-lib.org
+  repository: https://CRAN.R-project.org/package=testthat
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+  year: '2023'
+  version: '>= 3.0.0'
