@@ -16,6 +16,23 @@ abstract: ColOpenData is a package that acquires, standardizes, and wrangles Col
   acquisition process. Also, it allows these datasets to be merged so multiple operations,
   such as calculating statistics, can be made, taking into account information from
   different datasets.
+authors:
+- family-names: Tavera Cifuentes
+  given-names: Maria Camila
+  email: mc.tavera@uniandes.edu.co
+- family-names: Umana
+  given-names: Juan D.
+  email: jd.umana10@uniandes.edu.co
+- family-names: Otero
+  given-names: Julian
+  email: jd.otero10@uniandes.org
+- family-names: Montenegro
+  given-names: Juan F.
+  email: jf.montenegro@uniandes.edu.co
+contact:
+- family-names: Tavera Cifuentes
+  given-names: Maria Camila
+  email: mc.tavera@uniandes.edu.co
 references:
 - type: software
   title: spelling
