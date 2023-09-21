@@ -28,3 +28,9 @@ Config/testthat/edition: 3
 Config/Needs/website:
     epiverse-trace/epiversetheme
 Language: en-US
+Imports: 
+    checkmate,
+    dplyr,
+    magrittr,
+    rlang,
+    sf
