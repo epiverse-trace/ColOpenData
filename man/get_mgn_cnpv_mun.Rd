@@ -27,4 +27,5 @@ Retrieve data from the 2018 National Population and Living Census
 \dontrun{
 get_mgn_cnpv_mun()
 }
+
 }
