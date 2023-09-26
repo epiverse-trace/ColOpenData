@@ -6,30 +6,27 @@
 #' geometry
 #' @param columns character vector indicating which columns are meant to be
 #' included in the consultation
-#' 
+#'
 #' @importFrom rlang .data
 #'
 #' @return a data.frame containing the consulted municipalities and desired
 #' columns
-#' @export
 #'
 #' @examples
 #' \dontrun{
 #' get_mgn_cnpv_mun()
 #' }
+#'
+#' @export
 get_mgn_cnpv_mun <- function(mun = "all", include_geometry = TRUE,
                              columns = "all") {
   checkmate::assert_class(mun, "character")
   checkmate::assert_class(columns, "character")
-  # import dataset
-  mgn_cnpv <- municipios # WRONG
+
+  mgn_path <- retrieve_path("MGNCNPV02")
+  census <- retrieve_dataset(mgn_path)
   if (!include_geometry) {
-    census <- sf::st_drop_geometry(mgn_cnpv)
-  } else {
-    if (sf::st_crs(mgn_cnpv)$epsg != 4686) {
-      sf::st_transform(mgn_cnpv, 4686)
-    }
-    census <- sf::st_make_valid(mgn_cnpv)
+    census <- sf::st_drop_geometry(census)
   }
   # check column names
   if (columns != "all" && !all(columns %in% colnames(census))) {
@@ -38,21 +35,25 @@ get_mgn_cnpv_mun <- function(mun = "all", include_geometry = TRUE,
     columns <- colnames(census)
   }
 
-  if (all(mun %in% mgn_cnpv$MPIO_CDPMP)) {
-    census_2 <- census %>%
+  if (all(mun %in% census$MPIO_CDPMP)) {
+    census <- census %>%
       dplyr::filter(.data$MPIO_CDPMP %in% mun) %>%
       dplyr::select(dplyr::all_of(c("MPIO_CDPMP", columns)))
-  } else if (all(mun %in% mgn_cnpv$MPIO_CNMBR)) {
-    census_2 <- census %>%
+  } else if (all(mun %in% census$MPIO_CNMBR)) {
+    census <- census %>%
       dplyr::filter(.data$MPIO_CNMBR %in% mun) %>%
-      dplyr::select(dplyr::all_of(c("MPIO_CNMBR",
-                                    columns)))
+      dplyr::select(dplyr::all_of(c(
+        "MPIO_CNMBR",
+        columns
+      )))
   } else if (all(mun == "all")) {
-    census_2 <- census %>% dplyr::select(dplyr::all_of(c("MPIO_CDPMP",
-                                                         columns)))
+    census <- census %>% dplyr::select(dplyr::all_of(c(
+      "MPIO_CDPMP",
+      columns
+    )))
   } else {
     stop("Some municipalities could not be found, please check your input")
   }
 
-  return(census_2)
+  return(census)
 }
