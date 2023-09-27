@@ -1,6 +1,7 @@
 ^LICENSE\.md$
 ^\.github$
 ^README\.Rmd$
+^README\.html$
 ^codecov\.yml$
 ^_pkgdown\.yml$
 ^docs$
