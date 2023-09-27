@@ -8,10 +8,13 @@
 #' @keywords internal
 retrieve_path <- function(dataset_name) {
   root <- "https://github.com/jd-otero/data_COD/blob/main"
+  #include all paths and datasets
   datasets <- c("MGNCNPV01", "MGNCNPV02")
   paths <- c(
-    paste0(root, "/MGN/MGN_NivelDepartamentoIntegrado_CNPV/MGN_AMN_DPTOS.RDS?raw=true"),
-    paste0(root, "/MGN/MGN_NivelMunicipioIntegrado_CNPV/MGN_AMN_MPIOS.RDS?raw=true")
+    file.path(root, "MGN/MGN_NivelDepartamentoIntegrado_CNPV",
+              "MGN_AMN_DPTOS.RDS?raw=true", sep = "/"),
+    file.path(root, "MGN/MGN_NivelMunicipioIntegrado_CNPV",
+              "MGN_AMN_MPIOS.RDS?raw=true", sep = "/")
   )
   paths_df <- data.frame(dataset = datasets, path = paths)
   file_path <- paths_df[paths_df$dataset == dataset_name, "path"]
