@@ -7,7 +7,8 @@
 filter_mgn_cnpv(
   .data,
   level,
-  filter = list(AD = "all", columns = "all"),
+  ad = NULL,
+  columns = NULL,
   include_geometry = TRUE
 )
 }
@@ -16,8 +17,9 @@ filter_mgn_cnpv(
 
 \item{level}{numeric, either 1 for department or 2 for municipality level}
 
-\item{filter}{list containing administrative divisions to be included and
-columns to select from dataframe}
+\item{ad}{character vector with municipalities to filter}
+
+\item{columns}{character vector with columns to filter}
 
 \item{include_geometry}{boolean to include (or not) the geometry.}
 }
