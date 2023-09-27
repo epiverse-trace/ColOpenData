@@ -19,6 +19,24 @@
     <loc>/news/index.html</loc>
   </url>
   <url>
+    <loc>/reference/download.html</loc>
+  </url>
+  <url>
+    <loc>/reference/filter_mgn_cnpv.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pipe.html</loc>
+  </url>
+  <url>
+    <loc>/reference/retrieve_dataset.html</loc>
+  </url>
+  <url>
+    <loc>/reference/retrieve_path.html</loc>
+  </url>
+  <url>
+    <loc>/reference/set_magna_sirgas.html</loc>
   </url>
 </urlset>
