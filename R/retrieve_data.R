@@ -10,11 +10,10 @@ retrieve_path <- function(dataset_name) {
   # include all paths and datasets
   datasets <- c("MGNCNPV01", "MGNCNPV02")
   paths <- c(
-      gsub("[\r\n ]","","https://github.com/jd-otero/data_COD/blob/main/
+    gsub("[\r\n ]", "", "https://github.com/jd-otero/data_COD/blob/main/
       MGN/MGN_NivelDepartamentoIntegrado_CNPV/
-      MGN_AMN_DPTOS.RDS?raw=true")
-    ,
-    gsub("[\r\n ]","","https://github.com/jd-otero/data_COD/blob/main/
+      MGN_AMN_DPTOS.RDS?raw=true"),
+    gsub("[\r\n ]", "", "https://github.com/jd-otero/data_COD/blob/main/
       MGN/MGN_NivelMunicipioIntegrado_CNPV/
       MGN_AMN_MPIOS.RDS?raw=true")
   )
