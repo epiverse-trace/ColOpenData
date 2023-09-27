@@ -7,17 +7,22 @@
 #'
 #' @keywords internal
 retrieve_path <- function(dataset_name) {
-  root <- "https://github.com/jd-otero/data_COD/blob/main"
-  #include all paths and datasets
+  # root <- "https://github.com/jd-otero/data_COD/blob/main"
+  # include all paths and datasets
   datasets <- c("MGNCNPV01", "MGNCNPV02")
   paths <- c(
-    file.path(root, "MGN/MGN_NivelDepartamentoIntegrado_CNPV",
-              "MGN_AMN_DPTOS.RDS?raw=true", sep = "/"),
-    file.path(root, "MGN/MGN_NivelMunicipioIntegrado_CNPV",
-              "MGN_AMN_MPIOS.RDS?raw=true", sep = "/")
+    file.path("https://github.com/jd-otero/data_COD/blob/main",
+      "MGN/MGN_NivelDepartamentoIntegrado_CNPV",
+      "MGN_AMN_DPTOS.RDS?raw=true",
+      sep = "/"
+    ),
+    file.path("https://github.com/jd-otero/data_COD/blob/main",
+      "MGN/MGN_NivelMunicipioIntegrado_CNPV",
+      "MGN_AMN_MPIOS.RDS?raw=true",
+      sep = "/"
+    )
   )
-  paths_df <- data.frame(dataset = datasets, path = paths)
-  file_path <- paths_df[paths_df$dataset == dataset_name, "path"]
+  file_path <- paths[which(datasets == dataset_name)]
   if (rlang::is_empty(file_path)) {
     stop("`dataset_name` is not available")
   }
