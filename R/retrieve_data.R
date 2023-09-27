@@ -7,16 +7,14 @@
 #'
 #' @keywords internal
 retrieve_path <- function(dataset_name) {
-  root <- "https://github.com/jd-otero/data_COD/tree/main"
+  root <- "https://github.com/jd-otero/data_COD/blob/main"
   datasets <- c("MGNCNPV01", "MGNCNPV02")
   paths <- c(
-    paste0(root, "/MGN/MGN_NivelDepartamentoIntegrado_CNPV/MGN_AMN_DPTOS.RDS
-           ?raw=true"),
-    paste0(root, "/MGN/MGN_NivelMunicipioIntegrado_CNPV/MGN_AMN_MPIOS.RDS
-           ?raw=true")
+    paste0(root, "/MGN/MGN_NivelDepartamentoIntegrado_CNPV/MGN_AMN_DPTOS.RDS?raw=true"),
+    paste0(root, "/MGN/MGN_NivelMunicipioIntegrado_CNPV/MGN_AMN_MPIOS.RDS?raw=true")
   )
   paths_df <- data.frame(dataset = datasets, path = paths)
-  file_path <- paths_df[paths_df$dataset == "dataset_name", "path"]
+  file_path <- paths_df[paths_df$dataset == dataset_name, "path"]
   if (rlang::is_empty(file_path)) {
     stop("`dataset_name` is not available")
   }
@@ -40,7 +38,7 @@ retrieve_dataset <- function(dataset_path) {
 #' @param .data sf object containing coordinates and established geometry
 #'
 #' @return sf dataframe with Colombian coordinate reference system
-#' 
+#'
 #' @keywords internal
 set_magna_sirgas <- function(.data) {
   checkmate::assert_class(.data, c("sf", "data.frame"))
