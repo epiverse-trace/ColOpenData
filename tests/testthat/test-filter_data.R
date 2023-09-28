@@ -33,7 +33,6 @@ test_that("Filter MGN-CNPV works as expected", {
   expect_s3_class(
     filter_mgn_cnpv(
       .data = dataset_1,
-      level = 1,
       include_geometry = FALSE
     ),
     "data.frame"
@@ -41,7 +40,6 @@ test_that("Filter MGN-CNPV works as expected", {
   expect_s3_class(
     filter_mgn_cnpv(
       .data = dataset_2,
-      level = 2,
       include_geometry = FALSE
     ),
     "data.frame"
@@ -49,21 +47,18 @@ test_that("Filter MGN-CNPV works as expected", {
   expect_s3_class(
     filter_mgn_cnpv(
       .data = dataset_1,
-      level = 1
     ),
     "data.frame"
   )
   expect_s3_class(
     filter_mgn_cnpv(
       .data = dataset_2,
-      level = 2
     ),
     "data.frame"
   )
   expect_s3_class(
     filter_mgn_cnpv(
       .data = dataset_1,
-      level = 1,
       ad = c("CUNDINAMARCA", "META")
     ),
     "data.frame"
@@ -71,7 +66,6 @@ test_that("Filter MGN-CNPV works as expected", {
   expect_s3_class(
     filter_mgn_cnpv(
       .data = dataset_2,
-      level = 2,
       ad = c("RIONEGRO", "MARINILLA")
     ),
     "data.frame"
