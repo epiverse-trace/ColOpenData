@@ -11,7 +11,7 @@ test_that("Filter MGN-CNPV errors are thrown", {
     columns = c("1", "THIS")
   ))
   expect_error(filter_mgn_cnpv(
-    .data = data.frame(MPIO_CDPMP = c("73001", "05001"))
+    .data = sf::st_drop_geometry(dataset_1)
   ))
 })
 
