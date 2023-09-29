@@ -5,8 +5,7 @@
 <!-- `packagename` is extracted from the DESCRIPTION file -->
 <!-- `gh_repo` is extracted via a special environment variable in GitHub Actions -->
 
-# ColOpenData 
-<!-- <img src="man/figures/logo.svg" align="right" width="120" /> -->
+# ColOpenData <img src="man/figures/logo.svg" align="right" width="120" />
 
 <!-- badges: start -->
 

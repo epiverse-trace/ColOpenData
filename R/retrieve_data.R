@@ -10,11 +10,11 @@ retrieve_path <- function(dataset_name) {
   # include all paths and datasets
   datasets <- c("MGNCNPV01", "MGNCNPV02")
   paths <- c(
-    gsub("[\r\n ]", "", "https://github.com/jd-otero/data_COD/blob/main/
-      MGN/MGN_NivelDepartamentoIntegrado_CNPV/
+    gsub("[\n ]", "", "https://github.com/biomac-lab/data_ColOpenData/blob/main/
+      MGN/MGN_CNPV_2018/MGN_NivelDepartamentoIntegrado_CNPV/
       MGN_AMN_DPTOS.RDS?raw=true"),
-    gsub("[\r\n ]", "", "https://github.com/jd-otero/data_COD/blob/main/
-      MGN/MGN_NivelMunicipioIntegrado_CNPV/
+    gsub("[\n ]", "", "https://github.com/biomac-lab/data_ColOpenData/blob/main/
+      MGN/MGN_CNPV_2018/MGN_NivelMunicipioIntegrado_CNPV/
       MGN_AMN_MPIOS.RDS?raw=true")
   )
   file_path <- paths[which(datasets == dataset_name)]
