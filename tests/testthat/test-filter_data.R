@@ -32,7 +32,7 @@ test_that("Filter MGN-CNPV works as expected", {
   )
   expect_s3_class(
     filter_mgn_cnpv(
-      .data = dataset_1,
+      .data = dataset_1
     ),
     "data.frame"
   )
