@@ -3,29 +3,15 @@ dataset_2 <- download("MGNCNPV02")
 test_that("Filter MGN-CNPV errors are thrown", {
   expect_error(filter_mgn_cnpv(
     .data = dataset_1,
-    level = 4
-  ))
-  expect_error(filter_mgn_cnpv(
-    .data = dataset_1,
     include_geometry = 1
   ))
   expect_error(filter_mgn_cnpv(
-    .data = dataset_1,
-    level = 1,
-    ad = c("73001", "05001")
-  ))
-  expect_error(filter_mgn_cnpv(.data = dataset_1))
-  expect_error(filter_mgn_cnpv(
-    .data = dataset_1,
-    level = 1,
-    ad = c("05", "73"),
-    columns = c("1", "2")
-  ))
-  expect_error(filter_mgn_cnpv(
     .data = dataset_2,
-    level = 2,
     ad = c("05", "73"),
     columns = c("1", "THIS")
+  ))
+  expect_error(filter_mgn_cnpv(
+    .data = data.frame(MPIO_CDPMP = c("73001", "05001"))
   ))
 })
 
@@ -67,6 +53,55 @@ test_that("Filter MGN-CNPV works as expected", {
     filter_mgn_cnpv(
       .data = dataset_2,
       ad = c("RIONEGRO", "MARINILLA")
+    ),
+    "data.frame"
+  )
+  expect_s3_class(
+    filter_mgn_cnpv(
+      .data = dataset_1,
+      ad = c("73", "70", "81")
+    ),
+    "data.frame"
+  )
+  expect_s3_class(
+    filter_mgn_cnpv(
+      .data = dataset_2,
+      ad = c("19821", "76041", "52240")
+    ),
+    "data.frame"
+  )
+  expect_s3_class(
+    filter_mgn_cnpv(
+      .data = dataset_2,
+      ad = c("73", "70")
+    ),
+    "data.frame"
+  )
+  expect_s3_class(
+    filter_mgn_cnpv(
+      .data = dataset_2,
+      ad = "TOLIMA"
+    ),
+    "data.frame"
+  )
+  expect_s3_class(
+    filter_mgn_cnpv(
+      .data = dataset_1,
+      ad = c(5, 73, 18, 19)
+    ),
+    "data.frame"
+  )
+  expect_s3_class(
+    filter_mgn_cnpv(
+      .data = dataset_2,
+      ad = 5
+    ),
+    "data.frame"
+  )
+  expect_s3_class(
+    filter_mgn_cnpv(
+      .data = dataset_2,
+      ad = c(5001, 5101, 5088, 5091)
     ),
     "data.frame"
   )

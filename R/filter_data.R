@@ -4,6 +4,7 @@
 #' @param include_geometry boolean to include (or not) the geometry.
 #' @param ad character vector with municipalities to filter
 #' @param columns character vector with columns to filter
+#' @importFrom rlang .data
 #'
 #' @return sf dataframe containing MGN(National Geo statistical Frame) and CNPV
 #' (National Population and Living Census) data
@@ -15,10 +16,12 @@ filter_mgn_cnpv <- function(.data,
                             include_geometry = TRUE) {
   checkmate::assert_class(.data, c("sf", "data.frame"))
   checkmate::assert_logical(include_geometry)
-  checkmate::assert_character(columns, null.ok = TRUE)
   checkmate::assert_choice(columns, colnames(.data), null.ok = TRUE)
 
   census <- .data
+  if (!include_geometry) {
+    census <- sf::st_drop_geometry(census)
+  }
   if (is.null(columns)) {
     columns <- colnames(census)
   }
@@ -30,68 +33,84 @@ filter_mgn_cnpv <- function(.data,
     level <- 1
   }
 
-  if (!include_geometry) {
-    census <- sf::st_drop_geometry(census)
-  }
-
   if (level == 2) {
     if (is.null(ad)) {
       ad <- census$MPIO_CDPMP
     } else if (is.numeric(ad)) {
       ad <- codes_to_string(ad)
     }
-    census <- census %>% select(all_of(columns))
+    census <- census %>% dplyr::select(dplyr::all_of(columns))
 
-    filtered_data <- filter_mgn_cnpv_ad2(census, ad)
+    filtered_data <- filter_mgn_cnpv_ad2(census, ad, columns)
   } else if (level == 1) {
     if (is.null(ad)) {
       ad <- census$DPTO_CCDGO
     } else if (is.numeric(ad)) {
       ad <- codes_to_string(ad)
     }
-    census <- census %>% select(all_of(columns))
+    census <- census %>% dplyr::select(dplyr::all_of(columns))
 
-    filtered_data <- filter_mgn_cnpv_ad1(census, ad)
+    filtered_data <- filter_mgn_cnpv_ad1(census, ad, columns)
   }
-  return(census)
+  return(filtered_data)
 }
 
+#' Filter department dataset
+#'
+#' @param census_data MGN - CNPV dataset
+#' @param ad Administrative division to include
+#' @param columns Columns to include
+#'
+#' @return filtered dataset for department level
+#' @keywords internal
 filter_mgn_cnpv_ad1 <- function(census_data,
-                                ad) {
-  if (!all(is.na(as.numeric(ad)))) {
+                                ad, columns) {
+  if (all(is.na(suppressWarnings(as.numeric(ad))))) {
     census_data <- census_data %>%
       dplyr::filter(.data$DPTO_CNMBR %in% ad) %>%
-      dplyr::select(all_of(c("DPTO_CNMBR", columns)))
+      dplyr::select(dplyr::all_of(c("DPTO_CNMBR", columns)))
   } else {
     census_data <- census_data %>%
       dplyr::filter(.data$DPTO_CCDGO %in% ad) %>%
-      dplyr::select(all_of(c("DPTO_CCDGO", columns)))
+      dplyr::select(dplyr::all_of(c("DPTO_CCDGO", columns)))
   }
-  
+
   return(census_data)
 }
 
+#' Filter municipal dataset
+#'
+#' @param census_data MGN - CNPV dataset
+#' @param ad Administrative division to include
+#' @param columns Columns to include
+#'
+#' @return filtered dataset for municipal level
+#' @keywords internal
 filter_mgn_cnpv_ad2 <- function(census_data,
-                                ad) {
-  if (!all(is.na(as.numeric(ad)))) {
+                                ad, columns) {
+  if (all(is.na(suppressWarnings(as.numeric(ad))))) {
     if (any(ad %in% census_data$MPIO_CNMBR)) {
       census_data <- census_data %>%
         dplyr::filter(.data$MPIO_CNMBR %in% ad) %>%
-        dplyr::select(all_of(c("MPIO_CNMBR", columns)))
+        dplyr::select(dplyr::all_of(c("MPIO_CNMBR", columns)))
     } else {
+      departments <- download("MGNCNPV01")
+      included_names <- departments$DPTO_CCDGO[which(
+        departments$DPTO_CNMBR %in% ad
+      )]
       census_data <- census_data %>%
-        dplyr::filter(.data$DPTO_CNMBR %in% ad) %>%
-        dplyr::select(all_of(c("DPTO_CNMBR", "MPIO_CNMBR", columns)))
+        dplyr::filter(.data$DPTO_CCDGO %in% included_names) %>%
+        dplyr::select(dplyr::all_of(c("DPTO_CCDGO", "MPIO_CNMBR", columns)))
     }
   } else {
     if (min(nchar(ad)) == 2) {
       census_data <- census_data %>%
         dplyr::filter(.data$MPIO_CDPMP %in% ad) %>%
-        dplyr::select(all_of(c("MPIO_CDPMP", columns)))
+        dplyr::select(dplyr::all_of(c("MPIO_CDPMP", columns)))
     } else {
       census_data <- census_data %>%
         dplyr::filter(.data$DPTO_CCDGO %in% ad) %>%
-        dplyr::select(all_of(c("DPTO_CCDGO", "MPIO_CDPMP", columns)))
+        dplyr::select(dplyr::all_of(c("DPTO_CCDGO", "MPIO_CDPMP", columns)))
     }
   }
   return(census_data)
@@ -102,7 +121,7 @@ filter_mgn_cnpv_ad2 <- function(census_data,
 #' @param codes numeric vector with municipality codes. They need to include the
 #' department and the municipality code.
 #'
-#' @return character vector with municipality codes in standarized 5 digit code
+#' @return character vector with municipality codes in standardized 5 digit code
 #' @keywords internal
 codes_to_string <- function(codes) {
   checkmate::assert_numeric(codes)
