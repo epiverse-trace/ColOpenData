@@ -16,7 +16,8 @@ filter_mgn_cnpv <- function(.data,
                             include_geometry = TRUE) {
   checkmate::assert_class(.data, c("sf", "data.frame"))
   checkmate::assert_logical(include_geometry)
-  checkmate::assert_choice(columns, colnames(.data), null.ok = TRUE)
+  stopifnot("`columns` must be inside the input data" =
+              all(columns %in% colnames(.data)))
 
   census <- .data
   if (!include_geometry) {
@@ -39,8 +40,6 @@ filter_mgn_cnpv <- function(.data,
     } else if (is.numeric(codes)) {
       codes <- codes_to_string(codes)
     }
-    census <- census %>% dplyr::select(dplyr::all_of(columns))
-
     filtered_data <- filter_mgn_cnpv_ad2(census, codes, columns)
   } else if (level == 1) {
     if (is.null(codes)) {
@@ -48,8 +47,6 @@ filter_mgn_cnpv <- function(.data,
     } else if (is.numeric(codes)) {
       codes <- codes_to_string(codes)
     }
-    census <- census %>% dplyr::select(dplyr::all_of(columns))
-
     filtered_data <- filter_mgn_cnpv_ad1(census, codes, columns)
   }
   return(filtered_data)
