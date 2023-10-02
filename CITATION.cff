@@ -20,12 +20,12 @@ authors:
 - family-names: Tavera Cifuentes
   given-names: Maria Camila
   email: mc.tavera@uniandes.edu.co
-- family-names: Umana
-  given-names: Juan D.
-  email: jd.umana10@uniandes.edu.co
 - family-names: Otero
   given-names: Julian
   email: jd.otero10@uniandes.org
+- family-names: Umana
+  given-names: Juan D.
+  email: jd.umana10@uniandes.edu.co
 - family-names: Montenegro
   given-names: Juan F.
   email: jf.montenegro@uniandes.edu.co
@@ -123,6 +123,22 @@ references:
     email: hadley@posit.co
   - family-names: Hester
     given-names: Jim
+  - family-names: Bryan
+    given-names: Jennifer
+    email: jenny@posit.co
+    orcid: https://orcid.org/0000-0002-6983-2759
+  year: '2023'
+- type: software
+  title: readxl
+  abstract: 'readxl: Read Excel Files'
+  notes: Imports
+  url: https://readxl.tidyverse.org
+  repository: https://CRAN.R-project.org/package=readxl
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+    orcid: https://orcid.org/0000-0003-4757-117X
   - family-names: Bryan
     given-names: Jennifer
     email: jenny@posit.co
