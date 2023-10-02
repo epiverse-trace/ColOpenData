@@ -11,7 +11,7 @@ codes_to_string(codes)
 department and the municipality code.}
 }
 \value{
-character vector with municipality codes in standardized 5 digit code
+character vector with municipality codes in standardized code
 }
 \description{
 Turn numeric vector of municipality codes into character vector

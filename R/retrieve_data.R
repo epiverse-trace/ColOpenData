@@ -19,7 +19,7 @@ retrieve_path <- function(dataset) {
   )
   file_path <- paths[which(datasets == dataset)]
   if (rlang::is_empty(file_path)) {
-    stop("`dataset` was not available")
+    stop("`dataset` is not available")
   }
   return(file_path)
 }
@@ -32,9 +32,9 @@ retrieve_path <- function(dataset) {
 #'
 #' @keywords internal
 retrieve_dataset <- function(dataset_path) {
-  if(grepl(".RDS", dataset_path)){
+  if (grepl(".RDS", dataset_path)) {
     dataset <- readr::read_rds(dataset_path)
-  } else if(grepl(".xslx", dataset_path)){
+  } else if (grepl(".xslx", dataset_path)) {
     dataset <- readxl::read_excel(dataset_path)
   }
   return(dataset)
