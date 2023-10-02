@@ -16,8 +16,10 @@ filter_mgn_cnpv <- function(.data,
                             include_geometry = TRUE) {
   checkmate::assert_class(.data, c("sf", "data.frame"))
   checkmate::assert_logical(include_geometry)
-  stopifnot("`columns` must be inside the input data" =
-              all(columns %in% colnames(.data)))
+  stopifnot(
+    "`columns` must be inside the input data" =
+      all(columns %in% colnames(.data))
+  )
 
   census <- .data
   if (!include_geometry) {
