@@ -4,12 +4,12 @@
 \alias{filter_mgn_cnpv}
 \title{Filter MGN data}
 \usage{
-filter_mgn_cnpv(.data, ad = NULL, columns = NULL, include_geometry = TRUE)
+filter_mgn_cnpv(.data, codes = NULL, columns = NULL, include_geometry = TRUE)
 }
 \arguments{
 \item{.data}{dataframe containing MGN - CNPV data}
 
-\item{ad}{character vector with municipalities to filter}
+\item{codes}{vector with municipalities or departments to filter}
 
 \item{columns}{character vector with columns to filter}
 

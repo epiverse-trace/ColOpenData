@@ -4,12 +4,12 @@
 \alias{filter_mgn_cnpv_ad1}
 \title{Filter department dataset}
 \usage{
-filter_mgn_cnpv_ad1(census_data, ad, columns)
+filter_mgn_cnpv_ad1(census_data, codes, columns)
 }
 \arguments{
 \item{census_data}{MGN - CNPV dataset}
 
-\item{ad}{Administrative division to include}
+\item{codes}{Administrative division to include}
 
 \item{columns}{Columns to include}
 }
