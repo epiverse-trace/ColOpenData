@@ -4,8 +4,8 @@
 #'
 #' @return dataframe downloaded
 #' @examples
-#' download("MGNCPV01")
-#' 
+#' download("MGNCNPV01")
+#'
 #' @export
 download <- function(dataset) {
   path <- retrieve_path(dataset)
