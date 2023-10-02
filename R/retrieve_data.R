@@ -6,7 +6,7 @@
 #' @return path to retrieve the dataset from server
 #'
 #' @keywords internal
-retrieve_path <- function(dataset_name) {
+retrieve_path <- function(dataset) {
   # include all paths and datasets
   datasets <- c("MGNCNPV01", "MGNCNPV02")
   paths <- c(
@@ -17,9 +17,9 @@ retrieve_path <- function(dataset_name) {
       MGN/MGN_CNPV_2018/MGN_NivelMunicipioIntegrado_CNPV/
       MGN_AMN_MPIOS.RDS?raw=true")
   )
-  file_path <- paths[which(datasets == dataset_name)]
+  file_path <- paths[which(datasets == dataset)]
   if (rlang::is_empty(file_path)) {
-    stop("`dataset_name` is not available")
+    stop("`dataset` was not available")
   }
   return(file_path)
 }
@@ -32,7 +32,11 @@ retrieve_path <- function(dataset_name) {
 #'
 #' @keywords internal
 retrieve_dataset <- function(dataset_path) {
-  dataset <- readr::read_rds(dataset_path)
+  if(grepl(".RDS", dataset_path)){
+    dataset <- readr::read_rds(dataset_path)
+  } else if(grepl(".xslx", dataset_path)){
+    dataset <- readxl::read_excel(dataset_path)
+  }
   return(dataset)
 }
 
