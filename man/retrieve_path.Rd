@@ -4,7 +4,7 @@
 \alias{retrieve_path}
 \title{Retrieve path of named dataset}
 \usage{
-retrieve_path(dataset_name)
+retrieve_path(dataset)
 }
 \arguments{
 \item{dataset_name}{name of the consulted dataset}
