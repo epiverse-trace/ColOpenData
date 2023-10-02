@@ -7,7 +7,7 @@ test_that("Filter MGN-CNPV errors are thrown", {
   ))
   expect_error(filter_mgn_cnpv(
     .data = dataset_2,
-    ad = c("05", "73"),
+    codes = c("05", "73"),
     columns = c("1", "THIS")
   ))
   expect_error(filter_mgn_cnpv(
@@ -45,63 +45,63 @@ test_that("Filter MGN-CNPV works as expected", {
   expect_s3_class(
     filter_mgn_cnpv(
       .data = dataset_1,
-      ad = c("CUNDINAMARCA", "META")
+      codes = c("CUNDINAMARCA", "META")
     ),
     "data.frame"
   )
   expect_s3_class(
     filter_mgn_cnpv(
       .data = dataset_2,
-      ad = c("RIONEGRO", "MARINILLA")
+      codes = c("RIONEGRO", "MARINILLA")
     ),
     "data.frame"
   )
   expect_s3_class(
     filter_mgn_cnpv(
       .data = dataset_1,
-      ad = c("73", "70", "81")
+      codes = c("73", "70", "81")
     ),
     "data.frame"
   )
   expect_s3_class(
     filter_mgn_cnpv(
       .data = dataset_2,
-      ad = c("19821", "76041", "52240")
+      codes = c("19821", "76041", "52240")
     ),
     "data.frame"
   )
   expect_s3_class(
     filter_mgn_cnpv(
       .data = dataset_2,
-      ad = c("73", "70")
+      codes = c("73", "70")
     ),
     "data.frame"
   )
   expect_s3_class(
     filter_mgn_cnpv(
       .data = dataset_2,
-      ad = "TOLIMA"
+      codes = "TOLIMA"
     ),
     "data.frame"
   )
   expect_s3_class(
     filter_mgn_cnpv(
       .data = dataset_1,
-      ad = c(5, 73, 18, 19)
+      codes = c(5, 73, 18, 19)
     ),
     "data.frame"
   )
   expect_s3_class(
     filter_mgn_cnpv(
       .data = dataset_2,
-      ad = 5
+      codes = 5
     ),
     "data.frame"
   )
   expect_s3_class(
     filter_mgn_cnpv(
       .data = dataset_2,
-      ad = c(5001, 5101, 5088, 5091)
+      codes = c(5001, 5101, 5088, 5091)
     ),
     "data.frame"
   )
