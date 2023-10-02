@@ -15,3 +15,7 @@ dataframe downloaded
 \description{
 Download dataset
 }
+\examples{
+download("MGNCNPV01")
+
+}
