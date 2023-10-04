@@ -16,6 +16,6 @@ dataframe downloaded
 Download dataset
 }
 \examples{
-download("MGNCNPV01")
+download("MGNCNPV_DPTO_2018")
 
 }

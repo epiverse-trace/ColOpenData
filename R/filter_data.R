@@ -93,7 +93,7 @@ filter_mgn_cnpv_ad2 <- function(census_data,
         dplyr::filter(.data$MPIO_CNMBR %in% codes) %>%
         dplyr::select(dplyr::all_of(c("MPIO_CNMBR", columns)))
     } else {
-      departments <- download("MGNCNPV01")
+      departments <- download("MGNCNPV_DPTO_2018")
       included_names <- departments$DPTO_CCDGO[which(
         departments$DPTO_CNMBR %in% codes
       )]

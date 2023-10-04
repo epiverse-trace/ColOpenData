@@ -8,9 +8,10 @@
 #'
 #' @keywords internal
 retrieve_path <- function(dataset) {
-  config_file <- system.file("config.yaml", 
-                                 package = "ColOpenData", 
-                                 mustWork = TRUE)
+  config_file <- system.file("config.yaml",
+    package = "ColOpenData",
+    mustWork = TRUE
+  )
   base_path <- config::get(value = "base_path", file = config_file)
   relative_path <- config::get(value = dataset, file = config_file)
   file_path <- paste0(base_path, relative_path)
@@ -32,6 +33,8 @@ retrieve_dataset <- function(dataset_path) {
     dataset <- readr::read_rds(dataset_path)
   } else if (grepl(".xslx", dataset_path)) {
     dataset <- readxl::read_excel(dataset_path)
+  } else{
+    stop("`dataset_name` not found")
   }
   return(dataset)
 }
