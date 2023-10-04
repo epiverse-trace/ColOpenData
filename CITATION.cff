@@ -129,6 +129,17 @@ references:
     orcid: https://orcid.org/0000-0001-9754-0393
   year: '2023'
 - type: software
+  title: config
+  abstract: 'config: Manage Environment Specific Configuration Values'
+  notes: Imports
+  url: https://rstudio.github.io/config/
+  repository: https://CRAN.R-project.org/package=config
+  authors:
+  - family-names: Allaire
+    given-names: JJ
+    email: jj@rstudio.com
+  year: '2023'
+- type: software
   title: dplyr
   abstract: 'dplyr: A Grammar of Data Manipulation'
   notes: Imports
