@@ -4,7 +4,7 @@
 #'
 #' @return dataframe downloaded
 #' @examples
-#' download("MGNCNPV01")
+#' download("MGNCNPV_DPTO_2018")
 #'
 #' @export
 download <- function(dataset) {

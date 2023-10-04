@@ -1,4 +1,5 @@
 # Established path will change when the repository is moved to the final server
+
 #' Retrieve path of named dataset
 #'
 #' @param dataset_name name of the consulted dataset
@@ -8,15 +9,11 @@
 #' @keywords internal
 retrieve_path <- function(dataset) {
   # include all paths and datasets
-  datasets <- c("MGNCNPV01", "MGNCNPV02")
-  paths <- c(
-    gsub("[\n ]", "", "https://github.com/biomac-lab/data_ColOpenData/blob/main/
-      MGN/MGN_CNPV_2018/MGN_NivelDepartamentoIntegrado_CNPV/
-      MGN_AMN_DPTOS.RDS?raw=true"),
-    gsub("[\n ]", "", "https://github.com/biomac-lab/data_ColOpenData/blob/main/
-      MGN/MGN_CNPV_2018/MGN_NivelMunicipioIntegrado_CNPV/
-      MGN_AMN_MPIOS.RDS?raw=true")
-  )
+  config_file <- system.file("config.yaml", 
+                                 package = "ColOpenData", 
+                                 mustWork = TRUE)
+  base_path <- config::get(value = "base_path", file = config_file)
+  file_path <- config::get(value = dataset, file = config_file)
   file_path <- paths[which(datasets == dataset)]
   if (rlang::is_empty(file_path)) {
     stop("`dataset` is not available")
