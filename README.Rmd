@@ -56,9 +56,9 @@ pak::pak("epiverse-trace/ColOpenData")
 ## Quick start
 This example shows how to retrieve census data at a department level in Colombia
 including the administrative divisions and spatial data. We will be using the
-`MGNCNPV01` dataset to subset a certain region and calculate the population
-density on each department of this region. We'll also be using some extra
-packages to transform and plot data.
+`MGNCNPV01` dataset, that contains the National Geo statistical Framework (MGN)
+and the National Population and Living Census (CNPV), and subset a certain
+region to calculate the population density on each department of this region.
 
 ```{r load_packages, message= FALSE}
 library(ColOpenData)
@@ -73,10 +73,11 @@ To download the dataset we can use the `download` function as follows
 census <- download("MGNCNPV01")
 ```
 
-Once downloaded, we can filter the data to subset only the regions of interest.
-We will be selecting the departments in the Amazonian region using the 
-[DIVIPOLA codes](https://www.datos.gov.co/widgets/gdxc-w37w) of each, and to
-calculate the population density we'll select the name, population and area.
+Once downloaded, we can filter the data to subset only the regions of interest
+using the `filter_mgn_cnpv` function. We will be selecting the departments in 
+the Amazonian region using the [DIVIPOLA codes](https://www.datos.gov.co/widgets/gdxc-w37w) 
+of each, and to calculate the population density we'll select the
+population and area.
 
 ```{r filter_data}
 amazonia <- census %>%
@@ -87,8 +88,8 @@ amazonia <- census %>%
   )
 ```
 
-As the area is stated in \{m^2} we'll transform it to \{km^2} and calculate the
-density in each department.
+As the area is stated in $m^2$ we need to transform it to $km^2$ and calculate 
+the density in each department.
 ```{r mutate_data}
 amazonia <- amazonia %>%
   mutate(
@@ -97,7 +98,7 @@ amazonia <- amazonia %>%
   )
 ```
 
-Finally, to visualize the data we'll plot a map with the density.
+Finally, to visualize the data we will plot a map with the density.
 ```{r plot_data}
 ggplot(data = amazonia) +
   geom_sf(mapping = aes(fill = DENSITY)) +
