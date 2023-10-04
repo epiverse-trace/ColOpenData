@@ -99,9 +99,11 @@ str(dengue_cases)
 
 To merge the datasets we will use the department's codes.
 ```{r}
-dengue_south <- merge(x = south_col, 
-                         y = dengue_2018, 
-                         by = "DPTO_CCDGO")
+dengue_south <- merge(
+  x = south_col,
+  y = dengue_2018,
+  by = "DPTO_CCDGO"
+)
 ```
 
 Finally, we can visualize the cases in a map.

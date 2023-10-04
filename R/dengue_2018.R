@@ -5,8 +5,8 @@
 #' @format ## `dengue_2018`
 #' data frame with 33 rows and 2 columns:
 #' \describe{
-#'   \item{cod_dpto_o}{Department code}
-#'   \item{cases}{Dengue case count}
+#'   \item{DPTO_CCDGO}{Department code}
+#'   \item{CASES}{Dengue case count}
 #' }
 #' @source <https://epiverse-trace.github.io/sivirep/>
 "dengue_2018"
