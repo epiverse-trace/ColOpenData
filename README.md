@@ -79,7 +79,7 @@ amazonia <- census %>%
   )
 ```
 
-As the area is stated in {m^2} we’ll transform it to {km^2} and
+As the area is stated in $m^2$ we’ll transform it to $km^2$ and
 calculate the density in each department.
 
 ``` r
