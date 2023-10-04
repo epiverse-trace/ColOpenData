@@ -55,11 +55,9 @@ pak::pak("epiverse-trace/ColOpenData")
 
 ## Quick start
 This example shows how to retrieve census data at a department level in Colombia
-including the administrative divisions and spatial data. We will be using the
-`MGNCNPV01` dataset, that contains the National Geo statistical Framework (MGN)
-and the National Population and Living Census (CNPV), and subset a certain
-region to calculate the population density on each department of this region.
-
+including the administrative divisions and spatial data, to later use it to 
+visualize Dengue cases in a specific region. We will first load the needed extra
+packages.
 ```{r load_packages, message= FALSE}
 library(ColOpenData)
 library(sf)
@@ -68,45 +66,53 @@ library(ggplot2)
 library(RColorBrewer)
 ```
 
+We will be using the `MGNCNPV_DPTO_2018` dataset, which contains the National 
+Geo statistical  Framework (MGN) and the National Population and Living Census 
+(CNPV) at department level for 2018.
+
 To download the dataset we can use the `download` function as follows
 ```{r download_data}
-census <- download("MGNCNPV01")
+census <- download("MGNCNPV_DPTO_2018")
 ```
 
-Once downloaded, we can filter the data to subset only the regions of interest
+Once downloaded, we can filter the data to subset only the region of interest
 using the `filter_mgn_cnpv` function. We will be selecting the departments in 
-the Amazonian region using the [DIVIPOLA codes](https://www.datos.gov.co/widgets/gdxc-w37w) 
-of each, and to calculate the population density we'll select the
-population and area.
+the southern regions of Colombia (Amazonia and Orinoquia),
+using their [DIVIPOLA codes](https://www.datos.gov.co/widgets/gdxc-w37w), and
+extract only the names and populations.
 
 ```{r filter_data}
-amazonia <- census %>%
+south_col <- census %>%
   filter_mgn_cnpv(
-    codes = c(91, 18, 19, 94, 95, 50, 52, 86, 97, 99),
-    columns = c("DPTO_CNMBR", "STP27_PERS", "AREA"),
+    codes = c(91, 18, 19, 94, 95, 50, 52, 86, 97, 99, 81, 85),
+    columns = c("DPTO_CNMBR", "STP27_PERS"),
     include_geometry = TRUE
   )
 ```
 
-As the area is stated in $m^2$ we need to transform it to $km^2$ and calculate 
-the density in each department.
-```{r mutate_data}
-amazonia <- amazonia %>%
-  mutate(
-    AREA = AREA / 1000000,
-    DENSITY = STP27_PERS / AREA
-  )
+For Dengue cases  of 2018 we will use the dataset `dengue_2018`,
+which was previously obtained using the package [sivirep](https://epiverse-trace.github.io/sivirep/).
+```{r load_data}
+data(dengue_2018)
+str(dengue_2018)
 ```
 
-Finally, to visualize the data we will plot a map with the density.
+To merge the datasets we will use the DIVIPOLA codes.
+```{r}
+dengue_south <- merge(x = south_col, 
+                         y = dengue_2018, 
+                         by = "DPTO_CCDGO")
+```
+
+Finally, we can plot the data
 ```{r plot_data}
-ggplot(data = amazonia) +
-  geom_sf(mapping = aes(fill = DENSITY)) +
+ggplot(data = dengue_south) +
+  geom_sf(mapping = aes(fill = CASES)) +
   scale_fill_gradientn(
     colours = brewer.pal(7, "YlOrRd"),
-    name = expression("Density [" * People / km^2 * "]")
+    name = element_blank()
   ) +
-  ggtitle("Population density by square kilometer") +
+  ggtitle("Dengue Cases in the Southern Regions of Colombia") +
   theme_bw()
 ```
 
