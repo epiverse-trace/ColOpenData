@@ -2,3 +2,5 @@ default:
   base_path: "https://github.com/biomac-lab/data_ColOpenData/blob/main/"
   MGNCNPV_DPTO_2018: "MGN/MGN_CNPV_2018/MGN_NivelDepartamentoIntegrado_CNPV/MGN_AMN_DPTOS.RDS?raw=true"
   MGNCNPV_MPIO_2018: "MGN/MGN_CNPV_2018/MGN_NivelMunicipioIntegrado_CNPV/MGN_AMN_MPIOS.RDS?raw=true"
+  CNPVHOG_MPIO_2018: "DEMOGRAFIA/DEMOGRAFIA_Y_POBLACION/CNPV/HOGARES_Cuadros_CNPV_2018.xlsx"
+  CNPVVIV_MPIO_2018: "DEMOGRAFIA/DEMOGRAFIA_Y_POBLACION/CNPV/VIVIENDAS_Cuadros_CNPV_2018.xlsx"
