@@ -56,8 +56,7 @@ pak::pak("epiverse-trace/ColOpenData")
 ## Quick start
 This example shows how to retrieve census data at a department level in Colombia
 including the administrative divisions and spatial data, to later use it to 
-visualize Dengue cases in a specific region. We will first load the needed extra
-packages.
+visualize Dengue cases in a specific region. We will first load the needed packages.
 ```{r load_packages, message= FALSE}
 library(ColOpenData)
 library(sf)
@@ -70,13 +69,14 @@ We will be using the `MGNCNPV_DPTO_2018` dataset, which contains the National
 Geo statistical  Framework (MGN) and the National Population and Living Census 
 (CNPV) at department level for 2018.
 
-To download the dataset we can use the `download` function as follows
+To download the dataset we can use the `download` function as follows.
 ```{r download_data}
 census <- download("MGNCNPV_DPTO_2018")
+str(census)
 ```
 
 Once downloaded, we can filter the data to subset only the region of interest
-using the `filter_mgn_cnpv` function. We will be selecting the departments in 
+using `filter_mgn_cnpv`. For this example will be selecting the departments in 
 the southern regions of Colombia (Amazonia and Orinoquia),
 using their [DIVIPOLA codes](https://www.datos.gov.co/widgets/gdxc-w37w), and
 extract only the names and populations.
@@ -90,21 +90,21 @@ south_col <- census %>%
   )
 ```
 
-For Dengue cases  of 2018 we will use the dataset `dengue_2018`,
+Dengue cases during 2018 can be loaded from the example dataset `dengue_2018`,
 which was previously obtained using the package [sivirep](https://epiverse-trace.github.io/sivirep/).
 ```{r load_data}
-data(dengue_2018)
-str(dengue_2018)
+dengue_cases <- dengue_2018
+str(dengue_cases)
 ```
 
-To merge the datasets we will use the DIVIPOLA codes.
+To merge the datasets we will use the department's codes.
 ```{r}
 dengue_south <- merge(x = south_col, 
                          y = dengue_2018, 
                          by = "DPTO_CCDGO")
 ```
 
-Finally, we can plot the data
+Finally, we can visualize the cases in a map.
 ```{r plot_data}
 ggplot(data = dengue_south) +
   geom_sf(mapping = aes(fill = CASES)) +
