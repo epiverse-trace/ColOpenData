@@ -8,13 +8,12 @@
 #'
 #' @keywords internal
 retrieve_path <- function(dataset) {
-  # include all paths and datasets
   config_file <- system.file("config.yaml", 
                                  package = "ColOpenData", 
                                  mustWork = TRUE)
   base_path <- config::get(value = "base_path", file = config_file)
-  file_path <- config::get(value = dataset, file = config_file)
-  file_path <- paths[which(datasets == dataset)]
+  relative_path <- config::get(value = dataset, file = config_file)
+  file_path <- paste0(base_path, relative_path)
   if (rlang::is_empty(file_path)) {
     stop("`dataset` is not available")
   }
