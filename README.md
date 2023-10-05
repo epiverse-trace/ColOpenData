@@ -46,8 +46,8 @@ pak::pak("epiverse-trace/ColOpenData")
 
 This example shows how to retrieve census data at a department level in
 Colombia including the administrative divisions and spatial data, to
-later use it to visualize Dengue cases in a specific region. We will
-first load the needed packages.
+later use it to visualize Dengue cases during 2018. We will first load
+the needed packages.
 
 ``` r
 library(ColOpenData)
@@ -61,7 +61,7 @@ We will be using the `MGNCNPV_DPTO_2018` dataset, which contains the
 National Geo statistical Framework (MGN) and the National Population and
 Living Census (CNPV) at department level for 2018.
 
-To download the dataset we can use the `download` function as follows.
+To load the dataset we can use the `download` function as follows.
 
 ``` r
 census <- download("MGNCNPV_DPTO_2018")
@@ -169,20 +169,13 @@ str(census)
 #>   ..- attr(*, "names")= chr [1:88] "DPTO_CCDGO" "DPTO_CNMBR" "VERSION" "AREA" ...
 ```
 
-Once downloaded, we can filter the data to subset only the region of
-interest using `filter_mgn_cnpv`. For this example will be selecting the
-departments in the southern regions of Colombia (Amazonia and
-Orinoquia), using their [DIVIPOLA
-codes](https://www.datos.gov.co/widgets/gdxc-w37w), and extract only the
-names and populations.
+Once downloaded, we can subset the data by regions or columns of
+interest. In this example we only need the departments codes and
+geometries.
 
 ``` r
 south_col <- census %>%
-  filter_mgn_cnpv(
-    codes = c(91, 18, 19, 94, 95, 50, 52, 86, 97, 99, 81, 85),
-    columns = c("DPTO_CNMBR", "STP27_PERS"),
-    include_geometry = TRUE
-  )
+  select(DPTO_CCDGO, geometry)
 ```
 
 Dengue cases during 2018 can be loaded from the example dataset
@@ -216,7 +209,7 @@ ggplot(data = dengue_south) +
     colours = brewer.pal(7, "YlOrRd"),
     name = element_blank()
   ) +
-  ggtitle("Dengue Cases in the Southern Regions of Colombia") +
+  ggtitle("Dengue Cases in Colombia during 2018") +
   theme_bw()
 ```
 
