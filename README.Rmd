@@ -56,7 +56,7 @@ pak::pak("epiverse-trace/ColOpenData")
 ## Quick start
 This example shows how to retrieve census data at a department level in Colombia
 including the administrative divisions and spatial data, to later use it to 
-visualize Dengue cases in a specific region. We will first load the needed packages.
+visualize Dengue cases during 2018. We will first load the needed packages.
 ```{r load_packages, message= FALSE}
 library(ColOpenData)
 library(sf)
@@ -69,25 +69,16 @@ We will be using the `MGNCNPV_DPTO_2018` dataset, which contains the National
 Geo statistical  Framework (MGN) and the National Population and Living Census 
 (CNPV) at department level for 2018.
 
-To download the dataset we can use the `download` function as follows.
+To load the dataset we can use the `download` function as follows.
 ```{r download_data}
 census <- download("MGNCNPV_DPTO_2018")
 str(census)
 ```
 
-Once downloaded, we can filter the data to subset only the region of interest
-using `filter_mgn_cnpv`. For this example will be selecting the departments in 
-the southern regions of Colombia (Amazonia and Orinoquia),
-using their [DIVIPOLA codes](https://www.datos.gov.co/widgets/gdxc-w37w), and
-extract only the names and populations.
-
+Once downloaded, we can subset the data by regions or columns of interest. In this example we only need the departments codes and geometries.
 ```{r filter_data}
-south_col <- census %>%
-  filter_mgn_cnpv(
-    codes = c(91, 18, 19, 94, 95, 50, 52, 86, 97, 99, 81, 85),
-    columns = c("DPTO_CNMBR", "STP27_PERS"),
-    include_geometry = TRUE
-  )
+col <- census %>%
+  select(DPTO_CCDGO, geometry)
 ```
 
 Dengue cases during 2018 can be loaded from the example dataset `dengue_2018`,
@@ -99,8 +90,8 @@ str(dengue_cases)
 
 To merge the datasets we will use the department's codes.
 ```{r}
-dengue_south <- merge(
-  x = south_col,
+dengue_col <- merge(
+  x = col,
   y = dengue_2018,
   by = "DPTO_CCDGO"
 )
@@ -108,13 +99,13 @@ dengue_south <- merge(
 
 Finally, we can visualize the cases in a map.
 ```{r plot_data}
-ggplot(data = dengue_south) +
+ggplot(data = dengue_col) +
   geom_sf(mapping = aes(fill = CASES)) +
   scale_fill_gradientn(
     colours = brewer.pal(7, "YlOrRd"),
     name = element_blank()
   ) +
-  ggtitle("Dengue Cases in the Southern Regions of Colombia") +
+  ggtitle("Dengue Cases in Colombia during 2018") +
   theme_bw()
 ```
 
