@@ -2,7 +2,7 @@
 
 #' Retrieve path of named dataset
 #'
-#' @param dataset_name name of the consulted dataset
+#' @param dataset name of the consulted dataset
 #'
 #' @return path to retrieve the dataset from server
 #'
