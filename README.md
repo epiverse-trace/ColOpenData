@@ -61,11 +61,6 @@ To load the dataset we can use the `download` function as follows.
 
 ``` r
 census <- download("MGNCNPV_DPTO_2018")
-#> Warning in readLines(con, warn = readLines.warn): incomplete final line found
-#> on 'C:\Users\Julia\AppData\Local\R\win-library\4.3\ColOpenData\config.yaml'
-
-#> Warning in readLines(con, warn = readLines.warn): incomplete final line found
-#> on 'C:\Users\Julia\AppData\Local\R\win-library\4.3\ColOpenData\config.yaml'
 str(census)
 #> Classes 'sf' and 'data.frame':   33 obs. of  89 variables:
 #>  $ DPTO_CCDGO: chr  "18" "19" "86" "76" ...
