@@ -7,7 +7,7 @@
 retrieve_path(dataset)
 }
 \arguments{
-\item{dataset_name}{name of the consulted dataset}
+\item{dataset}{name of the consulted dataset}
 }
 \value{
 path to retrieve the dataset from server
