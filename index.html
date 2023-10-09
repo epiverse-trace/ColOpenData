@@ -87,7 +87,7 @@
 
 <p>ColOpenData is a package that acquires, standardizes, and wrangles Colombian socioeconomic, climate and land cover data. It solves the problem of Colombian data being issued in different web pages and formats by using functions that allow the user to select the desired database and download it without having to do the exhausting acquisition process. Also, it allows these datasets to be merged so multiple operations, such as calculating statistics, can be made, taking into account information from different datasets.</p>
 <!-- This sentence is optional and can be removed -->
-<p>ColOpenData is developed at the <a href="https://uniandes.edu.co/" class="external-link">Universidad de Los Andes</a> as part of the <a href="https://data.org/initiatives/epiverse/" class="external-link">Epiverse-TRACE program</a>.</p>
+<p>ColOpenData is developed at <a href="https://uniandes.edu.co/" class="external-link">Universidad de Los Andes</a> as part of the <a href="https://data.org/initiatives/epiverse/" class="external-link">Epiverse-TRACE program</a>.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -95,6 +95,152 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"epiverse-trace/ColOpenData"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="quick-start">Quick start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
+</h2>
+<p>This example shows how to retrieve census data at a department level in Colombia including the administrative divisions and spatial data, to later use it to visualize Dengue cases in the country during 2018.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">ColOpenData</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span></code></pre></div>
+<p>We will be using the <code>MGNCNPV_DPTO_2018</code> dataset, which contains the National Geo statistical Framework (MGN) and the National Population and Living Census (CNPV) at department level for 2018.</p>
+<p>To load the dataset we can use the <code>download</code> function as follows.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">census</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/download.html">download</a></span><span class="op">(</span><span class="st">"MGNCNPV_DPTO_2018"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in readLines(con, warn = readLines.warn): incomplete final line found</span></span>
+<span><span class="co">#&gt; on 'C:\Users\Julia\AppData\Local\R\win-library\4.3\ColOpenData\config.yaml'</span></span>
+<span></span>
+<span><span class="co">#&gt; Warning in readLines(con, warn = readLines.warn): incomplete final line found</span></span>
+<span><span class="co">#&gt; on 'C:\Users\Julia\AppData\Local\R\win-library\4.3\ColOpenData\config.yaml'</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">census</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Classes 'sf' and 'data.frame':   33 obs. of  89 variables:</span></span>
+<span><span class="co">#&gt;  $ DPTO_CCDGO: chr  "18" "19" "86" "76" ...</span></span>
+<span><span class="co">#&gt;  $ DPTO_CNMBR: chr  "CAQUETÁ" "CAUCA" "PUTUMAYO" "VALLE DEL CAUCA" ...</span></span>
+<span><span class="co">#&gt;  $ VERSION   : num  2018 2018 2018 2018 2018 ...</span></span>
+<span><span class="co">#&gt;  $ AREA      : num  9.01e+10 3.12e+10 2.60e+10 2.07e+10 7.13e+10 ...</span></span>
+<span><span class="co">#&gt;  $ LATITUD   : num  0.799 2.397 0.452 3.859 2.728 ...</span></span>
+<span><span class="co">#&gt;  $ LONGITUD  : num  -74 -76.8 -75.9 -76.5 -68.8 ...</span></span>
+<span><span class="co">#&gt;  $ STCTNENCUE: num  163381 622959 147797 1674673 13059 ...</span></span>
+<span><span class="co">#&gt;  $ STP3_1_SI : num  1117 83033 4704 18250 3675 ...</span></span>
+<span><span class="co">#&gt;  $ STP3_2_NO : num  162264 539926 143093 1656423 9384 ...</span></span>
+<span><span class="co">#&gt;  $ STP3A_RI  : num  1117 70827 4659 3618 3675 ...</span></span>
+<span><span class="co">#&gt;  $ STP3B_TCN : num  0 12206 45 14632 0 ...</span></span>
+<span><span class="co">#&gt;  $ STP4_1_SI : num  544 226 1389 21431 532 ...</span></span>
+<span><span class="co">#&gt;  $ STP4_2_NO : num  162837 622733 146408 1653242 12527 ...</span></span>
+<span><span class="co">#&gt;  $ STP9_1_USO: num  132937 446806 107456 1410067 11111 ...</span></span>
+<span><span class="co">#&gt;  $ STP9_2_USO: num  5429 10837 3397 39096 293 ...</span></span>
+<span><span class="co">#&gt;  $ STP9_3_USO: num  24804 165011 36789 224820 1553 ...</span></span>
+<span><span class="co">#&gt;  $ STP9_4_USO: num  211 324 173 690 102 101 204 29 131 103 ...</span></span>
+<span><span class="co">#&gt;  $ STP9_2_1_M: num  96 328 67 1920 12 12 248 12 0 39 ...</span></span>
+<span><span class="co">#&gt;  $ STP9_2_2_M: num  3860 6147 2572 22705 154 ...</span></span>
+<span><span class="co">#&gt;  $ STP9_2_3_M: num  1117 2276 717 11986 106 ...</span></span>
+<span><span class="co">#&gt;  $ STP9_2_4_M: num  243 2016 29 2357 6 ...</span></span>
+<span><span class="co">#&gt;  $ STP9_2_9_M: num  113 70 12 128 15 14 8 36 14 47 ...</span></span>
+<span><span class="co">#&gt;  $ STP9_3_1_N: num  160 810 188 5572 15 ...</span></span>
+<span><span class="co">#&gt;  $ STP9_3_2_N: num  5422 10334 4402 50097 244 ...</span></span>
+<span><span class="co">#&gt;  $ STP9_3_3_N: num  2511 9455 2485 40191 263 ...</span></span>
+<span><span class="co">#&gt;  $ STP9_3_4_N: num  3052 43342 6665 32665 24 ...</span></span>
+<span><span class="co">#&gt;  $ STP9_3_5_N: num  1250 3515 1428 5452 149 ...</span></span>
+<span><span class="co">#&gt;  $ STP9_3_6_N: num  10099 86486 18445 67080 597 ...</span></span>
+<span><span class="co">#&gt;  $ STP9_3_7_N: num  678 3155 368 6881 35 ...</span></span>
+<span><span class="co">#&gt;  $ STP9_3_8_N: num  12 105 74 169 7 3 52 9 0 2 ...</span></span>
+<span><span class="co">#&gt;  $ STP9_3_9_N: num  96 969 319 1340 5 6 227 3 2 4 ...</span></span>
+<span><span class="co">#&gt;  $ STP9_3_10 : num  1453 6596 2334 14970 206 ...</span></span>
+<span><span class="co">#&gt;  $ STP9_3_99 : num  71 244 81 403 8 6 45 22 1 16 ...</span></span>
+<span><span class="co">#&gt;  $ STVIVIENDA: num  138366 457643 110853 1449163 11404 ...</span></span>
+<span><span class="co">#&gt;  $ STP14_1_TI: num  115307 372096 90540 902928 8577 ...</span></span>
+<span><span class="co">#&gt;  $ STP14_2_TI: num  18322 33837 11052 490230 690 ...</span></span>
+<span><span class="co">#&gt;  $ STP14_3_TI: num  3591 18177 8098 52855 311 ...</span></span>
+<span><span class="co">#&gt;  $ STP14_4_TI: num  493 30035 684 1173 1697 ...</span></span>
+<span><span class="co">#&gt;  $ STP14_5_TI: num  35 2187 49 518 34 ...</span></span>
+<span><span class="co">#&gt;  $ STP14_6_TI: num  618 1311 430 1459 95 ...</span></span>
+<span><span class="co">#&gt;  $ STP15_1_OC: num  110525 367793 91508 1231570 9364 ...</span></span>
+<span><span class="co">#&gt;  $ STP15_2_OC: num  4306 24327 3418 64873 72 ...</span></span>
+<span><span class="co">#&gt;  $ STP15_3_OC: num  7299 32268 5761 41444 660 ...</span></span>
+<span><span class="co">#&gt;  $ STP15_4_OC: num  16236 33255 10166 111276 1308 ...</span></span>
+<span><span class="co">#&gt;  $ TSP16_HOG : num  116166 432493 107053 1267039 9953 ...</span></span>
+<span><span class="co">#&gt;  $ STP19_EC_1: num  93242 336910 70944 1216379 5822 ...</span></span>
+<span><span class="co">#&gt;  $ STP19_ES_2: num  17283 30883 20564 15191 3542 ...</span></span>
+<span><span class="co">#&gt;  $ STP19_EE_1: num  70029 228576 58033 321720 3421 ...</span></span>
+<span><span class="co">#&gt;  $ STP19_EE_2: num  16659 51555 9096 438056 1401 ...</span></span>
+<span><span class="co">#&gt;  $ STP19_EE_3: num  3868 22577 1002 295053 144 ...</span></span>
+<span><span class="co">#&gt;  $ STP19_EE_4: num  523 10705 46 84368 5 ...</span></span>
+<span><span class="co">#&gt;  $ STP19_EE_5: num  20 2682 15 54589 3 ...</span></span>
+<span><span class="co">#&gt;  $ STP19_EE_6: num  7 564 37 16599 1 ...</span></span>
+<span><span class="co">#&gt;  $ STP19_EE_9: num  2136 20251 2715 5994 847 ...</span></span>
+<span><span class="co">#&gt;  $ STP19_ACU1: num  80362 239233 47315 1174360 2047 ...</span></span>
+<span><span class="co">#&gt;  $ STP19_ACU2: num  30163 128560 44193 57210 7317 ...</span></span>
+<span><span class="co">#&gt;  $ STP19_ALC1: num  72630 163290 49898 1119657 2621 ...</span></span>
+<span><span class="co">#&gt;  $ STP19_ALC2: num  37895 204503 41610 111913 6743 ...</span></span>
+<span><span class="co">#&gt;  $ STP19_GAS1: num  40608 101100 13261 1003741 0 ...</span></span>
+<span><span class="co">#&gt;  $ STP19_GAS2: num  67966 264114 77496 218169 9364 ...</span></span>
+<span><span class="co">#&gt;  $ STP19_GAS9: num  1951 2579 751 9660 0 ...</span></span>
+<span><span class="co">#&gt;  $ STP19_REC1: num  80237 163693 54930 1156676 3615 ...</span></span>
+<span><span class="co">#&gt;  $ STP19_REC2: num  30288 204100 36578 74894 5749 ...</span></span>
+<span><span class="co">#&gt;  $ STP19_INT1: num  16740 57774 9947 683961 693 ...</span></span>
+<span><span class="co">#&gt;  $ STP19_INT2: num  91374 307230 80704 537450 8442 ...</span></span>
+<span><span class="co">#&gt;  $ STP19_INT9: num  2411 2789 857 10159 229 ...</span></span>
+<span><span class="co">#&gt;  $ STP27_PERS: num  359602 1243503 283197 3789874 44431 ...</span></span>
+<span><span class="co">#&gt;  $ STPERSON_L: num  11260 7969 5720 27645 6849 ...</span></span>
+<span><span class="co">#&gt;  $ STPERSON_S: num  348342 1235534 277477 3762229 37582 ...</span></span>
+<span><span class="co">#&gt;  $ STP32_1_SE: num  182378 615833 142900 1800614 23214 ...</span></span>
+<span><span class="co">#&gt;  $ STP32_2_SE: num  177224 627670 140297 1989260 21217 ...</span></span>
+<span><span class="co">#&gt;  $ STP34_1_ED: num  63844 198781 47232 460691 11162 ...</span></span>
+<span><span class="co">#&gt;  $ STP34_2_ED: num  78433 224899 60789 571709 12028 ...</span></span>
+<span><span class="co">#&gt;  $ STP34_3_ED: num  62230 218267 51033 632594 7334 ...</span></span>
+<span><span class="co">#&gt;  $ STP34_4_ED: num  50014 184644 42216 556818 5070 ...</span></span>
+<span><span class="co">#&gt;  $ STP34_5_ED: num  39637 141446 32710 489478 3781 ...</span></span>
+<span><span class="co">#&gt;  $ STP34_6_ED: num  31396 119102 23515 468483 2749 ...</span></span>
+<span><span class="co">#&gt;  $ STP34_7_ED: num  19015 81959 14118 325926 1327 ...</span></span>
+<span><span class="co">#&gt;  $ STP34_8_ED: num  10148 48453 7828 183070 739 ...</span></span>
+<span><span class="co">#&gt;  $ STP34_9_ED: num  4885 25952 3756 101105 241 ...</span></span>
+<span><span class="co">#&gt;  $ STP51_PRIM: num  113225 434283 85979 851033 18602 ...</span></span>
+<span><span class="co">#&gt;  $ STP51_SECU: num  24649 195877 30892 446077 2788 ...</span></span>
+<span><span class="co">#&gt;  $ STP51_SUPE: num  17680 105690 20987 636722 2227 ...</span></span>
+<span><span class="co">#&gt;  $ STP51_POST: num  904 7288 501 44248 28 ...</span></span>
+<span><span class="co">#&gt;  $ STP51_13_E: num  17844 56673 11058 111703 2545 ...</span></span>
+<span><span class="co">#&gt;  $ STP51_99_E: num  10238 17057 5630 49860 1886 ...</span></span>
+<span><span class="co">#&gt;  $ Shape_Leng: num  21.4 14 12.7 12.7 21.2 ...</span></span>
+<span><span class="co">#&gt;  $ Shape_Area: num  7.32 2.53 2.11 1.68 5.75 ...</span></span>
+<span><span class="co">#&gt;  $ geometry  :sfc_MULTIPOLYGON of length 33; first list element: List of 1</span></span>
+<span><span class="co">#&gt;   ..$ :List of 1</span></span>
+<span><span class="co">#&gt;   .. ..$ : num [1:33205, 1:2] -74.9 -74.9 -74.9 -74.9 -74.9 ...</span></span>
+<span><span class="co">#&gt;   ..- attr(*, "class")= chr [1:3] "XY" "MULTIPOLYGON" "sfg"</span></span>
+<span><span class="co">#&gt;  - attr(*, "sf_column")= chr "geometry"</span></span>
+<span><span class="co">#&gt;  - attr(*, "agr")= Factor w/ 3 levels "constant","aggregate",..: NA NA NA NA NA NA NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;   ..- attr(*, "names")= chr [1:88] "DPTO_CCDGO" "DPTO_CNMBR" "VERSION" "AREA" ...</span></span></code></pre></div>
+<p>Once downloaded, we can subset the data by regions or columns of interest. In this example we only need the departments codes and geometries.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="va">col</span> <span class="op">&lt;-</span> <span class="va">census</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">DPTO_CCDGO</span>, <span class="va">geometry</span><span class="op">)</span></span></code></pre></div>
+<p>Dengue cases during 2018 can be loaded from the example dataset <code>dengue_2018</code>, which was previously loaded in the package.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dengue_cases</span> <span class="op">&lt;-</span> <span class="va">dengue_2018</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">dengue_cases</span><span class="op">)</span></span>
+<span><span class="co">#&gt; tibble [34 × 2] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ DPTO_CCDGO: chr [1:34] "00" "01" "05" "08" ...</span></span>
+<span><span class="co">#&gt;  $ CASES     : int [1:34] 4 407 3737 3298 1395 96 47 191 177 2103 ...</span></span></code></pre></div>
+<p>To merge the datasets we will use the department’s codes.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dengue_col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html" class="external-link">merge</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="va">col</span>,</span>
+<span>  y <span class="op">=</span> <span class="va">dengue_2018</span>,</span>
+<span>  by <span class="op">=</span> <span class="st">"DPTO_CCDGO"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Finally, we can visualize the cases in a map.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">dengue_col</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_sf</span><span class="op">(</span>mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span>fill <span class="op">=</span> <span class="va">CASES</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">scale_fill_gradientn</span><span class="op">(</span></span>
+<span>    colours <span class="op">=</span> <span class="fu">brewer.pal</span><span class="op">(</span><span class="fl">7</span>, <span class="st">"YlOrRd"</span><span class="op">)</span>,</span>
+<span>    name <span class="op">=</span> <span class="st">"Cases"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Dengue Cases in Colombia during 2018"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-plot_data-1.png" width="100%"></p>
 <div class="section level3">
 <h3 id="lifecycle">Lifecycle<a class="anchor" aria-label="anchor" href="#lifecycle"></a>
 </h3>
@@ -103,7 +249,7 @@
 <div class="section level3">
 <h3 id="contributions">Contributions<a class="anchor" aria-label="anchor" href="#contributions"></a>
 </h3>
-<p>Contributions are welcome via <a href="https://github.com/epiverse-trace/ColOpenData/pulls" class="external-link">pull requests</a>.</p>
+<p>Contributions are welcome via <a href="https://github.com/ColOpenData/pulls" class="external-link">pull requests</a>.</p>
 </div>
 <div class="section level3">
 <h3 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
@@ -142,8 +288,8 @@
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Maria Camila Tavera Cifuentes <br><small class="roles"> Author, maintainer </small>  </li>
-<li>Juan D. Umana <br><small class="roles"> Author </small>  </li>
 <li>Julian Otero <br><small class="roles"> Author </small>  </li>
+<li>Juan D. Umana <br><small class="roles"> Author </small>  </li>
 <li>Juan F. Montenegro <br><small class="roles"> Author </small>  </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
@@ -165,7 +311,7 @@
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by Maria Camila Tavera Cifuentes, Juan D. Umana, Julian Otero, Juan F. Montenegro.</p>
+<p>Developed by Maria Camila Tavera Cifuentes, Julian Otero, Juan D. Umana, Juan F. Montenegro.</p>
 </div>
 
 <div class="pkgdown-footer-right">
