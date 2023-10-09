@@ -24,6 +24,7 @@ RoxygenNote: 7.2.3
 Suggests: 
     ggplot2,
     knitr,
+    RColorBrewer,
     rmarkdown,
     spelling,
     testthat (>= 3.0.0)
