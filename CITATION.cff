@@ -247,4 +247,4 @@ references:
   year: '2023'
   institution:
     name: R Foundation for Statistical Computing
-  version: '>= 2.10'
+  version: '>= 3.2.0'
