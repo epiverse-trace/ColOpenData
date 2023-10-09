@@ -36,11 +36,15 @@ Imports:
     checkmate,
     config,
     dplyr,
+    janitor,
     magrittr,
     readr,
     readxl,
     rlang,
-    sf
+    sf,
+    stats,
+    stringr,
+    tidyr
 VignetteBuilder: knitr
 Depends: 
     R (>= 3.2.0)
