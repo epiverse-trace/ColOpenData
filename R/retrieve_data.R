@@ -33,7 +33,7 @@ retrieve_dataset <- function(dataset_path) {
     dataset <- readr::read_rds(dataset_path)
   } else if (grepl(".xslx", dataset_path)) {
     dataset <- readxl::read_excel(dataset_path)
-  } else{
+  } else {
     stop("`dataset_name` not found")
   }
   return(dataset)

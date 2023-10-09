@@ -46,15 +46,11 @@ pak::pak("epiverse-trace/ColOpenData")
 
 This example shows how to retrieve census data at a department level in
 Colombia including the administrative divisions and spatial data, to
-later use it to visualize Dengue cases during 2018. We will first load
-the needed packages.
+later use it to visualize Dengue cases in the country during 2018.
 
 ``` r
 library(ColOpenData)
 library(sf)
-library(dplyr)
-library(ggplot2)
-library(RColorBrewer)
 ```
 
 We will be using the `MGNCNPV_DPTO_2018` dataset, which contains the
@@ -174,13 +170,13 @@ interest. In this example we only need the departments codes and
 geometries.
 
 ``` r
-south_col <- census %>%
+library(dplyr)
+col <- census %>%
   select(DPTO_CCDGO, geometry)
 ```
 
 Dengue cases during 2018 can be loaded from the example dataset
-`dengue_2018`, which was previously obtained using the package
-[sivirep](https://epiverse-trace.github.io/sivirep/).
+`dengue_2018`, which was previously loaded in the package.
 
 ``` r
 dengue_cases <- dengue_2018
@@ -193,8 +189,8 @@ str(dengue_cases)
 To merge the datasets we will use the department’s codes.
 
 ``` r
-dengue_south <- merge(
-  x = south_col,
+dengue_col <- merge(
+  x = col,
   y = dengue_2018,
   by = "DPTO_CCDGO"
 )
@@ -203,11 +199,13 @@ dengue_south <- merge(
 Finally, we can visualize the cases in a map.
 
 ``` r
-ggplot(data = dengue_south) +
+library(ggplot2)
+library(RColorBrewer)
+ggplot(data = dengue_col) +
   geom_sf(mapping = aes(fill = CASES)) +
   scale_fill_gradientn(
     colours = brewer.pal(7, "YlOrRd"),
-    name = element_blank()
+    name = "Cases"
   ) +
   ggtitle("Dengue Cases in Colombia during 2018") +
   theme_bw()
