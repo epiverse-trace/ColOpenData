@@ -33,7 +33,7 @@ retrieve_dataset <- function(dataset_path) {
     dataset <- readr::read_rds(dataset_path)
   } else if (grepl(".xlsx", dataset_path)) {
     temp_file <- tempfile(fileext = ".xlsx")
-    dataset_xlsx <- httr::GET(url = dataset_path, httr::write_disk(temp_file))
+    httr::GET(url = dataset_path, httr::write_disk(temp_file))
     dataset <- readxl::read_excel(temp_file, skip = 1L)
   } else {
     stop("`dataset_name` not found")
