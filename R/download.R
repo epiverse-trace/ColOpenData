@@ -10,7 +10,7 @@
 download <- function(dataset) {
   path <- retrieve_path(dataset)
   downloaded_data <- retrieve_dataset(path)
-  if (grepl("DPDPP", dataset)) {
+  if (grepl("PP_", dataset, fixed = TRUE)) {
     downloaded_data <- clean_ddp_pp(downloaded_data)
   }
   return(downloaded_data)
@@ -44,8 +44,14 @@ clean_ddp_pp <- function(dataset) {
     values_to = "CONTEO"
   )
   pp_prep_filtered <- pp_prep_filtered %>% dplyr::mutate(
-    SEXO = unlist(stringr::str_split(.data$SEXO_EDAD, "_", simplify = T))[, 1],
-    EDAD = unlist(stringr::str_split(.data$SEXO_EDAD, "_", simplify = T))[, 2]
+    SEXO = unlist(stringr::str_split(.data$SEXO_EDAD,
+      stringr::fixed("_"),
+      simplify = TRUE
+    ))[, 1],
+    EDAD = unlist(stringr::str_split(.data$SEXO_EDAD,
+      stringr::fixed("_"),
+      simplify = TRUE
+    ))[, 2]
   )
   if ("DPMP" %in% colnames(pp_prep_filtered)) {
     pp_out <- pp_prep_filtered %>% dplyr::select(janitor::make_clean_names(c(
