@@ -1,5 +1,5 @@
-dataset_1 <- download("MGNCNPV_DPTO_2018")
-dataset_2 <- download("MGNCNPV_MPIO_2018")
+dataset_1 <- download("DANE_2018_MGNCNPV_DPTO")
+dataset_2 <- download("DANE_2018_MGNCNPV_MPIO")
 test_that("Filter MGN-CNPV errors are thrown", {
   expect_error(filter_mgn_cnpv(
     .data = dataset_1,
