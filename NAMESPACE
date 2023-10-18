@@ -3,5 +3,6 @@
 export("%>%")
 export(download)
 export(filter_mgn_cnpv)
+export(set_magna_sirgas)
 importFrom(magrittr,"%>%")
 importFrom(rlang,.data)

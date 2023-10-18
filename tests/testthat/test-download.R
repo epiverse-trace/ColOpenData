@@ -4,5 +4,5 @@ test_that("Download errors are thrown", {
 })
 
 test_that("Test that download works", {
-  expect_s3_class(download("MGNCNPV_DPTO_2018"), c("sf", "data.frame"))
+  expect_s3_class(download("DANE_2018_CNPV_Hogares"), c("data.frame"))
 })

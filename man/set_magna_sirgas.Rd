@@ -13,6 +13,12 @@ set_magna_sirgas(.data)
 sf dataframe with Colombian coordinate reference system
 }
 \description{
-Change coordinate system to Magna Sirgas
+Allows the user to set the Coordinate Reference System (CRS) to Colombian CRS
+(Magna Sirgas)
 }
-\keyword{internal}
+\examples{
+\dontrun{
+set_magna_sirgas(MGNCNPV_MUN_2018)
+}
+
+}
