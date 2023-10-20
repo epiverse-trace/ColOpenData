@@ -13,7 +13,7 @@ set_magna_sirgas(.data)
 sf dataframe with Colombian coordinate reference system
 }
 \description{
-Allows the user to set the Coordinate Reference System (CRS) to Colombian CRS
+Allows the user to set the Coordinate Reference System to Colombian CRS
 (Magna Sirgas)
 }
 \examples{
