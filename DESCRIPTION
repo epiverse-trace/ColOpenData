@@ -35,17 +35,12 @@ Language: en-US
 Imports: 
     checkmate,
     config,
-    dplyr,
     httr,
-    janitor,
     magrittr,
-    readr,
     readxl,
     rlang,
     sf,
-    stats,
-    stringr,
-    tidyr
+    utils
 VignetteBuilder: knitr
 Depends: 
     R (>= 3.2.0)
