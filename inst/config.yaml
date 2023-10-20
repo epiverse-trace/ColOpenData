@@ -1,5 +1,5 @@
 default:
-  base_path: "http://172.24.100.87:8085/colopendata/"
+  base_path: "https://trace.virtual.uniandes.edu.co/colopendata/"
   DANE_CNPV_2018_Hogares: "DANE_CNPV_2018_Hogares.XLSX"
   DANE_CNPV_2018_Personas_Demografico: "DANE_CNPV_2018_Personas_Demografico.xlsx"
   DANE_CNPV_2018_Personas_Social: "DANE_CNPV_2018_Personas_Social.xlsx"
