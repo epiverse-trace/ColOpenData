@@ -3,7 +3,7 @@
 #' Retrieve path of named dataset
 #'
 #' @description
-#' Retrieve included datsets path, to download them later.
+#' Retrieve included datasets path, to download them later.
 #' @param dataset name of the consulted dataset
 #'
 #' @return path to retrieve the dataset from server
@@ -31,20 +31,29 @@ retrieve_path <- function(dataset) {
 #'
 #' @keywords internal
 retrieve_dataset <- function(dataset_path) {
+  ext_path <- system.file("extdata",
+    package = "ColOpenData",
+    mustWork = TRUE
+  )
+  new_dir <- rev(unlist(strsplit(dataset_path, "[/.]")))[2]
+  new_dir_path <- file.path(ext_path, new_dir)
+  if (file.exists(new_dir_path)) {
+    unlink(new_dir_path, recursive = TRUE)
+  }
+  dir.create(new_dir_path)
   if (grepl(".zip", dataset_path)) {
-    temp_file <- tempfile()
-    httr::GET(url = dataset_path, httr::write_disk(temp_file))
-    temp_dir <- tempdir()
-    unzip(temp_file, exdir = temp_dir)
-    dir_name <- rev(unlist(strsplit(dataset_path, "/")))[2]
-    sf::st_read(dir_name)
-    unlink(temp_dir, recursive = TRUE)
-    dataset <- sf::read_sf(dataset_path)
+    new_file_path <- file.path(new_dir_path, new_dir)
+    httr::GET(url = dataset_path, httr::write_disk(new_file_path))
+    utils::unzip(new_file_path, exdir = new_dir_path)
+    unlink(new_file_path, recursive = TRUE)
+    import_dir <- list.files(new_dir_path)
+    dataset <- sf::st_read(file.path(new_dir_path, import_dir))
+    unlink(new_dir_path, recursive = TRUE)
   } else if (grepl(".xlsx", dataset_path)) {
-    temp_file <- tempfile()
-    httr::GET(url = dataset_path, httr::write_disk(temp_file))
-    dataset <- readxl::read_excel(temp_file)
-    unlink(temp_file, recursive = TRUE)
+    new_file_path <- file.path(new_dir_path, new_dir)
+    httr::GET(url = dataset_path, httr::write_disk(new_file_path))
+    dataset <- readxl::read_excel(new_file_path)
+    unlink(new_dir_path, recursive = TRUE)
   } else {
     stop("`dataset` not found")
   }
@@ -54,7 +63,7 @@ retrieve_dataset <- function(dataset_path) {
 #' Change coordinate system to Magna Sirgas
 #'
 #' @description
-#' Allows the user to set the Coordinate Reference System (CRS) to Colombian CRS
+#' Allows the user to set the Coordinate Reference System to local
 #' (Magna Sirgas)
 #'
 #' @param .data sf object containing coordinates and established geometry

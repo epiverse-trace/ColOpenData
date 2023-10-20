@@ -13,6 +13,6 @@ retrieve_path(dataset)
 path to retrieve the dataset from server
 }
 \description{
-Retrieve included datsets path, to download them later.
+Retrieve included datasets path, to download them later.
 }
 \keyword{internal}
