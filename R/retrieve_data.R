@@ -10,7 +10,7 @@
 #'
 #' @keywords internal
 retrieve_path <- function(dataset) {
-  config_file <- system.file("config.yaml",
+  config_file <- system.file("extdata", "config.yaml",
     package = "ColOpenData",
     mustWork = TRUE
   )
