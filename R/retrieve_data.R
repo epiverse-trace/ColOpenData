@@ -41,7 +41,7 @@ retrieve_dataset <- function(dataset_path) {
     unlink(new_dir_path, recursive = TRUE)
   }
   dir.create(new_dir_path)
-  if (grepl(".zip", dataset_path)) {
+  if (grepl(".zip", tolower(dataset_path))) {
     new_file_path <- file.path(new_dir_path, new_dir)
     httr::GET(url = dataset_path, httr::write_disk(new_file_path))
     utils::unzip(new_file_path, exdir = new_dir_path)
@@ -49,7 +49,7 @@ retrieve_dataset <- function(dataset_path) {
     import_dir <- list.files(new_dir_path)
     dataset <- sf::st_read(file.path(new_dir_path, import_dir))
     unlink(new_dir_path, recursive = TRUE)
-  } else if (grepl(".xlsx", dataset_path)) {
+  } else if (grepl(".xlsx", tolower(dataset_path))) {
     new_file_path <- file.path(new_dir_path, new_dir)
     httr::GET(url = dataset_path, httr::write_disk(new_file_path))
     dataset <- readxl::read_excel(new_file_path)
