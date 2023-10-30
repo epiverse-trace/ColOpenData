@@ -58,7 +58,7 @@ retrieve_dataset <- function(dataset_path) {
   } else {
     stop("`dataset` not found")
   }
-  #nolint
+  #nolint end
   return(dataset)
 }
 
