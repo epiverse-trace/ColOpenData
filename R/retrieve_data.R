@@ -36,21 +36,22 @@ retrieve_dataset <- function(dataset_path) {
     mustWork = TRUE
   )
   new_dir <- rev(unlist(strsplit(dataset_path, "[/.]")))[2]
-  new_dir_path <- file.path(ext_path, new_dir)
+  new_dir_path <- paste(ext_path, new_dir, sep = .Platform$file.sep)
   if (file.exists(new_dir_path)) {
     unlink(new_dir_path, recursive = TRUE)
   }
   dir.create(new_dir_path)
   if (grepl(".zip", tolower(dataset_path))) {
-    new_file_path <- file.path(new_dir_path, new_dir)
+    new_file_path <- paste(new_dir_path, new_dir, sep = .Platform$file.sep)
     httr::GET(url = dataset_path, httr::write_disk(new_file_path))
     utils::unzip(new_file_path, exdir = new_dir_path)
     unlink(new_file_path, recursive = TRUE)
     import_dir <- list.files(new_dir_path)
-    dataset <- sf::st_read(file.path(new_dir_path, import_dir))
+    dataset <- sf::st_read(paste(new_dir_path, import_dir, 
+                                 sep = .Platform$file.sep))
     unlink(new_dir_path, recursive = TRUE)
   } else if (grepl(".xlsx", tolower(dataset_path))) {
-    new_file_path <- file.path(new_dir_path, new_dir)
+    new_file_path <- paste(new_dir_path, new_dir, sep = .Platform$file.sep)
     httr::GET(url = dataset_path, httr::write_disk(new_file_path))
     dataset <- readxl::read_excel(new_file_path)
     unlink(new_dir_path, recursive = TRUE)
