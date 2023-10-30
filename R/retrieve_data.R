@@ -35,7 +35,7 @@ retrieve_dataset <- function(dataset_path) {
     package = "ColOpenData",
     mustWork = TRUE
   )
-  #nolint
+  #nolint start: nonportable_path_linter
   new_dir <- rev(unlist(strsplit(dataset_path, "[/.]")))[2]
   new_dir_path <- file.path(ext_path, new_dir)
   if (file.exists(new_dir_path)) {
