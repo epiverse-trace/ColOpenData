@@ -83,3 +83,55 @@ set_magna_sirgas <- function(.data) {
   transformed <- sf::st_transform(.data, 4686)
   return(transformed)
 }
+
+
+
+#' Get weather and environmental variables from IDEAM's backup
+#' @description
+#' Retrieve temperature data for a given location along a period of time.
+#' 
+#' @param location String with the municipality's DIVIPOLA code
+#' @param tag Variable to retrieve
+#' @param start_date Start date in format "YYYY-MM-DD"
+#' @param end_date End date in format "YYYY-MM-DD"
+#' @param frequency Frequency of the measurement (day, week, month, year)
+#'
+#' @return
+#' @export
+#'
+#' @examples
+get_weather <- function(location, tag, start_date, end_date, frequency){
+  #read IDEAM data
+  IDEAM_stations <- read.csv("C:/Users/Julia/OneDrive - Universidad de los Andes/TRACE/ColOpenData/supportR/IDEAM_stations.csv")
+  stations <- IDEAM_stations$codigo[which(IDEAM_stations$mpio_cdpmp == location)]
+  if(all(is.na(stations))){
+    stop("There were no records for the given location and dates")
+  }
+  paths_stations <- paste0(tag, "@",stations, ".data")
+  dates <- seq(as.Date(start_date), as.Date(end_date), by = frequency)
+  temp_df <- data.frame(dates = dates)
+  for(i in 1:length(paths_stations)){
+    if(file.exists(file.path("C:/Users/Julia/Downloads/BACKUP DATOS HASTA MAYO 2023",paths_stations[i]))){
+      temp_data <- readr::read_delim(file.path("C:/Users/Julia/Downloads/BACKUP DATOS HASTA MAYO 2023",paths_stations[i]), 
+                                     delim = "|", escape_double = FALSE, trim_ws = TRUE)
+      temp_data$Fecha <- as.POSIXct(temp_data$Fecha , format="%Y-%m-%d %H:%M:%S", tz="UTC")
+      filtered <- temp_data %>% filter(.data$Fecha >= start_date,
+                                       .data$Fecha <= end_date) %>%
+        group_by(as.Date(.data$Fecha)) %>% summarise(daily = mean(.data$Valor))
+      names(filtered) <- c("dates", paste("values", i, sep = "_"))
+      temp_df <- merge(temp_df, filtered, by.x = "dates", by.y = "dates", all.x = TRUE)
+    }
+  }
+  if(ncol(temp_df) == 1){
+    stop("There were no records for the given location and dates")
+  } else if(ncol(temp_df) == 2){
+    output <- temp_df
+    names(output) <- c("dates", tag)
+  } else{
+    output <- as.data.frame(temp_df$dates)
+    output[tag] <- round(rowMeans(temp_df[,-c(1)]), 2)
+    names(output) <- c("dates", tag)
+  }
+  return(output)
+}
+
