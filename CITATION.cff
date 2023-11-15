@@ -185,30 +185,6 @@ references:
     email: jj@rstudio.com
   year: '2023'
 - type: software
-  title: dplyr
-  abstract: 'dplyr: A Grammar of Data Manipulation'
-  notes: Imports
-  url: https://dplyr.tidyverse.org
-  repository: https://CRAN.R-project.org/package=dplyr
-  authors:
-  - family-names: Wickham
-    given-names: Hadley
-    email: hadley@posit.co
-    orcid: https://orcid.org/0000-0003-4757-117X
-  - family-names: François
-    given-names: Romain
-    orcid: https://orcid.org/0000-0002-2444-4226
-  - family-names: Henry
-    given-names: Lionel
-  - family-names: Müller
-    given-names: Kirill
-    orcid: https://orcid.org/0000-0002-1416-3412
-  - family-names: Vaughan
-    given-names: Davis
-    email: davis@posit.co
-    orcid: https://orcid.org/0000-0003-4777-038X
-  year: '2023'
-- type: software
   title: httr
   abstract: 'httr: Tools for Working with URLs and HTTP'
   notes: Imports
@@ -218,17 +194,6 @@ references:
   - family-names: Wickham
     given-names: Hadley
     email: hadley@posit.co
-  year: '2023'
-- type: software
-  title: janitor
-  abstract: 'janitor: Simple Tools for Examining and Cleaning Dirty Data'
-  notes: Imports
-  url: https://sfirke.github.io/janitor/
-  repository: https://CRAN.R-project.org/package=janitor
-  authors:
-  - family-names: Firke
-    given-names: Sam
-    email: samuel.firke@gmail.com
   year: '2023'
 - type: software
   title: magrittr
@@ -243,23 +208,6 @@ references:
   - family-names: Wickham
     given-names: Hadley
     email: hadley@rstudio.com
-  year: '2023'
-- type: software
-  title: readr
-  abstract: 'readr: Read Rectangular Text Data'
-  notes: Imports
-  url: https://readr.tidyverse.org
-  repository: https://CRAN.R-project.org/package=readr
-  authors:
-  - family-names: Wickham
-    given-names: Hadley
-    email: hadley@posit.co
-  - family-names: Hester
-    given-names: Jim
-  - family-names: Bryan
-    given-names: Jennifer
-    email: jenny@posit.co
-    orcid: https://orcid.org/0000-0002-6983-2759
   year: '2023'
 - type: software
   title: readxl
@@ -304,7 +252,7 @@ references:
     orcid: https://orcid.org/0000-0001-8049-7069
   year: '2023'
 - type: software
-  title: stats
+  title: utils
   abstract: 'R: A Language and Environment for Statistical Computing'
   notes: Imports
   authors:
@@ -315,32 +263,72 @@ references:
   institution:
     name: R Foundation for Statistical Computing
 - type: software
-  title: stringr
-  abstract: 'stringr: Simple, Consistent Wrappers for Common String Operations'
+  title: lubridate
+  abstract: 'lubridate: Make Dealing with Dates a Little Easier'
   notes: Imports
-  url: https://stringr.tidyverse.org
-  repository: https://CRAN.R-project.org/package=stringr
+  url: https://lubridate.tidyverse.org
+  repository: https://CRAN.R-project.org/package=lubridate
   authors:
+  - family-names: Spinu
+    given-names: Vitalie
+    email: spinuvit@gmail.com
+  - family-names: Grolemund
+    given-names: Garrett
   - family-names: Wickham
     given-names: Hadley
-    email: hadley@rstudio.com
   year: '2023'
 - type: software
-  title: tidyr
-  abstract: 'tidyr: Tidy Messy Data'
+  title: readr
+  abstract: 'readr: Read Rectangular Text Data'
   notes: Imports
-  url: https://tidyr.tidyverse.org
-  repository: https://CRAN.R-project.org/package=tidyr
+  url: https://readr.tidyverse.org
+  repository: https://CRAN.R-project.org/package=readr
   authors:
   - family-names: Wickham
     given-names: Hadley
     email: hadley@posit.co
+  - family-names: Hester
+    given-names: Jim
+  - family-names: Bryan
+    given-names: Jennifer
+    email: jenny@posit.co
+    orcid: https://orcid.org/0000-0002-6983-2759
+  year: '2023'
+- type: software
+  title: dplyr
+  abstract: 'dplyr: A Grammar of Data Manipulation'
+  notes: Imports
+  url: https://dplyr.tidyverse.org
+  repository: https://CRAN.R-project.org/package=dplyr
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+    orcid: https://orcid.org/0000-0003-4757-117X
+  - family-names: François
+    given-names: Romain
+    orcid: https://orcid.org/0000-0002-2444-4226
+  - family-names: Henry
+    given-names: Lionel
+  - family-names: Müller
+    given-names: Kirill
+    orcid: https://orcid.org/0000-0002-1416-3412
   - family-names: Vaughan
     given-names: Davis
     email: davis@posit.co
-  - family-names: Girlich
-    given-names: Maximilian
+    orcid: https://orcid.org/0000-0003-4777-038X
   year: '2023'
+- type: software
+  title: graphics
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  location:
+    name: Vienna, Austria
+  year: '2023'
+  institution:
+    name: R Foundation for Statistical Computing
 - type: software
   title: 'R: A Language and Environment for Statistical Computing'
   notes: Depends
