@@ -12,7 +12,7 @@
 #'
 #' @return data.frame with the observed data for the given municipality
 weather_stations_mpio <- function(name, start_date, end_date, frequency, tag,
-                                   plot = FALSE, group = FALSE) {
+                                  plot = FALSE, group = FALSE) {
   checkmate::assert_character(name)
   checkmate::assert_character(start_date)
   checkmate::assert_character(end_date)
@@ -41,7 +41,8 @@ weather_stations_mpio <- function(name, start_date, end_date, frequency, tag,
 #' @param geometry sf object containing a geometry (polygon or multipolygon)
 #' @param start_date starting date in format "YYYY-MM-DD"
 #' @param end_date end date in format "YYYY-MM-DD"
-#' @param frequency aggregation frequency. Can be "day", "week","month" or "year"
+#' @param frequency aggregation frequency. Can be "day", "week","month" or
+#' "year"
 #' @param tag character containing tags to analyze
 #' @param plot if TRUE, plot the individual stations that contain data
 #' @param group if TRUE, returns only one observation from the mean of the
@@ -88,7 +89,7 @@ weather_stations <- function(geometry, start_date, end_date, frequency,
 #' @param group if TRUE, returns only one observation from the mean of the
 #'
 #' @importFrom rlang .data
-#' 
+#'
 #' @return data.frame containing the observed data for the given stations
 #' @export
 retrieve_working_stations <- function(stations, start_date, end_date,
@@ -132,17 +133,23 @@ retrieve_working_stations <- function(stations, start_date, end_date,
         )
       if (frequency == "week") {
         filtered <- filtered %>%
-          dplyr::mutate(week = lubridate::floor_date(.data$Fecha, unit = "week")) %>%
+          dplyr::mutate(
+            week = lubridate::floor_date(.data$Fecha, unit = "week")
+          ) %>%
           dplyr::group_by(.data$week) %>%
           dplyr::summarise(value = round(mean(.data$Valor), 2))
       } else if (frequency == "month") {
         filtered <- filtered %>%
-          dplyr::mutate(month = lubridate::floor_date(.data$Fecha, unit = "month")) %>%
+          dplyr::mutate(
+            month = lubridate::floor_date(.data$Fecha, unit = "month")
+          ) %>%
           dplyr::group_by(.data$month) %>%
           dplyr::summarise(value = round(mean(.data$Valor), 2))
       } else if (frequency == "year") {
         filtered <- filtered %>%
-          dplyr::mutate(year = lubridate::floor_date(.data$Fecha, unit = "year")) %>%
+          dplyr::mutate(
+            year = lubridate::floor_date(.data$Fecha, unit = "year")
+          ) %>%
           dplyr::group_by(.data$year) %>%
           dplyr::summarise(value = round(mean(.data$Valor), 2))
       } else {
