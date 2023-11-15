@@ -40,7 +40,11 @@ Imports:
     readxl,
     rlang,
     sf,
-    utils
+    utils,
+    lubridate,
+    readr,
+    dplyr,
+    graphics
 VignetteBuilder: knitr
 Depends: 
     R (>= 3.2.0)
