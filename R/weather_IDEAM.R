@@ -9,21 +9,13 @@
 #' @param plot if TRUE, plot the individual stations that contain data
 #' @param group if TRUE, returns only one observation from the mean of the
 #' stations consulted
+#' @examples
+#' weather_stations_mpio("11001", "2021-11-14", "2021-11-30", "day", "TSSM_CON")
 #'
 #' @return data.frame with the observed data for the given municipality
 weather_stations_mpio <- function(name, start_date, end_date, frequency, tag,
                                   plot = FALSE, group = FALSE) {
   checkmate::assert_character(name)
-  checkmate::assert_character(start_date)
-  checkmate::assert_character(end_date)
-  checkmate::assert_choice(frequency, c("day", "week", "month", "year"))
-  checkmate::assert_choice(tag, c(
-    "TSSM_CON", "THSM_CON", "TMN_CON", "TMX_CON",
-    "TSTG_CON", "HR_CAL", "HRHG_CON", "TV_CAL",
-    "TPR_CAL", "PTPM_CON", "EVTE_CON", "FA_CON",
-    "NB_CON", "RCAM_CON", "BSHG_CON", "VVAG_CON",
-    "DVAG_CON", "VVMXAG_CON", "DVMXAG_CON"
-  ))
 
   mpios <- ColOpenData::download("DANE_MGNCNPV_2018_MPIO")
   mpio <- mpios[which(mpios$MPIO_CDPMP == name), ]
@@ -47,6 +39,11 @@ weather_stations_mpio <- function(name, start_date, end_date, frequency, tag,
 #' @param plot if TRUE, plot the individual stations that contain data
 #' @param group if TRUE, returns only one observation from the mean of the
 #' stations consulted
+#' 
+#' #' @examples
+#' \dontrun{
+#' weather_stations(geometry, "2021-11-14", "2021-11-30", "day", "TSSM_CON")
+#' }
 #'
 #' @return data.frame with the observed data for the given geometry
 #' @export
@@ -89,6 +86,12 @@ weather_stations <- function(geometry, start_date, end_date, frequency,
 #' @param group if TRUE, returns only one observation from the mean of the
 #'
 #' @importFrom rlang .data
+#' 
+#' @examples
+#' \dontrun{
+#' retrieve_working_stations(stations, "2021-11-14", "2021-11-30", "day", 
+#'"TSSM_CON")
+#' }
 #'
 #' @return data.frame containing the observed data for the given stations
 #' @export
