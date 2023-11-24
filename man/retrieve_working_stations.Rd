@@ -24,7 +24,7 @@ retrieve_working_stations(
 \item{frequency}{aggregation frequency. Can be "day", "week","month" or
 "year"}
 
-\item{tag}{character containing tags to analyze}
+\item{tag}{character containing tag to analyze}
 
 \item{plot}{if TRUE, plot the individual stations that contain data}
 
@@ -38,3 +38,4 @@ Retrieves, from a list of stations, the ones that contain observations for
 the given tag in specified dates. Might include stations that are no longer
 working.
 }
+\keyword{internal}

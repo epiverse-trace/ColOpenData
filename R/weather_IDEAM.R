@@ -5,28 +5,28 @@
 #' @param end_date end date in format "YYYY-MM-DD"
 #' @param frequency aggregation frequency. Can be "day", "week","month" or
 #' "year"
-#' @param tag character containing tags to analyze
+#' @param tags character containing tags to analyze
 #' @param plot if TRUE, plot the individual stations that contain data
 #' @param group if TRUE, returns only one observation from the mean of the
 #' stations consulted
 #' @examples
-#' weather_stations_mpio("11001", "2021-11-14", "2021-11-30", "day", "TSSM_CON")
+#' weather_data_mpio("11001", "2021-11-14", "2021-11-30", "day", "TSSM_CON")
 #'
 #' @return data.frame with the observed data for the given municipality
-weather_stations_mpio <- function(name, start_date, end_date, frequency, tag,
-                                  plot = FALSE, group = FALSE) {
+weather_data_mpio <- function(name, start_date, end_date, frequency, tags,
+                              plot = FALSE, group = FALSE) {
   checkmate::assert_character(name)
 
   mpios <- ColOpenData::download("DANE_MGNCNPV_2018_MPIO")
   mpio <- mpios[which(mpios$MPIO_CDPMP == name), ]
-  working_stations <- weather_stations(
+  weather_stations <- weather_data(
     mpio, start_date, end_date,
-    frequency, tag, plot, group
+    frequency, tags, plot, group
   )
-  return(working_stations)
+  return(weather_stations)
 }
 
-#' Retrieve weather stations
+#' Retrieve weather data from stations in geometry
 #' @description
 #' Retrieve weather stations with observed data in a given geometry.
 #'
@@ -35,39 +35,113 @@ weather_stations_mpio <- function(name, start_date, end_date, frequency, tag,
 #' @param end_date end date in format "YYYY-MM-DD"
 #' @param frequency aggregation frequency. Can be "day", "week","month" or
 #' "year"
-#' @param tag character containing tags to analyze
+#' @param tags character containing tags to analyze
 #' @param plot if TRUE, plot the individual stations that contain data
 #' @param group if TRUE, returns only one observation from the mean of the
 #' stations consulted
-#' 
-#' #' @examples
+#'
+#' @examples
 #' \dontrun{
-#' weather_stations(geometry, "2021-11-14", "2021-11-30", "day", "TSSM_CON")
+#' weather_data(geometry, "2021-11-14", "2021-11-30", "day", "TSSM_CON")
 #' }
 #'
 #' @return data.frame with the observed data for the given geometry
 #' @export
-weather_stations <- function(geometry, start_date, end_date, frequency,
-                             tag, plot = FALSE, group = FALSE) {
+weather_data <- function(geometry, start_date, end_date, frequency,
+                         tags, plot = FALSE, group = FALSE) {
   checkmate::assert_class(geometry, "sf")
   checkmate::assert_character(start_date)
   checkmate::assert_character(end_date)
   checkmate::assert_choice(frequency, c("day", "week", "month", "year"))
-  checkmate::assert_choice(tag, c(
+  ideam_tags <- c(
     "TSSM_CON", "THSM_CON", "TMN_CON", "TMX_CON",
     "TSTG_CON", "HR_CAL", "HRHG_CON", "TV_CAL",
     "TPR_CAL", "PTPM_CON", "EVTE_CON", "FA_CON",
     "NB_CON", "RCAM_CON", "BSHG_CON", "VVAG_CON",
     "DVAG_CON", "VVMXAG_CON", "DVMXAG_CON"
-  ))
+  )
+  for (tag in tags) {
+    checkmate::assert_choice(tag, ideam_tags)
+  }
 
   stations_roi <- stations_in_roi(geometry)
   stations <- stations_roi$codigo
-  working_stations <- retrieve_working_stations(
+  weather_stations <- weather_stations(
     stations, start_date, end_date,
-    frequency, tag, plot, group
+    frequency, tags, plot, group
   )
-  return(working_stations)
+  return(weather_stations)
+}
+
+#' Retrieve weather from stations
+#' @description
+#' Retrieve weather stations with observed data in a given geometry.
+#' @param stations vector containing the stations codes
+#' @param start_date starting date in format "YYYY-MM-DD"
+#' @param end_date end date in format "YYYY-MM-DD"
+#' @param frequency aggregation frequency. Can be "day", "week","month" or
+#' "year"
+#' @param tags character containing tags to analyze
+#' @param plot if TRUE, plot the individual stations that contain data
+#' @param group if TRUE, returns only one observation from the mean of the
+#' stations consulted
+#'
+#' @examples
+#' \dontrun{
+#' weather_stations(stations, "2021-11-14", "2021-11-30", "day", "TSSM_CON")
+#' }
+#'
+#' @return data.frame with the observed data for the given geometry
+#' @export
+weather_stations <- function(stations, start_date, end_date,
+                             frequency, tags, plot = FALSE,
+                             group = FALSE) {
+  checkmate::assert_vector(stations)
+  checkmate::assert_character(start_date)
+  checkmate::assert_character(end_date)
+  checkmate::assert_choice(frequency, c("day", "week", "month", "year"))
+  ideam_tags <- c(
+    "TSSM_CON", "THSM_CON", "TMN_CON", "TMX_CON",
+    "TSTG_CON", "HR_CAL", "HRHG_CON", "TV_CAL",
+    "TPR_CAL", "PTPM_CON", "EVTE_CON", "FA_CON",
+    "NB_CON", "RCAM_CON", "BSHG_CON", "VVAG_CON",
+    "DVAG_CON", "VVMXAG_CON", "DVMXAG_CON"
+  )
+  if (length(tags) == 1) {
+    stations_data <- retrieve_working_stations(
+      stations, start_date, end_date,
+      frequency, tags, plot, group
+    )
+  } else {
+    if (!group) {
+      stations_data <- list()
+      for (tag in tags) {
+        checkmate::assert_choice(tag, ideam_tags)
+        working_stations <- retrieve_working_stations(
+          stations, start_date, end_date,
+          frequency, tag, plot, group
+        )
+        stations_data[[tag]] <- working_stations
+      }
+    } else {
+      stations_data <- data.frame()
+      for (tag in tags) {
+        checkmate::assert_choice(tag, ideam_tags)
+        working_stations <- retrieve_working_stations(
+          stations, start_date, end_date,
+          frequency, tag, plot, group
+        )
+        if ("dates" %in% colnames(stations_data)) {
+          stations_data <- merge(stations_data, working_stations,
+            by.x = "dates", by.y = "dates", all.x = TRUE
+          )
+        } else {
+          stations_data <- working_stations
+        }
+      }
+    }
+  }
+  return(stations_data)
 }
 
 #' Retrieve stations that took measurements in the given dates
@@ -81,20 +155,14 @@ weather_stations <- function(geometry, start_date, end_date, frequency,
 #' @param end_date end date in format "YYYY-MM-DD"
 #' @param frequency aggregation frequency. Can be "day", "week","month" or
 #' "year"
-#' @param tag character containing tags to analyze
+#' @param tag character containing tag to analyze
 #' @param plot if TRUE, plot the individual stations that contain data
 #' @param group if TRUE, returns only one observation from the mean of the
 #'
 #' @importFrom rlang .data
-#' 
-#' @examples
-#' \dontrun{
-#' retrieve_working_stations(stations, "2021-11-14", "2021-11-30", "day", 
-#'"TSSM_CON")
-#' }
 #'
 #' @return data.frame containing the observed data for the given stations
-#' @export
+#' @keywords internal
 retrieve_working_stations <- function(stations, start_date, end_date,
                                       frequency, tag, plot = FALSE,
                                       group = FALSE) {
@@ -102,13 +170,14 @@ retrieve_working_stations <- function(stations, start_date, end_date,
   checkmate::assert_character(start_date)
   checkmate::assert_character(end_date)
   checkmate::assert_choice(frequency, c("day", "week", "month", "year"))
-  checkmate::assert_choice(tag, c(
+  ideam_tags <- c(
     "TSSM_CON", "THSM_CON", "TMN_CON", "TMX_CON",
     "TSTG_CON", "HR_CAL", "HRHG_CON", "TV_CAL",
     "TPR_CAL", "PTPM_CON", "EVTE_CON", "FA_CON",
     "NB_CON", "RCAM_CON", "BSHG_CON", "VVAG_CON",
     "DVAG_CON", "VVMXAG_CON", "DVMXAG_CON"
-  ))
+  )
+  checkmate::assert_choice(tag, ideam_tags)
   paths_stations <- paste0(tag, "@", stations, ".data")
   dates <- seq(as.Date(start_date), as.Date(end_date), by = frequency)
   floor_dates <- lubridate::floor_date(dates, unit = frequency)
@@ -189,6 +258,11 @@ retrieve_working_stations <- function(stations, start_date, end_date,
 #'
 #' @param geometry sf object containing a geometry (polygon or multipolygon)
 #'
+#' @examples
+#' \dontrun{
+#' stations_in_roy(geometry)
+#' }
+#' 
 #' @return data.frame with the stations inside the consulted geometry
 #' @export
 stations_in_roi <- function(geometry) {

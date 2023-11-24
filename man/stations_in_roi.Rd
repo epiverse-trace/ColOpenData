@@ -15,3 +15,9 @@ data.frame with the stations inside the consulted geometry
 \description{
 Retrieves the stations contained inside a given geometry
 }
+\examples{
+\dontrun{
+stations_in_roy(geometry)
+}
+
+}

@@ -2,9 +2,9 @@
 
 export("%>%")
 export(download)
-export(retrieve_working_stations)
 export(set_magna_sirgas)
 export(stations_in_roi)
+export(weather_data)
 export(weather_stations)
 importFrom(magrittr,"%>%")
 importFrom(rlang,.data)
