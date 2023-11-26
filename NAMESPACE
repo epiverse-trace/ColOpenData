@@ -2,5 +2,4 @@
 
 export("%>%")
 export(download_demographic)
-export(set_magna_sirgas)
 importFrom(magrittr,"%>%")
