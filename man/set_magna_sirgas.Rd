@@ -16,9 +16,4 @@ sf dataframe with Colombian coordinate reference system
 Allows the user to set the Coordinate Reference System to local
 (Magna Sirgas)
 }
-\examples{
-\dontrun{
-set_magna_sirgas(MGNCNPV_MUN_2018)
-}
-
-}
+\keyword{internal}
