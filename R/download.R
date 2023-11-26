@@ -60,7 +60,7 @@ retrieve_dataset <- function(dataset_path, sheet) {
   }
   dir.create(new_dir_path)
   if (grepl(".zip", tolower(dataset_path))) {
-    dataset <- retrieve_zip(dataset_path, new_dir, new_dir_path)
+    dataset <- retrieve_zip(dataset_path, new_dir_path, new_dir)
     if (sheet != "None") {
       warning("Sheet name was not used")
     }
@@ -125,12 +125,7 @@ retrieve_zip <- function(dataset_path, new_dir_path, new_dir) {
 #'
 #' @return sf dataframe with Colombian coordinate reference system
 #'
-#' @examples
-#' \dontrun{
-#' set_magna_sirgas(MGNCNPV_MUN_2018)
-#' }
-#'
-#' @export
+#' @keywords internal
 set_magna_sirgas <- function(.data) {
   checkmate::assert_class(.data, c("sf", "data.frame"))
   transformed <- sf::st_transform(.data, 4686)
