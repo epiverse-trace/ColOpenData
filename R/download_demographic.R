@@ -2,7 +2,7 @@
 #' @description
 #' Download demographic named dataset from server. This data is obtained from
 #' the national census of 2018.
-#' 
+#'
 #' @param dataset dataset code
 #' @param sheet string to indicate specific sheet
 #'
