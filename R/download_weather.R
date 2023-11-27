@@ -178,23 +178,30 @@ retrieve_working_stations <- function(stations, start_date, end_date,
     "DVAG_CON", "VVMXAG_CON", "DVMXAG_CON"
   )
   checkmate::assert_choice(tag, ideam_tags)
+
+  config_file <- system.file("extdata", "config.yaml",
+    package = "ColOpenData",
+    mustWork = TRUE
+  )
+  base_path <- config::get(value = "base_path", file = config_file)
+  # nolint start: nonportable_path_linter
+  relative_path <- file.path(base_path, "IDEAM_WEATHER_2023_MAY")
+  # nolint end
   paths_stations <- paste0(tag, "@", stations, ".data")
   dates <- seq(as.Date(start_date), as.Date(end_date), by = frequency)
   floor_dates <- lubridate::floor_date(dates, unit = frequency)
   output <- data.frame(dates = floor_dates)
   for (i in 1:length(paths_stations)) {
-    if (file.exists(file.path(
-      "C:/Users/Julia/Downloads/BACKUP DATOS HASTA MAYO 2023",
-      paths_stations[i]
-    ))) {
-      temp_data <- readr::read_delim(
-        file.path(
-          "C:/Users/Julia/Downloads/BACKUP DATOS HASTA MAYO 2023",
-          paths_stations[i]
-        ),
-        delim = "|", escape_double = FALSE, trim_ws = TRUE,
-        show_col_types = FALSE
-      )
+    # nolint start: nonportable_path_linter
+    dataset_path <- file.path(relative_path, paths_stations[i])
+    # nolint end
+    response <- httr::GET(url = dataset_path)
+    content <- httr::content(response, as = "text", encoding = "utf-8")
+    temp_data <- readr::read_delim(content,
+      delim = "|", escape_double = FALSE, trim_ws = TRUE,
+      show_col_types = FALSE
+    )
+    if (length(temp_data) != 1) {
       temp_data$Fecha <- as.POSIXct(temp_data$Fecha,
         format = "%Y-%m-%d %H:%M:%S", tz = "UTC"
       )
@@ -262,15 +269,25 @@ retrieve_working_stations <- function(stations, start_date, end_date,
 #' \dontrun{
 #' stations_in_roy(geometry)
 #' }
-#' 
+#'
 #' @return data.frame with the stations inside the consulted geometry
 #' @export
 stations_in_roi <- function(geometry) {
   checkmate::assert_class(geometry, "sf")
   crs <- sf::st_crs(geometry)
-  IDEAM_stations <- utils::read.csv(
-    "C:/Users/Julia/OneDrive - Universidad de los Andes/TRACE/ColOpenData/supportR/IDEAM_stations.csv"
+  
+  config_file <- system.file("extdata", "config.yaml",
+                             package = "ColOpenData",
+                             mustWork = TRUE
   )
+  base_path <- config::get(value = "base_path", file = config_file)
+  # nolint start: nonportable_path_linter
+  relative_path <- file.path(base_path, "IDEAM_stations.csv")
+  # nolint end
+  response <- httr::GET(relative_path)
+  content <- httr::content(response, as = "text", encoding = "utf-8")
+  IDEAM_stations <- utils::read_csv(content)
+  
   geo_stations <- sf::st_as_sf(IDEAM_stations,
     coords = c("longitude", "latitude"),
     remove = F

@@ -1,21 +1,21 @@
 # Region without stations
 mpios <- ColOpenData::download("DANE_MGNCNPV_2018_MPIO")
-mpio_no_stations <- mpios[which(mpios$MPIO_CDPMP == "15500"), ]
-mpio_stations <- mpios[which(mpios$MPIO_CDPMP == "05001"), ]
+oicata <- mpios[which(mpios$MPIO_CDPMP == "15500"), ]
+medellin <- mpios[which(mpios$MPIO_CDPMP == "05615"), ]
 
 # Stations in ROI
 test_that("Stations in ROI throws errors", {
   expect_error(stations_in_roi("geometry"))
-  expect_error(stations_in_roi(mpio_no_stations))
+  expect_error(stations_in_roi(oicata))
 })
 
 test_that("Stations in ROI work as expected", {
-  expect_s3_class(stations_in_roi(mpio_stations), "data.frame")
+  expect_s3_class(stations_in_roi(medellin), "data.frame")
 })
 
 # Retrieve Working Stations
-bogota <- mpios[which(mpios$MPIO_CDPMP == "11001"), ]
-stations_test <- stations_in_roi(bogota)
+ibague <- mpios[which(mpios$MPIO_CDPMP == "73001"), ]
+stations_test <- stations_in_roi(ibague)
 stations_names <- stations_test$codigo
 
 test_that("Retrieve Working Stations throws errors", {
@@ -77,14 +77,14 @@ test_that("Retrieve Working Stations works as expected", {
     end_date = "2013-02-01",
     frequency = "day",
     tag = "PTPM_CON"
-  ), 25)
+  ), 16L)
 })
 
-stations_roi <- stations_in_roi(mpio_stations)
+stations_roi <- stations_in_roi(medellin)
 stations_test <- stations_roi$codigo
 
 # Weather stations
-test_that("Weather Stations throws errors",{
+test_that("Weather Stations throws errors", {
   expect_error(weather_stations(
     stations = "bogota",
     start_date = "2010-10-01",
@@ -190,28 +190,28 @@ test_that("Weather Data throws errors", {
     tags = "TSSM_CON"
   ))
   expect_error(weather_data(
-    geometry = bogota,
+    geometry = ibague,
     start_date = 20100210,
     end_date = "2010-02-10",
     frequency = "day",
     tags = "TSSM_CON"
   ))
   expect_error(weather_data(
-    geometry = bogota,
+    geometry = ibague,
     start_date = "2010-01-01",
     end_date = 20100310,
     frequency = "day",
     tags = "TSSM_CON"
   ))
   expect_error(weather_data(
-    geometry = bogota,
+    geometry = ibague,
     start_date = "2010-01-01",
     end_date = "2010-02-10",
     frequency = "dday",
     tags = "TSSM_CON"
   ))
   expect_error(weather_data(
-    geometry = bogota,
+    geometry = ibague,
     start_date = "2010-01-01",
     end_date = "2010-02-10",
     frequency = "day",
@@ -221,22 +221,22 @@ test_that("Weather Data throws errors", {
 
 test_that("Weather Stations works as expected", {
   expect_s3_class(weather_data(
-    geometry = bogota,
+    geometry = ibague,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
     frequency = "day",
     tags = "PTPM_CON"
   ), "data.frame")
   expect_length(weather_data(
-    geometry = bogota,
+    geometry = ibague,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
     frequency = "day",
     tags = "PTPM_CON",
     plot = TRUE
-  ), 49)
+  ), 18)
   expect_length(weather_data(
-    geometry = bogota,
+    geometry = ibague,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
     frequency = "day",
@@ -245,7 +245,7 @@ test_that("Weather Stations works as expected", {
     group = TRUE
   ), 2)
   expect_length(weather_data(
-    geometry = bogota,
+    geometry = ibague,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
     frequency = "week",
@@ -254,7 +254,7 @@ test_that("Weather Stations works as expected", {
     group = TRUE
   ), 2)
   expect_length(weather_data(
-    geometry = bogota,
+    geometry = ibague,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
     frequency = "month",
@@ -263,7 +263,7 @@ test_that("Weather Stations works as expected", {
     group = TRUE
   ), 2)
   expect_length(weather_data(
-    geometry = bogota,
+    geometry = ibague,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
     frequency = "month",
@@ -272,7 +272,7 @@ test_that("Weather Stations works as expected", {
     group = TRUE
   ), 3)
   expect_type(weather_data(
-    geometry = bogota,
+    geometry = ibague,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
     frequency = "month",
@@ -387,6 +387,3 @@ test_that("Weather Stations works as expected", {
     group = FALSE
   ), "list")
 })
-
-
-## weather stations all
