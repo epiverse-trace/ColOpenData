@@ -4,7 +4,9 @@ test_that("Download geospatial errors are thrown", {
 })
 
 test_that("Download geospatial works", {
-  expect_s3_class(download_geospatial("DANE_MGNCNPV_2018_DPTO"),
-                  c("sf", "data.frame"))
+  expect_s3_class(
+    download_geospatial("DANE_MGNCNPV_2018_DPTO"),
+    c("sf", "data.frame")
+  )
   expect_length(download_geospatial("DANE_MGNCNPV_2018_MPIO"), 91L)
 })

@@ -4,7 +4,7 @@
 #' the national census of 2018.
 #'
 #' @param dataset dataset code
-#' @param sheet string to indicate specific sheet
+#' @param sheet string to indicate specific sheet (internal Dataset)
 #'
 #' @return dataframe downloaded
 #' @examples
