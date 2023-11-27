@@ -10,11 +10,12 @@ download_geospatial(dataset)
 \item{dataset}{dataset code}
 }
 \value{
-data.frame downloaded
+data.frame downloaded data
 }
 \description{
-Download geospatial named dataset from server. This data is obtained from
-the national census of 2018.
+Download geospatial named dataset from server. This data is merged with a
+simplified version of the National Census, associating the census with each
+geospatial structure.
 }
 \examples{
 download_geospatial("DANE_MGNCNPV_2018_DPTO")

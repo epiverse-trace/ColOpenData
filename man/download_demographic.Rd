@@ -9,7 +9,7 @@ download_demographic(dataset, sheet = "None")
 \arguments{
 \item{dataset}{dataset code}
 
-\item{sheet}{string to indicate specific sheet}
+\item{sheet}{string to indicate specific sheet (internal Dataset)}
 }
 \value{
 dataframe downloaded

@@ -1,10 +1,11 @@
 #' Download geospatial dataset
 #' @description
-#' Download geospatial named dataset from server. This data is obtained from
-#' the national census of 2018.
+#' Download geospatial named dataset from server. This data is merged with a
+#' simplified version of the National Census, associating the census with each
+#' geospatial structure.
 #' @param dataset dataset code
 #'
-#' @return data.frame downloaded
+#' @return data.frame downloaded data
 #' @examples
 #' download_geospatial("DANE_MGNCNPV_2018_DPTO")
 #'
