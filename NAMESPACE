@@ -2,4 +2,5 @@
 
 export("%>%")
 export(download_demographic)
+export(download_geospatial)
 importFrom(magrittr,"%>%")
