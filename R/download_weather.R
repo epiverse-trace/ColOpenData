@@ -1,4 +1,6 @@
 #' Retrieve weather data by municipality name
+#' @description
+#' Retrieve weather stations with observed data in a given municipality.
 #'
 #' @param name string of the DIVIPOLA code for a given municipality
 #' @param start_date starting date in format "YYYY-MM-DD"
@@ -10,7 +12,9 @@
 #' @param group if TRUE, returns only one observation from the mean of the
 #' stations consulted
 #' @examples
+#' \dontrun{
 #' weather_data_mpio("11001", "2021-11-14", "2021-11-30", "day", "TSSM_CON")
+#' }
 #'
 #' @return data.frame with the observed data for the given municipality
 weather_data_mpio <- function(name, start_date, end_date, frequency, tags,
@@ -275,19 +279,22 @@ retrieve_working_stations <- function(stations, start_date, end_date,
 stations_in_roi <- function(geometry) {
   checkmate::assert_class(geometry, "sf")
   crs <- sf::st_crs(geometry)
-  
+
   config_file <- system.file("extdata", "config.yaml",
-                             package = "ColOpenData",
-                             mustWork = TRUE
+    package = "ColOpenData",
+    mustWork = TRUE
   )
   base_path <- config::get(value = "base_path", file = config_file)
   # nolint start: nonportable_path_linter
-  relative_path <- file.path(base_path, "IDEAM_stations.csv")
+  relative_path <- file.path(base_path, "IDEAM_STATIONS_2023_MAY.csv")
   # nolint end
   response <- httr::GET(relative_path)
   content <- httr::content(response, as = "text", encoding = "utf-8")
-  IDEAM_stations <- utils::read_csv(content)
-  
+  IDEAM_stations <- suppressWarnings(readr::read_delim(content,
+    delim = ",", escape_double = FALSE, trim_ws = TRUE,
+    show_col_types = FALSE
+  ))
+
   geo_stations <- sf::st_as_sf(IDEAM_stations,
     coords = c("longitude", "latitude"),
     remove = F

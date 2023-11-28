@@ -35,9 +35,11 @@ stations consulted}
 data.frame with the observed data for the given municipality
 }
 \description{
-Retrieve weather data by municipality name
+Retrieve weather stations with observed data in a given municipality.
 }
 \examples{
+\dontrun{
 weather_data_mpio("11001", "2021-11-14", "2021-11-30", "day", "TSSM_CON")
+}
 
 }
