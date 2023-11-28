@@ -21,7 +21,7 @@ weather_data_mpio <- function(name, start_date, end_date, frequency, tags,
                               plot = FALSE, group = FALSE) {
   checkmate::assert_character(name)
 
-  mpios <- ColOpenData::download("DANE_MGNCNPV_2018_MPIO")
+  mpios <- ColOpenData::download_geospatial("DANE_MGNCNPV_2018_MPIO")
   mpio <- mpios[which(mpios$MPIO_CDPMP == name), ]
   weather_stations <- weather_data(
     mpio, start_date, end_date,
@@ -117,17 +117,7 @@ weather_stations <- function(stations, start_date, end_date,
       frequency, tags, plot, group
     )
   } else {
-    if (!group) {
-      stations_data <- list()
-      for (tag in tags) {
-        checkmate::assert_choice(tag, ideam_tags)
-        working_stations <- retrieve_working_stations(
-          stations, start_date, end_date,
-          frequency, tag, plot, group
-        )
-        stations_data[[tag]] <- working_stations
-      }
-    } else {
+    if (group) {
       stations_data <- data.frame()
       for (tag in tags) {
         checkmate::assert_choice(tag, ideam_tags)
@@ -142,6 +132,16 @@ weather_stations <- function(stations, start_date, end_date,
         } else {
           stations_data <- working_stations
         }
+      }
+    } else {
+      stations_data <- list()
+      for (tag in tags) {
+        checkmate::assert_choice(tag, ideam_tags)
+        working_stations <- retrieve_working_stations(
+          stations, start_date, end_date,
+          frequency, tag, plot, group
+        )
+        stations_data[[tag]] <- working_stations
       }
     }
   }
@@ -195,7 +195,7 @@ retrieve_working_stations <- function(stations, start_date, end_date,
   dates <- seq(as.Date(start_date), as.Date(end_date), by = frequency)
   floor_dates <- lubridate::floor_date(dates, unit = frequency)
   output <- data.frame(dates = floor_dates)
-  for (i in 1:length(paths_stations)) {
+  for (i in seq_along(paths_stations)) {
     # nolint start: nonportable_path_linter
     dataset_path <- file.path(relative_path, paths_stations[i])
     # nolint end
@@ -254,7 +254,7 @@ retrieve_working_stations <- function(stations, start_date, end_date,
     stop("There were no records for the given ROI and dates")
   }
 
-  if (group & ncol(output) > 2) {
+  if (group && ncol(output) > 2) {
     output <- group_stations(output, tag)
   }
   if (plot) {
@@ -297,12 +297,12 @@ stations_in_roi <- function(geometry) {
 
   geo_stations <- sf::st_as_sf(IDEAM_stations,
     coords = c("longitude", "latitude"),
-    remove = F
+    remove = FALSE
   )
   geo_stations <- sf::st_set_crs(geo_stations, crs)
   intersections <- sf::st_within(geo_stations, geometry, sparse = FALSE)
 
-  filtered_stations <- geo_stations[which(intersections == TRUE), ]
+  filtered_stations <- geo_stations[which(intersections), ]
   if (nrow(filtered_stations) == 0) {
     stop("There are no stations in the given ROI")
   }
@@ -325,7 +325,7 @@ group_stations <- function(stations_df, tag) {
     names(output) <- c("dates", tag)
   } else {
     output <- as.data.frame(stations_df$dates)
-    output[tag] <- round(rowMeans(stations_df[, -c(1)], na.rm = TRUE), 2)
+    output[tag] <- round(rowMeans(stations_df[, -1], na.rm = TRUE), 2)
     names(output) <- c("dates", tag)
   }
   return(output)

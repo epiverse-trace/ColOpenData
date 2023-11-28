@@ -1,5 +1,5 @@
 # Region without stations
-mpios <- ColOpenData::download("DANE_MGNCNPV_2018_MPIO")
+mpios <- ColOpenData::download_geospatial("DANE_MGNCNPV_2018_MPIO")
 oicata <- mpios[which(mpios$MPIO_CDPMP == "15500"), ]
 medellin <- mpios[which(mpios$MPIO_CDPMP == "05615"), ]
 
@@ -20,7 +20,7 @@ stations_names <- stations_test$codigo
 
 test_that("Retrieve Working Stations throws errors", {
   expect_error(retrieve_working_stations(
-    stations = data.frame(a = "5555"),
+    stations = data.frame(a = c("a5555", "p910002", "000011")),
     start_date = "2010-01-01",
     end_date = "2010-02-10",
     frequency = "day",
@@ -359,7 +359,7 @@ test_that("Weather Stations works as expected", {
     plot = TRUE,
     group = TRUE
   )[, 2], size = 2)
-  expect_equal(dim(weather_data_mpio(
+  expect_identical(dim(weather_data_mpio(
     name = "05001",
     start_date = "2017-01-01",
     end_date = "2019-12-31",
