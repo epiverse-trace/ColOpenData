@@ -13,17 +13,17 @@
 #' stations consulted
 #' @examples
 #' \dontrun{
-#' weather_data_mpio("11001", "2021-11-14", "2021-11-30", "day", "TSSM_CON")
+#' download_weather_mpio("11001", "2021-11-14", "2021-11-30", "day", "TSSM_CON")
 #' }
 #'
 #' @return data.frame with the observed data for the given municipality
-weather_data_mpio <- function(name, start_date, end_date, frequency, tags,
+download_weather_mpio <- function(name, start_date, end_date, frequency, tags,
                               plot = FALSE, group = FALSE) {
   checkmate::assert_character(name)
 
   mpios <- ColOpenData::download_geospatial("DANE_MGNCNPV_2018_MPIO")
   mpio <- mpios[which(mpios$MPIO_CDPMP == name), ]
-  weather_stations <- weather_data(
+  weather_stations <- download_weather(
     mpio, start_date, end_date,
     frequency, tags, plot, group
   )
@@ -46,12 +46,12 @@ weather_data_mpio <- function(name, start_date, end_date, frequency, tags,
 #'
 #' @examples
 #' \dontrun{
-#' weather_data(geometry, "2021-11-14", "2021-11-30", "day", "TSSM_CON")
+#' download_weather(geometry, "2021-11-14", "2021-11-30", "day", "TSSM_CON")
 #' }
 #'
 #' @return data.frame with the observed data for the given geometry
 #' @export
-weather_data <- function(geometry, start_date, end_date, frequency,
+download_weather <- function(geometry, start_date, end_date, frequency,
                          tags, plot = FALSE, group = FALSE) {
   checkmate::assert_class(geometry, "sf")
   checkmate::assert_character(start_date)
@@ -351,7 +351,7 @@ plot_stations <- function(stations_df, tag) {
     for (i in 1:cols) {
       plot(stations_df[, 1], stations_df[, i + 1],
         xlab = "date", ylab = tag, main = names(stations_df)[i + 1],
-        type = "l"
+        type = "l", ylim = range(stations_df[, i + 1], na.rm = TRUE)
       )
     }
   } else {
