@@ -349,13 +349,25 @@ plot_stations <- function(stations_df, tag) {
   if (cols > 1) {
     graphics::par(mfrow = c(2, min(ceiling(cols / 2), 5)))
     for (i in 1:cols) {
-      plot(stations_df[, 1], stations_df[, i + 1],
+      values_no_na <- replace(
+        stations_df[, i + 1],
+        is.na(stations_df[, i + 1]),
+        max(stations_df[, i + 1]) * 100
+      )
+      plot(
+        x = stations_df[, 1], y = values_no_na,
         xlab = "date", ylab = tag, main = names(stations_df)[i + 1],
         type = "l", ylim = range(stations_df[, i + 1], na.rm = TRUE)
       )
     }
   } else {
-    plot(stations_df[, 1], stations_df[, 2],
+    values_no_na <- replace(
+      stations_df[, 2],
+      is.na(stations_df[, 2]),
+      max(stations_df[, 2]) * 100
+    )
+    plot(
+      x = stations_df[, 1], y = values_no_na,
       xlab = "date", ylab = tag, main = names(stations_df)[2],
       type = "l", ylim = range(stations_df[, 2], na.rm = TRUE)
     )

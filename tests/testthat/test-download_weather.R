@@ -91,7 +91,7 @@ test_that("Weather Stations throws errors", {
     group = TRUE
   ))
   expect_error(weather_stations(
-    stations = stations_test,
+    stations = stations_names,
     start_date = 2010,
     end_date = "2010-12-10",
     frequency = "day",
@@ -100,7 +100,7 @@ test_that("Weather Stations throws errors", {
     group = TRUE
   ))
   expect_error(weather_stations(
-    stations = stations_test,
+    stations = stations_names,
     start_date = "2010-12-10",
     end_date = 675,
     frequency = "day",
@@ -109,7 +109,7 @@ test_that("Weather Stations throws errors", {
     group = TRUE
   ))
   expect_error(weather_stations(
-    stations = stations_test,
+    stations = stations_names,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
     frequency = "months",
@@ -118,7 +118,7 @@ test_that("Weather Stations throws errors", {
     group = TRUE
   ))
   expect_error(weather_stations(
-    stations = stations_test,
+    stations = stations_names,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
     frequency = "month",
@@ -127,7 +127,7 @@ test_that("Weather Stations throws errors", {
     group = TRUE
   ))
   expect_error(weather_stations(
-    stations = stations_test,
+    stations = stations_names,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
     frequency = "month",
@@ -139,7 +139,7 @@ test_that("Weather Stations throws errors", {
 
 test_that("Weather Stations works as expected", {
   expect_s3_class(weather_stations(
-    stations = stations_test,
+    stations = stations_names,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
     frequency = "month",
@@ -148,7 +148,7 @@ test_that("Weather Stations works as expected", {
     group = TRUE
   ), "data.frame")
   expect_type(weather_stations(
-    stations = stations_test,
+    stations = stations_names,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
     frequency = "month",
@@ -157,7 +157,7 @@ test_that("Weather Stations works as expected", {
     group = FALSE
   ), "list")
   expect_s3_class(weather_stations(
-    stations = stations_test,
+    stations = stations_names,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
     frequency = "month",
@@ -166,7 +166,7 @@ test_that("Weather Stations works as expected", {
     group = TRUE
   ), "data.frame")
   expect_length(weather_stations(
-    stations = stations_test,
+    stations = stations_names,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
     frequency = "month",
