@@ -357,7 +357,7 @@ plot_stations <- function(stations_df, tag) {
   } else {
     plot(stations_df[, 1], stations_df[, 2],
       xlab = "date", ylab = tag, main = names(stations_df)[2],
-      type = "l", ylim = range(stations_df[, i + 1], na.rm = TRUE)
+      type = "l", ylim = range(stations_df[, 2], na.rm = TRUE)
     )
   }
 }
