@@ -20,8 +20,10 @@ stations_names <- stations_test$codigo
 
 test_that("Retrieve Working Stations throws errors", {
   expect_error(retrieve_working_stations(
-    stations = data.frame(a = c("a5555", "p910002", "000011"),
-                          stringsAsFactors = FALSE),
+    stations = data.frame(
+      a = c("a5555", "p910002", "000011"),
+      stringsAsFactors = FALSE
+    ),
     start_date = "2010-01-01",
     end_date = "2010-02-10",
     frequency = "day",

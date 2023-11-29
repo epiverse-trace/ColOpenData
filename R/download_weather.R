@@ -18,7 +18,7 @@
 #'
 #' @return data.frame with the observed data for the given municipality
 download_weather_mpio <- function(name, start_date, end_date, frequency, tags,
-                              plot = FALSE, group = FALSE) {
+                                  plot = FALSE, group = FALSE) {
   checkmate::assert_character(name)
 
   mpios <- ColOpenData::download_geospatial("DANE_MGNCNPV_2018_MPIO")
@@ -52,7 +52,7 @@ download_weather_mpio <- function(name, start_date, end_date, frequency, tags,
 #' @return data.frame with the observed data for the given geometry
 #' @export
 download_weather <- function(geometry, start_date, end_date, frequency,
-                         tags, plot = FALSE, group = FALSE) {
+                             tags, plot = FALSE, group = FALSE) {
   checkmate::assert_class(geometry, "sf")
   checkmate::assert_character(start_date)
   checkmate::assert_character(end_date)
@@ -357,7 +357,7 @@ plot_stations <- function(stations_df, tag) {
   } else {
     plot(stations_df[, 1], stations_df[, 2],
       xlab = "date", ylab = tag, main = names(stations_df)[2],
-      type = "l"
+      type = "l", ylim = range(stations_df[, i + 1], na.rm = TRUE)
     )
   }
 }
