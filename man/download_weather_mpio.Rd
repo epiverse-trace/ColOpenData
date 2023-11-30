@@ -26,7 +26,7 @@ download_weather_mpio(
 \item{tags}{character containing tags to analyze}
 
 \item{group}{if TRUE, returns only one observation from the mean of the
-stations consulted}
+stations consulted. Default is FALSE}
 }
 \value{
 data.frame with the observed data for the given municipality

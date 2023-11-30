@@ -9,7 +9,7 @@
 #' "year"
 #' @param tags character containing tags to analyze
 #' @param group if TRUE, returns only one observation from the mean of the
-#' stations consulted
+#' stations consulted. Default is FALSE
 #' @examples
 #' \dontrun{
 #' download_weather_mpio("11001", "2021-11-14", "2021-11-30", "day", "TSSM_CON")
@@ -40,7 +40,7 @@ download_weather_mpio <- function(name, start_date, end_date, frequency, tags,
 #' "year"
 #' @param tags character containing tags to analyze
 #' @param group if TRUE, returns only one observation from the mean of the
-#' stations consulted
+#' stations consulted. Default is FALSE
 #'
 #' @examples
 #' \dontrun{
@@ -85,7 +85,7 @@ download_weather <- function(geometry, start_date, end_date, frequency,
 #' "year"
 #' @param tags character containing tags to analyze
 #' @param group if TRUE, returns only one observation from the mean of the
-#' stations consulted
+#' stations consulted. Default is FALSE
 #'
 #' @examples
 #' \dontrun{
@@ -158,6 +158,7 @@ weather_stations <- function(stations, start_date, end_date,
 #' "year"
 #' @param tag character containing tag to analyze
 #' @param group if TRUE, returns only one observation from the mean of the
+#' stations consulted. Default is FALSE
 #'
 #' @importFrom rlang .data
 #'

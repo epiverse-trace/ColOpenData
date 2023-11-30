@@ -25,7 +25,8 @@ retrieve_working_stations(
 
 \item{tag}{character containing tag to analyze}
 
-\item{group}{if TRUE, returns only one observation from the mean of the}
+\item{group}{if TRUE, returns only one observation from the mean of the
+stations consulted. Default is FALSE}
 }
 \value{
 data.frame containing the observed data for the given stations
