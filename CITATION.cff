@@ -319,17 +319,6 @@ references:
     orcid: https://orcid.org/0000-0003-4777-038X
   year: '2023'
 - type: software
-  title: graphics
-  abstract: 'R: A Language and Environment for Statistical Computing'
-  notes: Imports
-  authors:
-  - name: R Core Team
-  location:
-    name: Vienna, Austria
-  year: '2023'
-  institution:
-    name: R Foundation for Statistical Computing
-- type: software
   title: 'R: A Language and Environment for Statistical Computing'
   notes: Depends
   url: https://www.R-project.org/
