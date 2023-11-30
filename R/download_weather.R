@@ -348,7 +348,6 @@ plot_stations <- function(stations_df, tag) {
   }
   if (cols > 1) {
     graphics::par(mfrow = c(2, min(ceiling(cols / 2), 5, na.rm = TRUE)))
-    # plots <- list()
     for (i in 1:cols) {
       x_data <- stations_df[, 1]
       x_name <- names(stations_df)[1]
