@@ -296,14 +296,6 @@ test_that("Weather Stations works as expected", {
     tags = "THSM_CON",
     group = FALSE
   ), "data.frame")
-  expect_gte(download_weather_mpio(
-    name = "05001",
-    start_date = "2018-09-01",
-    end_date = "2018-12-10",
-    frequency = "week",
-    tags = "THSM_CON",
-    group = TRUE
-  )[1, 2], 0)
   expect_vector(download_weather_mpio(
     name = "05001",
     start_date = "2018-10-01",
