@@ -2,6 +2,10 @@
 mpios <- ColOpenData::download_geospatial("DANE_MGNCNPV_2018_MPIO")
 oicata <- mpios[which(mpios$MPIO_CDPMP == "15500"), ]
 medellin <- mpios[which(mpios$MPIO_CDPMP == "05615"), ]
+# Retrieve Working Stations
+ibague <- mpios[which(mpios$MPIO_CDPMP == "73001"), ]
+stations_test <- stations_in_roi(ibague)
+stations_names <- stations_test$codigo
 
 # Stations in ROI
 test_that("Stations in ROI throws errors", {
@@ -13,10 +17,6 @@ test_that("Stations in ROI work as expected", {
   expect_s3_class(stations_in_roi(medellin), "data.frame")
 })
 
-# Retrieve Working Stations
-ibague <- mpios[which(mpios$MPIO_CDPMP == "73001"), ]
-stations_test <- stations_in_roi(ibague)
-stations_names <- stations_test$codigo
 
 test_that("Retrieve Working Stations throws errors", {
   expect_error(retrieve_working_stations(
@@ -75,9 +75,6 @@ test_that("Retrieve Working Stations works as expected", {
     tag = "PTPM_CON"
   ), 16L)
 })
-
-stations_roi <- stations_in_roi(medellin)
-stations_test <- stations_roi$codigo
 
 # Weather stations
 test_that("Weather Stations throws errors", {

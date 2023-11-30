@@ -342,46 +342,39 @@ group_stations <- function(stations_df, tag) {
 #' @keywords internal
 plot_stations <- function(stations_df, tag) {
   # plot max 10
-  cols <- min(ncol(stations_df) - 1, 10)
-  if (cols > 10) {
+  cols <- min(ncol(stations_df) - 1, 10, na.rm = TRUE)
+  if (cols == 10) {
     warning("Only first 10 stations are plotted")
   }
   if (cols > 1) {
-    plots <- list()
-    for (i in range(1, cols)) {
-      y_name <- names(stations_df)[i + 1]
-      x_name <- "dates"
-      plots[[i]] <- ggplot2::ggplot(
-        data = stations_df,
-        ggplot2::aes_string(
-          x = x_name,
-          y = y_name
-        )
-      ) +
-        ggplot2::geom_line() +
-        ggplot2::xlab("DATE") +
-        ggplot2::ylab(tag) +
-        ggplot2::ggtitle(y_name) +
-        ggplot2::ylim(range(stations_df[, i + 1], na.rm = TRUE)) +
-        ggplot2::theme_bw()
-    }
-    plot_stations <- cowplot::plot_grid(plotlist = plots)
-  } else {
-    y_name <- names(stations_df)[2]
-    x_name <- "dates"
-    plot_stations <- ggplot2::ggplot(
-      data = stations_df,
-      ggplot2::aes_string(
-        x = x_name,
-        y = y_name
+    graphics::par(mfrow = c(2, min(ceiling(cols / 2), 5, na.rm = TRUE)))
+    # plots <- list()
+    for (i in 1:cols) {
+      x_data <- stations_df[, 1]
+      x_name <- names(stations_df)[1]
+      xlim <- range(x_data, na.rm = TRUE)
+      y_data <- stations_df[, i + 1]
+      ylim <- range(y_data, na.rm = TRUE)
+      y_data[is.na(y_data)] <- max(y_data, na.rm = TRUE) * (-1)
+      main_name <- names(stations_df)[i + 1]
+      plot(
+        x = x_data, y = y_data, xlab = x_name,
+        ylab = tag, main = main_name, ylim = ylim,
+        xlim = xlim
       )
-    ) +
-      ggplot2::geom_line() +
-      ggplot2::xlab("DATE") +
-      ggplot2::ylab(tag) +
-      ggplot2::ggtitle(y_name) +
-      ggplot2::ylim(range(stations_df[, 2], na.rm = TRUE)) +
-      ggplot2::theme_bw()
+    }
+  } else {
+    x_data <- stations_df[, 1]
+    x_name <- names(stations_df)[1]
+    xlim <- range(x_data, na.rm = TRUE)
+    y_data <- stations_df[, 2]
+    ylim <- range(y_data, na.rm = TRUE)
+    y_data[is.na(y_data)] <- max(y_data, na.rm = TRUE) * (-1)
+    main_name <- names(stations_df)[2]
+    plot(
+      x = x_data, y = y_data, xlab = x_name,
+      ylab = tag, main = main_name, ylim = ylim,
+      xlim = xlim
+    )
   }
-  graphics::plot(plot_stations)
 }
