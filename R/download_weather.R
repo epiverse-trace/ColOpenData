@@ -368,7 +368,7 @@ plot_stations <- function(stations_df, tag) {
     plot_stations <- cowplot::plot_grid(plotlist = plots)
   } else {
     y_name <- names(stations_df)[2]
-    x_name <- "DATE"
+    x_name <- "dates"
     plot_stations <- ggplot2::ggplot(
       data = stations_df,
       ggplot2::aes_string(
@@ -377,7 +377,7 @@ plot_stations <- function(stations_df, tag) {
       )
     ) +
       ggplot2::geom_line() +
-      ggplot2::xlab("Date") +
+      ggplot2::xlab("DATE") +
       ggplot2::ylab(tag) +
       ggplot2::ggtitle(y_name) +
       ggplot2::ylim(range(stations_df[, 2], na.rm = TRUE)) +
