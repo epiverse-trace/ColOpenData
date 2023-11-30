@@ -22,7 +22,19 @@
     <loc>/reference/dengue_2018.html</loc>
   </url>
   <url>
-    <loc>/reference/download.html</loc>
+    <loc>/reference/download_demographic.html</loc>
+  </url>
+  <url>
+    <loc>/reference/download_geospatial.html</loc>
+  </url>
+  <url>
+    <loc>/reference/download_weather.html</loc>
+  </url>
+  <url>
+    <loc>/reference/download_weather_mpio.html</loc>
+  </url>
+  <url>
+    <loc>/reference/group_stations.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>
@@ -31,12 +43,27 @@
     <loc>/reference/pipe.html</loc>
   </url>
   <url>
-    <loc>/reference/retrieve_dataset.html</loc>
+    <loc>/reference/retrieve_demographic_dataset.html</loc>
+  </url>
+  <url>
+    <loc>/reference/retrieve_excel.html</loc>
+  </url>
+  <url>
+    <loc>/reference/retrieve_geospatial_dataset.html</loc>
   </url>
   <url>
     <loc>/reference/retrieve_path.html</loc>
   </url>
   <url>
-    <loc>/reference/set_magna_sirgas.html</loc>
+    <loc>/reference/retrieve_working_stations.html</loc>
+  </url>
+  <url>
+    <loc>/reference/retrieve_zip.html</loc>
+  </url>
+  <url>
+    <loc>/reference/stations_in_roi.html</loc>
+  </url>
+  <url>
+    <loc>/reference/weather_stations.html</loc>
   </url>
 </urlset>
