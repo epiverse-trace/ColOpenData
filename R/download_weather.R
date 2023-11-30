@@ -347,19 +347,41 @@ plot_stations <- function(stations_df, tag) {
     warning("Only first 10 stations are plotted")
   }
   if (cols > 1) {
-    graphics::par(mfrow = c(2, min(ceiling(cols / 2), 5)))
+    plots <- list()
     for (i in range(1, cols)) {
-      plot(
-        x = stations_df[, 1], y = stations_df[, i + 1],
-        xlab = "date", ylab = tag, main = names(stations_df)[i + 1],
-        type = "l", ylim = range(stations_df[, i + 1], na.rm = TRUE)
-      )
+      y_name <- names(stations_df)[i + 1]
+      x_name <- "dates"
+      plots[[i]] <- ggplot2::ggplot(
+        data = stations_df,
+        ggplot2::aes_string(
+          x = x_name,
+          y = y_name
+        )
+      ) +
+        ggplot2::geom_line() +
+        ggplot2::xlab("DATE") +
+        ggplot2::ylab(tag) +
+        ggplot2::ggtitle(y_name) +
+        ggplot2::ylim(range(stations_df[, i + 1], na.rm = TRUE)) +
+        ggplot2::theme_bw()
     }
+    plot_stations <- cowplot::plot_grid(plotlist = plots)
   } else {
-    plot(
-      x = stations_df[, 1], y = stations_df[, 2],
-      xlab = "date", ylab = tag, main = names(stations_df)[2],
-      type = "l", ylim = range(stations_df[, 2], na.rm = TRUE)
-    )
+    y_name <- names(stations_df)[2]
+    x_name <- "DATE"
+    plot_stations <- ggplot2::ggplot(
+      data = stations_df,
+      ggplot2::aes_string(
+        x = x_name,
+        y = y_name
+      )
+    ) +
+      ggplot2::geom_line() +
+      ggplot2::xlab("Date") +
+      ggplot2::ylab(tag) +
+      ggplot2::ggtitle(y_name) +
+      ggplot2::ylim(range(stations_df[, 2], na.rm = TRUE)) +
+      ggplot2::theme_bw()
   }
+  graphics::plot(plot_stations)
 }

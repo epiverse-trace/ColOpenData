@@ -141,10 +141,10 @@ test_that("Weather Stations works as expected", {
   expect_s3_class(weather_stations(
     stations = stations_names,
     start_date = "2010-10-01",
-    end_date = "2010-12-10",
+    end_date = "2011-02-10",
     frequency = "month",
     tags = "TSSM_CON",
-    plot = FALSE, # Change eventually to TRUE
+    plot = TRUE,
     group = TRUE
   ), "data.frame")
   expect_type(weather_stations(
@@ -229,7 +229,7 @@ test_that("Weather Stations works as expected", {
     end_date = "2010-12-10",
     frequency = "week",
     tags = "PTPM_CON",
-    plot = FALSE, # Change eventually to TRUE
+    plot = TRUE,
     group = TRUE
   ), 2)
   expect_length(download_weather(
@@ -326,7 +326,7 @@ test_that("Weather Stations works as expected", {
     end_date = "2018-12-10",
     frequency = "week",
     tags = "THSM_CON",
-    plot = FALSE, # Change eventually to TRUE
+    plot = TRUE,
     group = TRUE
   )[1, 2], 0)
   expect_vector(download_weather_mpio(
