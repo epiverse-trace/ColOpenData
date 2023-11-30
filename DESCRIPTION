@@ -43,8 +43,7 @@ Imports:
     utils,
     lubridate,
     readr,
-    dplyr,
-    graphics
+    dplyr
 VignetteBuilder: knitr
 Depends: 
     R (>= 3.2.0)

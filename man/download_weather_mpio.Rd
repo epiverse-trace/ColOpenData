@@ -10,7 +10,6 @@ download_weather_mpio(
   end_date,
   frequency,
   tags,
-  plot = FALSE,
   group = FALSE
 )
 }
@@ -25,8 +24,6 @@ download_weather_mpio(
 "year"}
 
 \item{tags}{character containing tags to analyze}
-
-\item{plot}{if TRUE, plot the individual stations that contain data}
 
 \item{group}{if TRUE, returns only one observation from the mean of the
 stations consulted}

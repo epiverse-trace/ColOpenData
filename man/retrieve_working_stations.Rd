@@ -10,7 +10,6 @@ retrieve_working_stations(
   end_date,
   frequency,
   tag,
-  plot = FALSE,
   group = FALSE
 )
 }
@@ -25,8 +24,6 @@ retrieve_working_stations(
 "year"}
 
 \item{tag}{character containing tag to analyze}
-
-\item{plot}{if TRUE, plot the individual stations that contain data}
 
 \item{group}{if TRUE, returns only one observation from the mean of the}
 }

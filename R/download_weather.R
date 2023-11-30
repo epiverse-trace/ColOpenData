@@ -8,7 +8,6 @@
 #' @param frequency aggregation frequency. Can be "day", "week","month" or
 #' "year"
 #' @param tags character containing tags to analyze
-#' @param plot if TRUE, plot the individual stations that contain data
 #' @param group if TRUE, returns only one observation from the mean of the
 #' stations consulted
 #' @examples
@@ -18,14 +17,14 @@
 #'
 #' @return data.frame with the observed data for the given municipality
 download_weather_mpio <- function(name, start_date, end_date, frequency, tags,
-                                  plot = FALSE, group = FALSE) {
+                                  group = FALSE) {
   checkmate::assert_character(name)
 
   mpios <- ColOpenData::download_geospatial("DANE_MGNCNPV_2018_MPIO")
   mpio <- mpios[which(mpios$MPIO_CDPMP == name), ]
   weather_stations <- download_weather(
     mpio, start_date, end_date,
-    frequency, tags, plot, group
+    frequency, tags, group
   )
   return(weather_stations)
 }
@@ -40,7 +39,6 @@ download_weather_mpio <- function(name, start_date, end_date, frequency, tags,
 #' @param frequency aggregation frequency. Can be "day", "week","month" or
 #' "year"
 #' @param tags character containing tags to analyze
-#' @param plot if TRUE, plot the individual stations that contain data
 #' @param group if TRUE, returns only one observation from the mean of the
 #' stations consulted
 #'
@@ -52,7 +50,7 @@ download_weather_mpio <- function(name, start_date, end_date, frequency, tags,
 #' @return data.frame with the observed data for the given geometry
 #' @export
 download_weather <- function(geometry, start_date, end_date, frequency,
-                             tags, plot = FALSE, group = FALSE) {
+                             tags, group = FALSE) {
   checkmate::assert_class(geometry, "sf")
   checkmate::assert_character(start_date)
   checkmate::assert_character(end_date)
@@ -72,7 +70,7 @@ download_weather <- function(geometry, start_date, end_date, frequency,
   stations <- stations_roi$codigo
   weather_stations <- weather_stations(
     stations, start_date, end_date,
-    frequency, tags, plot, group
+    frequency, tags, group
   )
   return(weather_stations)
 }
@@ -86,7 +84,6 @@ download_weather <- function(geometry, start_date, end_date, frequency,
 #' @param frequency aggregation frequency. Can be "day", "week","month" or
 #' "year"
 #' @param tags character containing tags to analyze
-#' @param plot if TRUE, plot the individual stations that contain data
 #' @param group if TRUE, returns only one observation from the mean of the
 #' stations consulted
 #'
@@ -98,7 +95,7 @@ download_weather <- function(geometry, start_date, end_date, frequency,
 #' @return data.frame with the observed data for the given geometry
 #' @export
 weather_stations <- function(stations, start_date, end_date,
-                             frequency, tags, plot = FALSE,
+                             frequency, tags,
                              group = FALSE) {
   checkmate::assert_vector(stations)
   checkmate::assert_character(start_date)
@@ -114,7 +111,7 @@ weather_stations <- function(stations, start_date, end_date,
   if (length(tags) == 1) {
     stations_data <- retrieve_working_stations(
       stations, start_date, end_date,
-      frequency, tags, plot, group
+      frequency, tags, group
     )
   } else {
     if (group) {
@@ -123,7 +120,7 @@ weather_stations <- function(stations, start_date, end_date,
         checkmate::assert_choice(tag, ideam_tags)
         working_stations <- retrieve_working_stations(
           stations, start_date, end_date,
-          frequency, tag, plot, group
+          frequency, tag, group
         )
         if ("dates" %in% colnames(stations_data)) {
           stations_data <- merge(stations_data, working_stations,
@@ -139,7 +136,7 @@ weather_stations <- function(stations, start_date, end_date,
         checkmate::assert_choice(tag, ideam_tags)
         working_stations <- retrieve_working_stations(
           stations, start_date, end_date,
-          frequency, tag, plot, group
+          frequency, tag, group
         )
         stations_data[[tag]] <- working_stations
       }
@@ -160,7 +157,6 @@ weather_stations <- function(stations, start_date, end_date,
 #' @param frequency aggregation frequency. Can be "day", "week","month" or
 #' "year"
 #' @param tag character containing tag to analyze
-#' @param plot if TRUE, plot the individual stations that contain data
 #' @param group if TRUE, returns only one observation from the mean of the
 #'
 #' @importFrom rlang .data
@@ -168,7 +164,7 @@ weather_stations <- function(stations, start_date, end_date,
 #' @return data.frame containing the observed data for the given stations
 #' @keywords internal
 retrieve_working_stations <- function(stations, start_date, end_date,
-                                      frequency, tag, plot = FALSE,
+                                      frequency, tag,
                                       group = FALSE) {
   checkmate::assert_vector(stations)
   checkmate::assert_character(start_date)
@@ -257,9 +253,6 @@ retrieve_working_stations <- function(stations, start_date, end_date,
   if (group && ncol(output) > 2) {
     output <- group_stations(output, tag)
   }
-  if (plot) {
-    plot_stations(output, tag)
-  }
   return(output)
 }
 
@@ -329,51 +322,4 @@ group_stations <- function(stations_df, tag) {
     names(output) <- c("dates", tag)
   }
   return(output)
-}
-
-#' Plot stations
-#' @description
-#' Plot weather stations if required
-#'
-#' @param stations_df data.frame with stations containing observations for each
-#' date
-#' @param tag string with the tag consulted
-#'
-#' @keywords internal
-plot_stations <- function(stations_df, tag) {
-  # plot max 10
-  cols <- min(ncol(stations_df) - 1, 10, na.rm = TRUE)
-  if (cols == 10) {
-    warning("Only first 10 stations are plotted")
-  }
-  if (cols > 1) {
-    graphics::par(mfrow = c(2, min(ceiling(cols / 2), 5, na.rm = TRUE)))
-    for (i in 1:cols) {
-      x_data <- stations_df[, 1]
-      x_name <- names(stations_df)[1]
-      xlim <- range(x_data, na.rm = TRUE)
-      y_data <- stations_df[, i + 1]
-      ylim <- range(y_data, na.rm = TRUE)
-      y_data[is.na(y_data)] <- max(y_data, na.rm = TRUE) * (-1)
-      main_name <- names(stations_df)[i + 1]
-      plot(
-        x = x_data, y = y_data, xlab = x_name,
-        ylab = tag, main = main_name, ylim = ylim,
-        xlim = xlim
-      )
-    }
-  } else {
-    x_data <- stations_df[, 1]
-    x_name <- names(stations_df)[1]
-    xlim <- range(x_data, na.rm = TRUE)
-    y_data <- stations_df[, 2]
-    ylim <- range(y_data, na.rm = TRUE)
-    y_data[is.na(y_data)] <- max(y_data, na.rm = TRUE) * (-1)
-    main_name <- names(stations_df)[2]
-    plot(
-      x = x_data, y = y_data, xlab = x_name,
-      ylab = tag, main = main_name, ylim = ylim,
-      xlim = xlim
-    )
-  }
 }

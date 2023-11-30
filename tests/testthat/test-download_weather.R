@@ -84,7 +84,6 @@ test_that("Weather Stations throws errors", {
     end_date = "2010-12-10",
     frequency = "day",
     tags = "PTPM_CON",
-    plot = TRUE,
     group = TRUE
   ))
   expect_error(weather_stations(
@@ -93,7 +92,6 @@ test_that("Weather Stations throws errors", {
     end_date = "2010-12-10",
     frequency = "day",
     tags = "PTPM_CON",
-    plot = TRUE,
     group = TRUE
   ))
   expect_error(weather_stations(
@@ -102,7 +100,6 @@ test_that("Weather Stations throws errors", {
     end_date = 675,
     frequency = "day",
     tags = "PTPM_CON",
-    plot = TRUE,
     group = TRUE
   ))
   expect_error(weather_stations(
@@ -111,7 +108,6 @@ test_that("Weather Stations throws errors", {
     end_date = "2010-12-10",
     frequency = "months",
     tags = "PTPM_CON",
-    plot = TRUE,
     group = TRUE
   ))
   expect_error(weather_stations(
@@ -120,7 +116,6 @@ test_that("Weather Stations throws errors", {
     end_date = "2010-12-10",
     frequency = "month",
     tags = "ERR",
-    plot = TRUE,
     group = TRUE
   ))
   expect_error(weather_stations(
@@ -129,7 +124,6 @@ test_that("Weather Stations throws errors", {
     end_date = "2010-12-10",
     frequency = "month",
     tags = "ERR",
-    plot = TRUE,
     group = TRUE
   ))
 })
@@ -141,7 +135,6 @@ test_that("Weather Stations works as expected", {
     end_date = "2011-02-10",
     frequency = "month",
     tags = "TSSM_CON",
-    plot = TRUE,
     group = TRUE
   ), "data.frame")
   expect_type(weather_stations(
@@ -150,7 +143,6 @@ test_that("Weather Stations works as expected", {
     end_date = "2010-12-10",
     frequency = "month",
     tags = c("THSM_CON", "TSSM_CON"),
-    plot = FALSE,
     group = FALSE
   ), "list")
   expect_s3_class(weather_stations(
@@ -159,7 +151,6 @@ test_that("Weather Stations works as expected", {
     end_date = "2010-12-10",
     frequency = "month",
     tags = c("THSM_CON", "TSSM_CON"),
-    plot = FALSE,
     group = TRUE
   ), "data.frame")
   expect_length(weather_stations(
@@ -168,11 +159,9 @@ test_that("Weather Stations works as expected", {
     end_date = "2010-12-10",
     frequency = "month",
     tags = c("THSM_CON", "TSSM_CON"),
-    plot = FALSE,
     group = TRUE
   ), 3L)
 })
-
 
 test_that("Weather Data throws errors", {
   expect_error(download_weather(
@@ -226,7 +215,6 @@ test_that("Weather Stations works as expected", {
     end_date = "2010-12-10",
     frequency = "week",
     tags = "PTPM_CON",
-    plot = TRUE,
     group = TRUE
   ), 2)
   expect_length(download_weather(
@@ -235,7 +223,6 @@ test_that("Weather Stations works as expected", {
     end_date = "2010-12-10",
     frequency = "month",
     tags = "EVTE_CON",
-    plot = TRUE,
     group = TRUE
   ), 2)
   expect_length(download_weather(
@@ -244,7 +231,6 @@ test_that("Weather Stations works as expected", {
     end_date = "2010-12-10",
     frequency = "month",
     tags = c("TMN_CON", "HRHG_CON"),
-    plot = FALSE,
     group = TRUE
   ), 3)
   expect_type(download_weather(
@@ -253,7 +239,6 @@ test_that("Weather Stations works as expected", {
     end_date = "2010-12-10",
     frequency = "month",
     tags = c("TMN_CON", "BSHG_CON"),
-    plot = FALSE,
     group = FALSE
   ), "list")
 })
@@ -266,7 +251,6 @@ test_that("Weather stations by municipality throws errors", {
     end_date = "2010-12-10",
     frequency = "day",
     tags = "PTPM_CON",
-    plot = TRUE,
     group = TRUE
   ))
   expect_error(download_weather_mpio(
@@ -275,7 +259,6 @@ test_that("Weather stations by municipality throws errors", {
     end_date = "2010-12-10",
     frequency = "day",
     tags = "PTPM_CON",
-    plot = TRUE,
     group = TRUE
   ))
   expect_error(download_weather_mpio(
@@ -284,7 +267,6 @@ test_that("Weather stations by municipality throws errors", {
     end_date = c(199, 10),
     frequency = "day",
     tags = "PTPM_CON",
-    plot = TRUE,
     group = TRUE
   ))
   expect_error(download_weather_mpio(
@@ -293,7 +275,6 @@ test_that("Weather stations by municipality throws errors", {
     end_date = "2010-12-10",
     frequency = "days",
     tags = "PTPM_CON",
-    plot = TRUE,
     group = TRUE
   ))
   expect_error(download_weather_mpio(
@@ -302,7 +283,6 @@ test_that("Weather stations by municipality throws errors", {
     end_date = "2010-12-10",
     frequency = "day",
     tags = "PTPM_CONSS",
-    plot = TRUE,
     group = TRUE
   ))
 })
@@ -314,7 +294,6 @@ test_that("Weather Stations works as expected", {
     end_date = "2018-11-10",
     frequency = "day",
     tags = "THSM_CON",
-    plot = TRUE,
     group = FALSE
   ), "data.frame")
   expect_gte(download_weather_mpio(
@@ -323,7 +302,6 @@ test_that("Weather Stations works as expected", {
     end_date = "2018-12-10",
     frequency = "week",
     tags = "THSM_CON",
-    plot = TRUE,
     group = TRUE
   )[1, 2], 0)
   expect_vector(download_weather_mpio(
@@ -332,7 +310,6 @@ test_that("Weather Stations works as expected", {
     end_date = "2018-11-10",
     frequency = "month",
     tags = "NB_CON",
-    plot = TRUE,
     group = TRUE
   )[, 2], size = 2)
   expect_identical(dim(download_weather_mpio(
@@ -341,7 +318,6 @@ test_that("Weather Stations works as expected", {
     end_date = "2019-12-31",
     frequency = "year",
     tags = "TSTG_CON",
-    plot = TRUE,
     group = TRUE
   ))[1], 3L)
   expect_type(download_weather_mpio(
@@ -350,7 +326,6 @@ test_that("Weather Stations works as expected", {
     end_date = "2010-12-10",
     frequency = "month",
     tags = c("TMN_CON", "BSHG_CON"),
-    plot = FALSE,
     group = FALSE
   ), "list")
 })

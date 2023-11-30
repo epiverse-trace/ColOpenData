@@ -10,7 +10,6 @@ download_weather(
   end_date,
   frequency,
   tags,
-  plot = FALSE,
   group = FALSE
 )
 }
@@ -25,8 +24,6 @@ download_weather(
 "year"}
 
 \item{tags}{character containing tags to analyze}
-
-\item{plot}{if TRUE, plot the individual stations that contain data}
 
 \item{group}{if TRUE, returns only one observation from the mean of the
 stations consulted}
