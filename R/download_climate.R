@@ -18,6 +18,7 @@
 #' }
 #'
 #' @return data.frame with the observed data for the given municipality
+#' @export
 download_climate_mpio <- function(name, start_date, end_date, frequency, tags,
                                   group = FALSE) {
   checkmate::assert_character(name)
