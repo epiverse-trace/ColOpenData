@@ -14,19 +14,21 @@ climate_stations(
 )
 }
 \arguments{
-\item{stations}{vector containing the stations codes}
+\item{stations}{Vector containing the stations codes.}
 
-\item{start_date}{starting date in format "YYYY-MM-DD"}
+\item{start_date}{Character with the first date to consult in format
+"YYYY-MM_DD".}
 
-\item{end_date}{end date in format "YYYY-MM-DD"}
+\item{end_date}{Character with the last date to consult in format
+"YYYY-MM_DD".}
 
-\item{frequency}{aggregation frequency. Can be "day", "week","month" or
-"year"}
+\item{frequency}{Character with the aggregation frequency. Can be
+"day", "week","month" or"year".}
 
-\item{tags}{character containing tags to analyze}
+\item{tags}{Character containing tags to consult.}
 
-\item{group}{if TRUE, returns only one observation from the mean of the
-stations consulted. Default is FALSE}
+\item{group}{Boolean for data aggregation, if FALSE, returns the data from
+each individual station in ROI.(Default = FALSE).}
 }
 \value{
 data.frame with the observed data for the given geometry

@@ -3,6 +3,7 @@
 export("%>%")
 export(climate_stations)
 export(download_climate)
+export(download_climate_mpio)
 export(download_demographic)
 export(download_geospatial)
 export(stations_in_roi)

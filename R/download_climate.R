@@ -7,7 +7,7 @@
 #' "YYYY-MM_DD".
 #' @param end_date Character with the last date to consult in format
 #' "YYYY-MM_DD".
-#' @param frequency Character with the aggregation frequency. Can be 
+#' @param frequency Character with the aggregation frequency. Can be
 #' "day", "week","month" or"year".
 #' @param tags Character containing tags to consult.
 #' @param group Boolean for data aggregation, if FALSE, returns the data from
@@ -42,7 +42,7 @@ download_climate_mpio <- function(name, start_date, end_date, frequency, tags,
 #' "YYYY-MM_DD".
 #' @param end_date Character with the last date to consult in format
 #' "YYYY-MM_DD".
-#' @param frequency Character with the aggregation frequency. Can be 
+#' @param frequency Character with the aggregation frequency. Can be
 #' "day", "week","month" or"year".
 #' @param tags Character containing tags to consult.
 #' @param group Boolean for data aggregation, if FALSE, returns the data from
@@ -89,7 +89,7 @@ download_climate <- function(geometry, start_date, end_date, frequency,
 #' "YYYY-MM_DD".
 #' @param end_date Character with the last date to consult in format
 #' "YYYY-MM_DD".
-#' @param frequency Character with the aggregation frequency. Can be 
+#' @param frequency Character with the aggregation frequency. Can be
 #' "day", "week","month" or"year".
 #' @param tags Character containing tags to consult.
 #' @param group Boolean for data aggregation, if FALSE, returns the data from
