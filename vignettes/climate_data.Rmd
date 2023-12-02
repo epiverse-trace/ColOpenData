@@ -1,5 +1,5 @@
 ---
-title: "Extracting climate data"
+title: "Download climate data"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{climate_data}
@@ -54,7 +54,7 @@ ROI and the stations' status (active, maintenance or suspended).
 For this vignette we will retrieve data for the city of Manizales in Colombia. 
 We will download Dry-bulb temperature from 2013 to 2016, to evaluate the
 increase in the temperature during 2015 and 2016 thanks to the impact of El 
-Niño (ENSO).
+Nino (ENSO).
 
 We will first load the necessary libraries.
 
@@ -72,7 +72,7 @@ function `download_climate`, which downloads data from climate stations
 contained inside a given geometry from a ROI. The function has the following
 parameters:
 - `geometry`: `sf` object containing the geometry for a given ROI. This geometry
-can be either a POLYGON or MULTIPOLYGON.(see [(sf)](https://r-spatial.github.io/sf/articles/sf1.html) library for further details)
+can be either a POLYGON or MULTIPOLYGON.(see [sf](https://r-spatial.github.io/sf/articles/sf1.html) library for further details)
 - `start_date`: Character with the first date to consult in format "YYYY-MM_DD"
 - `end_date`: Character with the last date to consult in format "YYYY-MM_DD"
 - `frequency`: Character with the aggregation frequency. Can be "day", "week",
@@ -151,7 +151,7 @@ download data using the municipalities DIVIPOLA code. This codification is
 standardized for the whole country, and contains a department code (first two 
 digits) and the municipality code (last three digits), for a final five digit
 string. The codes for each municipality and department can be consulted in the
-following table[(table)](https://www.datos.gov.co/widgets/gdxc-w37w). To
+following [table](https://www.datos.gov.co/widgets/gdxc-w37w). To
 replicate our previous example we need the code for Manizales, which is "17001".
 
 The function `download_climate_mpio` will require almost the same arguments 
@@ -179,7 +179,7 @@ ggplot(data = db_temperature_mpio) +
   geom_line(aes(x = dates, y = TSSM_CON)) +
   ggtitle("Dry-bulb Temperature") +
   xlab("Date") +
-  ylab("Dry-bulb temperature [<U+00B0>C]") +
+  ylab("Dry-bulb temperature [C]") +
   theme_bw()
 ```
 
