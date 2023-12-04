@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-**ColOpenData** can be used to access open geospatial data from Colombia. This 
+**ColOpenData** can be used to access open Colombian geospatial data. This 
 data is retrieved from the Geostatistical National Framework (MGN) published by
 the Administrative National Department of Statistics
 [(DANE)](https://www.dane.gov.co/index.php/en/).
@@ -57,7 +57,7 @@ knitr::kable(mgncnpv)
 
 For this example, we will download the geospatial data at the level of
 department, to later include epidemiological data from dengue cases in 2018
-and visualize the municipalities with the highest case count.
+and visualize the departments with the highest case counts.
 
 We will start by importing needed libraries
 ```{r library imports, results = "hide", warning = FALSE, message = FALSE}
@@ -71,16 +71,16 @@ library(RColorBrewer)
 
 ## Downloading and plotting geospatial data
 
-To download the geospatial data we will use the `download_geospetial` function,
-with the respective code for municipality level.
+To download the geospatial data we will use the `download_geospatial` function,
+with the respective code for department level.
 ```{r download mpios, results = "hide", warning = FALSE, message = FALSE}
 departments <- download_geospatial("DANE_MGNCNPV_2018_DPTO")
 ```
 ```{r}
 str(departments)
 ```
-Once downloaded, we can subset the data by regions or columns of interest. 
-In this example we only need the departments codes and geometries.
+Once downloaded, we can subset the data as desired. In this example we only 
+need the departments codes and geometries.
 
 ```{r}
 departments_filtered <- departments %>%
@@ -88,7 +88,7 @@ departments_filtered <- departments %>%
 ```
 
 
-Dengue cases during 2018 can be loaded from the example dataset ``dengue_2018`,
+Dengue cases during 2018 can be loaded from the example dataset `dengue_2018`,
 which was previously loaded in the package.
 
 ```{r}
