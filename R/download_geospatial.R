@@ -3,9 +3,10 @@
 #' Download geospatial named dataset from server. This data is merged with a
 #' simplified version of the National Census, associating the census with each
 #' geospatial structure.
-#' @param dataset dataset code
 #'
-#' @return data.frame downloaded data
+#' @param dataset String indicating dataset code.
+#'
+#' @return data.frame downloaded data.
 #' @examples
 #' download_geospatial("DANE_MGNCNPV_2018_DPTO")
 #'
@@ -20,10 +21,9 @@ download_geospatial <- function(dataset) {
 
 #' Retrieve geospatial dataset from path
 #'
-#' @param dataset_path path to the dataset on repository
-#' @param sheet string to indicate specific sheet
+#' @param dataset_path path to the dataset on repository.
 #'
-#' @return consulted dataset
+#' @return Consulted dataset.
 #'
 #' @keywords internal
 retrieve_geospatial_dataset <- function(dataset_path) {

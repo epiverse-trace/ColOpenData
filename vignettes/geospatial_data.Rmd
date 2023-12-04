@@ -1,0 +1,127 @@
+---
+title: "Download geospatial data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Download geospatial data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+**ColOpenData** can be used to access open Colombian geospatial data. This 
+data is retrieved from the Geostatistical National Framework (MGN) published by
+the Administrative National Department of Statistics
+[(DANE)](https://www.dane.gov.co/index.php/en/).
+
+This package contains the 2018's version of the MGN, which also included a
+summarized version of the National Population and Housing Census (CNPV) in
+different aggregation levels. Each level is stored in a different dataset, 
+which can be retrieved using the `download_geospatial` function.
+
+`download_geospatial` only requires one argument, which is the name of the
+dataset to consult. The available datasets are stored in the same pattern:
+
+::: {.alert .alert-info}
+  SOURCE_DATASET_YEAR_DETAILS
+:::
+
+All datasets contained come from the same source: DANE, and are the same type
+of dataset: MGNCNPV which contains the National Geostatistical Framework
+including the summarized National Population and Housing Census of 2018. Details
+for geospatial datasets relate to the level of aggregation as follows:
+
+```{r Available datasets, echo = FALSE}
+code <- c(
+  "DANE_MGNCNPV_2018_DPTO", "DANE_MGNCNPV_2018_MPIO",
+  "DANE_MGNCNPV_2018_MPIOCL", "DANE_MGNCNPV_2018_MZN",
+  "DANE_MGNCNPV_2018_SECR", "DANE_MGNCNPV_2018_SECU",
+  "DANE_MGNCNPV_2018_SETR", "DANE_MGNCNPV_2018_SETU"
+)
+level <- c(
+  "Department", "Municipality",
+  "Municipality including Class", "Block Level", "Rural Sector", "Urban Sector",
+  "Rural Section", "Urban Section"
+)
+
+mgncnpv <- data.frame(
+  Code = code, Level = level,
+  stringsAsFactors = FALSE
+)
+knitr::kable(mgncnpv)
+```
+
+For this example, we will download the geospatial data at the level of
+department, to later include epidemiological data from dengue cases in 2018
+and visualize the departments with the highest case counts.
+
+We will start by importing needed libraries
+```{r library imports, results = "hide", warning = FALSE, message = FALSE}
+library(ColOpenData)
+library(dplyr)
+library(sf)
+library(ggplot2)
+library(RColorBrewer)
+```
+
+
+## Downloading and plotting geospatial data
+
+To download the geospatial data we will use the `download_geospatial` function,
+with the respective code for department level.
+```{r download mpios, results = "hide", warning = FALSE, message = FALSE}
+departments <- download_geospatial("DANE_MGNCNPV_2018_DPTO")
+```
+```{r}
+str(departments)
+```
+Once downloaded, we can subset the data as desired. In this example we only 
+need the departments codes and geometries.
+
+```{r}
+departments_filtered <- departments %>%
+  select(DPTO_CCDGO, geometry)
+```
+```{r}
+str(departments_filtered)
+```
+
+
+Dengue cases during 2018 can be loaded from the example dataset `dengue_2018`,
+which was previously loaded in the package.
+
+```{r}
+data(dengue_2018)
+```
+```{r}
+str(dengue_2018)
+```
+
+To merge the datasets we will use the department’s codes, marked by the same 
+column name in this example.
+
+```{r}
+dengue_col <- merge(
+  x = departments_filtered,
+  y = dengue_2018,
+  by = "DPTO_CCDGO"
+)
+```
+
+Finally, we can visualize the cases in a map.
+```{r}
+ggplot(data = dengue_col) +
+  geom_sf(mapping = aes(fill = CASES)) +
+  scale_fill_gradientn(
+    colours = brewer.pal(7, "YlOrRd"),
+    name = "Cases"
+  ) +
+  ggtitle("Dengue Cases in Colombia during 2018") +
+  theme_bw()
+```
+

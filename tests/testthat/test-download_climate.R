@@ -76,9 +76,9 @@ test_that("Retrieve Working Stations works as expected", {
   ), 16L)
 })
 
-# Weather stations
-test_that("Weather Stations throws errors", {
-  expect_error(weather_stations(
+# Climate stations
+test_that("Climate Stations throws errors", {
+  expect_error(climate_stations(
     stations = "bogota",
     start_date = "2010-10-01",
     end_date = "2010-12-10",
@@ -86,7 +86,7 @@ test_that("Weather Stations throws errors", {
     tags = "PTPM_CON",
     group = TRUE
   ))
-  expect_error(weather_stations(
+  expect_error(climate_stations(
     stations = stations_names,
     start_date = 2010,
     end_date = "2010-12-10",
@@ -94,7 +94,7 @@ test_that("Weather Stations throws errors", {
     tags = "PTPM_CON",
     group = TRUE
   ))
-  expect_error(weather_stations(
+  expect_error(climate_stations(
     stations = stations_names,
     start_date = "2010-12-10",
     end_date = 675,
@@ -102,7 +102,7 @@ test_that("Weather Stations throws errors", {
     tags = "PTPM_CON",
     group = TRUE
   ))
-  expect_error(weather_stations(
+  expect_error(climate_stations(
     stations = stations_names,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
@@ -110,7 +110,7 @@ test_that("Weather Stations throws errors", {
     tags = "PTPM_CON",
     group = TRUE
   ))
-  expect_error(weather_stations(
+  expect_error(climate_stations(
     stations = stations_names,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
@@ -118,7 +118,7 @@ test_that("Weather Stations throws errors", {
     tags = "ERR",
     group = TRUE
   ))
-  expect_error(weather_stations(
+  expect_error(climate_stations(
     stations = stations_names,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
@@ -128,8 +128,8 @@ test_that("Weather Stations throws errors", {
   ))
 })
 
-test_that("Weather Stations works as expected", {
-  expect_s3_class(weather_stations(
+test_that("Climate Stations works as expected", {
+  expect_s3_class(climate_stations(
     stations = stations_names,
     start_date = "2010-10-01",
     end_date = "2011-02-10",
@@ -137,7 +137,7 @@ test_that("Weather Stations works as expected", {
     tags = "TSSM_CON",
     group = TRUE
   ), "data.frame")
-  expect_type(weather_stations(
+  expect_type(climate_stations(
     stations = stations_names,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
@@ -145,7 +145,7 @@ test_that("Weather Stations works as expected", {
     tags = c("THSM_CON", "TSSM_CON"),
     group = FALSE
   ), "list")
-  expect_s3_class(weather_stations(
+  expect_s3_class(climate_stations(
     stations = stations_names,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
@@ -153,7 +153,7 @@ test_that("Weather Stations works as expected", {
     tags = c("THSM_CON", "TSSM_CON"),
     group = TRUE
   ), "data.frame")
-  expect_length(weather_stations(
+  expect_length(climate_stations(
     stations = stations_names,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
@@ -163,36 +163,36 @@ test_that("Weather Stations works as expected", {
   ), 3L)
 })
 
-test_that("Weather Data throws errors", {
-  expect_error(download_weather(
+test_that("Climate Data throws errors", {
+  expect_error(download_climate(
     geometry = "bogota",
     start_date = "2010-01-01",
     end_date = "2010-02-10",
     frequency = "day",
     tags = "TSSM_CON"
   ))
-  expect_error(download_weather(
+  expect_error(download_climate(
     geometry = ibague,
     start_date = 20100210,
     end_date = "2010-02-10",
     frequency = "day",
     tags = "TSSM_CON"
   ))
-  expect_error(download_weather(
+  expect_error(download_climate(
     geometry = ibague,
     start_date = "2010-01-01",
     end_date = 20100310,
     frequency = "day",
     tags = "TSSM_CON"
   ))
-  expect_error(download_weather(
+  expect_error(download_climate(
     geometry = ibague,
     start_date = "2010-01-01",
     end_date = "2010-02-10",
     frequency = "dday",
     tags = "TSSM_CON"
   ))
-  expect_error(download_weather(
+  expect_error(download_climate(
     geometry = ibague,
     start_date = "2010-01-01",
     end_date = "2010-02-10",
@@ -201,15 +201,15 @@ test_that("Weather Data throws errors", {
   ))
 })
 
-test_that("Weather Stations works as expected", {
-  expect_s3_class(download_weather(
+test_that("Climate Stations works as expected", {
+  expect_s3_class(download_climate(
     geometry = ibague,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
     frequency = "day",
     tags = "PTPM_CON"
   ), "data.frame")
-  expect_length(download_weather(
+  expect_length(download_climate(
     geometry = ibague,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
@@ -217,7 +217,7 @@ test_that("Weather Stations works as expected", {
     tags = "PTPM_CON",
     group = TRUE
   ), 2)
-  expect_length(download_weather(
+  expect_length(download_climate(
     geometry = ibague,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
@@ -225,7 +225,7 @@ test_that("Weather Stations works as expected", {
     tags = "EVTE_CON",
     group = TRUE
   ), 2)
-  expect_length(download_weather(
+  expect_length(download_climate(
     geometry = ibague,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
@@ -233,7 +233,7 @@ test_that("Weather Stations works as expected", {
     tags = c("TMN_CON", "HRHG_CON"),
     group = TRUE
   ), 3)
-  expect_type(download_weather(
+  expect_type(download_climate(
     geometry = ibague,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
@@ -243,42 +243,42 @@ test_that("Weather Stations works as expected", {
   ), "list")
 })
 
-# Weather Stations Mpio
-test_that("Weather stations by municipality throws errors", {
-  expect_error(download_weather_mpio(
-    name = 5001,
+# Climate Stations Mpio
+test_that("Climate stations by municipality throws errors", {
+  expect_error(download_climate_mpio(
+    code = 5001,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
     frequency = "day",
     tags = "PTPM_CON",
     group = TRUE
   ))
-  expect_error(download_weather_mpio(
-    name = "05001",
+  expect_error(download_climate_mpio(
+    code = "05001",
     start_date = 2010,
     end_date = "2010-12-10",
     frequency = "day",
     tags = "PTPM_CON",
     group = TRUE
   ))
-  expect_error(download_weather_mpio(
-    name = "05001",
+  expect_error(download_climate_mpio(
+    code = "05001",
     start_date = "2010-10-01",
     end_date = c(199, 10),
     frequency = "day",
     tags = "PTPM_CON",
     group = TRUE
   ))
-  expect_error(download_weather_mpio(
-    name = "05001",
+  expect_error(download_climate_mpio(
+    code = "05001",
     start_date = "2010-10-01",
     end_date = "2010-12-10",
     frequency = "days",
     tags = "PTPM_CON",
     group = TRUE
   ))
-  expect_error(download_weather_mpio(
-    name = "05001",
+  expect_error(download_climate_mpio(
+    code = "05001",
     start_date = "2010-10-01",
     end_date = "2010-12-10",
     frequency = "day",
@@ -287,33 +287,33 @@ test_that("Weather stations by municipality throws errors", {
   ))
 })
 
-test_that("Weather Stations works as expected", {
-  expect_s3_class(download_weather_mpio(
-    name = "05001",
+test_that("Climate Stations works as expected", {
+  expect_s3_class(download_climate_mpio(
+    code = "05001",
     start_date = "2018-10-01",
     end_date = "2018-11-10",
     frequency = "day",
     tags = "THSM_CON",
     group = FALSE
   ), "data.frame")
-  expect_vector(download_weather_mpio(
-    name = "05001",
+  expect_vector(download_climate_mpio(
+    code = "05001",
     start_date = "2018-10-01",
     end_date = "2018-11-10",
     frequency = "month",
     tags = "NB_CON",
     group = TRUE
   )[, 2], size = 2)
-  expect_identical(dim(download_weather_mpio(
-    name = "05001",
+  expect_identical(dim(download_climate_mpio(
+    code = "05001",
     start_date = "2017-01-01",
     end_date = "2019-12-31",
     frequency = "year",
     tags = "TSTG_CON",
     group = TRUE
   ))[1], 3L)
-  expect_type(download_weather_mpio(
-    name = "11001",
+  expect_type(download_climate_mpio(
+    code = "11001",
     start_date = "2010-10-01",
     end_date = "2010-12-10",
     frequency = "month",

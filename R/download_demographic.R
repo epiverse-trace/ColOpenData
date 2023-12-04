@@ -1,12 +1,12 @@
 #' Download demographic dataset
 #' @description
-#' Download demographic named dataset from server. This data is obtained from
-#' the national census of 2018.
+#' Download demographic dataset. This data is obtained from the national census
+#' of 2018.
 #'
-#' @param dataset dataset code
-#' @param sheet string to indicate specific sheet (internal Dataset)
+#' @param dataset String indicating dataset code.
+#' @param sheet String indicating specific sheet (internal dataset).
 #'
-#' @return dataframe downloaded
+#' @return data.frame downloaded.
 #' @examples
 #' download_demographic("DANE_CNPV_2018_Hogares", "1HD")
 #'
@@ -22,9 +22,9 @@ download_demographic <- function(dataset, sheet = "None") {
 #' Retrieve demographic dataset from path
 #'
 #' @param dataset_path path to the dataset on repository
-#' @param sheet string to indicate specific sheet
+#' @param sheet string to indicate specific sheet.
 #'
-#' @return consulted dataset
+#' @return consulted dataset.
 #'
 #' @keywords internal
 retrieve_demographic_dataset <- function(dataset_path, sheet) {

@@ -9,10 +9,10 @@ retrieve_demographic_dataset(dataset_path, sheet)
 \arguments{
 \item{dataset_path}{path to the dataset on repository}
 
-\item{sheet}{string to indicate specific sheet}
+\item{sheet}{string to indicate specific sheet.}
 }
 \value{
-consulted dataset
+consulted dataset.
 }
 \description{
 Retrieve demographic dataset from path

@@ -7,16 +7,16 @@
 download_demographic(dataset, sheet = "None")
 }
 \arguments{
-\item{dataset}{dataset code}
+\item{dataset}{String indicating dataset code.}
 
-\item{sheet}{string to indicate specific sheet (internal Dataset)}
+\item{sheet}{String indicating specific sheet (internal dataset).}
 }
 \value{
-dataframe downloaded
+data.frame downloaded.
 }
 \description{
-Download demographic named dataset from server. This data is obtained from
-the national census of 2018.
+Download demographic dataset. This data is obtained from the national census
+of 2018.
 }
 \examples{
 download_demographic("DANE_CNPV_2018_Hogares", "1HD")

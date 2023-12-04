@@ -7,12 +7,10 @@
 retrieve_geospatial_dataset(dataset_path)
 }
 \arguments{
-\item{dataset_path}{path to the dataset on repository}
-
-\item{sheet}{string to indicate specific sheet}
+\item{dataset_path}{path to the dataset on repository.}
 }
 \value{
-consulted dataset
+Consulted dataset.
 }
 \description{
 Retrieve geospatial dataset from path
