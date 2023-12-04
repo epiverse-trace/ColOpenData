@@ -11,7 +11,7 @@
 #' "day", "week","month" or"year".
 #' @param tags Character containing tags to consult.
 #' @param group Boolean for data aggregation, if FALSE, returns the data from
-#' each individual station in ROI.(Default = FALSE).
+#' each individual station in the municipality.(Default = FALSE).
 #' @examples
 #' \dontrun{
 #' download_climate_mpio("11001", "2021-11-14", "2021-11-30", "day", "TSSM_CON")

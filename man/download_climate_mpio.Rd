@@ -28,7 +28,7 @@ download_climate_mpio(
 \item{tags}{Character containing tags to consult.}
 
 \item{group}{Boolean for data aggregation, if FALSE, returns the data from
-each individual station in ROI.(Default = FALSE).}
+each individual station in the municipality.(Default = FALSE).}
 }
 \value{
 data.frame with the observed data for the given municipality
