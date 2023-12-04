@@ -18,13 +18,13 @@ download_climate(
 geometry can be either a POLYGON or MULTIPOLYGON.}
 
 \item{start_date}{Character with the first date to consult in format
-"YYYY-MM_DD".}
+"YYYY-MM-DD".}
 
 \item{end_date}{Character with the last date to consult in format
-"YYYY-MM_DD".}
+"YYYY-MM-DD". Last available date is 2023/05/31.}
 
 \item{frequency}{Character with the aggregation frequency. Can be
-"day", "week","month" or"year".}
+"day", "week","month" or "year".}
 
 \item{tags}{Character containing tags to consult.}
 
@@ -32,10 +32,11 @@ geometry can be either a POLYGON or MULTIPOLYGON.}
 each individual station in ROI.(Default = FALSE).}
 }
 \value{
-data.frame with the observed data for the given geometry
+data.frame with the observed data for the given geometry.
 }
 \description{
-Retrieve climate stations with observed data in a given geometry.
+Retrieve climate stations with observed data in a given geometry. This
+data is retrieved from local meteorological stations.
 }
 \examples{
 \dontrun{
