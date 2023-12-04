@@ -7,10 +7,11 @@
 stations_in_roi(geometry)
 }
 \arguments{
-\item{geometry}{sf object containing a geometry (polygon or multipolygon)}
+\item{geometry}{sf object containing the geometry for a given ROI. This
+geometry can be either a POLYGON or MULTIPOLYGON.}
 }
 \value{
-data.frame with the stations inside the consulted geometry
+data.frame with the stations inside the consulted geometry.
 }
 \description{
 Retrieves the stations contained inside a given geometry

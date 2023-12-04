@@ -162,12 +162,8 @@ replicate our previous example we only need the code for Manizales, which is
 
 The function `download_climate_mpio` will require almost the same arguments 
 than `download_climate`, :
-<<<<<<< Updated upstream
-- `name`: Character with the DIVIPOLA code for the municipality.
-=======
 
 - `code`: Character with the DIVIPOLA code for the municipality.
->>>>>>> Stashed changes
 - `start_date`: Character with the first date to consult in format "YYYY-MM_DD".
 - `end_date`: Character with the last date to consult in format "YYYY-MM_DD".
 - `frequency`: Character with the aggregation frequency. Can be "day", "week",
@@ -176,9 +172,9 @@ than `download_climate`, :
 - `group`: Boolean for data aggregation, if FALSE, returns the data from each
 individual station in the municipality.(Default = FALSE).
 
-```{r download climate by municipality, results = "hide", warning = FALSE, message = FALSE}
+```{r download climate mpio, results = "hide", warning = FALSE, message = FALSE}
 db_temperature_mpio <- download_climate_mpio(
-  name = "17001",
+  code = "17001",
   start_date = "2013-01-01",
   end_date = "2016-12-31",
   frequency = "day",

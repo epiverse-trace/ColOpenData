@@ -14,22 +14,24 @@ retrieve_working_stations(
 )
 }
 \arguments{
-\item{stations}{vector containing the stations codes}
+\item{stations}{Vector containing the stations' codes.}
 
-\item{start_date}{starting date in format "YYYY-MM-DD"}
+\item{start_date}{Character with the first date to consult in format
+"YYYY-MM-DD".}
 
-\item{end_date}{end date in format "YYYY-MM-DD"}
+\item{end_date}{Character with the last date to consult in format
+"YYYY-MM-DD". Last available date is 2023/05/31.}
 
-\item{frequency}{aggregation frequency. Can be "day", "week","month" or
-"year"}
+\item{frequency}{Character with the aggregation frequency. Can be
+"day", "week","month" or "year".}
 
-\item{tag}{character containing tag to analyze}
+\item{group}{Boolean for data aggregation, if FALSE, returns the data from
+each individual station in ROI.(Default = FALSE).}
 
-\item{group}{if TRUE, returns only one observation from the mean of the
-stations consulted. Default is FALSE}
+\item{tags}{Character containing tag to consult.}
 }
 \value{
-data.frame containing the observed data for the given stations
+data.frame containing the observed data for the given stations.
 }
 \description{
 Retrieves, from a list of stations, the ones that contain observations for
