@@ -17,7 +17,7 @@ coverage](https://codecov.io/gh/epiverse-trace/ColOpenData/branch/main/graph/bad
 [![lifecycle-concept](https://raw.githubusercontent.com/reconverse/reconverse.github.io/master/images/badge-concept.svg)](https://www.reconverse.org/lifecycle.html#concept)
 <!-- badges: end -->
 
-ColOpenData is a package that acquires, standardizes, and wrangles
+**ColOpenData** is a package that acquires, standardizes, and wrangles
 Colombian socioeconomic, geospatial and climate data. It solves the
 problem of Colombian data being issued in different web pages and
 formats by using functions that allow the user to select the desired
@@ -39,7 +39,7 @@ pak::pak("epiverse-trace/ColOpenData")
 ```
 ## Quick Overview
 
-`ColOpenData` contains data from two public data sources: The National 
+**ColOpenData** contains data from two public data sources: The National 
 Administrative Department of Statistics 
 [(DANE)](https://www.dane.gov.co/index.php/en/) and the Institute of Hydrology,
 Meteorology and Environmental Studies [(IDEAM)]( http://www.ideam.gov.co/). 
@@ -47,11 +47,11 @@ The available data is divided in three categories: Demographic and
 Socioeconomic, Geospatial and Climate.
 
 Demographic and Socioeconomic data is taken from the National Population and 
-Housing Census of 2018, the most recent census in the country. On the other 
+Housing Census of 2018, the most recent census available. On the other 
 hand, geospatial data is retrieved from the National Geostatistical Framework,
-which includes maps and a summarized version of the census from 2018. Finally,
+which includes maps and a summarized version of the 2018's census. Finally,
 the climate data is obtained from the climate stations in the country 
-until may 31^st 2023, the most recent available date.
+until may 31^st^ 2023, the most recent available date.
 
 ### Lifecycle
 
