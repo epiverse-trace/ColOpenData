@@ -13,7 +13,7 @@ group_stations(stations_df, tag)
 }
 \value{
 a data.frame with only two columns containing the dates and the
-grouped observations
+grouped observations.
 }
 \description{
 Groups stations by the mean of the observations

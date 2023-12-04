@@ -5,7 +5,7 @@
 \title{Retrieve climate data by municipality name}
 \usage{
 download_climate_mpio(
-  name,
+  code,
   start_date,
   end_date,
   frequency,
@@ -14,16 +14,16 @@ download_climate_mpio(
 )
 }
 \arguments{
-\item{name}{Character with the DIVIPOLA code for the municipality.}
+\item{code}{Character with the DIVIPOLA code for the municipality.}
 
 \item{start_date}{Character with the first date to consult in format
-"YYYY-MM_DD".}
+"YYYY-MM-DD".}
 
 \item{end_date}{Character with the last date to consult in format
-"YYYY-MM_DD".}
+"YYYY-MM-DD". Last available date is 2023/05/31.}
 
 \item{frequency}{Character with the aggregation frequency. Can be
-"day", "week","month" or"year".}
+"day", "week","month" or "year".}
 
 \item{tags}{Character containing tags to consult.}
 
@@ -31,10 +31,11 @@ download_climate_mpio(
 each individual station in the municipality.(Default = FALSE).}
 }
 \value{
-data.frame with the observed data for the given municipality
+data.frame with the observed data for the given municipality.
 }
 \description{
-Retrieve climate stations with observed data in a given municipality.
+Retrieve climate stations with observed data in a given municipality. This
+data is retrieved from local meteorological stations.
 }
 \examples{
 \dontrun{

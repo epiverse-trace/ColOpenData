@@ -246,7 +246,7 @@ test_that("Climate Stations works as expected", {
 # Climate Stations Mpio
 test_that("Climate stations by municipality throws errors", {
   expect_error(download_climate_mpio(
-    name = 5001,
+    code = 5001,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
     frequency = "day",
@@ -254,7 +254,7 @@ test_that("Climate stations by municipality throws errors", {
     group = TRUE
   ))
   expect_error(download_climate_mpio(
-    name = "05001",
+    code = "05001",
     start_date = 2010,
     end_date = "2010-12-10",
     frequency = "day",
@@ -262,7 +262,7 @@ test_that("Climate stations by municipality throws errors", {
     group = TRUE
   ))
   expect_error(download_climate_mpio(
-    name = "05001",
+    code = "05001",
     start_date = "2010-10-01",
     end_date = c(199, 10),
     frequency = "day",
@@ -270,7 +270,7 @@ test_that("Climate stations by municipality throws errors", {
     group = TRUE
   ))
   expect_error(download_climate_mpio(
-    name = "05001",
+    code = "05001",
     start_date = "2010-10-01",
     end_date = "2010-12-10",
     frequency = "days",
@@ -278,7 +278,7 @@ test_that("Climate stations by municipality throws errors", {
     group = TRUE
   ))
   expect_error(download_climate_mpio(
-    name = "05001",
+    code = "05001",
     start_date = "2010-10-01",
     end_date = "2010-12-10",
     frequency = "day",
@@ -289,7 +289,7 @@ test_that("Climate stations by municipality throws errors", {
 
 test_that("Climate Stations works as expected", {
   expect_s3_class(download_climate_mpio(
-    name = "05001",
+    code = "05001",
     start_date = "2018-10-01",
     end_date = "2018-11-10",
     frequency = "day",
@@ -297,7 +297,7 @@ test_that("Climate Stations works as expected", {
     group = FALSE
   ), "data.frame")
   expect_vector(download_climate_mpio(
-    name = "05001",
+    code = "05001",
     start_date = "2018-10-01",
     end_date = "2018-11-10",
     frequency = "month",
@@ -305,7 +305,7 @@ test_that("Climate Stations works as expected", {
     group = TRUE
   )[, 2], size = 2)
   expect_identical(dim(download_climate_mpio(
-    name = "05001",
+    code = "05001",
     start_date = "2017-01-01",
     end_date = "2019-12-31",
     frequency = "year",
@@ -313,7 +313,7 @@ test_that("Climate Stations works as expected", {
     group = TRUE
   ))[1], 3L)
   expect_type(download_climate_mpio(
-    name = "11001",
+    code = "11001",
     start_date = "2010-10-01",
     end_date = "2010-12-10",
     frequency = "month",
