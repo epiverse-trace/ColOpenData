@@ -2,7 +2,7 @@
 title: "Download climate data"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{climate_data}
+  %\VignetteIndexEntry{Download climate data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -58,7 +58,7 @@ Nino (ENSO).
 
 We will first load the necessary libraries.
 
-```{r library imports}
+```{r library imports, results = "hide", warning = FALSE, message = FALSE}
 library(ColOpenData)
 library(sf)
 library(leaflet)
@@ -71,6 +71,7 @@ To retrieve climate data for any ROI in the country, we can use the
 function `download_climate`, which downloads data from climate stations 
 contained inside a given geometry from a ROI. The function has the following
 parameters:
+
 - `geometry`: `sf` object containing the geometry for a given ROI. This geometry
 can be either a POLYGON or MULTIPOLYGON.(see [sf](https://r-spatial.github.io/sf/articles/sf1.html) library for further details)
 - `start_date`: Character with the first date to consult in format "YYYY-MM_DD"
@@ -109,7 +110,7 @@ leaflet(roi) %>%
 
 With our new ROI, we can make a first exploration to check if there are any 
 stations inside the ROI, using the function `stations_in_roi`
-```{r stations in roi, message=TRUE, warning=TRUE, results = "hide"}
+```{r stations in roi, results = "hide", warning = FALSE, message = FALSE}
 stations <- stations_in_roi(roi)
 ```
 
@@ -126,7 +127,7 @@ Now that we  have confirmed that there are meteorological stations in the area,
 we will access the Dry-bulb temperature from 2013 to 2016. To do this we will
 use `download_climate`. The Dry-bulb temperature is under the tag "TSSM_CON". 
 
-```{r download climate data, message = FALSE, warning=FALSE, results = FALSE}
+```{r download climate data, results = "hide", warning = FALSE, message = FALSE}
 db_temperature_roi <- download_climate(
   geometry = roi,
   start_date = "2013-01-01",
@@ -161,7 +162,12 @@ replicate our previous example we only need the code for Manizales, which is
 
 The function `download_climate_mpio` will require almost the same arguments 
 than `download_climate`, :
+<<<<<<< Updated upstream
 - `name`: Character with the DIVIPOLA code for the municipality.
+=======
+
+- `code`: Character with the DIVIPOLA code for the municipality.
+>>>>>>> Stashed changes
 - `start_date`: Character with the first date to consult in format "YYYY-MM_DD".
 - `end_date`: Character with the last date to consult in format "YYYY-MM_DD".
 - `frequency`: Character with the aggregation frequency. Can be "day", "week",
@@ -170,7 +176,7 @@ than `download_climate`, :
 - `group`: Boolean for data aggregation, if FALSE, returns the data from each
 individual station in the municipality.(Default = FALSE).
 
-```{r download climate by municipality}
+```{r download climate by municipality, results = "hide", warning = FALSE, message = FALSE}
 db_temperature_mpio <- download_climate_mpio(
   name = "17001",
   start_date = "2013-01-01",

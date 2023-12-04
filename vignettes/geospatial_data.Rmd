@@ -2,7 +2,7 @@
 title: "Download geospatial data"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{geospatial_data}
+  %\VignetteIndexEntry{Download geospatial data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -38,8 +38,9 @@ for geospatial datasets relate to the level of aggregation as follows:
 
 ```{r Available datasets, echo = FALSE}
 code <- c(
-  "DANE_MGNCNPV_2018_DPTO", "DANE_MGNCNPV_2018_MPIO", "DANE_MGNCNPV_2018_MPIOCL",
-  "DANE_MGNCNPV_2018_MZN", "DANE_MGNCNPV_2018_SECR", "DANE_MGNCNPV_2018_SECU",
+  "DANE_MGNCNPV_2018_DPTO", "DANE_MGNCNPV_2018_MPIO",
+  "DANE_MGNCNPV_2018_MPIOCL", "DANE_MGNCNPV_2018_MZN",
+  "DANE_MGNCNPV_2018_SECR", "DANE_MGNCNPV_2018_SECU",
   "DANE_MGNCNPV_2018_SETR", "DANE_MGNCNPV_2018_SETU"
 )
 level <- c(
@@ -85,6 +86,9 @@ need the departments codes and geometries.
 ```{r}
 departments_filtered <- departments %>%
   select(DPTO_CCDGO, geometry)
+```
+```{r}
+str(departments_filtered)
 ```
 
 
