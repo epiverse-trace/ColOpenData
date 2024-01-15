@@ -7,10 +7,10 @@
 download_geospatial(dataset)
 }
 \arguments{
-\item{dataset}{dataset code}
+\item{dataset}{String indicating dataset code.}
 }
 \value{
-data.frame downloaded data
+data.frame downloaded data.
 }
 \description{
 Download geospatial named dataset from server. This data is merged with a

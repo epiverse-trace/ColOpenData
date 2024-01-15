@@ -70,6 +70,26 @@ references:
     orcid: https://orcid.org/0000-0002-9415-4582
   year: '2023'
 - type: software
+  title: leaflet
+  abstract: 'leaflet: Create Interactive Web Maps with the JavaScript ''Leaflet''
+    Library'
+  notes: Suggests
+  url: https://rstudio.github.io/leaflet/
+  repository: https://CRAN.R-project.org/package=leaflet
+  authors:
+  - family-names: Cheng
+    given-names: Joe
+    email: joe@posit.co
+  - family-names: Schloerke
+    given-names: Barret
+    email: barret@posit.co
+    orcid: https://orcid.org/0000-0001-9986-114X
+  - family-names: Karambelkar
+    given-names: Bhaskar
+  - family-names: Xie
+    given-names: Yihui
+  year: '2023'
+- type: software
   title: knitr
   abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
   notes: Suggests
