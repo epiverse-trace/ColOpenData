@@ -144,7 +144,7 @@ ggplot(data = db_temperature_roi) +
   geom_line(aes(x = dates, y = TSSM_CON)) +
   ggtitle("Dry-bulb Temperature") +
   xlab("Date") +
-  ylab("Dry-bulb temperature [<U+00B0>C]") +
+  ylab("Dry-bulb temperature [C]") +
   theme_bw()
 ```
 
