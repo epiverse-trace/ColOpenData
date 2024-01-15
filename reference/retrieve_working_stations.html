@@ -32,6 +32,13 @@ working."><meta property="og:image" content="/logo.svg"><!-- mathjax --><script 
       <ul class="navbar-nav me-auto"><li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/climate_data.html">Download climate data</a>
+    <a class="dropdown-item" href="../articles/geospatial_data.html">Download geospatial data</a>
+  </div>
+</li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
@@ -71,36 +78,38 @@ working.</p>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>stations</dt>
-<dd><p>vector containing the stations codes</p></dd>
+<dd><p>Vector containing the stations' codes.</p></dd>
 
 
 <dt>start_date</dt>
-<dd><p>starting date in format "YYYY-MM-DD"</p></dd>
+<dd><p>Character with the first date to consult in format
+"YYYY-MM-DD".</p></dd>
 
 
 <dt>end_date</dt>
-<dd><p>end date in format "YYYY-MM-DD"</p></dd>
+<dd><p>Character with the last date to consult in format
+"YYYY-MM-DD". Last available date is 2023/05/31.</p></dd>
 
 
 <dt>frequency</dt>
-<dd><p>aggregation frequency. Can be "day", "week","month" or
-"year"</p></dd>
-
-
-<dt>tag</dt>
-<dd><p>character containing tag to analyze</p></dd>
+<dd><p>Character with the aggregation frequency. Can be
+"day", "week","month" or "year".</p></dd>
 
 
 <dt>group</dt>
-<dd><p>if TRUE, returns only one observation from the mean of the
-stations consulted. Default is FALSE</p></dd>
+<dd><p>Boolean for data aggregation, if FALSE, returns the data from
+each individual station in ROI.(Default = FALSE).</p></dd>
+
+
+<dt>tags</dt>
+<dd><p>Character containing tag to consult.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>data.frame containing the observed data for the given stations</p>
+<p>data.frame containing the observed data for the given stations.</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
