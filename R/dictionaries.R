@@ -8,7 +8,7 @@
 #'
 #' @export
 data_dictionary <- function(dataset) {
-  dict_path <- paste0("DICT_", dataset)
+  dict_path <- paste("DICT", dataset, sep = "_")
   checkmate::assert_character(dataset)
   path <- retrieve_path(dict_path)
   downloaded_dict <- retrieve_dictionary(path)

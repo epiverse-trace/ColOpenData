@@ -76,7 +76,7 @@ retrieve_csv <- function(dataset_path, new_dir_path, new_dir, sep) {
   new_file_path <- file.path(new_dir_path, new_dir)
   httr::GET(url = dataset_path, httr::write_disk(new_file_path))
   print(new_file_path)
-  dataset <- read.csv(new_file_path, header = TRUE, sep = sep)
+  dataset <- utils::read.csv(new_file_path, header = TRUE, sep = sep)
   unlink(new_dir_path, recursive = TRUE)
   dataset <- as.data.frame(dataset)
   return(dataset)
