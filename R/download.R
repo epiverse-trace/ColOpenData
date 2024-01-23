@@ -81,3 +81,18 @@ retrieve_csv <- function(dataset_path, new_dir_path, new_dir, sep) {
   dataset <- as.data.frame(dataset)
   return(dataset)
 }
+
+#' Retrieve data file
+#'
+#' @param dataset_path path to the dataset on repository
+#' 
+#' @return dataset
+#' @keywords internal
+retrieve_data <- function(dataset_path){
+  response <- httr::GET(url = dataset_path)
+  content <- httr::content(response, as = "text", encoding = "utf-8")
+  dataset <- readr::read_delim(content,
+                                 delim = "|", escape_double = FALSE, trim_ws = TRUE,
+                                 show_col_types = FALSE)
+  return(dataset)
+}
