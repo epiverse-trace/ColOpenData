@@ -2,7 +2,7 @@
 
 export(climate_stations)
 export(data_dictionary)
-export(download_climate)
+export(download_climate_geom)
 export(download_climate_mpio)
 export(download_demographic)
 export(download_geospatial)

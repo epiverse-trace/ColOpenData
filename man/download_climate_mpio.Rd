@@ -20,7 +20,7 @@ download_climate_mpio(
 "YYYY-MM-DD".}
 
 \item{end_date}{Character with the last date to consult in format
-"YYYY-MM-DD". Last available date is 2023/05/31.}
+"YYYY-MM-DD". Last available date is 2023-05-31.}
 
 \item{frequency}{Character with the aggregation frequency. Can be
 "day", "week","month" or "year".}

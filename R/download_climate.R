@@ -7,7 +7,7 @@
 #' @param start_date Character with the first date to consult in format
 #' "YYYY-MM-DD".
 #' @param end_date Character with the last date to consult in format
-#' "YYYY-MM-DD". Last available date is 2023/05/31.
+#' "YYYY-MM-DD". Last available date is 2023-05-31.
 #' @param frequency Character with the aggregation frequency. Can be
 #' "day", "week","month" or "year".
 #' @param tags Character containing tags to consult.
@@ -26,7 +26,7 @@ download_climate_mpio <- function(code, start_date, end_date, frequency, tags,
 
   mpios <- ColOpenData::download_geospatial("DANE_MGNCNPV_2018_MPIO")
   mpio <- mpios[which(mpios$MPIO_CDPMP == code), ]
-  climate_stations <- download_climate(
+  climate_stations <- download_climate_geom(
     mpio, start_date, end_date,
     frequency, tags, group
   )
@@ -52,13 +52,13 @@ download_climate_mpio <- function(code, start_date, end_date, frequency, tags,
 #'
 #' @examples
 #' \dontrun{
-#' download_climate(geometry, "2021-11-14", "2021-11-30", "day", "TSSM_CON")
+#' download_climate_geom(geometry, "2021-11-14", "2021-11-30", "day", "TSSM_CON")
 #' }
 #'
 #' @return data.frame with the observed data for the given geometry.
 #' @export
-download_climate <- function(geometry, start_date, end_date, frequency,
-                             tags, group = FALSE) {
+download_climate_geom <- function(geometry, start_date, end_date, frequency,
+                                  tags, group = FALSE) {
   checkmate::assert_class(geometry, "sf")
   checkmate::assert_character(start_date)
   checkmate::assert_character(end_date)
@@ -195,13 +195,7 @@ retrieve_working_stations <- function(stations, start_date, end_date,
   )
   checkmate::assert_choice(tag, ideam_tags)
 
-  config_file <- system.file("extdata", "config.yaml",
-    package = "ColOpenData",
-    mustWork = TRUE
-  )
-  base_path <- config::get(value = "base_path", file = config_file)
-  # nolint start: nonportable_path_linter
-  relative_path <- file.path(base_path, "IDEAM_WEATHER_2023_MAY")
+  relative_path <- retrieve_path("IDEAM_CLIMATE_2023_MAY")
   # nolint end
   paths_stations <- paste0(tag, "@", stations, ".data")
   dates <- seq(as.Date(start_date), as.Date(end_date), by = frequency)
@@ -290,13 +284,7 @@ stations_in_roi <- function(geometry) {
   checkmate::assert_class(geometry, "sf")
   crs <- sf::st_crs(geometry)
 
-  config_file <- system.file("extdata", "config.yaml",
-    package = "ColOpenData",
-    mustWork = TRUE
-  )
-  base_path <- config::get(value = "base_path", file = config_file)
-  # nolint start: nonportable_path_linter
-  relative_path <- file.path(base_path, "IDEAM_STATIONS_2023_MAY.csv")
+  relative_path <- retrieve_path("IDEAM_STATIONS_2023_MAY")
   # nolint end
   response <- httr::GET(relative_path)
   content <- httr::content(response, as = "text", encoding = "utf-8")
