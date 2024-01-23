@@ -164,35 +164,35 @@ test_that("Climate Stations works as expected", {
 })
 
 test_that("Climate Data throws errors", {
-  expect_error(download_climate(
+  expect_error(download_climate_geom(
     geometry = "bogota",
     start_date = "2010-01-01",
     end_date = "2010-02-10",
     frequency = "day",
     tags = "TSSM_CON"
   ))
-  expect_error(download_climate(
+  expect_error(download_climate_geom(
     geometry = ibague,
     start_date = 20100210,
     end_date = "2010-02-10",
     frequency = "day",
     tags = "TSSM_CON"
   ))
-  expect_error(download_climate(
+  expect_error(download_climate_geom(
     geometry = ibague,
     start_date = "2010-01-01",
     end_date = 20100310,
     frequency = "day",
     tags = "TSSM_CON"
   ))
-  expect_error(download_climate(
+  expect_error(download_climate_geom(
     geometry = ibague,
     start_date = "2010-01-01",
     end_date = "2010-02-10",
     frequency = "dday",
     tags = "TSSM_CON"
   ))
-  expect_error(download_climate(
+  expect_error(download_climate_geom(
     geometry = ibague,
     start_date = "2010-01-01",
     end_date = "2010-02-10",
@@ -202,14 +202,14 @@ test_that("Climate Data throws errors", {
 })
 
 test_that("Climate Stations works as expected", {
-  expect_s3_class(download_climate(
+  expect_s3_class(download_climate_geom(
     geometry = ibague,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
     frequency = "day",
     tags = "PTPM_CON"
   ), "data.frame")
-  expect_length(download_climate(
+  expect_length(download_climate_geom(
     geometry = ibague,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
@@ -217,7 +217,7 @@ test_that("Climate Stations works as expected", {
     tags = "PTPM_CON",
     group = TRUE
   ), 2)
-  expect_length(download_climate(
+  expect_length(download_climate_geom(
     geometry = ibague,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
@@ -225,7 +225,7 @@ test_that("Climate Stations works as expected", {
     tags = "EVTE_CON",
     group = TRUE
   ), 2)
-  expect_length(download_climate(
+  expect_length(download_climate_geom(
     geometry = ibague,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
@@ -233,7 +233,7 @@ test_that("Climate Stations works as expected", {
     tags = c("TMN_CON", "HRHG_CON"),
     group = TRUE
   ), 3)
-  expect_type(download_climate(
+  expect_type(download_climate_geom(
     geometry = ibague,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
