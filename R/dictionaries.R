@@ -1,4 +1,4 @@
-#' Download data dictionary
+#' Download data dictionary for geospatial dataframes
 #'
 #' @param dataset String indicating dataset code.
 #'
@@ -7,7 +7,25 @@
 #' data_dictionary("DANE_MGNCNPV_2018_SETU")
 #'
 #' @export
-data_dictionary <- function(dataset) {
+dictionary_geospatial <- function(dataset) {
+  dict_path <- paste("DICT", dataset, sep = "_")
+  checkmate::assert_character(dataset)
+  path <- retrieve_path(dict_path)
+  downloaded_dict <- retrieve_dictionary(path)
+  dict_tibble <- tibble::as_tibble(downloaded_dict)
+  return(dict_tibble)
+}
+
+#' Download data dictionary for geospatial dataframes
+#'
+#' @param dataset String indicating dataset code.
+#'
+#' @return tibble containing data dictionary
+#' @examples
+#' data_dictionary("IDEAM_")
+#'
+#' @export
+dictionary_climate <- function(dataset) {
   dict_path <- paste("DICT", dataset, sep = "_")
   checkmate::assert_character(dataset)
   path <- retrieve_path(dict_path)

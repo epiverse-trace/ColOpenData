@@ -205,12 +205,7 @@ retrieve_working_stations <- function(stations, start_date, end_date,
     # nolint start: nonportable_path_linter
     dataset_path <- file.path(relative_path, paths_stations[i])
     # nolint end
-    response <- httr::GET(url = dataset_path)
-    content <- httr::content(response, as = "text", encoding = "utf-8")
-    temp_data <- readr::read_delim(content,
-      delim = "|", escape_double = FALSE, trim_ws = TRUE,
-      show_col_types = FALSE
-    )
+    temp_data <- retrieve_data(dataset_path)
     if (length(temp_data) != 1) {
       temp_data$Fecha <- as.POSIXct(temp_data$Fecha,
         format = "%Y-%m-%d %H:%M:%S", tz = "UTC"
