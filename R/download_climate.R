@@ -205,7 +205,7 @@ retrieve_working_stations <- function(stations, start_date, end_date,
     # nolint start: nonportable_path_linter
     dataset_path <- file.path(relative_path, paths_stations[i])
     # nolint end
-    temp_data <- retrieve_data(dataset_path)
+    temp_data <- retrieve_table(dataset_path, sep = "|")
     if (length(temp_data) != 1) {
       temp_data$Fecha <- as.POSIXct(temp_data$Fecha,
         format = "%Y-%m-%d %H:%M:%S", tz = "UTC"
@@ -279,14 +279,10 @@ stations_in_roi <- function(geometry) {
   checkmate::assert_class(geometry, "sf")
   crs <- sf::st_crs(geometry)
 
+  # IDEAM stations are retrieved directly from www.datos.gov.co
+  # and are separated by ","
   relative_path <- retrieve_path("IDEAM_STATIONS_2023_MAY")
-  # nolint end
-  response <- httr::GET(relative_path)
-  content <- httr::content(response, as = "text", encoding = "utf-8")
-  IDEAM_stations <- suppressWarnings(readr::read_delim(content,
-    delim = ",", escape_double = FALSE, trim_ws = TRUE,
-    show_col_types = FALSE
-  ))
+  IDEAM_stations <- retrieve_table(relative_path, ",")
 
   geo_stations <- sf::st_as_sf(IDEAM_stations,
     coords = c("longitude", "latitude"),
