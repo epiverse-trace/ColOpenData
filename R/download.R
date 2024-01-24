@@ -66,33 +66,16 @@ retrieve_zip <- function(dataset_path, new_dir_path, new_dir) {
 #' Retrieve csv file
 #'
 #' @param dataset_path path to the dataset on repository
-#' @param new_dir_path path to the created directory
-#' @param new_dir directory to store data
 #' @param sep separator for csv data
 #'
 #' @return dataset
 #' @keywords internal
-retrieve_csv <- function(dataset_path, new_dir_path, new_dir, sep) {
-  new_file_path <- file.path(new_dir_path, new_dir)
-  httr::GET(url = dataset_path, httr::write_disk(new_file_path))
-  print(new_file_path)
-  dataset <- utils::read.csv(new_file_path, header = TRUE, sep = sep)
-  unlink(new_dir_path, recursive = TRUE)
-  dataset <- as.data.frame(dataset)
-  return(dataset)
-}
-
-#' Retrieve data file
-#'
-#' @param dataset_path path to the dataset on repository
-#' 
-#' @return dataset
-#' @keywords internal
-retrieve_data <- function(dataset_path){
+retrieve_table <- function(dataset_path, sep) {
   response <- httr::GET(url = dataset_path)
   content <- httr::content(response, as = "text", encoding = "utf-8")
-  dataset <- readr::read_delim(content,
-                                 delim = "|", escape_double = FALSE, trim_ws = TRUE,
-                                 show_col_types = FALSE)
+  dataset <- suppressWarnings(readr::read_delim(content,
+    delim = sep, escape_double = FALSE,
+    trim_ws = TRUE, show_col_types = FALSE
+  ))
   return(dataset)
 }
