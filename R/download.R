@@ -63,7 +63,7 @@ retrieve_zip <- function(dataset_path, new_dir_path, new_dir) {
   return(dataset)
 }
 
-#' Retrieve csv file
+#' Retrieve table (csv and data) file
 #'
 #' @param dataset_path path to the dataset on repository
 #' @param sep separator for csv data
