@@ -134,14 +134,14 @@ db_temperature_roi <- download_climate_geom(
   end_date = "2016-12-31",
   frequency = "day",
   tags = "TSSM_CON",
-  group = TRUE
+  aggregate = TRUE
 )
 ```
 
 With the recorded data we can plot the time series, for the four years.
 ```{r plot temperatures}
 ggplot(data = db_temperature_roi) +
-  geom_line(aes(x = dates, y = TSSM_CON)) +
+  geom_line(aes(x = date, y = TSSM_CON)) +
   ggtitle("Dry-bulb Temperature") +
   xlab("Date") +
   ylab("Dry-bulb temperature [C]") +
@@ -173,18 +173,18 @@ than `download_climate`, :
 individual station in the municipality.(Default = FALSE).
 
 ```{r download climate mpio, results = "hide", warning = FALSE, message = FALSE}
-db_temperature_mpio <- download_climate_mpio(
+db_temperature_mpio <- download_climate(
   code = "17001",
   start_date = "2013-01-01",
   end_date = "2016-12-31",
   frequency = "day",
   tags = "TSSM_CON",
-  group = TRUE
+  aggregate = TRUE
 )
 ```
 ```{r}
 ggplot(data = db_temperature_mpio) +
-  geom_line(aes(x = dates, y = TSSM_CON)) +
+  geom_line(aes(x = date, y = TSSM_CON)) +
   ggtitle("Dry-bulb Temperature") +
   xlab("Date") +
   ylab("Dry-bulb temperature [C]") +
