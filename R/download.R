@@ -14,10 +14,10 @@ retrieve_path <- function(dataset) {
   )
   base_path <- config::get(value = "base_path", file = config_file)
   relative_path <- config::get(value = dataset, file = config_file)
-  file_path <- paste0(base_path, relative_path)
   if (rlang::is_empty(relative_path)) {
     stop("`dataset` is not available")
   }
+  file_path <- paste0(base_path, relative_path)
   return(file_path)
 }
 

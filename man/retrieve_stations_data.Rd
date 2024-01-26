@@ -10,7 +10,7 @@ retrieve_stations_data(
   end_date,
   frequency,
   tag,
-  group = FALSE
+  aggregate = FALSE
 )
 }
 \arguments{
@@ -25,10 +25,10 @@ retrieve_stations_data(
 \item{frequency}{Character with the aggregation frequency. Can be
 "day", "week","month" or "year".}
 
-\item{group}{Boolean for data aggregation, if FALSE, returns the data from
-each individual station in ROI.(Default = FALSE).}
+\item{tag}{Character containing tag to consult.}
 
-\item{tags}{Character containing tag to consult.}
+\item{aggregate}{Boolean for data aggregation, if FALSE, returns the data from
+each individual station in ROI.(Default = FALSE).}
 }
 \value{
 data.frame containing the observed data for the given stations.

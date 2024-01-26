@@ -1,6 +1,6 @@
 #' Retrieve climate data by named geometry (municipality or department)
 #' @description
-#' Retrieve climate stations with observed data in a named spatial structure 
+#' Retrieve climate stations with observed data in a named spatial structure
 #' (municipality or department). This data is retrieved from local
 #' meteorological stations.
 #'
@@ -12,7 +12,7 @@
 #' @param frequency Character with the aggregation frequency. Can be
 #' "day", "week","month" or "year".
 #' @param tags Character containing tags to consult.
-#' @param group Boolean for data aggregation, if FALSE, returns the data from
+#' @param aggregate Boolean for data aggregation, if FALSE, returns the data from
 #' each individual station in the municipality.(Default = FALSE).
 #' @examples
 #' \dontrun{
@@ -22,22 +22,22 @@
 #' @return data.frame with the observed data for the given municipality.
 #' @export
 download_climate <- function(code, start_date, end_date, frequency, tags,
-                                  group = FALSE) {
+                             aggregate = FALSE) {
   checkmate::assert_character(code)
 
-  if(length(code) == 5){
+  if (nchar(code) == 5) {
     mpios <- ColOpenData::download_geospatial("DANE_MGNCNPV_2018_MPIO")
     area <- mpios[which(mpios$MPIO_CDPMP == code), "MPIO_CDPMP"]
-  } else if(length(code) == 2){
+  } else if (nchar(code) == 2) {
     dptos <- ColOpenData::download_geospatial("DANE_MGNCNPV_2018_DPTO")
     area <- dptos[which(dptos$DPTO_CCDGO == code), "DPTO_CCDGO"]
   }
-  if(nrow(area) == 1){
+  if (nrow(area) == 0) {
     stop("`code` cannot be found")
   }
   climate <- download_climate_geom(
     area, start_date, end_date,
-    frequency, tags, group
+    frequency, tags, aggregate
   )
   return(climate)
 }
@@ -56,7 +56,7 @@ download_climate <- function(code, start_date, end_date, frequency, tags,
 #' @param frequency Character with the aggregation frequency. Can be
 #' "day", "week","month" or "year".
 #' @param tags Character containing tags to consult.
-#' @param group Boolean for data aggregation, if FALSE, returns the data from
+#' @param aggregate Boolean for data aggregation, if FALSE, returns the data from
 #' each individual station in ROI.(Default = FALSE).
 #'
 #' @examples
@@ -67,27 +67,14 @@ download_climate <- function(code, start_date, end_date, frequency, tags,
 #' @return data.frame with the observed data for the given geometry.
 #' @export
 download_climate_geom <- function(geometry, start_date, end_date, frequency,
-                                  tags, group = FALSE) {
+                                  tags, aggregate = FALSE) {
   checkmate::assert_class(geometry, "sf")
-  checkmate::assert_character(start_date)
-  checkmate::assert_character(end_date)
-  checkmate::assert_choice(frequency, c("day", "week", "month", "year"))
-  ideam_tags <- c(
-    "TSSM_CON", "THSM_CON", "TMN_CON", "TMX_CON",
-    "TSTG_CON", "HR_CAL", "HRHG_CON", "TV_CAL",
-    "TPR_CAL", "PTPM_CON", "PTPG_CON", "EVTE_CON", "FA_CON",
-    "NB_CON", "RCAM_CON", "BSHG_CON", "VVAG_CON",
-    "DVAG_CON", "VVMXAG_CON", "DVMXAG_CON"
-  )
-  for (tag in tags) {
-    checkmate::assert_choice(tag, ideam_tags)
-  }
 
   stations_roi <- stations_in_roi(geometry)
   stations <- stations_roi$codigo
   climate_geom <- retrieve_climate_data(
     stations, start_date, end_date,
-    frequency, tags, group
+    frequency, tags, aggregate
   )
   return(climate_geom)
 }
@@ -105,7 +92,7 @@ download_climate_geom <- function(geometry, start_date, end_date, frequency,
 #' @param frequency Character with the aggregation frequency. Can be
 #' "day", "week","month" or "year".
 #' @param tags Character containing tags to consult.
-#' @param group Boolean for data aggregation, if FALSE, returns the data from
+#' @param aggregate Boolean for data aggregation, if FALSE, returns the data from
 #' each individual station in ROI.(Default = FALSE).
 #'
 #' @examples
@@ -116,35 +103,28 @@ download_climate_geom <- function(geometry, start_date, end_date, frequency,
 #' @return data.frame with the observed data for the given geometry.
 #' @export
 retrieve_climate_data <- function(stations, start_date, end_date,
-                             frequency, tags,
-                             group = FALSE) {
+                                  frequency, tags,
+                                  aggregate = FALSE) {
   checkmate::assert_vector(stations)
   checkmate::assert_character(start_date)
   checkmate::assert_character(end_date)
   checkmate::assert_choice(frequency, c("day", "week", "month", "year"))
-  ideam_tags <- c(
-    "TSSM_CON", "THSM_CON", "TMN_CON", "TMX_CON",
-    "TSTG_CON", "HR_CAL", "HRHG_CON", "TV_CAL",
-    "TPR_CAL", "PTPM_CON", "PTPG_CON", "EVTE_CON", "FA_CON",
-    "NB_CON", "RCAM_CON", "BSHG_CON", "VVAG_CON",
-    "DVAG_CON", "VVMXAG_CON", "DVMXAG_CON"
-  )
+
   if (length(tags) == 1) {
     climate_data <- retrieve_stations_data(
       stations, start_date, end_date,
-      frequency, tags, group
+      frequency, tags, aggregate
     )
   } else {
-    if (group) {
+    if (aggregate) {
       climate_data <- data.frame()
       for (tag in tags) {
-        checkmate::assert_choice(tag, ideam_tags)
         stations_data <- retrieve_stations_data(
           stations, start_date, end_date,
-          frequency, tag, group
+          frequency, tag, aggregate
         )
         # If it is the first or a later observation
-        if ("dates" %in% colnames(climate_data)) {
+        if ("date" %in% colnames(climate_data)) {
           climate_data <- merge(climate_data, stations_data,
             by.x = "date", by.y = "date", all.x = TRUE
           )
@@ -155,10 +135,9 @@ retrieve_climate_data <- function(stations, start_date, end_date,
     } else {
       climate_data <- list()
       for (tag in tags) {
-        checkmate::assert_choice(tag, ideam_tags)
         stations_data <- retrieve_climate_data(
           stations, start_date, end_date,
-          frequency, tag, group
+          frequency, tag, aggregate
         )
         climate_data[[tag]] <- stations_data
       }
@@ -180,8 +159,8 @@ retrieve_climate_data <- function(stations, start_date, end_date,
 #' "YYYY-MM-DD". Last available date is 2023/05/31.
 #' @param frequency Character with the aggregation frequency. Can be
 #' "day", "week","month" or "year".
-#' @param tags Character containing tag to consult.
-#' @param group Boolean for data aggregation, if FALSE, returns the data from
+#' @param tag Character containing tag to consult.
+#' @param aggregate Boolean for data aggregation, if FALSE, returns the data from
 #' each individual station in ROI.(Default = FALSE).
 #'
 #' @importFrom rlang .data
@@ -190,12 +169,9 @@ retrieve_climate_data <- function(stations, start_date, end_date,
 #' @return data.frame containing the observed data for the given stations.
 #' @keywords internal
 retrieve_stations_data <- function(stations, start_date, end_date,
-                                      frequency, tag,
-                                      group = FALSE) {
+                                   frequency, tag,
+                                   aggregate = FALSE) {
   checkmate::assert_vector(stations)
-  checkmate::assert_character(start_date)
-  checkmate::assert_character(end_date)
-  checkmate::assert_choice(frequency, c("day", "week", "month", "year"))
   ideam_tags <- c(
     "TSSM_CON", "THSM_CON", "TMN_CON", "TMX_CON",
     "TSTG_CON", "HR_CAL", "HRHG_CON", "TV_CAL",
@@ -204,12 +180,13 @@ retrieve_stations_data <- function(stations, start_date, end_date,
     "DVAG_CON", "VVMXAG_CON", "DVMXAG_CON"
   )
   checkmate::assert_choice(tag, ideam_tags)
+  checkmate::assert_logical(aggregate)
 
   path_data <- retrieve_path("IDEAM_CLIMATE_2023_MAY")
   path_stations <- paste0(tag, "@", stations, ".data")
   date_range <- seq(as.Date(start_date), as.Date(end_date), by = frequency)
   floor_dates <- lubridate::floor_date(date_range, unit = frequency)
-  stations_data <- data.frame(dates = floor_dates)
+  stations_data <- data.frame(date = floor_dates)
   for (i in seq_along(path_stations)) {
     # nolint start: nonportable_path_linter
     dataset_path <- file.path(path_data, path_stations[i])
@@ -217,14 +194,15 @@ retrieve_stations_data <- function(stations, start_date, end_date,
     station <- retrieve_table(dataset_path, sep = "|")
     if (length(station) != 1) {
       names(station) <- c("date", "value")
-      station_data$date <- as.POSIXct(station$date,
+      station$date <- as.POSIXct(station$date,
         format = "%Y-%m-%d %H:%M:%S", tz = "UTC"
       )
       filtered <- station %>%
         dplyr::filter(
           .data$date >= start_date,
           .data$date <= (as.Date(end_date) + 1)
-        ) %>% aggregate(tag, frequency)
+        ) %>%
+        summarise(tag, frequency)
       if (all(is.na(filtered))) {
         next
       }
@@ -239,8 +217,8 @@ retrieve_stations_data <- function(stations, start_date, end_date,
     stop("There were no records for the given ROI and dates")
   }
 
-  if (group && ncol(stations_data) > 2) {
-    stations_data <- group_stations(stations_data, tag)
+  if (aggregate && ncol(stations_data) > 2) {
+    stations_data <- aggregate(stations_data, tag)
   }
   return(stations_data)
 }
@@ -261,20 +239,18 @@ retrieve_stations_data <- function(stations, start_date, end_date,
 #' @export
 stations_in_roi <- function(geometry) {
   checkmate::assert_class(geometry, "sf")
-  crs <- sf::st_crs(geometry)
 
+  crs <- sf::st_crs(geometry)
   # IDEAM stations are stored directly from www.datos.gov.co
   # and are separated by ","
   data_path <- retrieve_path("IDEAM_STATIONS_2023_MAY")
   stations <- retrieve_table(data_path, ",")
-
   geo_stations <- sf::st_as_sf(stations,
-                               coords = c("longitude", "latitude"),
-                               remove = FALSE
+    coords = c("longitude", "latitude"),
+    remove = FALSE
   )
   geo_stations <- sf::st_set_crs(geo_stations, crs)
   intersections <- sf::st_within(geo_stations, geometry, sparse = FALSE)
-
   stations_in_roi <- geo_stations[which(intersections), ]
   if (nrow(stations_in_roi) == 0) {
     stop("There are no stations in the given ROI")
@@ -282,35 +258,35 @@ stations_in_roi <- function(geometry) {
   return(stations_in_roi)
 }
 
-#' Group stations
+#' Aggregate stations
 #' @description
-#' Groups stations by the mean of the observations
+#' Aggregate stations observations.
 #'
-#' @param stations_df data.frame containing stations to group
-#' @param tag string with the tag consulted
+#' @param stations_df data.frame containing stations to aggregate
+#' @param tag string with the tag consulted.
 #'
 #' @return a data.frame with only two columns containing the dates and the
-#' grouped observations.
+#' aggregated observations.
 #' @keywords internal
-group_stations <- function(stations_df, tag) {
+aggregate <- function(stations_df, tag) {
   if (ncol(stations_df) == 2) {
-    grouped <- stations_df
-    names(grouped) <- c("dates", tag)
+    aggregated <- stations_df
+    names(aggregated) <- c("date", tag)
   } else {
-    if(tag %in% c("PTPM_CON", "PTPG_CON")){
-      grouped <- as.data.frame(stations_df$dates)
-      grouped[tag] <- round(rowSums(stations_df[, -1], na.rm = TRUE), 2)
-      names(grouped) <- c("dates", tag)
-    } else{
-      grouped <- as.data.frame(stations_df$dates)
-      grouped[tag] <- round(rowMeans(stations_df[, -1], na.rm = TRUE), 2)
-      names(grouped) <- c("dates", tag)
+    if (tag %in% c("PTPM_CON", "PTPG_CON")) {
+      aggregated <- as.data.frame(stations_df$date)
+      aggregated[tag] <- round(rowSums(stations_df[, -1]), 2)
+      names(aggregated) <- c("date", tag)
+    } else {
+      aggregated <- as.data.frame(stations_df$date)
+      aggregated[tag] <- round(rowMeans(stations_df[, -1]), 2)
+      names(aggregated) <- c("date", tag)
     }
   }
-  return(grouped)
+  return(aggregated)
 }
 
-#' Aggregate climate data according to time frequency
+#' Summary and group of climate data according to time frequency
 #'
 #' @param .data data.frame containing at least one observed column
 #' @param tag string with the tag consulted
@@ -319,19 +295,19 @@ group_stations <- function(stations_df, tag) {
 #' @return a data.frame with aggregated observations
 #'
 #' @keywords internal
-aggregate <- function(.data, tag, frequency) {
+summarise <- function(.data, tag, frequency) {
   if (tag %in% c("PTPM_CON", "PTPG_CON")) {
-    aggregated <- dplyr::mutate(.data,
+    summarised <- dplyr::mutate(.data,
       date = lubridate::floor_date(.data$date, unit = frequency)
     ) %>%
       dplyr::group_by(.data$date) %>%
       dplyr::summarise(value = round(sum(.data$value, na.rm = TRUE), 2))
   } else {
-    aggregated <- dplyr::mutate(.data, 
+    summarised <- dplyr::mutate(.data,
       date = lubridate::floor_date(.data$date, unit = frequency)
     ) %>%
       dplyr::group_by(.data$date) %>%
       dplyr::summarise(value = round(mean(.data$value, na.rm = TRUE), 2))
   }
-  return(aggregated)
+  return(summarised)
 }

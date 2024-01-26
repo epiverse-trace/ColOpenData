@@ -4,7 +4,14 @@
 \alias{download_climate}
 \title{Retrieve climate data by named geometry (municipality or department)}
 \usage{
-download_climate(code, start_date, end_date, frequency, tags, group = FALSE)
+download_climate(
+  code,
+  start_date,
+  end_date,
+  frequency,
+  tags,
+  aggregate = FALSE
+)
 }
 \arguments{
 \item{code}{Character with the DIVIPOLA code for the area.}
@@ -20,7 +27,7 @@ download_climate(code, start_date, end_date, frequency, tags, group = FALSE)
 
 \item{tags}{Character containing tags to consult.}
 
-\item{group}{Boolean for data aggregation, if FALSE, returns the data from
+\item{aggregate}{Boolean for data aggregation, if FALSE, returns the data from
 each individual station in the municipality.(Default = FALSE).}
 }
 \value{

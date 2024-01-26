@@ -2,19 +2,20 @@
 % Please edit documentation in R/download_climate.R
 \name{aggregate}
 \alias{aggregate}
-\title{Aggregate climate data according to time frequency}
+\title{Aggregate stations}
 \usage{
-aggregate(.data, tag, frequency)
+aggregate(stations_df, tag)
 }
 \arguments{
-\item{.data}{data.frame containing at least one observed column}
+\item{stations_df}{data.frame containing stations to aggregate}
 
-\item{tag}{string with the tag consulted}
+\item{tag}{string with the tag consulted.}
 }
 \value{
-a data.frame with aggregated observations
+a data.frame with only two columns containing the dates and the
+aggregated observations.
 }
 \description{
-Aggregate climate data according to time frequency
+Aggregate stations observations.
 }
 \keyword{internal}
