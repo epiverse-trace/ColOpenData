@@ -10,7 +10,7 @@ retrieve_climate_data(
   end_date,
   frequency,
   tags,
-  group = FALSE
+  aggregate = FALSE
 )
 }
 \arguments{
@@ -27,7 +27,7 @@ retrieve_climate_data(
 
 \item{tags}{Character containing tags to consult.}
 
-\item{group}{Boolean for data aggregation, if FALSE, returns the data from
+\item{aggregate}{Boolean for data aggregation, if FALSE, returns the data from
 each individual station in ROI.(Default = FALSE).}
 }
 \value{
