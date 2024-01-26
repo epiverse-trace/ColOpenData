@@ -4,12 +4,13 @@
 #'
 #' @return tibble containing data dictionary
 #' @examples
-#' data_dictionary("DANE_MGNCNPV_2018_SETU")
+#' dictionary("DANE_MGNCNPV_2018_SETU")
 #'
 #' @export
 dictionary <- function(dataset) {
-  dict_path <- paste("DICT", dataset, sep = "_")
   checkmate::assert_character(dataset)
+
+  dict_path <- paste("DICT", dataset, sep = "_")
   path <- retrieve_path(dict_path)
   downloaded_dict <- retrieve_table(path, ";")
   dict_tibble <- tibble::as_tibble(downloaded_dict)

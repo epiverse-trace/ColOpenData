@@ -16,6 +16,6 @@ tibble containing data dictionary
 Download data dictionary for geospatial dataframes
 }
 \examples{
-data_dictionary("DANE_MGNCNPV_2018_SETU")
+dictionary("DANE_MGNCNPV_2018_SETU")
 
 }
