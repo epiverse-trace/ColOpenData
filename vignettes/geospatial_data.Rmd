@@ -25,16 +25,9 @@ different aggregation levels. Each level is stored in a different dataset,
 which can be retrieved using the `download_geospatial` function.
 
 `download_geospatial` only requires one argument, which is the name of the
-dataset to consult. The available datasets are stored in the same pattern:
-
-::: {.alert .alert-info}
-  SOURCE_DATASET_YEAR_DETAILS
-:::
-
-All datasets contained come from the same source: DANE, and are the same type
-of dataset: MGNCNPV which contains the National Geostatistical Framework
-including the summarized National Population and Housing Census of 2018. Details
-for geospatial datasets relate to the level of aggregation as follows:
+dataset to consult. To better understand dataset names and metadata go to the
+[Documentation and Dictionaries] (/documentation_and_dictionaries.Rmd).
+Details for geospatial datasets relate to the level of aggregation as follows:
 
 ```{r Available datasets, echo = FALSE}
 code <- c(
