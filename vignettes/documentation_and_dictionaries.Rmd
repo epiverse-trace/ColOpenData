@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 ## 1. List data
 **ColOpenData** has three main dataset categories: demographic, geospatial and 
 climate. Available datasets have different details and aggregation on each
-category; however, the available datasets can be consulted using a common name framework:
+category; however, they can be consulted using a common framework:
 
 ::: {.alert .alert-info}
   SOURCE_DATASET_YEAR_DETAILS
@@ -26,18 +26,18 @@ Currently, **ColOpenData** only includes data from official sources [(DANE)](htt
 category, and provide an unique name for each dataset.
 
 To check available datasets you can use the `list_datasets` function.
-This function can also receive a string parameter to indicate a specific group.
+This function can also receive a string parameter to indicate a specific category.
 
 ```{r setup}
 library(ColOpenData)
 ```
 
-```{r}
+```{r list datasets}
 # List all datasets
 list_datasets()
 ```
 
-```{r}
+```{r list geospatial datasets}
 # List geospatial datasets
 list_datasets(category = "geospatial")
 ```
@@ -46,9 +46,9 @@ list_datasets(category = "geospatial")
 ### 2.1. Geospatial
 Datasets inside the geospatial category contain a summarized version of the
 National Population and Housing Census (CNPV) and a dictionary is needed to
-understand all aggregated variables. These dictionaries contain the necessary metadata to use the available information. To retrieve them, we can use the `dictionary`function, using the dataset name as a parameter:
+understand all aggregated variables. These dictionaries contain the necessary metadata to use the available information. Year and details in geospatial datasets reference the last included national census and level of aggregation. To retrieve them, we can use the `dictionary`function, using the dataset name as a parameter:
 
-```{r}
+```{r dictionary for MGNCNPV at municipalities}
 dict_mpio <- dictionary("DANE_MGNCNPV_2018_MPIO")
 dict_mpio
 ```
@@ -56,9 +56,9 @@ dict_mpio
 ### 2.2. Climate
 Climate data is not stored in multiple datasets but as an unique dataset with
 numerous tags. These tags can also be consulted through the `dictionary`
-function using the name of the climate dataset.
+function using the name of the climate dataset. Year and details in climate datasets reference the last available backup date from source (IDEAM).
 
-```{r}
+```{r dicionary for climate data}
 dict_climate <- dictionary("IDEAM_CLIMATE_2023_MAY")
 dict_climate
 ```

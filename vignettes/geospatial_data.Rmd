@@ -15,9 +15,9 @@ knitr::opts_chunk$set(
 ```
 
 **ColOpenData** can be used to access open Colombian geospatial data. This 
-data is retrieved from the Geostatistical National Framework (MGN) published by
+data is retrieved from the Geostatistical National Framework (MGN), published by
 the Administrative National Department of Statistics
-[(DANE)](https://www.dane.gov.co/index.php/en/).
+[(DANE)](https://www.dane.gov.co/index.php/en/). The MGN contains the political-administrative division and is used to reference census statistical information. Further information can be obtained directly from DANE [here](https://www.dane.gov.co/index.php/actualidad-dane/5454-el-dane-actualizo-el-marco-geoestadistico-nacional-a-2018)
 
 This package contains the 2018's version of the MGN, which also included a
 summarized version of the National Population and Housing Census (CNPV) in
@@ -26,7 +26,7 @@ which can be retrieved using the `download_geospatial` function.
 
 `download_geospatial` only requires one argument, which is the name of the
 dataset to consult. To better understand dataset names and metadata go to the
-[Documentation and Dictionaries] (/documentation_and_dictionaries.Rmd).
+[Documentation and Dictionaries](https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html).
 Details for geospatial datasets relate to the level of aggregation as follows:
 
 ```{r Available datasets, echo = FALSE}
