@@ -4,12 +4,10 @@
 \alias{download_demographic}
 \title{Download demographic dataset}
 \usage{
-download_demographic(dataset, sheet = "None")
+download_demographic(dataset)
 }
 \arguments{
 \item{dataset}{String indicating dataset code.}
-
-\item{sheet}{String indicating specific sheet (internal dataset).}
 }
 \value{
 data.frame downloaded.
@@ -19,6 +17,6 @@ Download demographic dataset. This data is obtained from the national census
 of 2018.
 }
 \examples{
-download_demographic("DANE_CNPV_2018_Hogares", "1HD")
+download_demographic("DANE_CNPVH_2018_1HD")
 
 }

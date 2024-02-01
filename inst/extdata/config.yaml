@@ -1,6 +1,8 @@
 default:
   base_path: "https://trace.virtual.uniandes.edu.co/colopendata/"
   documentation: "doc_and_dict/documentation.csv"
+  DANE_CNPVH_2018_1HD: "demographic/cnpv/hogares/DANE_CNPVH_2018_1HD.csv"
+  DANE_CNPVV_2018_10D: "demographic/cnpv/viviendas/DANE_CNPVV_2018_10D.csv"
   DANE_MGNCNPV_2018_DPTO: "geospatial/mgn/mgncnpv/DANE_MGNCNPV_2018_DPTO.zip"
   DANE_MGNCNPV_2018_MPIO: "geospatial/mgn/mgncnpv/DANE_MGNCNPV_2018_MPIO.zip"
   DANE_MGNCNPV_2018_MPIOCL: "geospatial/mgn/mgncnpv/DANE_MGNCNPV_2018_MPIOCL.zip"

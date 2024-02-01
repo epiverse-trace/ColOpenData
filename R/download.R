@@ -66,13 +66,13 @@ retrieve_zip <- function(dataset_path, new_dir_path, new_dir) {
 #' Retrieve table (csv and data) file
 #'
 #' @param dataset_path path to the dataset on repository
-#' @param sep separator for csv data
+#' @param sep separator for table data
 #'
 #' @return dataset
 #' @keywords internal
 retrieve_table <- function(dataset_path, sep) {
   response <- httr::GET(url = dataset_path)
-  content <- httr::content(response, as = "text", encoding = "utf-8")
+  content <- httr::content(response, as = "text", encoding = "UTF-8")
   dataset <- suppressWarnings(readr::read_delim(content,
     delim = sep, escape_double = FALSE,
     trim_ws = TRUE, show_col_types = FALSE
