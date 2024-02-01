@@ -21,29 +21,6 @@ retrieve_path <- function(dataset) {
   return(file_path)
 }
 
-#' Retrieve excel file
-#'
-#' @param dataset_path path to the dataset on repository
-#' @param new_dir_path path to the created directory
-#' @param new_dir directory to store data
-#' @param sheet string to indicate specific sheet
-#'
-#' @return dataset
-#' @keywords internal
-retrieve_excel <- function(dataset_path, new_dir_path, new_dir, sheet) {
-  new_file_path <- file.path(new_dir_path, new_dir)
-  httr::GET(url = dataset_path, httr::write_disk(new_file_path))
-  print(new_file_path)
-  if (sheet == "None") {
-    dataset <- readxl::read_excel(new_file_path)
-  } else {
-    dataset <- readxl::read_excel(new_file_path, sheet = sheet)
-  }
-  unlink(new_dir_path, recursive = TRUE)
-  dataset <- as.data.frame(dataset)
-  return(dataset)
-}
-
 #' Retrieve zip file
 #'
 #' @param dataset_path path to the dataset on repository
@@ -73,9 +50,14 @@ retrieve_zip <- function(dataset_path, new_dir_path, new_dir) {
 retrieve_table <- function(dataset_path, sep) {
   response <- httr::GET(url = dataset_path)
   content <- httr::content(response, as = "text", encoding = "UTF-8")
-  dataset <- suppressWarnings(readr::read_delim(content,
-    delim = sep, escape_double = FALSE,
-    trim_ws = TRUE, show_col_types = FALSE
-  ))
+  dataset <- suppressMessages(
+    suppressWarnings(
+      readr::read_delim(content,
+        delim = sep, escape_double = FALSE,
+        trim_ws = TRUE, show_col_types = FALSE
+      )
+    )
+  )
+  dataset <- as.data.frame(dataset)
   return(dataset)
 }
