@@ -44,7 +44,8 @@ Imports:
     utils,
     lubridate,
     readr,
-    dplyr
+    dplyr,
+    tibble
 VignetteBuilder: knitr
 Depends: 
     R (>= 3.2.0)

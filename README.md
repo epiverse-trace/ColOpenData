@@ -51,7 +51,7 @@ Housing Census of 2018, the most recent census available. On the other
 hand, geospatial data is retrieved from the National Geostatistical Framework,
 which includes maps and a summarized version of the 2018's census. Finally,
 the climate data is obtained from the climate stations in the country 
-until may 31^st^ 2023, the most recent available date.
+until May 31st 2023, the most recent available date.
 
 ### Lifecycle
 

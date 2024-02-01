@@ -51,7 +51,7 @@ knitr::kable(IDEAM_tags)
 Each variable's observation is subject to to the availability of stations in the
 ROI and the stations' status (active, maintenance or suspended). 
 
-For this vignette we will retrieve data for the city of Manizales in Colombia. 
+For this example we will retrieve data for the city of Manizales in Colombia. 
 We will download Dry-bulb temperature from 2013 to 2016, to observe the
 increase in the temperature during 2015 and 2016 due to the impact of El 
 Nino (ENSO).
@@ -68,7 +68,7 @@ library(ggplot2)
 ## Retrieving climate data for a Region of Interest (ROI)
 
 To retrieve climate data for any ROI in the country, we can use the
-function `download_climate`, which downloads data from climate stations 
+function `download_climate_geom`, which downloads data from climate stations 
 contained inside a given geometry from a ROI. The function has the following
 parameters:
 
@@ -128,20 +128,20 @@ we will access the Dry-bulb temperature from 2013 to 2016. To do this we will
 use `download_climate`. The Dry-bulb temperature is under the tag "TSSM_CON". 
 
 ```{r download climate data, results = "hide", warning = FALSE, message = FALSE}
-db_temperature_roi <- download_climate(
+db_temperature_roi <- download_climate_geom(
   geometry = roi,
   start_date = "2013-01-01",
   end_date = "2016-12-31",
   frequency = "day",
   tags = "TSSM_CON",
-  group = TRUE
+  aggregate = TRUE
 )
 ```
 
 With the recorded data we can plot the time series, for the four years.
 ```{r plot temperatures}
 ggplot(data = db_temperature_roi) +
-  geom_line(aes(x = dates, y = TSSM_CON)) +
+  geom_line(aes(x = date, y = TSSM_CON)) +
   ggtitle("Dry-bulb Temperature") +
   xlab("Date") +
   ylab("Dry-bulb temperature [C]") +
@@ -173,18 +173,18 @@ than `download_climate`, :
 individual station in the municipality.(Default = FALSE).
 
 ```{r download climate mpio, results = "hide", warning = FALSE, message = FALSE}
-db_temperature_mpio <- download_climate_mpio(
+db_temperature_mpio <- download_climate(
   code = "17001",
   start_date = "2013-01-01",
   end_date = "2016-12-31",
   frequency = "day",
   tags = "TSSM_CON",
-  group = TRUE
+  aggregate = TRUE
 )
 ```
 ```{r}
 ggplot(data = db_temperature_mpio) +
-  geom_line(aes(x = dates, y = TSSM_CON)) +
+  geom_line(aes(x = date, y = TSSM_CON)) +
   ggtitle("Dry-bulb Temperature") +
   xlab("Date") +
   ylab("Dry-bulb temperature [C]") +

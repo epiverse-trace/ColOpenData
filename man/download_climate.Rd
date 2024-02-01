@@ -2,45 +2,45 @@
 % Please edit documentation in R/download_climate.R
 \name{download_climate}
 \alias{download_climate}
-\title{Retrieve climate data from stations in geometry}
+\title{Retrieve climate data by named geometry (municipality or department)}
 \usage{
 download_climate(
-  geometry,
+  code,
   start_date,
   end_date,
   frequency,
   tags,
-  group = FALSE
+  aggregate = FALSE
 )
 }
 \arguments{
-\item{geometry}{sf object containing the geometry for a given ROI. This
-geometry can be either a POLYGON or MULTIPOLYGON.}
+\item{code}{Character with the DIVIPOLA code for the area.}
 
 \item{start_date}{Character with the first date to consult in format
 "YYYY-MM-DD".}
 
 \item{end_date}{Character with the last date to consult in format
-"YYYY-MM-DD". Last available date is 2023/05/31.}
+"YYYY-MM-DD". Last available date is 2023-05-31.}
 
 \item{frequency}{Character with the aggregation frequency. Can be
 "day", "week","month" or "year".}
 
 \item{tags}{Character containing tags to consult.}
 
-\item{group}{Boolean for data aggregation, if FALSE, returns the data from
-each individual station in ROI.(Default = FALSE).}
+\item{aggregate}{Boolean for data aggregation, if FALSE, returns the data from
+each individual station in the municipality.(Default = FALSE).}
 }
 \value{
-data.frame with the observed data for the given geometry.
+data.frame with the observed data for the given municipality.
 }
 \description{
-Retrieve climate stations with observed data in a given geometry. This
-data is retrieved from local meteorological stations.
+Retrieve climate stations with observed data in a named spatial structure
+(municipality or department). This data is retrieved from local
+meteorological stations.
 }
 \examples{
 \dontrun{
-download_climate(geometry, "2021-11-14", "2021-11-30", "day", "TSSM_CON")
+download_climate_mpio("11001", "2021-11-14", "2021-11-30", "day", "TSSM_CON")
 }
 
 }

@@ -14,10 +14,10 @@ retrieve_path <- function(dataset) {
   )
   base_path <- config::get(value = "base_path", file = config_file)
   relative_path <- config::get(value = dataset, file = config_file)
-  file_path <- paste0(base_path, relative_path)
   if (rlang::is_empty(relative_path)) {
     stop("`dataset` is not available")
   }
+  file_path <- paste0(base_path, relative_path)
   return(file_path)
 }
 
@@ -60,5 +60,22 @@ retrieve_zip <- function(dataset_path, new_dir_path, new_dir) {
   import_dir <- list.files(new_dir_path)
   dataset <- sf::st_read(file.path(new_dir_path, import_dir))
   unlink(new_dir_path, recursive = TRUE)
+  return(dataset)
+}
+
+#' Retrieve table (csv and data) file
+#'
+#' @param dataset_path path to the dataset on repository
+#' @param sep separator for csv data
+#'
+#' @return dataset
+#' @keywords internal
+retrieve_table <- function(dataset_path, sep) {
+  response <- httr::GET(url = dataset_path)
+  content <- httr::content(response, as = "text", encoding = "utf-8")
+  dataset <- suppressWarnings(readr::read_delim(content,
+    delim = sep, escape_double = FALSE,
+    trim_ws = TRUE, show_col_types = FALSE
+  ))
   return(dataset)
 }
