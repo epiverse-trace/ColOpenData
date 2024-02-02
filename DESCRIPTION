@@ -39,7 +39,6 @@ Imports:
     httr,
     magrittr,
     readxl,
-    rlang,
     sf,
     utils,
     lubridate,
