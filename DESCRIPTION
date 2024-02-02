@@ -38,7 +38,7 @@ Imports:
     config,
     httr,
     magrittr,
-    readxl,
+    rlang,
     sf,
     utils,
     lubridate,
