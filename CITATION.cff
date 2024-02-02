@@ -230,22 +230,6 @@ references:
     email: hadley@rstudio.com
   year: '2024'
 - type: software
-  title: readxl
-  abstract: 'readxl: Read Excel Files'
-  notes: Imports
-  url: https://readxl.tidyverse.org
-  repository: https://CRAN.R-project.org/package=readxl
-  authors:
-  - family-names: Wickham
-    given-names: Hadley
-    email: hadley@posit.co
-    orcid: https://orcid.org/0000-0003-4757-117X
-  - family-names: Bryan
-    given-names: Jennifer
-    email: jenny@posit.co
-    orcid: https://orcid.org/0000-0002-6983-2759
-  year: '2024'
-- type: software
   title: rlang
   abstract: 'rlang: Functions for Base Types and Core R and ''Tidyverse'' Features'
   notes: Imports

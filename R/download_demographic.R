@@ -4,18 +4,17 @@
 #' of 2018.
 #'
 #' @param dataset String indicating dataset code.
-#' @param sheet String indicating specific sheet (internal dataset).
 #'
 #' @return data.frame downloaded.
 #' @examples
-#' download_demographic("DANE_CNPV_2018_Hogares", "1HD")
+#' download_demographic("DANE_CNPVH_2018_1HD")
 #'
 #' @export
-download_demographic <- function(dataset, sheet = "None") {
+download_demographic <- function(dataset) {
   checkmate::assert_character(dataset)
-  checkmate::assert_character(sheet)
   path <- retrieve_path(dataset)
-  downloaded_data <- retrieve_demographic_dataset(path, sheet)
+  downloaded_data <- retrieve_demographic_dataset(path)
+
   return(downloaded_data)
 }
 
@@ -28,22 +27,14 @@ download_demographic <- function(dataset, sheet = "None") {
 #'
 #' @keywords internal
 retrieve_demographic_dataset <- function(dataset_path, sheet) {
-  ext_path <- system.file("extdata",
-    package = "ColOpenData",
-    mustWork = TRUE
+  tryCatch(
+    {
+      dataset <- retrieve_table(dataset_path, sep = ";")
+      dataset <- dataset[, -c(1, 2)] # Remove index (temporary)
+    },
+    error = function(e) {
+      stop("`dataset` not found")
+    }
   )
-  # nolint start: nonportable_path_linter
-  new_dir <- rev(unlist(strsplit(dataset_path, "[/.]")))[2]
-  new_dir_path <- file.path(ext_path, new_dir)
-  if (file.exists(new_dir_path)) {
-    unlink(new_dir_path, recursive = TRUE)
-  }
-  dir.create(new_dir_path)
-  if (grepl(".xlsx", tolower(dataset_path))) {
-    dataset <- retrieve_excel(dataset_path, new_dir_path, new_dir, sheet)
-  } else {
-    stop("`dataset` not found")
-  }
-  # nolint end
   return(dataset)
 }

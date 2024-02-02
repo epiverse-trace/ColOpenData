@@ -9,7 +9,7 @@ retrieve_table(dataset_path, sep)
 \arguments{
 \item{dataset_path}{path to the dataset on repository}
 
-\item{sep}{separator for csv data}
+\item{sep}{separator for table data}
 }
 \value{
 dataset
