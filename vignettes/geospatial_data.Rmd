@@ -29,7 +29,7 @@ dataset to consult. To better understand dataset names and metadata go to [Docum
 
 Details for geospatial datasets relate to the level of aggregation as follows:
 
-```{r Available datasets, echo = FALSE}
+```{r available datasets, echo = FALSE}
 code <- c(
   "DANE_MGNCNPV_2018_DPTO", "DANE_MGNCNPV_2018_MPIO",
   "DANE_MGNCNPV_2018_MPIOCL", "DANE_MGNCNPV_2018_MZN",
@@ -70,7 +70,7 @@ For this example we will be using geospatial data at the level of Urban Section 
 
 First, we download the data using the function `download_geospatial`. After downloading, we have to filter by the municipality code using the DIVIPOLA code for Tunja, which is "15001". For further information on DIVIPOLA please consult the dataset [here](https://www.datos.gov.co/widgets/gdxc-w37w).
 
-```{r}
+```{r download and filter data}
 # Download complete dataset
 secu <- download_geospatial("DANE_MGNCNPV_2018_SECU")
 
@@ -80,53 +80,56 @@ tunja <- secu %>% filter(MPIO_CDPMP == "15001")
 
 We will calculate the percentage of houses with internet connection in each urban section. We will need to know the number of houses with internet connection and the total of houses in each section. To know which are the names for the columns we can use the dictionary function.
 
-```{r}
+```{r dictionary for urban sections}
 # Urban section dictionary
 dictionary("DANE_MGNCNPV_2018_SECU")
 ```
 
 From this dictionary we get that the number of houses with internet connection is *STP19_INT1* and the total of houses is *STVIVIENDA*. We will calculate the percentage as follows:
 
-```{r}
-tunja <- tunja %>% mutate(INT_PERC = round(STP19_INT1/STVIVIENDA, 2))
+```{r internet coverage}
+tunja <- tunja %>% mutate(INT_PERC = round(STP19_INT1 / STVIVIENDA, 2))
 ```
 
 ## Static plots (ggplot2)
 
 [**ggplot2**](https://ggplot2.tidyverse.org/) can be used to generate static plots of spatial data by using the geometry `geom_sf`. 
 
-```{r}
-ggplot(data = tunja)+
+```{r ggplot2 basic}
+ggplot(data = tunja) +
   geom_sf(mapping = aes(fill = INT_PERC), color = NA)
 ```
 
 Color palettes and themes can be defined for each plot using the aesthetic and scales, which can be consulted in the **ggplot2** documentation.
 
-```{r}
-ggplot(data = tunja)+
-  geom_sf(mapping = aes(fill = INT_PERC), color = NA)+
-  theme_minimal()+
-  theme(panel.grid = element_blank(),
-        axis.text = element_blank(),
-        axis.ticks = element_blank())+
+```{r ggplot2}
+ggplot(data = tunja) +
+  geom_sf(mapping = aes(fill = INT_PERC), color = NA) +
+  theme_minimal() +
+  theme(
+    panel.grid = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank()
+  ) +
   scale_fill_gradient("Percentage", low = "#10bed2", high = "#deff00") +
-  ggtitle(label = "Internet access in Tunja",
-          subtitle = "Percentage of houses")
-  
+  ggtitle(
+    label = "Internet coverage",
+    subtitle = "Tunja, Colombia"
+  )
 ```
 
 ## Dynamic plots (leaflet)
 
 For dynamic plots we can use [**leaflet**](https://rstudio.github.io/leaflet/), which is an open-source library for interactive maps. To generate the same plot we first will create a color palette.
-```{r}
+```{r define color palette}
 # Color Palette
-colfunc = colorRampPalette(c("#10bed2","#deff00"))
-pal = colfunc(100)
+colfunc <- colorRampPalette(c("#10bed2", "#deff00"))
+pal <- colfunc(100)
 ```
 
 With the previous color palette we can generate the interactive plot. We need to define a provider for a basemap, which includes open sources like [OpenStreetMap](https://www.openstreetmap.org/#map=5/4.632/-74.299) and [CartoDB](https://carto.com/basemaps). For further details on **leaflet**, please refer to the package documentation.
 
-```{r}
+```{r leaflet}
 leaflet(tunja) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   addPolygons(
