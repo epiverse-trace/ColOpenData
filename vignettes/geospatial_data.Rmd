@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 **ColOpenData** can be used to access open Colombian geospatial data. This 
 data is retrieved from the Geostatistical National Framework (MGN), published by
 the Administrative National Department of Statistics
-[(DANE)](https://www.dane.gov.co/index.php/en/). The MGN contains the political-administrative division and is used to reference census statistical information. Further information can be obtained directly from DANE [here](https://www.dane.gov.co/index.php/actualidad-dane/5454-el-dane-actualizo-el-marco-geoestadistico-nacional-a-2018)
+[(DANE)](https://www.dane.gov.co/index.php/en/). The MGN contains the political-administrative division and is used to reference census statistical information. Further information can be obtained directly from DANE [here](https://www.dane.gov.co/index.php/actualidad-dane/5454-el-dane-actualizo-el-marco-geoestadistico-nacional-a-2018).
 
 This package contains the 2018's version of the MGN, which also included a
 summarized version of the National Population and Housing Census (CNPV) in
@@ -25,8 +25,8 @@ different aggregation levels. Each level is stored in a different dataset,
 which can be retrieved using the `download_geospatial` function.
 
 `download_geospatial` only requires one argument, which is the name of the
-dataset to consult. To better understand dataset names and metadata go to the
-[Documentation and Dictionaries](https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html).
+dataset to consult. To better understand dataset names and metadata go to [Documentation and Dictionaries](https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html).
+
 Details for geospatial datasets relate to the level of aggregation as follows:
 
 ```{r Available datasets, echo = FALSE}
@@ -34,12 +34,13 @@ code <- c(
   "DANE_MGNCNPV_2018_DPTO", "DANE_MGNCNPV_2018_MPIO",
   "DANE_MGNCNPV_2018_MPIOCL", "DANE_MGNCNPV_2018_MZN",
   "DANE_MGNCNPV_2018_SECR", "DANE_MGNCNPV_2018_SECU",
-  "DANE_MGNCNPV_2018_SETR", "DANE_MGNCNPV_2018_SETU"
+  "DANE_MGNCNPV_2018_SETR", "DANE_MGNCNPV_2018_SETU",
+  "DANE_MGNCNPV_2018_ZU"
 )
 level <- c(
   "Department", "Municipality",
-  "Municipality including Class", "Block Level", "Rural Sector", "Urban Sector",
-  "Rural Section", "Urban Section"
+  "Municipality including Class", "Block", "Rural Sector", "Urban Sector",
+  "Rural Section", "Urban Section", "Urban Zone"
 )
 
 mgncnpv <- data.frame(
@@ -49,9 +50,9 @@ mgncnpv <- data.frame(
 knitr::kable(mgncnpv)
 ```
 
-For this example, we will download the geospatial data at the level of
-department, to later include epidemiological data from dengue cases in 2018
-and visualize the departments with the highest case counts.
+In this vignette, we will download the geospatial data and provide some 
+examples on how to use the available information and visualize it using ggplot
+and leaflet.
 
 We will start by importing needed libraries
 ```{r library imports, results = "hide", warning = FALSE, message = FALSE}
@@ -59,62 +60,83 @@ library(ColOpenData)
 library(dplyr)
 library(sf)
 library(ggplot2)
+library(leaflet)
 library(RColorBrewer)
 ```
 
+## Downloading geospatial data
 
-## Downloading and plotting geospatial data
+For this example we will be using geospatial data at the level of Urban Section for the city of Tunja, Colombia. We will be using the demographic data included in the dataset to generate visualizations using **ggplot2** and **leaflet**.
 
-To download the geospatial data we will use the `download_geospatial` function,
-with the respective code for department level.
-```{r download mpios, results = "hide", warning = FALSE, message = FALSE}
-departments <- download_geospatial("DANE_MGNCNPV_2018_DPTO")
-```
-```{r}
-str(departments)
-```
-Once downloaded, we can subset the data as desired. In this example we only 
-need the departments codes and geometries.
+First, we download the data using the function `download_geospatial`. After downloading, we have to filter by the municipality code using the DIVIPOLA code for Tunja, which is "15001". For further information on DIVIPOLA please consult the dataset [here](https://www.datos.gov.co/widgets/gdxc-w37w).
 
 ```{r}
-departments_filtered <- departments %>%
-  select(DPTO_CCDGO, geometry)
-```
-```{r}
-str(departments_filtered)
+# Download complete dataset
+secu <- download_geospatial("DANE_MGNCNPV_2018_SECU")
+
+# Filter for Boyaca
+tunja <- secu %>% filter(MPIO_CDPMP == "15001")
 ```
 
-
-Dengue cases during 2018 can be loaded from the example dataset `dengue_2018`,
-which was previously loaded in the package.
+We will calculate the percentage of houses with internet connection in each urban section. We will need to know the number of houses with internet connection and the total of houses in each section. To know which are the names for the columns we can use the dictionary function.
 
 ```{r}
-data(dengue_2018)
-```
-```{r}
-str(dengue_2018)
+# Urban section dictionary
+dictionary("DANE_MGNCNPV_2018_SECU")
 ```
 
-To merge the datasets we will use the department’s codes, marked by the same 
-column name in this example.
+From this dictionary we get that the number of houses with internet connection is *STP19_INT1* and the total of houses is *STVIVIENDA*. We will calculate the percentage as follows:
 
 ```{r}
-dengue_col <- merge(
-  x = departments_filtered,
-  y = dengue_2018,
-  by = "DPTO_CCDGO"
-)
+tunja <- tunja %>% mutate(INT_PERC = round(STP19_INT1/STVIVIENDA, 2))
 ```
 
-Finally, we can visualize the cases in a map.
+## Static plots (ggplot2)
+
+[**ggplot2**](https://ggplot2.tidyverse.org/) can be used to generate static plots of spatial data by using the geometry `geom_sf`. 
+
 ```{r}
-ggplot(data = dengue_col) +
-  geom_sf(mapping = aes(fill = CASES)) +
-  scale_fill_gradientn(
-    colours = brewer.pal(7, "YlOrRd"),
-    name = "Cases"
-  ) +
-  ggtitle("Dengue Cases in Colombia during 2018") +
-  theme_bw()
+ggplot(data = tunja)+
+  geom_sf(mapping = aes(fill = INT_PERC), color = NA)
 ```
+
+Color palettes and themes can be defined for each plot using the aesthetic and scales, which can be consulted in the **ggplot2** documentation.
+
+```{r}
+ggplot(data = tunja)+
+  geom_sf(mapping = aes(fill = INT_PERC), color = NA)+
+  theme_minimal()+
+  theme(panel.grid = element_blank(),
+        axis.text = element_blank(),
+        axis.ticks = element_blank())+
+  scale_fill_gradient("Percentage", low = "#10bed2", high = "#deff00") +
+  ggtitle(label = "Internet access in Tunja",
+          subtitle = "Percentage of houses")
+  
+```
+
+## Dynamic plots (leaflet)
+
+For dynamic plots we can use [**leaflet**](https://rstudio.github.io/leaflet/), which is an open-source library for interactive maps. To generate the same plot we first will create a color palette.
+```{r}
+# Color Palette
+colfunc = colorRampPalette(c("#10bed2","#deff00"))
+pal = colfunc(100)
+```
+
+With the previous color palette we can generate the interactive plot. We need to define a provider for a basemap, which includes open sources like [OpenStreetMap](https://www.openstreetmap.org/#map=5/4.632/-74.299) and [CartoDB](https://carto.com/basemaps). For further details on **leaflet**, please refer to the package documentation.
+
+```{r}
+leaflet(tunja) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolygons(
+    stroke = TRUE,
+    weight = 0,
+    color = NA,
+    fillColor = ~pal,
+    fillOpacity = 1,
+    popup = paste0(tunja$INT_PERC)
+  )
+```
+
 
