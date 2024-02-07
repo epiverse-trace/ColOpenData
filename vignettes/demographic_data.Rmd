@@ -1,0 +1,54 @@
+---
+title: "Download demographic data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Download demographic data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r library imports, results = "hide", warning = FALSE, message = FALSE}
+library(ColOpenData)
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+library(reshape2)
+```
+
+```{r download households, results = "hide", warning = FALSE, message = FALSE}
+jefe <- download_demographic("DANE_CNPVH_2018_3HM")
+str(jefe)
+```
+
+```{r}
+jefe_hombre <- jefe[(condicion=="hogares_con_jefes_hombre")&(area=="total"),]%>%select(departamento,total)
+jefe_mujer <- jefe[(condicion=="hogares_con_jefes_mujer")&(area=="total"),] %>%select(departamento,total)
+
+# Rename columns for clarity and to prepare for merging
+names(jefe_mujer) <- c("departamento", "female")
+names(jefe_hombre) <- c("departamento", "male")
+
+# Merge data frames
+combined_df <- merge(jefe_mujer, jefe_hombre, by = "departamento")
+
+# Reshape the data into long format for ggplot
+combined_df_long <- reshape2::melt(combined_df, id.vars = "departamento")
+
+# Plotting
+ggplot(combined_df_long, aes(x = departamento, y = value, fill = variable)) +
+  geom_bar(stat = "identity", position = "dodge", color = "black") +
+  labs(title = "Total Households by Gender of the Head of the Household in Different Departments in Colombia", x = "Departments", y = "Total") +
+  scale_fill_manual(values = c("male" = "blue", "female" = "pink"), name = "Gender") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+
+
+```
