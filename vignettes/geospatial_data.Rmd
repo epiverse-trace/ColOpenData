@@ -1,8 +1,8 @@
 ---
-title: "Download geospatial data"
+title: "Download Geospatial Data"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Download geospatial data}
+  %\VignetteIndexEntry{Download Geospatial data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -51,10 +51,10 @@ knitr::kable(mgncnpv)
 ```
 
 In this vignette, we will download the geospatial data and provide some 
-examples on how to use the available information and visualize it using ggplot
+examples on how to use the available information and visualize it using ggplot2
 and leaflet.
 
-We will start by importing needed libraries
+We will start by importing the needed libraries
 ```{r library imports, results = "hide", warning = FALSE, message = FALSE}
 library(ColOpenData)
 library(dplyr)
@@ -70,24 +70,27 @@ For this example we will be using geospatial data at the level of Urban Section 
 
 First, we download the data using the function `download_geospatial`. After downloading, we have to filter by the municipality code using the DIVIPOLA code for Tunja, which is "15001". For further information on DIVIPOLA please consult the dataset [here](https://www.datos.gov.co/widgets/gdxc-w37w).
 
-```{r download and filter data}
+```{r download data}
 # Download complete dataset
 secu <- download_geospatial("DANE_MGNCNPV_2018_SECU")
-
-# Filter for Boyaca
-tunja <- secu %>% filter(MPIO_CDPMP == "15001")
 ```
-
-We will calculate the percentage of houses with internet connection in each urban section. We will need to know the number of houses with internet connection and the total of houses in each section. To know which are the names for the columns we can use the dictionary function.
+To know which column contains the municipalities code to filter for Tunja, we will need the dataset dictionary. To download the dictionary we can use the `dictionary` function. This function uses the dataset name to download the associated information. For further information please refer to the documentation on dictionaries previously mentioned.
 
 ```{r dictionary for urban sections}
 # Urban section dictionary
-dictionary("DANE_MGNCNPV_2018_SECU")
+dict <- dictionary("DANE_MGNCNPV_2018_SECU")
+head(dict)
 ```
 
-From this dictionary we get that the number of houses with internet connection is *STP19_INT1* and the total of houses is *STVIVIENDA*. We will calculate the percentage as follows:
+After exploring the dictionary, we can identify the column that contains the individual municipality codes, which is *MPIO_CDPMP*. This column contains the concatenated code for department and municipality, which is an unique identifier.
 
-```{r internet coverage}
+We will be calculation the percentage of houses with internet connection at each urban section. We will need to know the number of houses with internet connection and the total of houses in each section. From the dictionary we get that the number of houses with internet connection is *STP19_INT1* and the total of houses is *STVIVIENDA*. We will calculate the percentage as follows:
+
+```{r filter and internet coverage}
+# Filter for Tunja
+tunja <- secu %>% filter(MPIO_CDPMP == "15001")
+
+# Calculate internet coverage percentage
 tunja <- tunja %>% mutate(INT_PERC = round(STP19_INT1 / STVIVIENDA, 2))
 ```
 
@@ -103,6 +106,7 @@ ggplot(data = tunja) +
 Color palettes and themes can be defined for each plot using the aesthetic and scales, which can be consulted in the **ggplot2** documentation.
 
 ```{r ggplot2}
+# ggplot2
 ggplot(data = tunja) +
   geom_sf(mapping = aes(fill = INT_PERC), color = NA) +
   theme_minimal() +
@@ -120,16 +124,18 @@ ggplot(data = tunja) +
 
 ## Dynamic plots (leaflet)
 
-For dynamic plots we can use [**leaflet**](https://rstudio.github.io/leaflet/), which is an open-source library for interactive maps. To generate the same plot we first will create a color palette.
+For dynamic plots we can use [**leaflet**](https://rstudio.github.io/leaflet/), which is an open-source library for interactive maps. To create the same plot we first will create a color palette.
+
 ```{r define color palette}
 # Color Palette
 colfunc <- colorRampPalette(c("#10bed2", "#deff00"))
 pal <- colfunc(100)
 ```
 
-With the previous color palette we can generate the interactive plot. We need to define a provider for a basemap, which includes open sources like [OpenStreetMap](https://www.openstreetmap.org/#map=5/4.632/-74.299) and [CartoDB](https://carto.com/basemaps). For further details on **leaflet**, please refer to the package documentation.
+With the previous color palette we can generate the interactive plot. The package also includes open source maps for the base map like [OpenStreetMap](https://www.openstreetmap.org/#map=5/4.632/-74.299) and [CartoDB](https://carto.com/basemaps). For further details on **leaflet**, please refer to the package documentation.
 
 ```{r leaflet}
+# Leaflet
 leaflet(tunja) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   addPolygons(
