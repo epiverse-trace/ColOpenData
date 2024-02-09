@@ -18,7 +18,7 @@ Retrieves the stations contained inside a given geometry
 }
 \examples{
 \dontrun{
-stations_in_roy(geometry)
+stations_in_roi(geometry)
 }
 
 }

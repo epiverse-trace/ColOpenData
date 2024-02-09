@@ -232,7 +232,7 @@ retrieve_stations_data <- function(stations, start_date, end_date,
 #'
 #' @examples
 #' \dontrun{
-#' stations_in_roy(geometry)
+#' stations_in_roi(geometry)
 #' }
 #'
 #' @return data.frame with the stations inside the consulted geometry.
@@ -244,9 +244,9 @@ stations_in_roi <- function(geometry) {
   # IDEAM stations are stored directly from www.datos.gov.co
   # and are separated by ","
   data_path <- retrieve_path("IDEAM_STATIONS_2023_MAY")
-  stations <- retrieve_table(data_path, ",")
+  stations <- retrieve_table(data_path, ";")
   geo_stations <- sf::st_as_sf(stations,
-    coords = c("longitude", "latitude"),
+    coords = c("longitud", "latitud"),
     remove = FALSE
   )
   geo_stations <- sf::st_set_crs(geo_stations, crs)
