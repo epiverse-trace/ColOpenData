@@ -4,12 +4,10 @@
 \alias{retrieve_demographic_dataset}
 \title{Retrieve demographic dataset from path}
 \usage{
-retrieve_demographic_dataset(dataset_path, sheet)
+retrieve_demographic_dataset(dataset_path)
 }
 \arguments{
 \item{dataset_path}{path to the dataset on repository}
-
-\item{sheet}{string to indicate specific sheet.}
 }
 \value{
 consulted dataset.
