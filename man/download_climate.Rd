@@ -21,7 +21,7 @@ download_climate(code, start_date, end_date, frequency, tags, aggregate = TRUE)
 \item{tags}{Character containing tags to consult.}
 
 \item{aggregate}{Boolean for data aggregation, if FALSE, returns the data from
-each individual station in the municipality.(Default = FALSE).}
+each individual station in the municipality.(Default = TRUE).}
 }
 \value{
 data.frame with the observed data for the given municipality.

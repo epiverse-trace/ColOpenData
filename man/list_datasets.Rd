@@ -4,10 +4,10 @@
 \alias{list_datasets}
 \title{Download list of available datasets}
 \usage{
-list_datasets(category = "all")
+list_datasets(module = "all")
 }
 \arguments{
-\item{category}{Specific group to be consulted ("demographic", "geospatial",
+\item{module}{Specific group to be consulted ("demographic", "geospatial",
 "climate")}
 }
 \value{

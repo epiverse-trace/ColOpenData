@@ -28,16 +28,16 @@ dictionary <- function(dataset) {
 #'
 #' @export
 list_datasets <- function(module = "all") {
-  checkmate::assert_character(category)
-  checkmate::assert_choice(category, c(
+  checkmate::assert_character(module)
+  checkmate::assert_choice(module, c(
     "all", "demographic", "geospatial",
     "climate"
   ))
 
   dataset_path <- retrieve_path("documentation")
   listed <- retrieve_table(dataset_path, ";")
-  if (category != "all") {
-    listed <- listed[listed$category == category, ]
+  if (module != "all") {
+    listed <- listed[listed$category == module, ]
   }
   list_tibble <- tibble::as_tibble(listed)
   return(list_tibble)

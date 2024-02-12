@@ -21,7 +21,7 @@ test_that("Stations in ROI work as expected", {
 
 # Climate stations
 test_that("Climate Stations throws errors", {
-  expect_error(retrieve_climate_data(
+  expect_error(download_climate_data(
     stations = "bogota",
     start_date = "2010-10-01",
     end_date = "2010-12-10",
@@ -29,7 +29,7 @@ test_that("Climate Stations throws errors", {
     tags = "PTPM_CON",
     aggregate = TRUE
   ))
-  expect_error(retrieve_climate_data(
+  expect_error(download_climate_data(
     stations = stations_names,
     start_date = 2010,
     end_date = "2010-12-10",
@@ -37,7 +37,7 @@ test_that("Climate Stations throws errors", {
     tags = "PTPM_CON",
     aggregate = TRUE
   ))
-  expect_error(retrieve_climate_data(
+  expect_error(download_climate_data(
     stations = stations_names,
     start_date = "2010-12-10",
     end_date = 675,
@@ -53,7 +53,7 @@ test_that("Climate Stations throws errors", {
     tags = "PTPM_CON",
     aggregate = TRUE
   ))
-  expect_error(retrieve_climate_data(
+  expect_error(download_climate_data(
     stations = stations_names,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
@@ -61,7 +61,7 @@ test_that("Climate Stations throws errors", {
     tags = "ERR",
     aggregate = TRUE
   ))
-  expect_error(retrieve_climate_data(
+  expect_error(download_climate_data(
     stations = stations_names,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
@@ -69,7 +69,7 @@ test_that("Climate Stations throws errors", {
     tags = c("TSSM_CON", "ERR"),
     aggregate = TRUE
   ))
-  expect_error(retrieve_climate_data(
+  expect_error(download_climate_data(
     stations = stations_names,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
@@ -80,7 +80,7 @@ test_that("Climate Stations throws errors", {
 })
 
 test_that("Climate Stations works as expected", {
-  expect_s3_class(retrieve_climate_data(
+  expect_s3_class(download_climate_data(
     stations = stations_names,
     start_date = "2010-10-01",
     end_date = "2011-02-10",
@@ -88,7 +88,7 @@ test_that("Climate Stations works as expected", {
     tags = "TSSM_CON",
     aggregate = TRUE
   ), "data.frame")
-  expect_type(retrieve_climate_data(
+  expect_type(download_climate_data(
     stations = stations_names,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
@@ -96,7 +96,7 @@ test_that("Climate Stations works as expected", {
     tags = c("THSM_CON", "TSSM_CON"),
     aggregate = FALSE
   ), "list")
-  expect_s3_class(retrieve_climate_data(
+  expect_s3_class(download_climate_data(
     stations = stations_names,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
@@ -104,7 +104,7 @@ test_that("Climate Stations works as expected", {
     tags = c("THSM_CON", "TSSM_CON"),
     aggregate = TRUE
   ), "data.frame")
-  expect_length(retrieve_climate_data(
+  expect_length(download_climate_data(
     stations = stations_names,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
