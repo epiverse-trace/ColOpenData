@@ -4,14 +4,7 @@
 \alias{download_climate}
 \title{Retrieve climate data by named geometry (municipality or department)}
 \usage{
-download_climate(
-  code,
-  start_date,
-  end_date,
-  frequency,
-  tags,
-  aggregate = FALSE
-)
+download_climate(code, start_date, end_date, frequency, tags, aggregate = TRUE)
 }
 \arguments{
 \item{code}{Character with the DIVIPOLA code for the area.}
