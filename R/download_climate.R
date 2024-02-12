@@ -13,7 +13,7 @@
 #' "day", "week","month" or "year".
 #' @param tags Character containing tags to consult.
 #' @param aggregate Boolean for data aggregation, if FALSE, returns the data from
-#' each individual station in the municipality.(Default = FALSE).
+#' each individual station in the municipality.(Default = TRUE).
 #' @examples
 #' \dontrun{
 #' download_climate_mpio("11001", "2021-11-14", "2021-11-30", "day", "TSSM_CON")
@@ -63,7 +63,7 @@ download_climate <- function(code, start_date, end_date, frequency, tags,
 #' "day", "week","month" or "year".
 #' @param tags Character containing tags to consult.
 #' @param aggregate Boolean for data aggregation, if FALSE, returns the data from
-#' each individual station in ROI.(Default = FALSE).
+#' each individual station in ROI.(Default = TRUE).
 #'
 #' @examples
 #' \dontrun{
@@ -73,12 +73,12 @@ download_climate <- function(code, start_date, end_date, frequency, tags,
 #' @return data.frame with the observed data for the given geometry.
 #' @export
 download_climate_geom <- function(geometry, start_date, end_date, frequency,
-                                  tags, aggregate = FALSE) {
+                                  tags, aggregate = TRUE) {
   checkmate::assert_class(geometry, "sf")
 
   stations_roi <- stations_in_roi(geometry)
   stations <- stations_roi$codigo
-  climate_geom <- retrieve_climate_data(
+  climate_geom <- download_climate_data(
     stations = stations,
     start_date = start_date,
     end_date = end_date,
@@ -89,7 +89,7 @@ download_climate_geom <- function(geometry, start_date, end_date, frequency,
   return(climate_geom)
 }
 
-#' Retrieve climate from stations
+#' Download climate data from stations
 #' @description
 #' Retrieve climate stations with observed data in a given geometry. This
 #' data is retrieved from local meteorological stations.
@@ -103,7 +103,7 @@ download_climate_geom <- function(geometry, start_date, end_date, frequency,
 #' "day", "week","month" or "year".
 #' @param tags Character containing tags to consult.
 #' @param aggregate Boolean for data aggregation, if FALSE, returns the data from
-#' each individual station in ROI.(Default = FALSE).
+#' each individual station in ROI.(Default = TRUE).
 #'
 #' @examples
 #' \dontrun{
@@ -112,9 +112,9 @@ download_climate_geom <- function(geometry, start_date, end_date, frequency,
 #'
 #' @return data.frame with the observed data for the given geometry.
 #' @export
-retrieve_climate_data <- function(stations, start_date, end_date,
+download_climate_data <- function(stations, start_date, end_date,
                                   frequency, tags,
-                                  aggregate = FALSE) {
+                                  aggregate = TRUE) {
   checkmate::assert_vector(stations)
   checkmate::assert_character(start_date)
   checkmate::assert_character(end_date)
@@ -186,7 +186,7 @@ retrieve_climate_data <- function(stations, start_date, end_date,
 #' "day", "week","month" or "year".
 #' @param tag Character containing tag to consult.
 #' @param aggregate Boolean for data aggregation, if FALSE, returns the data from
-#' each individual station in ROI.(Default = FALSE).
+#' each individual station in ROI.(Default = TRUE).
 #'
 #' @importFrom rlang .data
 #' @importFrom magrittr %>%
@@ -195,7 +195,7 @@ retrieve_climate_data <- function(stations, start_date, end_date,
 #' @keywords internal
 retrieve_stations_data <- function(stations, start_date, end_date,
                                    frequency, tag,
-                                   aggregate = FALSE) {
+                                   aggregate = TRUE) {
   checkmate::assert_vector(stations)
   ideam_tags <- c(
     "TSSM_CON", "THSM_CON", "TMN_CON", "TMX_CON",

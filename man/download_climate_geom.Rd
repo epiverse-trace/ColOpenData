@@ -10,7 +10,7 @@ download_climate_geom(
   end_date,
   frequency,
   tags,
-  aggregate = FALSE
+  aggregate = TRUE
 )
 }
 \arguments{
@@ -29,7 +29,7 @@ geometry can be either a POLYGON or MULTIPOLYGON.}
 \item{tags}{Character containing tags to consult.}
 
 \item{aggregate}{Boolean for data aggregation, if FALSE, returns the data from
-each individual station in ROI.(Default = FALSE).}
+each individual station in ROI.(Default = TRUE).}
 }
 \value{
 data.frame with the observed data for the given geometry.
