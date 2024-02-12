@@ -68,7 +68,7 @@ library(ggplot2)
 ## Retrieving climate data for a Region of Interest (ROI) using stations' data
 
 For this example, we will need to create a spatial polygon around the city of
-Manizales and use that as our ROI to retrieve the climate data. To create the spatial polygon we need to introduce the coordinates of the geometry. For simplicity, we will build a box, introducing the 4 points which bound the box, and transform the created geometry into an `sf` object (see [**sf**](https://r-spatial.github.io/sf/articles/sf1.html) library for further details).
+Manizales and use that as our ROI to retrieve the climate data. To create the spatial polygon we need to introduce the coordinates of the geometry. For simplicity, we will build a box by introducing the 4 points which bound the box, and transform the created geometry into an `sf` object (see [**sf**](https://r-spatial.github.io/sf/articles/sf1.html) library for further details). For visualization we will use **leaflet**.
 
 ```{r polygon creation}
 # Define coordinates (Bounding box around Manizales)
@@ -234,5 +234,3 @@ ggplot(data = db_temperature_mpio) +
   ylab("Dry-bulb temperature [C]") +
   theme_bw()
 ```
-
-
