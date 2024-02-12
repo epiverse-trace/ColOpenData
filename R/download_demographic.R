@@ -12,28 +12,16 @@
 #' @export
 download_demographic <- function(dataset) {
   checkmate::assert_character(dataset)
-  path <- retrieve_path(dataset)
-  downloaded_data <- retrieve_demographic_dataset(path)
-
-  return(downloaded_data)
-}
-
-#' Retrieve demographic dataset from path
-#'
-#' @param dataset_path path to the dataset on repository
-#' @param sheet string to indicate specific sheet.
-#'
-#' @return consulted dataset.
-#'
-#' @keywords internal
-retrieve_demographic_dataset <- function(dataset_path, sheet) {
+  dataset_path <- retrieve_path(dataset)
   tryCatch(
     {
-      dataset <- retrieve_table(dataset_path, sep = ";")
+      demographic_data <- retrieve_table(dataset_path,
+        sep = ";"
+      )
     },
     error = function(e) {
       stop("`dataset` not found")
     }
   )
-  return(dataset)
+  return(demographic_data)
 }

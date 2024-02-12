@@ -19,7 +19,7 @@ dictionary <- function(dataset) {
 
 #' Download list of available datasets
 #'
-#' @param category Specific group to be consulted ("demographic", "geospatial",
+#' @param module Specific group to be consulted ("demographic", "geospatial",
 #' "climate")
 #'
 #' @return tibble containing listed available datasets
@@ -27,17 +27,17 @@ dictionary <- function(dataset) {
 #' list_datasets("geospatial")
 #'
 #' @export
-list_datasets <- function(category = "all") {
-  checkmate::assert_character(category)
-  checkmate::assert_choice(category, c(
+list_datasets <- function(module = "all") {
+  checkmate::assert_character(module)
+  checkmate::assert_choice(module, c(
     "all", "demographic", "geospatial",
     "climate"
   ))
 
   dataset_path <- retrieve_path("documentation")
   listed <- retrieve_table(dataset_path, ";")
-  if (category != "all") {
-    listed <- listed[listed$category == category, ]
+  if (module != "all") {
+    listed <- listed[listed$category == module, ]
   }
   list_tibble <- tibble::as_tibble(listed)
   return(list_tibble)
