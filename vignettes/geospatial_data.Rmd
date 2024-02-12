@@ -1,8 +1,8 @@
 ---
-title: "Download Geospatial Data"
+title: "Maps and plots with ColOpenData"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Download Geospatial data}
+  %\VignetteIndexEntry{Maps and plots with ColOpenData}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
