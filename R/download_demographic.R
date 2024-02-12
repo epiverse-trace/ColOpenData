@@ -26,11 +26,10 @@ download_demographic <- function(dataset) {
 #' @return consulted dataset.
 #'
 #' @keywords internal
-retrieve_demographic_dataset <- function(dataset_path, sheet) {
+retrieve_demographic_dataset <- function(dataset_path) {
   tryCatch(
     {
       dataset <- retrieve_table(dataset_path, sep = ";")
-      dataset <- dataset[, -c(1, 2)] # Remove index (temporary)
     },
     error = function(e) {
       stop("`dataset` not found")
