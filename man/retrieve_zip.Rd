@@ -4,14 +4,12 @@
 \alias{retrieve_zip}
 \title{Retrieve zip file}
 \usage{
-retrieve_zip(dataset_path, new_dir_path, new_dir)
+retrieve_zip(dataset_path, dataset)
 }
 \arguments{
-\item{dataset_path}{path to the dataset on repository}
+\item{dataset_path}{Path to dataset on repository}
 
-\item{new_dir_path}{path to the created directory}
-
-\item{new_dir}{directory to store data}
+\item{dataset}{Dataset name to download}
 }
 \value{
 dataset

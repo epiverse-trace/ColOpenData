@@ -3,6 +3,6 @@ test_that("Download demographic errors are thrown", {
 })
 
 test_that("Download demographic works", {
-  expect_s3_class(download_demographic("DANE_CNPVV_2018_10D"), "data.frame")
+  expect_s3_class(download_demographic("DANE_CNPVH_2018_3HM"), "data.frame")
   expect_length(download_demographic("DANE_CNPVH_2018_1HD"), 5L)
 })
