@@ -30,7 +30,6 @@ retrieve_demographic_dataset <- function(dataset_path, sheet) {
   tryCatch(
     {
       dataset <- retrieve_table(dataset_path, sep = ";")
-      dataset <- dataset[, -c(1, 2)] # Remove index (temporary)
     },
     error = function(e) {
       stop("`dataset` not found")
