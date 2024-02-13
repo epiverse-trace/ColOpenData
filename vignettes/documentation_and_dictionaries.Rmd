@@ -2,7 +2,7 @@
 title: "Documentation and Dictionaries"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{documentation_and_dictionaries}
+  %\VignetteIndexEntry{Documentation and Dictionaries}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
