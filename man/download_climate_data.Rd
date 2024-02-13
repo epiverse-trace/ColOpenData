@@ -2,7 +2,7 @@
 % Please edit documentation in R/download_climate.R
 \name{download_climate_data}
 \alias{download_climate_data}
-\title{Download climate data from stations}
+\title{Download climate data from geometry}
 \usage{
 download_climate_data(
   stations,
@@ -14,32 +14,33 @@ download_climate_data(
 )
 }
 \arguments{
-\item{stations}{Vector containing the stations' codes.}
+\item{stations}{numeric vector containing the stations' codes}
 
-\item{start_date}{Character with the first date to consult in format
-"YYYY-MM-DD".}
+\item{start_date}{character with the first date to consult in the format
+\code{"YYYY-MM-DD"}}
 
-\item{end_date}{Character with the last date to consult in format
-"YYYY-MM-DD". Last available date is 2023/05/31.}
+\item{end_date}{character with the last date to consult in the format
+\code{"YYYY-MM-DD"} (Last available date is \code{"2023-05-31"})}
 
-\item{frequency}{Character with the aggregation frequency. Can be
-"day", "week","month" or "year".}
+\item{frequency}{character with the aggregation frequency. (\code{"day"},
+\code{"week"}, \code{"month"} or \code{"year"})}
 
-\item{tags}{Character containing tags to consult.}
+\item{tags}{character containing climate tags to consult}
 
-\item{aggregate}{Boolean for data aggregation, if FALSE, returns the data from
-each individual station in ROI.(Default = TRUE).}
+\item{aggregate}{logical for data aggregation, if \code{FALSE}, returns the
+data from each individual station in the area. (Default = \code{TRUE})}
 }
 \value{
-data.frame with the observed data for the given geometry.
+\code{data.frame} with observations from the requested stations
 }
 \description{
-Retrieve climate stations with observed data in a given geometry. This
-data is retrieved from local meteorological stations.
+Download climate data from named stations.This data is
+retrieved from local meteorological stations provided by IDEAM.
 }
 \examples{
-\dontrun{
-climate_stations(stations, "2021-11-14", "2021-11-30", "day", "TSSM_CON")
-}
+stations <- c(26155110, 26155170)
+tssm <- download_climate_data(stations, "2021-11-14", "2021-11-20", 
+"day", "TSSM_CON", TRUE)
+print(tssm)
 
 }

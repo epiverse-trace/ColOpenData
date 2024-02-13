@@ -1,15 +1,18 @@
 #' Download geospatial dataset
+#' 
 #' @description
-#' Download geospatial named dataset from server. This data is merged with a
-#' simplified version of the National Census, associating the census with each
-#' geospatial structure.
+#' This function downloads geospatial datasets from the Geostatistical National 
+#' Framework (MGN) at different levels of aggregation. These datasets include a
+#' summarized version of the National Population and Housing Census (CNPV)
+#' 
+#' @param dataset character with the dataset name
 #'
-#' @param dataset String indicating dataset code.
-#'
-#' @return data.frame downloaded data.
 #' @examples
-#' download_geospatial("DANE_MGNCNPV_2018_DPTO")
+#' dptos <- download_geospatial("DANE_MGNCNPV_2018_DPTO")
+#' print(dptos)
 #'
+#' @return \code{sf} \code{data.frame} object with structures' details and geometries
+#' 
 #' @export
 download_geospatial <- function(dataset) {
   checkmate::assert_character(dataset)

@@ -2,18 +2,18 @@
 % Please edit documentation in R/documentation.R
 \name{dictionary}
 \alias{dictionary}
-\title{Download data dictionary for geospatial dataframes}
+\title{Download data dictionary for geospatial data}
 \usage{
 dictionary(dataset)
 }
 \arguments{
-\item{dataset}{String indicating dataset code.}
+\item{dataset}{character with the dataset name}
 }
 \value{
-tibble containing data dictionary
+\code{tibble} with data dictionary
 }
 \description{
-Download data dictionary for geospatial dataframes
+Download data dictionary for geospatial data
 }
 \examples{
 dictionary("DANE_MGNCNPV_2018_SETU")

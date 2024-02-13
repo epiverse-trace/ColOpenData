@@ -1,8 +1,8 @@
-#' Download data dictionary for geospatial dataframes
+#' Download data dictionary for geospatial data
 #'
-#' @param dataset String indicating dataset code.
+#' @param dataset character with the dataset name
 #'
-#' @return tibble containing data dictionary
+#' @return \code{tibble} with data dictionary
 #' @examples
 #' dictionary("DANE_MGNCNPV_2018_SETU")
 #'
@@ -19,10 +19,10 @@ dictionary <- function(dataset) {
 
 #' Download list of available datasets
 #'
-#' @param module Specific group to be consulted ("demographic", "geospatial",
-#' "climate")
+#' @param module character with module to be consulted (\code{"demographic"}, 
+#' \code{"geospatial"}, \code{"climate"})
 #'
-#' @return tibble containing listed available datasets
+#' @return \code{tibble} with the available datasets
 #' @examples
 #' list_datasets("geospatial")
 #'

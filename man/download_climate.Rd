@@ -2,38 +2,38 @@
 % Please edit documentation in R/download_climate.R
 \name{download_climate}
 \alias{download_climate}
-\title{Retrieve climate data by named geometry (municipality or department)}
+\title{Download climate from named geometry (municipality or department)}
 \usage{
 download_climate(code, start_date, end_date, frequency, tags, aggregate = TRUE)
 }
 \arguments{
-\item{code}{Character with the DIVIPOLA code for the area.}
+\item{code}{character with the DIVIPOLA code for the area}
 
-\item{start_date}{Character with the first date to consult in format
-"YYYY-MM-DD".}
+\item{start_date}{character with the first date to consult in the format
+\code{"YYYY-MM-DD"}}
 
-\item{end_date}{Character with the last date to consult in format
-"YYYY-MM-DD". Last available date is 2023-05-31.}
+\item{end_date}{character with the last date to consult in the format
+\code{"YYYY-MM-DD"} (Last available date is \code{"2023-05-31"})}
 
-\item{frequency}{Character with the aggregation frequency. Can be
-"day", "week","month" or "year".}
+\item{frequency}{character with the aggregation frequency. (\code{"day"},
+\code{"week"}, \code{"month"} or \code{"year"})}
 
-\item{tags}{Character containing tags to consult.}
+\item{tags}{character containing climate tags to consult}
 
-\item{aggregate}{Boolean for data aggregation, if FALSE, returns the data from
-each individual station in the municipality.(Default = TRUE).}
+\item{aggregate}{logical for data aggregation, if \code{FALSE}, returns the
+data from each individual station in the area. (Default = \code{TRUE})}
 }
 \value{
-data.frame with the observed data for the given municipality.
+data.frame with observations from the stations in the area
 }
 \description{
-Retrieve climate stations with observed data in a named spatial structure
-(municipality or department). This data is retrieved from local
-meteorological stations.
+Download climate data from stations contained in a municipality or
+department. This data is retrieved from local meteorological stations
+provided by IDEAM
 }
 \examples{
-\dontrun{
-download_climate_mpio("11001", "2021-11-14", "2021-11-30", "day", "TSSM_CON")
-}
+tssm <- download_climate("17001", "2021-11-14", "2021-11-20",
+"day", "TSSM_CON")
+print(tssm)
 
 }

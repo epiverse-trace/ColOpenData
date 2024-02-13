@@ -7,17 +7,18 @@
 download_geospatial(dataset)
 }
 \arguments{
-\item{dataset}{String indicating dataset code.}
+\item{dataset}{character with the dataset name}
 }
 \value{
-data.frame downloaded data.
+\code{sf} \code{data.frame} object with structures' details and geometries
 }
 \description{
-Download geospatial named dataset from server. This data is merged with a
-simplified version of the National Census, associating the census with each
-geospatial structure.
+This function downloads geospatial datasets from the Geostatistical National
+Framework (MGN) at different levels of aggregation. These datasets include a
+summarized version of the National Population and Housing Census (CNPV)
 }
 \examples{
-download_geospatial("DANE_MGNCNPV_2018_DPTO")
+dptos <- download_geospatial("DANE_MGNCNPV_2018_DPTO")
+print(dptos)
 
 }

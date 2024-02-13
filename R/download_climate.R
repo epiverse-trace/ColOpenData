@@ -1,25 +1,28 @@
-#' Retrieve climate data by named geometry (municipality or department)
+#' Download climate from named geometry (municipality or department)
+#' 
 #' @description
-#' Retrieve climate stations with observed data in a named spatial structure
-#' (municipality or department). This data is retrieved from local
-#' meteorological stations.
+#' Download climate data from stations contained in a municipality or
+#' department. This data is retrieved from local meteorological stations
+#' provided by IDEAM
 #'
-#' @param code Character with the DIVIPOLA code for the area.
-#' @param start_date Character with the first date to consult in format
-#' "YYYY-MM-DD".
-#' @param end_date Character with the last date to consult in format
-#' "YYYY-MM-DD". Last available date is 2023-05-31.
-#' @param frequency Character with the aggregation frequency. Can be
-#' "day", "week","month" or "year".
-#' @param tags Character containing tags to consult.
-#' @param aggregate Boolean for data aggregation, if FALSE, returns the data from
-#' each individual station in the municipality.(Default = TRUE).
+#' @param code character with the DIVIPOLA code for the area
+#' @param start_date character with the first date to consult in the format
+#' \code{"YYYY-MM-DD"}
+#' @param end_date character with the last date to consult in the format
+#' \code{"YYYY-MM-DD"} (Last available date is \code{"2023-05-31"})
+#' @param frequency character with the aggregation frequency. (\code{"day"}, 
+#' \code{"week"}, \code{"month"} or \code{"year"})
+#' @param tags character containing climate tags to consult
+#' @param aggregate logical for data aggregation, if \code{FALSE}, returns the 
+#' data from each individual station in the area. (Default = \code{TRUE})
+#' 
 #' @examples
-#' \dontrun{
-#' download_climate_mpio("11001", "2021-11-14", "2021-11-30", "day", "TSSM_CON")
-#' }
+#' tssm <- download_climate("17001", "2021-11-14", "2021-11-20",
+#' "day", "TSSM_CON")
+#' print(tssm)
 #'
-#' @return data.frame with the observed data for the given municipality.
+#' @return data.frame with observations from the stations in the area
+#' 
 #' @export
 download_climate <- function(code, start_date, end_date, frequency, tags,
                              aggregate = TRUE) {
@@ -48,29 +51,36 @@ download_climate <- function(code, start_date, end_date, frequency, tags,
   return(climate)
 }
 
-#' Retrieve climate data from stations in geometry
+#' Download climate data from geometry
+#' 
 #' @description
-#' Retrieve climate stations with observed data in a given geometry. This
-#' data is retrieved from local meteorological stations.
+#' Download climate data from stations contained in a geometry. This data is 
+#' retrieved from local meteorological stations provided by IDEAM.
 #'
-#' @param geometry sf object containing the geometry for a given ROI. This
-#' geometry can be either a POLYGON or MULTIPOLYGON.
-#' @param start_date Character with the first date to consult in format
-#' "YYYY-MM-DD".
-#' @param end_date Character with the last date to consult in format
-#' "YYYY-MM-DD". Last available date is 2023/05/31.
-#' @param frequency Character with the aggregation frequency. Can be
-#' "day", "week","month" or "year".
-#' @param tags Character containing tags to consult.
-#' @param aggregate Boolean for data aggregation, if FALSE, returns the data from
-#' each individual station in ROI.(Default = TRUE).
+#' @param geometry \code{sf} geometry containing the geometry for a given ROI. 
+#' This geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}
+#' @param start_date character with the first date to consult in the format
+#' \code{"YYYY-MM-DD"}
+#' @param end_date character with the last date to consult in the format
+#' \code{"YYYY-MM-DD"} (Last available date is \code{"2023-05-31"})
+#' @param frequency character with the aggregation frequency. (\code{"day"}, 
+#' \code{"week"}, \code{"month"} or \code{"year"})
+#' @param tags character containing climate tags to consult
+#' @param aggregate logical for data aggregation, if \code{FALSE}, returns the 
+#' data from each individual station in the area. (Default = \code{TRUE})
 #'
 #' @examples
-#' \dontrun{
-#' download_climate_geom(geometry, "2021-11-14", "2021-11-30", "day", "TSSM_CON")
-#' }
+#' lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)
+#' lon <- c(-75.678072, -75.327859, -75.327859, -75.678072, -75.678072)
+#' polygon <- sf::st_polygon(x = list(cbind(lon, lat)))
+#' geometry <- sf::st_sfc(polygon)
+#' roi <- sf::st_as_sf(geometry)
+#' tssm <- download_climate_geom(roi, "2021-11-14", "2021-11-20",
+#' "day", "TSSM_CON")
+#' print(tssm)
 #'
-#' @return data.frame with the observed data for the given geometry.
+#' @return \code{data.frame} with observations from the stations in the area
+#' 
 #' @export
 download_climate_geom <- function(geometry, start_date, end_date, frequency,
                                   tags, aggregate = TRUE) {
@@ -89,28 +99,30 @@ download_climate_geom <- function(geometry, start_date, end_date, frequency,
   return(climate_geom)
 }
 
-#' Download climate data from stations
+#' Download climate data from geometry
+#' 
 #' @description
-#' Retrieve climate stations with observed data in a given geometry. This
-#' data is retrieved from local meteorological stations.
-#'
-#' @param stations Vector containing the stations' codes.
-#' @param start_date Character with the first date to consult in format
-#' "YYYY-MM-DD".
-#' @param end_date Character with the last date to consult in format
-#' "YYYY-MM-DD". Last available date is 2023/05/31.
-#' @param frequency Character with the aggregation frequency. Can be
-#' "day", "week","month" or "year".
-#' @param tags Character containing tags to consult.
-#' @param aggregate Boolean for data aggregation, if FALSE, returns the data from
-#' each individual station in ROI.(Default = TRUE).
+#' Download climate data from named stations.This data is 
+#' retrieved from local meteorological stations provided by IDEAM.
+#' 
+#' @param stations numeric vector containing the stations' codes
+#' @param start_date character with the first date to consult in the format
+#' \code{"YYYY-MM-DD"}
+#' @param end_date character with the last date to consult in the format
+#' \code{"YYYY-MM-DD"} (Last available date is \code{"2023-05-31"})
+#' @param frequency character with the aggregation frequency. (\code{"day"}, 
+#' \code{"week"}, \code{"month"} or \code{"year"})
+#' @param tags character containing climate tags to consult
+#' @param aggregate logical for data aggregation, if \code{FALSE}, returns the 
+#' data from each individual station in the area. (Default = \code{TRUE})
 #'
 #' @examples
-#' \dontrun{
-#' climate_stations(stations, "2021-11-14", "2021-11-30", "day", "TSSM_CON")
-#' }
+#' stations <- c(26155110, 26155170)
+#' tssm <- download_climate_data(stations, "2021-11-14", "2021-11-20", 
+#' "day", "TSSM_CON", TRUE)
+#' print(tssm)
 #'
-#' @return data.frame with the observed data for the given geometry.
+#' @return \code{data.frame} with observations from the requested stations
 #' @export
 download_climate_data <- function(stations, start_date, end_date,
                                   frequency, tags,
@@ -171,27 +183,29 @@ download_climate_data <- function(stations, start_date, end_date,
   return(climate_data)
 }
 
-#' Retrieve data from stations that took measurements in the given dates
+
+#' Retrieve data from named stations for a specific tag
+#' 
 #' @description
-#' Retrieves, from a list of stations, the ones that contain observations for
-#' the given tag in specified dates. Might include stations that are no longer
-#' working.
+#' Retrieve climate data from a list of stations under the same tag.This data is 
+#' retrieved from local meteorological stations provided by IDEAM
 #'
-#' @param stations Vector containing the stations' codes.
-#' @param start_date Character with the first date to consult in format
-#' "YYYY-MM-DD".
-#' @param end_date Character with the last date to consult in format
-#' "YYYY-MM-DD". Last available date is 2023/05/31.
-#' @param frequency Character with the aggregation frequency. Can be
-#' "day", "week","month" or "year".
-#' @param tag Character containing tag to consult.
-#' @param aggregate Boolean for data aggregation, if FALSE, returns the data from
-#' each individual station in ROI.(Default = TRUE).
+#' @param stations numeric vector containing the stations' codes
+#' @param start_date character with the first date to consult in the format
+#' \code{"YYYY-MM-DD"}
+#' @param end_date character with the last date to consult in the format
+#' \code{"YYYY-MM-DD"} (Last available date is \code{"2023-05-31"})
+#' @param frequency character with the aggregation frequency. (\code{"day"}, 
+#' \code{"week"}, \code{"month"} or \code{"year"})
+#' @param tag unique character containing climate tags to consult
+#' @param aggregate logical for data aggregation, if \code{FALSE}, returns the 
+#' data from each individual station in the area. (Default = \code{TRUE})
 #'
 #' @importFrom rlang .data
 #' @importFrom magrittr %>%
 #'
-#' @return data.frame containing the observed data for the given stations.
+#' @return \code{data.frame} with observations from the requested stations
+#' 
 #' @keywords internal
 retrieve_stations_data <- function(stations, start_date, end_date,
                                    frequency, tag,
@@ -264,18 +278,24 @@ retrieve_stations_data <- function(stations, start_date, end_date,
 }
 
 #' Stations in region of interest
+#' 
 #' @description
-#' Retrieves the stations contained inside a given geometry
+#' Download and filter climate stations inside a region of interest (ROI)
 #'
-#' @param geometry sf object containing the geometry for a given ROI. This
-#' geometry can be either a POLYGON or MULTIPOLYGON.
+#' @param geometry \code{sf} geometry containing the geometry for a given ROI. 
+#' This geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}
 #'
 #' @examples
-#' \dontrun{
-#' stations_in_roi(geometry)
-#' }
+#' lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)
+#' lon <- c(-75.678072, -75.327859, -75.327859, -75.678072, -75.678072)
+#' polygon <- sf::st_polygon(x = list(cbind(lon, lat)))
+#' geometry <- sf::st_sfc(polygon)
+#' roi <- sf::st_as_sf(geometry)
+#' stations <- stations_in_roi(roi)
+#' print(stations)
 #'
-#' @return data.frame with the stations inside the consulted geometry.
+#' @return \code{data.frame} with the stations inside the consulted geometry
+#' 
 #' @export
 stations_in_roi <- function(geometry) {
   checkmate::assert_class(geometry, "sf")
@@ -302,41 +322,40 @@ stations_in_roi <- function(geometry) {
   return(stations_in_roi)
 }
 
-#' Aggregate stations
-#' @description
-#' Aggregate stations observations.
+#' Aggregate stations' data
+#' 
+#' @param stations_data data.frame containing stations' data to aggregate
+#' @param tag character with the consulted tag
 #'
-#' @param stations_df data.frame containing stations to aggregate
-#' @param tag string with the tag consulted.
-#'
-#' @return a data.frame with only two columns containing the dates and the
-#' aggregated observations.
+#' @return \code{data.frame} with only two columns containing the dates and the
+#' aggregated observations
+#' 
 #' @keywords internal
-aggregate <- function(stations_df, tag) {
-  if (ncol(stations_df) == 2) {
-    aggregated <- stations_df
+aggregate <- function(stations_data, tag) {
+  if (ncol(stations_data) == 2) {
+    aggregated <- stations_data
     names(aggregated) <- c("date", tag)
   } else {
     if (tag %in% c("PTPM_CON", "PTPG_CON")) {
-      aggregated <- as.data.frame(stations_df$date)
-      aggregated[tag] <- round(rowSums(stations_df[, -1], na.rm = TRUE), 2)
+      aggregated <- as.data.frame(stations_data$date)
+      aggregated[tag] <- round(rowSums(stations_data[, -1], na.rm = TRUE), 2)
       names(aggregated) <- c("date", tag)
     } else {
-      aggregated <- as.data.frame(stations_df$date)
-      aggregated[tag] <- round(rowMeans(stations_df[, -1], na.rm = TRUE), 2)
+      aggregated <- as.data.frame(stations_data$date)
+      aggregated[tag] <- round(rowMeans(stations_data[, -1], na.rm = TRUE), 2)
       names(aggregated) <- c("date", tag)
     }
   }
   return(aggregated)
 }
 
-#' Summary and group of climate data according to time frequency
+#' Summary and group climate data according to time frequency
 #'
-#' @param .data data.frame containing at least one observed column
-#' @param tag string with the tag consulted
+#' @param .data \code{data.frame} containing at least one observed column
+#' @param tag unique character with the tag consulted
 #' @importFrom rlang .data
 #'
-#' @return a data.frame with aggregated observations
+#' @return \code{data.frame} with grouped observations
 #'
 #' @keywords internal
 summarise <- function(.data, tag, frequency) {

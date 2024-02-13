@@ -2,19 +2,19 @@
 % Please edit documentation in R/download_climate.R
 \name{summarise}
 \alias{summarise}
-\title{Summary and group of climate data according to time frequency}
+\title{Summary and group climate data according to time frequency}
 \usage{
 summarise(.data, tag, frequency)
 }
 \arguments{
-\item{.data}{data.frame containing at least one observed column}
+\item{.data}{\code{data.frame} containing at least one observed column}
 
-\item{tag}{string with the tag consulted}
+\item{tag}{unique character with the tag consulted}
 }
 \value{
-a data.frame with aggregated observations
+\code{data.frame} with grouped observations
 }
 \description{
-Summary and group of climate data according to time frequency
+Summary and group climate data according to time frequency
 }
 \keyword{internal}

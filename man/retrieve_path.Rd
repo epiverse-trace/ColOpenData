@@ -7,12 +7,12 @@
 retrieve_path(dataset)
 }
 \arguments{
-\item{dataset}{name of the consulted dataset}
+\item{dataset}{character with the dataset name}
 }
 \value{
-path to retrieve the dataset from server
+character with path to retrieve the dataset from server
 }
 \description{
-Retrieve included datasets path, to download them later.
+Retrieve path of named dataset
 }
 \keyword{internal}

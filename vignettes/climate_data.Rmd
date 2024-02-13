@@ -119,13 +119,15 @@ print(cw_stations)
 
 From the original 129 stations, 40 were working for some or the whole period of interest and collected information for Dry-bulb temperature. With this information, we can access the Dry-bulb temperature from 2013 to 2016. To do so, we can use the function `download_climate_data`. This function has the following parameters:
 
-- `stations` Vector containing the stations' codes.
-- `start_date` Character with the first date to consult in format "YYYY-MM-DD".
-- `end_date` Character with the last date to consult in format "YYYY-MM-DD". Last available date is 2023/05/31.
-- `frequency` Character with the aggregation frequency. Can be
-"day", "week","month" or "year".
-- `tags` Character containing tags to consult.
-- `aggregate` Boolean for data aggregation, if FALSE, returns the data from each individual station in ROI.(Default = TRUE).
+- `stations` numeric vector containing the stations' codes
+- `start_date`: character with the first date to consult in the format `"YYYY-MM-DD"`
+- `end_date`: character with the last date to consult in the format `"YYYY-MM_DD"`. 
+(Last available date is `"2023-05-31"`
+- `frequency`: character with the aggregation frequency. (`"day"`, `"week"`, 
+`"month"` or `"year"`)
+- `tags`: character containing climate tags to consult
+- `aggregate`: logical for data aggregation, if `FALSE`, returns the data from 
+each individual station in the area. (Default = `TRUE`)
 
 Stations' codes are obtained from the column `codigo` in the stations data.
 
@@ -159,14 +161,15 @@ To retrieve climate data for any ROI in the country, without manually manipulati
 function `download_climate_geom`. The function has the following
 parameters:
 
-- `geometry`: `sf` object containing the geometry for a given ROI. This geometry
-can be either a POLYGON or MULTIPOLYGON.
-- `start_date`: Character with the first date to consult in format "YYYY-MM-DD"
-- `end_date`: Character with the last date to consult in format "YYYY-MM-DD"
-- `frequency`: Character with the aggregation frequency. Can be "day", "week",
-"month" or"year"
-- `tags`: Character containing tags to consult.
-- `aggregate`: Boolean for data aggregation, if FALSE, returns the data from each individual station in ROI.(Default = TRUE)
+- `geometry`: `sf` geometry containing the geometry for a given ROI. This geometry can be either a `POLYGON` or `MULTIPOLYGON`
+- `start_date`: character with the first date to consult in the format `"YYYY-MM-DD"`
+- `end_date`: character with the last date to consult in the format `"YYYY-MM_DD"`. 
+(Last available date is `"2023-05-31"`
+- `frequency`: character with the aggregation frequency. (`"day"`, `"week"`, 
+`"month"` or `"year"`)
+- `tags`: character containing climate tags to consult
+- `aggregate`: logical for data aggregation, if `FALSE`, returns the data from 
+each individual station in the area. (Default = `TRUE`)
 
 We will use the same ROI created for the previous example.
 
@@ -207,13 +210,15 @@ To replicate our previous example we only need the code for Manizales, which is 
 The function `download_climate` will require almost the same arguments 
 than `download_climate_geom`, but replace the `sf` object for a character containing the DIVIPOLA code:
 
-- `code`: Character with the DIVIPOLA code for the area.
-- `start_date`: Character with the first date to consult in format "YYYY-MM_DD".
-- `end_date`: Character with the last date to consult in format "YYYY-MM_DD".
-- `frequency`: Character with the aggregation frequency. Can be "day", "week",
-"month" or"year".
-- `tags`: Character containing tags to consult.
-- `aggregate`: Boolean for data aggregation, if FALSE, returns the data from each individual station in the municipality.(Default = TRUE).
+- `code`: character with the DIVIPOLA code for the area
+- `start_date`: character with the first date to consult in the format `"YYYY-MM-DD"`
+- `end_date`: character with the last date to consult in the format `"YYYY-MM_DD"`. 
+(Last available date is `"2023-05-31"`
+- `frequency`: character with the aggregation frequency. (`"day"`, `"week"`, 
+`"month"` or `"year"`)
+- `tags`: character containing climate tags to consult
+- `aggregate`: logical for data aggregation, if `FALSE`, returns the data from 
+each individual station in the area. (Default = `TRUE`)
 
 ```{r download climate mpio, results = "hide", warning = FALSE, message = FALSE}
 db_temperature_mpio <- download_climate(

@@ -1,10 +1,8 @@
 #' Retrieve path of named dataset
 #'
-#' @description
-#' Retrieve included datasets path, to download them later.
-#' @param dataset name of the consulted dataset
+#' @param dataset character with the dataset name
 #'
-#' @return path to retrieve the dataset from server
+#' @return character with path to retrieve the dataset from server
 #'
 #' @keywords internal
 retrieve_path <- function(dataset) {
@@ -30,25 +28,25 @@ retrieve_path <- function(dataset) {
 
 #' Retrieve zip file
 #'
-#' @param dataset_path Path to dataset on repository
-#' @param dataset Dataset name to download
+#' @param dataset_path character with the path to dataset on repository
+#' @param dataset_name character with the dataset name
 #'
-#' @return dataset
+#' @return \code{sf} data.frame object with structures' details and geometries
 #' @keywords internal
-retrieve_zip <- function(dataset_path, dataset) {
+retrieve_zip <- function(dataset_path, dataset_name) {
   ext_path <- system.file("extdata",
     package = "ColOpenData",
     mustWork = TRUE
   )
   # nolint start: nonportable_path_linter
-  directory <- file.path(ext_path, dataset)
+  directory <- file.path(ext_path, dataset_name)
   if (file.exists(directory)) {
     unlink(directory,
       recursive = TRUE
     )
   }
   dir.create(directory)
-  temp_file <- file.path(directory, dataset)
+  temp_file <- file.path(directory, dataset_name)
   request <- httr2::request(base_url = dataset_path)
   response <- httr2::req_perform(request)
   content <- httr2::resp_body_raw(response)
@@ -73,7 +71,7 @@ retrieve_zip <- function(dataset_path, dataset) {
 
 #' Retrieve table (csv and data) file
 #'
-#' @param dataset_path path to the dataset on repository
+#' @param dataset_path character path to the dataset on repository
 #' @param sep separator for table data
 #'
 #' @return dataset

@@ -2,7 +2,7 @@
 % Please edit documentation in R/download_climate.R
 \name{retrieve_stations_data}
 \alias{retrieve_stations_data}
-\title{Retrieve data from stations that took measurements in the given dates}
+\title{Retrieve data from named stations for a specific tag}
 \usage{
 retrieve_stations_data(
   stations,
@@ -14,28 +14,27 @@ retrieve_stations_data(
 )
 }
 \arguments{
-\item{stations}{Vector containing the stations' codes.}
+\item{stations}{numeric vector containing the stations' codes}
 
-\item{start_date}{Character with the first date to consult in format
-"YYYY-MM-DD".}
+\item{start_date}{character with the first date to consult in the format
+\code{"YYYY-MM-DD"}}
 
-\item{end_date}{Character with the last date to consult in format
-"YYYY-MM-DD". Last available date is 2023/05/31.}
+\item{end_date}{character with the last date to consult in the format
+\code{"YYYY-MM-DD"} (Last available date is \code{"2023-05-31"})}
 
-\item{frequency}{Character with the aggregation frequency. Can be
-"day", "week","month" or "year".}
+\item{frequency}{character with the aggregation frequency. (\code{"day"},
+\code{"week"}, \code{"month"} or \code{"year"})}
 
-\item{tag}{Character containing tag to consult.}
+\item{tag}{unique character containing climate tags to consult}
 
-\item{aggregate}{Boolean for data aggregation, if FALSE, returns the data from
-each individual station in ROI.(Default = TRUE).}
+\item{aggregate}{logical for data aggregation, if \code{FALSE}, returns the
+data from each individual station in the area. (Default = \code{TRUE})}
 }
 \value{
-data.frame containing the observed data for the given stations.
+\code{data.frame} with observations from the requested stations
 }
 \description{
-Retrieves, from a list of stations, the ones that contain observations for
-the given tag in specified dates. Might include stations that are no longer
-working.
+Retrieve climate data from a list of stations under the same tag.This data is
+retrieved from local meteorological stations provided by IDEAM
 }
 \keyword{internal}

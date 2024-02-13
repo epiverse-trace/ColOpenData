@@ -7,11 +7,11 @@
 list_datasets(module = "all")
 }
 \arguments{
-\item{module}{Specific group to be consulted ("demographic", "geospatial",
-"climate")}
+\item{module}{character with module to be consulted (\code{"demographic"},
+\code{"geospatial"}, \code{"climate"})}
 }
 \value{
-tibble containing listed available datasets
+\code{tibble} with the available datasets
 }
 \description{
 Download list of available datasets

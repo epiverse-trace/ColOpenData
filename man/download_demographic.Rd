@@ -7,16 +7,17 @@
 download_demographic(dataset)
 }
 \arguments{
-\item{dataset}{String indicating dataset code.}
+\item{dataset}{character with the dataset name}
 }
 \value{
-data.frame downloaded.
+\code{data.frame} with downloaded data.
 }
 \description{
-Download demographic dataset. This data is obtained from the national census
-of 2018.
+This function downloads demographic datasets from the National Population
+and Housing Census (CNPV)
 }
 \examples{
-download_demographic("DANE_CNPVH_2018_1HD")
+dem <- download_demographic("DANE_CNPVH_2018_1HD")
+print(dem)
 
 }
