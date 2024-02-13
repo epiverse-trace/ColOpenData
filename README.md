@@ -17,17 +17,14 @@ coverage](https://codecov.io/gh/epiverse-trace/ColOpenData/branch/main/graph/bad
 [![lifecycle-concept](https://raw.githubusercontent.com/reconverse/reconverse.github.io/master/images/badge-concept.svg)](https://www.reconverse.org/lifecycle.html#concept)
 <!-- badges: end -->
 
-ColOpenData is a package that acquires, standardizes, and wrangles Colombian
-socioeconomic, climate and land cover data. It solves the problem of
-Colombian data being issued in different web pages and formats by using functions that
-allow the user to select the desired database and download it without having to do the
-exhausting acquisition process. Also, it allows these datasets to be merged so multiple
-operations, such as calculating statistics, can be made, taking into account information
-from different datasets.
+**ColOpenData** is a package that acquires, standardizes, and wrangles
+Colombian socioeconomic, geospatial and climate data. It solves the
+problem of Colombian data being issued in different web pages and
+formats by using functions that allow the user to select the desired
+database and download it without having to do the exhausting acquisition
+process.
 
-<!-- This sentence is optional and can be removed -->
-
-ColOpenData is developed at the [Universidad de Los
+ColOpenData is developed at [Universidad de Los
 Andes](https://uniandes.edu.co/) as part of the [Epiverse-TRACE
 program](https://data.org/initiatives/epiverse/).
 
@@ -40,6 +37,21 @@ You can install the development version of ColOpenData from
 # install.packages("pak")
 pak::pak("epiverse-trace/ColOpenData")
 ```
+## Quick Overview
+
+**ColOpenData** contains data from two public data sources: The National 
+Administrative Department of Statistics 
+[(DANE)](https://www.dane.gov.co/index.php/en/) and the Institute of Hydrology,
+Meteorology and Environmental Studies [(IDEAM)]( http://www.ideam.gov.co/). 
+The available data is divided in three categories: Demographic and 
+Socioeconomic, Geospatial and Climate.
+
+Demographic and Socioeconomic data is taken from the National Population and 
+Housing Census of 2018, the most recent census available. On the other 
+hand, geospatial data is retrieved from the National Geostatistical Framework,
+which includes maps and a summarized version of the 2018's census. Finally,
+the climate data is obtained from the climate stations in the country 
+until May 31st 2023, the most recent available date.
 
 ### Lifecycle
 
@@ -51,11 +63,11 @@ package is not ready for use outside of the development team.
 ### Contributions
 
 Contributions are welcome via [pull
-requests](https://github.com/epiverse-trace/ColOpenData/pulls).
+requests](https://github.com/ColOpenData/pulls).
 
 ### Code of Conduct
 
-Please note that the ColOpenData project is released with a
-[Contributor Code of
+Please note that the ColOpenData project is released with a [Contributor
+Code of
 Conduct](https://github.com/epiverse-trace/.github/blob/main/CODE_OF_CONDUCT.md).
 By contributing to this project, you agree to abide by its terms.

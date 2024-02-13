@@ -3,8 +3,8 @@ Title: ColOpenData
 Version: 0.0.1
 Authors@R: c(
     person(given = "Maria Camila", family = "Tavera Cifuentes", , email = "mc.tavera@uniandes.edu.co", role = c("aut", "cre")),
-    person(given = "Juan D.", family = "Umana", , email = "jd.umana10@uniandes.edu.co", role = c("aut")),
     person(given = "Julian", family = "Otero", , email = "jd.otero10@uniandes.org", role = c("aut")),
+    person(given = "Juan D.", family = "Umana", , email = "jd.umana10@uniandes.edu.co", role = c("aut")),
     person(given = "Juan F.", family = "Montenegro", , email = "jf.montenegro@uniandes.edu.co", role = c("aut")),
     person(given = "Juan Manuel", family = "Cordovez", , email = "jucordov@uniandes.edu.co", role = c("ctb")),
     person(given = "Catalina", family = "Gonzalez Uribe", , email = "cgonzalez@uniandes.edu.co", role = c("ctb")),
@@ -20,8 +20,13 @@ Description: ColOpenData is a package that acquires, standardizes, and wrangles 
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Suggests: 
+    ggplot2,
+    leaflet,
+    knitr,
+    RColorBrewer,
+    rmarkdown,
     spelling,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
@@ -30,8 +35,17 @@ Config/Needs/website:
 Language: en-US
 Imports: 
     checkmate,
-    dplyr,
+    config,
+    httr2,
     magrittr,
-    readr,
     rlang,
-    sf
+    sf,
+    utils,
+    lubridate,
+    readr,
+    dplyr,
+    tibble
+VignetteBuilder: knitr
+Depends: 
+    R (>= 3.2.0)
+LazyData: true

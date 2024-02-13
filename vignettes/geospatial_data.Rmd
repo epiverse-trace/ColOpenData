@@ -1,0 +1,151 @@
+---
+title: "Maps and plots with ColOpenData"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Maps and plots with ColOpenData}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+**ColOpenData** can be used to access open Colombian geospatial data. This 
+data is retrieved from the Geostatistical National Framework (MGN), published by
+the Administrative National Department of Statistics
+[(DANE)](https://www.dane.gov.co/index.php/en/). The MGN contains the political-administrative division and is used to reference census statistical information. Further information can be obtained directly from DANE [here](https://www.dane.gov.co/index.php/actualidad-dane/5454-el-dane-actualizo-el-marco-geoestadistico-nacional-a-2018).
+
+This package contains the 2018's version of the MGN, which also included a
+summarized version of the National Population and Housing Census (CNPV) in
+different aggregation levels. Each level is stored in a different dataset, 
+which can be retrieved using the `download_geospatial` function.
+
+`download_geospatial` only requires one argument, which is the name of the
+dataset to consult. To better understand dataset names and metadata go to [Documentation and Dictionaries](https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html).
+
+Details for geospatial datasets relate to the level of aggregation as follows:
+
+```{r available datasets, echo = FALSE}
+code <- c(
+  "DANE_MGNCNPV_2018_DPTO", "DANE_MGNCNPV_2018_MPIO",
+  "DANE_MGNCNPV_2018_MPIOCL", "DANE_MGNCNPV_2018_MZN",
+  "DANE_MGNCNPV_2018_SECR", "DANE_MGNCNPV_2018_SECU",
+  "DANE_MGNCNPV_2018_SETR", "DANE_MGNCNPV_2018_SETU",
+  "DANE_MGNCNPV_2018_ZU"
+)
+level <- c(
+  "Department", "Municipality",
+  "Municipality including Class", "Block", "Rural Sector", "Urban Sector",
+  "Rural Section", "Urban Section", "Urban Zone"
+)
+
+mgncnpv <- data.frame(
+  Code = code, Level = level,
+  stringsAsFactors = FALSE
+)
+knitr::kable(mgncnpv)
+```
+
+In this vignette, we will download the geospatial data and provide some 
+examples on how to use the available information and visualize it using ggplot2
+and leaflet.
+
+We will start by importing the needed libraries
+```{r library imports, results = "hide", warning = FALSE, message = FALSE}
+library(ColOpenData)
+library(dplyr)
+library(sf)
+library(ggplot2)
+library(leaflet)
+library(RColorBrewer)
+```
+
+## Downloading geospatial data
+
+For this example we will be using geospatial data at the level of Urban Section for the city of Tunja, Colombia. We will be using the demographic data included in the dataset to generate visualizations using **ggplot2** and **leaflet**.
+
+First, we download the data using the function `download_geospatial`. After downloading, we have to filter by the municipality code using the DIVIPOLA code for Tunja, which is "15001". For further information on DIVIPOLA please consult the dataset [here](https://www.datos.gov.co/widgets/gdxc-w37w).
+
+```{r download data}
+# Download complete dataset
+secu <- download_geospatial("DANE_MGNCNPV_2018_SECU")
+```
+To know which column contains the municipalities code to filter for Tunja, we will need the dataset dictionary. To download the dictionary we can use the `dictionary` function. This function uses the dataset name to download the associated information. For further information please refer to the documentation on dictionaries previously mentioned.
+
+```{r dictionary for urban sections}
+# Urban section dictionary
+dict <- dictionary("DANE_MGNCNPV_2018_SECU")
+head(dict)
+```
+
+After exploring the dictionary, we can identify the column that contains the individual municipality codes, which is *MPIO_CDPMP*. This column contains the concatenated code for department and municipality, which is an unique identifier.
+
+We will be calculation the percentage of houses with internet connection at each urban section. We will need to know the number of houses with internet connection and the total of houses in each section. From the dictionary we get that the number of houses with internet connection is *STP19_INT1* and the total of houses is *STVIVIENDA*. We will calculate the percentage as follows:
+
+```{r filter and internet coverage}
+# Filter for Tunja
+tunja <- secu %>% filter(MPIO_CDPMP == "15001")
+
+# Calculate internet coverage percentage
+tunja <- tunja %>% mutate(INT_PERC = round(STP19_INT1 / STVIVIENDA, 2))
+```
+
+## Static plots (ggplot2)
+
+[**ggplot2**](https://ggplot2.tidyverse.org/) can be used to generate static plots of spatial data by using the geometry `geom_sf`. 
+
+```{r ggplot2 basic}
+ggplot(data = tunja) +
+  geom_sf(mapping = aes(fill = INT_PERC), color = NA)
+```
+
+Color palettes and themes can be defined for each plot using the aesthetic and scales, which can be consulted in the **ggplot2** documentation.
+
+```{r ggplot2}
+# ggplot2
+ggplot(data = tunja) +
+  geom_sf(mapping = aes(fill = INT_PERC), color = NA) +
+  theme_minimal() +
+  theme(
+    panel.grid = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank()
+  ) +
+  scale_fill_gradient("Percentage", low = "#10bed2", high = "#deff00") +
+  ggtitle(
+    label = "Internet coverage",
+    subtitle = "Tunja, Colombia"
+  )
+```
+
+## Dynamic plots (leaflet)
+
+For dynamic plots we can use [**leaflet**](https://rstudio.github.io/leaflet/), which is an open-source library for interactive maps. To create the same plot we first will create a color palette.
+
+```{r define color palette}
+# Color Palette
+colfunc <- colorRampPalette(c("#10bed2", "#deff00"))
+pal <- colfunc(100)
+```
+
+With the previous color palette we can generate the interactive plot. The package also includes open source maps for the base map like [OpenStreetMap](https://www.openstreetmap.org/#map=5/4.632/-74.299) and [CartoDB](https://carto.com/basemaps). For further details on **leaflet**, please refer to the package documentation.
+
+```{r leaflet}
+# Leaflet
+leaflet(tunja) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolygons(
+    stroke = TRUE,
+    weight = 0,
+    color = NA,
+    fillColor = ~pal,
+    fillOpacity = 1,
+    popup = paste0(tunja$INT_PERC)
+  )
+```
+
+
