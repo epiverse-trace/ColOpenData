@@ -2,7 +2,7 @@
 title: "Documentation and Dictionaries"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{documentation_and_dictionaries}
+  %\VignetteIndexEntry{Documentation and Dictionaries}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,19 +14,19 @@ knitr::opts_chunk$set(
 )
 ```
 ## 1. List data
-**ColOpenData** has three main dataset categories: demographic, geospatial and 
+**ColOpenData** has three main  modules: demographic, geospatial and 
 climate. Available datasets have different details and aggregation on each
-category; however, they can be consulted using a common framework:
+module; however, they can be consulted using a common framework:
 
 ::: {.alert .alert-info}
   SOURCE_DATASET_YEAR_DETAILS
 :::
 
 Currently, **ColOpenData** only includes data from official sources [(DANE)](https://www.dane.gov.co/index.php/en/) and [(IDEAM)]( http://www.ideam.gov.co/). Name, year and details are different for each 
-category, and provide an unique name for each dataset.
+module, and provide an unique name for each dataset.
 
 To check available datasets you can use the `list_datasets` function.
-This function can also receive a string parameter to indicate a specific category.
+This function can also receive a string parameter to indicate a specific module
 
 ```{r setup}
 library(ColOpenData)
@@ -39,18 +39,18 @@ list_datasets()
 
 ```{r list geospatial datasets}
 # List geospatial datasets
-list_datasets(category = "geospatial")
+list_datasets(module = "geospatial")
 ```
 
 ## 2. Dictionaries
 ### 2.1. Geospatial
-Datasets inside the geospatial category contain a summarized version of the
+Datasets inside the geospatial module contain a summarized version of the
 National Population and Housing Census (CNPV) and a dictionary is needed to
 understand all aggregated variables. These dictionaries contain the necessary metadata to use the available information. Year and details in geospatial datasets reference the last included national census and level of aggregation. To retrieve them, we can use the `dictionary`function, using the dataset name as a parameter:
 
 ```{r dictionary for MGNCNPV at municipalities}
 dict_mpio <- dictionary("DANE_MGNCNPV_2018_MPIO")
-dict_mpio
+print(dict_mpio)
 ```
 
 ### 2.2. Climate
@@ -60,6 +60,6 @@ function using the name of the climate dataset. Year and details in climate data
 
 ```{r dicionary for climate data}
 dict_climate <- dictionary("IDEAM_CLIMATE_2023_MAY")
-dict_climate
+print(dict_climate)
 ```
 

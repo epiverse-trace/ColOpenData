@@ -1,17 +1,20 @@
 #' Download demographic dataset
+#' 
 #' @description
-#' Download demographic dataset. This data is obtained from the national census
-#' of 2018.
+#' This function downloads demographic datasets from the National Population 
+#' and Housing Census (CNPV)
 #'
-#' @param dataset String indicating dataset code.
+#' @param dataset character with the dataset name
 #'
-#' @return data.frame downloaded.
 #' @examples
-#' download_demographic("DANE_CNPVH_2018_1HD")
+#' dem <- download_demographic("DANE_CNPVH_2018_1HD")
+#' print(dem)
 #'
+#' @return \code{data.frame} with downloaded data.
 #' @export
 download_demographic <- function(dataset) {
   checkmate::assert_character(dataset)
+<<<<<<< HEAD
   path <- retrieve_path(dataset)
   downloaded_data <- retrieve_demographic_dataset(path)
 
@@ -30,10 +33,18 @@ retrieve_demographic_dataset <- function(dataset_path) {
   tryCatch(
     {
       dataset <- retrieve_table(dataset_path, sep = ";")
+=======
+  dataset_path <- retrieve_path(dataset)
+  tryCatch(
+    {
+      demographic_data <- retrieve_table(dataset_path,
+        sep = ";"
+      )
+>>>>>>> 99c2b6ada0fa3818b43934ae355dc01690414e43
     },
     error = function(e) {
       stop("`dataset` not found")
     }
   )
-  return(dataset)
+  return(demographic_data)
 }
