@@ -19,7 +19,7 @@ dictionary <- function(dataset) {
 
 #' Download list of available datasets
 #'
-#' @param module character with module to be consulted (\code{"demographic"}, 
+#' @param module character with module to be consulted (\code{"demographic"},
 #' \code{"geospatial"}, \code{"climate"})
 #'
 #' @return \code{tibble} with the available datasets
@@ -34,10 +34,19 @@ list_datasets <- function(module = "all") {
     "climate"
   ))
 
-  dataset_path <- retrieve_path("documentation")
-  listed <- retrieve_table(dataset_path, ";")
+  config_file <- system.file("extdata",
+    "config.yaml",
+    package = "ColOpenData",
+    mustWork = TRUE
+  )
+  base_path <- retrieve_value_key("base_path")
+  documentation_path <- retrieve_value_key("documentation")
+  # nolint start: nonportable_path_linter
+  documentation <- file.path(base_path, documentation_path)
+  # nolint end
+  listed <- retrieve_table(documentation)
   if (module != "all") {
-    listed <- listed[listed$category == module, ]
+    listed <- listed[listed$group == module, ]
   }
   list_tibble <- tibble::as_tibble(listed)
   return(list_tibble)
