@@ -28,13 +28,18 @@ retrieve_value_key <- function(key) {
 #' Retrieve path of named dataset
 #'
 #' @param dataset character with the dataset name
+#' 
+#' @description
+#' Datasets are included in the general documentation file. Only dictionaries
+#' and support files are treated differently and not included in the file.
 #'
 #' @return character with path to retrieve the dataset from server
 #'
 #' @keywords internal
 retrieve_path <- function(dataset) {
   checkmate::assert_character(dataset)
-
+  
+  # nolint start: nonportable_path_linter
   base_path <- retrieve_value_key("base_path")
   if (grepl("DICT", dataset)) {
     group <- "dictionaries"
@@ -45,14 +50,7 @@ retrieve_path <- function(dataset) {
   } else {
     all_datasets <- list_datasets()
     dataset_info <- all_datasets[which(all_datasets$name == dataset), ]
-    if (nrow(dataset_info) < 1) {
-      # values in config file
-      dataset_path <- retrieve_value_key(dataset)
-      file_path <- file.path(base_path, dataset_path)
-      if (rlang::is_empty(file_path)) {
-        stop("`dataset` is not available")
-      }
-    } else {
+  if (nrow(datasets_info) == 1) {
       group <- dataset_info$group
       group_path <- retrieve_value_key(group)
       if (group == "geospatial") {
@@ -80,11 +78,17 @@ retrieve_path <- function(dataset) {
           category_path, dataset_path
         )
       } else {
-        stop("`dataset` is not available")
+        file_path <- file.path(NULL)
       }
+  }     else {
+    dataset_path <- retrieve_value_key(dataset)
+    file_path <- file.path(base_path, dataset_path)
+  } 
+    if (rlang::is_empty(file_path)) {
+      stop("`dataset` is not available")
     }
   }
-  ####
+  # nolint end
   return(file_path)
 }
 
