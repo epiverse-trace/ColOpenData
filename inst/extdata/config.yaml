@@ -1,6 +1,6 @@
 default:
   base_path: "https://trace.virtual.uniandes.edu.co/colopendata"
-  documentation: "DOCUMENTATION_DATSETS.csv"
+  documentation: "DOCUMENTATION_DATASETS.csv"
   dictionaries: "dictionaries"
   demographic: "demographic"
   households: "cnpv/hogares"

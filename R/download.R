@@ -50,7 +50,7 @@ retrieve_path <- function(dataset) {
   } else {
     all_datasets <- list_datasets()
     dataset_info <- all_datasets[which(all_datasets$name == dataset), ]
-  if (nrow(datasets_info) == 1) {
+  if (nrow(dataset_info) == 1) {
       group <- dataset_info$group
       group_path <- retrieve_value_key(group)
       if (group == "geospatial") {
