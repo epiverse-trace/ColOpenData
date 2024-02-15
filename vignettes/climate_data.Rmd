@@ -98,9 +98,12 @@ To filter the stations that recorded information during the desired period, we c
 
 ```{r}
 # Working stations after 2013
-w_stations <- stations %>% dplyr::filter(as.Date(fecha_suspension) > as.Date("2013-01-01") | estado == "Activa")
+w_stations <- stations %>%
+  dplyr::filter(as.Date(fecha_suspension) > as.Date("2013-01-01") |
+    estado == "Activa")
 # Filtering for categories
-cw_stations <- w_stations %>% dplyr::filter(categoria %in% c("Climática Principal", "Climática Ordinaria"))
+cw_stations <- w_stations %>% dplyr::filter(categoria %in%
+  c("Climática Principal", "Climática Ordinaria"))
 
 # Print stations
 print(cw_stations)

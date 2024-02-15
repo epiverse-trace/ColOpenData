@@ -33,10 +33,9 @@ Now, if we already have an idea of what our goal with the data of interest is, w
 :::
 
 ```{r libraries, message=FALSE, warning=FALSE, results="hide"}
-# library(ColOpenData)
-remotes::install_github("epiverse-trace/ColOpenData@dev")
 library(ColOpenData)
-library(tidyverse)
+library(dplyr)
+library(ggplot2)
 ```
 ::: {style="text-align: justify;"}
 After loading all libraries, we can download the data we want to work with. To do this, we will use the `download_demographic` function that takes by parameter the data name, presented in the documentation.
@@ -46,7 +45,7 @@ public_services_d <- download_demographic("DANE_CNPVV_2018_8VD")
 head(public_services_d)
 ```
 ::: {style="text-align: justify;"}
-As it can be seen above, `public_services_d` presents information regarding availability of public services in the country in 2018, at the department level. Now, with this data we could, for example, find the proportion of dwellings that have access to a water supply system by department and plot it.
+As it can be seen above, `public_services_d` presents information regarding availability of public services in the country in 2018, at the department level. Now, with this data we could, for example, find the proportion of dwellings that have access to a water supply system (WSS) by department and plot it.
 ::: 
 ```{r data filtering and plot, echo=TRUE, fig.width=7, fig.height=3}
 # Subset data so it presents the information regarding the water supply system, by department
@@ -71,10 +70,13 @@ proportions <- wss %>%
 proportions[28, "departamento"] <- "SAPSC"
 
 # Plot the proportions
-ggplot(proportions, aes(x = reorder(departamento, -proportion_si), y = proportion_si)) +
+ggplot(proportions, aes(
+  x = reorder(departamento, -proportion_si),
+  y = proportion_si
+)) +
   geom_bar(stat = "identity", fill = "skyblue", color = "black", width = 0.6) +
   labs(
-    title = "Proportion of dwellings with access to water supply system, by department",
+    title = "Proportion of dwellings with access to WSS, by department",
     x = "Department",
     y = "Proportion"
   ) +

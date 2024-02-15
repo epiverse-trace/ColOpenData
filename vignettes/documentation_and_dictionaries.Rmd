@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 ## Understanding Datasets Names
 
 **ColOpenData** has three  modules: demographic, geospatial and 
-climate. All the available datasets have different details and aggregation and a nemig system that is used to retrieve the data. All datasets need to have a source, given name, year and additional details for identification. They can be consulted using a common framework:
+climate. All the available datasets have different details and aggregation and a naming system that is used to retrieve the data. All datasets need to have a source, given name, year and additional details for identification. They can be consulted using a common framework:
 
 ::: {.alert .alert-info}
   SOURCE_NAME_YEAR_DETAILS
@@ -48,7 +48,7 @@ All datasets are retrieved from DANE, and are correspond to observed data from t
 
 ### Geospatial
 
-Geospatial datasets naming is related to the level of aggregation, since they are available from Blocks to Departments. All these datasets come from DANE, and are part of the Geostatistical National Framework (MGN), which for 2018 includes a summarized version of the National Populationa and Dwelling Census (CNPV). Naming is stated as follows:
+Geospatial datasets naming is related to the level of aggregation, since they are available from Blocks to Departments. All these datasets come from DANE, and are part of the Geostatistical National Framework (MGN), which for 2018 includes a summarized version of the National Population and Dwelling Census (CNPV). Naming is stated as follows:
 
 - Source: **DANE**
 - Name: The name is related to both the MGN and the CNPV: **MGNCNPV**
