@@ -19,7 +19,7 @@ dictionary <- function(dataset) {
 
 #' Download list of available datasets
 #'
-#' @param module character with module to be consulted (\code{"demographic"}, 
+#' @param module character with module to be consulted (\code{"demographic"},
 #' \code{"geospatial"}, \code{"climate"})
 #'
 #' @return \code{tibble} with the available datasets

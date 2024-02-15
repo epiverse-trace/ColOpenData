@@ -34,24 +34,34 @@ head(public_services_d)
 As it can be seen above, `public_services_d` presents information regarding availability of public services in the country in 2018, at the department level. Now, with this data we could, for example, find the proportion of dwellings that have access to a water supply system by department and plot it.
 
 ```{r data filtering and plot, echo=TRUE}
-
 # Subset data so it presents the information regarding the water supply system, by department
-wss <- public_services_d %>% subset (area=="total_departamental"&servicio_publico=="acueducto") %>%  select(departamento, disponible, total)
+wss <- public_services_d %>%
+  subset(area == "total_departamental" & servicio_publico == "acueducto") %>%
+  select(departamento, disponible, total)
 
 # Calculate the total counts for each department (for all situations)
-total_counts <- wss %>% group_by(departamento) %>% summarise(total_all = sum(total)) %>%  ungroup()
+total_counts <- wss %>%
+  group_by(departamento) %>%
+  summarise(total_all = sum(total)) %>%
+  ungroup()
 
 # Calculate the proportion of counts of "si" by department
-proportions <- wss %>% filter(disponible == "si") %>% left_join(total_counts, by = "departamento") %>%
+proportions <- wss %>%
+  filter(disponible == "si") %>%
+  left_join(total_counts, by = "departamento") %>%
   mutate(proportion_si = total / total_all)
 
 # Plot the proportions
 ggplot(proportions, aes(x = reorder(departamento, -proportion_si), y = proportion_si)) +
   geom_bar(stat = "identity", fill = "skyblue", color = "black", width = 0.6) +
-  labs(title = "Proportion of dwellings with access to water supply system, by department",
-       x = "Department",
-       y = "Proportion") +
+  labs(
+    title = "Proportion of dwellings with access to water supply system, by department",
+    x = "Department",
+    y = "Proportion"
+  ) +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1),
-        plot.title = element_text(hjust = 0.5))
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(hjust = 0.5)
+  )
 ```
