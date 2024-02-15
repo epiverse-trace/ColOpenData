@@ -19,7 +19,7 @@ dictionary <- function(dataset) {
 
 #' Download list of available datasets
 #'
-#' @param module character with module to be consulted (\code{"demographic"}, 
+#' @param module character with module to be consulted (\code{"demographic"},
 #' \code{"geospatial"}, \code{"climate"})
 #'
 #' @return \code{tibble} with the available datasets
@@ -37,7 +37,7 @@ list_datasets <- function(module = "all") {
   dataset_path <- retrieve_path("documentation")
   listed <- retrieve_table(dataset_path, ";")
   if (module != "all") {
-    listed <- listed[listed$category == module, ]
+    listed <- listed[listed$group == module, ]
   }
   list_tibble <- tibble::as_tibble(listed)
   return(list_tibble)

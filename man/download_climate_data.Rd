@@ -39,8 +39,10 @@ retrieved from local meteorological stations provided by IDEAM.
 }
 \examples{
 stations <- c(26155110, 26155170)
-tssm <- download_climate_data(stations, "2021-11-14", "2021-11-20", 
-"day", "TSSM_CON", TRUE)
+tssm <- download_climate_data(
+  stations, "2021-11-14", "2021-11-20",
+  "day", "TSSM_CON", TRUE
+)
 print(tssm)
 
 }
