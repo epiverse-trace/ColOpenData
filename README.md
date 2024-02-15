@@ -55,13 +55,13 @@ three categories:
 
 - **Geospatial:** This data is retrieved from the National
   Geostatistical Framework (MGN), which includes maps and a summarized
-  version of the 2018’s census, aggregated to spatial geometries. The
+  version of the 2018´s census, aggregated to spatial geometries. The
   data is available at different aggregation levels including: Blocks,
   Urban and Rural Sections, Urbal and Rural Sectors, Urban Areas,
   Municipalities and Departments .More information is available
   [here](https://www.dane.gov.co/index.php/actualidad-dane/5454-el-dane-actualizo-el-marco-geoestadistico-nacional-a-2018).
 
-- **Climate:** Climate data is recovered from IDEAM’s backup, containing
+- **Climate:** Climate data is recovered from IDEAM´s backup, containing
   historical data from the first station in the country, until May
   31st 2023. This backup includes temperature, precipitation, Solar
   Brightness, Wind Direction, among others. More information can be
