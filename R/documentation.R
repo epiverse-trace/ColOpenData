@@ -34,8 +34,17 @@ list_datasets <- function(module = "all") {
     "climate"
   ))
 
-  dataset_path <- retrieve_path("documentation")
-  listed <- retrieve_table(dataset_path, ";")
+  config_file <- system.file("extdata",
+    "config.yaml",
+    package = "ColOpenData",
+    mustWork = TRUE
+  )
+  base_path <- retrieve_value_key("base_path")
+  documentation_path <- retrieve_value_key("documentation")
+  # nolint start: nonportable_path_linter
+  documentation <- file.path(base_path, documentation_path)
+  # nolint end
+  listed <- retrieve_table(documentation)
   if (module != "all") {
     listed <- listed[listed$group == module, ]
   }

@@ -17,9 +17,7 @@ download_demographic <- function(dataset) {
   dataset_path <- retrieve_path(dataset)
   tryCatch(
     {
-      demographic_data <- retrieve_table(dataset_path,
-        sep = ";"
-      )
+      demographic_data <- retrieve_table(dataset_path)
     },
     error = function(e) {
       stop("`dataset` not found")

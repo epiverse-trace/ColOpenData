@@ -10,12 +10,13 @@ download_geospatial(dataset)
 \item{dataset}{character with the dataset name}
 }
 \value{
-\code{sf} \code{data.frame} object with structures' details and geometries
+\code{sf} \code{data.frame} object with structures' details and
+geometries
 }
 \description{
 This function downloads geospatial datasets from the Geostatistical National
 Framework (MGN) at different levels of aggregation. These datasets include a
-summarized version of the National Population and Housing Census (CNPV)
+summarized version of the National Population and Dwelling Census (CNPV)
 }
 \examples{
 dptos <- download_geospatial("DANE_MGNCNPV_2018_DPTO")
