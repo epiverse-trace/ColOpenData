@@ -1,7 +1,7 @@
 default:
   base_path: "https://trace.virtual.uniandes.edu.co/colopendata"
-  documentation: "doc_and_dict/documentation.csv"
-  dictionaries: "doc_and_dict"
+  documentation: "DOCUMENTATION_DATSETS.csv"
+  dictionaries: "dictionaries"
   demographic: "demographic"
   households: "cnpv/hogares"
   dwellings: "cnpv/viviendas"
@@ -10,4 +10,4 @@ default:
   geospatial: "geospatial"
   maps: "mgn/mgncnpv"
   climate: "climate"
-  IDEAM_STATIONS_2023_MAY: "doc_and_dict/IDEAM_STATIONS_2023_MAY.csv"
+  IDEAM_STATIONS_2023_MAY: "support/IDEAM_STATIONS_2023_MAY.csv"
