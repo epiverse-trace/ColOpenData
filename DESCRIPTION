@@ -19,6 +19,9 @@ Description: ColOpenData is a package that acquires, standardizes, and
     multiple operations, such as calculating statistics, can be made,
     taking into account information from different datasets.
 License: MIT + file LICENSE
+URL: https://github.com/epiverse-trace/ColOpenData,
+    https://epiverse-trace.github.io/ColOpenData/
+BugReports: https://github.com/epiverse-trace/ColOpenData/issues
 Depends: 
     R (>= 3.2.0)
 Imports: 
@@ -43,10 +46,10 @@ Suggests:
     testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
-Config/Needs/website: epiverse-trace/epiversetheme
+Config/Needs/website:epiverse-trace/epiversetheme
 Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.2.3

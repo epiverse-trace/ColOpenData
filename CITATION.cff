@@ -29,10 +29,18 @@ authors:
 - family-names: Montenegro
   given-names: Juan F.
   email: jf.montenegro@uniandes.edu.co
+repository-code: https://github.com/epiverse-trace/ColOpenData
+url: https://epiverse-trace.github.io/ColOpenData/
 contact:
 - family-names: Tavera Cifuentes
   given-names: Maria Camila
   email: mc.tavera@uniandes.edu.co
+keywords:
+- colombia
+- data-package
+- r
+- r-package
+- socio-economic-indicators
 references:
 - type: software
   title: 'R: A Language and Environment for Statistical Computing'
