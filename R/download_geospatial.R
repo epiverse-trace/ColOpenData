@@ -3,7 +3,7 @@
 #' @description
 #' This function downloads geospatial datasets from the Geostatistical National 
 #' Framework (MGN) at different levels of aggregation. These datasets include a
-#' summarized version of the National Population and Housing Census (CNPV)
+#' summarized version of the National Population and Dwelling Census (CNPV)
 #' 
 #' @param dataset character with the dataset name
 #'
@@ -11,7 +11,8 @@
 #' dptos <- download_geospatial("DANE_MGNCNPV_2018_DPTO")
 #' print(dptos)
 #'
-#' @return \code{sf} \code{data.frame} object with structures' details and geometries
+#' @return \code{sf} \code{data.frame} object with structures' details and 
+#' geometries
 #' 
 #' @export
 download_geospatial <- function(dataset) {

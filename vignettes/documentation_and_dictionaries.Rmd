@@ -35,7 +35,7 @@ Demographic datasets are available for municipalities and departments, and conta
 - Personas Social (Social)
 - Personas Demográfico (Demographic)
 
-All datasets are retrieved from DANE, and are correspond to observed data from the National Population and Housing Census (CNPV). Naming is stated as follows:
+All datasets are retrieved from DANE, and are correspond to observed data from the National Population and Dwelling Census (CNPV). Naming is stated as follows:
 
 - Source: **DANE**
 - Name: Names include the categories
@@ -48,7 +48,7 @@ All datasets are retrieved from DANE, and are correspond to observed data from t
 
 ### Geospatial
 
-Geospatial datasets naming is related to the level of aggregation, since they are available from Blocks to Departments. All these datasets come from DANE, and are part of the Geostatistical National Framework (MGN), which for 2018 includes a summarized version of the National Populationa and Housing Census (CNPV). Naming is stated as follows:
+Geospatial datasets naming is related to the level of aggregation, since they are available from Blocks to Departments. All these datasets come from DANE, and are part of the Geostatistical National Framework (MGN), which for 2018 includes a summarized version of the National Populationa and Dwelling Census (CNPV). Naming is stated as follows:
 
 - Source: **DANE**
 - Name: The name is related to both the MGN and the CNPV: **MGNCNPV**
@@ -98,7 +98,7 @@ Dictionaries are not provided for this module.
 ### Geospatial
 
 Datasets inside the geospatial module contain a summarized version of the
-National Population and Housing Census (CNPV) and a dictionary is needed to
+National Population and Dwelling Census (CNPV) and a dictionary is needed to
 understand all aggregated variables. These dictionaries contain the necessary metadata to use the available information. To retrieve them, we can use the `dictionary`function, using the dataset name as a parameter:
 
 ```{r dictionary for MGNCNPV at municipalities}

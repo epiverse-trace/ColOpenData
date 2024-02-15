@@ -2,7 +2,7 @@
 #' 
 #' @description
 #' This function downloads demographic datasets from the National Population 
-#' and Housing Census (CNPV)
+#' and Dwelling Census (CNPV)
 #'
 #' @param dataset character with the dataset name
 #'
