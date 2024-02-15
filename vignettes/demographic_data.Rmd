@@ -7,6 +7,16 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{css, include = FALSE}
+/* CSS rules for adjusting plot size */
+.my-plot {
+    width: 100%; /* Adjust the width as needed */
+    height: auto; /* Allow the height to adjust proportionally */
+    margin: auto; /* Center the plot horizontally */
+}
+
+```
+
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -14,26 +24,31 @@ knitr::opts_chunk$set(
 )
 ```
 
+::: {style="text-align: justify;"}
 **ColOpenData** can be used to access open demographic data from Colombia. This demographic data is retrieved from the National Administrative Department of Statistics ([DANE](https://www.dane.gov.co/index.php/estadisticas-por-tema), for its acronym in Spanish). The demographic module allows you to consult demographic data, more specifically, 2018 Census data.
 
 The available Census information is divided in four categories: households, people demographics, people social and dwellings. All data documentation can be accessed as explained at [Documentation and Dictionaries](https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html), and it is important to take a good look at this to have a clearer understanding of what we count with, before just throwing ourselves to work with the data. Just as a reminder, the documentation presents information regarding all the three modules of the package, but here we are just interested in the demographic one. So, our target data are those with `demographic` in the `group` column.
 
-Now, if we already have an idea of what our goal with the data of interested is, we should start by loading all necessary libraries. As the goal of this vignette is to show some examples on how to use the data, we will load some specific libraries but that does not mean they are required to use the data in all cases.
+Now, if we already have an idea of what our goal with the data of interest is, we should start by loading all necessary libraries. As the goal of this vignette is to show some examples on how to use the data, we will load some specific libraries but that does not mean they are required to use the data in all cases.
+:::
 
 ```{r libraries, message=FALSE, warning=FALSE, results="hide"}
+#library(ColOpenData)
+remotes::install_github("epiverse-trace/ColOpenData@dev")
 library(ColOpenData)
 library(tidyverse)
 ```
-
+::: {style="text-align: justify;"}
 After loading all libraries, we can download the data we want to work with. To do this, we will use the `download_demographic` function that takes by parameter the data name, presented in the documentation.
-
+::: 
 ```{r data download, echo=TRUE}
 public_services_d <- download_demographic("DANE_CNPVV_2018_8VD")
 head(public_services_d)
 ```
+::: {style="text-align: justify;"}
 As it can be seen above, `public_services_d` presents information regarding availability of public services in the country in 2018, at the department level. Now, with this data we could, for example, find the proportion of dwellings that have access to a water supply system by department and plot it.
-
-```{r data filtering and plot, echo=TRUE}
+::: 
+```{r data filtering and plot, echo=TRUE, fig.width=7, fig.height=3}
 # Subset data so it presents the information regarding the water supply system, by department
 wss <- public_services_d %>%
   subset(area == "total_departamental" & servicio_publico == "acueducto") %>%
@@ -50,6 +65,10 @@ proportions <- wss %>%
   filter(disponible == "si") %>%
   left_join(total_counts, by = "departamento") %>%
   mutate(proportion_si = total / total_all)
+
+# Change the value of cell San Andres
+
+proportions[28, 'departamento'] <- "SAPSC"
 
 # Plot the proportions
 ggplot(proportions, aes(x = reorder(departamento, -proportion_si), y = proportion_si)) +
