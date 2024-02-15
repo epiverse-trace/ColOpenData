@@ -14,14 +14,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-**ColOpenData** can be used to access open climate data from Colombia. This
-climate data is retrieved from the Institute of Hydrology, Meteorology and 
-Environmental Studies [(IDEAM)]( http://www.ideam.gov.co/). The climate module
-allows the user to consult climate data for any Region of Interest (ROI) inside the
-country and aggregate for different frequencies like day, week, month or year.
+**ColOpenData** can be used to access open climate data from Colombia. This climate data is retrieved from the Institute of Hydrology, Meteorology and Environmental Studies [(IDEAM)](http://www.ideam.gov.co/). The climate module allows the user to consult climate data for any Region of Interest (ROI) inside the country and aggregate for different frequencies like day, week, month or year.
 
-The available information from IDEAM can be accessed using specific internal 
-tags as follows:
+The available information from IDEAM can be accessed using specific internal tags as follows:
 
 ```{r IDEAM table, echo = FALSE}
 tags <- c(
@@ -48,13 +43,9 @@ IDEAM_tags <- data.frame(
 knitr::kable(IDEAM_tags)
 ```
 
-Each observation is subject to to the availability of stations in the
-ROI and the stations' status (active, maintenance or suspended). 
+Each observation is subject to to the availability of stations in the ROI and the stations' status (active, maintenance or suspended).
 
-For this example we will retrieve data for the city of Manizales in Colombia. 
-We will download Dry-bulb temperature from 2013 to 2016, to observe the
-increase in temperature during 2015 and 2016 due to the impact of El 
-Nino (ENSO).
+For this example we will retrieve data for the city of Manizales in Colombia. We will download Dry-bulb temperature from 2013 to 2016, to observe the increase in temperature during 2015 and 2016 due to the impact of El Nino (ENSO).
 
 We will start by loading the necessary libraries.
 
@@ -67,8 +58,7 @@ library(ggplot2)
 
 ## Retrieving climate data for a Region of Interest (ROI) using stations' data
 
-For this example, we will need to create a spatial polygon around the city of
-Manizales and use that as our ROI to retrieve the climate data. To create the spatial polygon we need to introduce the coordinates of the geometry. For simplicity, we will build a box by introducing the 4 points which bound the box, and transform the created geometry into an `sf` object (see [**sf**](https://r-spatial.github.io/sf/articles/sf1.html) library for further details). For visualization we will use **leaflet**.
+For this example, we will need to create a spatial polygon around the city of Manizales and use that as our ROI to retrieve the climate data. To create the spatial polygon we need to introduce the coordinates of the geometry. For simplicity, we will build a box by introducing the 4 points which bound the box, and transform the created geometry into an `sf` object (see [**sf**](https://r-spatial.github.io/sf/articles/sf1.html) library for further details). For visualization we will use **leaflet**.
 
 ```{r polygon creation}
 # Define coordinates (Bounding box around Manizales)
@@ -93,15 +83,14 @@ leaflet(roi) %>%
   )
 ```
 
-With our new ROI, we can make a first exploration to check if there are any 
-stations contained inside of it, using the function `stations_in_roi`
+With our new ROI, we can make a first exploration to check if there are any stations contained inside of it, using the function `stations_in_roi`
 
 ```{r stations in roi}
 stations <- stations_in_roi(roi)
 print(stations)
 ```
 
-We can see that in the region there are 129 stations. Different categories are recorded by different stations, and can be checked at the column *categoria*. To understand the category of each station we can use the definition catalog provided by DANE [here](http://www.ideam.gov.co/documents/10182/557765/Definiciones+CNE.pdf/25e1cca5-ee47-4eaf-86c0-c4f5192a9937).  Stations under the categories *Climática Principal* and *Climática Ordinaria* have records of Dry-bulb temperature.
+We can see that in the region there are 129 stations. Different categories are recorded by different stations, and can be checked at the column *categoria*. To understand the category of each station we can use the definition catalog provided by DANE [here](http://www.ideam.gov.co/documents/10182/557765/Definiciones+CNE.pdf/25e1cca5-ee47-4eaf-86c0-c4f5192a9937). Stations under the categories *Climática Principal* and *Climática Ordinaria* have records of Dry-bulb temperature.
 
 Some stations are suspended, which means they are not taking measurements at the moment. This information is found at the column *estado* or, if the observation at *fecha_suspension* is different from `NA`, since active stations do not have a suspension date. However, even if a station is suspended, the historical data (up to the suspension date) can be accessed.
 
@@ -119,15 +108,12 @@ print(cw_stations)
 
 From the original 129 stations, 40 were working for some or the whole period of interest and collected information for Dry-bulb temperature. With this information, we can access the Dry-bulb temperature from 2013 to 2016. To do so, we can use the function `download_climate_data`. This function has the following parameters:
 
-- `stations` numeric vector containing the stations' codes
-- `start_date`: character with the first date to consult in the format `"YYYY-MM-DD"`
-- `end_date`: character with the last date to consult in the format `"YYYY-MM_DD"`. 
-(Last available date is `"2023-05-31"`
-- `frequency`: character with the aggregation frequency. (`"day"`, `"week"`, 
-`"month"` or `"year"`)
-- `tags`: character containing climate tags to consult
-- `aggregate`: logical for data aggregation, if `FALSE`, returns the data from 
-each individual station in the area. (Default = `TRUE`)
+-   `stations` numeric vector containing the stations' codes
+-   `start_date`: character with the first date to consult in the format `"YYYY-MM-DD"`
+-   `end_date`: character with the last date to consult in the format `"YYYY-MM_DD"`. (Last available date is `"2023-05-31"`
+-   `frequency`: character with the aggregation frequency. (`"day"`, `"week"`, `"month"` or `"year"`)
+-   `tags`: character containing climate tags to consult
+-   `aggregate`: logical for data aggregation, if `FALSE`, returns the data from each individual station in the area. (Default = `TRUE`)
 
 Stations' codes are obtained from the column `codigo` in the stations data.
 
@@ -155,21 +141,16 @@ ggplot(data = db_temperature_stations) +
 
 The warning obtained indicates that there were no records for 61 of the consulted days. This might be due to stations being under maintenance.
 
-## Retrieving climate data for a Region of Interest (ROI) 
+## Retrieving climate data for a Region of Interest (ROI)
 
-To retrieve climate data for any ROI in the country, without manually manipulating the stations' data, we can use the
-function `download_climate_geom`. The function has the following
-parameters:
+To retrieve climate data for any ROI in the country, without manually manipulating the stations' data, we can use the function `download_climate_geom`. The function has the following parameters:
 
-- `geometry`: `sf` geometry containing the geometry for a given ROI. This geometry can be either a `POLYGON` or `MULTIPOLYGON`
-- `start_date`: character with the first date to consult in the format `"YYYY-MM-DD"`
-- `end_date`: character with the last date to consult in the format `"YYYY-MM_DD"`. 
-(Last available date is `"2023-05-31"`
-- `frequency`: character with the aggregation frequency. (`"day"`, `"week"`, 
-`"month"` or `"year"`)
-- `tags`: character containing climate tags to consult
-- `aggregate`: logical for data aggregation, if `FALSE`, returns the data from 
-each individual station in the area. (Default = `TRUE`)
+-   `geometry`: `sf` geometry containing the geometry for a given ROI. This geometry can be either a `POLYGON` or `MULTIPOLYGON`
+-   `start_date`: character with the first date to consult in the format `"YYYY-MM-DD"`
+-   `end_date`: character with the last date to consult in the format `"YYYY-MM_DD"`. (Last available date is `"2023-05-31"`
+-   `frequency`: character with the aggregation frequency. (`"day"`, `"week"`, `"month"` or `"year"`)
+-   `tags`: character containing climate tags to consult
+-   `aggregate`: logical for data aggregation, if `FALSE`, returns the data from each individual station in the area. (Default = `TRUE`)
 
 We will use the same ROI created for the previous example.
 
@@ -197,28 +178,20 @@ As we can see, the results are exactly the same as before.
 
 ## Retrieving climate data for municipality
 
-To make the download process even easier, and avoid the creation of already known
-geometries like municipalities or departments, **ColOpenData** offers an extra function to
-download data using the areas' DIVIPOLA code. 
+To make the download process even easier, and avoid the creation of already known geometries like municipalities or departments, **ColOpenData** offers an extra function to download data using the areas' DIVIPOLA code.
 
-DIVIPOLA codification is 
-standardized for the whole country, and contains department's and municipalities' codes. Departments have two digits for individual identification, while municipalities have three; however, for the usage of this function at the level of municipalities, we need to concatenate both, obtaining a five digit number with department and municipality codes. The codes for each municipality and department can be consulted in the
-following [table](https://www.datos.gov.co/widgets/gdxc-w37w). 
+DIVIPOLA codification is standardized for the whole country, and contains department's and municipalities' codes. Departments have two digits for individual identification, while municipalities have three; however, for the usage of this function at the level of municipalities, we need to concatenate both, obtaining a five digit number with department and municipality codes. The codes for each municipality and department can be consulted in the following [table](https://www.datos.gov.co/widgets/gdxc-w37w).
 
 To replicate our previous example we only need the code for Manizales, which is "17001", which means the code for the department Caldas is "17" and the code for Manizales inside that department is "001".
 
-The function `download_climate` will require almost the same arguments 
-than `download_climate_geom`, but replace the `sf` object for a character containing the DIVIPOLA code:
+The function `download_climate` will require almost the same arguments than `download_climate_geom`, but replace the `sf` object for a character containing the DIVIPOLA code:
 
-- `code`: character with the DIVIPOLA code for the area
-- `start_date`: character with the first date to consult in the format `"YYYY-MM-DD"`
-- `end_date`: character with the last date to consult in the format `"YYYY-MM_DD"`. 
-(Last available date is `"2023-05-31"`
-- `frequency`: character with the aggregation frequency. (`"day"`, `"week"`, 
-`"month"` or `"year"`)
-- `tags`: character containing climate tags to consult
-- `aggregate`: logical for data aggregation, if `FALSE`, returns the data from 
-each individual station in the area. (Default = `TRUE`)
+-   `code`: character with the DIVIPOLA code for the area
+-   `start_date`: character with the first date to consult in the format `"YYYY-MM-DD"`
+-   `end_date`: character with the last date to consult in the format `"YYYY-MM_DD"`. (Last available date is `"2023-05-31"`
+-   `frequency`: character with the aggregation frequency. (`"day"`, `"week"`, `"month"` or `"year"`)
+-   `tags`: character containing climate tags to consult
+-   `aggregate`: logical for data aggregation, if `FALSE`, returns the data from each individual station in the area. (Default = `TRUE`)
 
 ```{r download climate mpio, results = "hide", warning = FALSE, message = FALSE}
 db_temperature_mpio <- download_climate(
