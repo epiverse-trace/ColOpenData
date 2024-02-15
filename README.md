@@ -47,10 +47,10 @@ Hydrology, Meteorology and Environmental Studies
 three categories:
 
 - **Demographic:** Demographic and Socioeconomic data is taken from the
-  National Population and Housing Census (CNPV) of 2018, the most recent
-  census available to date. The information is presented as an answer to
-  three questions: How many are we?, Where are we? and How do we live?
-  Further information can be consulted
+  National Population and Dwelling Census (CNPV) of 2018, the most
+  recent census available to date. The information is presented as an
+  answer to three questions: How many are we?, Where are we? and How do
+  we live? Further information can be consulted
   [here](https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/censo-nacional-de-poblacion-y-vivenda-2018).
 
 - **Geospatial:** This data is retrieved from the National
