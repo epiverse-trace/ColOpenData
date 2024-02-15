@@ -13,6 +13,7 @@ retrieve_path(dataset)
 character with path to retrieve the dataset from server
 }
 \description{
-Retrieve path of named dataset
+Datasets are included in the general documentation file. Only dictionaries
+and support files are treated differently and not included in the file.
 }
 \keyword{internal}
