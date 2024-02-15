@@ -14,18 +14,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-**ColOpenData** can be used to access open Colombian geospatial data. This 
-data is retrieved from the Geostatistical National Framework (MGN), published by
-the Administrative National Department of Statistics
-[(DANE)](https://www.dane.gov.co/index.php/en/). The MGN contains the political-administrative division and is used to reference census statistical information. Further information can be obtained directly from DANE [here](https://www.dane.gov.co/index.php/actualidad-dane/5454-el-dane-actualizo-el-marco-geoestadistico-nacional-a-2018).
+**ColOpenData** can be used to access open Colombian geospatial data. This data is retrieved from the Geostatistical National Framework (MGN), published by the Administrative National Department of Statistics [(DANE)](https://www.dane.gov.co/index.php/en/). The MGN contains the political-administrative division and is used to reference census statistical information. Further information can be obtained directly from DANE [here](https://www.dane.gov.co/index.php/actualidad-dane/5454-el-dane-actualizo-el-marco-geoestadistico-nacional-a-2018).
 
-This package contains the 2018's version of the MGN, which also included a
-summarized version of the National Population and Housing Census (CNPV) in
-different aggregation levels. Each level is stored in a different dataset, 
-which can be retrieved using the `download_geospatial` function.
+This package contains the 2018's version of the MGN, which also included a summarized version of the National Population and Housing Census (CNPV) in different aggregation levels. Each level is stored in a different dataset, which can be retrieved using the `download_geospatial` function.
 
-`download_geospatial` only requires one argument, which is the name of the
-dataset to consult. To better understand dataset names and metadata go to [Documentation and Dictionaries](https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html).
+`download_geospatial` only requires one argument, which is the name of the dataset to consult. To better understand dataset names and metadata go to [Documentation and Dictionaries](https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html).
 
 Details for geospatial datasets relate to the level of aggregation as follows:
 
@@ -50,11 +43,10 @@ mgncnpv <- data.frame(
 knitr::kable(mgncnpv)
 ```
 
-In this vignette, we will download the geospatial data and provide some 
-examples on how to use the available information and visualize it using ggplot2
-and leaflet.
+In this vignette, we will download the geospatial data and provide some examples on how to use the available information and visualize it using ggplot2 and leaflet.
 
 We will start by importing the needed libraries
+
 ```{r library imports, results = "hide", warning = FALSE, message = FALSE}
 library(ColOpenData)
 library(dplyr)
@@ -74,6 +66,7 @@ First, we download the data using the function `download_geospatial`. After down
 # Download complete dataset
 secu <- download_geospatial("DANE_MGNCNPV_2018_SECU")
 ```
+
 To know which column contains the municipalities code to filter for Tunja, we will need the dataset dictionary. To download the dictionary we can use the `dictionary` function. This function uses the dataset name to download the associated information. For further information please refer to the documentation on dictionaries previously mentioned.
 
 ```{r dictionary for urban sections}
@@ -96,7 +89,7 @@ tunja <- tunja %>% mutate(INT_PERC = round(STP19_INT1 / STVIVIENDA, 2))
 
 ## Static plots (ggplot2)
 
-[**ggplot2**](https://ggplot2.tidyverse.org/) can be used to generate static plots of spatial data by using the geometry `geom_sf`. 
+[**ggplot2**](https://ggplot2.tidyverse.org/) can be used to generate static plots of spatial data by using the geometry `geom_sf`.
 
 ```{r ggplot2 basic}
 ggplot(data = tunja) +
@@ -147,5 +140,3 @@ leaflet(tunja) %>%
     popup = paste0(tunja$INT_PERC)
   )
 ```
-
-
