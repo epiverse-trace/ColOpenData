@@ -86,8 +86,8 @@ leaflet(roi) %>%
 With our new ROI, we can make a first exploration to check if there are any stations contained inside of it, using the function `stations_in_roi`
 
 ```{r stations in roi}
-#stations <- stations_in_roi(roi)
-#print(stations)
+# stations <- stations_in_roi(roi)
+# print(stations)
 ```
 
 We can see that in the region there are 129 stations. Different categories are recorded by different stations, and can be checked at the column *categoria*. To understand the category of each station we can use the definition catalog provided by DANE [here](http://www.ideam.gov.co/documents/10182/557765/Definiciones+CNE.pdf/25e1cca5-ee47-4eaf-86c0-c4f5192a9937). Stations under the categories *Climática Principal* and *Climática Ordinaria* have records of Dry-bulb temperature.
@@ -98,12 +98,12 @@ To filter the stations that recorded information during the desired period, we c
 
 ```{r}
 # Working stations after 2013
-#w_stations <- stations %>% dplyr::filter(as.Date(fecha_suspension) > as.Date("2013-01-01") | estado == "Activa")
+# w_stations <- stations %>% dplyr::filter(as.Date(fecha_suspension) > as.Date("2013-01-01") | estado == "Activa")
 # Filtering for categories
-#cw_stations <- w_stations %>% dplyr::filter(categoria %in% c("Climática Principal", "Climática Ordinaria"))
+# cw_stations <- w_stations %>% dplyr::filter(categoria %in% c("Climática Principal", "Climática Ordinaria"))
 
 # Print stations
-#print(cw_stations)
+# print(cw_stations)
 ```
 
 From the original 129 stations, 40 were working for some or the whole period of interest and collected information for Dry-bulb temperature. With this information, we can access the Dry-bulb temperature from 2013 to 2016. To do so, we can use the function `download_climate_data`. This function has the following parameters:

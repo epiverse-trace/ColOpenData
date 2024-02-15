@@ -33,7 +33,7 @@ Now, if we already have an idea of what our goal with the data of interest is, w
 :::
 
 ```{r libraries, message=FALSE, warning=FALSE, results="hide"}
-#library(ColOpenData)
+# library(ColOpenData)
 remotes::install_github("epiverse-trace/ColOpenData@dev")
 library(ColOpenData)
 library(tidyverse)
@@ -68,7 +68,7 @@ proportions <- wss %>%
 
 # Change the value of cell San Andres
 
-proportions[28, 'departamento'] <- "SAPSC"
+proportions[28, "departamento"] <- "SAPSC"
 
 # Plot the proportions
 ggplot(proportions, aes(x = reorder(departamento, -proportion_si), y = proportion_si)) +
