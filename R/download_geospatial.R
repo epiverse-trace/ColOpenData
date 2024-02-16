@@ -1,44 +1,34 @@
 #' Download geospatial dataset
+#'
 #' @description
-#' Download geospatial named dataset from server. This data is merged with a
-#' simplified version of the National Census, associating the census with each
-#' geospatial structure.
+#' This function downloads geospatial datasets from the Geostatistical National
+#' Framework (MGN) at different levels of aggregation. These datasets include a
+#' summarized version of the National Population and Dwelling Census (CNPV)
 #'
-#' @param dataset String indicating dataset code.
+#' @param dataset character with the dataset name
 #'
-#' @return data.frame downloaded data.
 #' @examples
-#' download_geospatial("DANE_MGNCNPV_2018_DPTO")
+#' dptos <- download_geospatial("DANE_MGNCNPV_2018_DPTO")
+#' print(dptos)
+#'
+#' @return \code{sf} \code{data.frame} object with structures' details and
+#' geometries
 #'
 #' @export
 download_geospatial <- function(dataset) {
   checkmate::assert_character(dataset)
-  path <- retrieve_path(dataset)
-  downloaded_data <- retrieve_geospatial_dataset(path)
-  return(downloaded_data)
-}
 
-
-#' Retrieve geospatial dataset from path
-#'
-#' @param dataset_path path to the dataset on repository.
-#'
-#' @return Consulted dataset.
-#'
-#' @keywords internal
-retrieve_geospatial_dataset <- function(dataset_path) {
-  ext_path <- system.file("extdata",
-    package = "ColOpenData",
-    mustWork = TRUE
+  dataset_path <- retrieve_path(dataset)
+  tryCatch(
+    {
+      geospatial_data <- retrieve_zip(
+        dataset_path,
+        dataset
+      )
+    },
+    error = function(e) {
+      stop("`dataset` not found")
+    }
   )
-  # nolint start: nonportable_path_linter
-  new_dir <- rev(unlist(strsplit(dataset_path, "[/.]")))[2]
-  new_dir_path <- file.path(ext_path, new_dir)
-  if (file.exists(new_dir_path)) {
-    unlink(new_dir_path, recursive = TRUE)
-  }
-  dir.create(new_dir_path)
-  dataset <- retrieve_zip(dataset_path, new_dir_path, new_dir)
-  # nolint end
-  return(dataset)
+  return(geospatial_data)
 }

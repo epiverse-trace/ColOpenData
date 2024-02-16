@@ -2,20 +2,20 @@
 % Please edit documentation in R/download_climate.R
 \name{aggregate}
 \alias{aggregate}
-\title{Aggregate stations}
+\title{Aggregate stations' data}
 \usage{
-aggregate(stations_df, tag)
+aggregate(stations_data, tag)
 }
 \arguments{
-\item{stations_df}{data.frame containing stations to aggregate}
+\item{stations_data}{data.frame containing stations' data to aggregate}
 
-\item{tag}{string with the tag consulted.}
+\item{tag}{character with the consulted tag}
 }
 \value{
-a data.frame with only two columns containing the dates and the
-aggregated observations.
+\code{data.frame} with only two columns containing the dates and the
+aggregated observations
 }
 \description{
-Aggregate stations observations.
+Aggregate stations' data
 }
 \keyword{internal}

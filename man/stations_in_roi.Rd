@@ -7,18 +7,22 @@
 stations_in_roi(geometry)
 }
 \arguments{
-\item{geometry}{sf object containing the geometry for a given ROI. This
-geometry can be either a POLYGON or MULTIPOLYGON.}
+\item{geometry}{\code{sf} geometry containing the geometry for a given ROI.
+This geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}}
 }
 \value{
-data.frame with the stations inside the consulted geometry.
+\code{data.frame} with the stations inside the consulted geometry
 }
 \description{
-Retrieves the stations contained inside a given geometry
+Download and filter climate stations inside a region of interest (ROI)
 }
 \examples{
-\dontrun{
-stations_in_roy(geometry)
-}
+lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)
+lon <- c(-75.678072, -75.327859, -75.327859, -75.678072, -75.678072)
+polygon <- sf::st_polygon(x = list(cbind(lon, lat)))
+geometry <- sf::st_sfc(polygon)
+roi <- sf::st_as_sf(geometry)
+stations <- stations_in_roi(roi)
+print(stations)
 
 }

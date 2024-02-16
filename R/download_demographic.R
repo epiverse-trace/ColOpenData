@@ -1,49 +1,27 @@
 #' Download demographic dataset
+#'
 #' @description
-#' Download demographic dataset. This data is obtained from the national census
-#' of 2018.
+#' This function downloads demographic datasets from the National Population
+#' and Dwelling Census (CNPV)
 #'
-#' @param dataset String indicating dataset code.
-#' @param sheet String indicating specific sheet (internal dataset).
+#' @param dataset character with the dataset name
 #'
-#' @return data.frame downloaded.
 #' @examples
-#' download_demographic("DANE_CNPV_2018_Hogares", "1HD")
+#' dem <- download_demographic("DANE_CNPVH_2018_1HD")
+#' print(dem)
 #'
+#' @return \code{data.frame} with downloaded data.
 #' @export
-download_demographic <- function(dataset, sheet = "None") {
+download_demographic <- function(dataset) {
   checkmate::assert_character(dataset)
-  checkmate::assert_character(sheet)
-  path <- retrieve_path(dataset)
-  downloaded_data <- retrieve_demographic_dataset(path, sheet)
-  return(downloaded_data)
-}
-
-#' Retrieve demographic dataset from path
-#'
-#' @param dataset_path path to the dataset on repository
-#' @param sheet string to indicate specific sheet.
-#'
-#' @return consulted dataset.
-#'
-#' @keywords internal
-retrieve_demographic_dataset <- function(dataset_path, sheet) {
-  ext_path <- system.file("extdata",
-    package = "ColOpenData",
-    mustWork = TRUE
+  dataset_path <- retrieve_path(dataset)
+  tryCatch(
+    {
+      demographic_data <- retrieve_table(dataset_path)
+    },
+    error = function(e) {
+      stop("`dataset` not found")
+    }
   )
-  # nolint start: nonportable_path_linter
-  new_dir <- rev(unlist(strsplit(dataset_path, "[/.]")))[2]
-  new_dir_path <- file.path(ext_path, new_dir)
-  if (file.exists(new_dir_path)) {
-    unlink(new_dir_path, recursive = TRUE)
-  }
-  dir.create(new_dir_path)
-  if (grepl(".xlsx", tolower(dataset_path))) {
-    dataset <- retrieve_excel(dataset_path, new_dir_path, new_dir, sheet)
-  } else {
-    stop("`dataset` not found")
-  }
-  # nolint end
-  return(dataset)
+  return(demographic_data)
 }

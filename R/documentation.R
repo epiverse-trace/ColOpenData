@@ -1,8 +1,8 @@
-#' Download data dictionary for geospatial dataframes
+#' Download data dictionary for geospatial data
 #'
-#' @param dataset String indicating dataset code.
+#' @param dataset character with the dataset name
 #'
-#' @return tibble containing data dictionary
+#' @return \code{tibble} with data dictionary
 #' @examples
 #' dictionary("DANE_MGNCNPV_2018_SETU")
 #'
@@ -19,25 +19,29 @@ dictionary <- function(dataset) {
 
 #' Download list of available datasets
 #'
-#' @param category Specific group to be consulted ("demographic", "geospatial",
-#' "climate")
+#' @param module character with module to be consulted (\code{"demographic"},
+#' \code{"geospatial"}, \code{"climate"})
 #'
-#' @return tibble containing listed available datasets
+#' @return \code{tibble} with the available datasets
 #' @examples
 #' list_datasets("geospatial")
 #'
 #' @export
-list_datasets <- function(category = "all") {
-  checkmate::assert_character(category)
-  checkmate::assert_choice(category, c(
+list_datasets <- function(module = "all") {
+  checkmate::assert_character(module)
+  checkmate::assert_choice(module, c(
     "all", "demographic", "geospatial",
     "climate"
   ))
 
-  dataset_path <- retrieve_path("documentation")
-  listed <- retrieve_table(dataset_path, ";")
-  if (category != "all") {
-    listed <- listed[listed$category == category, ]
+  base_path <- retrieve_value_key("base_path")
+  documentation_path <- retrieve_value_key("documentation")
+  # nolint start: nonportable_path_linter
+  documentation <- file.path(base_path, documentation_path)
+  # nolint end
+  listed <- retrieve_table(documentation)
+  if (module != "all") {
+    listed <- listed[listed$group == module, ]
   }
   list_tibble <- tibble::as_tibble(listed)
   return(list_tibble)

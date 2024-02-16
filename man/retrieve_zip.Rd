@@ -4,17 +4,15 @@
 \alias{retrieve_zip}
 \title{Retrieve zip file}
 \usage{
-retrieve_zip(dataset_path, new_dir_path, new_dir)
+retrieve_zip(dataset_path, dataset_name)
 }
 \arguments{
-\item{dataset_path}{path to the dataset on repository}
+\item{dataset_path}{character with the path to dataset on repository}
 
-\item{new_dir_path}{path to the created directory}
-
-\item{new_dir}{directory to store data}
+\item{dataset_name}{character with the dataset name}
 }
 \value{
-dataset
+\code{sf} data.frame object with structures' details and geometries
 }
 \description{
 Retrieve zip file

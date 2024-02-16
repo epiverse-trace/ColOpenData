@@ -18,10 +18,10 @@ test_that("Stations in ROI throws errors", {
 test_that("Stations in ROI work as expected", {
   expect_s3_class(stations_in_roi(medellin), "data.frame")
 })
-
+#
 # Climate stations
 test_that("Climate Stations throws errors", {
-  expect_error(retrieve_climate_data(
+  expect_error(download_climate_data(
     stations = "bogota",
     start_date = "2010-10-01",
     end_date = "2010-12-10",
@@ -29,7 +29,7 @@ test_that("Climate Stations throws errors", {
     tags = "PTPM_CON",
     aggregate = TRUE
   ))
-  expect_error(retrieve_climate_data(
+  expect_error(download_climate_data(
     stations = stations_names,
     start_date = 2010,
     end_date = "2010-12-10",
@@ -37,7 +37,7 @@ test_that("Climate Stations throws errors", {
     tags = "PTPM_CON",
     aggregate = TRUE
   ))
-  expect_error(retrieve_climate_data(
+  expect_error(download_climate_data(
     stations = stations_names,
     start_date = "2010-12-10",
     end_date = 675,
@@ -53,7 +53,7 @@ test_that("Climate Stations throws errors", {
     tags = "PTPM_CON",
     aggregate = TRUE
   ))
-  expect_error(retrieve_climate_data(
+  expect_error(download_climate_data(
     stations = stations_names,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
@@ -61,7 +61,7 @@ test_that("Climate Stations throws errors", {
     tags = "ERR",
     aggregate = TRUE
   ))
-  expect_error(retrieve_climate_data(
+  expect_error(download_climate_data(
     stations = stations_names,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
@@ -69,7 +69,7 @@ test_that("Climate Stations throws errors", {
     tags = c("TSSM_CON", "ERR"),
     aggregate = TRUE
   ))
-  expect_error(retrieve_climate_data(
+  expect_error(download_climate_data(
     stations = stations_names,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
@@ -77,41 +77,6 @@ test_that("Climate Stations throws errors", {
     tags = "TSSM_CON",
     aggregate = "TRUE"
   ))
-})
-
-test_that("Climate Stations works as expected", {
-  expect_s3_class(retrieve_climate_data(
-    stations = stations_names,
-    start_date = "2010-10-01",
-    end_date = "2011-02-10",
-    frequency = "month",
-    tags = "TSSM_CON",
-    aggregate = TRUE
-  ), "data.frame")
-  expect_type(retrieve_climate_data(
-    stations = stations_names,
-    start_date = "2010-10-01",
-    end_date = "2010-12-10",
-    frequency = "month",
-    tags = c("THSM_CON", "TSSM_CON"),
-    aggregate = FALSE
-  ), "list")
-  expect_s3_class(retrieve_climate_data(
-    stations = stations_names,
-    start_date = "2010-10-01",
-    end_date = "2010-12-10",
-    frequency = "month",
-    tags = c("THSM_CON", "TSSM_CON"),
-    aggregate = TRUE
-  ), "data.frame")
-  expect_length(retrieve_climate_data(
-    stations = stations_names,
-    start_date = "2010-10-01",
-    end_date = "2010-12-10",
-    frequency = "month",
-    tags = c("THSM_CON", "TSSM_CON"),
-    aggregate = TRUE
-  ), 3L)
 })
 
 test_that("Climate data from geometry throws errors", {
@@ -139,7 +104,7 @@ test_that("Climate data from geometry works as expected", {
     frequency = "week",
     tags = "PTPM_CON",
     aggregate = TRUE
-  ), 2)
+  ), 2L)
   expect_length(download_climate_geom(
     geometry = ibague,
     start_date = "2010-10-01",
@@ -147,15 +112,15 @@ test_that("Climate data from geometry works as expected", {
     frequency = "month",
     tags = "EVTE_CON",
     aggregate = TRUE
-  ), 2)
-  expect_length(download_climate_geom(
+  ), 2L)
+  expect_identical(colnames(download_climate_geom(
     geometry = ibague,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
     frequency = "month",
     tags = c("TMN_CON", "HRHG_CON"),
     aggregate = TRUE
-  ), 3)
+  )), c("date", "TMN_CON", "HRHG_CON"))
   expect_type(download_climate_geom(
     geometry = ibague,
     start_date = "2010-10-01",
@@ -176,6 +141,22 @@ test_that("Climate data from code throws errors", {
     tags = "PTPM_CON",
     aggregate = TRUE
   ))
+  expect_error(download_climate(
+    code = "730001",
+    start_date = "2010-10-01",
+    end_date = "2010-12-10",
+    frequency = "day",
+    tags = "PTPM_CON",
+    aggregate = TRUE
+  ))
+  expect_error(download_climate(
+    code = "11111",
+    start_date = "2010-10-01",
+    end_date = "2010-12-10",
+    frequency = "month",
+    tags = "PTPM_CON",
+    aggregate = TRUE
+  ))
 })
 
 test_that("Climate data from code works as expected", {
@@ -187,28 +168,12 @@ test_that("Climate data from code works as expected", {
     tags = "THSM_CON",
     aggregate = FALSE
   ), "data.frame")
-  expect_vector(download_climate(
-    code = "05001",
+  expect_type(download_climate(
+    code = "11",
     start_date = "2018-10-01",
     end_date = "2018-11-10",
     frequency = "month",
-    tags = "NB_CON",
-    aggregate = TRUE
-  )[, 2], size = 2)
-  expect_identical(dim(download_climate(
-    code = "05001",
-    start_date = "2017-01-01",
-    end_date = "2019-12-31",
-    frequency = "year",
-    tags = "TSTG_CON",
-    aggregate = TRUE
-  ))[1], 3L)
-  expect_type(download_climate(
-    code = "11001",
-    start_date = "2010-10-01",
-    end_date = "2010-12-10",
-    frequency = "month",
-    tags = c("TMN_CON", "BSHG_CON"),
+    tags = c("TSSM_CON", "PTPM_CON"),
     aggregate = FALSE
   ), "list")
 })

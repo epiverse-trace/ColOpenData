@@ -17,12 +17,11 @@ coverage](https://codecov.io/gh/epiverse-trace/ColOpenData/branch/main/graph/bad
 [![lifecycle-concept](https://raw.githubusercontent.com/reconverse/reconverse.github.io/master/images/badge-concept.svg)](https://www.reconverse.org/lifecycle.html#concept)
 <!-- badges: end -->
 
-**ColOpenData** is a package that acquires, standardizes, and wrangles
-Colombian socioeconomic, geospatial and climate data. It solves the
-problem of Colombian data being issued in different web pages and
-formats by using functions that allow the user to select the desired
-database and download it without having to do the exhausting acquisition
-process.
+**ColOpenData** is a package that acquires and wrangles Colombian
+socioeconomic, geospatial and climate data. It solves the problem of
+Colombian data being issued in different web pages and sources by using
+functions that allow the user to select the desired database and
+download it without having to do the exhausting acquisition process.
 
 ColOpenData is developed at [Universidad de Los
 Andes](https://uniandes.edu.co/) as part of the [Epiverse-TRACE
@@ -37,21 +36,50 @@ You can install the development version of ColOpenData from
 # install.packages("pak")
 pak::pak("epiverse-trace/ColOpenData")
 ```
+
 ## Quick Overview
 
-**ColOpenData** contains data from two public data sources: The National 
-Administrative Department of Statistics 
-[(DANE)](https://www.dane.gov.co/index.php/en/) and the Institute of Hydrology,
-Meteorology and Environmental Studies [(IDEAM)]( http://www.ideam.gov.co/). 
-The available data is divided in three categories: Demographic and 
-Socioeconomic, Geospatial and Climate.
+**ColOpenData** contains data from two public data sources: The National
+Administrative Department of Statistics
+[(DANE)](https://www.dane.gov.co/index.php/en/) and the Institute of
+Hydrology, Meteorology and Environmental Studies
+[(IDEAM)](http://www.ideam.gov.co/). The available data is divided in
+three categories:
 
-Demographic and Socioeconomic data is taken from the National Population and 
-Housing Census of 2018, the most recent census available. On the other 
-hand, geospatial data is retrieved from the National Geostatistical Framework,
-which includes maps and a summarized version of the 2018's census. Finally,
-the climate data is obtained from the climate stations in the country 
-until May 31st 2023, the most recent available date.
+- **Demographic:** Demographic and Socioeconomic data is taken from the
+  National Population and Dwelling Census (CNPV) of 2018, the most
+  recent census available to date. The information is presented as an
+  answer to three questions: How many are we?, Where are we? and How do
+  we live? Further information can be consulted
+  [here](https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/censo-nacional-de-poblacion-y-vivenda-2018).
+
+- **Geospatial:** This data is retrieved from the National
+  Geostatistical Framework (MGN), which includes maps and a summarized
+  version of the 2018 census, aggregated to spatial geometries. The data
+  is available at different aggregation levels including: Blocks, Urban
+  and Rural Sections, Urban and Rural Sectors, Urban Areas,
+  Municipalities and Departments .More information is available
+  [here](https://www.dane.gov.co/index.php/actualidad-dane/5454-el-dane-actualizo-el-marco-geoestadistico-nacional-a-2018).
+
+- **Climate:** Climate data is recovered from backup information
+  provided by IDEAM, containing historical data from the first station
+  in the country, until May 31st 2023. This backup includes temperature,
+  precipitation, Solar Brightness, Wind Direction, among others. More
+  information can be accessed [here](http://www.ideam.gov.co/).
+
+Documentation and vignettes are available for the three modules in the
+[user vignettes](https://epiverse-trace.github.io/ColOpenData/).
+
+## Related R Packages
+
+Similar R packages are offered for international communities, allowing
+the user to download census, geospatial and climate data.
+
+- [cancensus](https://mountainmath.github.io/cancensus/): Canada
+- [censobr](https://ipeagit.github.io/censobr/): Brazil
+- [tidycensus](https://walker-data.com/tidycensus/): US
+- [geofi](https://ropengov.github.io/geofi/): Finland
+- [climate](https://bczernecki.github.io/climate/)
 
 ### Lifecycle
 
