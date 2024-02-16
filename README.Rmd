@@ -60,9 +60,9 @@ The available data is divided in three categories:
 
 - **Demographic:** Demographic and Socioeconomic data is taken from the National Population and Dwelling Census (CNPV) of 2018, the most recent census available to date. The information is presented as an answer to three questions: How many are we?, Where are we? and How do we live? Further information can be consulted [here](https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/censo-nacional-de-poblacion-y-vivenda-2018).
 
-- **Geospatial:** This data is retrieved from the National Geostatistical Framework (MGN), which includes maps and a summarized version of the 2018´s census, aggregated to spatial geometries. The data is available at different aggregation levels including: Blocks, Urban and Rural Sections, Urbal and Rural Sectors, Urban Areas, Municipalities and Departments .More information is available [here](https://www.dane.gov.co/index.php/actualidad-dane/5454-el-dane-actualizo-el-marco-geoestadistico-nacional-a-2018).
+- **Geospatial:** This data is retrieved from the National Geostatistical Framework (MGN), which includes maps and a summarized version of the 2018 census, aggregated to spatial geometries. The data is available at different aggregation levels including: Blocks, Urban and Rural Sections, Urban and Rural Sectors, Urban Areas, Municipalities and Departments .More information is available [here](https://www.dane.gov.co/index.php/actualidad-dane/5454-el-dane-actualizo-el-marco-geoestadistico-nacional-a-2018).
 
-- **Climate:** Climate data is recovered from IDEAM´s backup, containing historical data from the first station in the country, until May 31st 2023. This backup includes temperature, precipitation, Solar Brightness, Wind Direction, among others. More information can be accessed [here](http://www.ideam.gov.co/).
+- **Climate:** Climate data is recovered from backup information provided by IDEAM, containing historical data from the first station in the country, until May 31st 2023. This backup includes temperature, precipitation, Solar Brightness, Wind Direction, among others. More information can be accessed [here](http://www.ideam.gov.co/).
 
 Documentation and vignettes are available for the three modules in the [user vignettes](https://epiverse-trace.github.io/ColOpenData/).
 
