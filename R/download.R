@@ -20,7 +20,7 @@ retrieve_value_key <- function(key) {
     file = config_file
   )
   if (rlang::is_empty(key_path)) {
-    stop("data is not available")
+    stop("information is not available")
   }
   return(key_path)
 }

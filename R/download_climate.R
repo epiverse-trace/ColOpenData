@@ -31,10 +31,10 @@ download_climate <- function(code, start_date, end_date, frequency, tags,
   checkmate::assert_character(code)
 
   if (nchar(code) == 5) {
-    mpios <- ColOpenData::download_geospatial("DANE_MGNCNPV_2018_MPIO")
+    mpios <- download_geospatial("DANE_MGNCNPV_2018_MPIO")
     area <- mpios[which(mpios$MPIO_CDPMP == code), "MPIO_CDPMP"]
   } else if (nchar(code) == 2) {
-    dptos <- ColOpenData::download_geospatial("DANE_MGNCNPV_2018_DPTO")
+    dptos <- download_geospatial("DANE_MGNCNPV_2018_DPTO")
     area <- dptos[which(dptos$DPTO_CCDGO == code), "DPTO_CCDGO"]
   } else {
     stop("`code` cannot be found")
@@ -171,6 +171,7 @@ download_climate_data <- function(stations, start_date, end_date,
           climate_data <- stations_data
         }
       }
+      names(climate_data) <- c("date", tags)
     } else {
       climate_data <- list()
       for (tag in tags) {
@@ -249,7 +250,7 @@ retrieve_stations_data <- function(stations, start_date, end_date,
         )
       },
       error = function(e) {
-        station <- data.frame(NA)
+        warning(paste0("Station ", stations[i], " is not available"))
       }
     )
     if (length(station) != 1) {
@@ -265,18 +266,18 @@ retrieve_stations_data <- function(stations, start_date, end_date,
         summarise(tag, frequency)
       if (all(is.na(filtered))) {
         next
+      } else {
+        names(filtered) <- c("date", paste("station", stations[i], sep = "_"))
+        stations_data <- merge(stations_data, filtered,
+          by.x = "date", by.y = "date",
+          all.x = TRUE
+        )
       }
-      names(filtered) <- c("date", paste("station", stations[i], sep = "_"))
-      stations_data <- merge(stations_data, filtered,
-        by.x = "date", by.y = "date",
-        all.x = TRUE
-      )
     }
   }
   if (ncol(stations_data) == 1) {
     stop("There were no records for the given ROI and dates")
   }
-
   if (aggregate && ncol(stations_data) > 2) {
     stations_data <- aggregate(stations_data, tag)
   }

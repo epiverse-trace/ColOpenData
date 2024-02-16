@@ -34,11 +34,6 @@ list_datasets <- function(module = "all") {
     "climate"
   ))
 
-  config_file <- system.file("extdata",
-    "config.yaml",
-    package = "ColOpenData",
-    mustWork = TRUE
-  )
   base_path <- retrieve_value_key("base_path")
   documentation_path <- retrieve_value_key("documentation")
   # nolint start: nonportable_path_linter
