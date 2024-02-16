@@ -13,6 +13,12 @@
     <loc>/articles/climate_data.html</loc>
   </url>
   <url>
+    <loc>/articles/demographic_data.html</loc>
+  </url>
+  <url>
+    <loc>/articles/documentation_and_dictionaries.html</loc>
+  </url>
+  <url>
     <loc>/articles/geospatial_data.html</loc>
   </url>
   <url>
@@ -28,16 +34,19 @@
     <loc>/news/index.html</loc>
   </url>
   <url>
-    <loc>/reference/climate_stations.html</loc>
+    <loc>/reference/aggregate.html</loc>
   </url>
   <url>
-    <loc>/reference/dengue_2018.html</loc>
+    <loc>/reference/dictionary.html</loc>
   </url>
   <url>
     <loc>/reference/download_climate.html</loc>
   </url>
   <url>
-    <loc>/reference/download_climate_mpio.html</loc>
+    <loc>/reference/download_climate_data.html</loc>
+  </url>
+  <url>
+    <loc>/reference/download_climate_geom.html</loc>
   </url>
   <url>
     <loc>/reference/download_demographic.html</loc>
@@ -46,30 +55,30 @@
     <loc>/reference/download_geospatial.html</loc>
   </url>
   <url>
-    <loc>/reference/group_stations.html</loc>
-  </url>
-  <url>
     <loc>/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/retrieve_demographic_dataset.html</loc>
-  </url>
-  <url>
-    <loc>/reference/retrieve_excel.html</loc>
-  </url>
-  <url>
-    <loc>/reference/retrieve_geospatial_dataset.html</loc>
+    <loc>/reference/list_datasets.html</loc>
   </url>
   <url>
     <loc>/reference/retrieve_path.html</loc>
   </url>
   <url>
-    <loc>/reference/retrieve_working_stations.html</loc>
+    <loc>/reference/retrieve_stations_data.html</loc>
+  </url>
+  <url>
+    <loc>/reference/retrieve_table.html</loc>
+  </url>
+  <url>
+    <loc>/reference/retrieve_value_key.html</loc>
   </url>
   <url>
     <loc>/reference/retrieve_zip.html</loc>
   </url>
   <url>
     <loc>/reference/stations_in_roi.html</loc>
+  </url>
+  <url>
+    <loc>/reference/summarise.html</loc>
   </url>
 </urlset>

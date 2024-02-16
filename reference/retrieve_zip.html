@@ -31,8 +31,10 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/climate_data.html">Download climate data</a>
-    <a class="dropdown-item" href="../articles/geospatial_data.html">Download geospatial data</a>
+    <a class="dropdown-item" href="../articles/climate_data.html">How to download climate data using ColOpenData</a>
+    <a class="dropdown-item" href="../articles/demographic_data.html">Download and use of demographic data</a>
+    <a class="dropdown-item" href="../articles/documentation_and_dictionaries.html">Documentation and Dictionaries</a>
+    <a class="dropdown-item" href="../articles/geospatial_data.html">Maps and plots with ColOpenData</a>
   </div>
 </li>
 <li class="nav-item">
@@ -41,7 +43,13 @@
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/epiverse-trace/ColOpenData/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -49,7 +57,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Retrieve zip file</h1>
-      
+      <small class="dont-index">Source: <a href="https://github.com/epiverse-trace/ColOpenData/blob/HEAD/R/download.R" class="external-link"><code>R/download.R</code></a></small>
       <div class="d-none name"><code>retrieve_zip.Rd</code></div>
     </div>
 
@@ -59,28 +67,24 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">retrieve_zip</span><span class="op">(</span><span class="va">dataset_path</span>, <span class="va">new_dir_path</span>, <span class="va">new_dir</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">retrieve_zip</span><span class="op">(</span><span class="va">dataset_path</span>, <span class="va">dataset_name</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>dataset_path</dt>
-<dd><p>path to the dataset on repository</p></dd>
+<dd><p>character with the path to dataset on repository</p></dd>
 
 
-<dt>new_dir_path</dt>
-<dd><p>path to the created directory</p></dd>
-
-
-<dt>new_dir</dt>
-<dd><p>directory to store data</p></dd>
+<dt>dataset_name</dt>
+<dd><p>character with the dataset name</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>dataset</p>
+<p><code>sf</code> data.frame object with structures' details and geometries</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

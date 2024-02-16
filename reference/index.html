@@ -31,8 +31,10 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/climate_data.html">Download climate data</a>
-    <a class="dropdown-item" href="../articles/geospatial_data.html">Download geospatial data</a>
+    <a class="dropdown-item" href="../articles/climate_data.html">How to download climate data using ColOpenData</a>
+    <a class="dropdown-item" href="../articles/demographic_data.html">Download and use of demographic data</a>
+    <a class="dropdown-item" href="../articles/documentation_and_dictionaries.html">Documentation and Dictionaries</a>
+    <a class="dropdown-item" href="../articles/geospatial_data.html">Maps and plots with ColOpenData</a>
   </div>
 </li>
 <li class="nav-item">
@@ -41,7 +43,13 @@
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/epiverse-trace/ColOpenData/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -64,24 +72,24 @@
 
       <dl><dt>
           
-          <code><a href="climate_stations.html">climate_stations()</a></code> 
+          <code><a href="dictionary.html">dictionary()</a></code> 
         </dt>
-        <dd>Retrieve climate from stations</dd>
-      </dl><dl><dt>
-          
-          <code><a href="dengue_2018.html">dengue_2018</a></code> 
-        </dt>
-        <dd>Dengue data 2018</dd>
+        <dd>Download data dictionary for geospatial data</dd>
       </dl><dl><dt>
           
           <code><a href="download_climate.html">download_climate()</a></code> 
         </dt>
-        <dd>Retrieve climate data from stations in geometry</dd>
+        <dd>Download climate from named geometry (municipality or department)</dd>
       </dl><dl><dt>
           
-          <code><a href="download_climate_mpio.html">download_climate_mpio()</a></code> 
+          <code><a href="download_climate_data.html">download_climate_data()</a></code> 
         </dt>
-        <dd>Retrieve climate data by municipality name</dd>
+        <dd>Download climate data from geometry</dd>
+      </dl><dl><dt>
+          
+          <code><a href="download_climate_geom.html">download_climate_geom()</a></code> 
+        </dt>
+        <dd>Download climate data from geometry</dd>
       </dl><dl><dt>
           
           <code><a href="download_demographic.html">download_demographic()</a></code> 
@@ -92,6 +100,11 @@
           <code><a href="download_geospatial.html">download_geospatial()</a></code> 
         </dt>
         <dd>Download geospatial dataset</dd>
+      </dl><dl><dt>
+          
+          <code><a href="list_datasets.html">list_datasets()</a></code> 
+        </dt>
+        <dd>Download list of available datasets</dd>
       </dl><dl><dt>
           
           <code><a href="stations_in_roi.html">stations_in_roi()</a></code> 
