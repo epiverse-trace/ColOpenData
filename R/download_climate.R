@@ -250,7 +250,7 @@ retrieve_stations_data <- function(stations, start_date, end_date,
         )
       },
       error = function(e) {
-        warning(paste("Station", stations[i], "is not available", sep = ""))
+        warning("Station ", stations[i], " is not available")
       }
     )
     if (length(station) != 1) {
