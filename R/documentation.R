@@ -12,9 +12,8 @@ dictionary <- function(dataset) {
 
   dict_path <- paste("DICT", dataset, sep = "_")
   path <- retrieve_path(dict_path)
-  downloaded_dict <- retrieve_table(path, ";")
-  dict_tibble <- tibble::as_tibble(downloaded_dict)
-  return(dict_tibble)
+  dict <- retrieve_table(path, ";")
+  return(dict)
 }
 
 #' Download list of available datasets
@@ -43,6 +42,5 @@ list_datasets <- function(module = "all") {
   if (module != "all") {
     listed <- listed[listed$group == module, ]
   }
-  list_tibble <- tibble::as_tibble(listed)
-  return(list_tibble)
+  return(listed)
 }
