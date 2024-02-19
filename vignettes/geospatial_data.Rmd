@@ -60,7 +60,7 @@ library(RColorBrewer)
 
 For this example we will be using geospatial data at the level of Urban Section for the city of Tunja, Colombia. We will be using the demographic data included in the dataset to generate visualizations using **ggplot2** and **leaflet**.
 
-First, we download the data using the function `download_geospatial`. After downloading, we have to filter by the municipality code using the DIVIPOLA code for Tunja, which is "15001". For further information on DIVIPOLA please consult the dataset [here](https://www.datos.gov.co/widgets/gdxc-w37w).
+First, we download the data using the function `download_geospatial`. After downloading, we have to filter by the municipality code using the DIVIPOLA code for Tunja, which is `"15001"`. For further information on DIVIPOLA please consult the dataset [here](https://www.datos.gov.co/widgets/gdxc-w37w).
 
 ```{r download data}
 # Download complete dataset
@@ -75,9 +75,9 @@ dict <- dictionary("DANE_MGNCNPV_2018_SECU")
 head(dict)
 ```
 
-After exploring the dictionary, we can identify the column that contains the individual municipality codes, which is *MPIO_CDPMP*. This column contains the concatenated code for department and municipality, which is an unique identifier for every municipality.
+After exploring the dictionary, we can identify the column that contains the individual municipality codes, which is [MPIO_CDPMP]{.underline}. This column contains the concatenated code for department and municipality, which is an unique identifier for every municipality.
 
-We will be calculation the percentage of houses with internet connection at each urban section. For this purpose we will need to know the number of houses with internet connection and the total of houses in each section. From the dictionary we get that the number of houses with internet connection is *STP19_INT1* and the total of houses is *STVIVIENDA*. We will calculate the percentage as follows:
+We will be calculation the percentage of houses with internet connection at each urban section. For this purpose we will need to know the number of houses with internet connection and the total of houses in each section. From the dictionary we get that the number of houses with internet connection is [STP19_INT1]{.underline} and the total of houses is [STVIVIENDA]{.underline}. We will calculate the percentage as follows:
 
 ```{r filter and internet coverage}
 # Filter for Tunja
