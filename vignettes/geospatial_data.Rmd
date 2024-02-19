@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 **ColOpenData** can be used to access open Colombian geospatial data. This data is retrieved from the Geostatistical National Framework (MGN), published by the Administrative National Department of Statistics [(DANE)](https://www.dane.gov.co/index.php/en/). The MGN contains the political-administrative division and is used to reference census statistical information. Further information can be obtained directly from DANE [here](https://www.dane.gov.co/index.php/actualidad-dane/5454-el-dane-actualizo-el-marco-geoestadistico-nacional-a-2018).
 
-This package contains the 2018's version of the MGN, which also included a summarized version of the National Population and Housing Census (CNPV) in different aggregation levels. Each level is stored in a different dataset, which can be retrieved using the `download_geospatial` function.
+This package contains the 2018's version of the MGN, which also included a summarized version of the National Population and Dwelling Census (CNPV) in different aggregation levels. Each level is stored in a different dataset, which can be retrieved using the `download_geospatial` function.
 
 `download_geospatial` only requires one argument, which is the name of the dataset to consult. To better understand dataset names and metadata go to [Documentation and Dictionaries](https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html).
 
@@ -60,14 +60,14 @@ library(RColorBrewer)
 
 For this example we will be using geospatial data at the level of Urban Section for the city of Tunja, Colombia. We will be using the demographic data included in the dataset to generate visualizations using **ggplot2** and **leaflet**.
 
-First, we download the data using the function `download_geospatial`. After downloading, we have to filter by the municipality code using the DIVIPOLA code for Tunja, which is "15001". For further information on DIVIPOLA please consult the dataset [here](https://www.datos.gov.co/widgets/gdxc-w37w).
+First, we download the data using the function `download_geospatial`. After downloading, we have to filter by the municipality code using the DIVIPOLA code for Tunja, which is `"15001"`. For further information on DIVIPOLA please consult the dataset [here](https://www.datos.gov.co/widgets/gdxc-w37w).
 
 ```{r download data}
 # Download complete dataset
 secu <- download_geospatial("DANE_MGNCNPV_2018_SECU")
 ```
 
-To know which column contains the municipalities code to filter for Tunja, we will need the dataset dictionary. To download the dictionary we can use the `dictionary` function. This function uses the dataset name to download the associated information. For further information please refer to the documentation on dictionaries previously mentioned.
+To understand which column contains the municipalities code to filter for Tunja, we will need the dataset dictionary. To download the dictionary we can use the `dictionary` function. This function uses the dataset name to download the associated information. For further information please refer to the documentation on dictionaries previously mentioned.
 
 ```{r dictionary for urban sections}
 # Urban section dictionary
@@ -75,9 +75,9 @@ dict <- dictionary("DANE_MGNCNPV_2018_SECU")
 head(dict)
 ```
 
-After exploring the dictionary, we can identify the column that contains the individual municipality codes, which is *MPIO_CDPMP*. This column contains the concatenated code for department and municipality, which is an unique identifier.
+After exploring the dictionary, we can identify the column that contains the individual municipality codes, which is [MPIO_CDPMP]{.underline}. This column contains the concatenated code for department and municipality, which is an unique identifier for every municipality.
 
-We will be calculation the percentage of houses with internet connection at each urban section. We will need to know the number of houses with internet connection and the total of houses in each section. From the dictionary we get that the number of houses with internet connection is *STP19_INT1* and the total of houses is *STVIVIENDA*. We will calculate the percentage as follows:
+We will be calculation the percentage of houses with internet connection at each urban section. For this purpose we will need to know the number of houses with internet connection and the total of houses in each section. From the dictionary we get that the number of houses with internet connection is [STP19_INT1]{.underline} and the total of houses is [STVIVIENDA]{.underline}. We will calculate the percentage as follows:
 
 ```{r filter and internet coverage}
 # Filter for Tunja
@@ -96,7 +96,7 @@ ggplot(data = tunja) +
   geom_sf(mapping = aes(fill = INT_PERC), color = NA)
 ```
 
-Color palettes and themes can be defined for each plot using the aesthetic and scales, which can be consulted in the **ggplot2** documentation.
+Color palettes and themes can be defined for each plot using the aesthetic and scales, which can be consulted in the **ggplot2** [documentation](https://ggplot2.tidyverse.org/reference/index.html#scales).
 
 ```{r ggplot2}
 # ggplot2
@@ -125,7 +125,7 @@ colfunc <- colorRampPalette(c("#10bed2", "#deff00"))
 pal <- colfunc(100)
 ```
 
-With the previous color palette we can generate the interactive plot. The package also includes open source maps for the base map like [OpenStreetMap](https://www.openstreetmap.org/#map=5/4.632/-74.299) and [CartoDB](https://carto.com/basemaps). For further details on **leaflet**, please refer to the package documentation.
+With the previous color palette we can generate the interactive plot. The package also includes open source maps for the base map like [OpenStreetMap](https://www.openstreetmap.org/#map=5/4.632/-74.299) and [CartoDB](https://carto.com/basemaps). For further details on **leaflet**, please refer to the package [documentation](https://rstudio.github.io/leaflet/reference/index.html).
 
 ```{r leaflet}
 # Leaflet
