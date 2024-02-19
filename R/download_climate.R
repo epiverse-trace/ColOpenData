@@ -92,7 +92,7 @@ download_climate_geom <- function(geometry, start_date, end_date, frequency,
 
   stations_roi <- stations_in_roi(geometry)
   stations <- stations_roi$codigo
-  climate_geom <- download_climate_data(
+  climate_geom <- download_climate_stations(
     stations = stations,
     start_date = start_date,
     end_date = end_date,
@@ -103,7 +103,7 @@ download_climate_geom <- function(geometry, start_date, end_date, frequency,
   return(climate_geom)
 }
 
-#' Download climate data from geometry
+#' Download climate data from stations
 #'
 #' @description
 #' Download climate data from named stations.This data is
@@ -122,7 +122,7 @@ download_climate_geom <- function(geometry, start_date, end_date, frequency,
 #'
 #' @examples
 #' stations <- c(26155110, 26155170)
-#' tssm <- download_climate_data(
+#' tssm <- download_climate_stations(
 #'   stations, "2021-11-14", "2021-11-20",
 #'   "day", "TSSM_CON", TRUE
 #' )
@@ -130,9 +130,9 @@ download_climate_geom <- function(geometry, start_date, end_date, frequency,
 #'
 #' @return \code{data.frame} with observations from the requested stations
 #' @export
-download_climate_data <- function(stations, start_date, end_date,
-                                  frequency, tags,
-                                  aggregate = TRUE) {
+download_climate_stations <- function(stations, start_date, end_date,
+                                      frequency, tags,
+                                      aggregate = TRUE) {
   checkmate::assert_vector(stations)
   checkmate::assert_character(start_date)
   checkmate::assert_character(end_date)
