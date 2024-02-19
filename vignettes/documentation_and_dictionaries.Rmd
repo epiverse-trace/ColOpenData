@@ -26,7 +26,7 @@ climate. All the available datasets have different details and aggregation and a
 Currently, **ColOpenData** only includes data from official sources [(DANE)](https://www.dane.gov.co/index.php/en/) and [(IDEAM)]( http://www.ideam.gov.co/). Name, year and details are different for each 
 module, and provide an unique name for each dataset.
 
-### Demographic
+#### Demographic
 
 Demographic datasets are available for municipalities and departments, and contain data for Houses and Population in four categories.
 
@@ -46,7 +46,7 @@ All datasets are retrieved from DANE, and are correspond to observed data from t
 - Year: **2018**
 - Details: These are related to each individual dataset, and can be related to their identifier and spatial level of aggregation. For further details please check the function `list_datasets` below.
 
-### Geospatial
+#### Geospatial
 
 Geospatial datasets naming is related to the level of aggregation, since they are available from Blocks to Departments. All these datasets come from DANE, and are part of the Geostatistical National Framework (MGN), which for 2018 includes a summarized version of the National Population and Dwelling Census (CNPV). Naming is stated as follows:
 
@@ -64,7 +64,7 @@ Geospatial datasets naming is related to the level of aggregation, since they ar
   - Urban Section: **SECU**
   - Urban Zone: **ZU**
 
-### Climate
+#### Climate
 
 This module has only one dataset, and the information required to use the related functions is related to the area of interest, dates, frequency of measurement and tags consulted. Therefore, this module does not use the same framework for naming, and the dataset name is only useful to retrieve the dictionary for the individual tags.
 
@@ -91,11 +91,11 @@ print(geo_datasets)
 
 ## Dictionaries
 
-### Demographic
+#### Demographic
 
 Dictionaries are not provided for this module.
 
-### Geospatial
+#### Geospatial
 
 Datasets inside the geospatial module contain a summarized version of the
 National Population and Dwelling Census (CNPV) and a dictionary is needed to
@@ -105,7 +105,7 @@ understand all aggregated variables. These dictionaries contain the necessary me
 dictionary("DANE_MGNCNPV_2018_MPIO")
 ```
 
-### Climate
+#### Climate
 
 Climate data is not stored in multiple datasets but as an unique dataset with
 numerous tags. These tags can also be consulted through the `dictionary`
