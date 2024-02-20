@@ -73,16 +73,16 @@ total_counts <- wss %>%
   ungroup()
 
 # Calculate the proportion of counts of "si" by department
-proportions <- wss %>%
+proportions_wss <- wss %>%
   filter(disponible == "si") %>%
   left_join(total_counts, by = "departamento") %>%
   mutate(proportion_si = total / total_all)
 
 # Change the value of cell San Andres
-proportions[28, "departamento"] <- "SAPSC"
+proportions_wss[28, "departamento"] <- "SAPSC"
 
-# Plot proportions of dwellings with access to WSS by deparment
-ggplot(proportions, aes(
+# Plot proportions_wss of dwellings with access to WSS by deparment
+ggplot(proportions_wss, aes(
   x = reorder(departamento, -proportion_si),
   y = proportion_si
 )) +
@@ -116,26 +116,29 @@ We will focus on a random municipality, examining the total area and specificall
 :::
 
 ```{r population counts, message=FALSE, warning=FALSE, results="hide"}
-# Filter of literacy data to have a count of population under specific conditions
+# Data literacy filter to have a population's count under specific conditions
 lit <- literacy %>%
-  subset(municipio == "Villapinzón" & grupo_de_edad == "entre_15_y_24_anos" & area == "total" & sabe_leer_y_escribir == "total" & sexo == "total") %>%
+  subset(municipio == "Villapinzón" & grupo_de_edad == "entre_15_y_24_anos" &
+    area == "total" & sabe_leer_y_escribir == "total" & sexo == "total") %>%
   select(municipio, area, grupo_de_edad, sexo, total)
 head(lit)
-
-# Filter of marital status data to have a count of population under specific conditions
+# Data marital status filter to have a population's count under specific conditions
 ms <- marital_status %>%
-  subset(municipio == "Villapinzón" & area == "total" & grupo_de_edad == c("15_a_19", "20_a_24") & estado_civil == "total" & sexo == "total") %>%
+  subset(municipio == "Villapinzón" & area == "total" &
+    grupo_de_edad == c("15_a_19", "20_a_24") & estado_civil == "total" &
+    sexo == "total") %>%
   select(grupo_de_edad, estado_civil, sexo, total)
-
 # Sum of counts of both age groups
 ms_count <- ms %>%
   group_by(estado_civil, sexo) %>%
   dplyr::summarise(total = sum(total)) %>%
   ungroup()
 # New row with summed information
-new_row <- data.frame(grupo_de_edad = "15_a_24", estado_civil = "total", sexo = "total", total = ms_count$total)
-
-# Final dataframe that presents counts for each each group independently, and together
+new_row <- data.frame(
+  grupo_de_edad = "15_a_24", estado_civil = "total",
+  sexo = "total", total = ms_count$total
+)
+# Final dataframe with counts for each group independently and together
 ms_f <- rbind(ms, new_row)
 head(ms_f)
 ```
@@ -145,28 +148,29 @@ Now that we know that both data sets contain the same counts, we can start to lo
 :::
 
 ```{r other data plot, echo=TRUE, fig.width=10, fig.height=3}
-# Filter of literacy data to get only the counts for persons that do not know how to read neither write, between 15 and 24 years old, in the total area of Villapinzon municipality
+# Filter of literacy data to get only the counts for specific conditions
 lit_filt <- literacy %>%
-  subset(municipio == "Villapinzón" & sabe_leer_y_escribir == "no" & grupo_de_edad == "entre_15_y_24_anos" & area == "total") %>%
+  subset(municipio == "Villapinzón" & sabe_leer_y_escribir == "no" &
+    grupo_de_edad == "entre_15_y_24_anos" & area == "total") %>%
   select(sabe_leer_y_escribir, grupo_de_edad, sexo, total) %>%
   mutate(estado = "no_sabe_leer_y_escribir") %>%
   select(-sabe_leer_y_escribir) %>%
   mutate(proportion = total / lit$total)
 
-# Filter of marital status data to get only the counts for persons that do not know how to read neither write, between 15 and 19 years old, in the total area of Villapinzon municipality
+# Filter of marital status data to get only the counts for specific conditions
 ms_filt15 <- marital_status %>%
-  subset(municipio == "Villapinzón" & area == "total" & grupo_de_edad == "15_a_19") %>%
+  subset(municipio == "Villapinzón" & area == "total" &
+    grupo_de_edad == "15_a_19") %>%
   select(grupo_de_edad, estado_civil, sexo, total)
 
-# Filter of marital status data to get only the counts for persons that do not know how to read neither write, between 20 and 24 years old, in the total area of Villapinzon municipality
+# Filter of marital status data to get only the counts for specific conditions
 ms_filt20 <- marital_status %>%
-  subset(municipio == "Villapinzón" & area == "total" & grupo_de_edad == "20_a_24") %>%
+  subset(municipio == "Villapinzón" & area == "total" &
+    grupo_de_edad == "20_a_24") %>%
   select(grupo_de_edad, estado_civil, sexo, total)
-
 # Merge of both marital status dataframes
 ms_filt <- rbind(ms_filt15, ms_filt20)
-
-# New dataframe that has all marital status information, with a new column that presents the proportion of persons according to its other columns
+# Data frame with marital status info and proportions based on columns
 ms_final <- ms_filt %>%
   group_by(estado_civil, sexo) %>%
   dplyr::summarise(total = sum(total)) %>%
@@ -175,22 +179,26 @@ ms_final <- ms_filt %>%
   rename(estado = estado_civil) %>%
   mutate(proportion = total / lit$total)
 
-# Merge marital status and literacy final dataframes, with some subsets to plot a better graph
+# Merged marital status and literacy final df, with subsets to a better graph
 merged_df <- bind_rows(lit_filt, ms_final) %>%
   subset(sexo != "total") %>%
   subset(estado != "total") %>%
   subset(estado != "soltero_a")
 
-# Plot of persons proportion according to marital status and lack of writing and reading knowledge, by sex
+# Plot
 ggplot(merged_df, aes(x = estado, y = proportion, fill = sexo)) +
   geom_bar(stat = "identity", position = "dodge") +
   scale_fill_manual(values = c("mujer" = "#f04a4c", "hombre" = "#aec800")) +
   labs(
-    title = "Proportion of people in Villapinzón according to marital status and lack of writing and reading knowledge, by sex",
+    title = "Proportion of people in Villapinzón by marital status and
+    iliteracy by sex",
     x = "Status",
     y = "Count",
     fill = "Sex"
   ) +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1), plot.title = element_text(hjust = 0.5))
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(hjust = 0.5)
+  )
 ```

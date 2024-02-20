@@ -53,7 +53,6 @@ library(dplyr)
 library(sf)
 library(ggplot2)
 library(leaflet)
-library(RColorBrewer)
 ```
 
 ## Downloading geospatial data
