@@ -261,16 +261,6 @@ references:
     given-names: Yihui
   year: '2024'
 - type: software
-  title: RColorBrewer
-  abstract: 'RColorBrewer: ColorBrewer Palettes'
-  notes: Suggests
-  repository: https://CRAN.R-project.org/package=RColorBrewer
-  authors:
-  - family-names: Neuwirth
-    given-names: Erich
-    email: erich.neuwirth@univie.ac.at
-  year: '2024'
-- type: software
   title: rmarkdown
   abstract: 'rmarkdown: Dynamic Documents for R'
   notes: Suggests
