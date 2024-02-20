@@ -116,13 +116,13 @@ We will focus on a random municipality, examining the total area and specificall
 :::
 
 ```{r population counts, message=FALSE, warning=FALSE, results="hide"}
-# Data literacy filter to have a population's count under specific conditions
+# Literacy data filter to have a population's count under specific conditions
 lit <- literacy %>%
   subset(municipio == "Villapinzón" & grupo_de_edad == "entre_15_y_24_anos" &
     area == "total" & sabe_leer_y_escribir == "total" & sexo == "total") %>%
   select(municipio, area, grupo_de_edad, sexo, total)
 head(lit)
-# Data marital status filter to have a population's count under specific conditions
+# Marital status data filter to find population's count under certain conditions
 ms <- marital_status %>%
   subset(municipio == "Villapinzón" & area == "total" &
     grupo_de_edad == c("15_a_19", "20_a_24") & estado_civil == "total" &
@@ -133,10 +133,11 @@ ms_count <- ms %>%
   group_by(estado_civil, sexo) %>%
   dplyr::summarise(total = sum(total)) %>%
   ungroup()
+
 # New row with summed information
 new_row <- data.frame(
   grupo_de_edad = "15_a_24", estado_civil = "total",
-  sexo = "total", total = ms_count$total
+  sexo = "total", total = toString(ms_count$total)
 )
 # Final dataframe with counts for each group independently and together
 ms_f <- rbind(ms, new_row)
@@ -185,10 +186,12 @@ merged_df <- bind_rows(lit_filt, ms_final) %>%
   subset(estado != "total") %>%
   subset(estado != "soltero_a")
 
+colorm <- "#f04a4c"
+colorh <- "#aec800"
 # Plot
 ggplot(merged_df, aes(x = estado, y = proportion, fill = sexo)) +
   geom_bar(stat = "identity", position = "dodge") +
-  scale_fill_manual(values = c("mujer" = "#f04a4c", "hombre" = "#aec800")) +
+  scale_fill_manual(values = c("mujer" = colorm, "hombre" = colorh)) +
   labs(
     title = "Proportion of people in Villapinzón by marital status and
     iliteracy by sex",
