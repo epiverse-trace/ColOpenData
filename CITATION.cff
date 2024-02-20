@@ -9,30 +9,36 @@ type: software
 license: MIT
 title: 'ColOpenData: ColOpenData'
 version: 0.0.1
-abstract: ColOpenData is a package that acquires, standardizes, and wrangles Colombian
-  socioeconomic, climate and land cover data. It solves the problem of Colombian data
-  being issued in different web pages and formats by using functions that allow the
-  user to select the desired database and download it without having to do the exhausting
-  acquisition process. Also, it allows these datasets to be merged so multiple operations,
-  such as calculating statistics, can be made, taking into account information from
-  different datasets.
+abstract: ColOpenData is a package that acquires and wrangles Colombian socioeconomic,
+  geospatial and climate data. It solves the problem of Colombian data being issued
+  in different web pages and sources by using functions that allow the user to select
+  the desired database and download it without having to do the exhausting acquisition
+  process.
 authors:
 - family-names: Tavera Cifuentes
   given-names: Maria Camila
   email: mc.tavera@uniandes.edu.co
 - family-names: Otero
   given-names: Julian
-  email: jd.otero10@uniandes.org
+  email: jd.otero10@uniandes.edu.co
 - family-names: Umana
   given-names: Juan D.
   email: jd.umana10@uniandes.edu.co
 - family-names: Montenegro
   given-names: Juan F.
   email: jf.montenegro@uniandes.edu.co
+repository-code: https://github.com/epiverse-trace/ColOpenData
+url: https://epiverse-trace.github.io/ColOpenData/
 contact:
 - family-names: Tavera Cifuentes
   given-names: Maria Camila
   email: mc.tavera@uniandes.edu.co
+keywords:
+- colombia
+- data-package
+- r
+- r-package
+- socio-economic-indicators
 references:
 - type: software
   title: 'R: A Language and Environment for Statistical Computing'
@@ -175,21 +181,6 @@ references:
     given-names: Edzer
     email: edzer.pebesma@uni-muenster.de
     orcid: https://orcid.org/0000-0001-8049-7069
-  year: '2024'
-- type: software
-  title: tibble
-  abstract: 'tibble: Simple Data Frames'
-  notes: Imports
-  url: https://tibble.tidyverse.org/
-  repository: https://CRAN.R-project.org/package=tibble
-  authors:
-  - family-names: Müller
-    given-names: Kirill
-    email: kirill@cynkra.com
-    orcid: https://orcid.org/0000-0002-1416-3412
-  - family-names: Wickham
-    given-names: Hadley
-    email: hadley@rstudio.com
   year: '2024'
 - type: software
   title: utils

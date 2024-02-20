@@ -5,7 +5,7 @@ test_that("List datasets errors are thrown", {
 test_that("List datasets works as expected", {
   expect_s3_class(list_datasets("geospatial"), "data.frame")
   expect_identical(list_datasets("climate")[1, 1][[1]], "IDEAM_CLIMATE_2023_MAY")
-  expect_length(list_datasets("climate"), 6L)
+  expect_length(list_datasets("climate"), 7L)
 })
 
 test_that("Dictionary errors are thrown", {
