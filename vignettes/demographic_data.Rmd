@@ -1,8 +1,8 @@
 ---
-title: "Download and use of demographic data"
+title: "A Deep Dive into Colombian Demographics Using ColOpenData"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Download and use of demographic data}
+  %\VignetteIndexEntry{A Deep Dive into Colombian Demographics Using ColOpenData}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -28,6 +28,9 @@ knitr::opts_chunk$set(
 **ColOpenData** can be used to access open demographic data from Colombia. This demographic data is retrieved from the National Administrative Department of Statistics ([DANE](https://www.dane.gov.co/index.php/estadisticas-por-tema), for its acronym in Spanish). The demographic module allows you to consult demographic data, more specifically, National Population and Dwelling Census (CNPV) of 2018.
 
 The available CNPV information is divided in four categories: households, persons demographic, persons social and dwellings. All data documentation can be accessed as explained at [Documentation and Dictionaries](https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html). Just as a reminder, the documentation presents information regarding all the three modules of the package, but here we are just interested in the demographic one. In order to access its documentation we need to use the function `list_datasets` and by parameter indicate the module we are interested in. It is important to take a good look at this to have a clearer understanding of what we count with, before just throwing ourselves to work with the data. Now, we should start by loading all necessary libraries. As the goal of this vignette is to show some examples on how to use the data, we will load some specific libraries but that does not mean they are required to use the data in all cases.
+:::
+
+## Initial Exploration: Basic Data Handling with ColOpenData
 
 ```{r libraries, message=FALSE, warning=FALSE, results="hide"}
 library(ColOpenData)
@@ -35,6 +38,7 @@ library(dplyr)
 library(ggplot2)
 ```
 
+::: {style="text-align: justify;"}
 Then, we can access to the demographic documentation.
 
 ```{r documentation, echo =TRUE}
@@ -81,7 +85,7 @@ ggplot(proportions, aes(
   x = reorder(departamento, -proportion_si),
   y = proportion_si
 )) +
-  geom_bar(stat = "identity", fill = "skyblue", color = "black", width = 0.6) +
+  geom_bar(stat = "identity", fill = "#10bed2", color = "black", width = 0.6) +
   labs(
     title = "Proportion of dwellings with access to WSS, by department",
     x = "Department",
@@ -93,6 +97,8 @@ ggplot(proportions, aes(
     plot.title = element_text(hjust = 0.5)
   )
 ```
+
+## Data Integration: Combining Datasets for Enhanced Analysis
 
 ::: {style="text-align: justify;"}
 Also, with the demographic data, we could merge data from the different categories and compare information. For example, we would download a file from the persons demographic category and another one from persons social. The first one presents information regarding population's literacy and the second one regarding its marital status.
@@ -132,10 +138,12 @@ new_row <- data.frame(grupo_de_edad = "15_a_24", estado_civil = "total", sexo = 
 ms_f <- rbind(ms, new_row)
 head(ms_f)
 ```
+
 ::: {style="text-align: justify;"}
 Now that we know that both data sets contain the same counts, we can start to look at the specific information we want. For the literacy data set, we would focus on the people that do not know how to read neither write. :::
 :::
-```{r other data plot, echo=TRUE, fig.width=7, fig.height=3}
+
+```{r other data plot, echo=TRUE, fig.width=10, fig.height=3}
 # Filter of literacy data to get only the counts for persons that do not know how to read neither write, between 15 and 24 years old, in the total area of Villapinzon municipality
 lit_filt <- literacy %>%
   subset(municipio == "Villapinzón" & sabe_leer_y_escribir == "no" & grupo_de_edad == "entre_15_y_24_anos" & area == "total") %>%
@@ -175,6 +183,7 @@ merged_df <- bind_rows(lit_filt, ms_final) %>%
 # Plot of persons proportion according to marital status and lack of writing and reading knowledge, by sex
 ggplot(merged_df, aes(x = estado, y = proportion, fill = sexo)) +
   geom_bar(stat = "identity", position = "dodge") +
+  scale_fill_manual(values = c("mujer" = "#f04a4c", "hombre" = "#aec800")) +
   labs(
     title = "Proportion of people in Villapinzón according to marital status and lack of writing and reading knowledge, by sex",
     x = "Status",
