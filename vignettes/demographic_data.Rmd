@@ -134,10 +134,11 @@ ms_count <- ms %>%
   dplyr::summarise(total = sum(total)) %>%
   ungroup()
 
+count_total <- toString(ms_count$total)
 # New row with summed information
 new_row <- data.frame(
   grupo_de_edad = "15_a_24", estado_civil = "total",
-  sexo = "total", total = toString(ms_count$total)
+  sexo = "total", total = count_total
 )
 # Final dataframe with counts for each group independently and together
 ms_f <- rbind(ms, new_row)
