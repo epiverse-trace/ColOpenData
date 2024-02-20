@@ -17,7 +17,7 @@ This function downloads demographic datasets from the National Population
 and Dwelling Census (CNPV)
 }
 \examples{
-dem <- download_demographic("DANE_CNPVH_2018_1HD")
-print(dem)
+demographic <- download_demographic("DANE_CNPVH_2018_1HD")
+print(demographic)
 
 }
