@@ -2,7 +2,6 @@
 
 export(dictionary)
 export(download_climate)
-export(download_climate_data)
 export(download_climate_geom)
 export(download_climate_stations)
 export(download_demographic)
