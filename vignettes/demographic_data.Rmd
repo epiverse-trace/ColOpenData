@@ -1,8 +1,8 @@
 ---
-title: "Analyzing Colombian CNPV Data with ColOpenData: A Comprehensive Overview"
+title: "A Deep Dive into Colombian Demographics Using ColOpenData"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Analyzing Colombian CNPV Data with ColOpenData: A Comprehensive Overview}
+  %\VignetteIndexEntry{A Deep Dive into Colombian Demographics Using ColOpenData}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
