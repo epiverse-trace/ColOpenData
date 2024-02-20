@@ -96,6 +96,7 @@ ggplot(data = tunja) +
   geom_sf(mapping = aes(fill = INT_PERC), color = NA)
 ```
 
+
 Color palettes and themes can be defined for each plot using the aesthetic and scales, which can be consulted in the **ggplot2** [documentation](https://ggplot2.tidyverse.org/reference/index.html#scales).
 
 ```{r ggplot2}
