@@ -137,7 +137,8 @@ count_total <- toString(ms_count$total)
 # New row with summed information
 new_row <- data.frame(
   grupo_de_edad = "15_a_24", estado_civil = "total",
-  sexo = "total", total = count_total
+  sexo = "total", total = count_total,
+  stringsAsFactors = FALSE
 )
 # Final dataframe with counts for each group independently and together
 ms_f <- rbind(ms, new_row)
@@ -191,7 +192,7 @@ colorh <- "#aec800"
 # Plot
 ggplot(merged_df, aes(x = estado, y = proportion, fill = sexo)) +
   geom_bar(stat = "identity", position = "dodge") +
-  scale_fill_manual(values = c("mujer" = colorm, "hombre" = colorh)) +
+  scale_fill_manual(values = c(mujer = colorm, hombre = colorh)) +
   labs(
     title = "Proportion of people in Villapinzón by marital status and
     iliteracy by sex",
