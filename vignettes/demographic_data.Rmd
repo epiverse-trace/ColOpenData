@@ -25,7 +25,6 @@ knitr::opts_chunk$set(
 ```
 
 ::: {style="text-align: justify;"}
-
 **ColOpenData** can be used to access open demographic data from Colombia. This demographic data is retrieved from the National Administrative Department of Statistics ([DANE](https://www.dane.gov.co/index.php/estadisticas-por-tema), for its acronym in Spanish). The demographic module allows you to consult demographic data, more specifically, National Population and Dwelling Census (CNPV) of 2018.
 
 The available CNPV information is divided in four categories: households, persons demographic, persons social and dwellings. All data documentation can be accessed as explained at [Documentation and Dictionaries](https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html). Just as a reminder, the documentation presents information regarding all the three modules of the package, but here we are just interested in the demographic one. In order to access its documentation we need to use the function `list_datasets` and by parameter indicate the module we are interested in. It is important to take a good look at this to have a clearer understanding of what we count with, before just throwing ourselves to work with the data. Now, we should start by loading all necessary libraries. As the goal of this vignette is to show some examples on how to use the data, we will load some specific libraries but that does not mean they are required to use the data in all cases.
