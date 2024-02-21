@@ -15,8 +15,8 @@ abstract: ColOpenData is a package that acquires and wrangles Colombian socioeco
   the desired database and download it without having to do the exhausting acquisition
   process.
 authors:
-- family-names: Tavera Cifuentes
-  given-names: Maria Camila
+- family-names: Tavera-Cifuentes
+  given-names: M. Camila
   email: mc.tavera@uniandes.edu.co
 - family-names: Otero
   given-names: Julian
