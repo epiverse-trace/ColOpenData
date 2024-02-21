@@ -58,19 +58,19 @@ three categories:
   version of the 2018 census, aggregated to spatial geometries. The data
   is available at different aggregation levels including: Blocks, Urban
   and Rural Sections, Urban and Rural Sectors, Urban Areas,
-  Municipalities and Departments .More information is available
+  Municipalities and Departments. More information is available
   [here](https://www.dane.gov.co/index.php/actualidad-dane/5454-el-dane-actualizo-el-marco-geoestadistico-nacional-a-2018).
 
 - **Climate:** Climate data is recovered from backup information
   provided by IDEAM, containing historical data from the first station
   in the country, until May 31st 2023. This backup includes temperature,
-  precipitation, Solar Brightness, Wind Direction, among others. More
+  precipitation, solar brightness, wind direction, among others. More
   information can be accessed [here](http://www.ideam.gov.co/).
 
 Documentation and vignettes are available for the three modules in the
 [user vignettes](https://epiverse-trace.github.io/ColOpenData/).
 
-## Related R Packages
+### Related R Packages
 
 Similar R packages are offered for international communities, allowing
 the user to download census, geospatial and climate data.

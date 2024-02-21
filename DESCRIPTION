@@ -3,21 +3,18 @@ Title: ColOpenData
 Version: 0.0.1
 Authors@R: c(
     person("Maria Camila", "Tavera Cifuentes", , "mc.tavera@uniandes.edu.co", role = c("aut", "cre")),
-    person("Julian", "Otero", , "jd.otero10@uniandes.org", role = "aut"),
+    person("Julian", "Otero", , "jd.otero10@uniandes.edu.co", role = "aut"),
     person("Juan D.", "Umana", , "jd.umana10@uniandes.edu.co", role = "aut"),
     person("Juan F.", "Montenegro", , "jf.montenegro@uniandes.edu.co", role = "aut"),
     person("Juan Manuel", "Cordovez", , "jucordov@uniandes.edu.co", role = "ctb"),
     person("Catalina", "Gonzalez Uribe", , "cgonzalez@uniandes.edu.co", role = "ctb"),
     person("Mauricio", "Santos-Vega", , "om.santos@uniandes.edu.co", role = "ctb")
   )
-Description: ColOpenData is a package that acquires, standardizes, and
-    wrangles Colombian socioeconomic, climate and land cover data. It
-    solves the problem of Colombian data being issued in different web
-    pages and formats by using functions that allow the user to select the
-    desired database and download it without having to do the exhausting
-    acquisition process. Also, it allows these datasets to be merged so
-    multiple operations, such as calculating statistics, can be made,
-    taking into account information from different datasets.
+Description: ColOpenData is a package that acquires and wrangles Colombian
+    socioeconomic, geospatial and climate data. It solves the problem of
+    Colombian data being issued in different web pages and sources by
+    using functions that allow the user to select the desired database and
+    download it without having to do the exhausting acquisition process.
 License: MIT + file LICENSE
 URL: https://github.com/epiverse-trace/ColOpenData,
     https://epiverse-trace.github.io/ColOpenData/
@@ -34,13 +31,11 @@ Imports:
     readr,
     rlang,
     sf,
-    tibble,
     utils
 Suggests: 
     ggplot2,
     knitr,
     leaflet,
-    RColorBrewer,
     rmarkdown,
     spelling,
     testthat (>= 3.0.0)

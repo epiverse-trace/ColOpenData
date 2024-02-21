@@ -21,7 +21,7 @@ test_that("Stations in ROI work as expected", {
 #
 # Climate stations
 test_that("Climate Stations throws errors", {
-  expect_error(download_climate_data(
+  expect_error(download_climate_stations(
     stations = "bogota",
     start_date = "2010-10-01",
     end_date = "2010-12-10",
@@ -29,7 +29,7 @@ test_that("Climate Stations throws errors", {
     tags = "PTPM_CON",
     aggregate = TRUE
   ))
-  expect_error(download_climate_data(
+  expect_error(download_climate_stations(
     stations = stations_names,
     start_date = 2010,
     end_date = "2010-12-10",
@@ -37,7 +37,7 @@ test_that("Climate Stations throws errors", {
     tags = "PTPM_CON",
     aggregate = TRUE
   ))
-  expect_error(download_climate_data(
+  expect_error(download_climate_stations(
     stations = stations_names,
     start_date = "2010-12-10",
     end_date = 675,
@@ -53,7 +53,7 @@ test_that("Climate Stations throws errors", {
     tags = "PTPM_CON",
     aggregate = TRUE
   ))
-  expect_error(download_climate_data(
+  expect_error(download_climate_stations(
     stations = stations_names,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
@@ -61,7 +61,7 @@ test_that("Climate Stations throws errors", {
     tags = "ERR",
     aggregate = TRUE
   ))
-  expect_error(download_climate_data(
+  expect_error(download_climate_stations(
     stations = stations_names,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
@@ -69,7 +69,7 @@ test_that("Climate Stations throws errors", {
     tags = c("TSSM_CON", "ERR"),
     aggregate = TRUE
   ))
-  expect_error(download_climate_data(
+  expect_error(download_climate_stations(
     stations = stations_names,
     start_date = "2010-10-01",
     end_date = "2010-12-10",

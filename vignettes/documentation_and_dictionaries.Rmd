@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 ## Understanding Datasets Names
 
 **ColOpenData** has three  modules: demographic, geospatial and 
-climate. All the available datasets have different details and aggregation and a naming system that is used to retrieve the data. All datasets need to have a source, given name, year and additional details for identification. They can be consulted using a common framework:
+climate. All the available datasets have different details, aggregation and a naming system that is used to retrieve the data. All datasets within the demographic and geospatial modules need to have a source, given name, year and additional details for identification and download. They can be consulted using a common framework:
 
 ::: {.alert .alert-info}
   SOURCE_NAME_YEAR_DETAILS
@@ -26,14 +26,14 @@ climate. All the available datasets have different details and aggregation and a
 Currently, **ColOpenData** only includes data from official sources [(DANE)](https://www.dane.gov.co/index.php/en/) and [(IDEAM)]( http://www.ideam.gov.co/). Name, year and details are different for each 
 module, and provide an unique name for each dataset.
 
-### Demographic
+#### Demographic
 
 Demographic datasets are available for municipalities and departments, and contain data for Houses and Population in four categories.
 
-- Viviendas (Houses)
-- Hogares (Homes)
-- Personas Social (Social)
-- Personas Demográfico (Demographic)
+- Viviendas (Dwellings)
+- Hogares (Households)
+- Personas Social (Persons social)
+- Personas Demográfico (Persons demographic)
 
 All datasets are retrieved from DANE, and are correspond to observed data from the National Population and Dwelling Census (CNPV). Naming is stated as follows:
 
@@ -46,7 +46,7 @@ All datasets are retrieved from DANE, and are correspond to observed data from t
 - Year: **2018**
 - Details: These are related to each individual dataset, and can be related to their identifier and spatial level of aggregation. For further details please check the function `list_datasets` below.
 
-### Geospatial
+#### Geospatial
 
 Geospatial datasets naming is related to the level of aggregation, since they are available from Blocks to Departments. All these datasets come from DANE, and are part of the Geostatistical National Framework (MGN), which for 2018 includes a summarized version of the National Population and Dwelling Census (CNPV). Naming is stated as follows:
 
@@ -64,7 +64,7 @@ Geospatial datasets naming is related to the level of aggregation, since they ar
   - Urban Section: **SECU**
   - Urban Zone: **ZU**
 
-### Climate
+#### Climate
 
 This module has only one dataset, and the information required to use the related functions is related to the area of interest, dates, frequency of measurement and tags consulted. Therefore, this module does not use the same framework for naming, and the dataset name is only useful to retrieve the dictionary for the individual tags.
 
@@ -80,32 +80,34 @@ library(ColOpenData)
 ```{r list datasets}
 # List all datasets
 datasets <- list_datasets()
-print(datasets)
+head(datasets)
 ```
 
-```{r list geospatial datasets}
+```{r list demographic datasets}
 # List geospatial datasets
-geo_datasets <- list_datasets(module = "geospatial")
-print(geo_datasets)
+geo_datasets <- list_datasets(module = "demographic")
+head(geo_datasets)
 ```
+Using this function we can retrieve all datasets names, source, aggregation level and small summary, to understand the contained information.
 
 ## Dictionaries
 
-### Demographic
+Dictionaries are provided to understand some tags and column names inside each module. These dictionaries are provided in Spanish, since they are retrieved directly from the sources.
+
+#### Demographic
 
 Dictionaries are not provided for this module.
 
-### Geospatial
+#### Geospatial
 
-Datasets inside the geospatial module contain a summarized version of the
-National Population and Dwelling Census (CNPV) and a dictionary is needed to
-understand all aggregated variables. These dictionaries contain the necessary metadata to use the available information. To retrieve them, we can use the `dictionary`function, using the dataset name as a parameter:
+Datasets inside the geospatial module contain a summarized version of the census and a dictionary is needed to understand all aggregated variables. These dictionaries contain the necessary metadata to use the available information. To retrieve them, we can use the `dictionary`function, using the dataset name as a parameter:
 
 ```{r dictionary for MGNCNPV at municipalities}
-dictionary("DANE_MGNCNPV_2018_MPIO")
+dict_mpio <- dictionary("DANE_MGNCNPV_2018_MPIO")
+head(dict_mpio)
 ```
 
-### Climate
+#### Climate
 
 Climate data is not stored in multiple datasets but as an unique dataset with
 numerous tags. These tags can also be consulted through the `dictionary`
@@ -113,8 +115,8 @@ function using the name of the climate dataset.
 
 ```{r dicionary for climate data}
 dict_climate <- dictionary("IDEAM_CLIMATE_2023_MAY")
-print(dict_climate)
+head(dict_climate)
 ```
 
-Climate dictionary includes the available tags to use in the functions `download_cliamte`, `download_climate_geom` and `download_climate_stations`.
-These tags allow the user to download specific climate attributes for their desired area of interest.
+Climate dictionary includes the available tags to use in the functions `download_climate`, `download_climate_geom` and `download_climate_stations`.
+These tags allow the user to download specific climate attributes for the desired area of interest.
