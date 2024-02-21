@@ -56,7 +56,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/climate_data.html">How to download climate data using ColOpenData</a>
-    <a class="dropdown-item" href="../articles/demographic_data.html">Download and use of demographic data</a>
+    <a class="dropdown-item" href="../articles/demographic_data.html">A Deep Dive into Colombian Demographics Using ColOpenData</a>
     <a class="dropdown-item" href="../articles/documentation_and_dictionaries.html">Documentation and Dictionaries</a>
     <a class="dropdown-item" href="../articles/geospatial_data.html">Maps and plots with ColOpenData</a>
   </div>
@@ -102,10 +102,11 @@
 </h2>
 <p><strong>ColOpenData</strong> has three modules: demographic,
 geospatial and climate. All the available datasets have different
-details and aggregation and a naming system that is used to retrieve the
-data. All datasets need to have a source, given name, year and
-additional details for identification. They can be consulted using a
-common framework:</p>
+details, aggregation and a naming system that is used to retrieve the
+data. All datasets within the demographic and geospatial modules need to
+have a source, given name, year and additional details for
+identification and download. They can be consulted using a common
+framework:</p>
 <div class="alert alert-info">
 <p>SOURCE_NAME_YEAR_DETAILS</p>
 </div>
@@ -113,17 +114,17 @@ common framework:</p>
 official sources <a href="https://www.dane.gov.co/index.php/en/" class="external-link">(DANE)</a> and <a href="http://www.ideam.gov.co/" class="external-link">(IDEAM)</a>. Name, year and details are
 different for each module, and provide an unique name for each
 dataset.</p>
-<div class="section level3">
-<h3 id="demographic">Demographic<a class="anchor" aria-label="anchor" href="#demographic"></a>
-</h3>
+<div class="section level4">
+<h4 id="demographic">Demographic<a class="anchor" aria-label="anchor" href="#demographic"></a>
+</h4>
 <p>Demographic datasets are available for municipalities and
 departments, and contain data for Houses and Population in four
 categories.</p>
 <ul>
-<li>Viviendas (Houses)</li>
-<li>Hogares (Homes)</li>
-<li>Personas Social (Social)</li>
-<li>Personas Demográfico (Demographic)</li>
+<li>Viviendas (Dwellings)</li>
+<li>Hogares (Households)</li>
+<li>Personas Social (Persons social)</li>
+<li>Personas Demográfico (Persons demographic)</li>
 </ul>
 <p>All datasets are retrieved from DANE, and are correspond to observed
 data from the National Population and Dwelling Census (CNPV). Naming is
@@ -151,9 +152,9 @@ further details please check the function <code>list_datasets</code>
 below.</li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="geospatial">Geospatial<a class="anchor" aria-label="anchor" href="#geospatial"></a>
-</h3>
+<div class="section level4">
+<h4 id="geospatial">Geospatial<a class="anchor" aria-label="anchor" href="#geospatial"></a>
+</h4>
 <p>Geospatial datasets naming is related to the level of aggregation,
 since they are available from Blocks to Departments. All these datasets
 come from DANE, and are part of the Geostatistical National Framework
@@ -191,9 +192,9 @@ Population and Dwelling Census (CNPV). Naming is stated as follows:</p>
 </li>
 </ul>
 </div>
-<div class="section level3">
-<h3 id="climate">Climate<a class="anchor" aria-label="anchor" href="#climate"></a>
-</h3>
+<div class="section level4">
+<h4 id="climate">Climate<a class="anchor" aria-label="anchor" href="#climate"></a>
+</h4>
 <p>This module has only one dataset, and the information required to use
 the related functions is related to the area of interest, dates,
 frequency of measurement and tags consulted. Therefore, this module does
@@ -212,110 +213,117 @@ with the <code>module</code> parameter to indicate a specific module</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># List all datasets</span></span>
 <span><span class="va">datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/list_datasets.html">list_datasets</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 104 × 7</span></span></span>
-<span><span class="co">#&gt;    name                     group      source  year level   category description</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> DANE_MGNCNPV_2018_DPTO   geospatial DANE    <span style="text-decoration: underline;">2</span>018 Depart… maps     Geographic…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> DANE_MGNCNPV_2018_MPIO   geospatial DANE    <span style="text-decoration: underline;">2</span>018 Munici… maps     Geographic…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> DANE_MGNCNPV_2018_MPIOCL geospatial DANE    <span style="text-decoration: underline;">2</span>018 Munici… maps     Geographic…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> DANE_MGNCNPV_2018_SETU   geospatial DANE    <span style="text-decoration: underline;">2</span>018 Urban … maps     Geographic…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> DANE_MGNCNPV_2018_SETR   geospatial DANE    <span style="text-decoration: underline;">2</span>018 Rural … maps     Geographic…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> DANE_MGNCNPV_2018_SECU   geospatial DANE    <span style="text-decoration: underline;">2</span>018 Urban … maps     Geographic…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> DANE_MGNCNPV_2018_SECR   geospatial DANE    <span style="text-decoration: underline;">2</span>018 Rural … maps     Geographic…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> DANE_MGNCNPV_2018_MZN    geospatial DANE    <span style="text-decoration: underline;">2</span>018 Block   maps     Geographic…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> DANE_MGNCNPV_2018_ZU     geospatial DANE    <span style="text-decoration: underline;">2</span>023 Urban … maps     Geographic…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> IDEAM_CLIMATE_2023_MAY   climate    IDEAM   <span style="text-decoration: underline;">2</span>023 Munici… weather  Available …</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 94 more rows</span></span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                       name      group source year         level category</span></span>
+<span><span class="co">#&gt; 1   DANE_MGNCNPV_2018_DPTO geospatial   DANE 2018    Department     maps</span></span>
+<span><span class="co">#&gt; 2   DANE_MGNCNPV_2018_MPIO geospatial   DANE 2018  Municipality     maps</span></span>
+<span><span class="co">#&gt; 3 DANE_MGNCNPV_2018_MPIOCL geospatial   DANE 2018  Municipality     maps</span></span>
+<span><span class="co">#&gt; 4   DANE_MGNCNPV_2018_SETU geospatial   DANE 2018  Urban Sector     maps</span></span>
+<span><span class="co">#&gt; 5   DANE_MGNCNPV_2018_SETR geospatial   DANE 2018  Rural Sector     maps</span></span>
+<span><span class="co">#&gt; 6   DANE_MGNCNPV_2018_SECU geospatial   DANE 2018 Urban Section     maps</span></span>
+<span><span class="co">#&gt;                                                                                 description</span></span>
+<span><span class="co">#&gt; 1              Geographical and summarised census data from 2018 at the level of Department</span></span>
+<span><span class="co">#&gt; 2            Geographical and summarised census data from 2018 at the level of Municipality</span></span>
+<span><span class="co">#&gt; 3 Geographical and summarised census data from 2018 at the level of Municipality with Class</span></span>
+<span><span class="co">#&gt; 4            Geographical and summarised census data from 2018 at the level of Urban Sector</span></span>
+<span><span class="co">#&gt; 5            Geographical and summarised census data from 2018 at the level of Rural Sector</span></span>
+<span><span class="co">#&gt; 6           Geographical and summarised census data from 2018 at the level of Urban Section</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># List geospatial datasets</span></span>
-<span><span class="va">geo_datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/list_datasets.html">list_datasets</a></span><span class="op">(</span>module <span class="op">=</span> <span class="st">"geospatial"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">geo_datasets</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 7</span></span></span>
-<span><span class="co">#&gt;   name                     group      source  year level    category description</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> DANE_MGNCNPV_2018_DPTO   geospatial DANE    <span style="text-decoration: underline;">2</span>018 Departm… maps     Geographic…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> DANE_MGNCNPV_2018_MPIO   geospatial DANE    <span style="text-decoration: underline;">2</span>018 Municip… maps     Geographic…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> DANE_MGNCNPV_2018_MPIOCL geospatial DANE    <span style="text-decoration: underline;">2</span>018 Municip… maps     Geographic…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> DANE_MGNCNPV_2018_SETU   geospatial DANE    <span style="text-decoration: underline;">2</span>018 Urban S… maps     Geographic…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> DANE_MGNCNPV_2018_SETR   geospatial DANE    <span style="text-decoration: underline;">2</span>018 Rural S… maps     Geographic…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> DANE_MGNCNPV_2018_SECU   geospatial DANE    <span style="text-decoration: underline;">2</span>018 Urban S… maps     Geographic…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> DANE_MGNCNPV_2018_SECR   geospatial DANE    <span style="text-decoration: underline;">2</span>018 Rural S… maps     Geographic…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> DANE_MGNCNPV_2018_MZN    geospatial DANE    <span style="text-decoration: underline;">2</span>018 Block    maps     Geographic…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span> DANE_MGNCNPV_2018_ZU     geospatial DANE    <span style="text-decoration: underline;">2</span>023 Urban Z… maps     Geographic…</span></span></code></pre></div>
+<span><span class="va">geo_datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/list_datasets.html">list_datasets</a></span><span class="op">(</span>module <span class="op">=</span> <span class="st">"demographic"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">geo_datasets</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                   name       group source year        level   category</span></span>
+<span><span class="co">#&gt; 11 DANE_CNPVH_2018_1HD demographic   DANE 2018   department households</span></span>
+<span><span class="co">#&gt; 12 DANE_CNPVH_2018_1HM demographic   DANE 2018 municipality households</span></span>
+<span><span class="co">#&gt; 13 DANE_CNPVH_2018_2HD demographic   DANE 2018   department households</span></span>
+<span><span class="co">#&gt; 14 DANE_CNPVH_2018_2HM demographic   DANE 2018 municipality households</span></span>
+<span><span class="co">#&gt; 15 DANE_CNPVH_2018_3HD demographic   DANE 2018   department households</span></span>
+<span><span class="co">#&gt; 16 DANE_CNPVH_2018_3HM demographic   DANE 2018 municipality households</span></span>
+<span><span class="co">#&gt;                                                                                                                      description</span></span>
+<span><span class="co">#&gt; 11   Number of households with persons under 15 years of age and number of persons under 15 years of age, by department and area</span></span>
+<span><span class="co">#&gt; 12 Number of households with persons under 15 years of age and number of persons under 15 years of age, by municipality and area</span></span>
+<span><span class="co">#&gt; 13                      Number of households with senior citizens and number of persons aged 60 and over, by department and area</span></span>
+<span><span class="co">#&gt; 14                    Number of households with senior citizens and number of persons aged 60 and over, by municipality and area</span></span>
+<span><span class="co">#&gt; 15                                                                                Households by headship, by department and area</span></span>
+<span><span class="co">#&gt; 16                                                                              Households by headship, by municipality and area</span></span></code></pre></div>
+<p>Using this function we can retrieve all datasets names, source,
+aggregation level and small summary, to understand the contained
+information.</p>
 </div>
 <div class="section level2">
 <h2 id="dictionaries">Dictionaries<a class="anchor" aria-label="anchor" href="#dictionaries"></a>
 </h2>
-<div class="section level3">
-<h3 id="demographic-1">Demographic<a class="anchor" aria-label="anchor" href="#demographic-1"></a>
-</h3>
+<p>Dictionaries are provided to understand some tags and column names
+inside each module. These dictionaries are provided in Spanish, since
+they are retrieved directly from the sources.</p>
+<div class="section level4">
+<h4 id="demographic-1">Demographic<a class="anchor" aria-label="anchor" href="#demographic-1"></a>
+</h4>
 <p>Dictionaries are not provided for this module.</p>
 </div>
-<div class="section level3">
-<h3 id="geospatial-1">Geospatial<a class="anchor" aria-label="anchor" href="#geospatial-1"></a>
-</h3>
+<div class="section level4">
+<h4 id="geospatial-1">Geospatial<a class="anchor" aria-label="anchor" href="#geospatial-1"></a>
+</h4>
 <p>Datasets inside the geospatial module contain a summarized version of
-the National Population and Dwelling Census (CNPV) and a dictionary is
-needed to understand all aggregated variables. These dictionaries
-contain the necessary metadata to use the available information. To
-retrieve them, we can use the <code>dictionary</code>function, using the
-dataset name as a parameter:</p>
+the census and a dictionary is needed to understand all aggregated
+variables. These dictionaries contain the necessary metadata to use the
+available information. To retrieve them, we can use the
+<code>dictionary</code>function, using the dataset name as a
+parameter:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/dictionary.html">dictionary</a></span><span class="op">(</span><span class="st">"DANE_MGNCNPV_2018_MPIO"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 88 × 5</span></span></span>
-<span><span class="co">#&gt;    variable   tipo         longitud descripcion               categoria_original</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> DPTO_CCDGO Text                2 Código del departamento   <span style="color: #BB0000;">NA</span>                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> MPIO_CCDGO Text                3 Código que identifica al… <span style="color: #BB0000;">NA</span>                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> MPIO_CNMBR Text              250 Nombre del municipio      <span style="color: #BB0000;">NA</span>                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> MPIO_CDPMP Text                5 Código concatenado que i… <span style="color: #BB0000;">NA</span>                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> VERSION    Long Integer       <span style="color: #BB0000;">NA</span> Año de la información ge… <span style="color: #BB0000;">NA</span>                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> AREA       Double             <span style="color: #BB0000;">NA</span> Área del municipio en me… <span style="color: #BB0000;">NA</span>                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> LATITUD    Double             <span style="color: #BB0000;">NA</span> Coordenada de latitud ce… <span style="color: #BB0000;">NA</span>                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> LONGITUD   Double             <span style="color: #BB0000;">NA</span> Coordenada de longitud c… <span style="color: #BB0000;">NA</span>                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> STCTNENCUE Double             <span style="color: #BB0000;">NA</span> Cantidad de Encuestas CN… <span style="color: #BB0000;">NA</span>                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> STP3_1_SI  Double             <span style="color: #BB0000;">NA</span> Cantidad de encuestas qu… <span style="color: #BB0000;">NA</span>                </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 78 more rows</span></span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">dict_mpio</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dictionary.html">dictionary</a></span><span class="op">(</span><span class="st">"DANE_MGNCNPV_2018_MPIO"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dict_mpio</span><span class="op">)</span></span>
+<span><span class="co">#&gt;     variable         tipo longitud</span></span>
+<span><span class="co">#&gt; 1 DPTO_CCDGO         Text        2</span></span>
+<span><span class="co">#&gt; 2 MPIO_CCDGO         Text        3</span></span>
+<span><span class="co">#&gt; 3 MPIO_CNMBR         Text      250</span></span>
+<span><span class="co">#&gt; 4 MPIO_CDPMP         Text        5</span></span>
+<span><span class="co">#&gt; 5    VERSION Long Integer       NA</span></span>
+<span><span class="co">#&gt; 6       AREA       Double       NA</span></span>
+<span><span class="co">#&gt;                                                                                     descripcion</span></span>
+<span><span class="co">#&gt; 1                                                                       Código del departamento</span></span>
+<span><span class="co">#&gt; 2                                                            Código que identifica al municipio</span></span>
+<span><span class="co">#&gt; 3                                                                          Nombre del municipio</span></span>
+<span><span class="co">#&gt; 4                                                Código concatenado que identifica al municipio</span></span>
+<span><span class="co">#&gt; 5                                                              Año de la información geográfica</span></span>
+<span><span class="co">#&gt; 6 Área del municipio en metros cuadrados  (Sistema de coordenadas planas MAGNA_Colombia_Bogota)</span></span>
+<span><span class="co">#&gt;   categoria_original</span></span>
+<span><span class="co">#&gt; 1               &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 2               &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 3               &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 4               &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 5               &lt;NA&gt;</span></span>
+<span><span class="co">#&gt; 6               &lt;NA&gt;</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="climate-1">Climate<a class="anchor" aria-label="anchor" href="#climate-1"></a>
-</h3>
+<div class="section level4">
+<h4 id="climate-1">Climate<a class="anchor" aria-label="anchor" href="#climate-1"></a>
+</h4>
 <p>Climate data is not stored in multiple datasets but as an unique
 dataset with numerous tags. These tags can also be consulted through the
 <code>dictionary</code> function using the name of the climate
 dataset.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dict_climate</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dictionary.html">dictionary</a></span><span class="op">(</span><span class="st">"IDEAM_CLIMATE_2023_MAY"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">dict_climate</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 20 × 3</span></span></span>
-<span><span class="co">#&gt;    etiqueta   variable                                   frecuencia             </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> TSSM_CON   Temperatura seca (ambiente)                Horaria (07:00, 13:00,…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> THSM_CON   Temperatura húmeda                         Horaria (07:00, 13:00,…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> TMN_CON    Temperatura mínima                         Diaria                 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> TMX_CON    Temperatura máxima                         Diaria                 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> TSTG_CON   Temperatura seca (ambiente) del termógrafo Horaria (24 horas)     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> HR_CAL     Humedad relativa                           Horaria (07:00, 13:00,…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> HRHG_CON   Humedad relativa del hidrógrafo            Horaria (24 horas      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> TV_CAL     Tensión de vapor                           Horaria (07:00, 13:00,…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> TPR_CAL    Punto de rocío                             Horaria (07:00, 13:00,…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> PTPM_CON   Precipitación                              Diaria                 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> PTPG_CON   Precipitación                              Horaria (24 horas)     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> EVTE_CON   Evaporación                                Diaria                 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> FA_CON     Fenómeno atmosférico                       Horaria (07:00, 13:00,…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> NB_CON     Nubosidad                                  Horaria (07:00, 13:00,…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> RCAM_CON   Recorrido del viento                       Diaria                 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> BSHG_CON   Brillo solar                               Horaria (14 horas)     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> VVAG_CON   Velocidad del viento                       Horaria (24 horas)     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> DVAG_CON   Dirección del viento                       Horaria (24 horas)     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> VVMXAG_CON Velocidad máxima del viento                Diaria                 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> DVMXAG_CON Dirección máxima del viento                Diaria</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dict_climate</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   etiqueta                                   variable</span></span>
+<span><span class="co">#&gt; 1 TSSM_CON                Temperatura seca (ambiente)</span></span>
+<span><span class="co">#&gt; 2 THSM_CON                         Temperatura húmeda</span></span>
+<span><span class="co">#&gt; 3  TMN_CON                         Temperatura mínima</span></span>
+<span><span class="co">#&gt; 4  TMX_CON                         Temperatura máxima</span></span>
+<span><span class="co">#&gt; 5 TSTG_CON Temperatura seca (ambiente) del termógrafo</span></span>
+<span><span class="co">#&gt; 6   HR_CAL                           Humedad relativa</span></span>
+<span><span class="co">#&gt;                                frecuencia</span></span>
+<span><span class="co">#&gt; 1 Horaria (07:00, 13:00, 18:00 y/o 19:00)</span></span>
+<span><span class="co">#&gt; 2 Horaria (07:00, 13:00, 18:00 y/o 19:00)</span></span>
+<span><span class="co">#&gt; 3                                  Diaria</span></span>
+<span><span class="co">#&gt; 4                                  Diaria</span></span>
+<span><span class="co">#&gt; 5                      Horaria (24 horas)</span></span>
+<span><span class="co">#&gt; 6 Horaria (07:00, 13:00, 18:00 y/o 19:00)</span></span></code></pre></div>
 <p>Climate dictionary includes the available tags to use in the
-functions <code>download_cliamte</code>,
+functions <code>download_climate</code>,
 <code>download_climate_geom</code> and
 <code>download_climate_stations</code>. These tags allow the user to
-download specific climate attributes for their desired area of
+download specific climate attributes for the desired area of
 interest.</p>
 </div>
 </div>

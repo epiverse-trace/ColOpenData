@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="ColOpenData">
-<title>Download and use of demographic data • ColOpenData</title>
+<title>A Deep Dive into Colombian Demographics Using ColOpenData • ColOpenData</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Download and use of demographic data">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="A Deep Dive into Colombian Demographics Using ColOpenData">
 <meta property="og:description" content="ColOpenData">
 <meta property="og:image" content="/logo.svg">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -56,7 +56,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/climate_data.html">How to download climate data using ColOpenData</a>
-    <a class="dropdown-item" href="../articles/demographic_data.html">Download and use of demographic data</a>
+    <a class="dropdown-item" href="../articles/demographic_data.html">A Deep Dive into Colombian Demographics Using ColOpenData</a>
     <a class="dropdown-item" href="../articles/documentation_and_dictionaries.html">Documentation and Dictionaries</a>
     <a class="dropdown-item" href="../articles/geospatial_data.html">Maps and plots with ColOpenData</a>
   </div>
@@ -88,7 +88,7 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.svg" class="logo" alt=""><h1>Download and use of demographic data</h1>
+      <img src="../logo.svg" class="logo" alt=""><h1>A Deep Dive into Colombian Demographics Using ColOpenData</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/epiverse-trace/ColOpenData/blob/HEAD/vignettes/demographic_data.Rmd" class="external-link"><code>vignettes/demographic_data.Rmd</code></a></small>
@@ -102,35 +102,57 @@
 data from Colombia. This demographic data is retrieved from the National
 Administrative Department of Statistics (<a href="https://www.dane.gov.co/index.php/estadisticas-por-tema" class="external-link">DANE</a>,
 for its acronym in Spanish). The demographic module allows you to
-consult demographic data, more specifically, 2018 Census data.</p>
-<p>The available Census information is divided in four categories:
-households, people demographics, people social and dwellings. All data
+consult demographic data, more specifically, National Population and
+Dwelling Census (CNPV) of 2018.</p>
+<p>The available CNPV information is divided in four categories:
+households, persons demographic, persons social and dwellings. All data
 documentation can be accessed as explained at <a href="https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html" class="external-link">Documentation
-and Dictionaries</a>, and it is important to take a good look at this to
-have a clearer understanding of what we count with, before just throwing
-ourselves to work with the data. Just as a reminder, the documentation
-presents information regarding all the three modules of the package, but
-here we are just interested in the demographic one. So, our target data
-are those with <code>demographic</code> in the <code>group</code>
-column.</p>
-<p>Now, if we already have an idea of what our goal with the data of
-interest is, we should start by loading all necessary libraries. As the
-goal of this vignette is to show some examples on how to use the data,
-we will load some specific libraries but that does not mean they are
-required to use the data in all cases.</p>
+and Dictionaries</a>. Just as a reminder, the documentation presents
+information regarding all the three modules of the package, but here we
+are just interested in the demographic one. In order to access its
+documentation we need to use the function <code>list_datasets</code> and
+by parameter indicate the module we are interested in. It is important
+to take a good look at this to have a clearer understanding of what we
+count with, before just throwing ourselves to work with the data. Now,
+we should start by loading all necessary libraries. As the goal of this
+vignette is to show some examples on how to use the data, we will load
+some specific libraries but that does not mean they are required to use
+the data in all cases.</p>
 </div>
+<div class="section level2">
+<h2 id="initial-exploration-basic-data-handling-with-colopendata">Initial Exploration: Basic Data Handling with ColOpenData<a class="anchor" aria-label="anchor" href="#initial-exploration-basic-data-handling-with-colopendata"></a>
+</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiverse-trace/ColOpenData" class="external-link">ColOpenData</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
 <div style="text-align: justify;">
-<p>After loading all libraries, we can download the data we want to work
-with. To do this, we will use the <code>download_demographic</code>
+<p>Then, we can access to the demographic documentation.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">datasets_dem</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/list_datasets.html">list_datasets</a></span><span class="op">(</span><span class="st">"demographic"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">datasets_dem</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                   name       group source year        level   category</span></span>
+<span><span class="co">#&gt; 11 DANE_CNPVH_2018_1HD demographic   DANE 2018   department households</span></span>
+<span><span class="co">#&gt; 12 DANE_CNPVH_2018_1HM demographic   DANE 2018 municipality households</span></span>
+<span><span class="co">#&gt; 13 DANE_CNPVH_2018_2HD demographic   DANE 2018   department households</span></span>
+<span><span class="co">#&gt; 14 DANE_CNPVH_2018_2HM demographic   DANE 2018 municipality households</span></span>
+<span><span class="co">#&gt; 15 DANE_CNPVH_2018_3HD demographic   DANE 2018   department households</span></span>
+<span><span class="co">#&gt; 16 DANE_CNPVH_2018_3HM demographic   DANE 2018 municipality households</span></span>
+<span><span class="co">#&gt;                                                                                                                      description</span></span>
+<span><span class="co">#&gt; 11   Number of households with persons under 15 years of age and number of persons under 15 years of age, by department and area</span></span>
+<span><span class="co">#&gt; 12 Number of households with persons under 15 years of age and number of persons under 15 years of age, by municipality and area</span></span>
+<span><span class="co">#&gt; 13                      Number of households with senior citizens and number of persons aged 60 and over, by department and area</span></span>
+<span><span class="co">#&gt; 14                    Number of households with senior citizens and number of persons aged 60 and over, by municipality and area</span></span>
+<span><span class="co">#&gt; 15                                                                                Households by headship, by department and area</span></span>
+<span><span class="co">#&gt; 16                                                                              Households by headship, by municipality and area</span></span></code></pre></div>
+<p>After checking the documentation, we can download the data we want to
+work with. To do this, we will use the <code>download_demographic</code>
 function that takes by parameter the data name, presented in the
 documentation.</p>
 </div>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">public_services_d</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_demographic.html">download_demographic</a></span><span class="op">(</span><span class="st">"DANE_CNPVV_2018_8VD"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Download a demographic dataset</span></span>
+<span><span class="va">public_services_d</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_demographic.html">download_demographic</a></span><span class="op">(</span><span class="st">"DANE_CNPVV_2018_8VD"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">public_services_d</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   codigo_departamento   departamento     area  servicio_publico      disponible</span></span>
 <span><span class="co">#&gt; 1                  00 Total nacional    total energia_electrica              si</span></span>
@@ -147,14 +169,14 @@ documentation.</p>
 <span><span class="co">#&gt; 5    81579</span></span>
 <span><span class="co">#&gt; 6        0</span></span></code></pre></div>
 <div style="text-align: justify;">
-<p>As it can be seen above, <code>public_services_d</code> presents
+<p>As it can be seen above, <u>public_services_d</u> presents
 information regarding availability of public services in the country in
 2018, at the department level. Now, with this data we could, for
 example, find the proportion of dwellings that have access to a water
 supply system (WSS) by department and plot it.</p>
 </div>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Subset data so it presents the information regarding the water supply system, by department</span></span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Subset data so it presents the information regarding the WSS, by department</span></span>
 <span><span class="va">wss</span> <span class="op">&lt;-</span> <span class="va">public_services_d</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">area</span> <span class="op">==</span> <span class="st">"total_departamental"</span> <span class="op">&amp;</span> <span class="va">servicio_publico</span> <span class="op">==</span> <span class="st">"acueducto"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">departamento</span>, <span class="va">disponible</span>, <span class="va">total</span><span class="op">)</span></span>
@@ -162,25 +184,24 @@ supply system (WSS) by department and plot it.</p>
 <span><span class="co"># Calculate the total counts for each department (for all situations)</span></span>
 <span><span class="va">total_counts</span> <span class="op">&lt;-</span> <span class="va">wss</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">departamento</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/summarise.html">summarise</a></span><span class="op">(</span>total_all <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">total</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>total_all <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">total</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Calculate the proportion of counts of "si" by department</span></span>
-<span><span class="va">proportions</span> <span class="op">&lt;-</span> <span class="va">wss</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">proportions_wss</span> <span class="op">&lt;-</span> <span class="va">wss</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">disponible</span> <span class="op">==</span> <span class="st">"si"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">total_counts</span>, by <span class="op">=</span> <span class="st">"departamento"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>proportion_si <span class="op">=</span> <span class="va">total</span> <span class="op">/</span> <span class="va">total_all</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Change the value of cell San Andres</span></span>
+<span><span class="va">proportions_wss</span><span class="op">[</span><span class="fl">28</span>, <span class="st">"departamento"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"SAPSC"</span></span>
 <span></span>
-<span><span class="va">proportions</span><span class="op">[</span><span class="fl">28</span>, <span class="st">"departamento"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"SAPSC"</span></span>
-<span></span>
-<span><span class="co"># Plot the proportions</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">proportions</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span></span>
+<span><span class="co"># Plot proportions_wss of dwellings with access to WSS by deparment</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">proportions_wss</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span></span>
 <span>  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html" class="external-link">reorder</a></span><span class="op">(</span><span class="va">departamento</span>, <span class="op">-</span><span class="va">proportion_si</span><span class="op">)</span>,</span>
 <span>  y <span class="op">=</span> <span class="va">proportion_si</span></span>
 <span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span>, fill <span class="op">=</span> <span class="st">"skyblue"</span>, color <span class="op">=</span> <span class="st">"black"</span>, width <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span>, fill <span class="op">=</span> <span class="st">"#10bed2"</span>, color <span class="op">=</span> <span class="st">"black"</span>, width <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
 <span>    title <span class="op">=</span> <span class="st">"Proportion of dwellings with access to WSS, by department"</span>,</span>
 <span>    x <span class="op">=</span> <span class="st">"Department"</span>,</span>
@@ -192,7 +213,122 @@ supply system (WSS) by department and plot it.</p>
 <span>    plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="demographic_data_files/figure-html/data%20filtering%20and%20plot-1.png" width="672"></p>
-  </main>
+</div>
+<div class="section level2">
+<h2 id="data-integration-combining-datasets-for-enhanced-analysis">Data Integration: Combining Datasets for Enhanced Analysis<a class="anchor" aria-label="anchor" href="#data-integration-combining-datasets-for-enhanced-analysis"></a>
+</h2>
+<div style="text-align: justify;">
+<p>Also, with the demographic data, we could merge data from the
+different categories and compare information. For example, we would
+download a file from the persons demographic category and another one
+from persons social. The first one presents information regarding
+population’s literacy and the second one regarding its marital
+status.</p>
+</div>
+<div style="text-align: justify;">
+<p>We will focus on a random municipality, examining the total area and
+specifically concentrating on the age group between 15 and 24 years old.
+Since we want to look at both data sets at the same time, it is good to
+check first if they present the same count for population under the same
+conditions.</p>
+</div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Literacy data filter to have a population's count under specific conditions</span></span>
+<span><span class="va">lit</span> <span class="op">&lt;-</span> <span class="va">literacy</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">municipio</span> <span class="op">==</span> <span class="st">"Villapinzón"</span> <span class="op">&amp;</span> <span class="va">grupo_de_edad</span> <span class="op">==</span> <span class="st">"entre_15_y_24_anos"</span> <span class="op">&amp;</span></span>
+<span>    <span class="va">area</span> <span class="op">==</span> <span class="st">"total"</span> <span class="op">&amp;</span> <span class="va">sabe_leer_y_escribir</span> <span class="op">==</span> <span class="st">"total"</span> <span class="op">&amp;</span> <span class="va">sexo</span> <span class="op">==</span> <span class="st">"total"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">municipio</span>, <span class="va">area</span>, <span class="va">grupo_de_edad</span>, <span class="va">sexo</span>, <span class="va">total</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">lit</span><span class="op">)</span></span>
+<span><span class="co"># Marital status data filter to find population's count under certain conditions</span></span>
+<span><span class="va">ms</span> <span class="op">&lt;-</span> <span class="va">marital_status</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">municipio</span> <span class="op">==</span> <span class="st">"Villapinzón"</span> <span class="op">&amp;</span> <span class="va">area</span> <span class="op">==</span> <span class="st">"total"</span> <span class="op">&amp;</span></span>
+<span>    <span class="va">grupo_de_edad</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"15_a_19"</span>, <span class="st">"20_a_24"</span><span class="op">)</span> <span class="op">&amp;</span> <span class="va">estado_civil</span> <span class="op">==</span> <span class="st">"total"</span> <span class="op">&amp;</span></span>
+<span>    <span class="va">sexo</span> <span class="op">==</span> <span class="st">"total"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">grupo_de_edad</span>, <span class="va">estado_civil</span>, <span class="va">sexo</span>, <span class="va">total</span><span class="op">)</span></span>
+<span><span class="co"># Sum of counts of both age groups</span></span>
+<span><span class="va">ms_count</span> <span class="op">&lt;-</span> <span class="va">ms</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">estado_civil</span>, <span class="va">sexo</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>total <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">total</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">count_total</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/toString.html" class="external-link">toString</a></span><span class="op">(</span><span class="va">ms_count</span><span class="op">$</span><span class="va">total</span><span class="op">)</span></span>
+<span><span class="co"># New row with summed information</span></span>
+<span><span class="va">new_row</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  grupo_de_edad <span class="op">=</span> <span class="st">"15_a_24"</span>, estado_civil <span class="op">=</span> <span class="st">"total"</span>,</span>
+<span>  sexo <span class="op">=</span> <span class="st">"total"</span>, total <span class="op">=</span> <span class="va">count_total</span>,</span>
+<span>  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co"># Final dataframe with counts for each group independently and together</span></span>
+<span><span class="va">ms_f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">ms</span>, <span class="va">new_row</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ms_f</span><span class="op">)</span></span></code></pre></div>
+<div style="text-align: justify;">
+<p>Now that we know that both data sets contain the same counts, we can
+start to look at the specific information we want. For the literacy data
+set, we would focus on the people that do not know how to read neither
+write. :::</p>
+</div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Filter of literacy data to get only the counts for specific conditions</span></span>
+<span><span class="va">lit_filt</span> <span class="op">&lt;-</span> <span class="va">literacy</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">municipio</span> <span class="op">==</span> <span class="st">"Villapinzón"</span> <span class="op">&amp;</span> <span class="va">sabe_leer_y_escribir</span> <span class="op">==</span> <span class="st">"no"</span> <span class="op">&amp;</span></span>
+<span>    <span class="va">grupo_de_edad</span> <span class="op">==</span> <span class="st">"entre_15_y_24_anos"</span> <span class="op">&amp;</span> <span class="va">area</span> <span class="op">==</span> <span class="st">"total"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">sabe_leer_y_escribir</span>, <span class="va">grupo_de_edad</span>, <span class="va">sexo</span>, <span class="va">total</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>estado <span class="op">=</span> <span class="st">"no_sabe_leer_y_escribir"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">sabe_leer_y_escribir</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>proportion <span class="op">=</span> <span class="va">total</span> <span class="op">/</span> <span class="va">lit</span><span class="op">$</span><span class="va">total</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Filter of marital status data to get only the counts for specific conditions</span></span>
+<span><span class="va">ms_filt15</span> <span class="op">&lt;-</span> <span class="va">marital_status</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">municipio</span> <span class="op">==</span> <span class="st">"Villapinzón"</span> <span class="op">&amp;</span> <span class="va">area</span> <span class="op">==</span> <span class="st">"total"</span> <span class="op">&amp;</span></span>
+<span>    <span class="va">grupo_de_edad</span> <span class="op">==</span> <span class="st">"15_a_19"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">grupo_de_edad</span>, <span class="va">estado_civil</span>, <span class="va">sexo</span>, <span class="va">total</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Filter of marital status data to get only the counts for specific conditions</span></span>
+<span><span class="va">ms_filt20</span> <span class="op">&lt;-</span> <span class="va">marital_status</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">municipio</span> <span class="op">==</span> <span class="st">"Villapinzón"</span> <span class="op">&amp;</span> <span class="va">area</span> <span class="op">==</span> <span class="st">"total"</span> <span class="op">&amp;</span></span>
+<span>    <span class="va">grupo_de_edad</span> <span class="op">==</span> <span class="st">"20_a_24"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">grupo_de_edad</span>, <span class="va">estado_civil</span>, <span class="va">sexo</span>, <span class="va">total</span><span class="op">)</span></span>
+<span><span class="co"># Merge of both marital status dataframes</span></span>
+<span><span class="va">ms_filt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">ms_filt15</span>, <span class="va">ms_filt20</span><span class="op">)</span></span>
+<span><span class="co"># Data frame with marital status info and proportions based on columns</span></span>
+<span><span class="va">ms_final</span> <span class="op">&lt;-</span> <span class="va">ms_filt</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">estado_civil</span>, <span class="va">sexo</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>total <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">total</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>grupo_de_edad <span class="op">=</span> <span class="st">"entre_15_y_24_anos"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>estado <span class="op">=</span> <span class="va">estado_civil</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>proportion <span class="op">=</span> <span class="va">total</span> <span class="op">/</span> <span class="va">lit</span><span class="op">$</span><span class="va">total</span><span class="op">)</span></span>
+<span><span class="co">#&gt; `summarise()` has grouped output by 'estado_civil'. You can override using the</span></span>
+<span><span class="co">#&gt; `.groups` argument.</span></span>
+<span></span>
+<span><span class="co"># Merged marital status and literacy final df, with subsets to a better graph</span></span>
+<span><span class="va">merged_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">lit_filt</span>, <span class="va">ms_final</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">sexo</span> <span class="op">!=</span> <span class="st">"total"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">estado</span> <span class="op">!=</span> <span class="st">"total"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">estado</span> <span class="op">!=</span> <span class="st">"soltero_a"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">colorm</span> <span class="op">&lt;-</span> <span class="st">"#f04a4c"</span></span>
+<span><span class="va">colorh</span> <span class="op">&lt;-</span> <span class="st">"#aec800"</span></span>
+<span><span class="co"># Plot</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">merged_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">estado</span>, y <span class="op">=</span> <span class="va">proportion</span>, fill <span class="op">=</span> <span class="va">sexo</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span>, position <span class="op">=</span> <span class="st">"dodge"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>mujer <span class="op">=</span> <span class="va">colorm</span>, hombre <span class="op">=</span> <span class="va">colorh</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Proportion of people in Villapinzón by marital status and</span></span>
+<span><span class="st">    iliteracy by sex"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Status"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Count"</span>,</span>
+<span>    fill <span class="op">=</span> <span class="st">"Sex"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
+<span>    axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
+<span>    plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<p><img src="demographic_data_files/figure-html/other%20data%20plot-1.png" width="960"></p>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 

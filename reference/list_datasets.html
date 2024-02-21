@@ -32,7 +32,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/climate_data.html">How to download climate data using ColOpenData</a>
-    <a class="dropdown-item" href="../articles/demographic_data.html">Download and use of demographic data</a>
+    <a class="dropdown-item" href="../articles/demographic_data.html">A Deep Dive into Colombian Demographics Using ColOpenData</a>
     <a class="dropdown-item" href="../articles/documentation_and_dictionaries.html">Documentation and Dictionaries</a>
     <a class="dropdown-item" href="../articles/geospatial_data.html">Maps and plots with ColOpenData</a>
   </div>
@@ -87,18 +87,26 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">list_datasets</span><span class="op">(</span><span class="st">"geospatial"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 9 × 7</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   name                     group      source  year level    category description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> DANE_MGNCNPV_2018_DPTO   geospatial DANE    <span style="text-decoration: underline;">2</span>018 Departm… maps     Geographic…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> DANE_MGNCNPV_2018_MPIO   geospatial DANE    <span style="text-decoration: underline;">2</span>018 Municip… maps     Geographic…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> DANE_MGNCNPV_2018_MPIOCL geospatial DANE    <span style="text-decoration: underline;">2</span>018 Municip… maps     Geographic…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> DANE_MGNCNPV_2018_SETU   geospatial DANE    <span style="text-decoration: underline;">2</span>018 Urban S… maps     Geographic…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> DANE_MGNCNPV_2018_SETR   geospatial DANE    <span style="text-decoration: underline;">2</span>018 Rural S… maps     Geographic…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> DANE_MGNCNPV_2018_SECU   geospatial DANE    <span style="text-decoration: underline;">2</span>018 Urban S… maps     Geographic…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> DANE_MGNCNPV_2018_SECR   geospatial DANE    <span style="text-decoration: underline;">2</span>018 Rural S… maps     Geographic…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> DANE_MGNCNPV_2018_MZN    geospatial DANE    <span style="text-decoration: underline;">2</span>018 Block    maps     Geographic…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">9</span> DANE_MGNCNPV_2018_ZU     geospatial DANE    <span style="text-decoration: underline;">2</span>023 Urban Z… maps     Geographic…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       name      group source year         level category</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   DANE_MGNCNPV_2018_DPTO geospatial   DANE 2018    Department     maps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   DANE_MGNCNPV_2018_MPIO geospatial   DANE 2018  Municipality     maps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 DANE_MGNCNPV_2018_MPIOCL geospatial   DANE 2018  Municipality     maps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   DANE_MGNCNPV_2018_SETU geospatial   DANE 2018  Urban Sector     maps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5   DANE_MGNCNPV_2018_SETR geospatial   DANE 2018  Rural Sector     maps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6   DANE_MGNCNPV_2018_SECU geospatial   DANE 2018 Urban Section     maps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7   DANE_MGNCNPV_2018_SECR geospatial   DANE 2018 Rural Section     maps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8    DANE_MGNCNPV_2018_MZN geospatial   DANE 2018         Block     maps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9     DANE_MGNCNPV_2018_ZU geospatial   DANE 2023    Urban Zone     maps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                 description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1              Geographical and summarised census data from 2018 at the level of Department</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2            Geographical and summarised census data from 2018 at the level of Municipality</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 Geographical and summarised census data from 2018 at the level of Municipality with Class</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4            Geographical and summarised census data from 2018 at the level of Urban Sector</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5            Geographical and summarised census data from 2018 at the level of Rural Sector</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6           Geographical and summarised census data from 2018 at the level of Urban Section</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7           Geographical and summarised census data from 2018 at the level of Rural Section</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8                   Geographical and summarised census data from 2018 at the level of Block</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9              Geographical and summarised census data from 2018 at the level of Urban zone</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

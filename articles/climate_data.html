@@ -56,7 +56,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/climate_data.html">How to download climate data using ColOpenData</a>
-    <a class="dropdown-item" href="../articles/demographic_data.html">Download and use of demographic data</a>
+    <a class="dropdown-item" href="../articles/demographic_data.html">A Deep Dive into Colombian Demographics Using ColOpenData</a>
     <a class="dropdown-item" href="../articles/documentation_and_dictionaries.html">Documentation and Dictionaries</a>
     <a class="dropdown-item" href="../articles/geospatial_data.html">Maps and plots with ColOpenData</a>
   </div>
@@ -231,39 +231,34 @@ library for further details). For visualization we will use
 <span><span class="va">roi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="va">polygon</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># plot polygon for reference</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/leaflet/man/leaflet.html" class="external-link">leaflet</a></span><span class="op">(</span><span class="va">roi</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/leaflet/man/addProviderTiles.html" class="external-link">addProviderTiles</a></span><span class="op">(</span><span class="st">"OpenStreetMap"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/leaflet/man/map-layers.html" class="external-link">addPolygons</a></span><span class="op">(</span></span>
+<span><span class="fu"><a href="https://rstudio.github.io/leaflet/reference/leaflet.html" class="external-link">leaflet</a></span><span class="op">(</span><span class="va">roi</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/leaflet/reference/addProviderTiles.html" class="external-link">addProviderTiles</a></span><span class="op">(</span><span class="st">"OpenStreetMap"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/leaflet/reference/map-layers.html" class="external-link">addPolygons</a></span><span class="op">(</span></span>
 <span>    stroke <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>    weight <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>    color <span class="op">=</span> <span class="st">"#2e6930"</span>,</span>
 <span>    fillColor <span class="op">=</span> <span class="st">"#2e6930"</span>,</span>
 <span>    opacity <span class="op">=</span> <span class="fl">0.6</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-e2e5c815c6389dc703b9" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-e2e5c815c6389dc703b9">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addPolygons","args":[[[[{"lng":[-75.678072,-75.327859,-75.327859,-75.678072,-75.678072],"lat":[5.166278,5.166278,4.982247,4.982247,5.166278]}]]],null,null,{"interactive":true,"className":"","stroke":true,"color":"#2e6930","weight":2,"opacity":0.6,"fill":true,"fillColor":"#2e6930","fillOpacity":0.2,"smoothFactor":1,"noClip":false},null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[4.982247,5.166278],"lng":[-75.678072,-75.327859]}},"evals":[],"jsHooks":[]}</script><p>With our new ROI, we can make a first exploration to check if there
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-6903f9aa9875aaf9eb8e" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-6903f9aa9875aaf9eb8e">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addPolygons","args":[[[[{"lng":[-75.678072,-75.327859,-75.327859,-75.678072,-75.678072],"lat":[5.166278,5.166278,4.982247,4.982247,5.166278]}]]],null,null,{"interactive":true,"className":"","stroke":true,"color":"#2e6930","weight":2,"opacity":0.6,"fill":true,"fillColor":"#2e6930","fillOpacity":0.2,"smoothFactor":1,"noClip":false},null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[4.982247,5.166278],"lng":[-75.678072,-75.327859]}},"evals":[],"jsHooks":[]}</script><p>With our new ROI, we can make a first exploration to check if there
 are any stations contained inside of it, using the function
 <code>stations_in_roi</code></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stations</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/stations_in_roi.html">stations_in_roi</a></span><span class="op">(</span><span class="va">roi</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">stations</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Simple feature collection with 129 features and 20 fields</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">stations</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Simple feature collection with 6 features and 20 fields</span></span>
 <span><span class="co">#&gt; Geometry type: POINT</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
-<span><span class="co">#&gt; Bounding box:  xmin: -75.67119 ymin: 4.983333 xmax: -75.33222 ymax: 5.163167</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: -75.51667 ymin: 5.029778 xmax: -75.35611 ymax: 5.1</span></span>
 <span><span class="co">#&gt; CRS:           NA</span></span>
-<span><span class="co">#&gt; First 10 features:</span></span>
-<span><span class="co">#&gt;        codigo                           nombre              categoria</span></span>
-<span><span class="co">#&gt; 138  26155220      VILLAMARIA - AUT [26155220]    Climática Principal</span></span>
-<span><span class="co">#&gt; 139  26155210         TORRE 4 - AUT [26155210]    Climática Principal</span></span>
-<span><span class="co">#&gt; 140  26155230            EMAS - AUT [26155230]    Climática Principal</span></span>
-<span><span class="co">#&gt; 266  26155110   AEROPUERTO LA NUBIA [26155110]    Sinóptica Principal</span></span>
-<span><span class="co">#&gt; 749  26155170 TESORITO FINCA  - AUT [26155170]    Climática Ordinaria</span></span>
-<span><span class="co">#&gt; 1119 26157090              PLAYA LA [26157090]           Limnimétrica</span></span>
-<span><span class="co">#&gt; 2157 26157100           SAN GABRIEL [26157100]           Limnimétrica</span></span>
-<span><span class="co">#&gt; 2312 26157060             RIO CLARO [26157060]           Limnimétrica</span></span>
-<span><span class="co">#&gt; 2314 26155160             PALESTINA [26155160] Meteorológica Especial</span></span>
-<span><span class="co">#&gt; 2326 26157080            CHUPADEROS [26157080]           Limnigráfica</span></span>
+<span><span class="co">#&gt;        codigo                           nombre           categoria</span></span>
+<span><span class="co">#&gt; 138  26155220      VILLAMARIA - AUT [26155220] Climática Principal</span></span>
+<span><span class="co">#&gt; 139  26155210         TORRE 4 - AUT [26155210] Climática Principal</span></span>
+<span><span class="co">#&gt; 140  26155230            EMAS - AUT [26155230] Climática Principal</span></span>
+<span><span class="co">#&gt; 266  26155110   AEROPUERTO LA NUBIA [26155110] Sinóptica Principal</span></span>
+<span><span class="co">#&gt; 749  26155170 TESORITO FINCA  - AUT [26155170] Climática Ordinaria</span></span>
+<span><span class="co">#&gt; 1119 26157090              PLAYA LA [26157090]        Limnimétrica</span></span>
 <span><span class="co">#&gt;                     tecnologia     estado departamento  municipio  latitud</span></span>
 <span><span class="co">#&gt; 138  Automática con Telemetría     Activa       Caldas Villamaria 5.048667</span></span>
 <span><span class="co">#&gt; 139  Automática con Telemetría Suspendida       Caldas  Manizales 5.060778</span></span>
@@ -271,10 +266,6 @@ are any stations contained inside of it, using the function
 <span><span class="co">#&gt; 266               Convencional     Activa       Caldas  Manizales 5.029778</span></span>
 <span><span class="co">#&gt; 749  Automática con Telemetría     Activa       Caldas  Manizales 5.032222</span></span>
 <span><span class="co">#&gt; 1119              Convencional Suspendida       Caldas  Manizales 5.100000</span></span>
-<span><span class="co">#&gt; 2157              Convencional     Activa       Caldas  Manizales 5.119306</span></span>
-<span><span class="co">#&gt; 2312              Convencional Suspendida       Caldas Villamaria 5.000000</span></span>
-<span><span class="co">#&gt; 2314              Convencional Suspendida       Caldas  Chinchina 5.016667</span></span>
-<span><span class="co">#&gt; 2326              Convencional Suspendida       Caldas  Manizales 5.028944</span></span>
 <span><span class="co">#&gt;       longitud altitud   fecha_instalacion</span></span>
 <span><span class="co">#&gt; 138  -75.51389    1906 2004-06-14 00:00:00</span></span>
 <span><span class="co">#&gt; 139  -75.35611    3787 2004-07-14 00:00:00</span></span>
@@ -282,10 +273,6 @@ are any stations contained inside of it, using the function
 <span><span class="co">#&gt; 266  -75.46992    2104 1968-06-15 00:00:00</span></span>
 <span><span class="co">#&gt; 749  -75.43833    2325 1992-10-14 19:00:00</span></span>
 <span><span class="co">#&gt; 1119 -75.51667     250 1984-07-15 00:00:00</span></span>
-<span><span class="co">#&gt; 2157 -75.56472    1173 1984-07-15 00:00:00</span></span>
-<span><span class="co">#&gt; 2312 -75.55000    1530 1984-08-15 00:00:00</span></span>
-<span><span class="co">#&gt; 2314 -75.51667    1500 1989-02-15 00:00:00</span></span>
-<span><span class="co">#&gt; 2326 -75.47617      21 1984-07-15 00:00:00</span></span>
 <span><span class="co">#&gt;                              area_operativa         corriente area_hidrografica</span></span>
 <span><span class="co">#&gt; 138  Area Operativa 09 - Cauca-Valle-Caldas          San Juan   Magdalena Cauca</span></span>
 <span><span class="co">#&gt; 139  Area Operativa 09 - Cauca-Valle-Caldas          San Juan   Magdalena Cauca</span></span>
@@ -293,10 +280,6 @@ are any stations contained inside of it, using the function
 <span><span class="co">#&gt; 266  Area Operativa 09 - Cauca-Valle-Caldas           Orinoco   Magdalena Cauca</span></span>
 <span><span class="co">#&gt; 749  Area Operativa 09 - Cauca-Valle-Caldas                 0   Magdalena Cauca</span></span>
 <span><span class="co">#&gt; 1119 Area Operativa 09 - Cauca-Valle-Caldas Quebrada Olivares   Magdalena Cauca</span></span>
-<span><span class="co">#&gt; 2157 Area Operativa 09 - Cauca-Valle-Caldas          Guacaica   Magdalena Cauca</span></span>
-<span><span class="co">#&gt; 2312 Area Operativa 09 - Cauca-Valle-Caldas             Claro   Magdalena Cauca</span></span>
-<span><span class="co">#&gt; 2314 Area Operativa 09 - Cauca-Valle-Caldas           Villeta   Magdalena Cauca</span></span>
-<span><span class="co">#&gt; 2326 Area Operativa 09 - Cauca-Valle-Caldas         Chinchina   Magdalena Cauca</span></span>
 <span><span class="co">#&gt;      zona_hidrografica subzona_hidrografica</span></span>
 <span><span class="co">#&gt; 138              Cauca        Río Chinchiná</span></span>
 <span><span class="co">#&gt; 139    Medio Magdalena          Río Guarinó</span></span>
@@ -304,10 +287,6 @@ are any stations contained inside of it, using the function
 <span><span class="co">#&gt; 266              Cauca        Río Chinchiná</span></span>
 <span><span class="co">#&gt; 749              Cauca        Río Chinchiná</span></span>
 <span><span class="co">#&gt; 1119             Cauca        Río Chinchiná</span></span>
-<span><span class="co">#&gt; 2157             Cauca        Río Chinchiná</span></span>
-<span><span class="co">#&gt; 2312             Cauca        Río Chinchiná</span></span>
-<span><span class="co">#&gt; 2314             Cauca        Río Chinchiná</span></span>
-<span><span class="co">#&gt; 2326             Cauca        Río Chinchiná</span></span>
 <span><span class="co">#&gt;                                                          entidad</span></span>
 <span><span class="co">#&gt; 138  INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES</span></span>
 <span><span class="co">#&gt; 139  INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES</span></span>
@@ -315,21 +294,13 @@ are any stations contained inside of it, using the function
 <span><span class="co">#&gt; 266  INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES</span></span>
 <span><span class="co">#&gt; 749  INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES</span></span>
 <span><span class="co">#&gt; 1119 INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES</span></span>
-<span><span class="co">#&gt; 2157 INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES</span></span>
-<span><span class="co">#&gt; 2312 INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES</span></span>
-<span><span class="co">#&gt; 2314 INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES</span></span>
-<span><span class="co">#&gt; 2326 INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES</span></span>
 <span><span class="co">#&gt;      fecha_suspension mpio_cdpmp dpto_ccdgo                   geometry</span></span>
 <span><span class="co">#&gt; 138              &lt;NA&gt;      17873         17 POINT (-75.51389 5.048667)</span></span>
 <span><span class="co">#&gt; 139        2010-09-29      17446         17 POINT (-75.35611 5.060778)</span></span>
 <span><span class="co">#&gt; 140              &lt;NA&gt;      17001         17  POINT (-75.50714 5.08525)</span></span>
 <span><span class="co">#&gt; 266              &lt;NA&gt;      17001         17 POINT (-75.46992 5.029778)</span></span>
 <span><span class="co">#&gt; 749              &lt;NA&gt;      17001         17 POINT (-75.43833 5.032222)</span></span>
-<span><span class="co">#&gt; 1119       1996-04-15      17001         17      POINT (-75.51667 5.1)</span></span>
-<span><span class="co">#&gt; 2157             &lt;NA&gt;      17001         17 POINT (-75.56472 5.119306)</span></span>
-<span><span class="co">#&gt; 2312       1995-05-15      17873         17           POINT (-75.55 5)</span></span>
-<span><span class="co">#&gt; 2314       1992-11-15      17873         17 POINT (-75.51667 5.016667)</span></span>
-<span><span class="co">#&gt; 2326       2016-01-06      17001         17 POINT (-75.47617 5.028944)</span></span></code></pre></div>
+<span><span class="co">#&gt; 1119       1996-04-15      17001         17      POINT (-75.51667 5.1)</span></span></code></pre></div>
 <p>We can see that in the region there are 129 stations. Different
 categories are recorded by different stations, and can be checked at the
 column <em>categoria</em>. To understand the category of each station we
@@ -338,7 +309,7 @@ Stations under the categories <em>Climática Principal</em> and
 <em>Climática Ordinaria</em> have records of Dry-bulb temperature.</p>
 <p>Some stations are suspended, which means they are not taking
 measurements at the moment. This information is found at the column
-<em>estado</em> or, if the observation at <em>fecha_suspension</em> is
+<u>estado</u> or, if the observation at <u>fecha_suspension</u> is
 different from <code>NA</code>, since active stations do not have a
 suspension date. However, even if a station is suspended, the historical
 data (up to the suspension date) can be accessed.</p>
@@ -354,85 +325,38 @@ period, we can delete the stations with suspension dates before
 <span><span class="va">cw_stations</span> <span class="op">&lt;-</span> <span class="va">w_stations</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">categoria</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Climática Principal"</span>, <span class="st">"Climática Ordinaria"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Print stations</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">cw_stations</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Simple feature collection with 40 features and 20 fields</span></span>
-<span><span class="co">#&gt; Geometry type: POINT</span></span>
-<span><span class="co">#&gt; Dimension:     XY</span></span>
-<span><span class="co">#&gt; Bounding box:  xmin: -75.66667 ymin: 4.983333 xmax: -75.33222 ymax: 5.158472</span></span>
-<span><span class="co">#&gt; CRS:           NA</span></span>
-<span><span class="co">#&gt; First 10 features:</span></span>
-<span><span class="co">#&gt;        codigo                                      nombre           categoria</span></span>
-<span><span class="co">#&gt; 1    26155220                 VILLAMARIA - AUT [26155220] Climática Principal</span></span>
-<span><span class="co">#&gt; 2    26155230                       EMAS - AUT [26155230] Climática Principal</span></span>
-<span><span class="co">#&gt; 3    26155170            TESORITO FINCA  - AUT [26155170] Climática Ordinaria</span></span>
-<span><span class="co">#&gt; 4  2615500122 LA ESPERANZA ANDALUCIA - AUT   [2615500122] Climática Principal</span></span>
-<span><span class="co">#&gt; 5    26155190                    ALGARROBO EL  [26155190] Climática Principal</span></span>
-<span><span class="co">#&gt; 6    26155090                      SANTAGUEDA  [26155090] Climática Principal</span></span>
-<span><span class="co">#&gt; 7    26155180                            EMAS  [26155180] Climática Principal</span></span>
-<span><span class="co">#&gt; 8    26135270                        PLANALTO  [26135270] Climática Principal</span></span>
-<span><span class="co">#&gt; 9    26155504                 LA SIRIA  - AUT  [26155504] Climática Principal</span></span>
-<span><span class="co">#&gt; 10   26155020                        CENICAFE  [26155020] Climática Principal</span></span>
-<span><span class="co">#&gt;                   tecnologia estado departamento          municipio  latitud</span></span>
-<span><span class="co">#&gt; 1  Automática con Telemetría Activa       Caldas         Villamaria 5.048667</span></span>
-<span><span class="co">#&gt; 2  Automática con Telemetría Activa       Caldas          Manizales 5.085250</span></span>
-<span><span class="co">#&gt; 3  Automática con Telemetría Activa       Caldas          Manizales 5.032222</span></span>
-<span><span class="co">#&gt; 4  Automática con Telemetría Activa       Caldas          Manizales 5.017778</span></span>
-<span><span class="co">#&gt; 5               Convencional Activa       Caldas          Manizales 5.066667</span></span>
-<span><span class="co">#&gt; 6               Convencional Activa       Caldas Palestina (Caldas) 5.083333</span></span>
-<span><span class="co">#&gt; 7               Convencional Activa       Caldas          Manizales 5.083333</span></span>
-<span><span class="co">#&gt; 8               Convencional Activa       Caldas          Chinchina 4.983333</span></span>
-<span><span class="co">#&gt; 9  Automática con Telemetría Activa       Caldas          Manizales 5.022997</span></span>
-<span><span class="co">#&gt; 10              Convencional Activa       Caldas          Chinchina 4.983333</span></span>
-<span><span class="co">#&gt;     longitud altitud   fecha_instalacion                         area_operativa</span></span>
-<span><span class="co">#&gt; 1  -75.51389    1906 2004-06-14 00:00:00 Area Operativa 09 - Cauca-Valle-Caldas</span></span>
-<span><span class="co">#&gt; 2  -75.50714    2211 2004-06-10 00:00:00 Area Operativa 09 - Cauca-Valle-Caldas</span></span>
-<span><span class="co">#&gt; 3  -75.43833    2325 1992-10-14 19:00:00 Area Operativa 09 - Cauca-Valle-Caldas</span></span>
-<span><span class="co">#&gt; 4  -75.35658    3316 2017-04-19 19:00:00 Area Operativa 09 - Cauca-Valle-Caldas</span></span>
-<span><span class="co">#&gt; 5  -75.58333    1202 1992-11-15 00:00:00 Area Operativa 09 - Cauca-Valle-Caldas</span></span>
-<span><span class="co">#&gt; 6  -75.66667    1010 1964-01-15 00:00:00 Area Operativa 09 - Cauca-Valle-Caldas</span></span>
-<span><span class="co">#&gt; 7  -75.51667    2046 1997-06-15 00:00:00 Area Operativa 09 - Cauca-Valle-Caldas</span></span>
-<span><span class="co">#&gt; 8  -75.58333    1406 1993-03-15 00:00:00 Area Operativa 09 - Cauca-Valle-Caldas</span></span>
-<span><span class="co">#&gt; 9  -75.55300     999                &lt;NA&gt; Area Operativa 09 - Cauca-Valle-Caldas</span></span>
-<span><span class="co">#&gt; 10 -75.58333    1310 1941-04-15 00:00:00 Area Operativa 09 - Cauca-Valle-Caldas</span></span>
-<span><span class="co">#&gt;            corriente area_hidrografica zona_hidrografica subzona_hidrografica</span></span>
-<span><span class="co">#&gt; 1           San Juan   Magdalena Cauca             Cauca        Río Chinchiná</span></span>
-<span><span class="co">#&gt; 2           San Juan   Magdalena Cauca             Cauca        Río Chinchiná</span></span>
-<span><span class="co">#&gt; 3                  0   Magdalena Cauca             Cauca        Río Chinchiná</span></span>
-<span><span class="co">#&gt; 4                  0   Magdalena Cauca             Cauca        Río Chinchiná</span></span>
-<span><span class="co">#&gt; 5  Qda Santa Barbara   Magdalena Cauca             Cauca        Río Chinchiná</span></span>
-<span><span class="co">#&gt; 6  Qda Santa Barbara   Magdalena Cauca             Cauca        Río Chinchiná</span></span>
-<span><span class="co">#&gt; 7  Qda Santa Barbara   Magdalena Cauca             Cauca        Río Chinchiná</span></span>
-<span><span class="co">#&gt; 8            Bituima   Magdalena Cauca             Cauca        Río Chinchiná</span></span>
-<span><span class="co">#&gt; 9        Campoalegre   Magdalena Cauca             Cauca        Río Chinchiná</span></span>
-<span><span class="co">#&gt; 10 Qda Santa Barbara   Magdalena Cauca             Cauca        Río Chinchiná</span></span>
-<span><span class="co">#&gt;                                                        entidad fecha_suspension</span></span>
-<span><span class="co">#&gt; 1  INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES             &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2  INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES             &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3  INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES             &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4  INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES             &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5                             FEDERACION NACIONAL DE CAFETEROS             &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6                             FEDERACION NACIONAL DE CAFETEROS             &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 7                                      ESTACIONES PARTICULARES             &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 8                             FEDERACION NACIONAL DE CAFETEROS             &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 9                                                     CENICAFE             &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 10                            FEDERACION NACIONAL DE CAFETEROS             &lt;NA&gt;</span></span>
-<span><span class="co">#&gt;    mpio_cdpmp dpto_ccdgo                   geometry</span></span>
-<span><span class="co">#&gt; 1       17873         17 POINT (-75.51389 5.048667)</span></span>
-<span><span class="co">#&gt; 2       17001         17  POINT (-75.50714 5.08525)</span></span>
-<span><span class="co">#&gt; 3       17001         17 POINT (-75.43833 5.032222)</span></span>
-<span><span class="co">#&gt; 4       17001         17 POINT (-75.35658 5.017778)</span></span>
-<span><span class="co">#&gt; 5       17001         17 POINT (-75.58333 5.066667)</span></span>
-<span><span class="co">#&gt; 6       17524         17 POINT (-75.66667 5.083333)</span></span>
-<span><span class="co">#&gt; 7       17001         17 POINT (-75.51667 5.083333)</span></span>
-<span><span class="co">#&gt; 8       17873         17 POINT (-75.58333 4.983333)</span></span>
-<span><span class="co">#&gt; 9       17001         17   POINT (-75.553 5.022997)</span></span>
-<span><span class="co">#&gt; 10      17873         17 POINT (-75.58333 4.983333)</span></span></code></pre></div>
+<span><span class="co"># General information of stations</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">cw_stations</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Classes 'sf' and 'data.frame':   40 obs. of  21 variables:</span></span>
+<span><span class="co">#&gt;  $ codigo              : num  2.62e+07 2.62e+07 2.62e+07 2.62e+09 2.62e+07 ...</span></span>
+<span><span class="co">#&gt;  $ nombre              : chr  "VILLAMARIA - AUT [26155220]" "EMAS - AUT [26155230]" "TESORITO FINCA  - AUT [26155170]" "LA ESPERANZA ANDALUCIA - AUT   [2615500122]" ...</span></span>
+<span><span class="co">#&gt;  $ categoria           : chr  "Climática Principal" "Climática Principal" "Climática Ordinaria" "Climática Principal" ...</span></span>
+<span><span class="co">#&gt;  $ tecnologia          : chr  "Automática con Telemetría" "Automática con Telemetría" "Automática con Telemetría" "Automática con Telemetría" ...</span></span>
+<span><span class="co">#&gt;  $ estado              : chr  "Activa" "Activa" "Activa" "Activa" ...</span></span>
+<span><span class="co">#&gt;  $ departamento        : chr  "Caldas" "Caldas" "Caldas" "Caldas" ...</span></span>
+<span><span class="co">#&gt;  $ municipio           : chr  "Villamaria" "Manizales" "Manizales" "Manizales" ...</span></span>
+<span><span class="co">#&gt;  $ latitud             : num  5.05 5.09 5.03 5.02 5.07 ...</span></span>
+<span><span class="co">#&gt;  $ longitud            : num  -75.5 -75.5 -75.4 -75.4 -75.6 ...</span></span>
+<span><span class="co">#&gt;  $ altitud             : num  1906 2211 2325 3316 1202 ...</span></span>
+<span><span class="co">#&gt;  $ fecha_instalacion   : POSIXct, format: "2004-06-14 00:00:00" "2004-06-10 00:00:00" ...</span></span>
+<span><span class="co">#&gt;  $ area_operativa      : chr  "Area Operativa 09 - Cauca-Valle-Caldas" "Area Operativa 09 - Cauca-Valle-Caldas" "Area Operativa 09 - Cauca-Valle-Caldas" "Area Operativa 09 - Cauca-Valle-Caldas" ...</span></span>
+<span><span class="co">#&gt;  $ corriente           : chr  "San Juan" "San Juan" "0" "0" ...</span></span>
+<span><span class="co">#&gt;  $ area_hidrografica   : chr  "Magdalena Cauca" "Magdalena Cauca" "Magdalena Cauca" "Magdalena Cauca" ...</span></span>
+<span><span class="co">#&gt;  $ zona_hidrografica   : chr  "Cauca" "Cauca" "Cauca" "Cauca" ...</span></span>
+<span><span class="co">#&gt;  $ subzona_hidrografica: chr  "Río Chinchiná" "Río Chinchiná" "Río Chinchiná" "Río Chinchiná" ...</span></span>
+<span><span class="co">#&gt;  $ entidad             : chr  "INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES" "INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES" "INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES" "INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES" ...</span></span>
+<span><span class="co">#&gt;  $ fecha_suspension    : chr  NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ mpio_cdpmp          : chr  "17873" "17001" "17001" "17001" ...</span></span>
+<span><span class="co">#&gt;  $ dpto_ccdgo          : chr  "17" "17" "17" "17" ...</span></span>
+<span><span class="co">#&gt;  $ geometry            :sfc_POINT of length 40; first list element:  'XY' num  -75.51 5.05</span></span>
+<span><span class="co">#&gt;  - attr(*, "sf_column")= chr "geometry"</span></span>
+<span><span class="co">#&gt;  - attr(*, "agr")= Factor w/ 3 levels "constant","aggregate",..: NA NA NA NA NA NA NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;   ..- attr(*, "names")= chr [1:20] "codigo" "nombre" "categoria" "tecnologia" ...</span></span></code></pre></div>
 <p>From the original 129 stations, 40 were working for some or the whole
 period of interest and collected information for Dry-bulb temperature.
 With this information, we can access the Dry-bulb temperature from 2013
 to 2016. To do so, we can use the function
-<code>download_climate_data</code>. This function has the following
+<code>download_climate_stations</code>. This function has the following
 parameters:</p>
 <ul>
 <li>
@@ -461,124 +385,14 @@ area. (Default = <code>TRUE</code>)</li>
 <p>Stations’ codes are obtained from the column <code>codigo</code> in
 the stations data.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">db_temperature_stations</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_climate_data.html">download_climate_data</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">db_temperature_stations</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_climate_stations.html">download_climate_stations</a></span><span class="op">(</span></span>
 <span>  stations <span class="op">=</span> <span class="va">w_stations</span><span class="op">$</span><span class="va">codigo</span>,</span>
 <span>  start_date <span class="op">=</span> <span class="st">"2013-01-01"</span>,</span>
 <span>  end_date <span class="op">=</span> <span class="st">"2016-12-31"</span>,</span>
 <span>  frequency <span class="op">=</span> <span class="st">"day"</span>,</span>
 <span>  tags <span class="op">=</span> <span class="st">"TSSM_CON"</span>,</span>
 <span>  aggregate <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26155220 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26155230 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26157100 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26157080 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26150160 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26157020 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26160100 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615500122 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26150030 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26150040 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26150050 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26155190 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26155090 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26155180 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26157150 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 23020130 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26150340 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26150360 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26150410 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26150420 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26150310 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26150140 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26150200 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26150400 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26150130 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26150370 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26150390 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26157010 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26157050 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26130160 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26130470 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26135270 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26150220 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26150280 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26155504 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26150380 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26155020 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26155502 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 24025070 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26137030 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26150080 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26150260 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26157030 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26150210 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26155200 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26150090 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26150180 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26150350 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 23025502 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26150070 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26150250 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26150300 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26155050 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26157130 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26150190 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 26155503 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615500011 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615500005 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615500008 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615700040 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615500012 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615700045 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615700046 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615500015 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615700048 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615500021 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615700053 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615700056 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615700061 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615500026 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615700066 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615500028 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615700067 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615500031 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615500033 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615700074 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615700076 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2613700077 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615700079 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615700080 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615700082 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615500035 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615500013 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615700041 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615700042 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615700043 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615700044 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615500014 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615500016 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615700049 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615500018 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615700050 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615500019 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615500020 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615500022 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615500023 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615700054 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615700055 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615500024 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615500025 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615700058 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615700059 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615500027 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615700064 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615700065 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615500029 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615700068 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615700073 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615500034 is not available</span></span>
-<span><span class="co">#&gt; Warning in value[[3L]](cond): Station 2615700001 is not available</span></span></code></pre></div>
+<span><span class="op">)</span></span></code></pre></div>
 <p>With the stations’ downloaded data we can plot the time series for
 the four years of interest.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -663,9 +477,9 @@ we need to concatenate both, obtaining a five digit number with
 department and municipality codes. The codes for each municipality and
 department can be consulted in the following <a href="https://www.datos.gov.co/widgets/gdxc-w37w" class="external-link">table</a>.</p>
 <p>To replicate our previous example we only need the code for
-Manizales, which is “17001”, which means the code for the department
-Caldas is “17” and the code for Manizales inside that department is
-“001”.</p>
+Manizales, which is <code>"17001"</code>, which means the code for the
+department Caldas (where Manizales is located) is <code>"17"</code> and
+the code for Manizales inside that department is <code>"001"</code>.</p>
 <p>The function <code>download_climate</code> will require almost the
 same arguments than <code>download_climate_geom</code>, but replace the
 <code>sf</code> object for a character containing the DIVIPOLA code:</p>
