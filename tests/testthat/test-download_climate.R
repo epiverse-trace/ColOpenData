@@ -7,7 +7,6 @@ medellin <- mpios[which(mpios$MPIO_CDPMP == "05615"), ]
 ibague <- mpios[which(mpios$MPIO_CDPMP == "73001"), ]
 # Retrieve existing stations
 stations_test <- stations_in_roi(ibague)
-# stations_names <- stations_test$codigo
 
 # Stations in ROI
 test_that("Stations in ROI throws errors", {
@@ -79,7 +78,7 @@ test_that("Climate data from geometry works as expected", {
     geometry = ibague,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
-    tags = "EVTE_CON"
+    tags = "TSSM_CON"
   ), 7L)
   expect_identical(colnames(download_climate_geom(
     geometry = ibague,

@@ -3,7 +3,7 @@
 #' @description
 #' Retrieve climate data from a list of stations under the same tag.This data is
 #' retrieved from local meteorological stations provided by IDEAM
-#' 
+#'
 #' @param stations numeric vector containing the stations' codes
 #' @param start_date character with the first date to consult in the format
 #' \code{"YYYY-MM-DD"}
@@ -13,9 +13,9 @@
 #'
 #' @importFrom rlang .data
 #' @importFrom magrittr %>%
-#'  
+#'
 #' @return \code{data.frame} with observations from the requested stations
-#'  
+#'
 #' @keywords internal
 retrieve_stations_data <- function(stations, start_date, end_date, tag) {
   checkmate::assert_data_frame(stations) # Check for sf?
@@ -61,8 +61,14 @@ retrieve_stations_data <- function(stations, start_date, end_date, tag) {
       )
       station_filtered <- station_data %>%
         dplyr::filter(
-          .data$date >= start_date,
-          .data$date <= (as.Date(end_date) + 1)
+          .data$date >= as.POSIXct(start_date,
+            format = "%Y-%m-%d",
+            tz = "UTC"
+          ),
+          .data$date <= (as.POSIXct(end_date,
+            format = "%Y-%m-%d",
+            tz = "UTC"
+          ) + 1)
         )
       if (all(is.na(station_filtered))) {
         next
@@ -82,4 +88,50 @@ retrieve_stations_data <- function(stations, start_date, end_date, tag) {
     }
   }
   return(stations_data)
+}
+
+
+#' Stations in region of interest
+#'
+#' @description
+#' Download and filter climate stations inside a region of interest (ROI)
+#'
+#' @param geometry \code{sf} geometry containing the geometry for a given ROI.
+#' This geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}
+#'
+#' @examples
+#' lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)
+#' lon <- c(-75.678072, -75.327859, -75.327859, -75.678072, -75.678072)
+#' polygon <- sf::st_polygon(x = list(cbind(lon, lat)))
+#' geometry <- sf::st_sfc(polygon)
+#' roi <- sf::st_as_sf(geometry)
+#' stations <- stations_in_roi(roi)
+#' print(stations)
+#'
+#' @return \code{data.frame} with the stations inside the consulted geometry
+#'
+#' @export
+stations_in_roi <- function(geometry) {
+  checkmate::assert_class(geometry, "sf")
+
+  crs <- sf::st_crs(geometry)
+  data_path <- retrieve_path("IDEAM_STATIONS_2023_MAY")
+  stations <- retrieve_table(data_path, ",")
+  geo_stations <- sf::st_as_sf(stations,
+    coords = c("longitud", "latitud"),
+    remove = FALSE
+  )
+  geo_stations <- sf::st_set_crs(
+    geo_stations,
+    crs
+  )
+  intersections <- sf::st_within(geo_stations,
+    geometry,
+    sparse = FALSE
+  )
+  stations_in_roi <- geo_stations[which(intersections), ]
+  if (nrow(stations_in_roi) == 0) {
+    stop("There are no stations in the given ROI")
+  }
+  return(stations_in_roi)
 }
