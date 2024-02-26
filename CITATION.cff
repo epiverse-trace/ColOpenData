@@ -111,21 +111,6 @@ references:
     email: hadley@rstudio.com
   year: '2024'
 - type: software
-  title: lubridate
-  abstract: 'lubridate: Make Dealing with Dates a Little Easier'
-  notes: Imports
-  url: https://lubridate.tidyverse.org
-  repository: https://CRAN.R-project.org/package=lubridate
-  authors:
-  - family-names: Spinu
-    given-names: Vitalie
-    email: spinuvit@gmail.com
-  - family-names: Grolemund
-    given-names: Garrett
-  - family-names: Wickham
-    given-names: Hadley
-  year: '2024'
-- type: software
   title: magrittr
   abstract: 'magrittr: A Forward-Pipe Operator for R'
   notes: Imports
@@ -227,6 +212,9 @@ references:
   - family-names: Dunnington
     given-names: Dewey
     orcid: https://orcid.org/0000-0002-9415-4582
+  - family-names: van den Brand
+    given-names: Teun
+    orcid: https://orcid.org/0000-0002-9335-7468
   year: '2024'
 - type: software
   title: knitr
