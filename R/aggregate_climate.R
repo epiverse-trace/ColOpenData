@@ -1,10 +1,14 @@
-#' Aggregate dry-bulb temperature data for different frequencies
+#' Aggregate climate data for different frequencies
 #'
 #' @description
-#' Calculate the mean of downloaded hourly dry-bulb temperature data to day,
-#' month and year
+#' Aggregate time series downloaded data from specific tags to day, month or
+#' year. Only observations under the tags \code{TSSM_CON}, \code{TMN_CON},
+#' \code{TMX_CON}, \code{PTPM_CON}, and \code{BSHG_CON} can be aggregated,
+#' since are the ones where methodology  for aggregation is explicitly available
+#' from the source.
 #'
-#' @param .data \code{data.frame} obtained from download functions
+#' @param .data \code{data.frame} obtained from download functions. Can only
+#' include observations under the same tag.
 #' @param frequency character with the aggregation frequency. (\code{"day"},
 #'  \code{"month"} or \code{"year"})
 #'
@@ -12,372 +16,168 @@
 #'
 #' @examples
 #' \dontrun{
-#' aggregate_tssm(.data, "day")
+#' aggregate_tssm(tssm, "day")
 #' }
 #'
-#' @return \code{data.frame} with the aggregated data
+#' @return \code{data.frame} with the aggregated data for specific frequency
 #'
 #' @export
-aggregate_tssm <- function(.data, frequency) {
-  checkmate::assert_choice(frequency, c("day", "month", "year"), null.ok = TRUE)
+aggregate_climate <- function(.data, frequency) {
+  checkmate::assert_choice(frequency, c("day", "month", "year"))
   checkmate::assert_names(names(.data), must.include = c(
     "station", "longitude", "latitude",
     "date", "hour", "tag", "value"
   ))
-  checkmate::assert_set_equal(names(table(.data$tag)), "TSSM_CON")
+  tag <- unique(.data$tag)
+  stopifnot(
+    "Aggregation is only possible for individual tags" =
+      length(tag) == 1
+  )
+  checkmate::assert_choice(tag, c(
+    "TSSM_CON", "TMN_CON",
+    "TMX_CON", "BSHG_CON",
+    "PTPM_CON"
+  ))
 
-  aggregated_day <- dplyr::group_by(
-    .data, .data$station,
-    .data$longitude, .data$latitude, .data$date, .data$tag
-  ) %>%
-    dplyr::do(data.frame(value = daily_tssm(.data)))
+  aggregation_functions <- list(
+    TSSM_CON = list(
+      day = daily_tssm,
+      month = monthly_tssm,
+      year = annual_tssm,
+      warning_msg = NULL
+    ),
+    TMN_CON = list(
+      day = NULL,
+      month = monthly_tmn,
+      year = annual_tmn,
+      warning_msg = "`TMN_CON` data aggregation is already daily"
+    ),
+    TMX_CON = list(
+      day = NULL,
+      month = monthly_tmx,
+      year = annual_tmx,
+      warning_msg = "`TMX_CON` data aggregation is already daily"
+    ),
+    PTPM_CON = list(
+      day = NULL,
+      month = monthly_ptpm,
+      year = annual_ptpm,
+      warning_msg = "`PTPM_CON` data aggregation is already daily"
+    ),
+    BSHG_CON = list(
+      day = daily_bshg,
+      month = monthly_bshg,
+      year = annual_bshg,
+      warning_msg = NULL
+    )
+  )
+
+  evaluated <- aggregation_functions[[tag]]
+
   if (frequency == "day") {
-    aggregated_tssm <- aggregated_day
-  } else {
-    aggregated_month <- aggregated_day %>%
-      dplyr::mutate(
-        month = format(as.Date(.data$date), "%m"),
-        year = format(as.Date(.data$date), "%Y")
-      ) %>%
-      dplyr::group_by(
-        .data$station, .data$longitude, .data$latitude,
-        .data$tag, .data$year, .data$month
-      ) %>%
-      dplyr::do(data.frame(value = monthly_tssm(.data))) %>%
-      dplyr::mutate(date = as.Date(
-        paste(.data$year, .data$month,
-          "01",
-          sep = "-"
-        ),
-        format = "%Y-%m-%d"
-      )) %>%
-      dplyr::ungroup() %>%
-      dplyr::select(
-        "station", "longitude", "latitude",
-        "date", "tag", "value"
-      )
-    if (frequency == "month") {
-      aggregated_tssm <- aggregated_month
+    if (!is.null(evaluated$day)) {
+      aggregated_data <- aggregate_daily(.data, evaluated$day)
     } else {
-      aggregated_year <- aggregated_month %>%
-        dplyr::mutate(year = format(as.Date(.data$date), "%Y")) %>%
-        dplyr::group_by(
-          .data$station, .data$longitude, .data$latitude,
-          .data$tag, .data$year
-        ) %>%
-        dplyr::do(data.frame(value = annual_tssm(.data))) %>%
-        dplyr::mutate(date = as.Date(paste(.data$year, "01", "01", sep = "-"),
-          format = "%Y-%m-%d"
-        )) %>%
-        dplyr::ungroup() %>%
-        dplyr::select(
-          "station", "longitude", "latitude",
-          "date", "tag", "value"
-        )
-      aggregated_tssm <- aggregated_year
+      aggregated_data <- .data
+      warning(evaluated$warning_msg)
+    }
+  } else if (frequency == "month") {
+    if (!is.null(evaluated$day)) {
+      aggregated_data <- aggregate_daily(.data, evaluated$day) %>%
+        aggregate_monthly(evaluated$month)
+    } else {
+      aggregated_data <- aggregate_monthly(.data, evaluated$month)
+    }
+  } else {
+    if (!is.null(evaluated$day)) {
+      aggregated_data <- aggregate_daily(.data, evaluated$day) %>%
+        aggregate_monthly(evaluated$month) %>%
+        aggregate_annual(evaluated$year)
+    } else {
+      aggregated_data <- aggregate_monthly(.data, evaluated$month) %>%
+        aggregate_annual(evaluated$year)
     }
   }
-  return(aggregated_tssm)
+
+  return(aggregated_data)
 }
 
-#' Aggregate minimum temperature data for different frequencies
+#' Calculate daily aggregate of climate data
 #'
-#' @description
-#' Calculate the minimum of downloaded minimum temperature data to day, month
-#' and year
+#' @param hourly_data \code{data.frame} with hourly aggregated data
+#' @param FUN Function to use for aggregation
 #'
-#' @param .data \code{data.frame} obtained from download functions
-#' @param frequency character with the aggregation frequency. (
-#'  \code{"month"} or \code{"year"})
+#' @return \code{data.frame} with daily aggregated data
 #'
-#' @importFrom rlang .data
-#'
-#' @return \code{data.frame} with the aggregated data
-#'
-#' @examples
-#' \dontrun{
-#' aggregate_tmn(.data, "day")
-#' }
-#' @export
-aggregate_tmn <- function(.data, frequency) {
-  checkmate::assert_choice(frequency, c("month", "year"), null.ok = TRUE)
-  checkmate::assert_names(names(.data), must.include = c(
-    "station", "longitude", "latitude",
-    "date", "hour", "tag", "value"
-  ))
-  checkmate::assert_set_equal(names(table(.data$tag)), "TMN_CON")
-
-  aggregated_day <- .data
-    aggregated_month <- aggregated_day %>%
-      dplyr::mutate(
-        month = format(as.Date(.data$date), "%m"),
-        year = format(as.Date(.data$date), "%Y")
-      ) %>%
-      dplyr::group_by(
-        .data$station, .data$longitude, .data$latitude,
-        .data$tag, .data$year, .data$month
-      ) %>%
-      dplyr::do(data.frame(value = monthly_tmn(.data))) %>%
-      dplyr::mutate(date = as.Date(
-        paste(.data$year,
-          .data$month, "01",
-          sep = "-"
-        ),
-        format = "%Y-%m-%d"
-      )) %>%
-      dplyr::ungroup() %>%
-      dplyr::select(
-        "station", "longitude", "latitude",
-        "date", "tag", "value"
-      )
-    if (frequency == "month") {
-      agregated_tmn <- aggregated_month
-    } else {
-      aggregated_year <- aggregated_month %>%
-        dplyr::mutate(year = format(as.Date(.data$date), "%Y")) %>%
-        dplyr::group_by(
-          .data$station, .data$longitude, .data$latitude,
-          .data$tag, .data$year
-        ) %>%
-        dplyr::do(data.frame(value = annual_tmn(.data))) %>%
-        dplyr::mutate(date = as.Date(paste(.data$year, "01", "01", sep = "-"),
-          format = "%Y-%m-%d"
-        )) %>%
-        dplyr::ungroup() %>%
-        dplyr::select(
-          "station", "longitude", "latitude",
-          "date", "tag", "value"
-        )
-      agregated_tmn <- aggregated_year
-    }
-  return(agregated_tmn)
-}
-
-#' Aggregate maximum temperature data for different frequencies
-#'
-#' @description
-#' Calculate the maximum of downloaded maximum temperature data to day, month
-#' and year
-#'
-#' @param .data \code{data.frame} obtained from download functions
-#' @param frequency character with the aggregation frequency. (
-#'  \code{"month"} or \code{"year"})
-#' @importFrom rlang .data
-#'
-#' @examples
-#' \dontrun{
-#' aggregate_tmx(.data, "day")
-#' }
-#'
-#' @return \code{data.frame} with the aggregated data
-#'
-#' @export
-aggregate_tmx <- function(.data, frequency) {
-  checkmate::assert_choice(frequency, c("month", "year"), null.ok = TRUE)
-  checkmate::assert_names(names(.data), must.include = c(
-    "station", "longitude", "latitude",
-    "date", "hour", "tag", "value"
-  ))
-  checkmate::assert_set_equal(names(table(.data$tag)), "TMX_CON")
-
-  aggregated_day <- .data
-    aggregated_month <- aggregated_day %>%
-      dplyr::mutate(
-        month = format(as.Date(.data$date), "%m"),
-        year = format(as.Date(.data$date), "%Y")
-      ) %>%
-      dplyr::group_by(
-        .data$station, .data$longitude, .data$latitude, .data$tag,
-        .data$year, .data$month
-      ) %>%
-      dplyr::do(data.frame(value = monthly_tmx(.data))) %>%
-      dplyr::mutate(date = as.Date(
-        paste(.data$year, .data$month, "01",
-          sep = "-"
-        ),
-        format = "%Y-%m-%d"
-      )) %>%
-      dplyr::ungroup() %>%
-      dplyr::select(
-        "station", "longitude", "latitude",
-        "date", "tag", "value"
-      )
-    if (frequency == "month") {
-      agregated_tmx <- aggregated_month
-    } else {
-      aggregated_year <- aggregated_month %>%
-        dplyr::mutate(year = format(as.Date(.data$date), "%Y")) %>%
-        dplyr::group_by(
-          .data$station, .data$longitude, .data$latitude,
-          .data$tag, .data$year
-        ) %>%
-        dplyr::do(data.frame(value = annual_tmx(.data))) %>%
-        dplyr::mutate(date = as.Date(paste(.data$year, "01", "01", sep = "-"),
-          format = "%Y-%m-%d"
-        )) %>%
-        dplyr::ungroup() %>%
-        dplyr::select(
-          "station", "longitude", "latitude",
-          "date", "tag", "value"
-        )
-      agregated_tmx <- aggregated_year
-    }
-  return(agregated_tmx)
-}
-
-#' Aggregate precipitation data for different frequencies
-#'
-#' @description
-#' Calculate the aggregate of downloaded precipitation data to day, month
-#' and year
-#'
-#' @param .data \code{data.frame} obtained from download functions
-#' @param frequency character with the aggregation frequency. (\code{"day"},
-#'  \code{"month"} or \code{"year"})
-#'
-#' @importFrom rlang .data
-#'
-#' @examples
-#' \dontrun{
-#' aggregate_ptpm(.data, "day")
-#' }
-#'
-#' @return \code{data.frame} with the aggregated data
-#'
-#' @export
-aggregate_ptpm <- function(.data, frequency) {
-  checkmate::assert_choice(frequency, c("month", "year"), null.ok = TRUE)
-  checkmate::assert_names(names(.data), must.include = c(
-    "station", "longitude", "latitude",
-    "date", "hour", "tag", "value"
-  ))
-  checkmate::assert_set_equal(names(table(.data$tag)), "PTPM_CON")
-
-  aggregated_day <- .data
-    aggregated_month <- aggregated_day %>%
-      dplyr::mutate(
-        month = format(as.Date(date), "%m"),
-        year = format(as.Date(date), "%Y")
-      ) %>%
-      dplyr::group_by(
-        .data$station, .data$longitude, .data$latitude, .data$tag,
-        .data$year, .data$month
-      ) %>%
-      dplyr::do(data.frame(value = monthly_ptpm(.data))) %>%
-      dplyr::mutate(date = as.Date(
-        paste(.data$year, .data$month, "01",
-          sep = "-"
-        ),
-        format = "%Y-%m-%d"
-      )) %>%
-      dplyr::ungroup() %>%
-      dplyr::select(
-        "station", "longitude", "latitude",
-        "date", "tag", "value"
-      )
-    if (frequency == "month") {
-      agregated_ptpm <- aggregated_month
-    } else {
-      aggregated_year <- aggregated_month %>%
-        dplyr::mutate(year = format(as.Date(.data$date), "%Y")) %>%
-        dplyr::group_by(
-          .data$station, .data$longitude, .data$latitude,
-          .data$tag, .data$year
-        ) %>%
-        dplyr::do(data.frame(value = annual_ptpm(.data))) %>%
-        dplyr::mutate(date = as.Date(paste(.data$year, "01", "01", sep = "-"),
-          format = "%Y-%m-%d"
-        )) %>%
-        dplyr::ungroup() %>%
-        dplyr::select(
-          "station", "longitude", "latitude",
-          "date", "tag", "value"
-        )
-      agregated_ptpm <- aggregated_year
-    }
-  return(agregated_ptpm)
-}
-
-#' Aggregate sunshine duration data for different frequencies
-#'
-#' @description
-#' Calculate the aggregate of downloaded sunshine duration data to day, month
-#' and year
-#'
-#' @param .data \code{data.frame} obtained from download functions
-#' @param frequency character with the aggregation frequency. (\code{"day"},
-#'  \code{"month"} or \code{"year"})
-#'
-#' @importFrom rlang .data
-#'
-#' @examples
-#' \dontrun{
-#' aggregate_bshg(.data, "day")
-#' }
-#'
-#' @return \code{data.frame} with the aggregated data
-#'
-#' @export
-aggregate_bshg <- function(.data, frequency) {
-  checkmate::assert_choice(frequency, c("day", "month", "year"), null.ok = TRUE)
-  checkmate::assert_names(names(.data), must.include = c(
-    "station", "longitude", "latitude",
-    "date", "hour", "tag", "value"
-  ))
-  checkmate::assert_set_equal(names(table(.data$tag)), "BSHG_CON")
-
+#' @keywords internal
+aggregate_daily <- function(hourly_data, FUN) {
   aggregated_day <- dplyr::group_by(
-    .data, .data$station,
+    hourly_data, .data$station,
     .data$longitude, .data$latitude, .data$date, .data$tag
   ) %>%
-    dplyr::do(data.frame(value = daily_bshg(.data)))
-  if (frequency == "day") {
-    aggregated_bshg <- aggregated_day
-  } else {
-    aggregated_month <- aggregated_day %>%
-      dplyr::mutate(
-        month = format(as.Date(.data$date), "%m"),
-        year = format(as.Date(.data$date), "%Y")
-      ) %>%
-      dplyr::group_by(
-        .data$station, .data$longitude, .data$latitude, .data$tag,
-        .data$year, .data$month
-      ) %>%
-      dplyr::do(data.frame(value = monthly_bshg(.data))) %>%
-      dplyr::mutate(date = as.Date(
-        paste(.data$year, .data$month,
-          "01",
-          sep = "-"
-        ),
-        format = "%Y-%m-%d"
-      )) %>%
-      dplyr::ungroup() %>%
-      dplyr::select(
-        "station", "longitude", "latitude",
-        "date", "tag", "value"
-      )
-    if (frequency == "month") {
-      aggregated_bshg <- aggregated_month
-    } else {
-      aggregated_year <- aggregated_month %>%
-        dplyr::mutate(year = format(as.Date(.data$date), "%Y")) %>%
-        dplyr::group_by(
-          .data$station, .data$longitude, .data$latitude,
-          .data$tag, .data$year
-        ) %>%
-        dplyr::do(data.frame(value = annual_bshg(.data))) %>%
-        dplyr::mutate(date = as.Date(paste(.data$year, "01", "01", sep = "-"),
-          format = "%Y-%m-%d"
-        )) %>%
-        dplyr::ungroup() %>%
-        dplyr::select(
-          "station", "longitude", "latitude",
-          "date", "tag", "value"
-        )
-      aggregated_bshg <- aggregated_year
-    }
-  }
-  return(aggregated_bshg)
+    dplyr::do(data.frame(value = FUN(.data)))
+  return(aggregated_day)
+}
+
+#' Calculate monthly aggregate of climate data
+#'
+#' @param daily_data \code{data.frame} with daily aggregated data
+#' @param FUN Function to use for aggregation
+#'
+#' @return \code{data.frame} with monthly aggregated data
+#'
+#' @keywords internal
+aggregate_monthly <- function(daily_data, FUN) {
+  aggregated_month <- dplyr::mutate(daily_data,
+    month = format(as.Date(.data$date), "%m"),
+    year = format(as.Date(.data$date), "%Y")
+  ) %>%
+    dplyr::group_by(
+      .data$station, .data$longitude, .data$latitude,
+      .data$tag, .data$year, .data$month
+    ) %>%
+    dplyr::do(data.frame(value = FUN(.data))) %>%
+    dplyr::mutate(date = as.Date(
+      paste(.data$year, .data$month,
+        "01",
+        sep = "-"
+      ),
+      format = "%Y-%m-%d"
+    )) %>%
+    dplyr::ungroup() %>%
+    dplyr::select(
+      "station", "longitude", "latitude",
+      "date", "tag", "value"
+    )
+  return(aggregated_month)
+}
+
+#' Calculate annual aggregate of climate data
+#'
+#' @param monthly_data \code{data.frame} with monthly aggregated data
+#' @param FUN Function to use for aggregation
+#'
+#' @return \code{data.frame} with annual aggregated data
+#'
+#' @keywords internal
+aggregate_annual <- function(monthly_data, FUN) {
+  aggregated_year <- dplyr::mutate(monthly_data,
+    year = format(as.Date(.data$date), "%Y")
+  ) %>%
+    dplyr::group_by(
+      .data$station, .data$longitude, .data$latitude,
+      .data$tag, .data$year
+    ) %>%
+    dplyr::do(data.frame(value = FUN(.data))) %>%
+    dplyr::mutate(date = as.Date(paste(.data$year, "01", "01", sep = "-"),
+      format = "%Y-%m-%d"
+    )) %>%
+    dplyr::ungroup() %>%
+    dplyr::select(
+      "station", "longitude", "latitude",
+      "date", "tag", "value"
+    )
+  return(aggregated_year)
 }
 
 #' Calculate daily dry-bulb mean temperature

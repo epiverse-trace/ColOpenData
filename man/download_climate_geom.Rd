@@ -4,7 +4,7 @@
 \alias{download_climate_geom}
 \title{Download climate data from geometry}
 \usage{
-download_climate_geom(geometry, start_date, end_date, tags)
+download_climate_geom(geometry, start_date, end_date, tag)
 }
 \arguments{
 \item{geometry}{\code{sf} geometry containing the geometry for a given ROI.
@@ -16,7 +16,7 @@ This geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}}
 \item{end_date}{character with the last date to consult in the format
 \code{"YYYY-MM-DD"} (Last available date is \code{"2023-05-31"})}
 
-\item{tags}{character containing climate tags to consult}
+\item{tag}{character containing climate tag to consult}
 }
 \value{
 \code{data.frame} with observations from the stations in the area

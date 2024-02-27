@@ -4,7 +4,7 @@
 \alias{download_climate_stations}
 \title{Download climate data from stations}
 \usage{
-download_climate_stations(stations, start_date, end_date, tags)
+download_climate_stations(stations, start_date, end_date, tag)
 }
 \arguments{
 \item{stations}{\code{data.frame} containing the stations' codes. This
@@ -17,7 +17,7 @@ download_climate_stations(stations, start_date, end_date, tags)
 \item{end_date}{character with the last date to consult in the format
 \code{"YYYY-MM-DD"} (Last available date is \code{"2023-05-31"})}
 
-\item{tags}{character containing climate tags to consult}
+\item{tag}{character containing climate tag to consult}
 }
 \value{
 \code{data.frame} with observations from the requested stations

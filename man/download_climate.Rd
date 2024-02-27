@@ -4,7 +4,7 @@
 \alias{download_climate}
 \title{Download climate from named geometry (municipality or department)}
 \usage{
-download_climate(code, start_date, end_date, tags)
+download_climate(code, start_date, end_date, tag)
 }
 \arguments{
 \item{code}{character with the DIVIPOLA code for the area}
@@ -15,7 +15,7 @@ download_climate(code, start_date, end_date, tags)
 \item{end_date}{character with the last date to consult in the format
 \code{"YYYY-MM-DD"} (Last available date is \code{"2023-05-31"})}
 
-\item{tags}{character containing climate tags to consult}
+\item{tag}{character containing climate tag to consult}
 }
 \value{
 data.frame with observations from the stations in the area

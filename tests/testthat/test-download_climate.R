@@ -24,37 +24,37 @@ test_that("Climate Stations throws errors", {
     stations = "bogota",
     start_date = "2010-10-01",
     end_date = "2010-12-10",
-    tags = "PTPM_CON"
+    tag = "PTPM_CON"
   ))
   expect_error(download_climate_stations(
     stations = stations_test,
     start_date = 2010,
     end_date = "2010-12-10",
-    tags = "PTPM_CON"
+    tag = "PTPM_CON"
   ))
   expect_error(download_climate_stations(
     stations = stations_test,
     start_date = "2010-12-10",
     end_date = 675,
-    tags = "PTPM_CON"
-  ))
-  expect_error(climate_stations(
-    stations = stations_test,
-    start_date = "2010-10-01",
-    end_date = "2010-12-10",
-    tags = "PTPM_CON"
+    tag = "PTPM_CON"
   ))
   expect_error(download_climate_stations(
     stations = stations_test,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
-    tags = "ERR"
+    tag = "PTPM_CONS"
+  ))
+  expect_error(download_climate_stations(
+    stations = stations_test,
+    start_date = "2013-10-01",
+    end_date = "2010-12-10",
+    tag = "NB_CON"
   ))
   expect_error(download_climate_stations(
     stations = stations_test,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
-    tags = c("TSSM_CON", "ERR")
+    tag = c("TSSM_CON", "PTPM_CON")
   ))
 })
 
@@ -63,7 +63,7 @@ test_that("Climate data from geometry throws errors", {
     geometry = "bogota",
     start_date = "2010-01-01",
     end_date = "2010-02-10",
-    tags = "TSSM_CON"
+    tag = "TSSM_CON"
   ))
 })
 
@@ -72,29 +72,23 @@ test_that("Climate data from geometry works as expected", {
     geometry = ibague,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
-    tags = "PTPM_CON"
+    tag = "PTPM_CON"
   ), "data.frame")
   expect_length(download_climate_geom(
     geometry = ibague,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
-    tags = "TSSM_CON"
+    tag = "TSSM_CON"
   ), 7L)
   expect_identical(colnames(download_climate_geom(
     geometry = ibague,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
-    tags = "TMN_CON"
+    tag = "TMN_CON"
   )), c(
     "station", "longitude", "latitude", "date",
     "hour", "tag", "value"
   ))
-  expect_type(download_climate_geom(
-    geometry = ibague,
-    start_date = "2010-10-01",
-    end_date = "2010-12-10",
-    tags = c("TMN_CON", "BSHG_CON")
-  ), "list")
 })
 
 # Climate Stations Mpio
@@ -103,19 +97,19 @@ test_that("Climate data from code throws errors", {
     code = 73001,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
-    tags = "PTPM_CON"
+    tag = "PTPM_CON"
   ))
   expect_error(download_climate(
     code = "730001",
     start_date = "2010-10-01",
     end_date = "2010-12-10",
-    tags = "PTPM_CON"
+    tag = "PTPM_CON"
   ))
   expect_error(download_climate(
     code = "11111",
     start_date = "2010-10-01",
     end_date = "2010-12-10",
-    tags = "PTPM_CON"
+    tag = "PTPM_CON"
   ))
 })
 
@@ -124,12 +118,6 @@ test_that("Climate data from code works as expected", {
     code = "05001",
     start_date = "2018-10-01",
     end_date = "2018-11-10",
-    tags = "THSM_CON"
+    tag = "THSM_CON"
   ), "data.frame")
-  expect_type(download_climate(
-    code = "11",
-    start_date = "2018-10-01",
-    end_date = "2018-11-10",
-    tags = c("TSSM_CON", "PTPM_CON")
-  ), "list")
 })
