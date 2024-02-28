@@ -8,6 +8,6 @@ default:
   persons_social: "cnpv/personas_social"
   persons_demographic: "cnpv/personas_demografico"
   geospatial: "geospatial"
-  maps: "mgn/mgncnpv"
+  maps: "mgn"
   climate: "climate"
   IDEAM_STATIONS_2023_MAY: "support/IDEAM_STATIONS_2023_MAY.csv"
