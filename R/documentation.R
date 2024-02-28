@@ -2,9 +2,9 @@
 #'
 #' @param dataset character with the dataset name
 #'
-#' @return \code{tibble} with data dictionary
+#' @return \code{data.frame} with data dictionary
 #' @examples
-#' dictionary("DANE_MGNCNPV_2018_SETU")
+#' dictionary("DANE_MGN_2018_SETU")
 #'
 #' @export
 dictionary <- function(dataset) {
@@ -21,7 +21,7 @@ dictionary <- function(dataset) {
 #' @param module character with module to be consulted (\code{"demographic"},
 #' \code{"geospatial"}, \code{"climate"})
 #'
-#' @return \code{tibble} with the available datasets
+#' @return \code{data.frame} with the available datasets
 #' @examples
 #' list_datasets("geospatial")
 #'
