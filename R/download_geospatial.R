@@ -16,15 +16,15 @@
 #' @return \code{sf} \code{data.frame} object with structures' details
 #'
 #' @export
-download_geospatial <- function(dataset, geospatial=T, demographic=T) 
-  {
+download_geospatial <- function(dataset, geospatial = T, demographic = T) {
   checkmate::assert_character(dataset)
   dataset_path <- retrieve_path(dataset)
   tryCatch(
     {
       geospatial_data <- retrieve_zip(
         dataset_path,
-        dataset)
+        dataset
+      )
     },
     error = function(e) {
       stop("`dataset` not found")
@@ -34,30 +34,25 @@ download_geospatial <- function(dataset, geospatial=T, demographic=T)
   return(final_data)
 }
 
-filter_dataset<- function(data, geospatial=T, demographic=T) 
-{
+filter_dataset <- function(data, geospatial = T, demographic = T) {
   geospatial_vars <- c("AREA", "LATITUD", "LONGITUD", "Shape_Leng", "Shape_Area")
   final_vars <- c("Shape_Leng", "Shape_Area")
-  
-  if (geospatial==T & demographic==F){
+
+  if (geospatial == T & demographic == F) {
     # Find the index of the specific column
-    specific_column_index <- which(colnames(data) == "LONGITUD") 
-    
+    specific_column_index <- which(colnames(data) == "LONGITUD")
+
     # Select all columns before the specific column
-    first_cols <- data[, 1:specific_column_index]%>%
+    first_cols <- data[, 1:specific_column_index] %>%
       sf::st_drop_geometry()
-    
+
     # Concatenate with the specific columns at the end
     final_data <- cbind(first_cols, data[, final_vars])
-  }
-  else if(geospatial==F & demographic==T){
+  } else if (geospatial == F & demographic == T) {
     final_data <- data[, -which(names(data) %in% geospatial_vars)] %>%
       sf::st_drop_geometry()
-  } 
-  else if (geospatial==T & demographic==T)
-  {
+  } else if (geospatial == T & demographic == T) {
     final_data <- data
   }
-  return (final_data)
+  return(final_data)
 }
-
