@@ -87,26 +87,44 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">list_datasets</span><span class="op">(</span><span class="st">"geospatial"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                       name      group source year         level category</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   DANE_MGNCNPV_2018_DPTO geospatial   DANE 2018    Department     maps</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   DANE_MGNCNPV_2018_MPIO geospatial   DANE 2018  Municipality     maps</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 DANE_MGNCNPV_2018_MPIOCL geospatial   DANE 2018  Municipality     maps</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4   DANE_MGNCNPV_2018_SETU geospatial   DANE 2018  Urban Sector     maps</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5   DANE_MGNCNPV_2018_SETR geospatial   DANE 2018  Rural Sector     maps</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6   DANE_MGNCNPV_2018_SECU geospatial   DANE 2018 Urban Section     maps</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7   DANE_MGNCNPV_2018_SECR geospatial   DANE 2018 Rural Section     maps</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8    DANE_MGNCNPV_2018_MZN geospatial   DANE 2018         Block     maps</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9     DANE_MGNCNPV_2018_ZU geospatial   DANE 2023    Urban Zone     maps</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                 description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1              Geographical and summarised census data from 2018 at the level of Department</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2            Geographical and summarised census data from 2018 at the level of Municipality</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 Geographical and summarised census data from 2018 at the level of Municipality with Class</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4            Geographical and summarised census data from 2018 at the level of Urban Sector</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5            Geographical and summarised census data from 2018 at the level of Rural Sector</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6           Geographical and summarised census data from 2018 at the level of Urban Section</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7           Geographical and summarised census data from 2018 at the level of Rural Section</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8                   Geographical and summarised census data from 2018 at the level of Block</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9              Geographical and summarised census data from 2018 at the level of Urban zone</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         name      group source year         level category</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1         DANE_MGN_2018_DPTO geospatial   DANE 2018    Department     maps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2         DANE_MGN_2018_MPIO geospatial   DANE 2018  Municipality     maps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3       DANE_MGN_2018_MPIOCL geospatial   DANE 2018  Municipality     maps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4         DANE_MGN_2018_SETU geospatial   DANE 2018  Urban Sector     maps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5         DANE_MGN_2018_SETR geospatial   DANE 2018  Rural Sector     maps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6         DANE_MGN_2018_SECU geospatial   DANE 2018 Urban Section     maps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7         DANE_MGN_2018_SECR geospatial   DANE 2018 Rural Section     maps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8          DANE_MGN_2018_MZN geospatial   DANE 2018         Block     maps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9           DANE_MGN_2018_ZU geospatial   DANE 2023    Urban Zone     maps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 105   DANE_MGNCNPV_2018_DPTO geospatial   DANE 2018    Department     maps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 106   DANE_MGNCNPV_2018_MPIO geospatial   DANE 2018  Municipality     maps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 107 DANE_MGNCNPV_2018_MPIOCL geospatial   DANE 2018  Municipality     maps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108   DANE_MGNCNPV_2018_SETU geospatial   DANE 2018  Urban Sector     maps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 109   DANE_MGNCNPV_2018_SETR geospatial   DANE 2018  Rural Sector     maps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 110   DANE_MGNCNPV_2018_SECU geospatial   DANE 2018 Urban Section     maps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 111   DANE_MGNCNPV_2018_SECR geospatial   DANE 2018 Rural Section     maps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 112    DANE_MGNCNPV_2018_MZN geospatial   DANE 2018         Block     maps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 113     DANE_MGNCNPV_2018_ZU geospatial   DANE 2023    Urban Zone     maps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                   description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                Geographical and summarised census data from 2018 at the level of Department</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2              Geographical and summarised census data from 2018 at the level of Municipality</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   Geographical and summarised census data from 2018 at the level of Municipality with Class</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4              Geographical and summarised census data from 2018 at the level of Urban Sector</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5              Geographical and summarised census data from 2018 at the level of Rural Sector</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6             Geographical and summarised census data from 2018 at the level of Urban Section</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7             Geographical and summarised census data from 2018 at the level of Rural Section</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8                     Geographical and summarised census data from 2018 at the level of Block</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9                Geographical and summarised census data from 2018 at the level of Urban zone</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 105              Geographical and summarised census data from 2018 at the level of Department</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 106            Geographical and summarised census data from 2018 at the level of Municipality</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 107 Geographical and summarised census data from 2018 at the level of Municipality with Class</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108            Geographical and summarised census data from 2018 at the level of Urban Sector</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 109            Geographical and summarised census data from 2018 at the level of Rural Sector</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 110           Geographical and summarised census data from 2018 at the level of Urban Section</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 111           Geographical and summarised census data from 2018 at the level of Rural Section</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 112                   Geographical and summarised census data from 2018 at the level of Block</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 113              Geographical and summarised census data from 2018 at the level of Urban zone</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
