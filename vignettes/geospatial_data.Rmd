@@ -57,13 +57,17 @@ library(leaflet)
 
 ## Downloading geospatial data
 
-For this example we will be using geospatial data at the level of Urban Section for the city of Tunja, Colombia. We will be using the demographic data included in the dataset to generate visualizations using **ggplot2** and **leaflet**.
+For this example we will be using geospatial data at the level of Urban Section (SECU) for the city of Tunja, Colombia. We will be using the demographic data included in the dataset to generate visualizations using **ggplot2** and **leaflet**.
 
-First, we download the data using the function `download_geospatial`. After downloading, we have to filter by the municipality code using the DIVIPOLA code for Tunja, which is `"15001"`. For further information on DIVIPOLA please consult the dataset [here](https://www.datos.gov.co/widgets/gdxc-w37w).
+First, we download the data using the function `download_geospatial`, including the geometries and the CNPV related information. After downloading, we have to filter by the municipality code using the DIVIPOLA code for Tunja, which is `"15001"`. For further information on DIVIPOLA please consult the dataset [here](https://www.datos.gov.co/widgets/gdxc-w37w).
 
 ```{r download data}
 # Download complete dataset
-secu <- download_geospatial("DANE_MGN_2018_SECU", T, T)
+secu <- download_geospatial(
+  dataset = "DANE_MGN_2018_SECU",
+  include_geom = TRUE,
+  include_cnpv = TRUE
+)
 ```
 
 To understand which column contains the municipalities code to filter for Tunja, we will need the dataset dictionary. To download the dictionary we can use the `dictionary` function. This function uses the dataset name to download the associated information. For further information please refer to the documentation on dictionaries previously mentioned.
