@@ -1,5 +1,5 @@
 Package: ColOpenData
-Title: ColOpenData
+Title: Colombian Open Data Download and Wrangling
 Version: 0.0.1
 Authors@R: c(
     person("M. Camila", "Tavera-Cifuentes", , "mc.tavera@uniandes.edu.co", role = c("aut", "cre"),
