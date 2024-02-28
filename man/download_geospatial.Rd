@@ -4,22 +4,27 @@
 \alias{download_geospatial}
 \title{Download geospatial dataset}
 \usage{
-download_geospatial(dataset)
+download_geospatial(dataset, include_geom = TRUE, include_cnpv = TRUE)
 }
 \arguments{
 \item{dataset}{character with the dataset name}
+
+\item{include_geom}{logical for including (or not) geometry and related
+information. Default is \code{TRUE}}
+
+\item{include_cnpv}{logical for including (or not) CNPV demographic and
+socioeconomic related information. Default is \code{TRUE}}
 }
 \value{
-\code{sf} \code{data.frame} object with structures' details and
-geometries
+\code{sf} or \code{data.frame} object with downloaded data
 }
 \description{
 This function downloads geospatial datasets from the Geostatistical National
 Framework (MGN) at different levels of aggregation. These datasets include a
-summarized version of the National Population and Dwelling Census (CNPV)
+summarized version of the National Population and Dwelling Census (CNPV) with
+demographic and socioeconomic information.
 }
 \examples{
-dptos <- download_geospatial("DANE_MGNCNPV_2018_DPTO")
-print(dptos)
+departments <- download_geospatial("DANE_MGN_2018_DPTO", TRUE, FALSE)
 
 }

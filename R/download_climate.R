@@ -31,10 +31,10 @@ download_climate <- function(code, start_date, end_date, frequency, tags,
   checkmate::assert_character(code)
 
   if (nchar(code) == 5) {
-    mpios <- download_geospatial("DANE_MGNCNPV_2018_MPIO")
+    mpios <- download_geospatial("DANE_MGN_2018_MPIO")
     area <- mpios[which(mpios$MPIO_CDPMP == code), "MPIO_CDPMP"]
   } else if (nchar(code) == 2) {
-    dptos <- download_geospatial("DANE_MGNCNPV_2018_DPTO")
+    dptos <- download_geospatial("DANE_MGN_2018_DPTO")
     area <- dptos[which(dptos$DPTO_CCDGO == code), "DPTO_CCDGO"]
   } else {
     stop("`code` cannot be found")
