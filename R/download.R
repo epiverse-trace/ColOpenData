@@ -44,8 +44,8 @@ retrieve_path <- function(dataset) {
   if (grepl("DICT", dataset)) {
     group <- "dictionaries"
     group_path <- retrieve_value_key(group)
-    ext <- ".csv"
-    dataset_path <- paste0(dataset, ext)
+    ext <- "csv"
+    dataset_path <- paste(dataset, ext, sep = ".")
     file_path <- file.path(base_path, group_path, dataset_path)
   } else {
     all_datasets <- list_datasets()
@@ -56,8 +56,8 @@ retrieve_path <- function(dataset) {
       if (group == "geospatial") {
         category <- dataset_info$category
         category_path <- retrieve_value_key(category)
-        ext <- ".zip"
-        dataset_path <- paste0(dataset, ext)
+        ext <- "gpkg"
+        dataset_path <- paste(dataset, ext, sep = ".")
         file_path <- file.path(
           base_path, group_path,
           category_path, dataset_path
@@ -71,8 +71,8 @@ retrieve_path <- function(dataset) {
       } else if (group == "demographic") {
         category <- dataset_info$category
         category_path <- retrieve_value_key(category)
-        ext <- ".csv"
-        dataset_path <- paste0(dataset, ext)
+        ext <- "csv"
+        dataset_path <- paste(dataset, ext, sep = ".")
         file_path <- file.path(
           base_path, group_path,
           category_path, dataset_path
@@ -90,50 +90,6 @@ retrieve_path <- function(dataset) {
   }
   # nolint end
   return(file_path)
-}
-
-#' Retrieve zip file
-#'
-#' @param dataset_path character with the path to dataset on repository
-#' @param dataset_name character with the dataset name
-#'
-#' @return \code{sf} data.frame object with structures' details and geometries
-#'
-#' @keywords internal
-retrieve_zip <- function(dataset_path, dataset_name) {
-  ext_path <- system.file("extdata",
-    package = "ColOpenData",
-    mustWork = TRUE
-  )
-  # nolint start: nonportable_path_linter
-  directory <- file.path(ext_path, dataset_name)
-  if (file.exists(directory)) {
-    unlink(directory,
-      recursive = TRUE
-    )
-  }
-  dir.create(directory)
-  temp_file <- file.path(directory, dataset_name)
-  request <- httr2::request(base_url = dataset_path)
-  response <- httr2::req_perform(request)
-  content <- httr2::resp_body_raw(response)
-  writeBin(content, con = temp_file)
-  utils::unzip(temp_file,
-    exdir = directory
-  )
-  unlink(temp_file,
-    recursive = TRUE
-  )
-  unzipped <- list.files(directory)
-  downloaded_data <- sf::st_read(file.path(
-    directory,
-    unzipped
-  ))
-  # nolint end
-  unlink(directory,
-    recursive = TRUE
-  )
-  return(downloaded_data)
 }
 
 #' Retrieve table (csv and data) file
