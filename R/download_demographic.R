@@ -7,8 +7,7 @@
 #' @param dataset character with the dataset name
 #'
 #' @examples
-#' demographic <- download_demographic("DANE_CNPVH_2018_1HD")
-#' print(demographic)
+#' house_under_15 <- download_demographic("DANE_CNPVH_2018_1HD")
 #'
 #' @return \code{data.frame} with downloaded data.
 #' @export

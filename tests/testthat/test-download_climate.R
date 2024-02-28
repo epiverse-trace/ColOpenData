@@ -1,5 +1,5 @@
 # Sample regions for test
-mpios <- ColOpenData::download_geospatial("DANE_MGNCNPV_2018_MPIO")
+mpios <- ColOpenData::download_geospatial("DANE_MGN_2018_MPIO")
 # Region without stations
 oicata <- mpios[which(mpios$MPIO_CDPMP == "15500"), ]
 # Regions with stations
