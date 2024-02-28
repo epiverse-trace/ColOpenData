@@ -3,56 +3,48 @@
 #' @description
 #' This function downloads geospatial datasets from the Geostatistical National
 #' Framework (MGN) at different levels of aggregation. These datasets include a
-#' summarized version of the National Population and Dwelling Census (CNPV)
+#' summarized version of the National Population and Dwelling Census (CNPV) with
+#' demographic and socioeconomic information.
 #'
 #' @param dataset character with the dataset name
-#' @param geospatial boolean for presenting or not geospatial related columns
-#' @param demographic boolean for presenting or not demographic related columns
+#' @param include_geom logical for including (or not) geometry and related
+#' information. Default is \code{TRUE}
+#' @param include_cnpv logical for including (or not) CNPV demographic and
+#' socioeconomic related information. Default is \code{TRUE}
 #'
 #' @examples
-#' dptos <- download_geospatial("DANE_MGN_2018_DPTO", T, F)
-#' print(dptos)
+#' departments <- download_geospatial("DANE_MGN_2018_DPTO", TRUE, FALSE)
 #'
-#' @return \code{sf} \code{data.frame} object with structures' details
+#' @return \code{sf} or \code{data.frame} object with downloaded data
 #'
 #' @export
-download_geospatial <- function(dataset, geospatial = T, demographic = T) {
+download_geospatial <- function(dataset, include_geom = TRUE,
+                                include_cnpv = TRUE) {
   checkmate::assert_character(dataset)
+  checkmate::assert_logical(include_geom)
+  checkmate::assert_logical(include_cnpv)
+  stopifnot("At least one of the groups (`geospatial` and/or `demographic`)
+            must be TRUE" = any(include_geom, include_cnpv))
+
   dataset_path <- retrieve_path(dataset)
   tryCatch(
     {
-      geospatial_data <- retrieve_zip(
-        dataset_path,
-        dataset
-      )
+      geospatial_data <- sf::st_read(dataset_path, quiet = TRUE)
     },
     error = function(e) {
       stop("`dataset` not found")
     }
   )
-  final_data <- filter_dataset(geospatial_data, geospatial, demographic)
-  return(final_data)
-}
-
-filter_dataset <- function(data, geospatial = T, demographic = T) {
-  geospatial_vars <- c("AREA", "LATITUD", "LONGITUD", "Shape_Leng", "Shape_Area")
-  final_vars <- c("Shape_Leng", "Shape_Area")
-
-  if (geospatial == T & demographic == F) {
-    # Find the index of the specific column
-    specific_column_index <- which(colnames(data) == "LONGITUD")
-
-    # Select all columns before the specific column
-    first_cols <- data[, 1:specific_column_index] %>%
+  geospatial_vars <- c("AREA", "LATITUD", "LONGITUD") # geom included by default
+  shape_vars <- c("Shape_Leng", "Shape_Area")
+  if (include_geom & !include_cnpv) {
+    last_base_index <- which(colnames(geospatial_data) == "LONGITUD")
+    geospatial_data <- geospatial_data %>%
+      dplyr::select(dplyr::all_of(1:last_base_index))
+  } else if (!include_geom & include_cnpv) {
+    geospatial_data <- geospatial_data %>%
+      dplyr::select(-all_of(c(geospatial_vars, shape_vars))) %>%
       sf::st_drop_geometry()
-
-    # Concatenate with the specific columns at the end
-    final_data <- cbind(first_cols, data[, final_vars])
-  } else if (geospatial == F & demographic == T) {
-    final_data <- data[, -which(names(data) %in% geospatial_vars)] %>%
-      sf::st_drop_geometry()
-  } else if (geospatial == T & demographic == T) {
-    final_data <- data
   }
-  return(final_data)
+  return(geospatial_data)
 }
