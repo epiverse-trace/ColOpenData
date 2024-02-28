@@ -3,19 +3,19 @@ Title: Colombian Open Data Download and Wrangling
 Version: 0.1.0
 Authors@R: c(
     person("M. Camila", "Tavera-Cifuentes", , "mc.tavera@uniandes.edu.co", role = c("aut", "cre"),
-      comment = c(ORCID = "0009-0007-1610-4583")),
+           comment = c(ORCID = "0009-0007-1610-4583")),
     person("Julian", "Otero", , "jd.otero10@uniandes.edu.co", role = c("aut", "cre"),
-      comment = c(ORCID = "0009-0006-0429-7747")),
+           comment = c(ORCID = "0009-0006-0429-7747")),
     person("Juan D.", "Umana", , "jd.umana10@uniandes.edu.co", role = "aut",
-      comment = c(ORCID = "0000-0003-0316-6164")),
+           comment = c(ORCID = "0000-0003-0316-6164")),
     person("Juan F.", "Montenegro", , "jf.montenegro@uniandes.edu.co", role = "aut",
-      comment = c(ORCID = "0000-0003-2755-4743")),
+           comment = c(ORCID = "0000-0003-2755-4743")),
     person("Juan Manuel", "Cordovez", , "jucordov@uniandes.edu.co", role = "ctb",
-      comment = c(ORCID = "0000-0002-4005-3567")),
+           comment = c(ORCID = "0000-0002-4005-3567")),
     person("Catalina", "Gonzalez-Uribe", , "cgonzalez@uniandes.edu.co", role = "ctb",
-      comment = c(ORCID = "0000-0002-3322-5017")),
+           comment = c(ORCID = "0000-0002-3322-5017")),
     person("Mauricio", "Santos-Vega", , "om.santos@uniandes.edu.co", role = "ctb",
-      comment = c(ORCID = "0000-0002-8130-6014"))
+           comment = c(ORCID = "0000-0002-8130-6014"))
   )
 Description: ColOpenData is a package that acquires and wrangles Colombian
     socioeconomic, geospatial and climate data. It solves the problem of
