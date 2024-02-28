@@ -37,13 +37,13 @@ download_geospatial <- function(dataset, include_geom = TRUE,
   )
   geospatial_vars <- c("AREA", "LATITUD", "LONGITUD") # geom included by default
   shape_vars <- c("Shape_Leng", "Shape_Area")
-  if (include_geom & !include_cnpv) {
+  if (include_geom && !include_cnpv) {
     last_base_index <- which(colnames(geospatial_data) == "LONGITUD")
     geospatial_data <- geospatial_data %>%
       dplyr::select(dplyr::all_of(1:last_base_index))
-  } else if (!include_geom & include_cnpv) {
+  } else if (!include_geom && include_cnpv) {
     geospatial_data <- geospatial_data %>%
-      dplyr::select(-all_of(c(geospatial_vars, shape_vars))) %>%
+      dplyr::select(-dplyr::all_of(c(geospatial_vars, shape_vars))) %>%
       sf::st_drop_geometry()
   }
   return(geospatial_data)
