@@ -10,7 +10,7 @@
 dictionary <- function(dataset) {
   checkmate::assert_character(dataset)
 
-  dict_path <- paste("DICT", dataset, sep = "_")
+  dict_path <- sprintf("DICT_%s", dataset)
   path <- retrieve_path(dict_path)
   dict <- retrieve_table(path, ";")
   return(dict)
