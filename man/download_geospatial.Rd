@@ -4,14 +4,17 @@
 \alias{download_geospatial}
 \title{Download geospatial dataset}
 \usage{
-download_geospatial(dataset)
+download_geospatial(dataset, geospatial = T, demographic = T)
 }
 \arguments{
 \item{dataset}{character with the dataset name}
+
+\item{geospatial}{boolean for presenting or not geospatial related columns}
+
+\item{demographic}{boolean for presenting or not demographic related columns}
 }
 \value{
-\code{sf} \code{data.frame} object with structures' details and
-geometries
+\code{sf} \code{data.frame} object with structures' details
 }
 \description{
 This function downloads geospatial datasets from the Geostatistical National
@@ -19,7 +22,7 @@ Framework (MGN) at different levels of aggregation. These datasets include a
 summarized version of the National Population and Dwelling Census (CNPV)
 }
 \examples{
-dptos <- download_geospatial("DANE_MGNCNPV_2018_DPTO")
+dptos <- download_geospatial("DANE_MGN_2018_DPTO", T, F)
 print(dptos)
 
 }
