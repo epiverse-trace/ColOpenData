@@ -40,7 +40,7 @@ retrieve_path <- function(dataset) {
   checkmate::assert_character(dataset)
 
   base_path <- retrieve_value_key("base_path")
-  if (grepl("DICT", dataset)) {
+  if (grepl("DICT", dataset, fixed = TRUE)) {
     group <- "dictionaries"
     group_path <- retrieve_value_key(group)
     ext <- "csv"
