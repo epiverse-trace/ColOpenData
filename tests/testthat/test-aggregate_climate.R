@@ -61,8 +61,7 @@ test_that("Aggregation for sunshine duration works as expected", {
 
 test_that("Aggregation for minimum temperature works as expected", {
   expect_s3_class(aggregate_climate(base_tmn, "month"), "data.frame")
-  expect_identical(
-    names(aggregate_climate(base_tmn, "year")),
+  expect_named(aggregate_climate(base_tmn, "year"),
     c("station", "longitude", "latitude", "date", "tag", "value")
   )
 })

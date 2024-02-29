@@ -162,9 +162,7 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
   path_stations <- paste0(tag, "@", stations$codigo, ".data")
   stations_data <- data.frame()
   for (i in seq_along(path_stations)) {
-    # nolint start: nonportable_path_linter
     dataset_path <- file.path(path_data, path_stations[i])
-    # nolint end
 
     # Request is different, error 404 is expected for some datasets
     base_request <- httr2::request(base_url = dataset_path)

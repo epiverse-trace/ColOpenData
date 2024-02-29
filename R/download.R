@@ -39,7 +39,6 @@ retrieve_value_key <- function(key) {
 retrieve_path <- function(dataset) {
   checkmate::assert_character(dataset)
 
-  # nolint start: nonportable_path_linter
   base_path <- retrieve_value_key("base_path")
   if (grepl("DICT", dataset)) {
     group <- "dictionaries"
@@ -88,7 +87,6 @@ retrieve_path <- function(dataset) {
       stop("`dataset` is not available")
     }
   }
-  # nolint end
   return(file_path)
 }
 
