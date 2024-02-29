@@ -206,7 +206,8 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
           date = format(station_filtered$date, "%Y-%m-%d"),
           hour = format(station_filtered$date, "%H:%M:%S"),
           tag = rep(tag, n_data),
-          value = station_filtered$value
+          value = station_filtered$value,
+          stringsAsFactors = FALSE
         )
         stations_data <- rbind(stations_data, output)
       }
