@@ -35,9 +35,7 @@ list_datasets <- function(module = "all") {
 
   base_path <- retrieve_value_key("base_path")
   documentation_path <- retrieve_value_key("documentation")
-  # nolint start: nonportable_path_linter
   documentation <- file.path(base_path, documentation_path)
-  # nolint end
   listed <- retrieve_table(documentation)
   if (module != "all") {
     listed <- listed[listed$group == module, ]

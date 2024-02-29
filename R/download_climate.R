@@ -239,9 +239,7 @@ retrieve_stations_data <- function(stations, start_date, end_date,
   )
   stations_data <- data.frame(date = floor_dates)
   for (i in seq_along(path_stations)) {
-    # nolint start: nonportable_path_linter
     dataset_path <- file.path(path_data, path_stations[i])
-    # nolint end
     station <- data.frame(NA)
     tryCatch(
       {
