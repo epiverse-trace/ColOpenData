@@ -111,7 +111,7 @@ test_that("Climate data from code throws errors", {
     tag = "PTPM_CON"
   ))
   expect_error(download_climate(
-    code = "11111",
+    code = "04",
     start_date = "2010-10-01",
     end_date = "2010-12-10",
     tag = "PTPM_CON"

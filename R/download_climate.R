@@ -163,55 +163,25 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
   stations_data <- data.frame()
   for (i in seq_along(path_stations)) {
     dataset_path <- file.path(path_data, path_stations[i])
-
-    # Request is different, error 404 is expected for some datasets
-    base_request <- httr2::request(base_url = dataset_path)
-    request <- httr2::req_error(base_request, is_error = \(resp) FALSE)
-    response <- httr2::req_perform(request)
-    if (httr2::resp_status(response) == 404) {
-      # if not found go to next
-      next
-    } else {
-      content <- httr2::resp_body_string(response)
-      station_data <- suppressMessages(
-        suppressWarnings(
-          readr::read_delim(content,
-            delim = "|",
-            escape_double = FALSE,
-            trim_ws = TRUE,
-            show_col_types = FALSE
-          )
-        )
+    downloaded_station <- retrieve_climate(dataset_path, start_date, end_date)
+    n_obs <- nrow(downloaded_station)
+    if (n_obs > 0) {
+      ordered <- data.frame(
+        station = rep(stations$codigo[i], n_obs),
+        longitude = rep(stations$longitud[i], n_obs),
+        latitude = rep(stations$latitud[i], n_obs),
+        date = format(downloaded_station$date, "%Y-%m-%d"),
+        hour = format(downloaded_station$date, "%H:%M:%S"),
+        tag = rep(tag, n_obs),
+        value = downloaded_station$value,
+        stringsAsFactors = FALSE
       )
-      names(station_data) <- c("date", "value")
-      station_data$date <- as.POSIXct(station_data$date,
-        format = "%Y-%m-%d %H:%M:%S",
-        tz = "UTC"
-      )
-      station_filtered <- station_data %>%
-        dplyr::filter(
-          .data$date >= start_date,
-          .data$date <= end_date + 1
-        )
-      if (all(is.na(station_filtered))) {
-        next
-      } else {
-        n_data <- nrow(station_filtered)
-        output <- data.frame(
-          station = rep(stations$codigo[i], n_data),
-          longitude = rep(stations$longitud[i], n_data),
-          latitude = rep(stations$latitud[i], n_data),
-          date = format(station_filtered$date, "%Y-%m-%d"),
-          hour = format(station_filtered$date, "%H:%M:%S"),
-          tag = rep(tag, n_data),
-          value = station_filtered$value,
-          stringsAsFactors = FALSE
-        )
-        stations_data <- rbind(stations_data, output)
-      }
+      stations_data <- rbind(stations_data, ordered)
     }
   }
-
+  if (nrow(stations_data) == 0) {
+    stop("There is no available information available for these dates")
+  }
   return(stations_data)
 }
 
