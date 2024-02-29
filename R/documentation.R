@@ -2,15 +2,15 @@
 #'
 #' @param dataset character with the dataset name
 #'
-#' @return \code{tibble} with data dictionary
+#' @return \code{data.frame} with data dictionary
 #' @examples
-#' dictionary("DANE_MGNCNPV_2018_SETU")
+#' dictionary("DANE_MGN_2018_SETU")
 #'
 #' @export
 dictionary <- function(dataset) {
   checkmate::assert_character(dataset)
 
-  dict_path <- paste("DICT", dataset, sep = "_")
+  dict_path <- sprintf("DICT_%s", dataset)
   path <- retrieve_path(dict_path)
   dict <- retrieve_table(path, ";")
   return(dict)
@@ -21,7 +21,7 @@ dictionary <- function(dataset) {
 #' @param module character with module to be consulted (\code{"demographic"},
 #' \code{"geospatial"}, \code{"climate"})
 #'
-#' @return \code{tibble} with the available datasets
+#' @return \code{data.frame} with the available datasets
 #' @examples
 #' list_datasets("geospatial")
 #'
