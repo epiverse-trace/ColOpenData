@@ -1,20 +1,20 @@
 #' Climate aggregation rules
-#' 
+#'
 #' @description
 #' Climate temporal aggregation rules are provided by the source, and guarantee
-#' data quality given missing information. These rules are included in the 
+#' data quality given missing information. These rules are included in the
 #' package to make the download and aggregation process easier for the user. The
 #' aggregation is not available for all climate data, and is only available for
-#' information under the tags \code{TSSM_CON}, \code{TMN_CON}, \code{TMX_CON}, 
+#' information under the tags \code{TSSM_CON}, \code{TMN_CON}, \code{TMX_CON},
 #' \code{PTPM_CON}, and \code{BSHG_CON}. Internal functions are provided as a
-#' set of comprehensible rules to aggregate the data for daily, monthly and 
+#' set of comprehensible rules to aggregate the data for daily, monthly and
 #' annual frequencies
-#' 
-#' @section Methods: 
-#' Aggregation can only be performed from the previous level, meaning for 
-#' monthly aggregation, the data must be already aggregated daily, and for 
+#'
+#' @section Methods:
+#' Aggregation can only be performed from the previous level, meaning for
+#' monthly aggregation, the data must be already aggregated daily, and for
 #' annual aggregation the data must be monthly
-#' 
+#'
 #' @param group \code{data.frame} with filtered and grouped data
 #'
 #' @return numeric value calculated
@@ -60,7 +60,7 @@ annual_tssm <- function(group) {
 }
 
 #' Calculate monthly maximum temperature
-#' 
+#'
 #' @keywords internal
 monthly_tmx <- function(group) {
   if (nrow(group) >= 16) {

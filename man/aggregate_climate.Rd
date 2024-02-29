@@ -4,11 +4,11 @@
 \alias{aggregate_climate}
 \title{Aggregate climate data for different frequencies}
 \usage{
-aggregate_climate(.data, frequency)
+aggregate_climate(climate_data, frequency)
 }
 \arguments{
-\item{.data}{\code{data.frame} obtained from download functions. Can only
-include observations under the same tag.}
+\item{climate_data}{\code{data.frame} obtained from download functions. Only
+observations under the same tag can be aggregated.}
 
 \item{frequency}{character with the aggregation frequency. (\code{"day"},
 \code{"month"} or \code{"year"})}
@@ -20,12 +20,16 @@ include observations under the same tag.}
 Aggregate time series downloaded data from specific tags to day, month or
 year. Only observations under the tags \code{TSSM_CON}, \code{TMN_CON},
 \code{TMX_CON}, \code{PTPM_CON}, and \code{BSHG_CON} can be aggregated,
-since are the ones where methodology  for aggregation is explicitly available
+since are the ones where methodology for aggregation is explicitly provided
 from the source.
 }
 \examples{
-\dontrun{
-aggregate_tssm(tssm, "day")
-}
+lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)
+lon <- c(-75.678072, -75.327859, -75.327859, -75.678072, -75.678072)
+polygon <- sf::st_polygon(x = list(cbind(lon, lat)))
+geometry <- sf::st_sfc(polygon)
+roi <- sf::st_as_sf(geometry)
+tssm <- download_climate_geom(roi, "2021-11-14", "2021-11-20", "TSSM_CON")
+daily_tssm <- aggregate_climate(tssm, "day")
 
 }

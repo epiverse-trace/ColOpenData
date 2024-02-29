@@ -23,6 +23,5 @@ polygon <- sf::st_polygon(x = list(cbind(lon, lat)))
 geometry <- sf::st_sfc(polygon)
 roi <- sf::st_as_sf(geometry)
 stations <- stations_in_roi(roi)
-print(stations)
 
 }

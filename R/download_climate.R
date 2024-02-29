@@ -14,7 +14,6 @@
 #'
 #' @examples
 #' tssm <- download_climate("17001", "2021-11-14", "2021-11-20", "TSSM_CON")
-#' print(tssm)
 #'
 #' @return data.frame with observations from the stations in the area
 #'
@@ -68,7 +67,6 @@ download_climate <- function(code, start_date, end_date, tag) {
 #' geometry <- sf::st_sfc(polygon)
 #' roi <- sf::st_as_sf(geometry)
 #' tssm <- download_climate_geom(roi, "2021-11-14", "2021-11-20", "TSSM_CON")
-#' print(tssm)
 #'
 #' @return \code{data.frame} with observations from the stations in the area
 #'
@@ -106,12 +104,15 @@ download_climate_geom <- function(geometry, start_date, end_date,
 #' @importFrom rlang .data
 #'
 #' @examples
-#' \dontrun{
+#' lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)
+#' lon <- c(-75.678072, -75.327859, -75.327859, -75.678072, -75.678072)
+#' polygon <- sf::st_polygon(x = list(cbind(lon, lat)))
+#' geometry <- sf::st_sfc(polygon)
+#' roi <- sf::st_as_sf(geometry)
+#' stations <- stations_in_roi(roi)
 #' tssm <- download_climate_stations(
 #'   stations, "2021-11-14", "2021-11-20", "TSSM_CON"
 #' )
-#' print(tssm)
-#' }
 #'
 #' @return \code{data.frame} with observations from the requested stations
 #' @export
@@ -165,11 +166,12 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
     dataset_path <- file.path(path_data, path_stations[i])
     # nolint end
 
-    # Request is different, since datasets might not be available
+    # Request is different, error 404 is expected for some datasets
     base_request <- httr2::request(base_url = dataset_path)
     request <- httr2::req_error(base_request, is_error = \(resp) FALSE)
     response <- httr2::req_perform(request)
-    if (httr2::resp_status(response) == 404) { # if not found go to next
+    if (httr2::resp_status(response) == 404) {
+      # if not found go to next
       next
     } else {
       content <- httr2::resp_body_string(response)
@@ -229,7 +231,6 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
 #' geometry <- sf::st_sfc(polygon)
 #' roi <- sf::st_as_sf(geometry)
 #' stations <- stations_in_roi(roi)
-#' print(stations)
 #'
 #' @return \code{data.frame} with the stations inside the consulted geometry
 #'
@@ -254,7 +255,7 @@ stations_in_roi <- function(geometry) {
   )
   stations_in_roi <- geo_stations[which(intersections), ]
   if (nrow(stations_in_roi) == 0) {
-    stop("There are no stations in the given ROI")
+    stop("There are no stations in the specified ROI")
   }
   return(stations_in_roi)
 }

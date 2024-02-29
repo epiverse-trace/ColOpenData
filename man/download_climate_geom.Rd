@@ -32,6 +32,5 @@ polygon <- sf::st_polygon(x = list(cbind(lon, lat)))
 geometry <- sf::st_sfc(polygon)
 roi <- sf::st_as_sf(geometry)
 tssm <- download_climate_geom(roi, "2021-11-14", "2021-11-20", "TSSM_CON")
-print(tssm)
 
 }

@@ -7,28 +7,32 @@
 #' since are the ones where methodology for aggregation is explicitly provided
 #' from the source.
 #'
-#' @param .data \code{data.frame} obtained from download functions. Can only
-#' include observations under the same tag.
+#' @param climate_data \code{data.frame} obtained from download functions. Only
+#' observations under the same tag can be aggregated.
 #' @param frequency character with the aggregation frequency. (\code{"day"},
 #'  \code{"month"} or \code{"year"})
 #'
 #' @importFrom rlang .data
 #'
 #' @examples
-#' \dontrun{
-#' aggregate_tssm(tssm, "day")
-#' }
+#' lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)
+#' lon <- c(-75.678072, -75.327859, -75.327859, -75.678072, -75.678072)
+#' polygon <- sf::st_polygon(x = list(cbind(lon, lat)))
+#' geometry <- sf::st_sfc(polygon)
+#' roi <- sf::st_as_sf(geometry)
+#' tssm <- download_climate_geom(roi, "2021-11-14", "2021-11-20", "TSSM_CON")
+#' daily_tssm <- aggregate_climate(tssm, "day")
 #'
 #' @return \code{data.frame} with the aggregated data for specific frequency
 #'
 #' @export
-aggregate_climate <- function(.data, frequency) {
+aggregate_climate <- function(climate_data, frequency) {
   checkmate::assert_choice(frequency, c("day", "month", "year"))
-  checkmate::assert_names(names(.data), must.include = c(
+  checkmate::assert_names(names(climate_data), must.include = c(
     "station", "longitude", "latitude",
     "date", "hour", "tag", "value"
   ))
-  tag <- unique(.data$tag)
+  tag <- unique(climate_data$tag)
   stopifnot(
     "Aggregation is only possible for individual tags" =
       length(tag) == 1
@@ -76,25 +80,25 @@ aggregate_climate <- function(.data, frequency) {
 
   if (frequency == "day") {
     if (!is.null(evaluated$day)) {
-      aggregated_data <- aggregate_daily(.data, evaluated$day)
+      aggregated_data <- aggregate_daily(climate_data, evaluated$day)
     } else {
-      aggregated_data <- .data
+      aggregated_data <- climate_data
       warning(evaluated$warning_msg)
     }
   } else if (frequency == "month") {
     if (!is.null(evaluated$day)) {
-      aggregated_data <- aggregate_daily(.data, evaluated$day) %>%
+      aggregated_data <- aggregate_daily(climate_data, evaluated$day) %>%
         aggregate_monthly(evaluated$month)
     } else {
-      aggregated_data <- aggregate_monthly(.data, evaluated$month)
+      aggregated_data <- aggregate_monthly(climate_data, evaluated$month)
     }
   } else {
     if (!is.null(evaluated$day)) {
-      aggregated_data <- aggregate_daily(.data, evaluated$day) %>%
+      aggregated_data <- aggregate_daily(climate_data, evaluated$day) %>%
         aggregate_monthly(evaluated$month) %>%
         aggregate_annual(evaluated$year)
     } else {
-      aggregated_data <- aggregate_monthly(.data, evaluated$month) %>%
+      aggregated_data <- aggregate_monthly(climate_data, evaluated$month) %>%
         aggregate_annual(evaluated$year)
     }
   }

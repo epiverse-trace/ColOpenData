@@ -27,11 +27,14 @@ Download climate data from named stations.This data is
 retrieved from local meteorological stations provided by IDEAM.
 }
 \examples{
-\dontrun{
+lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)
+lon <- c(-75.678072, -75.327859, -75.327859, -75.678072, -75.678072)
+polygon <- sf::st_polygon(x = list(cbind(lon, lat)))
+geometry <- sf::st_sfc(polygon)
+roi <- sf::st_as_sf(geometry)
+stations <- stations_in_roi(roi)
 tssm <- download_climate_stations(
   stations, "2021-11-14", "2021-11-20", "TSSM_CON"
 )
-print(tssm)
-}
 
 }

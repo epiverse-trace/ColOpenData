@@ -11,7 +11,7 @@ list_datasets(module = "all")
 \code{"geospatial"}, \code{"climate"})}
 }
 \value{
-\code{tibble} with the available datasets
+\code{data.frame} with the available datasets
 }
 \description{
 Download list of available datasets

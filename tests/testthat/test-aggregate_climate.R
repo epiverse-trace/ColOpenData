@@ -1,5 +1,5 @@
 # Samples to aggregate
-mpios <- ColOpenData::download_geospatial("DANE_MGNCNPV_2018_MPIO")
+mpios <- ColOpenData::download_geospatial("DANE_MGN_2018_MPIO")
 
 barranquilla <- mpios[which(mpios$MPIO_CDPMP == "08001"), ]
 bogota <- mpios[which(mpios$MPIO_CDPMP == "11001"), ]
