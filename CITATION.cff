@@ -7,8 +7,8 @@ cff-version: 1.2.0
 message: 'To cite package "ColOpenData" in publications use:'
 type: software
 license: MIT
-title: 'ColOpenData: ColOpenData'
-version: 0.0.1
+title: 'ColOpenData: Colombian Open Data Download and Wrangling'
+version: 0.1.0
 abstract: ColOpenData is a package that acquires and wrangles Colombian socioeconomic,
   geospatial and climate data. It solves the problem of Colombian data being issued
   in different web pages and sources by using functions that allow the user to select
@@ -18,21 +18,26 @@ authors:
 - family-names: Tavera-Cifuentes
   given-names: M. Camila
   email: mc.tavera@uniandes.edu.co
+  orcid: https://orcid.org/0009-0007-1610-4583
 - family-names: Otero
   given-names: Julian
   email: jd.otero10@uniandes.edu.co
+  orcid: https://orcid.org/0009-0006-0429-7747
 - family-names: Umana
   given-names: Juan D.
   email: jd.umana10@uniandes.edu.co
-- family-names: Montenegro
-  given-names: Juan F.
+  orcid: https://orcid.org/0000-0003-0316-6164
+- family-names: Montenegro-Torres
+  given-names: Juan
   email: jf.montenegro@uniandes.edu.co
+  orcid: https://orcid.org/0000-0003-2755-4743
 repository-code: https://github.com/epiverse-trace/ColOpenData
 url: https://epiverse-trace.github.io/ColOpenData/
 contact:
-- family-names: Tavera Cifuentes
-  given-names: Maria Camila
+- family-names: Tavera-Cifuentes
+  given-names: M. Camila
   email: mc.tavera@uniandes.edu.co
+  orcid: https://orcid.org/0009-0007-1610-4583
 keywords:
 - colombia
 - data-package
@@ -227,6 +232,9 @@ references:
   - family-names: Dunnington
     given-names: Dewey
     orcid: https://orcid.org/0000-0002-9415-4582
+  - family-names: van den Brand
+    given-names: Teun
+    orcid: https://orcid.org/0000-0002-9335-7468
   year: '2024'
 - type: software
   title: knitr
