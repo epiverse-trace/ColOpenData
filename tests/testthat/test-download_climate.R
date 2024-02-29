@@ -1,21 +1,26 @@
-# Sample regions for test
-mpios <- ColOpenData::download_geospatial("DANE_MGN_2018_MPIO")
 # Region without stations
-oicata <- mpios[which(mpios$MPIO_CDPMP == "15500"), ]
-# Regions with stations
-medellin <- mpios[which(mpios$MPIO_CDPMP == "05615"), ]
-ibague <- mpios[which(mpios$MPIO_CDPMP == "73001"), ]
+lat_1 <- c(5.644531, 5.644531, 5.59963, 5.59963, 5.644531)
+lon_1 <- c(-73.30733, -73.28177, -73.28177, -73.30733, -73.30733)
+polygon_1 <- sf::st_polygon(x = list(cbind(lon_1, lat_1))) %>% sf::st_sfc()
+no_stations_area <- sf::st_as_sf(polygon_1)
+
+# Region with stations
+lat_2 <- c(4.700691, 4.700691, 4.256457, 4.256457, 4.700691)
+lon_2 <- c(-75.5221, -74.96571, -74.96571, -75.5221, -75.5221)
+polygon_2 <- sf::st_polygon(x = list(cbind(lon_2, lat_2))) %>% sf::st_sfc()
+ibague <- sf::st_as_sf(polygon_2)
+
 # Retrieve existing stations
 stations_test <- stations_in_roi(ibague)
 
 # Stations in ROI
 test_that("Stations in ROI throws errors", {
   expect_error(stations_in_roi("geometry"))
-  expect_error(stations_in_roi(oicata))
+  expect_error(stations_in_roi(no_stations_area))
 })
 
 test_that("Stations in ROI work as expected", {
-  expect_s3_class(stations_in_roi(medellin), "data.frame")
+  expect_s3_class(stations_in_roi(ibague), "data.frame")
 })
 
 # Climate stations
@@ -71,19 +76,19 @@ test_that("Climate data from geometry works as expected", {
   expect_s3_class(download_climate_geom(
     geometry = ibague,
     start_date = "2010-10-01",
-    end_date = "2010-12-10",
+    end_date = "2010-11-10",
     tag = "PTPM_CON"
   ), "data.frame")
   expect_length(download_climate_geom(
     geometry = ibague,
-    start_date = "2010-10-01",
-    end_date = "2010-12-10",
+    start_date = "2015-08-01",
+    end_date = "2015-08-16",
     tag = "TSSM_CON"
   ), 7L)
   expect_identical(colnames(download_climate_geom(
     geometry = ibague,
-    start_date = "2010-10-01",
-    end_date = "2010-12-10",
+    start_date = "2020-01-01",
+    end_date = "2020-02-10",
     tag = "TMN_CON"
   )), c(
     "station", "longitude", "latitude", "date",

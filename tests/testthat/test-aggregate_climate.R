@@ -1,20 +1,23 @@
-# Samples to aggregate
-mpios <- ColOpenData::download_geospatial("DANE_MGN_2018_MPIO")
+# Municipality 1
+lat_1 <- c(6.373761, 6.373761, 6.163823, 6.163823, 6.373761)
+lon_1 <- c(-75.71929, -75.4723, -75.4723, -75.71929, -75.71929)
+polygon_1 <- sf::st_polygon(x = list(cbind(lon_1, lat_1))) %>% sf::st_sfc()
+medellin <- sf::st_as_sf(polygon_1)
 
-barranquilla <- mpios[which(mpios$MPIO_CDPMP == "08001"), ]
-bogota <- mpios[which(mpios$MPIO_CDPMP == "11001"), ]
-ibague <- mpios[which(mpios$MPIO_CDPMP == "73001"), ]
-medellin <- mpios[which(mpios$MPIO_CDPMP == "05001"), ]
-manizales <- mpios[which(mpios$MPIO_CDPMP == "17001"), ]
+# Municipality 2
+lat_2 <- c(4.700691, 4.700691, 4.256457, 4.256457, 4.700691)
+lon_2 <- c(-75.5221, -74.96571, -74.96571, -75.5221, -75.5221)
+polygon_2 <- sf::st_polygon(x = list(cbind(lon_2, lat_2))) %>% sf::st_sfc()
+ibague <- sf::st_as_sf(polygon_2)
 
 base_tssm <- download_climate_geom(
-  geometry = barranquilla,
+  geometry = medellin,
   start_date = "2014-01-01",
   end_date = "2015-04-05",
   tag = "TSSM_CON"
 )
 base_bshg <- download_climate_geom(
-  geometry = bogota,
+  geometry = medellin,
   start_date = "1990-01-01",
   end_date = "1990-05-16",
   tag = "BSHG_CON"
@@ -26,13 +29,13 @@ base_tmn <- download_climate_geom(
   tag = "TMN_CON"
 )
 base_tmx <- download_climate_geom(
-  geometry = medellin,
+  geometry = ibague,
   start_date = "2020-04-01",
   end_date = "2020-04-30",
   tag = "TMX_CON"
 )
 base_ptpm <- download_climate_geom(
-  geometry = manizales,
+  geometry = ibague,
   start_date = "2020-06-14",
   end_date = "2020-10-12",
   tag = "PTPM_CON"
@@ -50,18 +53,19 @@ test_that("Aggregation for dry-bulb temperature works as expected", {
   expect_identical(month_tssm[
     which(month_tssm$date == "2015-04-01"),
     "value"
-  ][[1]], NA_real_)
-  expect_identical(nrow(na.omit(aggregate_climate(base_tssm, "year"))), 1L)
+  ][[1]], c(NA_real_, NA_real_))
+  expect_identical(nrow(na.omit(aggregate_climate(base_tssm, "year"))), 2L)
 })
 
 test_that("Aggregation for sunshine duration works as expected", {
   expect_s3_class(aggregate_climate(base_bshg, "day"), "data.frame")
-  expect_identical(nrow(aggregate_climate(base_bshg, "month")), 35L)
+  expect_identical(nrow(aggregate_climate(base_bshg, "month")), 15L)
 })
 
 test_that("Aggregation for minimum temperature works as expected", {
   expect_s3_class(aggregate_climate(base_tmn, "month"), "data.frame")
-  expect_named(aggregate_climate(base_tmn, "year"),
+  expect_named(
+    aggregate_climate(base_tmn, "year"),
     c("station", "longitude", "latitude", "date", "tag", "value")
   )
 })

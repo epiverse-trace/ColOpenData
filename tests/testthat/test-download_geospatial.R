@@ -19,15 +19,15 @@ test_that("Download geospatial works", {
   )
   expect_identical(
     dim(download_geospatial(
-      dataset = "DANE_MGN_2018_MPIO",
+      dataset = "DANE_MGN_2018_DPTO",
       include_geom = TRUE,
-      include_cnpv = TRUE
+      include_cnpv = FALSE
     )),
-    c(1122L, 91L)
+    c(33L, 7L)
   )
   expect_s3_class(
     download_geospatial(
-      dataset = "DANE_MGN_2018_MPIO",
+      dataset = "DANE_MGN_2018_DPTO",
       include_geom = FALSE,
       include_cnpv = TRUE
     ),
