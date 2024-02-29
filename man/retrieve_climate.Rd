@@ -2,7 +2,7 @@
 % Please edit documentation in R/download.R
 \name{retrieve_climate}
 \alias{retrieve_climate}
-\title{Retrieve climate (.data) file}
+\title{Retrieve climate (.data) file from one station}
 \usage{
 retrieve_climate(dataset_path, start_date, end_date)
 }
@@ -19,6 +19,6 @@ retrieve_climate(dataset_path, start_date, end_date)
 dataset filtered for specified dates
 }
 \description{
-Retrieve climate (.data) file
+Retrieve climate (.data) file from one station
 }
 \keyword{internal}

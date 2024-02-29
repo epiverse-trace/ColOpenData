@@ -90,7 +90,7 @@ retrieve_path <- function(dataset) {
   return(file_path)
 }
 
-#' Retrieve table (csv and data) file
+#' Retrieve table csv file
 #'
 #' @param dataset_path character path to the dataset on repository
 #' @param sep separator for table data
@@ -115,7 +115,7 @@ retrieve_table <- function(dataset_path, sep = ";") {
   return(downloaded_data)
 }
 
-#' Retrieve climate (.data) file
+#' Retrieve climate (.data) file from one station
 #'
 #' @param dataset_path character path to the dataset on repository
 #' @param start_date character with the first date to consult in the format
@@ -147,12 +147,7 @@ retrieve_climate <- function(dataset_path, start_date, end_date) {
       format = "%Y-%m-%d %H:%M:%S",
       tz = "UTC"
     )
-    station_filtered <- station_data %>%
-      dplyr::filter(
-        .data$date >= start_date,
-        .data$date <= end_date + 1
-      )
-    downloaded_data <- station_filtered
+    downloaded_data <- station_data
   }
   return(downloaded_data)
 }
