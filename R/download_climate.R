@@ -228,7 +228,7 @@ retrieve_stations_data <- function(stations, start_date, end_date,
   checkmate::assert_choice(tag, ideam_tags)
   checkmate::assert_logical(aggregate)
 
-  path_data <- retrieve_path("IDEAM_CLIMATE_2023_MAY")
+  path_data <- retrieve_climate_path()
   path_stations <- paste0(tag, "@", stations, ".data")
   date_range <- seq(as.Date(start_date),
     as.Date(end_date),
@@ -305,7 +305,7 @@ stations_in_roi <- function(geometry) {
   checkmate::assert_class(geometry, "sf")
 
   crs <- sf::st_crs(geometry)
-  data_path <- retrieve_path("IDEAM_STATIONS_2023_MAY")
+  data_path <- retrieve_support_path("IDEAM_STATIONS_2023_MAY")
   stations <- retrieve_table(data_path, ",")
   geo_stations <- sf::st_as_sf(stations,
     coords = c("longitud", "latitud"),

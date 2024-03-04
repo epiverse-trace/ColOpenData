@@ -2,7 +2,7 @@
 % Please edit documentation in R/retrieve.R
 \name{retrieve_path}
 \alias{retrieve_path}
-\title{Retrieve path of named dataset}
+\title{Retrieve demographic and geospatial path of named dataset}
 \usage{
 retrieve_path(dataset)
 }
@@ -13,7 +13,7 @@ retrieve_path(dataset)
 character with path to retrieve the dataset from server
 }
 \description{
-Datasets are included in the general documentation file. Only dictionaries
-and support files are treated differently and not included in the file.
+Demographic and Geospatial datasets are included in the general documentation
+file. Path is built from information in the general file
 }
 \keyword{internal}

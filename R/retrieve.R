@@ -19,19 +19,16 @@ retrieve_value_key <- function(key) {
     value = key,
     file = config_file
   )
-  if (rlang::is_empty(key_path)) {
-    stop("information is not available")
-  }
   return(key_path)
 }
 
-#' Retrieve path of named dataset
+#' Retrieve demographic and geospatial path of named dataset
 #'
 #' @param dataset character with the dataset name
 #'
 #' @description
-#' Datasets are included in the general documentation file. Only dictionaries
-#' and support files are treated differently and not included in the file.
+#' Demographic and Geospatial datasets are included in the general documentation
+#' file. Path is built from information in the general file
 #'
 #' @return character with path to retrieve the dataset from server
 #'
@@ -39,53 +36,91 @@ retrieve_value_key <- function(key) {
 retrieve_path <- function(dataset) {
   checkmate::assert_character(dataset)
 
+  ext <- list(
+    geospatial = ".gpkg",
+    demographic = ".csv"
+  )
   base_path <- retrieve_value_key("base_path")
-  if (grepl("DICT", dataset, fixed = TRUE)) {
-    group <- "dictionaries"
-    group_path <- retrieve_value_key(group)
-    ext <- "csv"
-    dataset_path <- paste(dataset, ext, sep = ".")
-    file_path <- file.path(base_path, group_path, dataset_path)
+  all_datasets <- list_datasets()
+  dataset_info <- all_datasets[which(all_datasets$name == dataset), ]
+  # If dataset exists, build path
+  if (nrow(dataset_info) == 1) {
+    group_path <- retrieve_value_key(dataset_info$group)
+    category_path <- retrieve_value_key(dataset_info$category)
+    dataset_path <- paste0(dataset, ext[[dataset_info$group]])
+    file_path <- file.path(
+      base_path, group_path,
+      category_path, dataset_path
+    )
   } else {
-    all_datasets <- list_datasets()
-    dataset_info <- all_datasets[which(all_datasets$name == dataset), ]
-    if (nrow(dataset_info) == 1) {
-      group <- dataset_info$group
-      group_path <- retrieve_value_key(group)
-      if (group == "geospatial") {
-        category <- dataset_info$category
-        category_path <- retrieve_value_key(category)
-        ext <- "gpkg"
-        dataset_path <- paste(dataset, ext, sep = ".")
-        file_path <- file.path(
-          base_path, group_path,
-          category_path, dataset_path
-        )
-      } else if (group == "climate") {
-        directory_path <- dataset
-        file_path <- file.path(
-          base_path, group_path,
-          directory_path
-        )
-      } else if (group == "demographic") {
-        category <- dataset_info$category
-        category_path <- retrieve_value_key(category)
-        ext <- "csv"
-        dataset_path <- paste(dataset, ext, sep = ".")
-        file_path <- file.path(
-          base_path, group_path,
-          category_path, dataset_path
-        )
-      } else {
-        file_path <- file.path(NULL)
-      }
-    } else {
-      dataset_path <- retrieve_value_key(dataset)
-      file_path <- file.path(base_path, dataset_path)
-    }
-    if (rlang::is_empty(file_path)) {
-      stop("`dataset` is not available")
-    }
+    file_path <- file.path(NULL)
+  }
+  if (rlang::is_empty(file_path)) {
+    stop("`dataset` not found")
+  }
+  return(file_path)
+}
+
+#' Retrieve climate directory path of named dataset
+#'
+#' @param dataset character with the dataset name
+#'
+#' @description
+#' Climate data is retrieved from a general directory. Path is build for said
+#' directory
+#'
+#' @return character with path to retrieve the dataset from server
+#'
+#' @keywords internal
+retrieve_climate_path <- function() {
+  base_path <- retrieve_value_key("base_path")
+  group_path <- retrieve_value_key("climate")
+  directory_path <- file.path(base_path, group_path)
+  if (rlang::is_empty(directory_path)) {
+    stop("`directory` not found")
+  }
+  return(directory_path)
+}
+
+#' Retrieve dictionary path of named dataset
+#'
+#' @param dataset character with the dictionary name
+#'
+#' @description
+#' Dictionaries are not included in the general documentation file. Therefore,
+#' the path is different from regular included files
+#'
+#' @return character with path to retrieve the dataset from server
+#'
+#' @keywords internal
+retrieve_dict_path <- function(dataset) {
+  base_path <- retrieve_value_key("base_path")
+  group_path <- retrieve_value_key("dictionaries")
+  dataset_path <- sprintf("%s.csv", dataset)
+  file_path <- file.path(base_path, group_path, dataset_path)
+  if (rlang::is_empty(file_path)) {
+    stop("dictionary is not available")
+  }
+  return(file_path)
+}
+
+#' Retrieve support dataset path
+#'
+#' @param dataset character with the dataset name
+#'
+#' @description
+#' Support data is used for internal purposes and they are not included in the
+#' general documentation file
+#'
+#' @return character with path to retrieve the dataset from server
+#'
+#' @keywords internal
+retrieve_support_path <- function(dataset) {
+  base_path <- retrieve_value_key("base_path")
+  dataset_path <- retrieve_value_key(dataset)
+  file_path <- file.path(base_path, dataset_path)
+  if (rlang::is_empty(file_path)) {
+    stop("`dataset` not found")
   }
   return(file_path)
 }
