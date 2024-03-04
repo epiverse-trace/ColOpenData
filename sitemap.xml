@@ -61,10 +61,19 @@
     <loc>/reference/list_datasets.html</loc>
   </url>
   <url>
+    <loc>/reference/retrieve_climate_path.html</loc>
+  </url>
+  <url>
+    <loc>/reference/retrieve_dict_path.html</loc>
+  </url>
+  <url>
     <loc>/reference/retrieve_path.html</loc>
   </url>
   <url>
     <loc>/reference/retrieve_stations_data.html</loc>
+  </url>
+  <url>
+    <loc>/reference/retrieve_support_path.html</loc>
   </url>
   <url>
     <loc>/reference/retrieve_table.html</loc>

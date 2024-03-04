@@ -240,8 +240,8 @@ library for further details). For visualization we will use
 <span>    fillColor <span class="op">=</span> <span class="st">"#2e6930"</span>,</span>
 <span>    opacity <span class="op">=</span> <span class="fl">0.6</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<div class="leaflet html-widget html-fill-item" id="htmlwidget-f9cbf456c9e27accb3ab" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-f9cbf456c9e27accb3ab">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addPolygons","args":[[[[{"lng":[-75.678072,-75.327859,-75.327859,-75.678072,-75.678072],"lat":[5.166278,5.166278,4.982247,4.982247,5.166278]}]]],null,null,{"interactive":true,"className":"","stroke":true,"color":"#2e6930","weight":2,"opacity":0.6,"fill":true,"fillColor":"#2e6930","fillOpacity":0.2,"smoothFactor":1,"noClip":false},null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[4.982247,5.166278],"lng":[-75.678072,-75.327859]}},"evals":[],"jsHooks":[]}</script><p>With our new ROI, we can make a first exploration to check if there
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-3bcc2c3bd10d8ae70aee" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-3bcc2c3bd10d8ae70aee">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addPolygons","args":[[[[{"lng":[-75.678072,-75.327859,-75.327859,-75.678072,-75.678072],"lat":[5.166278,5.166278,4.982247,4.982247,5.166278]}]]],null,null,{"interactive":true,"className":"","stroke":true,"color":"#2e6930","weight":2,"opacity":0.6,"fill":true,"fillColor":"#2e6930","fillOpacity":0.2,"smoothFactor":1,"noClip":false},null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[4.982247,5.166278],"lng":[-75.678072,-75.327859]}},"evals":[],"jsHooks":[]}</script><p>With our new ROI, we can make a first exploration to check if there
 are any stations contained inside of it, using the function
 <code>stations_in_roi</code></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -402,7 +402,7 @@ the four years of interest.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Date"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Dry-bulb temperature [C]"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Removed 61 rows containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; Warning: Removed 1461 rows containing missing values or values outside the scale range</span></span>
 <span><span class="co">#&gt; (`geom_line()`).</span></span></code></pre></div>
 <p><img src="climate_data_files/figure-html/plot%20temperatures%20stations-1.png" width="700"></p>
 <p>The warning obtained indicates that there were no records for 61 of
@@ -459,7 +459,7 @@ area. (Default = <code>TRUE</code>)</li>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Date"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Dry-bulb temperature [C]"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Removed 61 rows containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; Warning: Removed 1461 rows containing missing values or values outside the scale range</span></span>
 <span><span class="co">#&gt; (`geom_line()`).</span></span></code></pre></div>
 <p><img src="climate_data_files/figure-html/plot%20temperatures%20roi-1.png" width="700"></p>
 <p>As we can see, the results are exactly the same as before.</p>
@@ -525,7 +525,7 @@ area. (Default = <code>TRUE</code>)</li>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Date"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Dry-bulb temperature [C]"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Removed 61 rows containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; Warning: Removed 1461 rows containing missing values or values outside the scale range</span></span>
 <span><span class="co">#&gt; (`geom_line()`).</span></span></code></pre></div>
 <p><img src="climate_data_files/figure-html/plot%20temperatures%20mpios-1.png" width="700"></p>
 </div>
