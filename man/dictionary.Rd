@@ -10,12 +10,12 @@ dictionary(dataset)
 \item{dataset}{character with the dataset name}
 }
 \value{
-\code{tibble} with data dictionary
+\code{data.frame} with data dictionary
 }
 \description{
 Download data dictionary for geospatial data
 }
 \examples{
-dictionary("DANE_MGNCNPV_2018_SETU")
+dictionary("DANE_MGN_2018_SETU")
 
 }
