@@ -4,14 +4,7 @@
 \alias{download_climate_geom}
 \title{Download climate data from geometry}
 \usage{
-download_climate_geom(
-  geometry,
-  start_date,
-  end_date,
-  frequency,
-  tags,
-  aggregate = TRUE
-)
+download_climate_geom(geometry, start_date, end_date, tag)
 }
 \arguments{
 \item{geometry}{\code{sf} geometry containing the geometry for a given ROI.
@@ -23,13 +16,7 @@ This geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}}
 \item{end_date}{character with the last date to consult in the format
 \code{"YYYY-MM-DD"} (Last available date is \code{"2023-05-31"})}
 
-\item{frequency}{character with the aggregation frequency. (\code{"day"},
-\code{"week"}, \code{"month"} or \code{"year"})}
-
-\item{tags}{character containing climate tags to consult}
-
-\item{aggregate}{logical for data aggregation, if \code{FALSE}, returns the
-data from each individual station in the area. (Default = \code{TRUE})}
+\item{tag}{character containing climate tag to consult}
 }
 \value{
 \code{data.frame} with observations from the stations in the area
@@ -44,10 +31,6 @@ lon <- c(-75.678072, -75.327859, -75.327859, -75.678072, -75.678072)
 polygon <- sf::st_polygon(x = list(cbind(lon, lat)))
 geometry <- sf::st_sfc(polygon)
 roi <- sf::st_as_sf(geometry)
-tssm <- download_climate_geom(
-  roi, "2021-11-14", "2021-11-20",
-  "day", "TSSM_CON"
-)
-print(tssm)
+tssm <- download_climate_geom(roi, "2021-11-14", "2021-11-20", "TSSM_CON")
 
 }

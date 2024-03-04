@@ -4,17 +4,12 @@
 \alias{download_climate_stations}
 \title{Download climate data from stations}
 \usage{
-download_climate_stations(
-  stations,
-  start_date,
-  end_date,
-  frequency,
-  tags,
-  aggregate = TRUE
-)
+download_climate_stations(stations, start_date, end_date, tag)
 }
 \arguments{
-\item{stations}{numeric vector containing the stations' codes}
+\item{stations}{\code{data.frame} containing the stations' codes. This
+\code{data.frame} must be retrieved from the function
+\code{stations_in_roi()}}
 
 \item{start_date}{character with the first date to consult in the format
 \code{"YYYY-MM-DD"}}
@@ -22,13 +17,7 @@ download_climate_stations(
 \item{end_date}{character with the last date to consult in the format
 \code{"YYYY-MM-DD"} (Last available date is \code{"2023-05-31"})}
 
-\item{frequency}{character with the aggregation frequency. (\code{"day"},
-\code{"week"}, \code{"month"} or \code{"year"})}
-
-\item{tags}{character containing climate tags to consult}
-
-\item{aggregate}{logical for data aggregation, if \code{FALSE}, returns the
-data from each individual station in the area. (Default = \code{TRUE})}
+\item{tag}{character containing climate tag to consult}
 }
 \value{
 \code{data.frame} with observations from the requested stations
@@ -38,11 +27,14 @@ Download climate data from named stations.This data is
 retrieved from local meteorological stations provided by IDEAM.
 }
 \examples{
-stations <- c(26155110, 26155170)
+lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)
+lon <- c(-75.678072, -75.327859, -75.327859, -75.678072, -75.678072)
+polygon <- sf::st_polygon(x = list(cbind(lon, lat)))
+geometry <- sf::st_sfc(polygon)
+roi <- sf::st_as_sf(geometry)
+stations <- stations_in_roi(roi)
 tssm <- download_climate_stations(
-  stations, "2021-11-14", "2021-11-20",
-  "day", "TSSM_CON", TRUE
+  stations, "2021-11-14", "2021-11-20", "TSSM_CON"
 )
-print(tssm)
 
 }

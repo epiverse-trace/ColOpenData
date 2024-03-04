@@ -33,7 +33,6 @@ Imports:
     config,
     dplyr,
     httr2,
-    lubridate,
     magrittr,
     readr,
     rlang,

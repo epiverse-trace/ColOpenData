@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-**ColOpenData** can be used to access open climate data from Colombia. This climate data is retrieved from the Institute of Hydrology, Meteorology and Environmental Studies [(IDEAM)](http://www.ideam.gov.co/). The climate module allows the user to consult climate data for any Region of Interest (ROI) inside the country and aggregate for different frequencies like day, week, month or year.
+**ColOpenData** can be used to access open climate data from Colombia. This climate data is retrieved from the Institute of Hydrology, Meteorology and Environmental Studies [(IDEAM)](http://www.ideam.gov.co/). The climate module allows the user to consult climate data for any Region of Interest (ROI) inside the country and retrieve the information for each station contained inside.
 
 The available information from IDEAM can be accessed using specific internal tags as follows:
 
@@ -43,11 +43,11 @@ IDEAM_tags <- data.frame(
 knitr::kable(IDEAM_tags)
 ```
 
-Each observation is subject to to the availability of stations in the ROI and the stations' status (active, maintenance or suspended).
+Each observation is subject to the availability of stations in the ROI and the stations' status (active, maintenance or suspended).
 
-For this example we will retrieve data for the city of Manizales in Colombia. We will download Dry-bulb temperature from 2013 to 2016, to observe the increase in temperature during 2015 and 2016 due to the impact of El Nino (ENSO).
+For this example we will retrieve data for the city of Manizales in Colombia. We will download Maximum temperature from 2013 to 2016, to observe the increase in temperature during 2015 and 2016 due to the impact of El Nino (ENSO).
 
-We will start by loading the necessary libraries.
+We will start by loading the needed libraries.
 
 ```{r library imports, results = "hide", warning = FALSE, message = FALSE}
 library(ColOpenData)
@@ -87,10 +87,10 @@ With our new ROI, we can make a first exploration to check if there are any stat
 
 ```{r stations in roi, }
 stations <- stations_in_roi(roi)
-head(stations)
+stations
 ```
 
-We can see that in the region there are 129 stations. Different categories are recorded by different stations, and can be checked at the column *categoria*. To understand the category of each station we can use the definition catalog provided by DANE [here](http://www.ideam.gov.co/documents/10182/557765/Definiciones+CNE.pdf/25e1cca5-ee47-4eaf-86c0-c4f5192a9937). Stations under the categories *Climática Principal* and *Climática Ordinaria* have records of Dry-bulb temperature.
+We can see that in the region there are 129 stations. Different categories are recorded by different stations, and can be checked at the column [categoria]{.underline}. To understand the category of each station we can use the definition catalog provided by IDEAM [here](http://www.ideam.gov.co/documents/10182/557765/Definiciones+CNE.pdf/25e1cca5-ee47-4eaf-86c0-c4f5192a9937). Stations under the categories *Climática Principal* and *Climática Ordinaria* have records of temperature.
 
 Some stations are suspended, which means they are not taking measurements at the moment. This information is found at the column [estado]{.underline} or, if the observation at [fecha_suspension]{.underline} is different from `NA`, since active stations do not have a suspension date. However, even if a station is suspended, the historical data (up to the suspension date) can be accessed.
 
@@ -106,78 +106,85 @@ cw_stations <- w_stations %>% dplyr::filter(categoria %in%
   c("Climática Principal", "Climática Ordinaria"))
 
 # General information of stations
-str(cw_stations)
+cw_stations
 ```
 
-From the original 129 stations, 40 were working for some or the whole period of interest and collected information for Dry-bulb temperature. With this information, we can access the Dry-bulb temperature from 2013 to 2016. To do so, we can use the function `download_climate_stations`. This function has the following parameters:
+From the original 129 stations, 40 were working for some or the whole period of interest and collected information for Dry-bulb temperature. It is important to consider that after data collection, some information might be lost due to quality attributes. 
 
--   `stations` numeric vector containing the stations' codes
+With the stations, we can access the maximum temperature from 2013 to 2016. To do so, we can use the function `download_climate_stations`. This function has the following parameters:
+
+-   `stations` `data.frame` containing the stations' codes. This `data.frame` must be retrieved from the function `stations_in_roi()`
 -   `start_date`: character with the first date to consult in the format `"YYYY-MM-DD"`
 -   `end_date`: character with the last date to consult in the format `"YYYY-MM_DD"`. (Last available date is `"2023-05-31"`
--   `frequency`: character with the aggregation frequency. (`"day"`, `"week"`, `"month"` or `"year"`)
--   `tags`: character containing climate tags to consult
--   `aggregate`: logical for data aggregation, if `FALSE`, returns the data from each individual station in the area. (Default = `TRUE`)
-
-Stations' codes are obtained from the column `codigo` in the stations data.
+-   `tag`: character containing climate tag to consult
 
 ```{r download climate stations}
-db_temperature_stations <- download_climate_stations(
-  stations = w_stations$codigo,
+max_temperature_stations <- download_climate_stations(
+  stations = w_stations,
   start_date = "2013-01-01",
   end_date = "2016-12-31",
-  frequency = "day",
-  tags = "TSSM_CON",
-  aggregate = TRUE
+  tag = "TMX_CON"
 )
+max_temperature_stations
 ```
 
-With the stations' downloaded data we can plot the time series for the four years of interest.
+The returned tidy `data.frame` includes: Individual and unique station code, longitude, latitude
+date, hour, tag requested and value recorded at the specified time. The tidy structure reports a row for each observation, which makes the subset and plot activities easier.
+
+To plot a time series of the stations data we can use **ggplot2** as follows:
 
 ```{r plot temperatures stations}
-ggplot(data = db_temperature_stations) +
-  geom_line(aes(x = date, y = TSSM_CON), color = "#106ba0") +
+ggplot(data = max_temperature_stations) +
+  geom_line(aes(x = date, y = value, group = station), color = "#106ba0") +
+  ggtitle("Max Temperature in Manizales by station") +
+  xlab("Date") +
+  ylab("Temperature [°C]") +
+  theme_bw() +
+  facet_grid(rows = vars(station))
+```
+As we can see, only two stations have data for the selected period, and we have missing information in some periods. Additionally, by having the data daily we cannot easily see big changes along time. To aid this issue, we will use an aggregation function. Aggregation functions are available at **ColOpenData** for climate data, we will use `aggregate_climate()`, adding as parameter the desired aggregation.
+
+```{r}
+max_temperature_month <- max_temperature_stations %>% aggregate_climate("month")
+
+ggplot(data = max_temperature_month) +
+  geom_line(aes(x = date, y = value, group = station), color = "#106ba0") +
   ggtitle("Dry-bulb Temperature") +
   xlab("Date") +
   ylab("Dry-bulb temperature [C]") +
-  theme_bw()
+  theme_bw() +
+  facet_grid(rows = vars(station))
 ```
-
-The warning obtained indicates that there were no records for 61 of the consulted days. This might be due to stations being under maintenance.
 
 ## Retrieving climate data for a Region of Interest (ROI)
 
-To retrieve climate data for any ROI in the country, without manually manipulating the stations' data, we can use the function `download_climate_geom`. The function has the following parameters:
+To retrieve climate data for any ROI in the country, without manually extracting the stations' data, we can use the function `download_climate_geom`. The function has the following parameters:
 
 -   `geometry`: `sf` geometry containing the geometry for a given ROI. This geometry can be either a `POLYGON` or `MULTIPOLYGON`
 -   `start_date`: character with the first date to consult in the format `"YYYY-MM-DD"`
--   `end_date`: character with the last date to consult in the format `"YYYY-MM_DD"`. (Last available date is `"2023-05-31"`
--   `frequency`: character with the aggregation frequency. (`"day"`, `"week"`, `"month"` or `"year"`)
--   `tags`: character containing climate tags to consult
--   `aggregate`: logical for data aggregation, if `FALSE`, returns the data from each individual station in the area. (Default = `TRUE`)
+-   `end_date`: character with the last date to consult in the format `"YYYY-MM_DD"`. (Last available date is `"2023-05-31"`)
+-   `tag`: character containing climate tag to consult
 
-We will use the same ROI created for the previous example.
+We will use the same ROI created for the previous example, and add the aggregation for month. We can add the aggregation function to the workflow using the pipe operator `%>%`.
 
 ```{r download climate data, results = "hide", warning = FALSE, message = FALSE}
-db_temperature_roi <- download_climate_geom(
+max_temperature_roi <- download_climate_geom(
   geometry = roi,
   start_date = "2013-01-01",
   end_date = "2016-12-31",
-  frequency = "day",
-  tags = "TSSM_CON",
-  aggregate = TRUE
-)
+  tag = "TMX_CON"
+) %>% aggregate_climate("month")
 ```
 
 ```{r plot temperatures roi}
-ggplot(data = db_temperature_roi) +
-  geom_line(aes(x = date, y = TSSM_CON), color = "#106ba0") +
+ggplot(data = max_temperature_roi) +
+  geom_line(aes(x = date, y = value, group = station), color = "#106ba0") +
   ggtitle("Dry-bulb Temperature") +
   xlab("Date") +
   ylab("Dry-bulb temperature [C]") +
-  theme_bw()
+  theme_bw() +
+  facet_grid(rows = vars(station))
 ```
-
-As we can see, the results are exactly the same as before.
 
 ## Retrieving climate data for municipality
 
@@ -191,27 +198,39 @@ The function `download_climate` will require almost the same arguments than `dow
 
 -   `code`: character with the DIVIPOLA code for the area
 -   `start_date`: character with the first date to consult in the format `"YYYY-MM-DD"`
--   `end_date`: character with the last date to consult in the format `"YYYY-MM_DD"`. (Last available date is `"2023-05-31"`
--   `frequency`: character with the aggregation frequency. (`"day"`, `"week"`, `"month"` or `"year"`)
--   `tags`: character containing climate tags to consult
--   `aggregate`: logical for data aggregation, if `FALSE`, returns the data from each individual station in the area. (Default = `TRUE`)
+-   `end_date`: character with the last date to consult in the format `"YYYY-MM_DD"`. (Last available date is `"2023-05-31"`)
+-   `tag`: character containing climate tag to consult
 
 ```{r download climate mpio, results = "hide", warning = FALSE, message = FALSE}
-db_temperature_mpio <- download_climate(
+max_temperature_mpio <- download_climate(
   code = "17001",
   start_date = "2013-01-01",
   end_date = "2016-12-31",
-  frequency = "day",
-  tags = "TSSM_CON",
-  aggregate = TRUE
-)
+  tag = "TMX_CON"
+) %>% aggregate_climate("month")
 ```
 
 ```{r plot temperatures mpios}
-ggplot(data = db_temperature_mpio) +
-  geom_line(aes(x = date, y = TSSM_CON), color = "#106ba0") +
+ggplot(data = max_temperature_mpio) +
+  geom_line(aes(x = date, y = value, group = station), color = "#106ba0") +
   ggtitle("Dry-bulb Temperature") +
   xlab("Date") +
   ylab("Dry-bulb temperature [C]") +
-  theme_bw()
+  theme_bw() +
+  facet_grid(rows = vars(station))
 ```
+
+The three methods display the same results, and the increase in maximum monthly temperature can be perceived during 2015 and 2016.
+
+## Disclaimer
+
+Data availability is subdued to station's measurements and quality filters. In most cases this leads to a lower amount of data, considering the extensive amount of climate stations.
+
+Temporal aggregation is only available for some tags and is limited to the ones who have a specific methodology of aggregation reported by IDEAM. The daily, monthly and annual aggregation is available for:
+- `TSSM_CON`: Dry-bulb temperature
+- `TMX_CON`: Maximum temperature
+- `TMN_CON`: Minimum temperature
+- `PTPM_CON`: Precipitation
+- `BSHG_CON`: Sunshine duration
+
+Temporal and spatial interpolation are not included in this version of **ColOpenData**.
