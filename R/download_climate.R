@@ -158,7 +158,7 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
   )
   checkmate::assert_choice(tag, ideam_tags)
 
-  path_data <- retrieve_path("IDEAM_CLIMATE_2023_MAY")
+  path_data <- retrieve_climate_path()
   path_stations <- paste0(tag, "@", stations$codigo, ".data")
   stations_data <- data.frame()
   for (i in seq_along(path_stations)) {
@@ -190,7 +190,7 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
   }
   # If none of the stations provided data
   if (nrow(stations_data) == 0) {
-    stop("There is no available information available for these dates")
+    stop("There is no available information for these dates")
   }
   return(stations_data)
 }
@@ -218,7 +218,7 @@ stations_in_roi <- function(geometry) {
   checkmate::assert_class(geometry, "sf")
 
   crs <- sf::st_crs(geometry)
-  data_path <- retrieve_path("IDEAM_STATIONS_2023_MAY")
+  data_path <- retrieve_support_path("IDEAM_STATIONS_2023_MAY")
   stations <- retrieve_table(data_path, ",")
   geo_stations <- sf::st_as_sf(stations,
     coords = c("longitud", "latitud"),
