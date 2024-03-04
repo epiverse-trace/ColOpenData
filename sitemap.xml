@@ -34,7 +34,37 @@
     <loc>/news/index.html</loc>
   </url>
   <url>
-    <loc>/reference/aggregate.html</loc>
+    <loc>/reference/aggregate_annual.html</loc>
+  </url>
+  <url>
+    <loc>/reference/aggregate_climate.html</loc>
+  </url>
+  <url>
+    <loc>/reference/aggregate_daily.html</loc>
+  </url>
+  <url>
+    <loc>/reference/aggregate_monthly.html</loc>
+  </url>
+  <url>
+    <loc>/reference/annual_bshg.html</loc>
+  </url>
+  <url>
+    <loc>/reference/annual_ptpm.html</loc>
+  </url>
+  <url>
+    <loc>/reference/annual_tmn.html</loc>
+  </url>
+  <url>
+    <loc>/reference/annual_tmx.html</loc>
+  </url>
+  <url>
+    <loc>/reference/annual_tssm.html</loc>
+  </url>
+  <url>
+    <loc>/reference/daily_bshg.html</loc>
+  </url>
+  <url>
+    <loc>/reference/daily_tssm.html</loc>
   </url>
   <url>
     <loc>/reference/dictionary.html</loc>
@@ -61,6 +91,24 @@
     <loc>/reference/list_datasets.html</loc>
   </url>
   <url>
+    <loc>/reference/monthly_bshg.html</loc>
+  </url>
+  <url>
+    <loc>/reference/monthly_ptpm.html</loc>
+  </url>
+  <url>
+    <loc>/reference/monthly_tmn.html</loc>
+  </url>
+  <url>
+    <loc>/reference/monthly_tmx.html</loc>
+  </url>
+  <url>
+    <loc>/reference/monthly_tssm.html</loc>
+  </url>
+  <url>
+    <loc>/reference/retrieve_climate.html</loc>
+  </url>
+  <url>
     <loc>/reference/retrieve_climate_path.html</loc>
   </url>
   <url>
@@ -68,9 +116,6 @@
   </url>
   <url>
     <loc>/reference/retrieve_path.html</loc>
-  </url>
-  <url>
-    <loc>/reference/retrieve_stations_data.html</loc>
   </url>
   <url>
     <loc>/reference/retrieve_support_path.html</loc>
@@ -83,8 +128,5 @@
   </url>
   <url>
     <loc>/reference/stations_in_roi.html</loc>
-  </url>
-  <url>
-    <loc>/reference/summarise.html</loc>
   </url>
 </urlset>

@@ -70,14 +70,7 @@ retrieved from local meteorological stations provided by IDEAM.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">download_climate_geom</span><span class="op">(</span></span>
-<span>  <span class="va">geometry</span>,</span>
-<span>  <span class="va">start_date</span>,</span>
-<span>  <span class="va">end_date</span>,</span>
-<span>  <span class="va">frequency</span>,</span>
-<span>  <span class="va">tags</span>,</span>
-<span>  aggregate <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">download_climate_geom</span><span class="op">(</span><span class="va">geometry</span>, <span class="va">start_date</span>, <span class="va">end_date</span>, <span class="va">tag</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -97,18 +90,8 @@ This geometry can be either a <code>POLYGON</code> or <code>MULTIPOLYGON</code><
 <code>"YYYY-MM-DD"</code> (Last available date is <code>"2023-05-31"</code>)</p></dd>
 
 
-<dt>frequency</dt>
-<dd><p>character with the aggregation frequency. (<code>"day"</code>,
-<code>"week"</code>, <code>"month"</code> or <code>"year"</code>)</p></dd>
-
-
-<dt>tags</dt>
-<dd><p>character containing climate tags to consult</p></dd>
-
-
-<dt>aggregate</dt>
-<dd><p>logical for data aggregation, if <code>FALSE</code>, returns the
-data from each individual station in the area. (Default = <code>TRUE</code>)</p></dd>
+<dt>tag</dt>
+<dd><p>character containing climate tag to consult</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -125,19 +108,7 @@ data from each individual station in the area. (Default = <code>TRUE</code>)</p>
 <span class="r-in"><span><span class="va">polygon</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st.html" class="external-link">st_polygon</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">lon</span>, <span class="va">lat</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">geometry</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html" class="external-link">st_sfc</a></span><span class="op">(</span><span class="va">polygon</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">roi</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="va">geometry</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">tssm</span> <span class="op">&lt;-</span> <span class="fu">download_climate_geom</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="va">roi</span>, <span class="st">"2021-11-14"</span>, <span class="st">"2021-11-20"</span>,</span></span>
-<span class="r-in"><span>  <span class="st">"day"</span>, <span class="st">"TSSM_CON"</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">tssm</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         date TSSM_CON</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 2021-11-14      NaN</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2021-11-15      NaN</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 2021-11-16      NaN</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 2021-11-17      NaN</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 2021-11-18      NaN</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 2021-11-19      NaN</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7 2021-11-20      NaN</span>
+<span class="r-in"><span><span class="va">tssm</span> <span class="op">&lt;-</span> <span class="fu">download_climate_geom</span><span class="op">(</span><span class="va">roi</span>, <span class="st">"2021-11-14"</span>, <span class="st">"2021-11-20"</span>, <span class="st">"TSSM_CON"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
