@@ -149,3 +149,40 @@ retrieve_table <- function(dataset_path, sep = ";") {
   downloaded_data <- as.data.frame(downloaded_data)
   return(downloaded_data)
 }
+
+#' Retrieve climate (.data) file from one station
+#'
+#' @param dataset_path character path to the dataset on repository
+#' @param start_date character with the first date to consult in the format
+#' \code{"YYYY-MM-DD"}
+#' @param end_date character with the last date to consult in the format
+#' \code{"YYYY-MM-DD"} (Last available date is \code{"2023-05-31"})
+#'
+#' @return dataset filtered for specified dates
+#' @keywords internal
+retrieve_climate <- function(dataset_path, start_date, end_date) {
+  base_request <- httr2::request(base_url = dataset_path)
+  request <- httr2::req_error(base_request, is_error = \(resp) FALSE)
+  response <- httr2::req_perform(request)
+  downloaded_data <- data.frame()
+  if (httr2::resp_status(response) == 200) {
+    content <- httr2::resp_body_string(response)
+    station_data <- suppressMessages(
+      suppressWarnings(
+        readr::read_delim(content,
+          delim = "|",
+          escape_double = FALSE,
+          trim_ws = TRUE,
+          show_col_types = FALSE
+        )
+      )
+    )
+    names(station_data) <- c("date", "value")
+    station_data$date <- as.POSIXct(station_data$date,
+      format = "%Y-%m-%d %H:%M:%S",
+      tz = "UTC"
+    )
+    downloaded_data <- station_data
+  }
+  return(downloaded_data)
+}

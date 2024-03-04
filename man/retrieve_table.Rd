@@ -2,7 +2,7 @@
 % Please edit documentation in R/retrieve.R
 \name{retrieve_table}
 \alias{retrieve_table}
-\title{Retrieve table csv file}
+\title{Retrieve table (csv and data) file}
 \usage{
 retrieve_table(dataset_path, sep = ";")
 }
@@ -15,6 +15,6 @@ retrieve_table(dataset_path, sep = ";")
 dataset
 }
 \description{
-Retrieve table csv file
+Retrieve table (csv and data) file
 }
 \keyword{internal}
