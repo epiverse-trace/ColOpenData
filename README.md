@@ -20,8 +20,8 @@ coverage](https://codecov.io/gh/epiverse-trace/ColOpenData/branch/main/graph/bad
 **ColOpenData** is a package that acquires and wrangles Colombian
 socioeconomic, geospatial and climate data. It solves the problem of
 Colombian data being issued in different web pages and sources by using
-functions that allow the user to select the desired database and
-download it without having to do the exhausting acquisition process.
+functions that allow the user to select the desired dataset and download
+it without having to do the exhausting acquisition process.
 
 ColOpenData is developed at [Universidad de Los
 Andes](https://uniandes.edu.co/) as part of the [Epiverse-TRACE
@@ -41,7 +41,7 @@ pak::pak("epiverse-trace/ColOpenData")
 
 **ColOpenData** contains data from two public data sources: The National
 Administrative Department of Statistics
-[(DANE)](https://www.dane.gov.co/index.php/en/) and the Institute of
+[(DANE)](https://www.dane.gov.co/index.php/en/), and the Institute of
 Hydrology, Meteorology and Environmental Studies
 [(IDEAM)](http://www.ideam.gov.co/). The available data is divided in
 three categories:
@@ -63,9 +63,9 @@ three categories:
 
 - **Climate:** Climate data is recovered from backup information
   provided by IDEAM, containing historical data from the first station
-  in the country, until May 31st 2023. This backup includes temperature,
-  precipitation, solar brightness, wind direction, among others. More
-  information can be accessed [here](http://www.ideam.gov.co/).
+  in the country until May 31st 2023. This backup includes temperature,
+  precipitation, sunshine duration, wind direction, among others. More
+  information can be found [here](http://www.ideam.gov.co/).
 
 Documentation and vignettes are available for the three modules in the
 [user vignettes](https://epiverse-trace.github.io/ColOpenData/).
