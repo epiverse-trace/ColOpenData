@@ -2,20 +2,20 @@
 #'
 #' @description
 #' This function downloads geospatial datasets from the Geostatistical National
-#' Framework (MGN) at different levels of aggregation. These datasets include a
-#' summarized version of the National Population and Dwelling Census (CNPV) with
-#' demographic and socioeconomic information.
+#' Framework (MGN) at different levels of spatial aggregation. These datasets
+#' include a summarized version of the National Population and Dwelling Census
+#' (CNPV) with demographic and socioeconomic information.
 #'
-#' @param dataset character with the dataset name
-#' @param include_geom logical for including (or not) geometry and related
-#' information. Default is \code{TRUE}
+#' @param dataset character with the geospatial dataset name
+#' @param include_geom logical for including (or not) geometry.
+#' Default is \code{TRUE}
 #' @param include_cnpv logical for including (or not) CNPV demographic and
-#' socioeconomic related information. Default is \code{TRUE}
+#' socioeconomic information. Default is \code{TRUE}
 #'
 #' @examples
 #' departments <- download_geospatial("DANE_MGN_2018_DPTO", TRUE, FALSE)
 #'
-#' @return \code{sf} or \code{data.frame} object with downloaded data
+#' @return \code{data.frame} object with downloaded data
 #'
 #' @export
 download_geospatial <- function(dataset, include_geom = TRUE,

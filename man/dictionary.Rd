@@ -2,7 +2,7 @@
 % Please edit documentation in R/documentation.R
 \name{dictionary}
 \alias{dictionary}
-\title{Download data dictionary for geospatial data}
+\title{Download data dictionaries}
 \usage{
 dictionary(dataset)
 }
@@ -10,12 +10,13 @@ dictionary(dataset)
 \item{dataset}{character with the dataset name}
 }
 \value{
-\code{data.frame} with data dictionary
+\code{data.frame} object with data dictionary
 }
 \description{
-Download data dictionary for geospatial data
+Demographic and climate datasets contain data dictionaries to understand
+internal tags and named columns.
 }
 \examples{
-dictionary("DANE_MGN_2018_SETU")
+dict <- dictionary("DANE_MGN_2018_SETU")
 
 }

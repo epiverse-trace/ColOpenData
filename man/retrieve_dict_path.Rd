@@ -14,6 +14,6 @@ character with path to retrieve the dataset from server
 }
 \description{
 Dictionaries are not included in the general documentation file. Therefore,
-the path is different from regular included files
+the path is built internally
 }
 \keyword{internal}

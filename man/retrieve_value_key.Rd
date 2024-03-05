@@ -10,7 +10,7 @@ retrieve_value_key(key)
 \item{key}{character key}
 }
 \value{
-character containing value
+character containing associated value
 }
 \description{
 Retrieve value from key included in configuration file

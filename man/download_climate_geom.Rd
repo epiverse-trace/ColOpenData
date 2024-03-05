@@ -7,7 +7,7 @@
 download_climate_geom(geometry, start_date, end_date, tag)
 }
 \arguments{
-\item{geometry}{\code{sf} geometry containing the geometry for a given ROI.
+\item{geometry}{\code{sf} object containing the geometry for a given ROI
 This geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}}
 
 \item{start_date}{character with the first date to consult in the format
@@ -19,11 +19,12 @@ This geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}}
 \item{tag}{character containing climate tag to consult}
 }
 \value{
-\code{data.frame} with observations from the stations in the area
+\code{data.frame} object with observations from the stations in the
+area
 }
 \description{
 Download climate data from stations contained in a geometry. This data is
-retrieved from local meteorological stations provided by IDEAM.
+retrieved from local meteorological stations provided by IDEAM
 }
 \examples{
 lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)

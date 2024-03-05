@@ -7,10 +7,10 @@
 download_demographic(dataset)
 }
 \arguments{
-\item{dataset}{character with the dataset name}
+\item{dataset}{character with the demographic dataset name}
 }
 \value{
-\code{data.frame} with downloaded data.
+\code{data.frame} object with downloaded data
 }
 \description{
 This function downloads demographic datasets from the National Population

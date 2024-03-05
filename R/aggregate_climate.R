@@ -1,14 +1,14 @@
 #' Aggregate climate data for different frequencies
 #'
 #' @description
-#' Aggregate time series downloaded data from specific tags to day, month or
-#' year. Only observations under the tags \code{TSSM_CON}, \code{TMN_CON},
+#' Aggregate time series downloaded climate data to day, month or year.
+#' Only observations under the tags \code{TSSM_CON}, \code{TMN_CON},
 #' \code{TMX_CON}, \code{PTPM_CON}, and \code{BSHG_CON} can be aggregated,
 #' since are the ones where methodology for aggregation is explicitly provided
-#' from the source.
+#' from the source
 #'
 #' @param climate_data \code{data.frame} obtained from download functions. Only
-#' observations under the same tag can be aggregated.
+#' observations under the same tag can be aggregated
 #' @param frequency character with the aggregation frequency. (\code{"day"},
 #'  \code{"month"} or \code{"year"})
 #'
@@ -23,7 +23,7 @@
 #' tssm <- download_climate_geom(roi, "2021-11-14", "2021-11-20", "TSSM_CON")
 #' daily_tssm <- aggregate_climate(tssm, "day")
 #'
-#' @return \code{data.frame} with the aggregated data for specific frequency
+#' @return \code{data.frame} object with the aggregated data
 #'
 #' @export
 aggregate_climate <- function(climate_data, frequency) {
@@ -111,7 +111,7 @@ aggregate_climate <- function(climate_data, frequency) {
 #' @param hourly_data \code{data.frame} with hourly aggregated data
 #' @param FUN Function to use for aggregation
 #'
-#' @return \code{data.frame} with daily aggregated data
+#' @return \code{data.frame} object with daily aggregated data
 #'
 #' @keywords internal
 aggregate_daily <- function(hourly_data, FUN) {
@@ -128,7 +128,7 @@ aggregate_daily <- function(hourly_data, FUN) {
 #' @param daily_data \code{data.frame} with daily aggregated data
 #' @param FUN Function to use for aggregation
 #'
-#' @return \code{data.frame} with monthly aggregated data
+#' @return \code{data.frame} object with monthly aggregated data
 #'
 #' @keywords internal
 aggregate_monthly <- function(daily_data, FUN) {
@@ -161,7 +161,7 @@ aggregate_monthly <- function(daily_data, FUN) {
 #' @param monthly_data \code{data.frame} with monthly aggregated data
 #' @param FUN Function to use for aggregation
 #'
-#' @return \code{data.frame} with annual aggregated data
+#' @return \code{data.frame} object with annual aggregated data
 #'
 #' @keywords internal
 aggregate_annual <- function(monthly_data, FUN) {

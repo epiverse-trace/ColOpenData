@@ -4,12 +4,12 @@
 #' This function downloads demographic datasets from the National Population
 #' and Dwelling Census (CNPV)
 #'
-#' @param dataset character with the dataset name
+#' @param dataset character with the demographic dataset name
 #'
 #' @examples
 #' house_under_15 <- download_demographic("DANE_CNPVH_2018_1HD")
 #'
-#' @return \code{data.frame} with downloaded data.
+#' @return \code{data.frame} object with downloaded data
 #' @export
 download_demographic <- function(dataset) {
   checkmate::assert_character(dataset)

@@ -12,7 +12,7 @@ aggregate_annual(monthly_data, FUN)
 \item{FUN}{Function to use for aggregation}
 }
 \value{
-\code{data.frame} with annual aggregated data
+\code{data.frame} object with annual aggregated data
 }
 \description{
 Calculate annual aggregate of climate data

@@ -1,10 +1,15 @@
-#' Download data dictionary for geospatial data
+#' Download data dictionaries
+#'
+#' @description
+#' Demographic and climate datasets contain data dictionaries to understand
+#' internal tags and named columns.
 #'
 #' @param dataset character with the dataset name
 #'
-#' @return \code{data.frame} with data dictionary
+#' @return \code{data.frame} object with data dictionary
+#'
 #' @examples
-#' dictionary("DANE_MGN_2018_SETU")
+#' dict <- dictionary("DANE_MGN_2018_SETU")
 #'
 #' @export
 dictionary <- function(dataset) {
@@ -18,12 +23,16 @@ dictionary <- function(dataset) {
 
 #' Download list of available datasets
 #'
+#' @description
+#' List all available datasets by name, including category, description and
+#' source
+#'
 #' @param module character with module to be consulted (\code{"demographic"},
 #' \code{"geospatial"}, \code{"climate"})
 #'
-#' @return \code{data.frame} with the available datasets
+#' @return \code{data.frame} object with the available datasets
 #' @examples
-#' list_datasets("geospatial")
+#' list <- list_datasets("geospatial")
 #'
 #' @export
 list_datasets <- function(module = "all") {

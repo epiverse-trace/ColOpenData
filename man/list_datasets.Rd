@@ -11,12 +11,13 @@ list_datasets(module = "all")
 \code{"geospatial"}, \code{"climate"})}
 }
 \value{
-\code{data.frame} with the available datasets
+\code{data.frame} object with the available datasets
 }
 \description{
-Download list of available datasets
+List all available datasets by name, including category, description and
+source
 }
 \examples{
-list_datasets("geospatial")
+list <- list_datasets("geospatial")
 
 }
