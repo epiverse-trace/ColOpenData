@@ -27,9 +27,9 @@ knitr::opts_chunk$set(
 ```
 
 ::: {style="text-align: justify;"}
-**ColOpenData** can be used to access open demographic data from Colombia. This demographic data is retrieved from the National Administrative Department of Statistics ([DANE](https://www.dane.gov.co/index.php/estadisticas-por-tema), for its acronym in Spanish). The demographic module allows you to consult demographic data from the National Population and Dwelling Census (CNPV) of 2018.
+**ColOpenData** can be used to access open demographic data from Colombia. This demographic data is retrieved from the National Administrative Department of Statistics ([DANE](https://www.dane.gov.co/index.php/estadisticas-por-tema)). The demographic module allows you to consult demographic data from the National Population and Dwelling Census (CNPV) of 2018.
 
-The available CNPV information is divided in four categories: households, persons demographic, persons social and dwellings. All data documentation can be accessed as explained at [Documentation and Dictionaries](https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html). 
+The available CNPV information is divided in four categories: households, persons demographic, persons social and dwellings. All data documentation can be accessed as explained at [Documentation and Dictionaries](https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html).
 
 In order to access its documentation we need to use the function `list_datasets` and indicate as a parameter the module we are interested in. It is important to take a good look at this to have a clearer understanding of what we count with, before just throwing ourselves to work with the data. Now, we should start by loading all necessary libraries. As the goal of this vignette is to show some examples on how to use the data, we will load some specific libraries but that does not mean they are required to use the data in all cases.
 :::
@@ -41,7 +41,6 @@ library(ggplot2)
 ```
 
 ## Initial Exploration: Basic Data Handling with ColOpenData
-
 
 ::: {style="text-align: justify;"}
 First, we have to access the demographic documentation, to check available datasets.
@@ -122,13 +121,13 @@ For this example, we will focus on a specific municipality, examining the total 
 ```{r population counts, message=FALSE, warning=FALSE, results="hide"}
 # Literacy data filter to have a population's count under specific conditions
 lit <- literacy %>%
-  subset(municipio == "Villapinz<U+00F3>n" & grupo_de_edad == "entre_15_y_24_anos" &
+  subset(municipio == "Villapinzón" & grupo_de_edad == "entre_15_y_24_anos" &
     area == "total" & sabe_leer_y_escribir == "total" & sexo == "total") %>%
   select(municipio, area, grupo_de_edad, sexo, total)
 
 # Marital status data filter to find population's count under certain conditions
 ms <- marital_status %>%
-  subset(municipio == "Villapinz<U+00F3>n" & area == "total" &
+  subset(municipio == "Villapinzón" & area == "total" &
     grupo_de_edad == c("15_a_19", "20_a_24") & estado_civil == "total" &
     sexo == "total") %>%
   select(grupo_de_edad, estado_civil, sexo, total)
@@ -158,7 +157,7 @@ Now that we know that both data sets contain the same counts, we can start to lo
 ```{r other data plot, echo=TRUE, fig.width=10, fig.height=3}
 # Filter of literacy data to get only the counts for specific conditions
 lit_filt <- literacy %>%
-  subset(municipio == "Villapinz<U+00F3>n" & sabe_leer_y_escribir == "no" &
+  subset(municipio == "Villapinzón" & sabe_leer_y_escribir == "no" &
     grupo_de_edad == "entre_15_y_24_anos" & area == "total") %>%
   select(sabe_leer_y_escribir, grupo_de_edad, sexo, total) %>%
   mutate(estado = "no_sabe_leer_y_escribir") %>%
@@ -167,13 +166,13 @@ lit_filt <- literacy %>%
 
 # Filter of marital status data to get only the counts for specific conditions
 ms_filt15 <- marital_status %>%
-  subset(municipio == "Villapinz<U+00F3>n" & area == "total" &
+  subset(municipio == "Villapinzón" & area == "total" &
     grupo_de_edad == "15_a_19") %>%
   select(grupo_de_edad, estado_civil, sexo, total)
 
 # Filter of marital status data to get only the counts for specific conditions
 ms_filt20 <- marital_status %>%
-  subset(municipio == "Villapinz<U+00F3>n" & area == "total" &
+  subset(municipio == "Villapinzón" & area == "total" &
     grupo_de_edad == "20_a_24") %>%
   select(grupo_de_edad, estado_civil, sexo, total)
 
@@ -200,7 +199,7 @@ ggplot(merged_df, aes(x = estado, y = proportion, fill = sexo)) +
   geom_bar(stat = "identity", position = "dodge") +
   scale_fill_manual(values = c(mujer = "#f04a4c", hombre = "#aec800")) +
   labs(
-    title = "Proportion of people in Villapinz<U+00F3>n by marital status and
+    title = "Proportion of people in Villapinzón by marital status and
     iliteracy by sex",
     x = "Status",
     y = "Count",
