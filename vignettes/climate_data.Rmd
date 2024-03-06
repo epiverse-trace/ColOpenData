@@ -50,7 +50,7 @@ knitr::kable(IDEAM_tags)
 ::: {style="text-align: justify;"}
 Each observation is subject to the availability of stations in the ROI and the stations' status (active, maintenance or suspended), as well as quality filters implemented by IDEAM.
 
-For this example we will retrieve data for the city of Manizales in Colombia. We will download Maximum Temperature (TMX_CON) from 2013 to 2016, to observe the increase in temperature during 2015 and 2016 due to the impact of El Nino (ENSO).
+For this example we will retrieve data for the municipality of Manizales in Colombia. We will download Maximum Temperature (TMX_CON) from 2013 to 2016, to observe the increase in temperature during 2015 and 2016 due to the impact of El Nino (ENSO).
 
 We will start by loading the needed libraries.
 :::
@@ -65,7 +65,7 @@ library(ggplot2)
 ## Retrieving climate data for a ROI using stations' data
 
 ::: {style="text-align: justify;"}
-For this example, we will need to create a spatial polygon around the city of Manizales and use that as our ROI to retrieve the climate data. To create the spatial polygon we need to introduce the coordinates of the geometry. For simplicity, we will build a box by introducing the 4 points which bound the city, and transform the created geometry into an `sf` object (see [**sf**](https://r-spatial.github.io/sf/articles/sf1.html) library for further details). For visualization we will use `leaflet`.
+For this example, we will need to create a spatial polygon around the municipality of Manizales and use that as our ROI to retrieve the climate data. To create the spatial polygon we need to introduce the coordinates of the geometry. For simplicity, we will build a box by introducing the 4 points which bound the municipality, and transform the created geometry into an `sf` object (see [**sf**](https://r-spatial.github.io/sf/articles/sf1.html) library for further details). For visualization we will use `leaflet`.
 :::
 
 ```{r polygon creation}

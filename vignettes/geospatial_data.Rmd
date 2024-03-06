@@ -54,7 +54,7 @@ knitr::kable(mgncnpv)
 ```
 
 ::: {style="text-align: justify;"}
-In this vignette, we will download the geospatial data and provide some examples on how to use the available information and visualize it using graphic libraries like `ggplot2` and `leaflet`. We will be using geospatial data at the level of Urban Section (SECU) for the city of Tunja and will calculate the percentage of houses with internet connection at each SECU.
+In this vignette, we will download the geospatial data and provide some examples on how to use the available information and visualize it using graphic libraries like `ggplot2` and `leaflet`. We will be using geospatial data at the level of Urban Section (SECU) for the municipality of Tunja and will calculate the percentage of houses with internet connection at each SECU.
 
 We will start by importing the needed libraries.
 
