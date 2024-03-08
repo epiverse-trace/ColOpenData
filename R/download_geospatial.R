@@ -46,5 +46,8 @@ download_geospatial <- function(dataset, include_geom = TRUE,
       dplyr::select(-dplyr::all_of(c(geospatial_vars, shape_vars))) %>%
       sf::st_drop_geometry()
   }
+  message("Original data is provided by the National Administrative Department of Statistics (DANE).\n",
+          "Reformatted by the package authors.\n",
+          "Stored and redistributed by Universidad de Los Andes under the Epiverse TRACE iniative.")
   return(geospatial_data)
 }
