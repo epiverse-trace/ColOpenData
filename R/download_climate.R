@@ -198,10 +198,12 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
   if (nrow(stations_data) == 0) {
     stop("There is no available information for these dates")
   }
-  message("Original data is provided by the National Administrative Department of Statistics (DANE).\n",
-          "Reformatted by the package authors.\n",
-          "Stored and redistributed by Universidad de Los Andes under the Epiverse TRACE iniative.")
-  
+  message(
+    "Original data is provided by the National Administrative Department of Statistics (DANE).\n",
+    "Reformatted by the package authors.\n",
+    "Stored and redistributed by Universidad de Los Andes under the Epiverse TRACE iniative."
+  )
+
   return(stations_data)
 }
 

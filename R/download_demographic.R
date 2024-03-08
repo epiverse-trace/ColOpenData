@@ -22,8 +22,10 @@ download_demographic <- function(dataset) {
       stop("`dataset` not found")
     }
   )
-  message("Original data is provided by the National Administrative Department of Statistics (DANE).\n",
-          "Reformatted by the package authors.\n",
-          "Stored and redistributed by Universidad de Los Andes under the Epiverse TRACE iniative.")
+  message(
+    "Original data is provided by the National Administrative Department of Statistics (DANE).\n",
+    "Reformatted by the package authors.\n",
+    "Stored and redistributed by Universidad de Los Andes under the Epiverse TRACE iniative."
+  )
   return(demographic_data)
 }
