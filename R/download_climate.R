@@ -229,8 +229,8 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
 #' roi <- sf::st_as_sf(geometry)
 #' stations <- stations_in_roi(roi)
 #'
-#' @return \code{data.frame} object with the stations contained inside the consulted
-#' geometry
+#' @return \code{data.frame} object with the stations contained inside the
+#' consulted geometry
 #'
 #' @export
 stations_in_roi <- function(geometry) {
