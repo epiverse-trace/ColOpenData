@@ -15,7 +15,9 @@ Authors@R: c(
     person("Catalina", "Gonzalez-Uribe", , "cgonzalez@uniandes.edu.co", role = "ctb",
            comment = c(ORCID = "0000-0002-3322-5017")),
     person("Mauricio", "Santos-Vega", , "om.santos@uniandes.edu.co", role = "ctb",
-           comment = c(ORCID = "0000-0002-8130-6014"))
+           comment = c(ORCID = "0000-0002-8130-6014")),
+    person("Chris", "Hartgerink", , "chris@data.org", role = "rev",
+           comment = c(ORCID = "0000-0003-1050-6809"))
   )
 Description: ColOpenData is a package that acquires and wrangles Colombian
     socioeconomic, geospatial and climate data. It solves the problem of
