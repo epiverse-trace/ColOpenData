@@ -12,7 +12,7 @@ aggregate_daily(hourly_data, FUN)
 \item{FUN}{Function to use for aggregation}
 }
 \value{
-\code{data.frame} with daily aggregated data
+\code{data.frame} object with daily aggregated data
 }
 \description{
 Calculate daily aggregate of climate data

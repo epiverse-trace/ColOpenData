@@ -5,7 +5,8 @@
 #' department. This data is retrieved from local meteorological stations
 #' provided by IDEAM
 #'
-#' @param code character with the DIVIPOLA code for the area
+#' @param code character with the DIVIPOLA code for the area (2 digits for
+#' departments and 5 digits for municipalities)
 #' @param start_date character with the first date to consult in the format
 #' \code{"YYYY-MM-DD"}
 #' @param end_date character with the last date to consult in the format
@@ -15,7 +16,8 @@
 #' @examples
 #' tssm <- download_climate("17001", "2021-11-14", "2021-11-20", "TSSM_CON")
 #'
-#' @return data.frame with observations from the stations in the area
+#' @return \code{data.frame} object with observations from the stations in the
+#' area
 #'
 #' @export
 download_climate <- function(code, start_date, end_date, tag) {
@@ -50,9 +52,9 @@ download_climate <- function(code, start_date, end_date, tag) {
 #'
 #' @description
 #' Download climate data from stations contained in a geometry. This data is
-#' retrieved from local meteorological stations provided by IDEAM.
+#' retrieved from local meteorological stations provided by IDEAM
 #'
-#' @param geometry \code{sf} geometry containing the geometry for a given ROI.
+#' @param geometry \code{sf} object containing the geometry for a given ROI
 #' This geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}
 #' @param start_date character with the first date to consult in the format
 #' \code{"YYYY-MM-DD"}
@@ -68,7 +70,8 @@ download_climate <- function(code, start_date, end_date, tag) {
 #' roi <- sf::st_as_sf(geometry)
 #' tssm <- download_climate_geom(roi, "2021-11-14", "2021-11-20", "TSSM_CON")
 #'
-#' @return \code{data.frame} with observations from the stations in the area
+#' @return \code{data.frame} object with observations from the stations in the
+#' area
 #'
 #' @export
 download_climate_geom <- function(geometry, start_date, end_date,
@@ -89,9 +92,10 @@ download_climate_geom <- function(geometry, start_date, end_date,
 #'
 #' @description
 #' Download climate data from named stations.This data is
-#' retrieved from local meteorological stations provided by IDEAM.
+#' retrieved from local meteorological stations provided by IDEAM
 #'
-#' @param stations \code{data.frame} containing the stations' codes. This
+#' @param stations \code{data.frame} containing the stations' codes and
+#' locations
 #' \code{data.frame} must be retrieved from the function
 #' \code{stations_in_roi()}
 #' @param start_date character with the first date to consult in the format
@@ -114,7 +118,9 @@ download_climate_geom <- function(geometry, start_date, end_date,
 #'   stations, "2021-11-14", "2021-11-20", "TSSM_CON"
 #' )
 #'
-#' @return \code{data.frame} with observations from the requested stations
+#' @return \code{data.frame} object with observations from the stations in the
+#' area
+#'
 #' @export
 download_climate_stations <- function(stations, start_date, end_date, tag) {
   # Check stations minimum data
@@ -192,15 +198,27 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
   if (nrow(stations_data) == 0) {
     stop("There is no available information for these dates")
   }
+  message(strwrap(
+    prefix = "\n", initial = "",
+    c(
+      "Original data is provided by the Institute of Hydrology, Meteorology and
+    Environmental Studies(IDEAM).",
+      "Reformatted by the package authors.",
+      "Stored and redistributed by Universidad de Los Andes under the Epiverse
+    TRACE iniative."
+    )
+  ))
+
   return(stations_data)
 }
 
 #' Stations in region of interest
 #'
 #' @description
-#' Download and filter climate stations inside a region of interest (ROI)
+#' Download and filter climate stations contained inside a region of interest
+#' (ROI)
 #'
-#' @param geometry \code{sf} geometry containing the geometry for a given ROI.
+#' @param geometry \code{sf} object containing the geometry for a given ROI
 #' This geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}
 #'
 #' @examples
@@ -211,7 +229,8 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
 #' roi <- sf::st_as_sf(geometry)
 #' stations <- stations_in_roi(roi)
 #'
-#' @return \code{data.frame} with the stations inside the consulted geometry
+#' @return \code{data.frame} object with the stations contained inside the
+#' consulted geometry
 #'
 #' @export
 stations_in_roi <- function(geometry) {

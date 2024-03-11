@@ -5,7 +5,7 @@
 #'
 #' @param key character key
 #'
-#' @return character containing value
+#' @return character containing associated value
 #'
 #' @keywords internal
 retrieve_value_key <- function(key) {
@@ -88,7 +88,7 @@ retrieve_climate_path <- function() {
 #'
 #' @description
 #' Dictionaries are not included in the general documentation file. Therefore,
-#' the path is different from regular included files
+#' the path is built internally
 #'
 #' @return character with path to retrieve the dataset from server
 #'
@@ -106,7 +106,7 @@ retrieve_dict_path <- function(dataset) {
 
 #' Retrieve support dataset path
 #'
-#' @param dataset character with the dataset name
+#' @param dataset character with the support dataset name
 #'
 #' @description
 #' Support data is used for internal purposes and they are not included in the
@@ -127,10 +127,12 @@ retrieve_support_path <- function(dataset) {
 
 #' Retrieve table (csv and data) file
 #'
-#' @param dataset_path character path to the dataset on repository
+#' @param dataset_path character path to the dataset on server
+#'
 #' @param sep separator for table data
 #'
-#' @return dataset
+#' @return \code{data.frame} object with downloaded data
+#'
 #' @keywords internal
 retrieve_table <- function(dataset_path, sep = ";") {
   request <- httr2::request(base_url = dataset_path)
@@ -152,13 +154,15 @@ retrieve_table <- function(dataset_path, sep = ";") {
 
 #' Retrieve climate (.data) file from one station
 #'
-#' @param dataset_path character path to the dataset on repository
+#' @param dataset_path character path to the climate dataset on server
 #' @param start_date character with the first date to consult in the format
 #' \code{"YYYY-MM-DD"}
 #' @param end_date character with the last date to consult in the format
 #' \code{"YYYY-MM-DD"} (Last available date is \code{"2023-05-31"})
 #'
-#' @return dataset filtered for specified dates
+#' @return \code{data.frame} object with downloaded data filtered for requested
+#' dates
+#'
 #' @keywords internal
 retrieve_climate <- function(dataset_path, start_date, end_date) {
   base_request <- httr2::request(base_url = dataset_path)

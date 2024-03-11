@@ -1,3 +1,41 @@
-url: ~
+url: https://epiverse-trace.github.io/ColOpenData/
 template:
   package: epiversetheme
+articles:
+- title: Documentation and Dictionaries
+  navbar:  Documentation and Dictionaries
+  contents:
+  - documentation_and_dictionaries
+- title: Download data
+  navbar: Download data
+  contents:
+  - demographic_data
+  - geospatial_data
+  - climate_data
+    
+reference:
+- title: Demographic Data
+  contents:
+  - download_demographic
+- title: Geospatial Data
+  contents:
+  - download_geospatial
+  
+- title: Climate Data
+- subtitle: Download climate data
+  contents:
+  - download_climate
+  - download_climate_geom
+  - download_climate_stations
+- subtitle: Helper functions
+  contents:
+  - stations_in_roi
+  - aggregate_climate
+  
+- title: Documentation and Dictionaries
+- subtitle: List available datasets
+  contents:
+  - list_datasets
+- subtitle: Dictionaries
+  contents:
+  - dictionary

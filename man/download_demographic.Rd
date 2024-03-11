@@ -7,14 +7,14 @@
 download_demographic(dataset)
 }
 \arguments{
-\item{dataset}{character with the dataset name}
+\item{dataset}{character with the demographic dataset name}
 }
 \value{
-\code{data.frame} with downloaded data.
+\code{data.frame} object with downloaded data
 }
 \description{
 This function downloads demographic datasets from the National Population
-and Dwelling Census (CNPV)
+and Dwelling Census (CNPV) and Population Projections
 }
 \examples{
 house_under_15 <- download_demographic("DANE_CNPVH_2018_1HD")

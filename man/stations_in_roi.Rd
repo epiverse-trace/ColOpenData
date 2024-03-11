@@ -7,14 +7,16 @@
 stations_in_roi(geometry)
 }
 \arguments{
-\item{geometry}{\code{sf} geometry containing the geometry for a given ROI.
+\item{geometry}{\code{sf} object containing the geometry for a given ROI
 This geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}}
 }
 \value{
-\code{data.frame} with the stations inside the consulted geometry
+\code{data.frame} object with the stations contained inside the
+consulted geometry
 }
 \description{
-Download and filter climate stations inside a region of interest (ROI)
+Download and filter climate stations contained inside a region of interest
+(ROI)
 }
 \examples{
 lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)

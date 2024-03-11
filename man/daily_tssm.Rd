@@ -7,7 +7,7 @@
 daily_tssm(group)
 }
 \arguments{
-\item{group}{\code{data.frame} with filtered and grouped data}
+\item{group}{\code{data.frame} object with filtered and grouped data}
 }
 \value{
 numeric value calculated

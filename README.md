@@ -5,7 +5,7 @@
 <!-- `packagename` is extracted from the DESCRIPTION file -->
 <!-- `gh_repo` is extracted via a special environment variable in GitHub Actions -->
 
-# ColOpenData <img src="man/figures/logo.svg" align="right" width="120" />
+# ColOpenData <img src="man/figures/logo.svg" align="right" width="200" />
 
 <!-- badges: start -->
 
@@ -14,14 +14,16 @@ MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.or
 [![R-CMD-check](https://github.com/epiverse-trace/ColOpenData/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/epiverse-trace/ColOpenData/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/epiverse-trace/ColOpenData/branch/main/graph/badge.svg)](https://app.codecov.io/gh/epiverse-trace/ColOpenData?branch=main)
-[![lifecycle-concept](https://raw.githubusercontent.com/reconverse/reconverse.github.io/master/images/badge-concept.svg)](https://www.reconverse.org/lifecycle.html#concept)
+[![lifecycle-experimental](https://raw.githubusercontent.com/reconverse/reconverse.github.io/master/images/badge-experimental.svg)](https://www.reconverse.org/lifecycle.html#experimental)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/ColOpenData)](https://CRAN.R-project.org/package=ColOpenData)
 <!-- badges: end -->
 
 **ColOpenData** is a package that acquires and wrangles Colombian
 socioeconomic, geospatial and climate data. It solves the problem of
 Colombian data being issued in different web pages and sources by using
-functions that allow the user to select the desired database and
-download it without having to do the exhausting acquisition process.
+functions that allow the user to select the desired dataset and download
+it without having to do the exhausting acquisition process.
 
 ColOpenData is developed at [Universidad de Los
 Andes](https://uniandes.edu.co/) as part of the [Epiverse-TRACE
@@ -41,7 +43,7 @@ pak::pak("epiverse-trace/ColOpenData")
 
 **ColOpenData** contains data from two public data sources: The National
 Administrative Department of Statistics
-[(DANE)](https://www.dane.gov.co/index.php/en/) and the Institute of
+[(DANE)](https://www.dane.gov.co/index.php/en/), and the Institute of
 Hydrology, Meteorology and Environmental Studies
 [(IDEAM)](http://www.ideam.gov.co/). The available data is divided in
 three categories:
@@ -63,9 +65,9 @@ three categories:
 
 - **Climate:** Climate data is recovered from backup information
   provided by IDEAM, containing historical data from the first station
-  in the country, until May 31st 2023. This backup includes temperature,
-  precipitation, solar brightness, wind direction, among others. More
-  information can be accessed [here](http://www.ideam.gov.co/).
+  in the country until May 31st 2023. This backup includes temperature,
+  precipitation, sunshine duration, wind direction, among others. More
+  information can be found [here](http://www.ideam.gov.co/).
 
 Documentation and vignettes are available for the three modules in the
 [user vignettes](https://epiverse-trace.github.io/ColOpenData/).
@@ -83,10 +85,10 @@ the user to download census, geospatial and climate data.
 
 ### Lifecycle
 
-This package is currently a *concept*, as defined by the [RECON software
-lifecycle](https://www.reconverse.org/lifecycle.html). This means that
-essential features and mechanisms are still being developed, and the
-package is not ready for use outside of the development team.
+This package is currently *experimental*, as defined by the [RECON
+software lifecycle](https://www.reconverse.org/lifecycle.html).
+Therefore, this is a functional draft and can be tested outside of the
+development team. However, it still may change over time.
 
 ### Contributions
 

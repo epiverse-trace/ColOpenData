@@ -7,7 +7,7 @@
 retrieve_climate(dataset_path, start_date, end_date)
 }
 \arguments{
-\item{dataset_path}{character path to the dataset on repository}
+\item{dataset_path}{character path to the climate dataset on server}
 
 \item{start_date}{character with the first date to consult in the format
 \code{"YYYY-MM-DD"}}
@@ -16,7 +16,8 @@ retrieve_climate(dataset_path, start_date, end_date)
 \code{"YYYY-MM-DD"} (Last available date is \code{"2023-05-31"})}
 }
 \value{
-dataset filtered for specified dates
+\code{data.frame} object with downloaded data filtered for requested
+dates
 }
 \description{
 Retrieve climate (.data) file from one station

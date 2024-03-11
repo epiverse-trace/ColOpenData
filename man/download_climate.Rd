@@ -7,7 +7,8 @@
 download_climate(code, start_date, end_date, tag)
 }
 \arguments{
-\item{code}{character with the DIVIPOLA code for the area}
+\item{code}{character with the DIVIPOLA code for the area (2 digits for
+departments and 5 digits for municipalities)}
 
 \item{start_date}{character with the first date to consult in the format
 \code{"YYYY-MM-DD"}}
@@ -18,7 +19,8 @@ download_climate(code, start_date, end_date, tag)
 \item{tag}{character containing climate tag to consult}
 }
 \value{
-data.frame with observations from the stations in the area
+\code{data.frame} object with observations from the stations in the
+area
 }
 \description{
 Download climate data from stations contained in a municipality or

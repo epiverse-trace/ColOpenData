@@ -15,7 +15,7 @@
 #' monthly aggregation, the data must be already aggregated daily, and for
 #' annual aggregation the data must be monthly
 #'
-#' @param group \code{data.frame} with filtered and grouped data
+#' @param group \code{data.frame} object with filtered and grouped data
 #'
 #' @return numeric value calculated
 #'
