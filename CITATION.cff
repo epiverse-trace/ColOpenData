@@ -39,11 +39,13 @@ contact:
   email: mc.tavera@uniandes.edu.co
   orcid: https://orcid.org/0009-0007-1610-4583
 keywords:
+- climate
 - colombia
 - data-package
+- demographics
+- maps
 - r
 - r-package
-- socio-economic-indicators
 references:
 - type: software
   title: 'R: A Language and Environment for Statistical Computing'
@@ -300,7 +302,7 @@ references:
   title: spelling
   abstract: 'spelling: Tools for Spell Checking in R'
   notes: Suggests
-  url: https://docs.ropensci.org/spelling/
+  url: https://ropensci.r-universe.dev/spelling
   repository: https://CRAN.R-project.org/package=spelling
   authors:
   - family-names: Ooms
