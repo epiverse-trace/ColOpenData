@@ -11,8 +11,8 @@ stations_in_roi(geometry)
 This geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}}
 }
 \value{
-\code{data.frame} object with the stations contained inside the consulted
-geometry
+\code{data.frame} object with the stations contained inside the
+consulted geometry
 }
 \description{
 Download and filter climate stations contained inside a region of interest
