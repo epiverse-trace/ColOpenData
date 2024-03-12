@@ -1,20 +1,11 @@
----
-editor_options: 
-  markdown: 
-    wrap: 72
----
 
 <!-- README.md is generated from README.Rmd. Please edit that file. -->
-
 <!-- The code to render this README is stored in .github/workflows/render-readme.yaml -->
-
 <!-- Variables marked with double curly braces will be transformed beforehand: -->
-
 <!-- `packagename` is extracted from the DESCRIPTION file -->
-
 <!-- `gh_repo` is extracted via a special environment variable in GitHub Actions -->
 
-# ColOpenData <img src="man/figures/logo.svg" align="right" width="200"/>
+# ColOpenData <img src="man/figures/logo.svg" align="right" width="200" />
 
 <!-- badges: start -->
 
@@ -26,7 +17,6 @@ coverage](https://codecov.io/gh/epiverse-trace/ColOpenData/branch/main/graph/bad
 [![lifecycle-experimental](https://raw.githubusercontent.com/reconverse/reconverse.github.io/master/images/badge-experimental.svg)](https://www.reconverse.org/lifecycle.html#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ColOpenData)](https://CRAN.R-project.org/package=ColOpenData)
-
 <!-- badges: end -->
 
 **ColOpenData** is a package that acquires and wrangles Colombian
@@ -58,32 +48,31 @@ Hydrology, Meteorology and Environmental Studies
 [(IDEAM)](http://www.ideam.gov.co/). The available data is divided in
 three categories:
 
--   **Demographic:** Demographic and Socioeconomic data presents
-    information from the National Population and Dwelling Census (CNPV)
-    of 2018 and Population Projections. The CNPV data corresponds to the
-    most recent census available to date and the information is
-    presented as an answer to three questions: How many are we?, Where
-    are we? and How do we live? Further information can be consulted
-    [here](https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/censo-nacional-de-poblacion-y-vivenda-2018).
-    The Population Projections data contains the population projections
-    with the post COVID-19 update calculated based on the results of
-    CNPV of 2018. Further information can be consulted
-    [here](https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/proyecciones-de-poblacion).
+- **Demographic:** Demographic and Socioeconomic data presents
+  information from the National Population and Dwelling Census (CNPV) of
+  2018 and Population Projections. The CNPV data corresponds to the most
+  recent census available to date and the information is presented as an
+  answer to three questions: How many are we?, Where are we? and How do
+  we live? Further information can be consulted
+  [here](https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/censo-nacional-de-poblacion-y-vivenda-2018).
+  The Population Projections data contains the population projections
+  with the post COVID-19 update calculated based on the results of CNPV
+  of 2018. Further information can be consulted
+  [here](https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/proyecciones-de-poblacion).
 
--   **Geospatial:** This data is retrieved from the National
-    Geostatistical Framework (MGN), which includes maps and a summarized
-    version of the 2018 census, aggregated to spatial geometries. The
-    data is available at different aggregation levels including: Blocks,
-    Urban and Rural Sections, Urban and Rural Sectors, Urban Areas,
-    Municipalities and Departments. More information is available
-    [here](https://www.dane.gov.co/index.php/actualidad-dane/5454-el-dane-actualizo-el-marco-geoestadistico-nacional-a-2018).
+- **Geospatial:** This data is retrieved from the National
+  Geostatistical Framework (MGN), which includes maps and a summarized
+  version of the 2018 census, aggregated to spatial geometries. The data
+  is available at different aggregation levels including: Blocks, Urban
+  and Rural Sections, Urban and Rural Sectors, Urban Areas,
+  Municipalities and Departments. More information is available
+  [here](https://www.dane.gov.co/index.php/actualidad-dane/5454-el-dane-actualizo-el-marco-geoestadistico-nacional-a-2018).
 
--   **Climate:** Climate data is recovered from backup information
-    provided by IDEAM, containing historical data from the first station
-    in the country until May 31st 2023. This backup includes
-    temperature, precipitation, sunshine duration, wind direction, among
-    others. More information can be found
-    [here](http://www.ideam.gov.co/).
+- **Climate:** Climate data is recovered from backup information
+  provided by IDEAM, containing historical data from the first station
+  in the country until May 31st 2023. This backup includes temperature,
+  precipitation, sunshine duration, wind direction, among others. More
+  information can be found [here](http://www.ideam.gov.co/).
 
 Documentation and vignettes are available for the three modules in the
 [user vignettes](https://epiverse-trace.github.io/ColOpenData/).
@@ -93,11 +82,11 @@ Documentation and vignettes are available for the three modules in the
 Similar R packages are offered for international communities, allowing
 the user to download census, geospatial and climate data.
 
--   [cancensus](https://mountainmath.github.io/cancensus/): Canada
--   [censobr](https://ipeagit.github.io/censobr/): Brazil
--   [tidycensus](https://walker-data.com/tidycensus/): US
--   [geofi](https://ropengov.github.io/geofi/): Finland
--   [climate](https://bczernecki.github.io/climate/)
+- [cancensus](https://mountainmath.github.io/cancensus/): Canada
+- [censobr](https://ipeagit.github.io/censobr/): Brazil
+- [tidycensus](https://walker-data.com/tidycensus/): US
+- [geofi](https://ropengov.github.io/geofi/): Finland
+- [climate](https://bczernecki.github.io/climate/)
 
 ### Lifecycle
 
