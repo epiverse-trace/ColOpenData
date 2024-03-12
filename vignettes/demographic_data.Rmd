@@ -197,7 +197,7 @@ merged_df <- bind_rows(lit_filt, ms_final) %>%
 # Plot
 ggplot(merged_df, aes(x = estado, y = proportion, fill = sexo)) +
   geom_bar(stat = "identity", position = "dodge") +
-  scale_fill_manual(values = c(mujer = "#f04a4c", hombre = "#aec800"), labels=c("Female", "Male")) +
+  scale_fill_manual(values = c(mujer = "#f04a4c", hombre = "#aec800"), labels = c("Female", "Male")) +
   labs(
     title = "Proportion of people in Villapinzón by marital status and
     iliteracy by sex",
@@ -225,17 +225,17 @@ First, we will observe the variation on the female and male population within th
 asen <- download_demographic("DANE_PP_1950_2070_ASEN")
 # Subset data
 male <- asen %>%
-  subset(area == "total" & sexo == "total_hombres" & ano>2018)
+  subset(area == "total" & sexo == "total_hombres" & ano > 2018)
 
 female <- asen %>%
-  subset(area == "total" & sexo == "total_mujeres" & ano>2018)
+  subset(area == "total" & sexo == "total_mujeres" & ano > 2018)
 
-mandf <- bind_rows(male, female) 
+mandf <- bind_rows(male, female)
 
 # Plot of population in a national level by year and sex
-ggplot(mandf, aes(x = ano, y = total, fill= sexo)) +
+ggplot(mandf, aes(x = ano, y = total, fill = sexo)) +
   geom_bar(stat = "identity", position = "dodge") +
-  scale_fill_manual(values = c(total_mujeres = "#f04a4c", total_hombres = "#aec800"), labels=c("Female", "Male")) +
+  scale_fill_manual(values = c(total_mujeres = "#f04a4c", total_hombres = "#aec800"), labels = c("Female", "Male")) +
   labs(
     title = "Population in Colombia from 2019 to 2070 by sex",
     x = "Year",
@@ -247,23 +247,23 @@ ggplot(mandf, aes(x = ano, y = total, fill= sexo)) +
     axis.text.x = element_text(angle = 45, hjust = 1),
     plot.title = element_text(hjust = 0.5)
   )
-
 ```
 ::: {style="text-align: justify;"}
 In the graph presented above, we observe that the male population slightly exceeds the female population for the selected period. As a second step in our analysis of the dataset, we will focus on the male population by age in the year with the highest male population value from 2019 to 2070, which is the year 2052.
 :::
 ```{r pop projections second example, echo=TRUE}
-
 # Subset data
 male_2052_99 <- asen %>%
-  subset(area == "total" & ano==2052 & sexo=="hombre"& edad!="100_y_mas")%>%
+  subset(area == "total" & ano == 2052 & sexo == "hombre" & edad != "100_y_mas") %>%
   mutate(edad = as.numeric(edad))
 male_2052_100 <- asen %>%
-  subset(area == "total" & ano==2052 & sexo=="hombre"& edad=="100_y_mas")%>%
-  rename(age_group=edad)%>% rename(total_sum=total) %>% select(age_group, total_sum)
+  subset(area == "total" & ano == 2052 & sexo == "hombre" & edad == "100_y_mas") %>%
+  rename(age_group = edad) %>%
+  rename(total_sum = total) %>%
+  select(age_group, total_sum)
 
 # Define age groups
-age_groups <- cut(male_2052_99$edad, breaks = c(-1, 2, 12, 19, 29, 39,49,59,69,79,89,99), labels = c("0-2", "3-12", "13-19", "20-29", "30-39", "40-49", "50-59", "60-69", "70-79", "80-89", "90-99"))
+age_groups <- cut(male_2052_99$edad, breaks = c(-1, 2, 12, 19, 29, 39, 49, 59, 69, 79, 89, 99), labels = c("0-2", "3-12", "13-19", "20-29", "30-39", "40-49", "50-59", "60-69", "70-79", "80-89", "90-99"))
 
 # Add age groups to the data frame
 male_agegroups <- mutate(male_2052_99, age_group = age_groups)
@@ -274,7 +274,7 @@ summarized_data <- male_agegroups %>%
   summarize(total_sum = sum(total))
 
 # Bind dataframes
-merged <- bind_rows(summarized_data, male_2052_100) 
+merged <- bind_rows(summarized_data, male_2052_100)
 
 # Fix the order of ages appearance in the plot
 merged$age_group <- factor(merged$age_group, levels = unique(merged$age_group))
@@ -295,5 +295,4 @@ ggplot(merged, aes(
     axis.text.x = element_text(angle = 45, hjust = 1),
     plot.title = element_text(hjust = 0.5)
   )
-
 ```
