@@ -48,12 +48,17 @@ Hydrology, Meteorology and Environmental Studies
 [(IDEAM)](http://www.ideam.gov.co/). The available data is divided in
 three categories:
 
-- **Demographic:** Demographic and Socioeconomic data is taken from the
-  National Population and Dwelling Census (CNPV) of 2018, the most
-  recent census available to date. The information is presented as an
+- **Demographic:** Demographic and Socioeconomic data presents
+  information from the National Population and Dwelling Census (CNPV) of
+  2018 and Population Projections. The CNPV data corresponds to the most
+  recent census available to date and the information is presented as an
   answer to three questions: How many are we?, Where are we? and How do
   we live? Further information can be consulted
   [here](https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/censo-nacional-de-poblacion-y-vivenda-2018).
+  The Population Projections data contains the population projections
+  with the post COVID-19 update calculated based on the results of CNPV
+  of 2018. Further information can be consulted
+  [here](https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/proyecciones-de-poblacion).
 
 - **Geospatial:** This data is retrieved from the National
   Geostatistical Framework (MGN), which includes maps and a summarized

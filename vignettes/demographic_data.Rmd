@@ -27,9 +27,9 @@ knitr::opts_chunk$set(
 ```
 
 ::: {style="text-align: justify;"}
-**ColOpenData** can be used to access open demographic data from Colombia. This demographic data is retrieved from the National Administrative Department of Statistics ([DANE](https://www.dane.gov.co/index.php/estadisticas-por-tema)). The demographic module allows you to consult demographic data from the National Population and Dwelling Census (CNPV) of 2018.
+**ColOpenData** can be used to access open demographic data from Colombia. This demographic data is retrieved from the National Administrative Department of Statistics ([DANE](https://www.dane.gov.co/index.php/estadisticas-por-tema)). The demographic module allows you to consult demographic data from the National Population and Dwelling Census (CNPV) of 2018 and Population Projections.
 
-The available CNPV information is divided in four categories: households, persons demographic, persons social and dwellings. All data documentation can be accessed as explained at [Documentation and Dictionaries](https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html).
+The available CNPV information is divided in four categories: households, persons demographic, persons social and dwellings. The population projections information presents data from 1950 to 2070 for a national level, from 1985 to 2050 for a departmental level and from 1985 to 2035 for a municipal level. All data documentation can be accessed as explained at [Documentation and Dictionaries](https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html).
 
 In order to access its documentation we need to use the function `list_datasets` and indicate as a parameter the module we are interested in. It is important to take a good look at this to have a clearer understanding of what we count with, before just throwing ourselves to work with the data. Now, we should start by loading all necessary libraries. As the goal of this vignette is to show some examples on how to use the data, we will load some specific libraries but that does not mean they are required to use the data in all cases.
 :::
@@ -50,7 +50,7 @@ datasets_dem <- list_datasets("demographic")
 head(datasets_dem)
 ```
 
-After checking the documentation, we can download the data we want to work with. To do this, we will use the `download_demographic` function that takes by parameter the data name, presented in the documentation.
+After checking the documentation, we can download the data we want to work with. To do this, we will use the `download_demographic` function that takes by parameter the data name, presented in the documentation. For this first example we will focus on a CNPV dataset.
 :::
 
 ```{r data download, echo=TRUE}
@@ -105,7 +105,7 @@ ggplot(proportions_wss, aes(
 ## Data Integration: Combining Datasets for Enhanced Analysis
 
 ::: {style="text-align: justify;"}
-Also, with the demographic data, we could merge data from the different categories and compare information. For example, we would download a file from the persons demographic category and another one from persons social. The first one presents information regarding population's literacy and the second one regarding its marital status.
+Also, with the CNPV data, we could merge data from the different categories and compare information. For example, we would download a dataset from the persons demographic category and another one from persons social. The first one presents information regarding population's literacy and the second one regarding its marital status.
 :::
 
 ```{r more data download, include=FALSE}
@@ -197,13 +197,113 @@ merged_df <- bind_rows(lit_filt, ms_final) %>%
 # Plot
 ggplot(merged_df, aes(x = estado, y = proportion, fill = sexo)) +
   geom_bar(stat = "identity", position = "dodge") +
-  scale_fill_manual(values = c(mujer = "#f04a4c", hombre = "#aec800")) +
+  scale_fill_manual(
+    values = c(mujer = "#f04a4c", hombre = "#aec800"),
+    labels = c("Female", "Male")
+  ) +
   labs(
     title = "Proportion of people in Villapinzón by marital status and
     iliteracy by sex",
     x = "Status",
     y = "Count",
     fill = "Sex"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(hjust = 0.5)
+  )
+```
+
+## Forecasting the Future: Analyzing Population Projections
+
+::: {style="text-align: justify;"}
+Now, as a third example, we will take a look at a population projections dataset presenting projections and back projections of national population by area, sex and age for the period from 1950 to 2070. 
+
+First, we will observe the variation on the female and male population within the years, covering the period from 2019 to 2070.
+:::
+
+```{r pop projections first example, echo=TRUE}
+# Download data
+asen <- download_demographic("DANE_PP_1950_2070_ASEN")
+# Subset data
+male <- asen %>%
+  subset(area == "total" & sexo == "total_hombres" & ano > 2018)
+
+female <- asen %>%
+  subset(area == "total" & sexo == "total_mujeres" & ano > 2018)
+
+mandf <- bind_rows(male, female)
+
+# Plot of population in a national level by year and sex
+ggplot(mandf, aes(x = ano, y = total, fill = sexo)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  scale_fill_manual(
+    values = c(total_mujeres = "#f04a4c", total_hombres = "#aec800"),
+    labels = c("Female", "Male")
+  ) +
+  labs(
+    title = "Population in Colombia from 2019 to 2070 by sex",
+    x = "Year",
+    y = "Population",
+    fill = "Sex"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(hjust = 0.5)
+  )
+```
+::: {style="text-align: justify;"}
+In the graph presented above, we observe that the male population slightly exceeds the female population for the selected period. As a second step in our analysis of the dataset, we will focus on the male population by age in the year with the highest male population value from 2019 to 2070, which is the year 2052.
+:::
+```{r pop projections second example, echo=TRUE}
+# Subset data
+male_2052_99 <- asen %>%
+  subset(area == "total" & ano == 2052 & sexo == "hombre" &
+    edad != "100_y_mas") %>%
+  mutate(edad = as.numeric(edad))
+
+male_2052_100 <- asen %>%
+  subset(area == "total" & ano == 2052 & sexo == "hombre" &
+    edad == "100_y_mas") %>%
+  rename(age_group = edad) %>%
+  rename(total_sum = total) %>%
+  select(age_group, total_sum)
+
+# Define age groups
+age_groups <- cut(male_2052_99$edad,
+  breaks = c(-1, 2, 12, 19, 29, 39, 49, 59, 69, 79, 89, 99),
+  labels = c(
+    "0-2", "3-12", "13-19", "20-29", "30-39", "40-49",
+    "50-59", "60-69", "70-79", "80-89", "90-99"
+  )
+)
+
+# Add age groups to the data frame
+male_agegroups <- mutate(male_2052_99, age_group = age_groups)
+
+# Calculate new totals for age groups
+summarized_data <- male_agegroups %>%
+  group_by(age_group) %>%
+  summarize(total_sum = sum(total))
+
+# Bind dataframes
+merged <- bind_rows(summarized_data, male_2052_100)
+
+# Fix the order of ages appearance in the plot
+merged$age_group <- factor(merged$age_group, levels = unique(merged$age_group))
+
+# Plot of male population in a national level by age group in 2052
+ggplot(merged, aes(
+  x = age_group,
+  y = total_sum
+)) +
+  geom_bar(stat = "identity", fill = "#f04a4c", color = "black", width = 0.6) +
+  labs(
+    title = "Male population counts in Colombia by age group in 2052",
+    x = "Age group",
+    y = "Male population"
   ) +
   theme_minimal() +
   theme(
