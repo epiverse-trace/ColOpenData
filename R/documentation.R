@@ -15,9 +15,21 @@
 dictionary <- function(dataset) {
   checkmate::assert_character(dataset)
 
-  dict_path <- sprintf("DICT_%s", dataset)
-  path <- retrieve_dict_path(dict_path)
-  dict <- retrieve_table(path, ";")
+  datasets <- list_datasets()
+  if (!dataset %in% datasets$name) {
+    stop("`dataset` not found")
+  } else {
+    tryCatch(
+      {
+        dict_path <- sprintf("DICT_%s", dataset)
+        path <- retrieve_dict_path(dict_path)
+        dict <- retrieve_table(path, ";")
+      },
+      error = function(e) {
+        stop("This dataset does not have an associated dictionary")
+      }
+    )
+  }
   return(dict)
 }
 
