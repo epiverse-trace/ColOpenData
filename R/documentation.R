@@ -16,9 +16,7 @@ dictionary <- function(dataset) {
   checkmate::assert_character(dataset)
 
   datasets <- list_datasets()
-  if (!dataset %in% datasets$name) {
-    stop("`dataset` not found")
-  } else {
+  if (dataset %in% datasets$name) {
     tryCatch(
       {
         dict_path <- sprintf("DICT_%s", dataset)
@@ -29,6 +27,8 @@ dictionary <- function(dataset) {
         stop("This dataset does not have an associated dictionary")
       }
     )
+  } else {
+    stop("`dataset` not found")
   }
   return(dict)
 }
