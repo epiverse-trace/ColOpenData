@@ -55,7 +55,7 @@ For this example we will retrieve data for the municipality of Manizales in Colo
 **ColOpenData** offers three methods to do this, using three different functions:
 - `download_climate_stations` to download climate data from previously selected stations
 - `download_climate_geom` to download climate data from a specified geometry (ROI)
-- `download_climate` to download climate data from municipalities' or departments' pre-loaded geometries
+- `download_climate` to download climate data from municipalities' or departments' already loaded geometries
 
 In this example, we will follow the three methods to get the same results, exploring the included functions. We will start by loading the needed libraries.
 :::
