@@ -249,7 +249,7 @@ ggplot(data = max_temperature_mpio) +
 ```
 
 ::: {style="text-align: justify;"}
-The three methods display the same results by different methods.
+As stated at the beginning of this vignette, the three methods display the same results.
 :::
 
 ## Disclaimer
