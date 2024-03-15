@@ -24,7 +24,7 @@ dictionary <- function(dataset) {
         dict <- retrieve_table(path, ";")
       },
       error = function(e) {
-        stop("This dataset does not have an associated dictionary")
+        stop("This dataset does not have (or need) an associated dictionary")
       }
     )
   } else {
