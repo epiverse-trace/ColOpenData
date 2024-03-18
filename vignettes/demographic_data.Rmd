@@ -256,7 +256,7 @@ mandf <- bind_rows(male, female)
 
 # Plot of population in a national level by year and sex
 ggplot(mandf, aes(x = ano, y = total, fill = sexo)) +
-  geom_bar(stat = "identity", position = "dodge", width=0.6) +
+  geom_bar(stat = "identity", position = "dodge", width = 0.6) +
   scale_fill_manual(
     values = c(total_mujeres = "#f04a4c", total_hombres = "#aec800"),
     labels = c("Female", "Male")
@@ -271,7 +271,8 @@ ggplot(mandf, aes(x = ano, y = total, fill = sexo)) +
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1),
     plot.title = element_text(hjust = 0.5)
-  ) + scale_x_continuous(breaks = unique(mandf$ano))
+  ) +
+  scale_x_continuous(breaks = unique(mandf$ano))
 ```
 
 ::: {style="text-align: justify;"}
