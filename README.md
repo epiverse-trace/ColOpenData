@@ -19,11 +19,14 @@ coverage](https://codecov.io/gh/epiverse-trace/ColOpenData/branch/main/graph/bad
 status](https://www.r-pkg.org/badges/version/ColOpenData)](https://CRAN.R-project.org/package=ColOpenData)
 <!-- badges: end -->
 
-**ColOpenData** is a package that acquires and wrangles Colombian
-socioeconomic, geospatial and climate data. It solves the problem of
-Colombian data being issued in different web pages and sources by using
-functions that allow the user to select the desired dataset and download
-it without having to do the exhausting acquisition process.
+**ColOpenData** is a package designed to streamline the access to
+curated Colombian socioeconomic, geospatial and climate data. The data,
+sourced from various open Colombian platforms, undergoes meticulous
+wrangling by the authors before being presented to users as refined
+datasets. Moreover, the package addresses the challenge of scattered
+Colombian data across multiple web sources by providing functions that
+enable users to select and load desired datasets without the need for
+exhaustive data acquisition processes.
 
 ColOpenData is developed at [Universidad de Los
 Andes](https://uniandes.edu.co/) as part of the [Epiverse-TRACE
