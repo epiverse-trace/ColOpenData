@@ -36,8 +36,8 @@ dictionary <- function(dataset) {
 #' Download list of available datasets
 #'
 #' @description
-#' List all available datasets by name, including category, description and
-#' source
+#' List all available datasets by name, including group, source, year, level, 
+#' category and description 
 #'
 #' @param module character with module to be consulted (\code{"demographic"},
 #' \code{"geospatial"}, \code{"climate"})
@@ -62,4 +62,44 @@ list_datasets <- function(module = "all") {
     listed <- listed[listed$group == module, ]
   }
   return(listed)
+}
+
+#' Filter list of available datasets based on keywords given by the user
+#'
+#' @description
+#' # List available datasets containing user-specified keywords in their 
+#' descriptions.
+#'
+#' @param module character with module to be consulted (\code{"demographic"},
+#' \code{"geospatial"}, \code{"climate"})
+#'
+#' @param keywords character or vector of characters to be look up in the 
+#' description
+#' 
+#' @param logic A character string specifying the matching logic. 
+#' Can be either "or" or "and". 
+#' \code{logic = "or"}: Matches rows containing at least one of the specified 
+#' keywords in their descriptions.
+#' \code{logic = "and"}: Matches rows containing all of the specified keywords
+#'  in their descriptions.
+#' 
+#' @return \code{data.frame} object with the available datasets
+#' @examples
+#' filtered_datasets <- look_up("demographic", c=("sex", "age"), "and")
+#'
+#' @export
+look_up <- function(module = "all", keywords, logic="or") {
+  listed <- list_datasets(module)
+  if (logic=="or")
+  {
+    filtered_datasets<- listed[grep(paste(keywords, collapse = "|"), listed$description, ignore.case = TRUE), ]
+  }
+  else if(logic=="and")
+  {
+    filtered_datasets <- listed[rowSums(sapply(keywords, grepl, listed$description, ignore.case = TRUE)) == length(keywords), ]
+  }
+  else {
+    stop("Invalid logic parameter. Please provide 'or' or 'and'.")
+  }
+   return(filtered_datasets)
 }
