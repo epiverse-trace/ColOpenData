@@ -123,6 +123,9 @@ necessary libraries. As the goal of this vignette is to show some
 examples on how to use the data, we will load some specific libraries
 but that does not mean they are required to use the data in all
 cases.</p>
+<p><strong>As an important clarification, all data is loaded and not
+downloaded, which means it will be stored as part of the environment,
+but will not be downloaded to user’s computer.</strong></p>
 </div>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiverse-trace/ColOpenData" class="external-link">ColOpenData</a></span><span class="op">)</span></span>
@@ -131,6 +134,9 @@ cases.</p>
 <div class="section level2">
 <h2 id="initial-exploration-basic-data-handling-with-colopendata">Initial Exploration: Basic Data Handling with ColOpenData<a class="anchor" aria-label="anchor" href="#initial-exploration-basic-data-handling-with-colopendata"></a>
 </h2>
+<div class="section level3">
+<h3 id="documentation-access">Documentation access<a class="anchor" aria-label="anchor" href="#documentation-access"></a>
+</h3>
 <div style="text-align: justify;">
 <p>First, we have to access the demographic documentation, to check
 available datasets.</p>
@@ -151,14 +157,18 @@ available datasets.</p>
 <span><span class="co">#&gt; 14                    Number of households with senior citizens and number of persons aged 60 and over, by municipality and area</span></span>
 <span><span class="co">#&gt; 15                                                                                Households by headship, by department and area</span></span>
 <span><span class="co">#&gt; 16                                                                              Households by headship, by municipality and area</span></span></code></pre></div>
-<p>After checking the documentation, we can download the data we want to
+<p>After checking the documentation, we can load the data we want to
 work with. To do this, we will use the <code>download_demographic</code>
 function that takes by parameter the data name, presented in the
 documentation. For this first example we will focus on a CNPV
 dataset.</p>
 </div>
+</div>
+<div class="section level3">
+<h3 id="data-load">Data load<a class="anchor" aria-label="anchor" href="#data-load"></a>
+</h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Download a demographic dataset</span></span>
+<code class="sourceCode R"><span><span class="co"># Load a demographic dataset</span></span>
 <span><span class="va">public_services_d</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_demographic.html">download_demographic</a></span><span class="op">(</span><span class="st">"DANE_CNPVV_2018_8VD"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Original data is provided by the National Administrative Department of</span></span>
 <span><span class="co">#&gt; Statistics (DANE).</span></span>
@@ -187,6 +197,10 @@ information regarding availability of public services in the country in
 example, find the proportion of dwellings that have access to a water
 supply system (WSS) by department and plot it.</p>
 </div>
+</div>
+<div class="section level3">
+<h3 id="data-filter-and-plot">Data filter and plot<a class="anchor" aria-label="anchor" href="#data-filter-and-plot"></a>
+</h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Subset data so it presents the information regarding the WSS, by department</span></span>
 <span><span class="va">wss</span> <span class="op">&lt;-</span> <span class="va">public_services_d</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -224,7 +238,8 @@ supply system (WSS) by department and plot it.</p>
 <span>    axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
 <span>    plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="demographic_data_files/figure-html/data%20filtering%20and%20plot-1.png" width="672"></p>
+<p><img src="demographic_data_files/figure-html/data%20filter%20and%20plot-1.png" width="672"></p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="data-integration-combining-datasets-for-enhanced-analysis">Data Integration: Combining Datasets for Enhanced Analysis<a class="anchor" aria-label="anchor" href="#data-integration-combining-datasets-for-enhanced-analysis"></a>
@@ -237,14 +252,42 @@ persons social. The first one presents information regarding
 population’s literacy and the second one regarding its marital
 status.</p>
 </div>
+<div class="section level3">
+<h3 id="data-load-1">Data load<a class="anchor" aria-label="anchor" href="#data-load-1"></a>
+</h3>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Load data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"Loading data, this can take a while"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Loading data, this can take a while</span></span>
+<span><span class="va">literacy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_demographic.html">download_demographic</a></span><span class="op">(</span><span class="st">"DANE_CNPVPD_2018_16PM"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Original data is provided by the National Administrative Department of</span></span>
+<span><span class="co">#&gt; Statistics (DANE).</span></span>
+<span><span class="co">#&gt; Reformatted by the package authors.</span></span>
+<span><span class="co">#&gt; Stored and redistributed by Universidad de Los Andes under the Epiverse</span></span>
+<span><span class="co">#&gt; TRACE iniative.</span></span>
+<span><span class="va">marital_status</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_demographic.html">download_demographic</a></span><span class="op">(</span><span class="st">"DANE_CNPVPS_2018_7PM"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Original data is provided by the National Administrative Department of</span></span>
+<span><span class="co">#&gt; Statistics (DANE).</span></span>
+<span><span class="co">#&gt; Reformatted by the package authors.</span></span>
+<span><span class="co">#&gt; Stored and redistributed by Universidad de Los Andes under the Epiverse</span></span>
+<span><span class="co">#&gt; TRACE iniative.</span></span></code></pre></div>
 <div style="text-align: justify;">
 <p>For this example, we will focus on a specific municipality, examining
 the total area and specifically concentrating on the age group between
-15 and 24 years old. Since we want to look at both data sets at the same
-time, it is good to check first if they present the same count for
-population under the same conditions.</p>
+15 and 24 years old. Since we want to compare both datasets
+simultaneously, it’s important to first ensure they have the same
+population count under identical conditions. Most columns in the
+demographic datasets contain a <u>total</u> value, which aggregates data
+across all conditions. For instance, the ‘sex’ column includes ‘male’,
+‘female’, and <u>total</u>, representing both genders combined.
+Similarly, the ‘marital status’ column’s <u>total</u> value encompasses
+the entire population, irrespective of their marital status.</p>
 </div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+</div>
+<div class="section level3">
+<h3 id="data-check">Data check<a class="anchor" aria-label="anchor" href="#data-check"></a>
+</h3>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Literacy data filter to have a population's count under specific conditions</span></span>
 <span><span class="va">lit</span> <span class="op">&lt;-</span> <span class="va">literacy</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">municipio</span> <span class="op">==</span> <span class="st">"Villapinzón"</span> <span class="op">&amp;</span> <span class="va">grupo_de_edad</span> <span class="op">==</span> <span class="st">"entre_15_y_24_anos"</span> <span class="op">&amp;</span></span>
@@ -252,11 +295,19 @@ population under the same conditions.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">municipio</span>, <span class="va">area</span>, <span class="va">grupo_de_edad</span>, <span class="va">sexo</span>, <span class="va">total</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Marital status data filter to find population's count under certain conditions</span></span>
-<span><span class="va">ms</span> <span class="op">&lt;-</span> <span class="va">marital_status</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">ms_15_19</span> <span class="op">&lt;-</span> <span class="va">marital_status</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">municipio</span> <span class="op">==</span> <span class="st">"Villapinzón"</span> <span class="op">&amp;</span> <span class="va">area</span> <span class="op">==</span> <span class="st">"total"</span> <span class="op">&amp;</span></span>
-<span>    <span class="va">grupo_de_edad</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"15_a_19"</span>, <span class="st">"20_a_24"</span><span class="op">)</span> <span class="op">&amp;</span> <span class="va">estado_civil</span> <span class="op">==</span> <span class="st">"total"</span> <span class="op">&amp;</span></span>
+<span>    <span class="va">grupo_de_edad</span> <span class="op">==</span> <span class="st">"15_a_19"</span> <span class="op">&amp;</span> <span class="va">estado_civil</span> <span class="op">==</span> <span class="st">"total"</span> <span class="op">&amp;</span></span>
 <span>    <span class="va">sexo</span> <span class="op">==</span> <span class="st">"total"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">grupo_de_edad</span>, <span class="va">estado_civil</span>, <span class="va">sexo</span>, <span class="va">total</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ms_20_24</span> <span class="op">&lt;-</span> <span class="va">marital_status</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">municipio</span> <span class="op">==</span> <span class="st">"Villapinzón"</span> <span class="op">&amp;</span> <span class="va">area</span> <span class="op">==</span> <span class="st">"total"</span> <span class="op">&amp;</span></span>
+<span>    <span class="va">grupo_de_edad</span> <span class="op">==</span> <span class="st">"20_a_24"</span> <span class="op">&amp;</span> <span class="va">estado_civil</span> <span class="op">==</span> <span class="st">"total"</span> <span class="op">&amp;</span></span>
+<span>    <span class="va">sexo</span> <span class="op">==</span> <span class="st">"total"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">grupo_de_edad</span>, <span class="va">estado_civil</span>, <span class="va">sexo</span>, <span class="va">total</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">ms_15_19</span>, <span class="va">ms_20_24</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Sum of counts of both age groups</span></span>
 <span><span class="va">ms_count</span> <span class="op">&lt;-</span> <span class="va">ms</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -271,8 +322,11 @@ population under the same conditions.</p>
 <span>  sexo <span class="op">=</span> <span class="st">"total"</span>, total <span class="op">=</span> <span class="va">count_total</span>,</span>
 <span>  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co"># Final dataframe with counts for each group independently and together</span></span>
+<span><span class="co"># Final dataframe with counts for each group independently and together, with</span></span>
+<span><span class="co"># rows names modification</span></span>
+<span></span>
 <span><span class="va">ms_f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">ms</span>, <span class="va">new_row</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">ms_f</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ms_f</span><span class="op">)</span></span></code></pre></div>
 <div style="text-align: justify;">
 <p>Now that we know that both data sets contain the same counts, we can
@@ -280,7 +334,11 @@ start to look at the specific information we want. For the literacy data
 set, we would focus on the people that do not know how to read neither
 write.</p>
 </div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+</div>
+<div class="section level3">
+<h3 id="data-filter-and-plot-1">Data filter and plot<a class="anchor" aria-label="anchor" href="#data-filter-and-plot-1"></a>
+</h3>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Filter of literacy data to get only the counts for specific conditions</span></span>
 <span><span class="va">lit_filt</span> <span class="op">&lt;-</span> <span class="va">literacy</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">municipio</span> <span class="op">==</span> <span class="st">"Villapinzón"</span> <span class="op">&amp;</span> <span class="va">sabe_leer_y_escribir</span> <span class="op">==</span> <span class="st">"no"</span> <span class="op">&amp;</span></span>
@@ -343,6 +401,7 @@ write.</p>
 <span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="demographic_data_files/figure-html/other%20data%20plot-1.png" width="960"></p>
 </div>
+</div>
 <div class="section level2">
 <h2 id="forecasting-the-future-analyzing-population-projections">Forecasting the Future: Analyzing Population Projections<a class="anchor" aria-label="anchor" href="#forecasting-the-future-analyzing-population-projections"></a>
 </h2>
@@ -352,9 +411,12 @@ projections dataset presenting projections and back projections of
 national population by area, sex and age for the period from 1950 to
 2070.</p>
 <p>First, we will observe the variation on the female and male
-population within the years, covering the period from 2019 to 2070.</p>
+population within the years, covering the period from 2024 to 2034.</p>
 </div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="section level3">
+<h3 id="data-load-filter-and-plot">Data load, filter and plot<a class="anchor" aria-label="anchor" href="#data-load-filter-and-plot"></a>
+</h3>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Download data</span></span>
 <span><span class="va">asen</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_demographic.html">download_demographic</a></span><span class="op">(</span><span class="st">"DANE_PP_1950_2070_ASEN"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Original data is provided by the National Administrative Department of</span></span>
@@ -362,24 +424,25 @@ population within the years, covering the period from 2019 to 2070.</p>
 <span><span class="co">#&gt; Reformatted by the package authors.</span></span>
 <span><span class="co">#&gt; Stored and redistributed by Universidad de Los Andes under the Epiverse</span></span>
 <span><span class="co">#&gt; TRACE iniative.</span></span>
+<span></span>
 <span><span class="co"># Subset data</span></span>
 <span><span class="va">male</span> <span class="op">&lt;-</span> <span class="va">asen</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">area</span> <span class="op">==</span> <span class="st">"total"</span> <span class="op">&amp;</span> <span class="va">sexo</span> <span class="op">==</span> <span class="st">"total_hombres"</span> <span class="op">&amp;</span> <span class="va">ano</span> <span class="op">&gt;</span> <span class="fl">2018</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">area</span> <span class="op">==</span> <span class="st">"total"</span> <span class="op">&amp;</span> <span class="va">sexo</span> <span class="op">==</span> <span class="st">"total_hombres"</span> <span class="op">&amp;</span> <span class="va">ano</span> <span class="op">&gt;</span> <span class="fl">2023</span> <span class="op">&amp;</span> <span class="va">ano</span> <span class="op">&lt;</span> <span class="fl">2035</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">female</span> <span class="op">&lt;-</span> <span class="va">asen</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">area</span> <span class="op">==</span> <span class="st">"total"</span> <span class="op">&amp;</span> <span class="va">sexo</span> <span class="op">==</span> <span class="st">"total_mujeres"</span> <span class="op">&amp;</span> <span class="va">ano</span> <span class="op">&gt;</span> <span class="fl">2018</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">area</span> <span class="op">==</span> <span class="st">"total"</span> <span class="op">&amp;</span> <span class="va">sexo</span> <span class="op">==</span> <span class="st">"total_mujeres"</span> <span class="op">&amp;</span> <span class="va">ano</span> <span class="op">&gt;</span> <span class="fl">2023</span> <span class="op">&amp;</span> <span class="va">ano</span> <span class="op">&lt;</span> <span class="fl">2035</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">mandf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">male</span>, <span class="va">female</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Plot of population in a national level by year and sex</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">mandf</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">ano</span>, y <span class="op">=</span> <span class="va">total</span>, fill <span class="op">=</span> <span class="va">sexo</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span>, position <span class="op">=</span> <span class="st">"dodge"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span>, position <span class="op">=</span> <span class="st">"dodge"</span>, width <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span></span>
 <span>    values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>total_mujeres <span class="op">=</span> <span class="st">"#f04a4c"</span>, total_hombres <span class="op">=</span> <span class="st">"#aec800"</span><span class="op">)</span>,</span>
 <span>    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Female"</span>, <span class="st">"Male"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
-<span>    title <span class="op">=</span> <span class="st">"Population in Colombia from 2019 to 2070 by sex"</span>,</span>
+<span>    title <span class="op">=</span> <span class="st">"Population in Colombia from 2024 to 2034 by sex"</span>,</span>
 <span>    x <span class="op">=</span> <span class="st">"Year"</span>,</span>
 <span>    y <span class="op">=</span> <span class="st">"Population"</span>,</span>
 <span>    fill <span class="op">=</span> <span class="st">"Sex"</span></span>
@@ -388,30 +451,36 @@ population within the years, covering the period from 2019 to 2070.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
 <span>    axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
 <span>    plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="demographic_data_files/figure-html/pop%20projections%20first%20example-1.png" width="700">
-::: {style=“text-align: justify;”} In the graph presented above, we
-observe that the male population slightly exceeds the female population
-for the selected period. As a second step in our analysis of the
-dataset, we will focus on the male population by age in the year with
-the highest male population value from 2019 to 2070, which is the year
-2052. :::</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">mandf</span><span class="op">$</span><span class="va">ano</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="demographic_data_files/figure-html/pop%20projections%20first%20example-1.png" width="700"></p>
+<div style="text-align: justify;">
+<p>In the graph presented above, we observe that the male population
+slightly exceeds the female population for the selected period. As a
+second step in our analysis of the dataset, we will focus on the male
+population by age in the year with the highest male population value
+from 2024 to 2034, which is the year 2034.</p>
+</div>
+</div>
+<div class="section level3">
+<h3 id="data-load-filter-and-plot-1">Data load, filter and plot<a class="anchor" aria-label="anchor" href="#data-load-filter-and-plot-1"></a>
+</h3>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Subset data</span></span>
-<span><span class="va">male_2052_99</span> <span class="op">&lt;-</span> <span class="va">asen</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">area</span> <span class="op">==</span> <span class="st">"total"</span> <span class="op">&amp;</span> <span class="va">ano</span> <span class="op">==</span> <span class="fl">2052</span> <span class="op">&amp;</span> <span class="va">sexo</span> <span class="op">==</span> <span class="st">"hombre"</span> <span class="op">&amp;</span></span>
+<span><span class="va">male_2034_99</span> <span class="op">&lt;-</span> <span class="va">asen</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">area</span> <span class="op">==</span> <span class="st">"total"</span> <span class="op">&amp;</span> <span class="va">ano</span> <span class="op">==</span> <span class="fl">2034</span> <span class="op">&amp;</span> <span class="va">sexo</span> <span class="op">==</span> <span class="st">"hombre"</span> <span class="op">&amp;</span></span>
 <span>    <span class="va">edad</span> <span class="op">!=</span> <span class="st">"100_y_mas"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>edad <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">edad</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">male_2052_100</span> <span class="op">&lt;-</span> <span class="va">asen</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">area</span> <span class="op">==</span> <span class="st">"total"</span> <span class="op">&amp;</span> <span class="va">ano</span> <span class="op">==</span> <span class="fl">2052</span> <span class="op">&amp;</span> <span class="va">sexo</span> <span class="op">==</span> <span class="st">"hombre"</span> <span class="op">&amp;</span></span>
+<span><span class="va">male_2034_100</span> <span class="op">&lt;-</span> <span class="va">asen</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">area</span> <span class="op">==</span> <span class="st">"total"</span> <span class="op">&amp;</span> <span class="va">ano</span> <span class="op">==</span> <span class="fl">2034</span> <span class="op">&amp;</span> <span class="va">sexo</span> <span class="op">==</span> <span class="st">"hombre"</span> <span class="op">&amp;</span></span>
 <span>    <span class="va">edad</span> <span class="op">==</span> <span class="st">"100_y_mas"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>age_group <span class="op">=</span> <span class="va">edad</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>total_sum <span class="op">=</span> <span class="va">total</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">age_group</span>, <span class="va">total_sum</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Define age groups</span></span>
-<span><span class="va">age_groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html" class="external-link">cut</a></span><span class="op">(</span><span class="va">male_2052_99</span><span class="op">$</span><span class="va">edad</span>,</span>
+<span><span class="va">age_groups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html" class="external-link">cut</a></span><span class="op">(</span><span class="va">male_2034_99</span><span class="op">$</span><span class="va">edad</span>,</span>
 <span>  breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">12</span>, <span class="fl">19</span>, <span class="fl">29</span>, <span class="fl">39</span>, <span class="fl">49</span>, <span class="fl">59</span>, <span class="fl">69</span>, <span class="fl">79</span>, <span class="fl">89</span>, <span class="fl">99</span><span class="op">)</span>,</span>
 <span>  labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>    <span class="st">"0-2"</span>, <span class="st">"3-12"</span>, <span class="st">"13-19"</span>, <span class="st">"20-29"</span>, <span class="st">"30-39"</span>, <span class="st">"40-49"</span>,</span>
@@ -420,7 +489,7 @@ the highest male population value from 2019 to 2070, which is the year
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Add age groups to the data frame</span></span>
-<span><span class="va">male_agegroups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="va">male_2052_99</span>, age_group <span class="op">=</span> <span class="va">age_groups</span><span class="op">)</span></span>
+<span><span class="va">male_agegroups</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="va">male_2034_99</span>, age_group <span class="op">=</span> <span class="va">age_groups</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Calculate new totals for age groups</span></span>
 <span><span class="va">summarized_data</span> <span class="op">&lt;-</span> <span class="va">male_agegroups</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -428,7 +497,7 @@ the highest male population value from 2019 to 2070, which is the year
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>total_sum <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">total</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Bind dataframes</span></span>
-<span><span class="va">merged</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">summarized_data</span>, <span class="va">male_2052_100</span><span class="op">)</span></span>
+<span><span class="va">merged</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">summarized_data</span>, <span class="va">male_2034_100</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Fix the order of ages appearance in the plot</span></span>
 <span><span class="va">merged</span><span class="op">$</span><span class="va">age_group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">merged</span><span class="op">$</span><span class="va">age_group</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">merged</span><span class="op">$</span><span class="va">age_group</span><span class="op">)</span><span class="op">)</span></span>
@@ -440,7 +509,7 @@ the highest male population value from 2019 to 2070, which is the year
 <span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span>, fill <span class="op">=</span> <span class="st">"#f04a4c"</span>, color <span class="op">=</span> <span class="st">"black"</span>, width <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
-<span>    title <span class="op">=</span> <span class="st">"Male population counts in Colombia by age group in 2052"</span>,</span>
+<span>    title <span class="op">=</span> <span class="st">"Male population counts in Colombia by age group in 2034"</span>,</span>
 <span>    x <span class="op">=</span> <span class="st">"Age group"</span>,</span>
 <span>    y <span class="op">=</span> <span class="st">"Male population"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
@@ -450,6 +519,7 @@ the highest male population value from 2019 to 2070, which is the year
 <span>    plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="demographic_data_files/figure-html/pop%20projections%20second%20example-1.png" width="700"></p>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
