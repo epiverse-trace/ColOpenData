@@ -50,6 +50,14 @@ knitr::kable(IDEAM_tags)
 ::: {style="text-align: justify;"}
 Each observation is subject to the availability of stations in the ROI and the stations' status (active, maintenance or suspended), as well as quality filters implemented by IDEAM.
 
+In this vignette you will learn:
+1. How to download climate data using **ColOpenData** by three different methods
+  - Download from named stations
+  - Download from geometry (`sf`)
+  - Download from named geometry (municipality or department)
+2. How to aggregate climate data by different frequencies
+3. How to plot downloaded climate data
+
 For this example we will retrieve data for the municipality of Manizales in Colombia. We will download Maximum Temperature (TMX_CON) from 2013 to 2016, to observe the increase in temperature during 2015 and 2016 due to the impact of El Nino (ENSO).
 
 **ColOpenData** offers three methods to do this, using three different functions:
@@ -66,6 +74,10 @@ library(sf)
 library(leaflet)
 library(ggplot2)
 ```
+
+::: {style="text-align: justify;"}
+**Disclaimer: all data is loaded to the environment in the user's R session, but is not downloaded to user's computer.**
+:::
 
 ## Retrieving climate data for a ROI using stations' data
 
