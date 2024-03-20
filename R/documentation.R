@@ -85,17 +85,24 @@ list_datasets <- function(module = "all") {
 #'
 #' @return \code{data.frame} object with the available datasets
 #' @examples
-#' filtered_datasets <- look_up("demographic", c("sex", "age"), "and")
+#' found <- look_up("demographic", c("sex", "age"), "and")
 #'
 #' @export
 look_up <- function(module = "all", keywords, logic = "or") {
   listed <- list_datasets(module)
   if (logic == "or") {
-    filtered_datasets <- listed[grep(paste(keywords, collapse = "|"), listed$description, ignore.case = TRUE), ]
+    found <- listed[grep(paste(keywords, collapse = "|"),
+      listed$description,
+      ignore.case = TRUE
+    ), ]
   } else if (logic == "and") {
-    filtered_datasets <- listed[rowSums(sapply(keywords, grepl, listed$description, ignore.case = TRUE)) == length(keywords), ]
+    found <- listed[rowSums(sapply(keywords,
+      grepl,
+      listed$description,
+      ignore.case = TRUE
+    )) == length(keywords), ]
   } else {
     stop("Invalid logic parameter. Please provide 'or' or 'and'.")
   }
-  return(filtered_datasets)
+  return(found)
 }
