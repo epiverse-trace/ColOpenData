@@ -8,29 +8,28 @@ look_up(module = "all", keywords, logic = "or")
 }
 \arguments{
 \item{module}{character with module to be consulted (\code{"demographic"},
-\code{"geospatial"}, \code{"climate"})}
+\code{"geospatial"}, \code{"climate"}). Default is \code{"all"}}
 
 \item{keywords}{character or vector of characters to be look up in the
 description}
 
 \item{logic}{A character string specifying the matching logic.
-Can be either "or" or "and".
-\code{logic = "or"}: Matches rows containing at least one of the specified
+Can be either \code{"or"} or \code{"and"}. Default is \code{"or"}
+\itemize{
+\item \code{logic = "or"}: Matches rows containing at least one of the
+specified keywords in their descriptions.
+\item \code{logic = "and"}: Matches rows containing all of the specified
 keywords in their descriptions.
-\code{logic = "and"}: Matches rows containing all of the specified keywords
-in their descriptions.}
+}}
 }
 \value{
 \code{data.frame} object with the available datasets
 }
 \description{
-Filter list of available datasets based on keywords given by the user
+List available datasets containing user-specified keywords in their
+descriptions
 }
-\section{List available datasets containing user-specified keywords in their}{
-descriptions.
-}
-
 \examples{
-filtered_datasets <- look_up("demographic", c("sex", "age"), "and")
+found <- look_up("demographic", c("sex", "age"), "and")
 
 }

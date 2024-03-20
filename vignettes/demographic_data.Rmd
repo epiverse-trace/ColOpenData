@@ -21,9 +21,15 @@ knitr::opts_chunk$set(
 
 The available CNPV information is divided in four categories: households, persons demographic, persons social and dwellings. The population projections information presents data from 1950 to 2070 for a national level, from 1985 to 2050 for a departmental level and from 1985 to 2035 for a municipal level. All data documentation can be accessed as explained at [Documentation and Dictionaries](https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html).
 
-In order to access its documentation we need to use the function `list_datasets` and indicate as a parameter the module we are interested in. It is important to take a good look at this to have a clearer understanding of what we count with, before just throwing ourselves to work with the data. Now, we should start by loading all necessary libraries. As the goal of this vignette is to show some examples on how to use the data, we will load some specific libraries but that does not mean they are required to use the data in all cases.
+In order to access its documentation we need to use the function `list_datasets` and indicate as a parameter the module we are interested in. It is important to take a good look at this to have a clearer understanding of what we count with, before just throwing ourselves to work with the data. Now, we should start by loading all necessary libraries. 
 
-**As an important clarification, all data is loaded and not downloaded, which means it will be stored as part of the environment, but will not be downloaded to user's computer.**
+In this vignette you will learn:
+1. How to download demographic data using **ColOpenData**
+2. How to filter, group, mutate and aggregate demographic data including census and population projections
+3. How to visualize data using **ggplot2**
+
+As the goal of this vignette is to show some examples on how to use the data, we will load some specific libraries but that does not mean they are required to use the data in all cases.
+
 :::
 
 ```{r libraries, message=FALSE, warning=FALSE, results="hide"}
@@ -31,6 +37,10 @@ library(ColOpenData)
 library(dplyr)
 library(ggplot2)
 ```
+
+::: {style="text-align: justify;"}
+**Disclaimer: all data is loaded to the environment in the user's R session, but is not downloaded to user's computer.**
+:::
 
 ## Initial Exploration: Basic Data Handling with ColOpenData
 
