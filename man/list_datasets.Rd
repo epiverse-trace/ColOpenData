@@ -8,7 +8,7 @@ list_datasets(module = "all")
 }
 \arguments{
 \item{module}{character with module to be consulted (\code{"demographic"},
-\code{"geospatial"}, \code{"climate"})}
+\code{"geospatial"}, \code{"climate"}). Default is \code{"all"}}
 }
 \value{
 \code{data.frame} object with the available datasets

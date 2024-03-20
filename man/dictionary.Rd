@@ -14,7 +14,7 @@ dictionary(dataset)
 }
 \description{
 Demographic and climate datasets contain data dictionaries to understand
-internal tags and named columns.
+internal tags and named columns
 }
 \examples{
 dict <- dictionary("DANE_MGN_2018_SETU")
