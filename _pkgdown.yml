@@ -36,6 +36,9 @@ reference:
 - subtitle: List available datasets
   contents:
   - list_datasets
+- subtitle: Look up keywords in datasets
+  contents:
+  - look_up
 - subtitle: Dictionaries
   contents:
   - dictionary

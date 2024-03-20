@@ -14,8 +14,8 @@ list_datasets(module = "all")
 \code{data.frame} object with the available datasets
 }
 \description{
-List all available datasets by name, including category, description and
-source
+List all available datasets by name, including group, source, year, level,
+category and description
 }
 \examples{
 list <- list_datasets("geospatial")
