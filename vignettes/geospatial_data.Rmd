@@ -153,7 +153,10 @@ For dynamic plots, we can use [`leaflet`](https://rstudio.github.io/leaflet/), w
 ```{r define color palette}
 # Color Palette
 colfunc <- colorRampPalette(c("#10bed2", "#deff00"))
-pal <- colfunc(100)
+pal <- colorNumeric(
+  palette = colfunc(100),
+  domain = tunja$INT_PERC
+)
 ```
 
 ::: {style="text-align: justify;"}
@@ -168,8 +171,15 @@ leaflet(tunja) %>%
     stroke = TRUE,
     weight = 0,
     color = NA,
-    fillColor = ~pal,
+    fillColor = ~ pal(tunja$INT_PERC),
     fillOpacity = 1,
     popup = paste0(tunja$INT_PERC)
+  ) %>%
+  addLegend(
+    position = "bottomright",
+    pal = pal,
+    values = ~ tunja$INT_PERC,
+    opacity = 1,
+    title = "Internet Coverage"
   )
 ```
