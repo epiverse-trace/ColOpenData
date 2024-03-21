@@ -36,13 +36,13 @@ divipola_department_code <- function(department_name) {
     !duplicated(divipola$nombre_departamento),
     c("codigo_departamento", "nombre_departamento")
   ]
-  fixed_tokens <- iconv(gsub(" ", "", dpts$nombre_departamento),
+  fixed_tokens <- iconv(gsub(" ", "", dpts$nombre_departamento, fixed = TRUE),
     from = "utf-8",
     to = "ASCII//TRANSLIT"
   )
-  dpt_codes <- c()
+  dpt_codes <- NULL
   for (dpt in department_name) {
-    input_token <- iconv(gsub(" ", "", dpt),
+    input_token <- iconv(gsub(" ", "", dpt, fixed = TRUE),
       from = "utf-8",
       to = "ASCII//TRANSLIT"
     )
@@ -94,9 +94,9 @@ divipola_municipality_code <- function(department_name, municipality_name) {
 
   divipola <- divipola_table()
   dpts <- divipola_department_code(department_name)
-  mp_codes <- c()
+  mp_codes <- NULL
   for (i in seq_along(municipality_name)) {
-    input_token <- iconv(gsub(" ", "", municipality_name[i]),
+    input_token <- iconv(gsub(" ", "", municipality_name[i], fixed = TRUE),
       from = "utf-8",
       to = "ASCII//TRANSLIT"
     )
@@ -104,7 +104,10 @@ divipola_municipality_code <- function(department_name, municipality_name) {
     filtered_mps <- divipola[which(
       divipola$codigo_departamento == dpt_code
     ), ]
-    fixed_tokens <- iconv(gsub(" ", "", filtered_mps$nombre_municipio),
+    fixed_tokens <- iconv(
+      gsub(" ", "", filtered_mps$nombre_municipio,
+        fixed = TRUE
+      ),
       from = "utf-8",
       to = "ASCII//TRANSLIT"
     )
@@ -151,7 +154,7 @@ divipola_department_name <- function(department_code) {
     !duplicated(divipola$nombre_departamento),
     c("codigo_departamento", "nombre_departamento")
   ]
-  dpt_names <- c()
+  dpt_names <- NULL
   for (code in department_code) {
     dpt_name <- dpts$nombre_departamento[which(
       dpts$codigo_departamento == department_code
@@ -183,7 +186,7 @@ divipola_municipality_name <- function(municipality_code) {
   checkmate::assert_character(municipality_code)
 
   mps <- divipola_table()
-  mp_names <- c()
+  mp_names <- NULL
   for (code in municipality_code) {
     mp_name <- mps$nombre_municipio[which(
       mps$codigo_municipio == municipality_code
