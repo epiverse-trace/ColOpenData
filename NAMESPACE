@@ -2,6 +2,11 @@
 
 export(aggregate_climate)
 export(dictionary)
+export(divipola_department_code)
+export(divipola_department_name)
+export(divipola_municipality_code)
+export(divipola_municipality_name)
+export(divipola_table)
 export(download_climate)
 export(download_climate_geom)
 export(download_climate_stations)
