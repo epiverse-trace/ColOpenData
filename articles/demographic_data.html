@@ -119,18 +119,23 @@ and Dictionaries</a>.</p>
 interested in. It is important to take a good look at this to have a
 clearer understanding of what we count with, before just throwing
 ourselves to work with the data. Now, we should start by loading all
-necessary libraries. As the goal of this vignette is to show some
-examples on how to use the data, we will load some specific libraries
-but that does not mean they are required to use the data in all
-cases.</p>
-<p><strong>As an important clarification, all data is loaded and not
-downloaded, which means it will be stored as part of the environment,
-but will not be downloaded to user’s computer.</strong></p>
+necessary libraries.</p>
+<p>In this vignette you will learn: 1. How to download demographic data
+using <strong>ColOpenData</strong> 2. How to filter, group, mutate and
+aggregate demographic data including census and population projections
+3. How to visualize data using <strong>ggplot2</strong></p>
+<p>As the goal of this vignette is to show some examples on how to use
+the data, we will load some specific libraries but that does not mean
+they are required to use the data in all cases.</p>
 </div>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiverse-trace/ColOpenData" class="external-link">ColOpenData</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
+<div style="text-align: justify;">
+<p><strong>Disclaimer: all data is loaded to the environment in the
+user’s R session, but is not downloaded to user’s computer.</strong></p>
+</div>
 <div class="section level2">
 <h2 id="initial-exploration-basic-data-handling-with-colopendata">Initial Exploration: Basic Data Handling with ColOpenData<a class="anchor" aria-label="anchor" href="#initial-exploration-basic-data-handling-with-colopendata"></a>
 </h2>

@@ -116,19 +116,22 @@ frame can be used as follows:</p>
 </div>
 <div style="text-align: justify;">
 <p>This naming framework is only used for the functions
-<code>download_demographic</code> and
-<code>download_geospatial</code>.</p>
+<code>download_demographic</code> and <code>download_geospatial</code>.
+For hands on examples please check <a href="https://epiverse-trace.github.io/ColOpenData/articles/demographic_data.html">A
+Deep Dive into Colombian Demographics Using ColOpenData</a> and <a href="https://epiverse-trace.github.io/ColOpenData/articles/geospatial_data.html">Maps
+and plots with ColOpenData</a></p>
 <div class="section level4">
 <h4 id="demographic">Demographic<a class="anchor" aria-label="anchor" href="#demographic"></a>
 </h4>
 <p>Demographic datasets are available for municipalities and
-departments, and contain data for Dwellings, Households and Population
-in four categories.</p>
+departments, and contain data for Dwellings, Households, Population and
+Population Projections in five categories.</p>
 <ul>
 <li>Viviendas (Dwellings)</li>
 <li>Hogares (Households)</li>
 <li>Personas Social (Persons social)</li>
 <li>Personas Demográfico (Persons demographic)</li>
+<li>Proyecciones Poblacionales (Population Projections)</li>
 </ul>
 <p>All datasets are retrieved from the National Administrative
 Department of Statistics (DANE). Naming is stated as follows:</p>
@@ -145,9 +148,17 @@ Department of Statistics (DANE). Naming is stated as follows:</p>
 </li>
 <li>Personas Demográfico: <strong>CNPVPD</strong>
 </li>
+<li>Proyecciones Poblacionales <strong>PP</strong>
+</li>
 </ul>
 </li>
-<li>Year: <strong>2018</strong>
+<li>Year:
+<ul>
+<li>Census data: <strong>2018</strong>
+</li>
+<li>Population projections: Various (see <code>list_datasets</code>
+below)</li>
+</ul>
 </li>
 <li>Details: These are related to each individual dataset. For further
 details please check the function <code>list_datasets</code> below.</li>
@@ -273,13 +284,17 @@ download data and include:</p>
 <div style="text-align: justify;">
 <p>These tags are meant to be used for download using
 <code>download_climate</code>, <code>download_climate_geom</code> and
-<code>download_climate_stations</code>.</p>
+<code>download_climate_stations</code>. See <a href="https://epiverse-trace.github.io/ColOpenData/articles/climate_data.html">How
+to download climate data using ColOpenData</a> for further details.</p>
 <div class="section level2">
 <h2 id="list-data">List data<a class="anchor" aria-label="anchor" href="#list-data"></a>
 </h2>
 <p>To check available datasets you can use the
 <code>list_datasets</code> function. This function can also be filtered
-with the <code>module</code> parameter to indicate a specific module</p>
+with the <code>module</code> parameter to indicate a specific module.
+Default is <code>"all"</code>, but can be filtered by
+<code>"demographic"</code>, <code>"geospatial"</code> and
+<code>"climate"</code>.</p>
 </div>
 </div>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -320,6 +335,9 @@ with the <code>module</code> parameter to indicate a specific module</p>
 <span><span class="co">#&gt; 14                    Number of households with senior citizens and number of persons aged 60 and over, by municipality and area</span></span>
 <span><span class="co">#&gt; 15                                                                                Households by headship, by department and area</span></span>
 <span><span class="co">#&gt; 16                                                                              Households by headship, by municipality and area</span></span></code></pre></div>
+<p>We highly recommend using <code><a href="https://rdrr.io/r/utils/View.html" class="external-link">View()</a></code> instead of
+<code><a href="https://rdrr.io/r/utils/head.html" class="external-link">head()</a></code> in the local environment for a cleaner and easier
+visualization of the information.</p>
 <div style="text-align: justify;">
 <p>Using this function, we can retrieve all names, source, aggregation
 level and information for individual datasets.</p>
@@ -332,7 +350,9 @@ they are retrieved directly from the sources.</p>
 <div class="section level4">
 <h4 id="demographic-1">Demographic<a class="anchor" aria-label="anchor" href="#demographic-1"></a>
 </h4>
-<p>Dictionaries are not provided for this module.</p>
+<p>Dictionaries are not provided for this module since they are not
+needed. Demographic datasets include comprehensive column names and
+variables, and they are self-contained.</p>
 </div>
 <div class="section level4">
 <h4 id="geospatial-1">Geospatial<a class="anchor" aria-label="anchor" href="#geospatial-1"></a>
