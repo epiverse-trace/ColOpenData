@@ -81,7 +81,7 @@ divipola_department_code <- function(department_name) {
 #' municipalities
 #'
 #' @examples
-#' code_ibague <- divipola_municipality_code("TOLIMA", "IBAGUE")
+#' code_ibague <- divipola_municipality_code("HUILA", "PITALITO")
 #'
 #' @return character vector with the DIVIPOLA codes of the municipalities
 #'
