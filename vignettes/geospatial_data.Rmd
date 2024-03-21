@@ -21,11 +21,9 @@ knitr::opts_chunk$set(
 
 This package contains the 2018's version of the MGN, which also included a summarized version of the National Population and Dwelling Census (CNPV) in different aggregation levels. Each level is stored in a different dataset, which can be retrieved using the `download_geospatial` function, which requires three arguments:
 
-\- `dataset` character with the geospatial dataset name.
-
-\- `include_geom` logical for including (or not) geometry. Default is `TRUE`.
-
-\- `include_cnpv` logical for including (or not) CNPV demographic and socioeconomic information. Default is `TRUE`.
+- `dataset` character with the geospatial dataset name.
+- `include_geom` logical for including (or not) geometry. Default is `TRUE`.
+- `include_cnpv` logical for including (or not) CNPV demographic and socioeconomic information. Default is `TRUE`.
 
 To better understand dataset names and details go to [Documentation and Dictionaries](https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html).
 
@@ -54,7 +52,12 @@ knitr::kable(mgncnpv)
 ```
 
 ::: {style="text-align: justify;"}
-In this vignette, we will download the geospatial data and provide some examples on how to use the available information and visualize it using graphic libraries like `ggplot2` and `leaflet`. We will be using geospatial data at the level of Urban Section (SECU) for the municipality of Tunja and will calculate the percentage of houses with internet connection at each SECU.
+In this vignette you will learn:
+1. How to download geospatial data using **ColOpenData**
+2. How to use census data included in geospatial datasets
+3. How to visualize spatial data using **leaflet** and **ggplot2**
+
+We will be using geospatial data at the level of Urban Section (SECU) for the municipality of Tunja and will calculate the percentage of houses with internet connection at each SECU. Later, we will build some plots using the previously mentioned approaches for dynamic and static plots.
 
 We will start by importing the needed libraries.
 
@@ -65,6 +68,10 @@ library(sf)
 library(ggplot2)
 library(leaflet)
 ```
+
+::: {style="text-align: justify;"}
+**Disclaimer: all data is loaded to the environment in the user's R session, but is not downloaded to user's computer.**
+:::
 
 ## Downloading geospatial data
 
@@ -146,7 +153,10 @@ For dynamic plots, we can use [`leaflet`](https://rstudio.github.io/leaflet/), w
 ```{r define color palette}
 # Color Palette
 colfunc <- colorRampPalette(c("#10bed2", "#deff00"))
-pal <- colfunc(100)
+pal <- colorNumeric(
+  palette = colfunc(100),
+  domain = tunja$INT_PERC
+)
 ```
 
 ::: {style="text-align: justify;"}
@@ -161,8 +171,15 @@ leaflet(tunja) %>%
     stroke = TRUE,
     weight = 0,
     color = NA,
-    fillColor = ~pal,
+    fillColor = ~ pal(tunja$INT_PERC),
     fillOpacity = 1,
     popup = paste0(tunja$INT_PERC)
+  ) %>%
+  addLegend(
+    position = "bottomright",
+    pal = pal,
+    values = ~ tunja$INT_PERC,
+    opacity = 1,
+    title = "Internet Coverage"
   )
 ```

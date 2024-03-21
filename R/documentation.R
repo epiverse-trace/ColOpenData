@@ -2,7 +2,7 @@
 #'
 #' @description
 #' Demographic and climate datasets contain data dictionaries to understand
-#' internal tags and named columns.
+#' internal tags and named columns
 #'
 #' @param dataset character with the dataset name
 #'
@@ -15,20 +15,32 @@
 dictionary <- function(dataset) {
   checkmate::assert_character(dataset)
 
-  dict_path <- sprintf("DICT_%s", dataset)
-  path <- retrieve_dict_path(dict_path)
-  dict <- retrieve_table(path, ";")
+  datasets <- list_datasets()
+  if (dataset %in% datasets$name) {
+    tryCatch(
+      {
+        dict_path <- sprintf("DICT_%s", dataset)
+        path <- retrieve_dict_path(dict_path)
+        dict <- retrieve_table(path, ";")
+      },
+      error = function(e) {
+        stop("This dataset does not have (or need) an associated dictionary")
+      }
+    )
+  } else {
+    stop("`dataset` not found")
+  }
   return(dict)
 }
 
 #' Download list of available datasets
 #'
 #' @description
-#' List all available datasets by name, including category, description and
-#' source
+#' List all available datasets by name, including group, source, year, level,
+#' category and description
 #'
 #' @param module character with module to be consulted (\code{"demographic"},
-#' \code{"geospatial"}, \code{"climate"})
+#' \code{"geospatial"}, \code{"climate"}). Default is \code{"all"}
 #'
 #' @return \code{data.frame} object with the available datasets
 #' @examples
@@ -50,4 +62,47 @@ list_datasets <- function(module = "all") {
     listed <- listed[listed$group == module, ]
   }
   return(listed)
+}
+
+#' Filter list of available datasets based on keywords given by the user
+#'
+#' @description
+#' List available datasets containing user-specified keywords in their
+#' descriptions
+#'
+#' @param module character with module to be consulted (\code{"demographic"},
+#' \code{"geospatial"}, \code{"climate"}). Default is \code{"all"}
+#' @param keywords character or vector of characters to be look up in the
+#' description
+#' @param logic A character string specifying the matching logic.
+#' Can be either \code{"or"} or \code{"and"}. Default is \code{"or"}
+#' \itemize{
+#' \item \code{logic = "or"}: Matches rows containing at least one of the
+#' specified keywords in their descriptions.
+#' \item \code{logic = "and"}: Matches rows containing all of the specified
+#' keywords in their descriptions.
+#'  }
+#'
+#' @return \code{data.frame} object with the available datasets
+#' @examples
+#' found <- look_up("demographic", c("sex", "age"), "and")
+#'
+#' @export
+look_up <- function(module = "all", keywords, logic = "or") {
+  listed <- list_datasets(module)
+  if (logic == "or") {
+    found <- listed[grep(paste(keywords, collapse = "|"),
+      listed$description,
+      ignore.case = TRUE
+    ), ]
+  } else if (logic == "and") {
+    found <- listed[rowSums(sapply(keywords,
+      grepl,
+      listed$description,
+      ignore.case = TRUE
+    )) == length(keywords), ]
+  } else {
+    stop("Invalid logic parameter. Please provide 'or' or 'and'.")
+  }
+  return(found)
 }

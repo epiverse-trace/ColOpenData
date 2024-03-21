@@ -19,11 +19,14 @@ coverage](https://codecov.io/gh/epiverse-trace/ColOpenData/branch/main/graph/bad
 status](https://www.r-pkg.org/badges/version/ColOpenData)](https://CRAN.R-project.org/package=ColOpenData)
 <!-- badges: end -->
 
-**ColOpenData** is a package that acquires and wrangles Colombian
-socioeconomic, geospatial and climate data. It solves the problem of
-Colombian data being issued in different web pages and sources by using
-functions that allow the user to select the desired dataset and download
-it without having to do the exhausting acquisition process.
+**ColOpenData** is a package designed to access curated and wrangled
+Colombian demographic, geospatial and climate data, retrieved from
+various open Colombian data sources. The package addresses the challenge
+of scattered Colombian data across multiple web sources by providing
+functions that enable users to select and load desired datasets without
+the need for extensive data acquisition processes. Additionally, the
+tidy data structure offered for demographic and climate data facilitates
+analysis and visualization.
 
 ColOpenData is developed at [Universidad de Los
 Andes](https://uniandes.edu.co/) as part of the [Epiverse-TRACE
@@ -48,12 +51,17 @@ Hydrology, Meteorology and Environmental Studies
 [(IDEAM)](http://www.ideam.gov.co/). The available data is divided in
 three categories:
 
-- **Demographic:** Demographic and Socioeconomic data is taken from the
-  National Population and Dwelling Census (CNPV) of 2018, the most
-  recent census available to date. The information is presented as an
+- **Demographic:** Demographic and Socioeconomic data presents
+  information from the National Population and Dwelling Census (CNPV) of
+  2018 and Population Projections. The CNPV data corresponds to the most
+  recent census available to date and the information is presented as an
   answer to three questions: How many are we?, Where are we? and How do
   we live? Further information can be consulted
   [here](https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/censo-nacional-de-poblacion-y-vivenda-2018).
+  The Population Projections data contains the population projections
+  with the post COVID-19 update calculated based on the results of CNPV
+  of 2018. Further information can be consulted
+  [here](https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/proyecciones-de-poblacion).
 
 - **Geospatial:** This data is retrieved from the National
   Geostatistical Framework (MGN), which includes maps and a summarized
