@@ -71,7 +71,7 @@ divipola_department_code <- function(department_name) {
 #'
 #' @description
 #' Retrieve municipalities' DIVIPOLA codes from their names. Since there are
-#' municipalities with the same names in diferent departments, the input must
+#' municipalities with the same names in different departments, the input must
 #' include a two vectors of the same length: one for the departments and one for
 #' the municipalities
 #'
@@ -137,7 +137,7 @@ divipola_municipality_code <- function(department_name, municipality_name) {
 #' @description
 #' Retrieve departments' DIVIPOLA official names from their DIVIPOLA codes
 #'
-#' @param department_name character vector with the DIVIPOLA codes of the
+#' @param department_code character vector with the DIVIPOLA codes of the
 #' departments
 #'
 #' @examples
@@ -173,7 +173,7 @@ divipola_department_name <- function(department_code) {
 #' @description
 #' Retrieve municipalities' DIVIPOLA official names from their DIVIPOLA codes
 #'
-#' @param department_name character vector with the DIVIPOLA codes of the
+#' @param municipality_code character vector with the DIVIPOLA codes of the
 #' municipalities
 #'
 #' @examples

@@ -18,7 +18,7 @@ character vector with the DIVIPOLA codes of the municipalities
 }
 \description{
 Retrieve municipalities' DIVIPOLA codes from their names. Since there are
-municipalities with the same names in diferent departments, the input must
+municipalities with the same names in different departments, the input must
 include a two vectors of the same length: one for the departments and one for
 the municipalities
 }

@@ -7,7 +7,7 @@
 divipola_municipality_name(municipality_code)
 }
 \arguments{
-\item{department_name}{character vector with the DIVIPOLA codes of the
+\item{municipality_code}{character vector with the DIVIPOLA codes of the
 municipalities}
 }
 \value{

@@ -7,7 +7,7 @@
 divipola_department_name(department_code)
 }
 \arguments{
-\item{department_name}{character vector with the DIVIPOLA codes of the
+\item{department_code}{character vector with the DIVIPOLA codes of the
 departments}
 }
 \value{
