@@ -25,12 +25,12 @@ download_climate <- function(code, start_date, end_date, tag) {
 
   if (nchar(code) == 5) {
     # Municipalities have a five digit code
-    mpios <- download_geospatial("DANE_MGN_2018_MPIO")
-    area <- mpios[which(mpios$MPIO_CDPMP == code), "MPIO_CDPMP"]
+    mps <- download_geospatial("DANE_MGN_2018_MPIO")
+    area <- mps[which(mps$MPIO_CDPMP == code), "MPIO_CDPMP"]
   } else if (nchar(code) == 2) {
     # Departments have a two digit code
-    dptos <- download_geospatial("DANE_MGN_2018_DPTO")
-    area <- dptos[which(dptos$DPTO_CCDGO == code), "DPTO_CCDGO"]
+    dpts <- download_geospatial("DANE_MGN_2018_DPTO")
+    area <- dpts[which(dpts$DPTO_CCDGO == code), "DPTO_CCDGO"]
   } else {
     stop("`code` must be either five digits for municipalities or two
             digits for departments")

@@ -39,7 +39,8 @@ Imports:
     readr,
     rlang,
     sf,
-    utils
+    utils,
+    stringdist
 Suggests: 
     ggplot2,
     knitr,

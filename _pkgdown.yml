@@ -42,3 +42,14 @@ reference:
 - subtitle: Dictionaries
   contents:
   - dictionary
+  
+- title: DIVIPOLA
+- subtitle: DIVIPOLA table
+  contents:
+  - divipola_table
+- subtitle: DIVIPOLA helper functions
+  contents:
+  - divipola_department_code
+  - divipola_municipality_code
+  - divipola_department_name
+  - divipola_municipality_name
