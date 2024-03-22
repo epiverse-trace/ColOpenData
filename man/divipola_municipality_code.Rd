@@ -23,6 +23,6 @@ include a two vectors of the same length: one for the departments and one for
 the municipalities
 }
 \examples{
-code_ibague <- divipola_municipality_code("TOLIMA", "IBAGUE")
+code_ibague <- divipola_municipality_code("HUILA", "PITALITO")
 
 }
