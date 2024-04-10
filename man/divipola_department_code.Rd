@@ -16,6 +16,7 @@ character vector with the DIVIPOLA codes of the departments
 Retrieve departments' DIVIPOLA codes from their names
 }
 \examples{
-code_tolima <- divipola_department_code("TOLIMA")
+dptos <- c("TOLIMA", "HUILA", "AMAZONAS")
+codes <- divipola_department_code(dptos)
 
 }
