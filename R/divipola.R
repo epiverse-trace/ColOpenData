@@ -36,13 +36,16 @@ divipola_department_code <- function(department_name) {
     !duplicated(divipola$nombre_departamento),
     c("codigo_departamento", "nombre_departamento")
   ]
-  fixed_tokens <- iconv(gsub(" ", "", dpts$nombre_departamento, fixed = TRUE),
+  fixed_tokens <- iconv(
+    gsub(" ", "", dpts$nombre_departamento,
+      fixed = TRUE
+    ),
     from = "utf-8",
     to = "ASCII//TRANSLIT"
   )
   dpt_codes <- NULL
   for (dpt in department_name) {
-    input_token <- iconv(gsub(" ", "", dpt, fixed = TRUE),
+    input_token <- iconv(toupper(gsub(" ", "", dpt, fixed = TRUE)),
       from = "utf-8",
       to = "ASCII//TRANSLIT"
     )
@@ -96,7 +99,10 @@ divipola_municipality_code <- function(department_name, municipality_name) {
   dpts <- divipola_department_code(department_name)
   mp_codes <- NULL
   for (i in seq_along(municipality_name)) {
-    input_token <- iconv(gsub(" ", "", municipality_name[i], fixed = TRUE),
+    input_token <- iconv(
+      toupper(gsub(" ", "", municipality_name[i],
+        fixed = TRUE
+      )),
       from = "utf-8",
       to = "ASCII//TRANSLIT"
     )
