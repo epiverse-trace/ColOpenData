@@ -1,5 +1,6 @@
 test_that("Download demographic errors are thrown", {
   expect_error(download_demographic("MGNCNPV06"))
+  expect_error(download_demographic("DANE_MGN_2018_DPTO"))
   expect_error(download_demographic())
 })
 
