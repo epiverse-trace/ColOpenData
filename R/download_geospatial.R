@@ -23,8 +23,11 @@ download_geospatial <- function(dataset, include_geom = TRUE,
   checkmate::assert_character(dataset)
   checkmate::assert_logical(include_geom)
   checkmate::assert_logical(include_cnpv)
-  stopifnot("At least one of the groups (`geospatial` and/or `demographic`)
-            must be TRUE" = any(include_geom, include_cnpv))
+  stopifnot(
+    "At least one of the groups (`geospatial` and/or `demographic`)
+            must be TRUE" = any(include_geom, include_cnpv),
+    "´dataset´ not found" = grepl("^DANE_MGN_", dataset)
+  )
 
   dataset_path <- retrieve_path(dataset)
   tryCatch(

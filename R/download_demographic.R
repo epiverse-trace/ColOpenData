@@ -14,6 +14,7 @@
 download_demographic <- function(dataset) {
   checkmate::assert_character(dataset)
   dataset_path <- retrieve_path(dataset)
+  stopifnot("´dataset´ not found" = grepl("^DANE_CNPV|^DANE_PP", dataset))
   tryCatch(
     {
       demographic_data <- retrieve_table(dataset_path)
