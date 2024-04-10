@@ -21,7 +21,7 @@ test_that("Stations in ROI throws errors", {
 
 test_that("Stations in ROI works as expected", {
   expect_snapshot(stations_test)
-  expect_s3class(stations_in_roi(ibague), "data.frame")
+  expect_s3_class(stations_in_roi(ibague), "data.frame")
 })
 
 # Climate stations
@@ -66,7 +66,7 @@ test_that("Climate Stations throws errors", {
 
 test_that("Climate Stations works as expected", {
   expect_snapshot(download_climate_stations(
-    stations = stat,
+    stations = stations_test,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
     tag = "PTPM_CON"

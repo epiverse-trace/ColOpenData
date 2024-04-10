@@ -2,7 +2,7 @@
 
     Code
       download_demographic("DANE_CNPVH_2018_1HD")
-    Message
+    Message <simpleMessage>
       Original data is provided by the National Administrative Department of
       Statistics (DANE).
       Reformatted by the package authors.
