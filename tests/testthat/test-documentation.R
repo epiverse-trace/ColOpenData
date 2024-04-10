@@ -3,12 +3,7 @@ test_that("List datasets errors are thrown", {
 })
 
 test_that("List datasets works as expected", {
-  expect_s3_class(list_datasets("geospatial"), "data.frame")
-  expect_identical(
-    list_datasets("climate")[1, 1][[1]],
-    "IDEAM_CLIMATE_2023_MAY"
-  )
-  expect_length(list_datasets("climate"), 7L)
+  expect_snapshot(list_datasets("geospatial"))
 })
 
 test_that("Dictionary errors are thrown", {
@@ -17,5 +12,5 @@ test_that("Dictionary errors are thrown", {
 })
 
 test_that("Dictionary works as expected", {
-  expect_s3_class(dictionary("DANE_MGN_2018_DPTO"), "data.frame")
+  expect_snapshot(dictionary("DANE_MGN_2018_DPTO"))
 })

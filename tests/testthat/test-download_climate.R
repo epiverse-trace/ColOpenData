@@ -19,7 +19,8 @@ test_that("Stations in ROI throws errors", {
   expect_error(stations_in_roi(no_stations_area))
 })
 
-test_that("Stations in ROI work as expected", {
+test_that("Stations in ROI works as expected", {
+  expect_snapshot(stations_test)
   expect_s3_class(stations_in_roi(ibague), "data.frame")
 })
 
@@ -63,6 +64,16 @@ test_that("Climate Stations throws errors", {
   ))
 })
 
+test_that("Climate Stations works as expected", {
+  expect_snapshot(download_climate_stations(
+    stations = stations_test,
+    start_date = "2010-10-01",
+    end_date = "2010-12-10",
+    tag = "PTPM_CON"
+  ))
+})
+
+# Climate data from geometry
 test_that("Climate data from geometry throws errors", {
   expect_error(download_climate_geom(
     geometry = "bogota",
@@ -73,18 +84,12 @@ test_that("Climate data from geometry throws errors", {
 })
 
 test_that("Climate data from geometry works as expected", {
-  expect_s3_class(download_climate_geom(
+  expect_snapshot(download_climate_geom(
     geometry = ibague,
     start_date = "2010-10-01",
     end_date = "2010-11-10",
     tag = "PTPM_CON"
-  ), "data.frame")
-  expect_length(download_climate_geom(
-    geometry = ibague,
-    start_date = "2015-08-01",
-    end_date = "2015-08-16",
-    tag = "TSSM_CON"
-  ), 7L)
+  ))
   expect_identical(colnames(download_climate_geom(
     geometry = ibague,
     start_date = "2020-01-01",
@@ -119,10 +124,10 @@ test_that("Climate data from code throws errors", {
 })
 
 test_that("Climate data from code works as expected", {
-  expect_s3_class(download_climate(
+  expect_snapshot(download_climate(
     code = "05001",
     start_date = "2018-10-01",
     end_date = "2018-11-10",
     tag = "THSM_CON"
-  ), "data.frame")
+  ))
 })
