@@ -1,12 +1,12 @@
 pandoc: 3.1.11
-pkgdown: 2.0.7
+pkgdown: 2.0.8
 pkgdown_sha: ~
 articles:
   climate_data: climate_data.html
   demographic_data: demographic_data.html
   documentation_and_dictionaries: documentation_and_dictionaries.html
   geospatial_data: geospatial_data.html
-last_built: 2024-03-22T14:43Z
+last_built: 2024-04-11T22:21Z
 urls:
   reference: https://epiverse-trace.github.io/ColOpenData/reference
   article: https://epiverse-trace.github.io/ColOpenData/articles
