@@ -167,7 +167,7 @@ divipola_department_name <- function(department_code) {
   dpt_names <- NULL
   for (code in department_code) {
     dpt_name <- dpts$nombre_departamento[which(
-      dpts$codigo_departamento == department_code
+      dpts$codigo_departamento == code
     )]
     if (rlang::is_empty(dpt_name)) {
       stop(code, " cannot be found as a department code")
