@@ -17,6 +17,7 @@ character vector with the DIVIPOLA name of the municipalities
 Retrieve municipalities' DIVIPOLA official names from their DIVIPOLA codes
 }
 \examples{
-name_ibague <- divipola_municipality_name("73001")
+mpios <- c("73001", "11001", "05615")
+names <- divipola_municipality_name(mpios)
 
 }

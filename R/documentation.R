@@ -89,6 +89,14 @@ list_datasets <- function(module = "all") {
 #'
 #' @export
 look_up <- function(module = "all", keywords, logic = "or") {
+  checkmate::assert_character(module)
+  checkmate::assert_character(keywords)
+  checkmate::assert_character(logic)
+  checkmate::assert_choice(
+    module,
+    c("all", "demographic", "geospatial", "climate")
+  )
+
   listed <- list_datasets(module)
   if (logic == "or") {
     found <- listed[grep(paste(keywords, collapse = "|"),
@@ -103,6 +111,9 @@ look_up <- function(module = "all", keywords, logic = "or") {
     )) == length(keywords), ]
   } else {
     stop("Invalid logic parameter. Please provide 'or' or 'and'.")
+  }
+  if (nrow(found) == 0) {
+    stop("Cannot find datasets with the consulted keywords")
   }
   return(found)
 }

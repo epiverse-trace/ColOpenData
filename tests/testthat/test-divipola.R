@@ -57,10 +57,10 @@ test_that("Divipola municipality code works as expected", {
   )
 })
 
-
 test_that("Divipola department name throws errors", {
   expect_error(divipola_department_name(c(73, 05)))
-  expect_error(divipola_department_name(c(75, 14)))
+  expect_error(divipola_department_name(c(73, "14")))
+  expect_error(divipola_department_name("04"))
 })
 
 test_that("Divipola department name works as expected", {
@@ -69,9 +69,10 @@ test_that("Divipola department name works as expected", {
 
 test_that("Divipola municipality name throws errors", {
   expect_error(divipola_municipality_name(c(05001, 73001)))
-  expect_error(divipola_municipality_name(05678, 14))
+  expect_error(divipola_municipality_name(05678, "14"))
+  expect_error(divipola_department_name("04678"))
 })
 
-test_that("Divipola department name works as expected", {
+test_that("Divipola municipality name works as expected", {
   expect_identical(divipola_municipality_name("05051"), "ARBOLETES")
 })

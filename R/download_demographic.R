@@ -14,6 +14,11 @@
 download_demographic <- function(dataset) {
   checkmate::assert_character(dataset)
   dataset_path <- retrieve_path(dataset)
+  stopifnot(
+    "`dataset` name format is not correct" =
+      (startsWith(dataset, "DANE_CNPV") |
+        startsWith(dataset, "DANE_PP"))
+  )
   tryCatch(
     {
       demographic_data <- retrieve_table(dataset_path)
