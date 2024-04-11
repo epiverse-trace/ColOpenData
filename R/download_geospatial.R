@@ -26,7 +26,7 @@ download_geospatial <- function(dataset, include_geom = TRUE,
   stopifnot(
     "At least one of the groups (`geospatial` and/or `demographic`)
             must be TRUE" = any(include_geom, include_cnpv),
-    "`dataset` name format is not correct" = grepl("^DANE_MGN", dataset)
+    "`dataset` name format is not correct" = startsWith(dataset, "DANE_MGN")
   )
 
   dataset_path <- retrieve_path(dataset)
