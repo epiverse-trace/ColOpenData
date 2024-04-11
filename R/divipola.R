@@ -23,7 +23,8 @@ divipola_table <- function() {
 #' @param department_name character vector with the names of the departments
 #'
 #' @examples
-#' code_tolima <- divipola_department_code("TOLIMA")
+#' dptos <- c("TOLIMA", "HUILA", "AMAZONAS")
+#' codes <- divipola_department_code(dptos)
 #'
 #' @return character vector with the DIVIPOLA codes of the departments
 #'
@@ -84,7 +85,9 @@ divipola_department_code <- function(department_name) {
 #' municipalities
 #'
 #' @examples
-#' code_ibague <- divipola_municipality_code("HUILA", "PITALITO")
+#' dptos <- c("HUILA", "ANTIOQUIA")
+#' mpios <- c("PITALITO", "TURBO")
+#' codes <- divipola_municipality_code(dptos, mpios)
 #'
 #' @return character vector with the DIVIPOLA codes of the municipalities
 #'
@@ -147,13 +150,14 @@ divipola_municipality_code <- function(department_name, municipality_name) {
 #' departments
 #'
 #' @examples
-#' name_tolima <- divipola_department_name("73")
+#' dptos <- c("73", "05", "11")
+#' names <- divipola_department_name(dptos)
 #'
 #' @return character vector with the DIVIPOLA name of the departments
 #'
 #' @export
 divipola_department_name <- function(department_code) {
-  checkmate::assert_character(department_code)
+  checkmate::assert_character(department_code, n.chars = 2)
 
   divipola <- divipola_table()
   dpts <- divipola[
@@ -183,13 +187,14 @@ divipola_department_name <- function(department_code) {
 #' municipalities
 #'
 #' @examples
-#' name_ibague <- divipola_municipality_name("73001")
+#' mpios <- c("73001", "11001", "05615")
+#' names <- divipola_municipality_name(mpios)
 #'
 #' @return character vector with the DIVIPOLA name of the municipalities
 #'
 #' @export
 divipola_municipality_name <- function(municipality_code) {
-  checkmate::assert_character(municipality_code)
+  checkmate::assert_character(municipality_code, n.chars = 5)
 
   mps <- divipola_table()
   mp_names <- NULL
