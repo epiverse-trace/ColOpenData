@@ -81,7 +81,7 @@
     Code
       download_climate_stations(stations = stations_test, start_date = "2010-10-01",
         end_date = "2010-12-10", tag = "PTPM_CON")
-    Message <simpleMessage>
+    Message
       Original data is provided by the Institute of Hydrology, Meteorology
       and Environmental Studies(IDEAM).
       Reformatted by the package authors.
@@ -1621,7 +1621,7 @@
     Code
       download_climate_geom(geometry = ibague, start_date = "2010-10-01", end_date = "2010-11-10",
         tag = "PTPM_CON")
-    Message <simpleMessage>
+    Message
       Original data is provided by the Institute of Hydrology, Meteorology
       and Environmental Studies(IDEAM).
       Reformatted by the package authors.
@@ -2484,7 +2484,7 @@
     Code
       download_climate(code = "05001", start_date = "2018-10-01", end_date = "2018-11-10",
         tag = "THSM_CON")
-    Message <simpleMessage>
+    Message
       Original data is provided by the National Administrative Department of
       Statistics (DANE).
       Reformatted by the package authors.

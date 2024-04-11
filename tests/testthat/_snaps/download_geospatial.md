@@ -3,7 +3,7 @@
     Code
       download_geospatial(dataset = "DANE_MGN_2018_DPTO", include_geom = TRUE,
         include_cnpv = FALSE)
-    Message <simpleMessage>
+    Message
       Original data is provided by the National Administrative Department of
       Statistics (DANE).
       Reformatted by the package authors.
@@ -44,7 +44,7 @@
     Code
       download_geospatial(dataset = "DANE_MGN_2018_DPTO", include_geom = FALSE,
         include_cnpv = TRUE)
-    Message <simpleMessage>
+    Message
       Original data is provided by the National Administrative Department of
       Statistics (DANE).
       Reformatted by the package authors.

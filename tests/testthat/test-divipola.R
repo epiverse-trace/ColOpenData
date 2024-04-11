@@ -59,7 +59,7 @@ test_that("Divipola municipality code works as expected", {
 
 test_that("Divipola department name throws errors", {
   expect_error(divipola_department_name(c(73, 05)))
-  expect_error(divipola_department_name(c(75, "14")))
+  expect_error(divipola_department_name(c(73, "14")))
   expect_error(divipola_department_name("04"))
 })
 
