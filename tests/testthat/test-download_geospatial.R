@@ -1,7 +1,7 @@
 test_that("Download geospatial errors are thrown", {
   expect_error(download_geospatial())
   expect_error(download_geospatial("MGNCNPV06"))
-  expect_error(download_geospatial("DANE_MGN_2019_DPTO"))
+  expect_error(download_geospatial("DANE_MGN_2019_MPIO"))
   expect_error(download_geospatial(
     dataset = "DANE_MGN_2018_DPTO",
     include_geom = FALSE,
