@@ -38,16 +38,14 @@ divipola_department_code <- function(department_name) {
     c("codigo_departamento", "nombre_departamento")
   ]
   fixed_tokens <- iconv(
-    gsub(" ", "", dpts$nombre_departamento,
-      fixed = TRUE
-    ),
+    dpts$nombre_departamento,
     from = "utf-8",
     to = "ASCII//TRANSLIT"
   )
   dpt_codes <- NULL
   for (dpt in department_name) {
-    input_token <- iconv(toupper(gsub(" ", "", dpt, fixed = TRUE)),
-      from = "utf-8",
+    input_token <- iconv(toupper(dpt),
+      from = "UTF-8",
       to = "ASCII//TRANSLIT"
     )
     distances <- as.data.frame(stringdist::afind(
@@ -55,9 +53,6 @@ divipola_department_code <- function(department_name) {
       pattern = input_token,
       method = "jaccard"
     ))
-    if (min(distances$distance) > 0.2) {
-      stop(dpt, " cannot be found as a department name")
-    }
     min_distance_i <- which(distances$distance == min(distances$distance))
     if (length(min_distance_i) == 1) {
       dpt_code <- dpts$codigo_departamento[min_distance_i]
@@ -66,7 +61,12 @@ divipola_department_code <- function(department_name) {
       min_location_i <- min_distance_i[which.min(min_location)]
       dpt_code <- dpts$codigo_departamento[min_location_i]
     }
-    dpt_codes <- c(dpt_codes, dpt_code)
+    if (min(distances$distance) > 0.3) {
+      warning(dpt, " cannot be found as a department name")
+      dpt_codes <- c(dpt_codes, NA)
+    } else {
+      dpt_codes <- c(dpt_codes, dpt_code)
+    }
   }
   return(dpt_codes)
 }
@@ -99,24 +99,25 @@ divipola_municipality_code <- function(department_name, municipality_name) {
             length" = length(department_name) == length(municipality_name))
 
   divipola <- divipola_table()
-  dpts <- divipola_department_code(department_name)
+  dpts <- suppressWarnings(divipola_department_code(department_name))
   mp_codes <- NULL
   for (i in seq_along(municipality_name)) {
     input_token <- iconv(
-      toupper(gsub(" ", "", municipality_name[i],
-        fixed = TRUE
-      )),
+      toupper(municipality_name[i]),
       from = "utf-8",
       to = "ASCII//TRANSLIT"
     )
     dpt_code <- dpts[i]
+    if (is.na(dpt_code)) {
+      warning(department_name[i], " cannot be found as a department name")
+      mp_codes <- c(mp_codes, NA)
+      next
+    }
     filtered_mps <- divipola[which(
       divipola$codigo_departamento == dpt_code
     ), ]
     fixed_tokens <- iconv(
-      gsub(" ", "", filtered_mps$nombre_municipio,
-        fixed = TRUE
-      ),
+      filtered_mps$nombre_municipio,
       from = "utf-8",
       to = "ASCII//TRANSLIT"
     )
@@ -125,9 +126,6 @@ divipola_municipality_code <- function(department_name, municipality_name) {
       pattern = input_token,
       method = "jaccard"
     ))
-    if (min(distances$distance) > 0.2) {
-      stop(municipality_name[i], " cannot be found as a municipality name")
-    }
     min_distance_i <- which(distances$distance == min(distances$distance))
     if (length(min_distance_i) == 1) {
       mp_code <- filtered_mps$codigo_municipio[min_distance_i]
@@ -136,7 +134,12 @@ divipola_municipality_code <- function(department_name, municipality_name) {
       min_location_i <- min_distance_i[which.min(min_location)]
       mp_code <- filtered_mps$codigo_municipio[min_location_i]
     }
-    mp_codes <- c(mp_codes, mp_code)
+    if (min(distances$distance) > 0.3) {
+      warning(municipality_name[i], " cannot be found as a municipality name")
+      mp_codes <- c(mp_codes, NA)
+    } else {
+      mp_codes <- c(mp_codes, mp_code)
+    }
   }
   return(mp_codes)
 }
@@ -170,7 +173,8 @@ divipola_department_name <- function(department_code) {
       dpts$codigo_departamento == code
     )]
     if (rlang::is_empty(dpt_name)) {
-      stop(code, " cannot be found as a department code")
+      warning(code, " cannot be found as a department code")
+      dpt_names <- c(dpt_names, NA)
     } else {
       dpt_names <- c(dpt_names, dpt_name)
     }
@@ -200,10 +204,11 @@ divipola_municipality_name <- function(municipality_code) {
   mp_names <- NULL
   for (code in municipality_code) {
     mp_name <- mps$nombre_municipio[which(
-      mps$codigo_municipio == municipality_code
+      mps$codigo_municipio == code
     )]
     if (rlang::is_empty(mp_name)) {
-      stop(code, " cannot be found as a municipality code")
+      warning(code, " cannot be found as a municipality code")
+      mp_names <- c(mp_names, NA)
     } else {
       mp_names <- c(mp_names, mp_name)
     }

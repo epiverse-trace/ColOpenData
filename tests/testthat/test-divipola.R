@@ -1,6 +1,6 @@
 test_that("Divipola department code throws errors", {
   expect_error(divipola_department_code(5678))
-  expect_error(divipola_department_code("CAARTAGENA"))
+  expect_warning(divipola_department_code("CAARTAGENA"))
 })
 
 test_that("Divipola department code works as expected", {
@@ -31,9 +31,13 @@ test_that("Divipola municipality code throws errors", {
     "BOLIVAR",
     c("SOPLAVIENTO", "CARTAGENA")
   ))
-  expect_error(divipola_municipality_code(
+  expect_warning(divipola_municipality_code(
     c("BOLIVAR", "CARTAGENA"),
     c("SOPLAVIENTO", "CARTAGENA")
+  ))
+  expect_warning(divipola_municipality_code(
+    c("BOLIVAR", "BOLIVAR"),
+    c("SOPLAVIENTO", "SANTANDER")
   ))
 })
 
@@ -59,8 +63,8 @@ test_that("Divipola municipality code works as expected", {
 
 test_that("Divipola department name throws errors", {
   expect_error(divipola_department_name(c(73, 05)))
-  expect_error(divipola_department_name(c(73, "14")))
-  expect_error(divipola_department_name("04"))
+  expect_warning(divipola_department_name(c(73, "14")))
+  expect_warning(divipola_department_name("04"))
 })
 
 test_that("Divipola department name works as expected", {
@@ -70,6 +74,7 @@ test_that("Divipola department name works as expected", {
 test_that("Divipola municipality name throws errors", {
   expect_error(divipola_municipality_name(c(05001, 73001)))
   expect_error(divipola_municipality_name(05678, "14"))
+  expect_warning(divipola_municipality_name(c("05001", "73048")))
   expect_error(divipola_department_name("04678"))
 })
 
