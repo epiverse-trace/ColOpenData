@@ -19,14 +19,7 @@ download_demographic <- function(dataset) {
       (startsWith(dataset, "DANE_CNPV") |
         startsWith(dataset, "DANE_PP"))
   )
-  tryCatch(
-    {
-      demographic_data <- retrieve_table(dataset_path)
-    },
-    error = function(e) {
-      stop("`dataset` not found")
-    }
-  )
+  demographic_data <- retrieve_table(dataset_path)
   message(strwrap(
     prefix = "\n", initial = "",
     c(
