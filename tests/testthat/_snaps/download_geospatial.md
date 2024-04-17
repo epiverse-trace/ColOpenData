@@ -39,7 +39,7 @@
       9  MULTIPOLYGON (((-70.11033 2...
       10 MULTIPOLYGON (((-71.31266 2...
 
----
+# Download geospatial works as expected different parameters
 
     Code
       download_geospatial(dataset = "DANE_MGN_2018_DPTO", include_geom = FALSE,

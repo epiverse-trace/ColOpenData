@@ -291,3 +291,18 @@
       85                                                                                   Ninguno
       86                                                                           Sin información
 
+# Lookup works as expected
+
+    Code
+      look_up(keywords = c("school", "age"), logic = "and")
+    Output
+                          name       group source year        level
+      49 DANE_CNPVPD_2018_18PD demographic   DANE 2018   department
+      50 DANE_CNPVPD_2018_18PM demographic   DANE 2018 municipality
+                    category
+      49 persons_demographic
+      50 persons_demographic
+                                                                                                                                                  description
+      49 Census population aged 5 years and over, registered in particular households, by school attendance, according to department, area, age group and sex
+      50         Census population aged 5 years and over, registered in particular households, by school attendance, by municipality, area, age group and sex
+
