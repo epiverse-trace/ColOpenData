@@ -145,7 +145,7 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
     "`end_date` must greater than `start_date`" =
       start_date <= end_date,
     "Dates are not in the expected format ('YYYY-MM-DD')" =
-      all(!is.na(c(start_date, end_date)))
+      !anyNA(c(start_date, end_date))
   )
 
   # Check that consulted tag exists
