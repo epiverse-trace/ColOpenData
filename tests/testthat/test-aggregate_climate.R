@@ -60,6 +60,7 @@ test_that("Aggregation for dry-bulb temperature works as expected", {
 test_that("Aggregation for sunshine duration works as expected", {
   expect_s3_class(aggregate_climate(base_bshg, "day"), "data.frame")
   expect_identical(nrow(aggregate_climate(base_bshg, "month")), 15L)
+  expect_snapshot(aggregate_climate(base_bshg, "year"))
 })
 
 test_that("Aggregation for minimum temperature works as expected", {
@@ -81,4 +82,5 @@ test_that("Aggregation for maximum temperature works as expected", {
 
 test_that("Aggregation for precipitation works as expected", {
   expect_s3_class(aggregate_climate(base_ptpm, "month"), "data.frame")
+  expect_snapshot(aggregate_climate(base_ptpm, "year"))
 })

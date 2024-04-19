@@ -57,10 +57,22 @@ test_that("Climate Stations throws errors", {
     tag = "NB_CON"
   ))
   expect_error(download_climate_stations(
-    stations = stations_test,
+    stations = "bogota",
     start_date = "2010-10-01",
     end_date = "2010-12-10",
-    tag = c("TSSM_CON", "PTPM_CON")
+    tag = "PTPM_CON"
+  ))
+  expect_error(download_climate_stations(
+    stations = stations_test,
+    start_date = "10-10",
+    end_date = "2010-12-10",
+    tag = "TSSM_CON"
+  ))
+  expect_error(download_climate_stations(
+    stations = stations_test,
+    start_date = "1900-01-10",
+    end_date = "1900-01-13",
+    tag = "TSSM_CON"
   ))
 })
 

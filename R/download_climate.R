@@ -133,24 +133,19 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
   # Check dates formats and that the end date is greater than the start date
   checkmate::assert_character(start_date)
   checkmate::assert_character(end_date)
-  tryCatch(
-    {
-      start_date <- as.POSIXct(start_date,
-        format = "%Y-%m-%d",
-        tz = "UTC"
-      )
-      end_date <- as.POSIXct(end_date,
-        format = "%Y-%m-%d",
-        tz = "UTC"
-      )
-    },
-    error = function(e) {
-      stop("Dates are not in the right format")
-    }
+  start_date <- as.POSIXct(start_date,
+    format = "%Y-%m-%d",
+    tz = "UTC"
+  )
+  end_date <- as.POSIXct(end_date,
+    format = "%Y-%m-%d",
+    tz = "UTC"
   )
   stopifnot(
     "`end_date` must greater than `start_date`" =
-      start_date <= end_date
+      start_date <= end_date,
+    "Dates are not in the expected format ('YYYY-MM-DD')" =
+      !anyNA(c(start_date, end_date))
   )
 
   # Check that consulted tag exists

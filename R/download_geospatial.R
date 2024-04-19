@@ -30,14 +30,8 @@ download_geospatial <- function(dataset, include_geom = TRUE,
   )
 
   dataset_path <- retrieve_path(dataset)
-  tryCatch(
-    {
-      geospatial_data <- sf::st_read(dataset_path, quiet = TRUE)
-    },
-    error = function(e) {
-      stop("`dataset` not found")
-    }
-  )
+  geospatial_data <- sf::st_read(dataset_path, quiet = TRUE)
+
   geospatial_vars <- c("AREA", "LATITUD", "LONGITUD") # geom included by default
   shape_vars <- c("Shape_Leng", "Shape_Area")
   if (include_geom && !include_cnpv) {

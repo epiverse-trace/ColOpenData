@@ -15,6 +15,9 @@ test_that("Download geospatial works as expected", {
     include_geom = TRUE,
     include_cnpv = FALSE
   ))
+})
+
+test_that("Download geospatial works as expected with different parameters", {
   expect_snapshot(download_geospatial(
     dataset = "DANE_MGN_2018_DPTO",
     include_geom = FALSE,

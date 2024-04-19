@@ -76,9 +76,6 @@ retrieve_climate_path <- function() {
   base_path <- retrieve_value_key("base_path")
   group_path <- retrieve_value_key("climate")
   directory_path <- file.path(base_path, group_path)
-  if (rlang::is_empty(directory_path)) {
-    stop("`directory` not found")
-  }
   return(directory_path)
 }
 
@@ -98,9 +95,6 @@ retrieve_dict_path <- function(dataset) {
   group_path <- retrieve_value_key("dictionaries")
   dataset_path <- sprintf("%s.csv", dataset)
   file_path <- file.path(base_path, group_path, dataset_path)
-  if (rlang::is_empty(file_path)) {
-    stop("dictionary is not available")
-  }
   return(file_path)
 }
 
