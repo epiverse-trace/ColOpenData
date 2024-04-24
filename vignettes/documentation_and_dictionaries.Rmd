@@ -48,9 +48,9 @@ All datasets are retrieved from the National Administrative Department of Statis
     -   Personas Social: **CNPVPS**
     -   Personas Demográfico: **CNPVPD**
     -   Proyecciones Poblacionales **PP**
--   Year: 
-    -    Census data: **2018**
-    -    Population projections: Various (see `list_datasets` below)
+-   Year:
+    -   Census data: **2018**
+    -   Population projections: Various (see `list_datasets` below)
 -   Details: These are related to each individual dataset. For further details please check the function `list_datasets` below.
 
 #### Geospatial
@@ -91,13 +91,15 @@ IDEAM_tags <- data.frame(
 )
 knitr::kable(IDEAM_tags)
 ```
+
 ::: {style="text-align: justify;"}
 These tags are meant to be used for download using `download_climate`, `download_climate_geom` and `download_climate_stations`. See [How to download climate data using ColOpenData](https://epiverse-trace.github.io/ColOpenData/articles/climate_data.html) for further details.
 
-## List data
+## List Data
 
 To check available datasets you can use the `list_datasets` function. This function can also be filtered with the `module` parameter to indicate a specific module. Default is `"all"`, but can be filtered by `"demographic"`, `"geospatial"` and `"climate"`.
 :::
+
 ```{r setup}
 library(ColOpenData)
 ```
@@ -114,11 +116,42 @@ geo_datasets <- list_datasets(module = "demographic")
 head(geo_datasets)
 ```
 
+::: {style="text-align: justify;"}
 We highly recommend using `View()` instead of `head()` in the local environment for a cleaner and easier visualization of the information.
 
-::: {style="text-align: justify;"}
 Using this function, we can retrieve all names, source, aggregation level and information for individual datasets.
 
+## List Data Using Keywords
+
+Sometimes, going through each dataset to find specific information can be tiring. If you want to look for an specific word or set of words within datasets quickly, you can use the `look_up`function, which takes by parameter:
+
+1.  The module you wish to search within (default is `"all"`).
+
+2.  The word (or words) you are interested in (input as a character or vector of characters).
+
+3.  The search condition: `"and"` to find datasets containing all specified words, or `"or"` to find datasets containing any of the specified words (default is `"or"`). If you are searching for a single word, you can use either `"and"`or `"or"` for this parameter.
+:::
+
+```{r list datasets with information by age}
+# List all datasets, no matter the module, that present the word "age"
+age_datasets<- look_up(keywords="age")
+head(age_datasets)
+```
+
+```{r list datasets with urban information in geospatial module}
+# List all datasets in geospatial module that present the word "department"
+urban_datasets<- look_up(module ="geospatial", keywords="urban")
+head(urban_datasets)
+```
+
+```{r list datasets with information by area and sex in demographic module}
+# List all datasets in demographic module that present the word "department"
+area_sex_datasets<- look_up(module="demographic", keywords=c("area", "sex"),
+                            logic = "and")
+head(area_sex_datasets)
+```
+
+::: {style="text-align: justify;"}
 ## Dictionaries
 
 Dictionaries are provided to understand some tags and column names inside each module. These dictionaries are provided in Spanish, since they are retrieved directly from the sources.
@@ -131,15 +164,18 @@ Dictionaries are not provided for this module since they are not needed. Demogra
 
 Datasets inside the geospatial module contain a summarized version of the census and a dictionary is needed to understand all aggregated variables. These dictionaries contain the necessary metadata to use the available information. To retrieve them, we can use the `dictionary`function, using the dataset name as a parameter:
 :::
+
 ```{r dictionary for MGNCNPV at municipalities}
 dict_mpio <- dictionary("DANE_MGN_2018_MPIO")
 head(dict_mpio)
 ```
 
 #### Climate
+
 ::: {style="text-align: justify;"}
 Climate data is not stored in multiple datasets but as an unique dataset with numerous tags. These tags can also be consulted through the `dictionary` function using the name of the only climate dataset.
 :::
+
 ```{r dicionary for climate data}
 dict_climate <- dictionary("IDEAM_CLIMATE_2023_MAY")
 head(dict_climate)
