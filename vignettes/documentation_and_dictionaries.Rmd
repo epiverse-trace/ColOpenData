@@ -134,20 +134,22 @@ Sometimes, going through each dataset to find specific information can be tiring
 
 ```{r list datasets with information by age}
 # List all datasets, no matter the module, that present the word "age"
-age_datasets<- look_up(keywords="age")
+age_datasets <- look_up(keywords = "age")
 head(age_datasets)
 ```
 
 ```{r list datasets with urban information in geospatial module}
 # List all datasets in geospatial module that present the word "department"
-urban_datasets<- look_up(module ="geospatial", keywords="urban")
+urban_datasets <- look_up(module = "geospatial", keywords = "urban")
 head(urban_datasets)
 ```
 
 ```{r list datasets with information by area and sex in demographic module}
 # List all datasets in demographic module that present the word "department"
-area_sex_datasets<- look_up(module="demographic", keywords=c("area", "sex"),
-                            logic = "and")
+area_sex_datasets <- look_up(
+  module = "demographic", keywords = c("area", "sex"),
+  logic = "and"
+)
 head(area_sex_datasets)
 ```
 
