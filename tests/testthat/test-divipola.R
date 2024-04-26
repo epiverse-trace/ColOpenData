@@ -1,6 +1,6 @@
 test_that("Divipola department code throws errors", {
   expect_error(divipola_department_code(5678))
-  expect_warning(divipola_department_code("CAARTAGENA"))
+  expect_warning(divipola_department_code("CARTAGO"))
 })
 
 test_that("Divipola department code works as expected", {
