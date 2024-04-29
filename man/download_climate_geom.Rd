@@ -7,8 +7,8 @@
 download_climate_geom(geometry, start_date, end_date, tag)
 }
 \arguments{
-\item{geometry}{\code{sf} object containing the geometry for a given ROI
-This geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}}
+\item{geometry}{\code{sf} object containing the geometry for a given ROI.
+The geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}}
 
 \item{start_date}{character with the first date to consult in the format
 \code{"YYYY-MM-DD"}}
