@@ -51,7 +51,8 @@ divipola_department_code <- function(department_name) {
     distances <- as.data.frame(stringdist::afind(
       x = fixed_tokens,
       pattern = input_token,
-      method = "jaccard"
+      method = "cosine",
+      window = max(8, nchar(input_token), na.rm = TRUE)
     ))
     min_distance_i <- which(distances$distance == min(distances$distance))
     if (length(min_distance_i) == 1) {
@@ -61,7 +62,7 @@ divipola_department_code <- function(department_name) {
       min_location_i <- min_distance_i[which.min(min_location)]
       dpt_code <- dpts$codigo_departamento[min_location_i]
     }
-    if (min(distances$distance) > 0.3) {
+    if (min(distances$distance) > 0.11) {
       warning(dpt, " cannot be found as a department name")
       dpt_codes <- c(dpt_codes, NA)
     } else {
@@ -124,7 +125,8 @@ divipola_municipality_code <- function(department_name, municipality_name) {
     distances <- as.data.frame(stringdist::afind(
       x = fixed_tokens,
       pattern = input_token,
-      method = "jaccard"
+      method = "cosine",
+      window = max(8, nchar(input_token), na.rm = TRUE)
     ))
     min_distance_i <- which(distances$distance == min(distances$distance))
     if (length(min_distance_i) == 1) {
@@ -134,7 +136,7 @@ divipola_municipality_code <- function(department_name, municipality_name) {
       min_location_i <- min_distance_i[which.min(min_location)]
       mp_code <- filtered_mps$codigo_municipio[min_location_i]
     }
-    if (min(distances$distance) > 0.3) {
+    if (min(distances$distance) > 0.11) {
       warning(municipality_name[i], " cannot be found as a municipality name")
       mp_codes <- c(mp_codes, NA)
     } else {
