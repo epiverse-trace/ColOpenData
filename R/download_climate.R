@@ -36,7 +36,6 @@ download_climate <- function(code, start_date, end_date, tag) {
             digits for departments")
   }
   if (nrow(area) == 0) {
-    # If code cannot be found in DIVIPOLA
     stop("`code` cannot be found")
   }
   climate <- download_climate_geom(
@@ -54,8 +53,8 @@ download_climate <- function(code, start_date, end_date, tag) {
 #' Download climate data from stations contained in a geometry. This data is
 #' retrieved from local meteorological stations provided by IDEAM
 #'
-#' @param geometry \code{sf} object containing the geometry for a given ROI
-#' This geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}
+#' @param geometry \code{sf} object containing the geometry for a given ROI.
+#' The geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}
 #' @param start_date character with the first date to consult in the format
 #' \code{"YYYY-MM-DD"}
 #' @param end_date character with the last date to consult in the format
@@ -150,6 +149,7 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
 
   # Check that consulted tag exists
   checkmate::assert_character(tag, len = 1L)
+  tag <- toupper(tag)
   ideam_tags <- c(
     "TSSM_CON", "THSM_CON", "TMN_CON", "TMX_CON",
     "TSTG_CON", "HR_CAL", "HRHG_CON", "TV_CAL",
@@ -213,8 +213,8 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
 #' Download and filter climate stations contained inside a region of interest
 #' (ROI)
 #'
-#' @param geometry \code{sf} object containing the geometry for a given ROI
-#' This geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}
+#' @param geometry \code{sf} object containing the geometry for a given ROI.
+#' The geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}
 #'
 #' @examples
 #' lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)
