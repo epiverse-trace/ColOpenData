@@ -77,8 +77,10 @@ First we will subset the data so it presents the information regarding the WSS b
 
 ```{r wss}
 wss <- public_services_d %>%
-  filter(area == "total_departamental",
-         servicio_publico == "acueducto") %>%
+  filter(
+    area == "total_departamental",
+    servicio_publico == "acueducto"
+  ) %>%
   select(departamento, disponible, total)
 ```
 

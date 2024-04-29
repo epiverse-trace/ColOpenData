@@ -129,9 +129,10 @@ To filter the stations that recorded information during the desired period, we c
 
 ```{r stations filtered}
 cw_stations <- stations %>%
-  filter(as.Date(fecha_suspension) > as.Date("2013-01-01") | estado == "Activa",
-         categoria %in% c("Climática Principal", "Climática Ordinaria")
-    )
+  filter(
+    as.Date(fecha_suspension) > as.Date("2013-01-01") | estado == "Activa",
+    categoria %in% c("Climática Principal", "Climática Ordinaria")
+  )
 
 head(cw_stations)
 ```
