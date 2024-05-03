@@ -19,7 +19,7 @@
 #'
 #' @export
 download_geospatial <- function(dataset, include_geom = TRUE,
-                                include_cnpv = TRUE) {
+                                include_cnpv = TRUE, cache = TRUE) {
   checkmate::assert_character(dataset)
   checkmate::assert_logical(include_geom)
   checkmate::assert_logical(include_cnpv)
@@ -28,10 +28,19 @@ download_geospatial <- function(dataset, include_geom = TRUE,
             must be TRUE" = any(include_geom, include_cnpv),
     "`dataset` name format is not correct" = startsWith(dataset, "DANE_MGN")
   )
-
-  dataset_path <- retrieve_path(dataset)
-  geospatial_data <- sf::st_read(dataset_path, quiet = TRUE)
-
+  
+  local_dataset_path <- retrieve_local_path(dataset)
+  if(cache && file.exists(local_dataset_path)){
+      geospatial_data <- sf::st_read(local_dataset_path, quiet = TRUE)
+  } else{
+    dataset_path <- retrieve_path(dataset)
+    geospatial_data <- sf::st_read(dataset_path, quiet = TRUE)
+    if(cache){
+      
+      sf::st_write(geospatial_data, local_dataset_path, quiet = TRUE)
+    }
+  }
+  
   geospatial_vars <- c("AREA", "LATITUD", "LONGITUD") # geom included by default
   shape_vars <- c("Shape_Leng", "Shape_Area")
   if (include_geom && !include_cnpv) {

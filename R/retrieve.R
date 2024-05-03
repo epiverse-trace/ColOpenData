@@ -40,11 +40,10 @@ retrieve_path <- function(dataset) {
     geospatial = ".gpkg",
     demographic = ".csv"
   )
-  base_path <- retrieve_value_key("base_path")
   all_datasets <- list_datasets()
   dataset_info <- all_datasets[which(all_datasets$name == dataset), ]
-  # If dataset exists, build path
   if (nrow(dataset_info) == 1) {
+    base_path <- retrieve_value_key("base_path")
     group_path <- retrieve_value_key(dataset_info$group)
     category_path <- retrieve_value_key(dataset_info$category)
     dataset_path <- paste0(dataset, ext[[dataset_info$group]])
@@ -52,6 +51,49 @@ retrieve_path <- function(dataset) {
       base_path, group_path,
       category_path, dataset_path
     )
+  } else {
+    file_path <- file.path(NULL)
+  }
+  if (rlang::is_empty(file_path)) {
+    stop("`dataset` not found")
+  }
+  return(file_path)
+}
+
+#' Retrieve local demographic and geospatial path of named dataset
+#'
+#' @param dataset character with the dataset name
+#'
+#' @description
+#' Demographic and Geospatial datasets are included in the general documentation
+#' file. Path is built from information in the general file and local storage
+#' folder
+#'
+#' @return character with path to retrieve the dataset from local storage
+#'
+#' @keywords internal
+retrieve_local_path <- function(dataset){
+  checkmate::assert_character(dataset)
+  
+  ext <- list(
+    geospatial = ".gpkg",
+    demographic = ".csv"
+  )
+  all_datasets <- list_datasets()
+  dataset_info <- all_datasets[which(all_datasets$name == dataset), ]
+  if (nrow(dataset_info) == 1) {
+    cache_dir <- tools::R_user_dir("ColOpenData", "data")
+    group_path <- retrieve_value_key(dataset_info$group)
+    category_path <- retrieve_value_key(dataset_info$category)
+    dataset_path <- paste0(dataset, ext[[dataset_info$group]])
+    local_directory <- file.path(
+      cache_dir, group_path,
+      category_path
+    )
+    if(!dir.exists(local_directory)){
+      dir.create(local_directory,recursive = TRUE)
+    }
+    file_path <- file.path(local_directory, dataset_path)
   } else {
     file_path <- file.path(NULL)
   }
@@ -119,7 +161,7 @@ retrieve_support_path <- function(dataset) {
   return(file_path)
 }
 
-#' Retrieve table (csv and data) file
+#' Retrieve table (csv and data) file from server
 #'
 #' @param dataset_path character path to the dataset on server
 #'
