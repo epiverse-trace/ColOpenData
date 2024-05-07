@@ -121,6 +121,16 @@ retrieve_climate_path <- function() {
   return(directory_path)
 }
 
+retrieve_local_climate_path <- function(){
+  cache_dir <- tools::R_user_dir("ColOpenData", "data")
+  group_path <- retrieve_value_key("climate")
+  directory_path <- file.path(cache_dir, group_path)
+  if(!dir.exists(directory_path)){
+    dir.create(directory_path,recursive = TRUE)
+  }
+  return(directory_path)
+}
+
 #' Retrieve dictionary path of named dataset
 #'
 #' @param dataset character with the dictionary name
@@ -137,6 +147,18 @@ retrieve_dict_path <- function(dataset) {
   group_path <- retrieve_value_key("dictionaries")
   dataset_path <- sprintf("%s.csv", dataset)
   file_path <- file.path(base_path, group_path, dataset_path)
+  return(file_path)
+}
+
+retrieve_local_dict_path <- function(dataset){
+  cache_dir <- tools::R_user_dir("ColOpenData", "data")
+  group_path <- retrieve_value_key("dictionaries")
+  directory_path <- file.path(cache_dir, group_path)
+  if(!dir.exists(directory_path)){
+    dir.create(directory_path,recursive = TRUE)
+  }
+  dataset_path <- sprintf("%s.csv", dataset)
+  file_path <- file.path(directory_path, dataset_path)
   return(file_path)
 }
 
@@ -158,6 +180,13 @@ retrieve_support_path <- function(dataset) {
   if (rlang::is_empty(file_path)) {
     stop("`dataset` not found")
   }
+  return(file_path)
+}
+
+retrieve_local_support_path <- function(dataset){
+  cache_dir <- tools::R_user_dir("ColOpenData", "data")
+  dataset_path <- retrieve_value_key(dataset)
+  file_path <- file.path(cache_dir, dataset_path)
   return(file_path)
 }
 
@@ -185,6 +214,19 @@ retrieve_table <- function(dataset_path, sep = ";") {
     )
   )
   downloaded_data <- as.data.frame(downloaded_data)
+  return(downloaded_data)
+}
+
+retrieve_local_table <- function(dataset_path, sep = ";"){
+  downloaded_data <- suppressWarnings(
+    readr::read_delim(dataset_path,
+                      delim = ";",
+                      escape_double = FALSE,
+                      trim_ws = TRUE,
+                      show_col_types = FALSE
+    )
+  )
+  demographic_data <- as.data.frame(downloaded_data)
   return(downloaded_data)
 }
 
@@ -225,4 +267,10 @@ retrieve_climate <- function(dataset_path, start_date, end_date) {
     downloaded_data <- station_data
   }
   return(downloaded_data)
+}
+
+download_file <- function(dataset_path, file_path){
+  request <- httr2::request(base_url = dataset_path)
+  response <- httr2::req_perform(request, path = file_path)
+  message("Dataset downloaded successfully")
 }

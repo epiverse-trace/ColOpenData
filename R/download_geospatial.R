@@ -30,15 +30,16 @@ download_geospatial <- function(dataset, include_geom = TRUE,
   )
   
   local_dataset_path <- retrieve_local_path(dataset)
+  dataset_path <- retrieve_path(dataset)
   if(cache && file.exists(local_dataset_path)){
-      geospatial_data <- sf::st_read(local_dataset_path, quiet = TRUE)
-  } else{
-    dataset_path <- retrieve_path(dataset)
+    geospatial_data <- sf::st_read(local_dataset_path, quiet = TRUE)
+  } 
+  else if(cache && !file.exists(local_dataset_path)){
+    download_file(dataset_path, local_dataset_path)
+    geospatial_data <- sf::st_read(local_dataset_path, quiet = TRUE)
+  } 
+  else{
     geospatial_data <- sf::st_read(dataset_path, quiet = TRUE)
-    if(cache){
-      
-      sf::st_write(geospatial_data, local_dataset_path, quiet = TRUE)
-    }
   }
   
   geospatial_vars <- c("AREA", "LATITUD", "LONGITUD") # geom included by default

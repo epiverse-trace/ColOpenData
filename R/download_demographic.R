@@ -25,25 +25,16 @@ download_demographic <- function(dataset, cache = TRUE) {
   )
   
   local_dataset_path <- retrieve_local_path(dataset)
+  dataset_path <- retrieve_path(dataset)
   if(cache && file.exists(local_dataset_path)){
-    loaded_data <- suppressWarnings(
-      readr::read_delim(local_dataset_path,
-                        delim = ";",
-                        escape_double = FALSE,
-                        trim_ws = TRUE,
-                        show_col_types = FALSE
-      )
-    )
-    demographic_data <- as.data.frame(loaded_data)
-    } else{
-    dataset_path <- retrieve_path(dataset)
+    demographic_data <- retrieve_local_table(local_dataset_path)
+  } 
+  else if(cache && !file.exists(local_dataset_path)){
+    download_file(dataset_path, local_dataset_path)
+    demographic_data <- retrieve_local_table(local_dataset_path)
+  } 
+  else{
     demographic_data <- retrieve_table(dataset_path)
-    if(cache){
-      write.csv2(demographic_data,
-                 local_dataset_path,
-                 row.names = FALSE,
-                 fileEncoding = "UTF-8")
-    }
   }
   message(strwrap(
     prefix = "\n", initial = "",

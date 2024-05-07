@@ -53,7 +53,7 @@ list_datasets <- function(module = "all") {
     "all", "demographic", "geospatial",
     "climate"
   ))
-
+  
   base_path <- retrieve_value_key("base_path")
   documentation_path <- retrieve_value_key("documentation")
   documentation <- file.path(base_path, documentation_path)
