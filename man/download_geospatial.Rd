@@ -9,7 +9,7 @@ download_geospatial(dataset, include_geom = TRUE, include_cnpv = TRUE)
 \arguments{
 \item{dataset}{character with the geospatial dataset name}
 
-\item{include_geom}{logical for including (or not) geometry.
+\item{include_geom}{logical for including (or not) the geometry.
 Default is \code{TRUE}}
 
 \item{include_cnpv}{logical for including (or not) CNPV demographic and
