@@ -3,11 +3,11 @@
     Code
       download_demographic("DANE_CNPVH_2018_1HD")
     Message
-      Original data is provided by the National Administrative Department of
-      Statistics (DANE).
-      Reformatted by the package authors.
-      Stored and redistributed by Universidad de Los Andes under the Epiverse
-      TRACE iniative.
+      Original data is retrieved from the National Administrative Department
+      of Statistics (Departamento Administrativo Nacional de Estadística -
+      DANE).
+      Reformatted by package authors.
+      Stored by Universidad de Los Andes under the Epiverse TRACE iniative.
     Output
           codigo_departamento
       1                    00
