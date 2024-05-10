@@ -13,21 +13,22 @@
 #' @export
 download_demographic <- function(dataset) {
   checkmate::assert_character(dataset)
-  dataset_path <- retrieve_path(dataset)
   stopifnot(
     "`dataset` name format is not correct" =
       (startsWith(dataset, "DANE_CNPV") |
         startsWith(dataset, "DANE_PP"))
   )
+
+  dataset_path <- retrieve_path(dataset)
   demographic_data <- retrieve_table(dataset_path)
   message(strwrap(
     prefix = "\n", initial = "",
     c(
-      "Original data is provided by the National Administrative Department of
-    Statistics (DANE).",
-      "Reformatted by the package authors.",
-      "Stored and redistributed by Universidad de Los Andes under the Epiverse
-    TRACE iniative."
+      "Original data is retrieved from the National Administrative Department of
+      Statistics (Departamento Administrativo Nacional de
+      Estad\u00edstica - DANE).",
+      "Reformatted by package authors.",
+      "Stored by Universidad de Los Andes under the Epiverse TRACE iniative."
     )
   ))
   return(demographic_data)

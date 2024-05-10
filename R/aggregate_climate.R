@@ -75,31 +75,30 @@ aggregate_climate <- function(climate_data, frequency) {
       warning_msg = NULL
     )
   )
-
-  evaluated <- aggregation_functions[[tag]]
+  selected_tag <- aggregation_functions[[tag]]
 
   if (frequency == "day") {
-    if (!is.null(evaluated$day)) {
-      aggregated_data <- aggregate_daily(climate_data, evaluated$day)
+    if (!is.null(selected_tag$day)) {
+      aggregated_data <- aggregate_daily(climate_data, selected_tag$day)
     } else {
       aggregated_data <- climate_data
-      warning(evaluated$warning_msg)
+      warning(selected_tag$warning_msg)
     }
   } else if (frequency == "month") {
-    if (!is.null(evaluated$day)) {
-      aggregated_data <- aggregate_daily(climate_data, evaluated$day) %>%
-        aggregate_monthly(evaluated$month)
+    if (!is.null(selected_tag$day)) {
+      aggregated_data <- aggregate_daily(climate_data, selected_tag$day) %>%
+        aggregate_monthly(selected_tag$month)
     } else {
-      aggregated_data <- aggregate_monthly(climate_data, evaluated$month)
+      aggregated_data <- aggregate_monthly(climate_data, selected_tag$month)
     }
   } else {
-    if (!is.null(evaluated$day)) {
-      aggregated_data <- aggregate_daily(climate_data, evaluated$day) %>%
-        aggregate_monthly(evaluated$month) %>%
-        aggregate_annual(evaluated$year)
+    if (!is.null(selected_tag$day)) {
+      aggregated_data <- aggregate_daily(climate_data, selected_tag$day) %>%
+        aggregate_monthly(selected_tag$month) %>%
+        aggregate_annual(selected_tag$year)
     } else {
-      aggregated_data <- aggregate_monthly(climate_data, evaluated$month) %>%
-        aggregate_annual(evaluated$year)
+      aggregated_data <- aggregate_monthly(climate_data, selected_tag$month) %>%
+        aggregate_annual(selected_tag$year)
     }
   }
 

@@ -7,7 +7,7 @@
 #' (CNPV) with demographic and socioeconomic information.
 #'
 #' @param dataset character with the geospatial dataset name
-#' @param include_geom logical for including (or not) geometry.
+#' @param include_geom logical for including (or not) the geometry.
 #' Default is \code{TRUE}
 #' @param include_cnpv logical for including (or not) CNPV demographic and
 #' socioeconomic information. Default is \code{TRUE}
@@ -46,11 +46,11 @@ download_geospatial <- function(dataset, include_geom = TRUE,
   message(strwrap(
     prefix = "\n", initial = "",
     c(
-      "Original data is provided by the National Administrative Department of
-    Statistics (DANE).",
-      "Reformatted by the package authors.",
-      "Stored and redistributed by Universidad de Los Andes under the Epiverse
-    TRACE iniative."
+      "Original data is retrieved from the National Administrative Department of
+      Statistics (Departamento Administrativo Nacional de
+      Estad\u00edstica - DANE).",
+      "Reformatted by package authors.",
+      "Stored by Universidad de Los Andes under the Epiverse TRACE iniative."
     )
   ))
   return(geospatial_data)
