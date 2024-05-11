@@ -74,5 +74,6 @@ merge_geo_dem <- function(spatial_level, dem_dataset, column) {
          Please provide 'department' or 'municipality'.")
   }
   names(merged_df) <- tolower(names(merged_df))
+  merged_df <- as.data.frame(merged_df)
   return(merged_df)
 }
