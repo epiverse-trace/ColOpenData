@@ -41,22 +41,22 @@ Geospatial and demographic data can be merged based on the spatial aggregation l
 Now, the `merge_geo_dem()` function takes three parameters: the SAL (`"department"` or `"municipality"`), the demographic dataset and the column of interest in the demographic dataset. To use the function correctly, it's important to review the demographic dataset we intend to work with. Therefore, we should first access the demographic documentation to verify the available datasets. If we already know which SAL we are interested in, we can filter by this.
 
 ```{r documentation, echo =TRUE}
-# Available demographic datasets 
+# Available demographic datasets
 datasets_dem <- list_datasets("demographic")
 
 # Available demographic datasets at the department level
-department_datasets <- datasets_dem[datasets_dem$level =="department",]
+department_datasets <- datasets_dem[datasets_dem$level == "department", ]
 head(department_datasets)
 
 # Available demographic datasets at the municipality level
-municipality_datasets <- datasets_dem[datasets_dem$level =="municipality",]
+municipality_datasets <- datasets_dem[datasets_dem$level == "municipality", ]
 head(municipality_datasets)
 ```
 
 After reviewing the available datasets, we can select the one we wish to work with and take a closer look. For instance, let's suppose we choose the dataset "DANE_CNPVPD_2018_15PD".
 
 ```{r data, echo =TRUE}
-# Download demographic dataset 
+# Download demographic dataset
 chosen_data <- download_demographic("DANE_CNPVPD_2018_15PD")
 head(chosen_data)
 ```
@@ -64,7 +64,7 @@ head(chosen_data)
 `chosen_data` presents information regarding children of less than 5 years of age, by where or with whom the child spends most of the time during the week. Looking at the data, we are gonna choose as column of interest the one named "donde_o_con_quien_permanece_el_menor".
 
 ```{r merge data, echo =TRUE}
-# Download demographic dataset 
+# Download demographic dataset
 column <- "donde_o_con_quien_permanece_el_menor"
 merged_data <- merge_geo_dem("department", "DANE_CNPVPD_2018_15PD", column)
 head(merged_data)
