@@ -44,7 +44,7 @@ merge_geo_dem <- function(spatial_level, dem_dataset, column) {
     "indice_de_feminidad"
   )
   filtered_df <- dem %>%
-    filter(rowSums(across(-any_of(cols_exclude), ~ !grepl("total", .))) == 0)
+    filter(rowSums(dplyr::across(-any_of(cols_exclude), ~ !grepl("total", .))) == 0)
 
   if (spatial_level == "department") {
     filtered_df <- filtered_df %>%
