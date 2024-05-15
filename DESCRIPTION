@@ -41,7 +41,8 @@ Imports:
     sf,
     utils,
     stringdist,
-    tidyr
+    tidyr,
+    stringr
 Suggests: 
     ggplot2,
     knitr,

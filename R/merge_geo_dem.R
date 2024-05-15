@@ -17,10 +17,8 @@
 #' @return \code{data.frame} object with the merged data
 #'
 #' @examples
-#' merged <- merge_geo_dem(
-#'   "department", "DANE_CNPVPD_2018_4PD",
-#'   "relacion_o_parentesco_con_el_jefe_a_del_hogar"
-#' )
+#' dem_file <- "DANE_CNPVV_2018_9VD"
+#' merged <- merge_geo_dem("department", dem_file, "tipo_de_servicio_sanitario")
 #'
 #' @export
 merge_geo_dem <- function(spatial_level, dem_dataset, column) {
@@ -44,31 +42,36 @@ merge_geo_dem <- function(spatial_level, dem_dataset, column) {
     "indice_de_feminidad"
   )
   filtered_df <- dem %>%
-    filter(rowSums(across(-any_of(cols_exclude), ~ !grepl("total", .))) == 0)
+    dplyr::filter(rowSums(dplyr::across(
+      -dplyr::any_of(cols_exclude),
+      ~ !grepl("total", .)
+    )) == 0)
 
   if (spatial_level == "department") {
+    to_select <- c("codigo_departamento", column, total_col)
     filtered_df <- filtered_df %>%
-      filter(get("codigo_departamento") != "00") %>%
-      select(c(codigo_departamento, column, total_col)) %>%
-      pivot_wider(names_from = column, values_from = total_col)
+      dplyr::filter("codigo_departamento" != "00") %>%
+      dplyr::select(dplyr::all_of(to_select)) %>%
+      tidyr::pivot_wider(names_from = column, values_from = total_col)
     geo_dpto <- download_geospatial("DANE_MGN_2018_DPTO", include_cnpv = F)
     merged_df <- merge(geo_dpto, filtered_df,
       by.x = "DPTO_CCDGO",
       by.y = "codigo_departamento", all.x = TRUE
-    ) %>%
-      mutate(DPTO_CNMBR = stringr::str_to_title(DPTO_CNMBR))
+    )
+    merged_df$DPTO_CNMBR <- stringr::str_to_title(merged_df$DPTO_CNMBR)
   } else if (spatial_level == "municipality") {
+    to_select <- c("codigo_municipio", column, total_col)
     filtered_df <- filtered_df %>%
-      filter(get("codigo_municipio") != "00000") %>%
-      select(c(codigo_municipio, column, total_col)) %>%
-      pivot_wider(names_from = column, values_from = total_col)
+      dplyr::filter("codigo_municipio" != "00000") %>%
+      dplyr::select(dplyr::all_of(to_select)) %>%
+      tidyr::pivot_wider(names_from = column, values_from = total_col)
 
     geo_mpio <- download_geospatial("DANE_MGN_2018_MPIO", include_cnpv = F)
     merged_df <- merge(geo_mpio, filtered_df,
       by.x = "MPIO_CDPMP",
       by.y = "codigo_municipio", all.x = TRUE
-    ) %>%
-      mutate(MPIO_CNMBR = stringr::str_to_title(MPIO_CNMBR))
+    )
+    merged_df$MPIO_CNMBR <- stringr::str_to_title(merged_df$MPIO_CNMBR)
   } else {
     stop("Invalid spatial level parameter.
          Please provide 'department' or 'municipality'.")

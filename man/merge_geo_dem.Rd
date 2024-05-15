@@ -27,9 +27,7 @@ datasets is municipality, this functions can only match with the municipality
 and department code of geospatial datasets.
 }
 \examples{
-merged <- merge_geo_dem(
-  "department", "DANE_CNPVPD_2018_4PD",
-  "relacion_o_parentesco_con_el_jefe_a_del_hogar"
-)
+dem_file <- "DANE_CNPVV_2018_9VD"
+merged <- merge_geo_dem("department", dem_file, "tipo_de_servicio_sanitario")
 
 }
