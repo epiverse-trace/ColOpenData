@@ -8,7 +8,7 @@
 #' datasets is municipality, this functions can only match with the municipality
 #' and department code of geospatial datasets.
 #'
-#' @param spatial_level character with the level of spatial aggregation to be used.
+#' @param spatial_level character with level of spatial aggregation to be used.
 #' \code{"department"} or \code{"municipality"}
 #' @param dem_dataset character with the demographic dataset name
 #' @param column character with the column we are interested in. It depends on
@@ -31,7 +31,7 @@ merge_geo_dem <- function(spatial_level, dem_dataset, column) {
          Please select a new dataset or change the spatial level.")
   }
   dem <- download_demographic(dem_dataset)
-  if (column %in% colnames(dem) == FALSE) {
+  if (!column %in% colnames(dem)) {
     stop("Column of interest provided is not part of the demographic dataset.
          Plase select another column.")
   }
@@ -44,7 +44,7 @@ merge_geo_dem <- function(spatial_level, dem_dataset, column) {
   filtered_df <- dem %>%
     dplyr::filter(rowSums(dplyr::across(
       -dplyr::any_of(cols_exclude),
-      ~ !grepl("total", .)
+      ~ !grepl("total", ., fixed = TRUE)
     )) == 0)
 
   if (spatial_level == "department") {
@@ -53,7 +53,7 @@ merge_geo_dem <- function(spatial_level, dem_dataset, column) {
       dplyr::filter("codigo_departamento" != "00") %>%
       dplyr::select(dplyr::all_of(to_select)) %>%
       tidyr::pivot_wider(names_from = column, values_from = total_col)
-    geo_dpto <- download_geospatial("DANE_MGN_2018_DPTO", include_cnpv = F)
+    geo_dpto <- download_geospatial("DANE_MGN_2018_DPTO", include_cnpv = FALSE)
     merged_df <- merge(geo_dpto, filtered_df,
       by.x = "DPTO_CCDGO",
       by.y = "codigo_departamento", all.x = TRUE
@@ -66,7 +66,7 @@ merge_geo_dem <- function(spatial_level, dem_dataset, column) {
       dplyr::select(dplyr::all_of(to_select)) %>%
       tidyr::pivot_wider(names_from = column, values_from = total_col)
 
-    geo_mpio <- download_geospatial("DANE_MGN_2018_MPIO", include_cnpv = F)
+    geo_mpio <- download_geospatial("DANE_MGN_2018_MPIO", include_cnpv = FALSE)
     merged_df <- merge(geo_mpio, filtered_df,
       by.x = "MPIO_CDPMP",
       by.y = "codigo_municipio", all.x = TRUE

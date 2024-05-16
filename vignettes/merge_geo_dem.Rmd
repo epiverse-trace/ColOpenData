@@ -22,8 +22,6 @@ As you know, **ColOpenData** can be used to access both geospatial and demograph
 
 ```{r libraries, message=FALSE, warning=FALSE, results="hide"}
 library(ColOpenData)
-library(dplyr)
-library(tidyr)
 ```
 
 ::: {style="text-align: justify;"}
