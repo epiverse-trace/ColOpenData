@@ -7,8 +7,8 @@
 stations_in_roi(geometry)
 }
 \arguments{
-\item{geometry}{\code{sf} object containing the geometry for a given ROI
-This geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}}
+\item{geometry}{\code{sf} object containing the geometry for a given ROI.
+The geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}}
 }
 \value{
 \code{data.frame} object with the stations contained inside the
