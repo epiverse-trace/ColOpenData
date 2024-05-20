@@ -26,20 +26,20 @@ download_climate <- function(code, start_date, end_date, tag) {
   if (nchar(code) == 5) {
     # Municipalities have a five digit code
     mps <- download_geospatial("DANE_MGN_2018_MPIO")
-    area <- mps[which(mps$MPIO_CDPMP == code), "MPIO_CDPMP"]
+    filtered_area <- mps[which(mps$MPIO_CDPMP == code), "MPIO_CDPMP"]
   } else if (nchar(code) == 2) {
     # Departments have a two digit code
     dpts <- download_geospatial("DANE_MGN_2018_DPTO")
-    area <- dpts[which(dpts$DPTO_CCDGO == code), "DPTO_CCDGO"]
+    filtered_area <- dpts[which(dpts$DPTO_CCDGO == code), "DPTO_CCDGO"]
   } else {
     stop("`code` must be either five digits for municipalities or two
             digits for departments")
   }
-  if (nrow(area) == 0) {
+  if (nrow(filtered_area) == 0) {
     stop("`code` cannot be found")
   }
   climate <- download_climate_geom(
-    geometry = area,
+    geometry = filtered_area,
     start_date = start_date,
     end_date = end_date,
     tag = tag
@@ -50,8 +50,9 @@ download_climate <- function(code, start_date, end_date, tag) {
 #' Download climate data from geometry
 #'
 #' @description
-#' Download climate data from stations contained in a geometry. This data is
-#' retrieved from local meteorological stations provided by IDEAM
+#' Download climate data from stations contained in a Region of Interest
+#' (ROI/geometry). This data is retrieved from local meteorological stations
+#' provided by IDEAM
 #'
 #' @param geometry \code{sf} object containing the geometry for a given ROI.
 #' The geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}
@@ -90,11 +91,11 @@ download_climate_geom <- function(geometry, start_date, end_date,
 #' Download climate data from stations
 #'
 #' @description
-#' Download climate data from named stations.This data is
+#' Download climate data from IDEAM stations by individual codes.This data is
 #' retrieved from local meteorological stations provided by IDEAM
 #'
 #' @param stations \code{data.frame} containing the stations' codes and
-#' locations
+#' location
 #' \code{data.frame} must be retrieved from the function
 #' \code{stations_in_roi()}
 #' @param start_date character with the first date to consult in the format
@@ -161,7 +162,7 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
 
   path_data <- retrieve_climate_path()
   path_stations <- paste0(tag, "@", stations$codigo, ".data")
-  stations_data <- data.frame()
+  climate_data <- data.frame()
   for (i in seq_along(path_stations)) {
     dataset_path <- file.path(path_data, path_stations[i])
     downloaded_station <- retrieve_climate(dataset_path)
@@ -173,7 +174,6 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
           .data$date <= end_date + 1
         )
       n_obs <- nrow(station_filtered)
-      # If there is available data in the requested date range
       if (n_obs > 0) {
         station_obs <- data.frame(
           station = rep(stations$codigo[i], n_obs),
@@ -185,26 +185,26 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
           value = station_filtered$value,
           stringsAsFactors = FALSE
         )
-        stations_data <- rbind(stations_data, station_obs)
+        climate_data <- rbind(climate_data, station_obs)
       }
     }
   }
   # If none of the stations provided data
-  if (nrow(stations_data) == 0) {
-    stop("There is no available information for these dates")
+  if (nrow(climate_data) == 0) {
+    stop("There is no available information for the requested dates")
   }
   message(strwrap(
     prefix = "\n", initial = "",
     c(
-      "Original data is provided by the Institute of Hydrology, Meteorology and
-    Environmental Studies(IDEAM).",
-      "Reformatted by the package authors.",
-      "Stored and redistributed by Universidad de Los Andes under the Epiverse
-    TRACE iniative."
+      "Original data is retrieved from the Institute of Hydrology, Meteorology
+      and Environmental Studies (Instituto de Hidrolog\u00eda,
+      Meteorolog\u00eda y Estudios Ambientales - IDEAM).",
+      "Reformatted by package authors.",
+      "Stored by Universidad de Los Andes under the Epiverse TRACE iniative."
     )
   ))
 
-  return(stations_data)
+  return(climate_data)
 }
 
 #' Stations in region of interest

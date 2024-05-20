@@ -5,7 +5,6 @@
 ^codecov\.yml$
 ^_pkgdown\.yml$
 ^docs$
-^pkgdown$
 ^\.lintr$
 ^.*\.Rproj$
 ^\.Rproj\.user$

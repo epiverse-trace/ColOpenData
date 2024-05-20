@@ -4,11 +4,11 @@
       download_geospatial(dataset = "DANE_MGN_2018_DPTO", include_geom = TRUE,
         include_cnpv = FALSE)
     Message
-      Original data is provided by the National Administrative Department of
-      Statistics (DANE).
-      Reformatted by the package authors.
-      Stored and redistributed by Universidad de Los Andes under the Epiverse
-      TRACE iniative.
+      Original data is retrieved from the National Administrative Department
+      of Statistics (Departamento Administrativo Nacional de Estadística -
+      DANE).
+      Reformatted by package authors.
+      Stored by Universidad de Los Andes under the Epiverse TRACE iniative.
     Output
       Simple feature collection with 33 features and 6 fields
       Geometry type: MULTIPOLYGON
@@ -39,17 +39,17 @@
       9  MULTIPOLYGON (((-70.11033 2...
       10 MULTIPOLYGON (((-71.31266 2...
 
-# Download geospatial works as expected different parameters
+# Download geospatial works as expected with different parameters
 
     Code
       download_geospatial(dataset = "DANE_MGN_2018_DPTO", include_geom = FALSE,
         include_cnpv = TRUE)
     Message
-      Original data is provided by the National Administrative Department of
-      Statistics (DANE).
-      Reformatted by the package authors.
-      Stored and redistributed by Universidad de Los Andes under the Epiverse
-      TRACE iniative.
+      Original data is retrieved from the National Administrative Department
+      of Statistics (Departamento Administrativo Nacional de Estadística -
+      DANE).
+      Reformatted by package authors.
+      Stored by Universidad de Los Andes under the Epiverse TRACE iniative.
     Output
          DPTO_CCDGO                                               DPTO_CNMBR VERSION
       1          18                                                  CAQUETÁ    2018
