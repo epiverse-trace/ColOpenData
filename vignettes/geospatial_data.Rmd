@@ -25,7 +25,7 @@ This package contains the 2018's version of the MGN, which also included a summa
 -   `include_geom` logical for including (or not) geometry. Default is `TRUE`.
 -   `include_cnpv` logical for including (or not) CNPV demographic and socioeconomic information. Default is `TRUE`.
 
-To better understand dataset names and details go to [Documentation and Dictionaries](https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html).
+To better understand dataset names and details please refer to [Documentation and Dictionaries](https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html).
 
 Details for geospatial datasets relate to the level of aggregation as follows:
 :::
@@ -52,11 +52,16 @@ knitr::kable(mgncnpv)
 ```
 
 ::: {style="text-align: justify;"}
-In this vignette you will learn: 1. How to download geospatial data using **ColOpenData** 2. How to use census data included in geospatial datasets 3. How to visualize spatial data using **leaflet** and **ggplot2**
+In this vignette you will learn:
 
-We will be using geospatial data at the level of Urban Section (SECU) for the municipality of Tunja and will calculate the percentage of houses with internet connection at each SECU. Later, we will build some plots using the previously mentioned approaches for dynamic and static plots.
+1. How to download geospatial data using **ColOpenData**
+2. How to use census data included in geospatial datasets
+3. How to visualize spatial data using **leaflet** and **ggplot2**
+
+We will be using geospatial data at the level of Municipality (MPIO) for the department of Tolima and we will calculate the percentage of houses with internet connection at each municipality. Later, we will build some plots using the previously mentioned approaches for dynamic and static plots.
 
 We will start by importing the needed libraries.
+:::
 
 ```{r library imports, results = "hide", warning = FALSE, message = FALSE}
 library(ColOpenData)
@@ -67,74 +72,75 @@ library(leaflet)
 ```
 
 ::: {style="text-align: justify;"}
-**Disclaimer: all data is loaded to the environment in the user's R session, but is not downloaded to user's computer.**
+**Disclaimer: all data is loaded to the environment in the user's R session, but is not downloaded to user's computer. Spatial datasets can be very long and might take a while to be loaded in the environment**
 :::
 
 ## Downloading geospatial data
 
+::: {style="text-align: justify;"}
 First, we download the data using the function `download_geospatial`, including the geometries and the census related information.
 :::
 
 ```{r download data}
-# Download complete dataset
-secu <- download_geospatial(
-  dataset = "DANE_MGN_2018_SECU",
+mpio <- download_geospatial(
+  dataset = "DANE_MGN_2018_MPIO",
   include_geom = TRUE,
   include_cnpv = TRUE
 )
-head(secu)
+head(mpio)
 ```
 
 ::: {style="text-align: justify;"}
-After downloading, we have to filter by the municipality code using the DIVIPOLA code for Tunja. DIVIPOLA codification is standardized for the whole country, and contains department's and municipalities' codes. Departments have two digits for individual identification, while municipalities have five. The codes for each municipality and department can be consulted in the following [table](https://www.datos.gov.co/widgets/gdxc-w37w).
-
-To get the DIVIPOLA code of a municipality or department we can use the auxiliary functions `divipola_municipality_code` and `divipola_department_code` in **ColOpenData**. To retrieve a municipality code we must include the department name and the municipality name. This is to consider repetition in municipalities' names across departments.
+After downloading, we have to filter by the municipality code using the DIVIPOLA code for Tolima. For further details on DIVIPOLA codification and functions please refer to [Documentation and Dictionaries](https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html#DIVIPOLA)
+:::
 
 ```{r}
-divipola_municipality_code("BOYACA", "TUNJA")
+divipola_department_code("TOLIMA")
 ```
 
-We can see that the DIVIPOLA code for Tunja is `"15001"`. We can use this code for filtering.
-
-To understand which column contains the municipalities' codes and filter for Tunja, we will need the corresponding dataset dictionary. To download the dictionary we can use the `dictionary` function. This function uses the dataset name to download the associated information. For further information please refer to the documentation on dictionaries previously mentioned.
+::: {style="text-align: justify;"}
+To understand which column contains the departments' codes and filter for Tolima, we will need the corresponding dataset dictionary. To download the dictionary we can use the `dictionary` function. This function uses the dataset name to download the associated information. For further information please refer to the documentation on dictionaries previously mentioned.
 :::
 
 ```{r dictionary for urban sections}
-# Urban section dictionary
-dict <- dictionary("DANE_MGN_2018_SECU")
+dict <- dictionary("DANE_MGN_2018_MPIO")
+
 head(dict)
 ```
 
 ::: {style="text-align: justify;"}
-After exploring the dictionary, we can identify the column that contains the individual municipality codes is [MPIO_CDPMP]{.underline}. This column contains the concatenated code for department and municipality, which is a five digit unique identifier for every municipality in the country.
-
-To calculate the percentage of houses with internet connection, we will need to know the number of houses with internet connection and the total of houses in each SECU. From the dictionary we get that the number of houses with internet connection is [STP19_INT1]{.underline} and the total of houses is [STVIVIENDA]{.underline}. We will calculate the percentage as follows:
+After exploring the dictionary, we can identify the column that contains the individual municipality codes is [DPTO_CCDGO]{.underline}. We will filter based on that column.
 :::
 
 ```{r filter and internet coverage}
-# Filter for Tunja
-tunja <- secu %>% filter(MPIO_CDPMP == "15001")
+tolima <- mpio %>% filter(DPTO_CCDGO == "73")
+```
 
-# Calculate internet coverage percentage
-tunja <- tunja %>% mutate(INT_PERC = round(STP19_INT1 / STVIVIENDA, 2))
+::: {style="text-align: justify;"}
+To calculate the percentage of houses with internet connection, we will need to know the number of houses with internet connection and the total of houses in each SECU. From the dictionary we get that the number of houses with internet connection is [STP19_INT1]{.underline} and the total of houses is [STVIVIENDA]{.underline}. We will calculate the percentage as follows:
+:::
+
+```{r}
+tolima <- tolima %>% mutate(INT_PERC = round(STP19_INT1 / STVIVIENDA, 2))
 ```
 
 ## Static plots (ggplot2)
 
 ::: {style="text-align: justify;"}
 [`ggplot2`](https://ggplot2.tidyverse.org/) can be used to generate static plots of spatial data by using the geometry `geom_sf` as follows:
+:::
 
 ```{r ggplot2 basic}
-ggplot(data = tunja) +
+ggplot(data = tolima) +
   geom_sf(mapping = aes(fill = INT_PERC), color = NA)
 ```
 
-Color palettes and themes can be defined for each plot using the aesthetic and scales, which can be consulted in the `ggplot2` [documentation](https://ggplot2.tidyverse.org/reference/index.html#scales).
+::: {style="text-align: justify;"}
+The generated plot by default uses a blue palette, which makes it hard to observe small differences in internet coverage across municipalities. Color palettes and themes can be defined for each plot using the aesthetic and scales, which can be consulted in the `ggplot2` [documentation](https://ggplot2.tidyverse.org/reference/index.html#scales). We will use a gradient with a two-color diverging palette, to make the differences more visible.
 :::
 
 ```{r ggplot2}
-# ggplot2
-ggplot(data = tunja) +
+ggplot(data = tolima) +
   geom_sf(mapping = aes(fill = INT_PERC), color = NA) +
   theme_minimal() +
   theme(
@@ -145,22 +151,21 @@ ggplot(data = tunja) +
   scale_fill_gradient("Percentage", low = "#10bed2", high = "#deff00") +
   ggtitle(
     label = "Internet coverage",
-    subtitle = "Tunja, Colombia"
+    subtitle = "Tolima, Colombia"
   )
 ```
 
 ## Dynamic plots (leaflet)
 
 ::: {style="text-align: justify;"}
-For dynamic plots, we can use [`leaflet`](https://rstudio.github.io/leaflet/), which is an open-source library for interactive maps. To create the same plot we first will create a color palette.
+For dynamic plots, we can use [`leaflet`](https://rstudio.github.io/leaflet/), which is an open-source library for interactive maps. To create the same plot we first will create the color palette.
 :::
 
 ```{r define color palette}
-# Color Palette
 colfunc <- colorRampPalette(c("#10bed2", "#deff00"))
 pal <- colorNumeric(
   palette = colfunc(100),
-  domain = tunja$INT_PERC
+  domain = tolima$INT_PERC
 )
 ```
 
@@ -169,21 +174,20 @@ With the previous color palette we can generate the interactive plot. The packag
 :::
 
 ```{r leaflet}
-# Leaflet
-leaflet(tunja) %>%
+leaflet(tolima) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   addPolygons(
     stroke = TRUE,
     weight = 0,
     color = NA,
-    fillColor = ~ pal(tunja$INT_PERC),
+    fillColor = ~ pal(tolima$INT_PERC),
     fillOpacity = 1,
-    popup = paste0(tunja$INT_PERC)
+    popup = paste0(tolima$INT_PERC)
   ) %>%
   addLegend(
     position = "bottomright",
     pal = pal,
-    values = ~ tunja$INT_PERC,
+    values = ~ tolima$INT_PERC,
     opacity = 1,
     title = "Internet Coverage"
   )
