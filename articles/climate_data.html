@@ -191,7 +191,7 @@ Manizales in Colombia. We will download Maximum Temperature (TMX_CON)
 from 2013 to 2016, to observe the increase in temperature during 2015
 and 2016 due to the impact of El Nino (ENSO).</p>
 <p><strong>ColOpenData</strong> offers three methods to do this, using
-three different functions: - <code>download_climate_stations</code> to
+different functions: - <code>download_climate_stations</code> to
 download climate data from previously selected stations -
 <code>download_climate_geom</code> to download climate data from a
 specified geometry (ROI) - <code>download_climate</code> to download
@@ -203,6 +203,7 @@ needed libraries.</p>
 </div>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiverse-trace/ColOpenData" class="external-link">ColOpenData</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/leaflet/" class="external-link">leaflet</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
@@ -217,25 +218,22 @@ user’s R session, but is not downloaded to user’s computer.</strong></p>
 <p>For this example, we will need to create a spatial polygon around the
 municipality of Manizales and use that as our ROI to retrieve the
 climate data. To create the spatial polygon we need to introduce the
-coordinates of the geometry. For simplicity, we will build a box by
-introducing the 4 points which bound the municipality, and transform the
-created geometry into an <code>sf</code> object (see <a href="https://r-spatial.github.io/sf/articles/sf1.html" class="external-link"><strong>sf</strong></a>
-library for further details). For visualization we will use
-<code>leaflet</code>.</p>
+coordinates of the geometry. For simplicity, we will build a bounding
+box by introducing the 4 points which bound the municipality, and
+transform the created geometry into an <code>sf</code> object (see <a href="https://r-spatial.github.io/sf/articles/sf1.html" class="external-link"><strong>sf</strong></a>
+library for further details).</p>
 </div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Define coordinates (bounding box around Manizales)</span></span>
-<span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5.166278</span>, <span class="fl">5.166278</span>, <span class="fl">4.982247</span>, <span class="fl">4.982247</span>, <span class="fl">5.166278</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5.166278</span>, <span class="fl">5.166278</span>, <span class="fl">4.982247</span>, <span class="fl">4.982247</span>, <span class="fl">5.166278</span><span class="op">)</span></span>
 <span><span class="va">lon</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">75.678072</span>, <span class="op">-</span><span class="fl">75.327859</span>, <span class="op">-</span><span class="fl">75.327859</span>, <span class="op">-</span><span class="fl">75.678072</span>, <span class="op">-</span><span class="fl">75.678072</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Use sf to create a polygon and turn it into a geometry</span></span>
 <span><span class="va">polygon</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st.html" class="external-link">st_polygon</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">lon</span>, <span class="va">lat</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html" class="external-link">st_sfc</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Turn geometry into sf object</span></span>
-<span><span class="va">roi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="va">polygon</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Plot polygon for reference</span></span>
-<span><span class="fu"><a href="https://rstudio.github.io/leaflet/reference/leaflet.html" class="external-link">leaflet</a></span><span class="op">(</span><span class="va">roi</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">roi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="va">polygon</span><span class="op">)</span></span></code></pre></div>
+<p>With our created ROI, we can make a simple visualization using
+<code>leaflet</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rstudio.github.io/leaflet/reference/leaflet.html" class="external-link">leaflet</a></span><span class="op">(</span><span class="va">roi</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rstudio.github.io/leaflet/reference/addProviderTiles.html" class="external-link">addProviderTiles</a></span><span class="op">(</span><span class="st">"OpenStreetMap"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rstudio.github.io/leaflet/reference/map-layers.html" class="external-link">addPolygons</a></span><span class="op">(</span></span>
 <span>    stroke <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -246,12 +244,13 @@ library for further details). For visualization we will use
 <span>  <span class="op">)</span></span></code></pre></div>
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:700px;height:432.632880098888px;"></div>
 <script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addPolygons","args":[[[[{"lng":[-75.678072,-75.327859,-75.327859,-75.678072,-75.678072],"lat":[5.166278,5.166278,4.982247,4.982247,5.166278]}]]],null,null,{"interactive":true,"className":"","stroke":true,"color":"#2e6930","weight":2,"opacity":0.6,"fill":true,"fillColor":"#2e6930","fillOpacity":0.2,"smoothFactor":1,"noClip":false},null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[4.982247,5.166278],"lng":[-75.678072,-75.327859]}},"evals":[],"jsHooks":[]}</script><div style="text-align: justify;">
-<p>With our new ROI, we can make a first exploration to check if there
-are any stations contained inside of it, using the function
+<p>We can make a first exploration to check if there are any stations
+contained inside of it, using the function
 <code>stations_in_roi</code></p>
 </div>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stations</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/stations_in_roi.html">stations_in_roi</a></span><span class="op">(</span><span class="va">roi</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">stations</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Simple feature collection with 6 features and 20 fields</span></span>
 <span><span class="co">#&gt; Geometry type: POINT</span></span>
@@ -316,27 +315,23 @@ Stations under the categories <em>Climática Principal</em> and
 <em>Climática Ordinaria</em> have records of temperature.</p>
 <p>Some stations are suspended, which means they are not taking
 measurements at the moment. This information is found at the column
-<u>estado,</u> where if suspended the observation would be
-<em>Suspendida.</em> Also, at the column <u>fecha_suspension</u> the
-observation would be different from <code>NA</code>, since active
-stations do not have a suspension date. However, even if a station is
-suspended, the historical data (up to the suspension date) can be
-accessed.</p>
+<u>estado</u> where, if suspended, the observation would be
+<em>Suspendida</em> Also, at the column <u>fecha_suspension</u> the
+observation would be different from <code>NA</code>, since suspended
+stations would have an associated suspension date. However, even if a
+station is suspended, the historical data (up to the suspension date)
+can be accessed.</p>
 <p>To filter the stations that recorded information during the desired
 period, we can delete the stations with suspension dates before
 2013.</p>
 </div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Working stations after 2013</span></span>
-<span><span class="va">w_stations</span> <span class="op">&lt;-</span> <span class="va">stations</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="va">fecha_suspension</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2013-01-01"</span><span class="op">)</span> <span class="op">|</span></span>
-<span>    <span class="va">estado</span> <span class="op">==</span> <span class="st">"Activa"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cw_stations</span> <span class="op">&lt;-</span> <span class="va">stations</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="va">fecha_suspension</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2013-01-01"</span><span class="op">)</span> <span class="op">|</span> <span class="va">estado</span> <span class="op">==</span> <span class="st">"Activa"</span>,</span>
+<span>    <span class="va">categoria</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Climática Principal"</span>, <span class="st">"Climática Ordinaria"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Filtering for categories</span></span>
-<span><span class="va">cw_stations</span> <span class="op">&lt;-</span> <span class="va">w_stations</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">categoria</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Climática Principal"</span>, <span class="st">"Climática Ordinaria"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># General information of stations</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">cw_stations</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Simple feature collection with 6 features and 20 fields</span></span>
 <span><span class="co">#&gt; Geometry type: POINT</span></span>
@@ -409,9 +404,9 @@ the format <code>"YYYY-MM_DD"</code>. (Last available date is
 <code>tag</code>: character containing climate tag to consult.</li>
 </ul>
 </div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">max_temperature_stations</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_climate_stations.html">download_climate_stations</a></span><span class="op">(</span></span>
-<span>  stations <span class="op">=</span> <span class="va">w_stations</span>,</span>
+<span>  stations <span class="op">=</span> <span class="va">cw_stations</span>,</span>
 <span>  start_date <span class="op">=</span> <span class="st">"2013-01-01"</span>,</span>
 <span>  end_date <span class="op">=</span> <span class="st">"2016-12-31"</span>,</span>
 <span>  tag <span class="op">=</span> <span class="st">"TMX_CON"</span></span>
@@ -421,15 +416,16 @@ the format <code>"YYYY-MM_DD"</code>. (Last available date is
 <span><span class="co">#&gt; Estudios Ambientales - IDEAM).</span></span>
 <span><span class="co">#&gt; Reformatted by package authors.</span></span>
 <span><span class="co">#&gt; Stored by Universidad de Los Andes under the Epiverse TRACE iniative.</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">max_temperature_stations</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">max_temperature_stations</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    station longitude latitude       date     hour     tag value</span></span>
-<span><span class="co">#&gt; 1 26155110 -75.46992 5.029778 2013-01-01 19:00:00 TMX_CON  22.2</span></span>
-<span><span class="co">#&gt; 2 26155110 -75.46992 5.029778 2013-01-02 19:00:00 TMX_CON  21.0</span></span>
-<span><span class="co">#&gt; 3 26155110 -75.46992 5.029778 2013-01-03 19:00:00 TMX_CON  23.0</span></span>
-<span><span class="co">#&gt; 4 26155110 -75.46992 5.029778 2013-01-04 19:00:00 TMX_CON  22.8</span></span>
-<span><span class="co">#&gt; 5 26155110 -75.46992 5.029778 2013-01-05 19:00:00 TMX_CON  23.6</span></span>
-<span><span class="co">#&gt; 6 26155110 -75.46992 5.029778 2013-01-06 19:00:00 TMX_CON  22.4</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 26155170 -75.43833 5.032222 2013-01-01 19:00:00 TMX_CON  20.2</span></span>
+<span><span class="co">#&gt; 2 26155170 -75.43833 5.032222 2013-01-02 19:00:00 TMX_CON  21.0</span></span>
+<span><span class="co">#&gt; 3 26155170 -75.43833 5.032222 2013-01-03 19:00:00 TMX_CON  21.4</span></span>
+<span><span class="co">#&gt; 4 26155170 -75.43833 5.032222 2013-01-04 19:00:00 TMX_CON  20.6</span></span>
+<span><span class="co">#&gt; 5 26155170 -75.43833 5.032222 2013-01-05 19:00:00 TMX_CON  22.4</span></span>
+<span><span class="co">#&gt; 6 26155170 -75.43833 5.032222 2013-01-06 19:00:00 TMX_CON  22.2</span></span></code></pre></div>
 <div style="text-align: justify;">
 <p>The returned tidy <code>data.frame</code> includes: individual and
 unique station code, longitude, latitude, date, hour, tag requested and
@@ -438,14 +434,14 @@ for each observation, which makes the subset and plot easier.</p>
 <p>To plot a time series of the stations’ data we can use
 <code>ggplot2</code> as follows:</p>
 </div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">max_temperature_stations</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">value</span>, group <span class="op">=</span> <span class="va">station</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"#106ba0"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Max Temperature in Manizales by station"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Date"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Temperature [°C]"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">station</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">station</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="climate_data_files/figure-html/plot%20temperatures%20stations-1.png" width="700"></p>
 <div style="text-align: justify;">
 <p>As we can see, only two stations have data for the selected period,
@@ -455,7 +451,7 @@ issue, we will use the aggregation function
 <code>aggregate_climate</code>, which aggregates climate data by time.
 This function takes by parameter the desired aggregation.</p>
 </div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">max_temperature_month</span> <span class="op">&lt;-</span> <span class="va">max_temperature_stations</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/aggregate_climate.html">aggregate_climate</a></span><span class="op">(</span><span class="st">"month"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">max_temperature_month</span><span class="op">)</span> <span class="op">+</span></span>
@@ -463,9 +459,9 @@ This function takes by parameter the desired aggregation.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Dry-bulb Temperature"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Date"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Dry-bulb temperature [C]"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">station</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="climate_data_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">station</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="climate_data_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 </div>
 <div class="section level2">
 <h2 id="retrieving-climate-data-for-a-roi">Retrieving climate data for a ROI<a class="anchor" aria-label="anchor" href="#retrieving-climate-data-for-a-roi"></a>
@@ -494,21 +490,21 @@ the format <code>"YYYY-MM_DD"</code>. (Last available date is
 the aggregation for month. We can add the aggregation function to the
 workflow using the pipe operator <code>%&gt;%</code>.</p>
 </div>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">max_temperature_roi</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_climate_geom.html">download_climate_geom</a></span><span class="op">(</span></span>
 <span>  geometry <span class="op">=</span> <span class="va">roi</span>,</span>
 <span>  start_date <span class="op">=</span> <span class="st">"2013-01-01"</span>,</span>
 <span>  end_date <span class="op">=</span> <span class="st">"2016-12-31"</span>,</span>
 <span>  tag <span class="op">=</span> <span class="st">"TMX_CON"</span></span>
 <span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/aggregate_climate.html">aggregate_climate</a></span><span class="op">(</span><span class="st">"month"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">max_temperature_roi</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">value</span>, group <span class="op">=</span> <span class="va">station</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"#106ba0"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Dry-bulb Temperature"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Date"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Dry-bulb temperature [C]"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">station</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">station</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="climate_data_files/figure-html/plot%20temperatures%20roi-1.png" width="700"></p>
 </div>
 <div class="section level2">
@@ -520,23 +516,15 @@ already known geometries like municipalities or departments,
 <strong>ColOpenData</strong> offers an extra function to download data
 using the areas’ DIVIPOLA code.</p>
 <p>DIVIPOLA codification is standardized for the whole country, and
-contains department’s and municipalities’ codes. Departments have two
-digits for individual identification, while municipalities have five.
-The codes for each municipality and department can be consulted in the
-following <a href="https://www.datos.gov.co/widgets/gdxc-w37w" class="external-link">table</a>.</p>
-<p>To get the DIVIPOLA code of a municipality or department we can use
-the auxiliary functions <code>divipola_municipality_code</code> and
-<code>divipola_department_code</code> in <strong>ColOpenData</strong>.
-To retrieve a municipality code we must include the department name and
-the municipality name. This is to consider repetition in municipalities’
-names across departments.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+contains departments’ and municipalities’ codes. For further details on
+DIVIPOLA codification and functions please refer to <a href="https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html#DIVIPOLA">Documentation
+and Dictionaries</a>. We will filter for the city of Manizales in the
+department Caldas.</p>
+</div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/divipola_municipality_code.html">divipola_municipality_code</a></span><span class="op">(</span><span class="st">"CALDAS"</span>, <span class="st">"MANIZALES"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "17001"</span></span></code></pre></div>
-<p>To replicate our previous example we only need the code for
-Manizales, which is “17001”. This means the code for the department
-Caldas (where Manizales is located) is “17” and the code for Manizales
-inside that department is “001”.</p>
+<div style="text-align: justify;">
 <p>The function <code>download_climate</code> will require almost the
 same arguments as <code>download_climate_geom</code>, but instead of an
 <code>sf</code> object, it will take a character containing the DIVIPOLA
@@ -556,21 +544,21 @@ the format <code>"YYYY-MM_DD"</code>. (Last available date is
 <code>tag</code>: character containing climate tag to consult.</li>
 </ul>
 </div>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">max_temperature_mpio</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_climate.html">download_climate</a></span><span class="op">(</span></span>
 <span>  code <span class="op">=</span> <span class="st">"17001"</span>,</span>
 <span>  start_date <span class="op">=</span> <span class="st">"2013-01-01"</span>,</span>
 <span>  end_date <span class="op">=</span> <span class="st">"2016-12-31"</span>,</span>
 <span>  tag <span class="op">=</span> <span class="st">"TMX_CON"</span></span>
 <span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/aggregate_climate.html">aggregate_climate</a></span><span class="op">(</span><span class="st">"month"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">max_temperature_mpio</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">value</span>, group <span class="op">=</span> <span class="va">station</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"#106ba0"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Dry-bulb Temperature"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Date"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Dry-bulb temperature [C]"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">station</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">station</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="climate_data_files/figure-html/plot%20temperatures%20mpios-1.png" width="700"></p>
 <div style="text-align: justify;">
 <p>As stated at the beginning of this vignette, the three methods

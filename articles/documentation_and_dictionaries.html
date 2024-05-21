@@ -93,10 +93,12 @@ frame can be used as follows:</p>
 <code>download_demographic</code> and <code>download_geospatial</code>.
 For hands on examples please check <a href="https://epiverse-trace.github.io/ColOpenData/articles/demographic_data.html">A
 Deep Dive into Colombian Demographics Using ColOpenData</a> and <a href="https://epiverse-trace.github.io/ColOpenData/articles/geospatial_data.html">Maps
-and plots with ColOpenData</a></p>
+and plots with ColOpenData</a>.</p>
+</div>
 <div class="section level4">
 <h4 id="demographic">Demographic<a class="anchor" aria-label="anchor" href="#demographic"></a>
 </h4>
+<div style="text-align: justify;">
 <p>Demographic datasets are available for municipalities and
 departments, and contain data for Dwellings, Households, Population and
 Population Projections in five categories.</p>
@@ -138,9 +140,11 @@ below)</li>
 details please check the function <code>list_datasets</code> below.</li>
 </ul>
 </div>
+</div>
 <div class="section level4">
 <h4 id="geospatial">Geospatial<a class="anchor" aria-label="anchor" href="#geospatial"></a>
 </h4>
+<div style="text-align: justify;">
 <p>Geospatial datasets naming is related to the level of aggregation,
 since they are available from Blocks to Departments. All these datasets
 come from DANE, and are part of the Geostatistical National Framework
@@ -157,15 +161,17 @@ Population and Dwelling Census (CNPV). Naming is stated as follows:</p>
 consulted using the function <code>list_datasets</code>.</li>
 </ul>
 </div>
+</div>
+</div>
 <div class="section level2">
 <h2 id="understanding-climate-dataset">Understanding Climate Dataset<a class="anchor" aria-label="anchor" href="#understanding-climate-dataset"></a>
 </h2>
+<div style="text-align: justify;">
 <p>This module’s data is stored in an unique dataset, and the
 information required to use the related functions is the area of
 interest, dates, and tags be consulted. Therefore, this module does not
 use the same naming framework. However, individual tags are required to
 download data and include:</p>
-</div>
 </div>
 <table class="table">
 <thead><tr class="header">
@@ -260,9 +266,12 @@ download data and include:</p>
 <code>download_climate</code>, <code>download_climate_geom</code> and
 <code>download_climate_stations</code>. See <a href="https://epiverse-trace.github.io/ColOpenData/articles/climate_data.html">How
 to download climate data using ColOpenData</a> for further details.</p>
+</div>
+</div>
 <div class="section level2">
 <h2 id="list-data">List Data<a class="anchor" aria-label="anchor" href="#list-data"></a>
 </h2>
+<div style="text-align: justify;">
 <p>To check available datasets you can use the
 <code>list_datasets</code> function. This function can also be filtered
 with the <code>module</code> parameter to indicate a specific module.
@@ -270,12 +279,11 @@ Default is <code>"all"</code>, but can be filtered by
 <code>"demographic"</code>, <code>"geospatial"</code> and
 <code>"climate"</code>.</p>
 </div>
-</div>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiverse-trace/ColOpenData" class="external-link">ColOpenData</a></span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># List all datasets</span></span>
-<span><span class="va">datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/list_datasets.html">list_datasets</a></span><span class="op">(</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/list_datasets.html">list_datasets</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                   name      group source year         level category</span></span>
 <span><span class="co">#&gt; 1   DANE_MGN_2018_DPTO geospatial   DANE 2018    department     maps</span></span>
@@ -291,10 +299,11 @@ Default is <code>"all"</code>, but can be filtered by
 <span><span class="co">#&gt; 4            Geographical and summarised census data from 2018 at the level of urban sector</span></span>
 <span><span class="co">#&gt; 5            Geographical and summarised census data from 2018 at the level of rural sector</span></span>
 <span><span class="co">#&gt; 6           Geographical and summarised census data from 2018 at the level of urban section</span></span></code></pre></div>
+<p>To list only demographic datasets we can use:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># List only geospatial datasets</span></span>
-<span><span class="va">geo_datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/list_datasets.html">list_datasets</a></span><span class="op">(</span>module <span class="op">=</span> <span class="st">"demographic"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">geo_datasets</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">demographic_datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/list_datasets.html">list_datasets</a></span><span class="op">(</span>module <span class="op">=</span> <span class="st">"demographic"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">demographic_datasets</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                   name       group source year        level   category</span></span>
 <span><span class="co">#&gt; 11 DANE_CNPVH_2018_1HD demographic   DANE 2018   department households</span></span>
 <span><span class="co">#&gt; 12 DANE_CNPVH_2018_1HM demographic   DANE 2018 municipality households</span></span>
@@ -315,29 +324,31 @@ Default is <code>"all"</code>, but can be filtered by
 visualization of the information.</p>
 <p>Using this function, we can retrieve all names, source, aggregation
 level and information for individual datasets.</p>
+</div>
+</div>
 <div class="section level2">
 <h2 id="list-data-using-keywords">List Data Using Keywords<a class="anchor" aria-label="anchor" href="#list-data-using-keywords"></a>
 </h2>
+<div style="text-align: justify;">
 <p>Sometimes, going through each dataset to find specific information
 can be tiring. If you want to look for an specific word or set of words
 within datasets quickly, you can use the <code>look_up</code>function,
 which takes by parameter:</p>
 <ol style="list-style-type: decimal">
-<li><p>The module you wish to search within (default is
-<code>"all"</code>).</p></li>
-<li><p>The word (or words) you are interested in (input as a character
-or vector of characters).</p></li>
-<li><p>The search condition: <code>"and"</code> to find datasets
-containing all specified words, or <code>"or"</code> to find datasets
-containing any of the specified words (default is <code>"or"</code>). If
-you are searching for a single word, you can use either
-<code>"and"</code>or <code>"or"</code> for this parameter.</p></li>
+<li>The module you wish to search within (default is
+<code>"all"</code>).</li>
+<li>The word (or words) you are interested in (input as a character or
+vector of characters).</li>
+<li>The search condition: <code>"and"</code> to find datasets containing
+all specified words, or <code>"or"</code> to find datasets containing
+any of the specified words (default is <code>"or"</code>). If you are
+searching for a single word, you can use either <code>"and"</code>or
+<code>"or"</code> for this parameter.</li>
 </ol>
 </div>
-</div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># List all datasets, no matter the module, that present the word "age"</span></span>
-<span><span class="va">age_datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/look_up.html">look_up</a></span><span class="op">(</span>keywords <span class="op">=</span> <span class="st">"age"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">age_datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/look_up.html">look_up</a></span><span class="op">(</span>keywords <span class="op">=</span> <span class="st">"age"</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">age_datasets</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                    name       group source year        level</span></span>
 <span><span class="co">#&gt; 11  DANE_CNPVH_2018_1HD demographic   DANE 2018   department</span></span>
@@ -360,24 +371,13 @@ you are searching for a single word, you can use either
 <span><span class="co">#&gt; 14                    Number of households with senior citizens and number of persons aged 60 and over, by municipality and area</span></span>
 <span><span class="co">#&gt; 17                          Total census population, by department, area, age group, masculinity and femininity indexes, and sex</span></span>
 <span><span class="co">#&gt; 18                        Total census population, by municipality, area, age group, masculinity and femininity indexes, and sex</span></span></code></pre></div>
+<p>We can specify a module to make a more narrow and precise search.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># List all datasets in geospatial module that present the word "department"</span></span>
-<span><span class="va">urban_datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/look_up.html">look_up</a></span><span class="op">(</span>module <span class="op">=</span> <span class="st">"geospatial"</span>, keywords <span class="op">=</span> <span class="st">"urban"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">urban_datasets</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                 name      group source year         level category</span></span>
-<span><span class="co">#&gt; 4 DANE_MGN_2018_SETU geospatial   DANE 2018  urban_sector     maps</span></span>
-<span><span class="co">#&gt; 6 DANE_MGN_2018_SECU geospatial   DANE 2018 urban_section     maps</span></span>
-<span><span class="co">#&gt; 9   DANE_MGN_2018_ZU geospatial   DANE 2023    urban_zone     maps</span></span>
-<span><span class="co">#&gt;                                                                       description</span></span>
-<span><span class="co">#&gt; 4  Geographical and summarised census data from 2018 at the level of urban sector</span></span>
-<span><span class="co">#&gt; 6 Geographical and summarised census data from 2018 at the level of urban section</span></span>
-<span><span class="co">#&gt; 9    Geographical and summarised census data from 2018 at the level of urban zone</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># List all datasets in demographic module that present the word "department"</span></span>
-<span><span class="va">area_sex_datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/look_up.html">look_up</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">area_sex_datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/look_up.html">look_up</a></span><span class="op">(</span></span>
 <span>  module <span class="op">=</span> <span class="st">"demographic"</span>, keywords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"area"</span>, <span class="st">"sex"</span><span class="op">)</span>,</span>
 <span>  logic <span class="op">=</span> <span class="st">"and"</span></span>
 <span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">area_sex_datasets</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                    name       group source year        level</span></span>
 <span><span class="co">#&gt; 17 DANE_CNPVPD_2018_1PD demographic   DANE 2018   department</span></span>
@@ -401,32 +401,36 @@ you are searching for a single word, you can use either
 <span><span class="co">#&gt; 22   Census population in particular households, by relationship or kinship to the head of household, by department, area and sex</span></span>
 <span><span class="co">#&gt; 23 Census population in particular households, by relationship or kinship to the head of household, by municipality, area and sex</span></span></code></pre></div>
 </div>
-<div class="section level2" style="text-align: justify;">
+<div class="section level2">
 <h2 id="dictionaries">Dictionaries<a class="anchor" aria-label="anchor" href="#dictionaries"></a>
 </h2>
+<div style="text-align: justify;">
 <p>Dictionaries are provided to understand some tags and column names
 inside each module. These dictionaries are provided in Spanish, since
 they are retrieved directly from the sources.</p>
+</div>
 <div class="section level4">
 <h4 id="demographic-1">Demographic<a class="anchor" aria-label="anchor" href="#demographic-1"></a>
 </h4>
+<div style="text-align: justify;">
 <p>Dictionaries are not provided for this module since they are not
 needed. Demographic datasets include comprehensive column names and
 variables, and they are self-contained.</p>
 </div>
+</div>
 <div class="section level4">
 <h4 id="geospatial-1">Geospatial<a class="anchor" aria-label="anchor" href="#geospatial-1"></a>
 </h4>
+<div style="text-align: justify;">
 <p>Datasets inside the geospatial module contain a summarized version of
 the census and a dictionary is needed to understand all aggregated
 variables. These dictionaries contain the necessary metadata to use the
-available information. To retrieve them, we can use the
-<code>dictionary</code>function, using the dataset name as a
-parameter:</p>
+available information. To retrieve them, we can use the function
+<code>dictionary</code>, using the dataset name as a parameter:</p>
 </div>
-</div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dict_mpio</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dictionary.html">dictionary</a></span><span class="op">(</span><span class="st">"DANE_MGN_2018_MPIO"</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dict_mpio</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     variable         tipo longitud</span></span>
 <span><span class="co">#&gt; 1 DPTO_CCDGO         Text        2</span></span>
@@ -449,17 +453,19 @@ parameter:</p>
 <span><span class="co">#&gt; 4               &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; 5               &lt;NA&gt;</span></span>
 <span><span class="co">#&gt; 6               &lt;NA&gt;</span></span></code></pre></div>
+</div>
 <div class="section level4">
 <h4 id="climate">Climate<a class="anchor" aria-label="anchor" href="#climate"></a>
 </h4>
 <div style="text-align: justify;">
 <p>Climate data is not stored in multiple datasets but as an unique
 dataset with numerous tags. These tags can also be consulted through the
-<code>dictionary</code> function using the name of the only climate
-dataset.</p>
+function <code>dictionary</code>, using the name of the only climate
+dataset available.</p>
 </div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dict_climate</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dictionary.html">dictionary</a></span><span class="op">(</span><span class="st">"IDEAM_CLIMATE_2023_MAY"</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dict_climate</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   etiqueta                                   variable</span></span>
 <span><span class="co">#&gt; 1 TSSM_CON                Temperatura seca (ambiente)</span></span>
@@ -475,6 +481,68 @@ dataset.</p>
 <span><span class="co">#&gt; 4                                  Diaria</span></span>
 <span><span class="co">#&gt; 5                      Horaria (24 horas)</span></span>
 <span><span class="co">#&gt; 6 Horaria (07:00, 13:00, 18:00 y/o 19:00)</span></span></code></pre></div>
+</div>
+</div>
+<div class="section level2">
+<h2 id="divipola">DIVIPOLA<a class="anchor" aria-label="anchor" href="#divipola"></a>
+</h2>
+<div style="text-align: justify;">
+<p>DIVIPOLA codification is a standardized frame for the whole country,
+and contains departments’ and municipalities’ codes. Departments have
+two digits for individual identification, while municipalities have
+five. The five numbers in municipalities’ codes include the department
+where they are located (first two digits) and the number of the
+municipality within the department (last three digits). The codes for
+each municipality and department can be consulted in the following <a href="https://www.datos.gov.co/widgets/gdxc-w37w" class="external-link">table</a>. They can
+also be consulted using the DIVIPOLA table function:</p>
+</div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">divipola</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/divipola_table.html">divipola_table</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">divipola</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   codigo_departamento codigo_municipio nombre_departamento nombre_municipio</span></span>
+<span><span class="co">#&gt; 1                  05            05001           ANTIOQUIA         MEDELLÍN</span></span>
+<span><span class="co">#&gt; 2                  05            05002           ANTIOQUIA        ABEJORRAL</span></span>
+<span><span class="co">#&gt; 3                  05            05004           ANTIOQUIA         ABRIAQUÍ</span></span>
+<span><span class="co">#&gt; 4                  05            05021           ANTIOQUIA       ALEJANDRÍA</span></span>
+<span><span class="co">#&gt; 5                  05            05030           ANTIOQUIA            AMAGÁ</span></span>
+<span><span class="co">#&gt; 6                  05            05031           ANTIOQUIA           AMALFI</span></span>
+<span><span class="co">#&gt;        tipo</span></span>
+<span><span class="co">#&gt; 1 Municipio</span></span>
+<span><span class="co">#&gt; 2 Municipio</span></span>
+<span><span class="co">#&gt; 3 Municipio</span></span>
+<span><span class="co">#&gt; 4 Municipio</span></span>
+<span><span class="co">#&gt; 5 Municipio</span></span>
+<span><span class="co">#&gt; 6 Municipio</span></span></code></pre></div>
+<div style="text-align: justify;">
+<p>To get the DIVIPOLA code of a municipality or department we can use
+the auxiliary functions <code>divipola_municipality_code</code> and
+<code>divipola_department_code</code> in <strong>ColOpenData</strong>.
+To retrieve a department code we only have to include the department’s
+name:</p>
+</div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/divipola_department_code.html">divipola_department_code</a></span><span class="op">(</span><span class="st">"GUAJIRA"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "44"</span></span></code></pre></div>
+<div style="text-align: justify;">
+<p>To retrieve a municipality code we must include the department name
+and the municipality name. This is to consider repetition in
+municipalities’ names across departments.</p>
+</div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/divipola_municipality_code.html">divipola_municipality_code</a></span><span class="op">(</span><span class="st">"BOYACÁ"</span>, <span class="st">"TUNJA"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "15001"</span></span></code></pre></div>
+<div style="text-align: justify;">
+<p>These individual codes can be used to filter information in the
+datasets.</p>
+<p>On the other hand, departments’ and municipalities’ codes can be
+translated to retrieve their official names using
+<code>divipola_municipality_name</code> and
+<code>divipola_department_name</code>.</p>
+</div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/divipola_municipality_name.html">divipola_municipality_name</a></span><span class="op">(</span><span class="st">"15001"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "TUNJA"</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
