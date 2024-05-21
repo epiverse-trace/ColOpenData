@@ -25,6 +25,9 @@
     <loc>https://epiverse-trace.github.io/ColOpenData/articles/index.html</loc>
   </url>
   <url>
+    <loc>https://epiverse-trace.github.io/ColOpenData/articles/merge_geo_dem.html</loc>
+  </url>
+  <url>
     <loc>https://epiverse-trace.github.io/ColOpenData/authors.html</loc>
   </url>
   <url>
@@ -107,6 +110,9 @@
   </url>
   <url>
     <loc>https://epiverse-trace.github.io/ColOpenData/reference/look_up.html</loc>
+  </url>
+  <url>
+    <loc>https://epiverse-trace.github.io/ColOpenData/reference/merge_geo_dem.html</loc>
   </url>
   <url>
     <loc>https://epiverse-trace.github.io/ColOpenData/reference/monthly_bshg.html</loc>
