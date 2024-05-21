@@ -8,7 +8,7 @@ download_climate_stations(stations, start_date, end_date, tag)
 }
 \arguments{
 \item{stations}{\code{data.frame} containing the stations' codes and
-locations
+location
 \code{data.frame} must be retrieved from the function
 \code{stations_in_roi()}}
 
@@ -25,7 +25,7 @@ locations
 area
 }
 \description{
-Download climate data from named stations.This data is
+Download climate data from IDEAM stations by individual codes.This data is
 retrieved from local meteorological stations provided by IDEAM
 }
 \examples{

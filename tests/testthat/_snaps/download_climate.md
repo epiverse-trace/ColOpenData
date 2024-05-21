@@ -82,11 +82,11 @@
       download_climate_stations(stations = stations_test, start_date = "2010-10-01",
         end_date = "2010-12-10", tag = "PTPM_CON")
     Message
-      Original data is provided by the Institute of Hydrology, Meteorology
-      and Environmental Studies(IDEAM).
-      Reformatted by the package authors.
-      Stored and redistributed by Universidad de Los Andes under the Epiverse
-      TRACE iniative.
+      Original data is retrieved from the Institute of Hydrology, Meteorology
+      and Environmental Studies (Instituto de Hidrología, Meteorología y
+      Estudios Ambientales - IDEAM).
+      Reformatted by package authors.
+      Stored by Universidad de Los Andes under the Epiverse TRACE iniative.
     Output
             station longitude latitude       date     hour      tag value
       1    21210160 -75.30428 4.466667 2010-10-01 07:00:00 PTPM_CON  13.0
@@ -1622,11 +1622,11 @@
       download_climate_geom(geometry = ibague, start_date = "2010-10-01", end_date = "2010-11-10",
         tag = "PTPM_CON")
     Message
-      Original data is provided by the Institute of Hydrology, Meteorology
-      and Environmental Studies(IDEAM).
-      Reformatted by the package authors.
-      Stored and redistributed by Universidad de Los Andes under the Epiverse
-      TRACE iniative.
+      Original data is retrieved from the Institute of Hydrology, Meteorology
+      and Environmental Studies (Instituto de Hidrología, Meteorología y
+      Estudios Ambientales - IDEAM).
+      Reformatted by package authors.
+      Stored by Universidad de Los Andes under the Epiverse TRACE iniative.
     Output
            station longitude latitude       date     hour      tag value
       1   21210160 -75.30428 4.466667 2010-10-01 07:00:00 PTPM_CON  13.0
@@ -2485,16 +2485,16 @@
       download_climate(code = "05001", start_date = "2018-10-01", end_date = "2018-11-10",
         tag = "THSM_CON")
     Message
-      Original data is provided by the National Administrative Department of
-      Statistics (DANE).
-      Reformatted by the package authors.
-      Stored and redistributed by Universidad de Los Andes under the Epiverse
-      TRACE iniative.
-      Original data is provided by the Institute of Hydrology, Meteorology
-      and Environmental Studies(IDEAM).
-      Reformatted by the package authors.
-      Stored and redistributed by Universidad de Los Andes under the Epiverse
-      TRACE iniative.
+      Original data is retrieved from the National Administrative Department
+      of Statistics (Departamento Administrativo Nacional de Estadística -
+      DANE).
+      Reformatted by package authors.
+      Stored by Universidad de Los Andes under the Epiverse TRACE iniative.
+      Original data is retrieved from the Institute of Hydrology, Meteorology
+      and Environmental Studies (Instituto de Hidrología, Meteorología y
+      Estudios Ambientales - IDEAM).
+      Reformatted by package authors.
+      Stored by Universidad de Los Andes under the Epiverse TRACE iniative.
     Output
            station longitude latitude       date     hour      tag value
       1   27015330    -75.59     6.22 2018-10-01 07:00:00 THSM_CON  16.9

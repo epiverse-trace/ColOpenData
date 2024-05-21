@@ -23,8 +23,9 @@ The geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}}
 area
 }
 \description{
-Download climate data from stations contained in a geometry. This data is
-retrieved from local meteorological stations provided by IDEAM
+Download climate data from stations contained in a Region of Interest
+(ROI/geometry). This data is retrieved from local meteorological stations
+provided by IDEAM
 }
 \examples{
 lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)

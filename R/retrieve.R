@@ -146,7 +146,7 @@ retrieve_table <- function(dataset_path, sep = ";") {
   return(downloaded_data)
 }
 
-#' Retrieve climate (.data) file from one station
+#' Retrieve climate table file from one station
 #'
 #' @param dataset_path character path to the climate dataset on server
 #' @param start_date character with the first date to consult in the format
