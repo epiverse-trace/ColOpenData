@@ -40,7 +40,9 @@ Imports:
     rlang,
     sf,
     utils,
-    stringdist
+    stringdist,
+    tidyr,
+    stringr
 Suggests: 
     ggplot2,
     knitr,
