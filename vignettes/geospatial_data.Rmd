@@ -21,9 +21,9 @@ knitr::opts_chunk$set(
 
 This package contains the 2018's version of the MGN, which also included a summarized version of the National Population and Dwelling Census (CNPV) in different aggregation levels. Each level is stored in a different dataset, which can be retrieved using the `download_geospatial` function, which requires three arguments:
 
-- `dataset` character with the geospatial dataset name.
-- `include_geom` logical for including (or not) geometry. Default is `TRUE`.
-- `include_cnpv` logical for including (or not) CNPV demographic and socioeconomic information. Default is `TRUE`.
+-   `dataset` character with the geospatial dataset name.
+-   `include_geom` logical for including (or not) geometry. Default is `TRUE`.
+-   `include_cnpv` logical for including (or not) CNPV demographic and socioeconomic information. Default is `TRUE`.
 
 To better understand dataset names and details please refer to [Documentation and Dictionaries](https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html).
 

@@ -1,0 +1,71 @@
+---
+title: "Integration of Geospatial and Demographic data"
+output: 
+  rmarkdown::html_vignette:
+    df_print: tibble
+vignette: >
+  %\VignetteIndexEntry{Integration of Geospatial and Demographic data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+::: {style="text-align: justify;"}
+As you know, **ColOpenData** can be used to access both geospatial and demographic data from Colombia, in independent modules. However, we thought it would be helpful to present a module that incorporates a way to merge information between geospatial and demographic data. In this vignette you will learn how to use the function `merge_geo_dem()`.
+:::
+
+```{r libraries, message=FALSE, warning=FALSE, results="hide"}
+library(ColOpenData)
+```
+
+::: {style="text-align: justify;"}
+**Disclaimer: all data is loaded to the environment in the user's R session, but is not downloaded to user's computer.**
+:::
+
+## How to merge geospatial and demographic data
+
+### Documentation access
+
+::: {style="text-align: justify;"}
+Geospatial and demographic data can be merged based on the spatial aggregation level (SAL). While geospatial data can be aggregated down to the block level, demographic data is typically available only at the department and municipality levels. Therefore, these are the only SAL that can be accessed in both types of data for merging.
+
+Now, the `merge_geo_dem()` function takes three parameters: the SAL (`"department"` or `"municipality"`), the demographic dataset and the column of interest in the demographic dataset. To use the function correctly, it's important to review the demographic dataset we intend to work with. Therefore, we should first access the demographic documentation to verify the available datasets. If we already know which SAL we are interested in, we can filter by this.
+:::
+```{r documentation, echo =TRUE}
+# Available demographic datasets
+datasets_dem <- list_datasets("demographic")
+
+# Available demographic datasets at the department level
+department_datasets <- datasets_dem[datasets_dem$level == "department", ]
+head(department_datasets)
+
+# Available demographic datasets at the municipality level
+municipality_datasets <- datasets_dem[datasets_dem$level == "municipality", ]
+head(municipality_datasets)
+```
+::: {style="text-align: justify;"}
+After reviewing the available datasets, we can select the one we wish to work with and take a closer look. For instance, let's suppose we choose the dataset "DANE_CNPVPD_2018_15PD".
+:::
+```{r data, echo =TRUE}
+# Download demographic dataset
+chosen_data <- download_demographic("DANE_CNPVPD_2018_15PD")
+head(chosen_data)
+```
+::: {style="text-align: justify;"}
+`chosen_data` presents information regarding children of less than 5 years of age, by where or with whom the child spends most of the time during the week. Looking at the data, we are gonna choose as column of interest the one named "donde_o_con_quien_permanece_el_menor".
+:::
+```{r merge data, echo =TRUE}
+# Download demographic dataset
+column <- "donde_o_con_quien_permanece_el_menor"
+merged_data <- merge_geo_dem("department", "DANE_CNPVPD_2018_15PD", column)
+head(merged_data)
+```
+::: {style="text-align: justify;"}
+`merged_data` presents geospatial information related to departments, as well as the information related to where or with whom the child spends most of the time during the week. So, `merge_geo_dem()` function enables users to link demographic information with spatial coordinates."
+:::
