@@ -61,9 +61,7 @@ retrieve_path <- function(dataset) {
   return(file_path)
 }
 
-#' Retrieve climate directory path of named dataset
-#'
-#' @param dataset character with the dataset name
+#' Retrieve climate directory path
 #'
 #' @description
 #' Climate data is retrieved from a general directory. Path is build for said
