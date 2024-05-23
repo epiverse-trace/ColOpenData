@@ -212,7 +212,7 @@ To get the DIVIPOLA code of a municipality or department we can use the auxiliar
 :::
 
 ```{r cordoba}
-divipola_department_code("GUAJIRA")
+divipola_department_code("Guajira")
 ```
 
 ::: {style="text-align: justify;"}
@@ -220,7 +220,7 @@ To retrieve a municipality code we must include the department name and the muni
 :::
 
 ```{r divipola tunja}
-divipola_municipality_code("BOYACÁ", "TUNJA")
+divipola_municipality_code("Boyacá", "Tunja")
 ```
 
 ::: {style="text-align: justify;"}
