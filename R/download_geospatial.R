@@ -31,10 +31,10 @@ download_geospatial <- function(dataset, include_geom = TRUE,
 
   dataset_path <- retrieve_path(dataset)
   geospatial_data <- sf::st_read(dataset_path, quiet = TRUE)
-  geospatial_vars <- c("AREA", "LATITUD", "LONGITUD") # geom included by default
-  shape_vars <- c("Shape_Leng", "Shape_Area")
+  geospatial_vars <- c("area", "latitud", "longitud")
+  shape_vars <- c("shape_length", "shape_area")
   if (include_geom && !include_cnpv) {
-    last_base_index <- which(colnames(geospatial_data) == "LONGITUD")
+    last_base_index <- which(colnames(geospatial_data) == "longitud")
     geospatial_data <- geospatial_data %>%
       dplyr::select(dplyr::all_of(1:last_base_index))
   } else if (!include_geom && include_cnpv) {

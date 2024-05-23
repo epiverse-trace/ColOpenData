@@ -33,18 +33,18 @@ divipola_department_code <- function(department_name) {
   checkmate::assert_character(department_name)
 
   divipola <- divipola_table()
-  dpts <- divipola[
-    !duplicated(divipola$nombre_departamento),
-    c("codigo_departamento", "nombre_departamento")
+  dptos <- divipola[
+    !duplicated(divipola$departamento),
+    c("codigo_departamento", "departamento")
   ]
   fixed_tokens <- iconv(
-    dpts$nombre_departamento,
+    tolower(dptos$departamento),
     from = "utf-8",
     to = "ASCII//TRANSLIT"
   )
   departments_codes <- NULL
-  for (dpt in department_name) {
-    input_token <- iconv(toupper(dpt),
+  for (dpto in department_name) {
+    input_token <- iconv(tolower(dpto),
       from = "UTF-8",
       to = "ASCII//TRANSLIT"
     )
@@ -56,17 +56,17 @@ divipola_department_code <- function(department_name) {
     ))
     min_distance_i <- which(distances$distance == min(distances$distance))
     if (length(min_distance_i) == 1) {
-      dpt_code <- dpts$codigo_departamento[min_distance_i]
+      dpto_code <- dptos$codigo_departamento[min_distance_i]
     } else {
       min_location <- distances$location[min_distance_i]
       min_location_i <- min_distance_i[which.min(min_location)]
-      dpt_code <- dpts$codigo_departamento[min_location_i]
+      dpto_code <- dptos$codigo_departamento[min_location_i]
     }
     if (min(distances$distance) > 0.11) {
-      warning(dpt, " cannot be found as a department name")
+      warning(dpto, " cannot be found as a department name")
       departments_codes <- c(departments_codes, NA)
     } else {
-      departments_codes <- c(departments_codes, dpt_code)
+      departments_codes <- c(departments_codes, dpto_code)
     }
   }
   return(departments_codes)
@@ -100,25 +100,25 @@ divipola_municipality_code <- function(department_name, municipality_name) {
             length" = length(department_name) == length(municipality_name))
 
   divipola <- divipola_table()
-  dpts <- suppressWarnings(divipola_department_code(department_name))
+  dptos <- suppressWarnings(divipola_department_code(department_name))
   municipalities_codes <- NULL
   for (i in seq_along(municipality_name)) {
     input_token <- iconv(
-      toupper(municipality_name[i]),
+      tolower(municipality_name[i]),
       from = "utf-8",
       to = "ASCII//TRANSLIT"
     )
-    dpt_code <- dpts[i]
-    if (is.na(dpt_code)) {
+    dpto_code <- dptos[i]
+    if (is.na(dpto_code)) {
       warning(department_name[i], " cannot be found as a department name")
       municipalities_codes <- c(municipalities_codes, NA)
       next
     }
-    filtered_mps <- divipola[which(
-      divipola$codigo_departamento == dpt_code
+    filtered_mpios <- divipola[which(
+      divipola$codigo_departamento == dpto_code
     ), ]
     fixed_tokens <- iconv(
-      filtered_mps$nombre_municipio,
+      tolower(filtered_mpios$municipio),
       from = "utf-8",
       to = "ASCII//TRANSLIT"
     )
@@ -130,17 +130,17 @@ divipola_municipality_code <- function(department_name, municipality_name) {
     ))
     min_distance_i <- which(distances$distance == min(distances$distance))
     if (length(min_distance_i) == 1) {
-      mp_code <- filtered_mps$codigo_municipio[min_distance_i]
+      mpio_code <- filtered_mpios$codigo_municipio[min_distance_i]
     } else {
       min_location <- distances$location[min_distance_i]
       min_location_i <- min_distance_i[which.min(min_location)]
-      mp_code <- filtered_mps$codigo_municipio[min_location_i]
+      mpio_code <- filtered_mpios$codigo_municipio[min_location_i]
     }
     if (min(distances$distance) > 0.11) {
       warning(municipality_name[i], " cannot be found as a municipality name")
       municipalities_codes <- c(municipalities_codes, NA)
     } else {
-      municipalities_codes <- c(municipalities_codes, mp_code)
+      municipalities_codes <- c(municipalities_codes, mpio_code)
     }
   }
   return(municipalities_codes)
@@ -165,20 +165,20 @@ divipola_department_name <- function(department_code) {
   checkmate::assert_character(department_code, n.chars = 2)
 
   divipola <- divipola_table()
-  dpts <- divipola[
-    !duplicated(divipola$nombre_departamento),
-    c("codigo_departamento", "nombre_departamento")
+  dptos <- divipola[
+    !duplicated(divipola$departamento),
+    c("codigo_departamento", "departamento")
   ]
   departments_names <- NULL
   for (code in department_code) {
-    dpt_name <- dpts$nombre_departamento[which(
-      dpts$codigo_departamento == code
+    dpto_name <- dptos$departamento[which(
+      dptos$codigo_departamento == code
     )]
-    if (rlang::is_empty(dpt_name)) {
+    if (rlang::is_empty(dpto_name)) {
       warning(code, " cannot be found as a department code")
       departments_names <- c(departments_names, NA)
     } else {
-      departments_names <- c(departments_names, dpt_name)
+      departments_names <- c(departments_names, dpto_name)
     }
   }
   return(departments_names)
@@ -202,17 +202,17 @@ divipola_department_name <- function(department_code) {
 divipola_municipality_name <- function(municipality_code) {
   checkmate::assert_character(municipality_code, n.chars = 5)
 
-  mps <- divipola_table()
+  mpios <- divipola_table()
   municipalities_names <- NULL
   for (code in municipality_code) {
-    mp_name <- mps$nombre_municipio[which(
-      mps$codigo_municipio == code
+    mpio_name <- mpios$municipio[which(
+      mpios$codigo_municipio == code
     )]
-    if (rlang::is_empty(mp_name)) {
+    if (rlang::is_empty(mpio_name)) {
       warning(code, " cannot be found as a municipality code")
       municipalities_names <- c(municipalities_names, NA)
     } else {
-      municipalities_names <- c(municipalities_names, mp_name)
+      municipalities_names <- c(municipalities_names, mpio_name)
     }
   }
   return(municipalities_names)

@@ -10,7 +10,7 @@
 #'
 #' @param spatial_level character with level of spatial aggregation to be used.
 #' \code{"department"} or \code{"municipality"}
-#' @param dem_dataset character with the demographic dataset name
+#' @param demographic_dataset character with the demographic dataset name
 #' @param column character with the column we are interested in. It depends on
 #' the demographic dataset, so it is important to have checked it before
 #'
@@ -21,16 +21,23 @@
 #' merged <- merge_geo_dem("department", dem_file, "tipo_de_servicio_sanitario")
 #'
 #' @export
-merge_geo_dem <- function(spatial_level, dem_dataset, column) {
+merge_geo_dem <- function(spatial_level, demographic_dataset, column) {
+  checkmate::assert_character(demographic_dataset)
+  checkmate::assert_character(column)
+  checkmate::assert_choice(spatial_level, c("department", "municipality"))
+
   datasets <- list_datasets("demographic")
-  selected_dataset <- datasets[datasets$name == dem_dataset, ]
+  selected_dataset <- datasets[datasets$name == demographic_dataset, ]
+  if (nrow(selected_dataset) == 0) {
+    stop("`demographic_dataset` cannot be found")
+  }
   level_selected <- selected_dataset$level
   if (spatial_level != level_selected) {
     stop("Spatial level provided does not match spatial level of the
          demographic dataset.
          Please select a new dataset or change the spatial level.")
   }
-  dem <- download_demographic(dem_dataset)
+  dem <- download_demographic(demographic_dataset)
   if (!column %in% colnames(dem)) {
     stop("Column of interest provided is not part of the demographic dataset.
          Plase select another column.")
@@ -50,33 +57,35 @@ merge_geo_dem <- function(spatial_level, dem_dataset, column) {
   if (spatial_level == "department") {
     to_select <- c("codigo_departamento", column, total_col)
     filtered_df <- filtered_df %>%
-      dplyr::filter("codigo_departamento" != "00") %>%
+      dplyr::filter(.data$codigo_departamento != "00") %>%
       dplyr::select(dplyr::all_of(to_select)) %>%
-      tidyr::pivot_wider(names_from = column, values_from = total_col)
-    geo_dpto <- download_geospatial("DANE_MGN_2018_DPTO", include_cnpv = FALSE)
+      tidyr::pivot_wider(
+        names_from = dplyr::all_of(column),
+        values_from = dplyr::all_of(total_col)
+      )
+    geo_dpto <- suppressMessages(download_geospatial("DANE_MGN_2018_DPTO",
+      include_cnpv = FALSE
+    ))
     merged_df <- merge(geo_dpto, filtered_df,
-      by.x = "DPTO_CCDGO",
+      by.x = "codigo_departamento",
       by.y = "codigo_departamento", all.x = TRUE
     )
-    merged_df$DPTO_CNMBR <- stringr::str_to_title(merged_df$DPTO_CNMBR)
-  } else if (spatial_level == "municipality") {
+  } else {
     to_select <- c("codigo_municipio", column, total_col)
     filtered_df <- filtered_df %>%
-      dplyr::filter("codigo_municipio" != "00000") %>%
+      dplyr::filter(.data$codigo_municipio != "00000") %>%
       dplyr::select(dplyr::all_of(to_select)) %>%
-      tidyr::pivot_wider(names_from = column, values_from = total_col)
-
-    geo_mpio <- download_geospatial("DANE_MGN_2018_MPIO", include_cnpv = FALSE)
+      tidyr::pivot_wider(
+        names_from = dplyr::all_of(column),
+        values_from = dplyr::all_of(total_col)
+      )
+    geo_mpio <- suppressMessages(download_geospatial("DANE_MGN_2018_MPIO",
+      include_cnpv = FALSE
+    ))
     merged_df <- merge(geo_mpio, filtered_df,
-      by.x = "MPIO_CDPMP",
+      by.x = "codigo_municipio",
       by.y = "codigo_municipio", all.x = TRUE
     )
-    merged_df$MPIO_CNMBR <- stringr::str_to_title(merged_df$MPIO_CNMBR)
-  } else {
-    stop("Invalid spatial level parameter.
-         Please provide 'department' or 'municipality'.")
   }
-  names(merged_df) <- tolower(names(merged_df))
-  merged_df <- as.data.frame(merged_df)
   return(merged_df)
 }

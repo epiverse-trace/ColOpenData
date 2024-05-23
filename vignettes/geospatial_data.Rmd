@@ -95,7 +95,7 @@ After downloading, we have to filter by the municipality code using the DIVIPOLA
 :::
 
 ```{r}
-divipola_department_code("TOLIMA")
+divipola_department_code("Tolima")
 ```
 
 ::: {style="text-align: justify;"}
@@ -109,11 +109,11 @@ head(dict)
 ```
 
 ::: {style="text-align: justify;"}
-After exploring the dictionary, we can identify the column that contains the individual municipality codes is [DPTO_CCDGO]{.underline}. We will filter based on that column.
+After exploring the dictionary, we can identify the column that contains the individual municipality codes is [codigo_departamento]{.underline}. We will filter based on that column.
 :::
 
 ```{r filter and internet coverage}
-tolima <- mpio %>% filter(DPTO_CCDGO == "73")
+tolima <- mpio %>% filter(codigo_departamento == "73")
 ```
 
 ::: {style="text-align: justify;"}
@@ -121,7 +121,7 @@ To calculate the percentage of houses with internet connection, we will need to 
 :::
 
 ```{r}
-tolima <- tolima %>% mutate(INT_PERC = round(STP19_INT1 / STVIVIENDA, 2))
+tolima <- tolima %>% mutate(internet = round(viv_internet / viviendas, 2))
 ```
 
 ## Static plots (ggplot2)
@@ -132,7 +132,7 @@ tolima <- tolima %>% mutate(INT_PERC = round(STP19_INT1 / STVIVIENDA, 2))
 
 ```{r ggplot2 basic}
 ggplot(data = tolima) +
-  geom_sf(mapping = aes(fill = INT_PERC), color = NA)
+  geom_sf(mapping = aes(fill = internet), color = NA)
 ```
 
 ::: {style="text-align: justify;"}
@@ -141,7 +141,7 @@ The generated plot by default uses a blue palette, which makes it hard to observ
 
 ```{r ggplot2}
 ggplot(data = tolima) +
-  geom_sf(mapping = aes(fill = INT_PERC), color = NA) +
+  geom_sf(mapping = aes(fill = internet), color = NA) +
   theme_minimal() +
   theme(
     panel.grid = element_blank(),
@@ -165,7 +165,7 @@ For dynamic plots, we can use [`leaflet`](https://rstudio.github.io/leaflet/), w
 colfunc <- colorRampPalette(c("#10bed2", "#deff00"))
 pal <- colorNumeric(
   palette = colfunc(100),
-  domain = tolima$INT_PERC
+  domain = tolima$internet
 )
 ```
 
@@ -180,14 +180,14 @@ leaflet(tolima) %>%
     stroke = TRUE,
     weight = 0,
     color = NA,
-    fillColor = ~ pal(tolima$INT_PERC),
+    fillColor = ~ pal(tolima$internet),
     fillOpacity = 1,
-    popup = paste0(tolima$INT_PERC)
+    popup = paste0(tolima$internet)
   ) %>%
   addLegend(
     position = "bottomright",
     pal = pal,
-    values = ~ tolima$INT_PERC,
+    values = ~ tolima$internet,
     opacity = 1,
     title = "Internet Coverage"
   )
