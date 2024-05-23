@@ -4,13 +4,13 @@
 \alias{merge_geo_dem}
 \title{Match and merge geospatial and demographic datasets}
 \usage{
-merge_geo_dem(spatial_level, dem_dataset, column)
+merge_geo_dem(spatial_level, demographic_dataset, column)
 }
 \arguments{
-\item{spatial_level}{character with the level of spatial aggregation to be used.
+\item{spatial_level}{character with level of spatial aggregation to be used.
 \code{"department"} or \code{"municipality"}}
 
-\item{dem_dataset}{character with the demographic dataset name}
+\item{demographic_dataset}{character with the demographic dataset name}
 
 \item{column}{character with the column we are interested in. It depends on
 the demographic dataset, so it is important to have checked it before}

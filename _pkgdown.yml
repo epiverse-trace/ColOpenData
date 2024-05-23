@@ -17,8 +17,7 @@ articles:
   navbar: Merge data
   contents:
   - merge_geo_dem
-  
-    
+
 reference:
 - title: Demographic Data
   contents:
@@ -40,7 +39,6 @@ reference:
   contents:
   - merge_geo_dem
 
-  
 - title: Documentation and Dictionaries
 - subtitle: List available datasets
   contents:
