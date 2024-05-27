@@ -21,31 +21,36 @@ knitr::opts_chunk$set(
 
 This package contains the 2018's version of the MGN, which also included a summarized version of the National Population and Dwelling Census (CNPV) in different aggregation levels. Each level is stored in a different dataset, which can be retrieved using the `download_geospatial` function, which requires three arguments:
 
--   `dataset` character with the geospatial dataset name.
--   `include_geom` logical for including (or not) geometry. Default is `TRUE`.
--   `include_cnpv` logical for including (or not) CNPV demographic and socioeconomic information. Default is `TRUE`.
+-   `spatial_level` character with the spatial level to be consulted
+-   `include_geom` logical for including (or not) geometry. Default is `TRUE`
+-   `include_cnpv` logical for including (or not) CNPV demographic and socioeconomic information Default is `TRUE`.
 
-To better understand dataset names and details please refer to [Documentation and Dictionaries](https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html).
-
-Details for geospatial datasets relate to the level of aggregation as follows:
+Available levels of aggregation come from the official spatial division provided by DANE, with their names corresponding to:
 :::
 
 ```{r available datasets, echo = FALSE}
 code <- c(
-  "DANE_MGN_2018_DPTO", "DANE_MGN_2018_MPIO",
-  "DANE_MGN_2018_MPIOCL", "DANE_MGN_2018_MZN",
-  "DANE_MGN_2018_SECR", "DANE_MGN_2018_SECU",
-  "DANE_MGN_2018_SETR", "DANE_MGN_2018_SETU",
-  "DANE_MGN_2018_ZU"
+  "DPTO", "MPIO",
+  "MPIOCL", "MZN",
+  "SECR", "SECU",
+  "SETR", "SETU",
+  "ZU"
 )
 level <- c(
   "Department", "Municipality",
   "Municipality including Class", "Block", "Rural Sector", "Urban Sector",
   "Rural Section", "Urban Section", "Urban Zone"
 )
+dictionary_key <- c(
+  "DANE_MGN_2018_DPTO", "DANE_MGN_2018_MPIO",
+  "DANE_MGN_2018_MPIOCL", "DANE_MGN_2018_MZN",
+  "DANE_MGN_2018_SECR", "DANE_MGN_2018_SECU",
+  "DANE_MGN_2018_SETR", "DANE_MGN_2018_SETU",
+  "DANE_MGN_2018_ZU"
+)
 
 mgncnpv <- data.frame(
-  Code = code, Level = level,
+  Code = code, Level = level, Name = dictionary_key,
   stringsAsFactors = FALSE
 )
 knitr::kable(mgncnpv)
@@ -83,7 +88,7 @@ First, we download the data using the function `download_geospatial`, including 
 
 ```{r download data}
 mpio <- download_geospatial(
-  dataset = "DANE_MGN_2018_MPIO",
+  spatial_level = "MPIO",
   include_geom = TRUE,
   include_cnpv = TRUE
 )
