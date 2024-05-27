@@ -1,8 +1,7 @@
 # Merge geospational demographic works as expected
 
     Code
-      merge_geo_dem(spatial_level = "municipality", demographic_dataset = "DANE_CNPVH_2018_1HM",
-        column = "condicion")
+      merge_geo_demographic(demographic_dataset = "DANE_CNPVH_2018_1HM", column = "condicion")
     Message
       Original data is retrieved from the National Administrative Department
       of Statistics (Departamento Administrativo Nacional de Estadística -
