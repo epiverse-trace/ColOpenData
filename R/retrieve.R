@@ -38,7 +38,8 @@ retrieve_path <- function(dataset) {
 
   ext <- list(
     geospatial = ".gpkg",
-    demographic = ".csv"
+    demographic = ".csv",
+    population_projections = ".csv"
   )
   base_path <- retrieve_value_key("base_path")
   all_datasets <- list_datasets()
