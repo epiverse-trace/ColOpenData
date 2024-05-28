@@ -48,15 +48,15 @@ download_geospatial <- function(spatial_level, include_geom = TRUE,
     "dpto", "mpio", "setu", "setr", "secu", "secr", "mpiocl", "mzn", "zu"
   )) {
     levels_trans <- list(
-      "dpto" = "department",
-      "mpio" = "municipality",
-      "mpiocl" = "municipality_class",
-      "setu" = "urban_sector",
-      "setr" = "rural_sector",
-      "secu" = "urban_section",
-      "secr" = "rural_section",
-      "zu" = "urban_zone",
-      "mzn" = "block"
+      dpto = "department",
+      mpio = "municipality",
+      mpiocl = "municipality_class",
+      setu = "urban_sector",
+      setr = "rural_sector",
+      secu = "urban_section",
+      secr = "rural_section",
+      zu = "urban_zone",
+      mzn = "block"
     )
     spatial_level <- levels_trans[[spatial_level]]
   }

@@ -49,15 +49,15 @@ download_pop_projections <- function(spatial_level, start_year, end_year,
   pp_datasets <- all_datasets %>%
     dplyr::filter(
       .data$level == spatial_level,
-      grepl("sex", .data$description) == include_sex,
-      grepl("ethnic", .data$description) == include_ethnic
+      grepl("sex", .data$description, fixed = TRUE) == include_sex,
+      grepl("ethnic", .data$description, fixed = TRUE) == include_ethnic
     )
   pp_datasets <- pp_datasets %>%
     dplyr::select(dplyr::all_of(c("name", "year"))) %>%
     dplyr::group_by(.data$year) %>%
     dplyr::mutate(
-      start = as.numeric(unlist(strsplit(.data$year, "_"))[1]),
-      end = as.numeric(unlist(strsplit(.data$year, "_"))[2])
+      start = as.numeric(unlist(strsplit(.data$year, "_", fixed = TRUE))[1]),
+      end = as.numeric(unlist(strsplit(.data$year, "_", fixed = TRUE))[2])
     ) %>%
     dplyr::ungroup()
   stopifnot(
