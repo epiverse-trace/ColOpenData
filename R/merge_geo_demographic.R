@@ -3,52 +3,46 @@
 #' @description
 #' This function downloads a demographic and a geospatial dataset, does a
 #' pivot to the demographic dataset based on a column of interest and merges
-#' with a geospatial dataset (with \code{include_cnpv} as \code{FALSE}.
+#' with a geospatial dataset according to the level of the demographic dataset.
 #' Since the smallest level of spatial aggregation present in the demographic
 #' datasets is municipality, this functions can only match with the municipality
 #' and department code of geospatial datasets.
 #'
-#' @param spatial_level character with level of spatial aggregation to be used.
-#' \code{"department"} or \code{"municipality"}
-#' @param demographic_dataset character with the demographic dataset name
+#' @param demographic_dataset character with the demographic dataset name.
+#' Please use \code{list_datasets("demographic")} to check available datasets
 #' @param column character with the column we are interested in. It depends on
-#' the demographic dataset, so it is important to have checked it before
+#' the demographic dataset, so it is important to have checked the dataset
+#' beforehand
 #'
 #' @return \code{data.frame} object with the merged data
 #'
 #' @examples
-#' dem_file <- "DANE_CNPVV_2018_9VD"
-#' merged <- merge_geo_dem("department", dem_file, "tipo_de_servicio_sanitario")
+#' census_file <- "DANE_CNPVV_2018_9VD"
+#' merged <- merge_geo_demographic(census_file, "tipo_de_servicio_sanitario")
 #'
 #' @export
-merge_geo_dem <- function(spatial_level, demographic_dataset, column) {
+merge_geo_demographic <- function(demographic_dataset, column) {
   checkmate::assert_character(demographic_dataset)
   checkmate::assert_character(column)
-  checkmate::assert_choice(spatial_level, c("department", "municipality"))
 
   datasets <- list_datasets("demographic")
   selected_dataset <- datasets[datasets$name == demographic_dataset, ]
   if (nrow(selected_dataset) == 0) {
     stop("`demographic_dataset` cannot be found")
   }
-  level_selected <- selected_dataset$level
-  if (spatial_level != level_selected) {
-    stop("Spatial level provided does not match spatial level of the
-         demographic dataset.
-         Please select a new dataset or change the spatial level.")
-  }
-  dem <- download_demographic(demographic_dataset)
-  if (!column %in% colnames(dem)) {
+  spatial_level <- selected_dataset$level[1]
+  cen <- download_demographic(demographic_dataset)
+  if (!column %in% colnames(cen)) {
     stop("Column of interest provided is not part of the demographic dataset.
          Plase select another column.")
   }
-  total_col <- names(dem)[length(names(dem))]
+  total_col <- names(cen)[length(names(cen))]
   cols_exclude <- c(
     total_col, column, "codigo_departamento", "departamento",
     "codigo_municipio", "municipio", "indice_de_masculinidad",
     "indice_de_feminidad"
   )
-  filtered_df <- dem %>%
+  filtered_df <- cen %>%
     dplyr::filter(rowSums(dplyr::across(
       -dplyr::any_of(cols_exclude),
       ~ !grepl("total", ., fixed = TRUE)
@@ -63,10 +57,10 @@ merge_geo_dem <- function(spatial_level, demographic_dataset, column) {
         names_from = dplyr::all_of(column),
         values_from = dplyr::all_of(total_col)
       )
-    geo_dpto <- suppressMessages(download_geospatial("DANE_MGN_2018_DPTO",
+    geo_dpto <- suppressMessages(download_geospatial("department",
       include_cnpv = FALSE
     ))
-    merged_df <- merge(geo_dpto, filtered_df,
+    merged_data <- merge(geo_dpto, filtered_df,
       by.x = "codigo_departamento",
       by.y = "codigo_departamento", all.x = TRUE
     )
@@ -79,13 +73,13 @@ merge_geo_dem <- function(spatial_level, demographic_dataset, column) {
         names_from = dplyr::all_of(column),
         values_from = dplyr::all_of(total_col)
       )
-    geo_mpio <- suppressMessages(download_geospatial("DANE_MGN_2018_MPIO",
+    geo_mpio <- suppressMessages(download_geospatial("municipality",
       include_cnpv = FALSE
     ))
-    merged_df <- merge(geo_mpio, filtered_df,
+    merged_data <- merge(geo_mpio, filtered_df,
       by.x = "codigo_municipio",
       by.y = "codigo_municipio", all.x = TRUE
     )
   }
-  return(merged_df)
+  return(merged_data)
 }

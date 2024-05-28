@@ -20,8 +20,8 @@ Authors@R: c(
            comment = c(ORCID = "0000-0003-1050-6809"))
   )
 Description: ColOpenData is a package that acquires and wrangles Colombian
-    socioeconomic, geospatial and climate data. It solves the problem of
-    Colombian data being issued in different web pages and sources by
+    socioeconomic, geospatial, population and climate data. It solves the 
+    problem of Colombian data being issued in different web pages and sources by
     using functions that allow the user to select the desired database and
     download it without having to do the exhausting acquisition process.
 License: MIT + file LICENSE
@@ -41,8 +41,7 @@ Imports:
     sf,
     utils,
     stringdist,
-    tidyr,
-    stringr
+    tidyr
 Suggests: 
     ggplot2,
     knitr,

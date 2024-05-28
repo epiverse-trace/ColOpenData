@@ -16,10 +16,10 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Understanding Demographic and Geospatial Datasets
+#### Understanding Demographic Datasets
 
 ::: {style="text-align: justify;"}
-Demographic and geospatial data is provided from multiple datasets of the same source. To download the data, a naming framework has been implemented, which includes the source, group, year and final details for individual identification. Details are different for every dataset and are related to the internal information they contain. The general frame can be used as follows:
+Demographic data is provided from multiple datasets of the same source. To download the data, a naming framework has been implemented, which includes the source, group, year and final details for individual identification. Details are different for every dataset and are related to the internal information they contain. The general frame can be used as follows:
 :::
 
 ::: {.alert .alert-info}
@@ -27,10 +27,8 @@ SOURCE_GROUP_YEARS_DETAILS
 :::
 
 ::: {style="text-align: justify;"}
-This naming framework is only used for the functions `download_demographic` and `download_geospatial`. For hands on examples please check [A Deep Dive into Colombian Demographics Using ColOpenData](https://epiverse-trace.github.io/ColOpenData/articles/demographic_data.html) and [Maps and plots with ColOpenData](https://epiverse-trace.github.io/ColOpenData/articles/geospatial_data.html).
+This naming framework is only used for the functions `download_demographic`. For hands on examples please check [A Deep Dive into Colombian Demographics Using ColOpenData](https://epiverse-trace.github.io/ColOpenData/articles/demographic_data.html).
 :::
-
-#### Demographic
 
 ::: {style="text-align: justify;"}
 Demographic datasets are available for municipalities and departments, and contain data for Dwellings, Households, Population and Population Projections in five categories.
@@ -56,15 +54,11 @@ All datasets are retrieved from the National Administrative Department of Statis
 -   Details: These are related to each individual dataset. For further details please check the function `list_datasets` below.
 :::
 
-#### Geospatial
+#### Understanding Geospatial Datasets
 
 ::: {style="text-align: justify;"}
-Geospatial datasets naming is related to the level of aggregation, since they are available from Blocks to Departments. All these datasets come from DANE, and are part of the Geostatistical National Framework (MGN), which for 2018 included a summarized version of the National Population and Dwelling Census (CNPV). Naming is stated as follows:
+Geospatial datasets naming is related to the level of aggregation, since they are available from Blocks to Departments. All these datasets come from DANE, and are part of the Geostatistical National Framework (MGN), which for 2018 included a summarized version of the National Population and Dwelling Census (CNPV). Available spatial levels include: department, municipality, urban and rural sector, urban and rural section, urban zone and blocks. Please check [Maps and plots with ColOpenData](https://epiverse-trace.github.io/ColOpenData/articles/geospatial_data.html) for further details.
 
--   Source: **DANE**
--   Group: **MGN**
--   Year: **2018**
--   Details: These are related to the level of aggregation, and can be consulted using the function `list_datasets`.
 :::
 
 ## Understanding Climate Dataset

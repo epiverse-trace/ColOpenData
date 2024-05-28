@@ -1,7 +1,7 @@
 # Download geospatial works as expected
 
     Code
-      download_geospatial(dataset = "DANE_MGN_2018_DPTO", include_geom = TRUE,
+      download_geospatial(spatial_level = "department", include_geom = TRUE,
         include_cnpv = FALSE)
     Message
       Original data is retrieved from the National Administrative Department
@@ -42,8 +42,7 @@
 # Download geospatial works as expected with different parameters
 
     Code
-      download_geospatial(dataset = "DANE_MGN_2018_DPTO", include_geom = FALSE,
-        include_cnpv = TRUE)
+      download_geospatial(spatial_level = "dpto", include_geom = FALSE, include_cnpv = TRUE)
     Message
       Original data is retrieved from the National Administrative Department
       of Statistics (Departamento Administrativo Nacional de Estadística -
@@ -74,12 +73,12 @@
       20                  44                                               La Guajira
       21                  47                                                Magdalena
       22                  70                                                    Sucre
-      23                  88 Archipiélago de San Andrés, Providencia Y Santa Catalina
+      23                  88 Archipiélago de San Andrés, Providencia y Santa Catalina
       24                  81                                                   Arauca
       25                  15                                                   Boyacá
       26                  25                                             Cundinamarca
       27                  54                                       Norte de Santander
-      28                  11                                             Bogotá, D.c.
+      28                  11                                             Bogotá, D.C.
       29                  50                                                     Meta
       30                  41                                                    Huila
       31                  68                                                Santander

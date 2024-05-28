@@ -49,19 +49,15 @@ Administrative Department of Statistics
 [(DANE)](https://www.dane.gov.co/index.php/en/), and the Institute of
 Hydrology, Meteorology and Environmental Studies
 [(IDEAM)](http://www.ideam.gov.co/). The available data is divided in
-three categories:
+four categories:
 
 - **Demographic:** Demographic and Socioeconomic data presents
-  information from the National Population and Dwelling Census (CNPV) of
-  2018 and Population Projections. The CNPV data corresponds to the most
-  recent census available to date and the information is presented as an
-  answer to three questions: How many are we?, Where are we? and How do
-  we live? Further information can be consulted
+  information from the National Population and Dwelling Census (CNPV)
+  of 2018. The CNPV data corresponds to the most recent census available
+  to date and the information is presented as an answer to three
+  questions: How many are we?, Where are we? and How do we live? Further
+  information can be consulted
   [here](https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/censo-nacional-de-poblacion-y-vivenda-2018).
-  The Population Projections data contains the population projections
-  with the post COVID-19 update calculated based on the results of CNPV
-  of 2018. Further information can be consulted
-  [here](https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/proyecciones-de-poblacion).
 
 - **Geospatial:** This data is retrieved from the National
   Geostatistical Framework (MGN), which includes maps and a summarized
@@ -77,8 +73,14 @@ three categories:
   precipitation, sunshine duration, wind direction, among others. More
   information can be found [here](http://www.ideam.gov.co/).
 
-Documentation and vignettes are available for the three modules in the
-[user vignettes](https://epiverse-trace.github.io/ColOpenData/).
+- **Population projections:** Population Projections data contains the
+  population projections and back projections from 1950 to 2070,
+  considering the post COVID-19 update, which was calculated based on
+  the results of CNPV of 2018. Further information can be consulted
+  [here](https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/proyecciones-de-poblacion).
+
+Documentation and vignettes are available for the modules in the [user
+vignettes](https://epiverse-trace.github.io/ColOpenData/).
 
 ### Related R Packages
 
