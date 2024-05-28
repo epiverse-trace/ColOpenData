@@ -24,14 +24,14 @@
 #' group (only available for \code{"municipality"}). Default is \code{FALSE}
 #'
 #' @examples
-#' pop_proj <- download_population_projections("national", 2020, 2030)
+#' pop_proj <- download_pop_projections("national", 2020, 2030)
 #'
 #' @return \code{data.frame} object with downloaded data
 #'
 #' @export
-download_population_projections <- function(spatial_level, start_year, end_year,
-                                            include_sex = FALSE,
-                                            include_ethnic = FALSE) {
+download_pop_projections <- function(spatial_level, start_year, end_year,
+                                     include_sex = FALSE,
+                                     include_ethnic = FALSE) {
   checkmate::assert_choice(spatial_level, c(
     "national", "department",
     "municipality"

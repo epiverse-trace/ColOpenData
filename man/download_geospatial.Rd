@@ -11,7 +11,7 @@ download_geospatial(spatial_level, include_geom = TRUE, include_cnpv = TRUE)
 \itemize{
 \item \code{"DPTO"} or \code{"department"}: Department
 \item \code{"MPIO"} or \code{"municipality"}: Municipality
-\item \code{"MPIOCL"} or \code{"municipality_cl"}: Municipality including
+\item \code{"MPIOCL"} or \code{"municipality_class"}: Municipality including
 Class
 \item \code{"SETU"} or \code{"urban_sector"}: Urban Sector
 \item \code{"SETR"} or \code{"rural_sector"}: Rural Sector

@@ -61,7 +61,7 @@ library(dplyr)
 library(ggplot2)
 ```
 
-Now we can download the data. We will use the function `download_population_projections`, which has five parameters:
+Now we can download the data. We will use the function `download_pop_projections`, which has five parameters:
 
 - `spatial_level` character with the spatial level to be consulted. Can be either `"national"`,  `"department"` or `"municipality"`
 - `start_year` numeric with the start year to be consulted
@@ -70,7 +70,7 @@ Now we can download the data. We will use the function `download_population_proj
 - `include_ethnic` logical for including (or not) division by ethnic group (only available for `"municipality"`). Default is `FALSE`
 
 ```{r download data}
-asen <- download_population_projections(
+asen <- download_pop_projections(
   spatial_level = "national",
   start_year = 2034,
   end_year = 2034,
