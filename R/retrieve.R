@@ -44,7 +44,6 @@ retrieve_path <- function(dataset) {
   base_path <- retrieve_value_key("base_path")
   all_datasets <- list_datasets()
   dataset_info <- all_datasets[which(all_datasets$name == dataset), ]
-  # If dataset exists, build path
   if (nrow(dataset_info) == 1) {
     group_path <- retrieve_value_key(dataset_info$group)
     category_path <- retrieve_value_key(dataset_info$category)

@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
 )
 ```
 
+## Naming and structure
+
 #### Understanding Demographic Datasets
 
 ::: {style="text-align: justify;"}
@@ -27,17 +29,12 @@ SOURCE_GROUP_YEARS_DETAILS
 :::
 
 ::: {style="text-align: justify;"}
-This naming framework is only used for the functions `download_demographic`. For hands on examples please check [A Deep Dive into Colombian Demographics Using ColOpenData](https://epiverse-trace.github.io/ColOpenData/articles/demographic_data.html).
-:::
-
-::: {style="text-align: justify;"}
 Demographic datasets are available for municipalities and departments, and contain data for Dwellings, Households, Population and Population Projections in five categories.
 
 -   Viviendas (Dwellings)
 -   Hogares (Households)
 -   Personas Social (Persons social)
 -   Personas Demográfico (Persons demographic)
--   Proyecciones Poblacionales (Population Projections)
 
 All datasets are retrieved from the National Administrative Department of Statistics (DANE). Naming is stated as follows:
 
@@ -47,24 +44,25 @@ All datasets are retrieved from the National Administrative Department of Statis
     -   Hogares: **CNPVH**
     -   Personas Social: **CNPVPS**
     -   Personas Demográfico: **CNPVPD**
-    -   Proyecciones Poblacionales **PP**
 -   Year:
     -   Census data: **2018**
-    -   Population projections: Various (see `list_datasets` below)
 -   Details: These are related to each individual dataset. For further details please check the function `list_datasets` below.
+:::
+
+::: {style="text-align: justify;"}
+For hands on examples please check [A Deep Dive into Colombian Demographics Using ColOpenData](https://epiverse-trace.github.io/ColOpenData/articles/demographic_data.html).
 :::
 
 #### Understanding Geospatial Datasets
 
 ::: {style="text-align: justify;"}
 Geospatial datasets naming is related to the level of aggregation, since they are available from Blocks to Departments. All these datasets come from DANE, and are part of the Geostatistical National Framework (MGN), which for 2018 included a summarized version of the National Population and Dwelling Census (CNPV). Available spatial levels include: department, municipality, urban and rural sector, urban and rural section, urban zone and blocks. Please check [Maps and plots with ColOpenData](https://epiverse-trace.github.io/ColOpenData/articles/geospatial_data.html) for further details.
-
 :::
 
 ## Understanding Climate Dataset
 
 ::: {style="text-align: justify;"}
-This module's data is stored in an unique dataset, and the information required to use the related functions is the area of interest, dates, and tags be consulted. Therefore, this module does not use the same naming framework. However, individual tags are required to download data and include:
+This module's data is stored in an unique dataset, and the information required to use the related functions is the area of interest, dates, and tags be consulted. Individual tags are required to download data and include:
 :::
 
 ```{r IDEAM table, echo = FALSE}
@@ -96,10 +94,18 @@ knitr::kable(IDEAM_tags)
 These tags are meant to be used for download using `download_climate`, `download_climate_geom` and `download_climate_stations`. See [How to download climate data using ColOpenData](https://epiverse-trace.github.io/ColOpenData/articles/climate_data.html) for further details.
 :::
 
+## Understanding Population Projections
+
+::: {style="text-align: justify;"}
+Population projections and back-projections are available for national, department and municipality levels, and divided by sex and ethnicity (the latter is only available for municipalities). The names of the datasets relate to the source, years included, sex and ethnicity.
+
+For examples on how to consult the data please refer to [Population Projection with ColOpenData](https://epiverse-trace.github.io/ColOpenData/articles/population_projections.html)
+:::
+
 ## List Data
 
 ::: {style="text-align: justify;"}
-To check available datasets you can use the `list_datasets` function. This function can also be filtered with the `module` parameter to indicate a specific module. Default is `"all"`, but can be filtered by `"demographic"`, `"geospatial"` and `"climate"`.
+To check available datasets you can use the `list_datasets` function. This function can also be filtered with the `module` parameter to indicate a specific module. Default is `"all"`, but can be filtered by `"demographic"`, `"geospatial"`, `"climate"` and `"population_projections"`.
 :::
 
 ```{r setup}
@@ -108,7 +114,6 @@ library(ColOpenData)
 
 ```{r list datasets}
 datasets <- list_datasets()
-
 head(datasets)
 ```
 
@@ -116,7 +121,6 @@ To list only demographic datasets we can use:
 
 ```{r list demographic datasets}
 demographic_datasets <- list_datasets(module = "demographic")
-
 head(demographic_datasets)
 ```
 
@@ -138,7 +142,6 @@ Sometimes, going through each dataset to find specific information can be tiring
 
 ```{r list datasets with information by age}
 age_datasets <- look_up(keywords = "age")
-
 head(age_datasets)
 ```
 
@@ -149,7 +152,6 @@ area_sex_datasets <- look_up(
   module = "demographic", keywords = c("area", "sex"),
   logic = "and"
 )
-
 head(area_sex_datasets)
 ```
 
@@ -173,7 +175,6 @@ Datasets inside the geospatial module contain a summarized version of the census
 
 ```{r dictionary for MGNCNPV at municipalities}
 dict_mpio <- dictionary("DANE_MGN_2018_MPIO")
-
 head(dict_mpio)
 ```
 
@@ -185,7 +186,6 @@ Climate data is not stored in multiple datasets but as an unique dataset with nu
 
 ```{r dicionary for climate data}
 dict_climate <- dictionary("IDEAM_CLIMATE_2023_MAY")
-
 head(dict_climate)
 ```
 
@@ -197,7 +197,6 @@ DIVIPOLA codification is a standardized frame for the whole country, and contain
 
 ```{r divipola-table}
 divipola <- divipola_table()
-
 head(divipola)
 ```
 
@@ -210,7 +209,7 @@ divipola_department_code("Guajira")
 ```
 
 ::: {style="text-align: justify;"}
-To retrieve a municipality code we must include the department name and the municipality name. This is to consider repetition in municipalities' names across departments.
+To retrieve a municipality code we must include the department name and the municipality name. This is to consider repetition among municipalities' names across departments.
 :::
 
 ```{r divipola tunja}
@@ -218,7 +217,7 @@ divipola_municipality_code("Boyacá", "Tunja")
 ```
 
 ::: {style="text-align: justify;"}
-These individual codes can be used to filter information in the datasets.
+These individual codes can be used to filter information in the datasets. 
 
 On the other hand, departments' and municipalities' codes can be translated to retrieve their official names using `divipola_municipality_name` and `divipola_department_name`.
 :::

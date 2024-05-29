@@ -4,14 +4,14 @@
 #' This function downloads geospatial datasets from the Geostatistical National
 #' Framework at different levels of spatial aggregation. These datasets
 #' include a summarized version of the National Population and Dwelling Census
-#' (CNPV) with demographic and socioeconomic information.
+#' (CNPV) with demographic and socioeconomic information for each spatial unit.
 #'
 #' @param spatial_level character with the spatial level to be consulted
 #' \itemize{
 #' \item \code{"DPTO"} or \code{"department"}: Department
 #' \item \code{"MPIO"} or \code{"municipality"}: Municipality
 #' \item \code{"MPIOCL"} or \code{"municipality_class"}: Municipality including
-#' Class
+#' class
 #' \item \code{"SETU"} or \code{"urban_sector"}: Urban Sector
 #' \item \code{"SETR"} or \code{"rural_sector"}: Rural Sector
 #' \item \code{"SECU"} or \code{"urban_section"}: Urban Section
@@ -64,7 +64,7 @@ download_geospatial <- function(spatial_level, include_geom = TRUE,
   all_datasets <- list_datasets("geospatial")
   geo_dataset <- all_datasets %>%
     dplyr::filter(.data$level == spatial_level)
-  dataset <- geo_dataset$name[1]
+  dataset <- geo_dataset$name
   dataset_path <- retrieve_path(dataset)
   geospatial_data <- sf::st_read(dataset_path, quiet = TRUE)
   geospatial_vars <- c("area", "latitud", "longitud")
