@@ -222,14 +222,14 @@ code_to_name_mun <- function(municipality_code) {
 #'
 #' @description
 #' Department names are usually manually input, which leads to multiple errors
-#' and lack of standardisation. This functions translates department names to
+#' and lack of standardization. This functions translates department names to
 #' their respective official names from DIVIPOLA
 #'
 #' @param department_name character vector with the names to be translated
 #'
 #' @examples
 #' dptos <- c("Bogota DC", "San Andres")
-#' official_names <- trans_divipola_department(dptos)
+#' official_names <- name_to_standard_dep(dptos)
 #'
 #' @return character vector with the DIVIPOLA name of the departments
 #'
@@ -255,7 +255,7 @@ name_to_standard_dep <- function(department_name) {
 #'
 #' dptos <- c("Bogota", "Antioquia", "Tolima")
 #' mpios <- c("Bogota DC", "Carmen dell Viboral", "CarmendeApicala")
-#' official_names <- trans_divipola_municipality(dptos, mpios)
+#' official_names <- name_to_standard_mun(dptos, mpios)
 #'
 #' @return character vector with the DIVIPOLA name of the municipalities
 #'

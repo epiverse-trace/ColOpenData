@@ -14,11 +14,11 @@ character vector with the DIVIPOLA name of the departments
 }
 \description{
 Department names are usually manually input, which leads to multiple errors
-and lack of standardisation. This functions translates department names to
+and lack of standardization. This functions translates department names to
 their respective official names from DIVIPOLA
 }
 \examples{
 dptos <- c("Bogota DC", "San Andres")
-official_names <- trans_divipola_department(dptos)
+official_names <- name_to_standard_dep(dptos)
 
 }
