@@ -64,3 +64,5 @@ reference:
   - divipola_municipality_code
   - divipola_department_name
   - divipola_municipality_name
+  - trans_divipola_department
+  - trans_divipola_municipality
