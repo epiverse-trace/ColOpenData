@@ -28,6 +28,9 @@
     <loc>https://epiverse-trace.github.io/ColOpenData/articles/merge_geo_dem.html</loc>
   </url>
   <url>
+    <loc>https://epiverse-trace.github.io/ColOpenData/articles/population_projections.html</loc>
+  </url>
+  <url>
     <loc>https://epiverse-trace.github.io/ColOpenData/authors.html</loc>
   </url>
   <url>
@@ -64,6 +67,12 @@
     <loc>https://epiverse-trace.github.io/ColOpenData/reference/annual_tssm.html</loc>
   </url>
   <url>
+    <loc>https://epiverse-trace.github.io/ColOpenData/reference/code_to_name_dep.html</loc>
+  </url>
+  <url>
+    <loc>https://epiverse-trace.github.io/ColOpenData/reference/code_to_name_mun.html</loc>
+  </url>
+  <url>
     <loc>https://epiverse-trace.github.io/ColOpenData/reference/daily_bshg.html</loc>
   </url>
   <url>
@@ -71,18 +80,6 @@
   </url>
   <url>
     <loc>https://epiverse-trace.github.io/ColOpenData/reference/dictionary.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/divipola_department_code.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/divipola_department_name.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/divipola_municipality_code.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/divipola_municipality_name.html</loc>
   </url>
   <url>
     <loc>https://epiverse-trace.github.io/ColOpenData/reference/divipola_table.html</loc>
@@ -103,6 +100,9 @@
     <loc>https://epiverse-trace.github.io/ColOpenData/reference/download_geospatial.html</loc>
   </url>
   <url>
+    <loc>https://epiverse-trace.github.io/ColOpenData/reference/download_pop_projections.html</loc>
+  </url>
+  <url>
     <loc>https://epiverse-trace.github.io/ColOpenData/reference/index.html</loc>
   </url>
   <url>
@@ -112,7 +112,7 @@
     <loc>https://epiverse-trace.github.io/ColOpenData/reference/look_up.html</loc>
   </url>
   <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/merge_geo_dem.html</loc>
+    <loc>https://epiverse-trace.github.io/ColOpenData/reference/merge_geo_demographic.html</loc>
   </url>
   <url>
     <loc>https://epiverse-trace.github.io/ColOpenData/reference/monthly_bshg.html</loc>
@@ -128,6 +128,18 @@
   </url>
   <url>
     <loc>https://epiverse-trace.github.io/ColOpenData/reference/monthly_tssm.html</loc>
+  </url>
+  <url>
+    <loc>https://epiverse-trace.github.io/ColOpenData/reference/name_to_code_dep.html</loc>
+  </url>
+  <url>
+    <loc>https://epiverse-trace.github.io/ColOpenData/reference/name_to_code_mun.html</loc>
+  </url>
+  <url>
+    <loc>https://epiverse-trace.github.io/ColOpenData/reference/name_to_standard_dep.html</loc>
+  </url>
+  <url>
+    <loc>https://epiverse-trace.github.io/ColOpenData/reference/name_to_standard_mun.html</loc>
   </url>
   <url>
     <loc>https://epiverse-trace.github.io/ColOpenData/reference/retrieve_climate.html</loc>
