@@ -60,9 +60,9 @@ reference:
   - divipola_table
 - subtitle: DIVIPOLA helper functions
   contents:
-  - divipola_department_code
-  - divipola_municipality_code
-  - divipola_department_name
-  - divipola_municipality_name
-  - trans_divipola_department
-  - trans_divipola_municipality
+  - name_to_code_dep
+  - name_to_code_mun
+  - code_to_name_dep
+  - code_to_name_mun
+  - name_to_standard_dep
+  - name_to_standard_mun
