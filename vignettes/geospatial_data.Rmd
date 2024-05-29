@@ -100,7 +100,7 @@ After downloading, we have to filter by the municipality code using the DIVIPOLA
 :::
 
 ```{r}
-divipola_department_code("Tolima")
+name_to_code_dep("Tolima")
 ```
 
 ::: {style="text-align: justify;"}
