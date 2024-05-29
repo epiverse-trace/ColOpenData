@@ -81,3 +81,13 @@ test_that("Divipola municipality name throws errors", {
 test_that("Divipola municipality name works as expected", {
   expect_identical(divipola_municipality_name("05051"), "Arboletes")
 })
+
+test_that("Translate divipola department name works as expected", {
+  expect_identical(trans_divipola_department("Bogota"), "Bogotá, D.C.")
+})
+
+test_that("Translate divipola municipality name works as expected", {
+  expect_identical(trans_divipola_municipality(
+    c("Antioquia"), c("Sta fe de antioquia")
+  ), "Santa Fé de Antioquia")
+})

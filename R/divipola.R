@@ -217,3 +217,51 @@ divipola_municipality_name <- function(municipality_code) {
   }
   return(municipalities_names)
 }
+
+#' Translate department names to  official municipalities' DIVIPOLA names
+#'
+#' @description
+#' Translate department names to their respective official names from DIVIPOLA
+#'
+#' @param department_name character vector with the names to be translated
+#'
+#' @examples
+#' dptos <- c("Bogota DC", "San Andres")
+#' official_names <- trans_divipola_department(dptos)
+#'
+#' @return character vector with the DIVIPOLA name of the departments
+#'
+#' @export
+trans_divipola_department <- function(department_name) {
+  divipola_codes <- divipola_department_code(department_name)
+  divipola_names <- divipola_department_name(divipola_codes)
+  return(divipola_names)
+}
+
+#' Translate municipality names to  official municipalities' DIVIPOLA names
+#'
+#' @description
+#' Translate municipalities' names to their respective official names from
+#' DIVIPOLA
+#'
+#' @param department_name character vector with the names of the
+#' departments containing the municipalities
+#' @param municipality_name character vector with the names to be translated
+#'
+#' @examples
+#'
+#' dptos <- c("Bogota", "Antioquia", "Tolima")
+#' mpios <- c("Bogota DC", "Carmen dell Viboral", "CarmendeApicala")
+#' official_names <- trans_divipola_municipality(dptos, mpios)
+#'
+#' @return character vector with the DIVIPOLA name of the municipalities
+#'
+#' @export
+trans_divipola_municipality <- function(department_name, municipality_name) {
+  divipola_codes <- divipola_municipality_code(
+    department_name,
+    municipality_name
+  )
+  divipola_names <- divipola_municipality_name(divipola_codes)
+  return(divipola_names)
+}
