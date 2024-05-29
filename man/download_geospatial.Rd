@@ -12,7 +12,7 @@ download_geospatial(spatial_level, include_geom = TRUE, include_cnpv = TRUE)
 \item \code{"DPTO"} or \code{"department"}: Department
 \item \code{"MPIO"} or \code{"municipality"}: Municipality
 \item \code{"MPIOCL"} or \code{"municipality_class"}: Municipality including
-Class
+class
 \item \code{"SETU"} or \code{"urban_sector"}: Urban Sector
 \item \code{"SETR"} or \code{"rural_sector"}: Rural Sector
 \item \code{"SECU"} or \code{"urban_section"}: Urban Section
@@ -34,7 +34,7 @@ socioeconomic information. Default is \code{TRUE}}
 This function downloads geospatial datasets from the Geostatistical National
 Framework at different levels of spatial aggregation. These datasets
 include a summarized version of the National Population and Dwelling Census
-(CNPV) with demographic and socioeconomic information.
+(CNPV) with demographic and socioeconomic information for each spatial unit.
 }
 \examples{
 departments <- download_geospatial("department", TRUE, FALSE)
