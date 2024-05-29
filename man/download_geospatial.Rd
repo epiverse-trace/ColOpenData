@@ -4,10 +4,22 @@
 \alias{download_geospatial}
 \title{Download geospatial dataset}
 \usage{
-download_geospatial(dataset, include_geom = TRUE, include_cnpv = TRUE)
+download_geospatial(spatial_level, include_geom = TRUE, include_cnpv = TRUE)
 }
 \arguments{
-\item{dataset}{character with the geospatial dataset name}
+\item{spatial_level}{character with the spatial level to be consulted
+\itemize{
+\item \code{"DPTO"} or \code{"department"}: Department
+\item \code{"MPIO"} or \code{"municipality"}: Municipality
+\item \code{"MPIOCL"} or \code{"municipality_class"}: Municipality including
+class
+\item \code{"SETU"} or \code{"urban_sector"}: Urban Sector
+\item \code{"SETR"} or \code{"rural_sector"}: Rural Sector
+\item \code{"SECU"} or \code{"urban_section"}: Urban Section
+\item \code{"SECR"} or \code{"rural_section"}: Rural Section
+\item \code{"ZU" } or \code{"urban_zone"}: Urban Zone
+\item \code{"MZN"} or \code{"block"}: Block
+}}
 
 \item{include_geom}{logical for including (or not) the geometry.
 Default is \code{TRUE}}
@@ -20,11 +32,11 @@ socioeconomic information. Default is \code{TRUE}}
 }
 \description{
 This function downloads geospatial datasets from the Geostatistical National
-Framework (MGN) at different levels of spatial aggregation. These datasets
+Framework at different levels of spatial aggregation. These datasets
 include a summarized version of the National Population and Dwelling Census
-(CNPV) with demographic and socioeconomic information.
+(CNPV) with demographic and socioeconomic information for each spatial unit.
 }
 \examples{
-departments <- download_geospatial("DANE_MGN_2018_DPTO", TRUE, FALSE)
+departments <- download_geospatial("department", TRUE, FALSE)
 
 }

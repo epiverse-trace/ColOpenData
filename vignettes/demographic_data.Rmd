@@ -24,7 +24,7 @@ The available CNPV information is divided in four categories: households, person
 In this vignette you will learn:
 
 1. How to download demographic data using **ColOpenData**
-2. How to filter, group, mutate and aggregate demographic data including census and population projections
+2. How to filter, group, mutate and aggregate demographic data
 3. How to visualize data using **ggplot2**
 
 As the goal of this vignette is to show some examples on how to use the data, we will load some specific libraries but that does not mean they are required to use the data in all cases.
@@ -255,64 +255,3 @@ ggplot(merged_df, aes(x = estado, y = proporcion, fill = sexo)) +
     plot.title = element_text(hjust = 0.5)
   )
 ```
-
-## Forecasting the Future: Analyzing Population Projections
-
-::: {style="text-align: justify;"}
-Now, as a third example, we will take a look at a population projections dataset, presenting projections and back projections of national population by area, sex and age for the period from 1950 to 2070. We will observe the expected female population under 99 by age brackets for 2034.
-:::
-
-We will first download the data.
-
-```{r download data}
-asen <- download_demographic("DANE_PP_1950_2070_ASEN")
-```
-We will filter the downloaded data for the year 2034 and ages under 99.
-
-```{r filtered projections}
-female_2034 <- asen %>%
-  filter(
-    area == "total",
-    ano == 2034,
-    sexo == "mujer",
-    edad != "100_y_mas"
-  ) %>%
-  mutate(edad = as.numeric(edad))
-```
-
-Age groups will be defined by breaks and included in the original dataset.
-
-```{r age groups}
-age_groups <- cut(female_2034$edad,
-  breaks = c(-1, 2, 12, 19, 29, 39, 49, 59, 69, 79, 89, 99),
-  labels = c(
-    "0-2", "3-12", "13-19", "20-29", "30-39", "40-49",
-    "50-59", "60-69", "70-79", "80-89", "90-99"
-  )
-)
-female_groups <- female_2034 %>%
-  mutate(age_group = age_groups) %>%
-  group_by(age_group) %>%
-  summarise(total_sum = sum(total))
-```
-
-Finally, we can plot the output.
-
-```{r plot population}
-ggplot(female_groups, aes(
-  x = age_group,
-  y = total_sum
-)) +
-  geom_bar(stat = "identity", fill = "#f04a4c", color = "black", width = 0.6) +
-  labs(
-    title = "Female population counts in Colombia by age group for 2034",
-    x = "Age group",
-    y = "Female population"
-  ) +
-  theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    plot.title = element_text(hjust = 0.5)
-  )
-```
-

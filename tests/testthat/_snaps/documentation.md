@@ -3,16 +3,16 @@
     Code
       list_datasets("geospatial")
     Output
-                        name      group source year         level category
-      1   DANE_MGN_2018_DPTO geospatial   DANE 2018    department     maps
-      2   DANE_MGN_2018_MPIO geospatial   DANE 2018  municipality     maps
-      3 DANE_MGN_2018_MPIOCL geospatial   DANE 2018  municipality     maps
-      4   DANE_MGN_2018_SETU geospatial   DANE 2018  urban_sector     maps
-      5   DANE_MGN_2018_SETR geospatial   DANE 2018  rural_sector     maps
-      6   DANE_MGN_2018_SECU geospatial   DANE 2018 urban_section     maps
-      7   DANE_MGN_2018_SECR geospatial   DANE 2018 rural_section     maps
-      8    DANE_MGN_2018_MZN geospatial   DANE 2018         block     maps
-      9     DANE_MGN_2018_ZU geospatial   DANE 2023    urban_zone     maps
+                        name      group source year              level category
+      1   DANE_MGN_2018_DPTO geospatial   DANE 2018         department     maps
+      2   DANE_MGN_2018_MPIO geospatial   DANE 2018       municipality     maps
+      3 DANE_MGN_2018_MPIOCL geospatial   DANE 2018 municipality_class     maps
+      4   DANE_MGN_2018_SETU geospatial   DANE 2018       urban_sector     maps
+      5   DANE_MGN_2018_SETR geospatial   DANE 2018       rural_sector     maps
+      6   DANE_MGN_2018_SECU geospatial   DANE 2018      urban_section     maps
+      7   DANE_MGN_2018_SECR geospatial   DANE 2018      rural_section     maps
+      8    DANE_MGN_2018_MZN geospatial   DANE 2018              block     maps
+      9     DANE_MGN_2018_ZU geospatial   DANE 2023         urban_zone     maps
                                                                                       description
       1              Geographical and summarised census data from 2018 at the level of department
       2            Geographical and summarised census data from 2018 at the level of municipality
@@ -29,93 +29,93 @@
     Code
       dictionary("DANE_MGN_2018_DPTO")
     Output
-           variable         tipo longitud
-      1  DPTO_CCDGO         Text        2
-      2  DPTO_CNMBR         Text      250
-      3     VERSION Long Integer       NA
-      4        AREA       Double       NA
-      5     LATITUD       Double       NA
-      6    LONGITUD       Double       NA
-      7  STCTNENCUE       Double       NA
-      8   STP3_1_SI       Double       NA
-      9   STP3_2_NO       Double       NA
-      10   STP3A_RI       Double       NA
-      11  STP3B_TCN       Double       NA
-      12  STP4_1_SI       Double       NA
-      13  STP4_2_NO       Double       NA
-      14 STP9_1_USO       Double       NA
-      15 STP9_2_USO       Double       NA
-      16 STP9_3_USO       Double       NA
-      17 STP9_4_USO       Double       NA
-      18 STP9_2_1_M       Double       NA
-      19 STP9_2_2_M       Double       NA
-      20 STP9_2_3_M       Double       NA
-      21 STP9_2_4_M       Double       NA
-      22 STP9_2_9_M       Double       NA
-      23 STP9_3_1_N       Double       NA
-      24 STP9_3_2_N       Double       NA
-      25 STP9_3_3_N       Double       NA
-      26 STP9_3_4_N       Double       NA
-      27 STP9_3_5_N       Double       NA
-      28 STP9_3_6_N       Double       NA
-      29 STP9_3_7_N       Double       NA
-      30 STP9_3_8_N       Double       NA
-      31 STP9_3_9_N       Double       NA
-      32  STP9_3_10       Double       NA
-      33  STP9_3_99       Double       NA
-      34 STVIVIENDA       Double       NA
-      35 STP14_1_TI       Double       NA
-      36 STP14_2_TI       Double       NA
-      37 STP14_3_TI       Double       NA
-      38 STP14_4_TI       Double       NA
-      39 STP14_5_TI       Double       NA
-      40 STP14_6_TI       Double       NA
-      41 STP15_1_OC       Double       NA
-      42 STP15_2_OC       Double       NA
-      43 STP15_3_OC       Double       NA
-      44 STP15_4_OC       Double       NA
-      45  TSP16_HOG       Double       NA
-      46 STP19_EC_1       Double       NA
-      47 STP19_ES_2       Double       NA
-      48 STP19_EE_1       Double       NA
-      49 STP19_EE_2       Double       NA
-      50 STP19_EE_3       Double       NA
-      51 STP19_EE_4       Double       NA
-      52 STP19_EE_5       Double       NA
-      53 STP19_EE_6       Double       NA
-      54 STP19_EE_9       Double       NA
-      55 STP19_ACU1       Double       NA
-      56 STP19_ACU2       Double       NA
-      57 STP19_ALC1       Double       NA
-      58 STP19_ALC2       Double       NA
-      59 STP19_GAS1       Double       NA
-      60 STP19_GAS2       Double       NA
-      61 STP19_GAS9       Double       NA
-      62 STP19_REC1       Double       NA
-      63 STP19_REC2       Double       NA
-      64 STP19_INT1       Double       NA
-      65 STP19_INT2       Double       NA
-      66 STP19_INT9       Double       NA
-      67 STP27_PERS       Double       NA
-      68 STPERSON_L       Double       NA
-      69 STPERSON_S       Double       NA
-      70 STP32_1_SE       Double       NA
-      71 STP32_2_SE       Double       NA
-      72 STP34_1_ED       Double       NA
-      73 STP34_2_ED       Double       NA
-      74 STP34_3_ED       Double       NA
-      75 STP34_4_ED       Double       NA
-      76 STP34_5_ED       Double       NA
-      77 STP34_6_ED       Double       NA
-      78 STP34_7_ED       Double       NA
-      79 STP34_8_ED       Double       NA
-      80 STP34_9_ED       Double       NA
-      81 STP51_PRIM       Double       NA
-      82 STP51_SECU       Double       NA
-      83 STP51_SUPE       Double       NA
-      84 STP51_POST       Double       NA
-      85 STP51_13_E       Double       NA
-      86 STP51_99_E       Double       NA
+                          variable         tipo longitud
+      1        codigo_departamento         Text        2
+      2               departamento         Text      250
+      3                    version Long Integer       NA
+      4                       area       Double       NA
+      5                    latitud       Double       NA
+      6                   longitud       Double       NA
+      7                  encuestas       Double       NA
+      8                 enc_etnico       Double       NA
+      9              enc_no_etnico       Double       NA
+      10    enc_resguardo_indigena       Double       NA
+      11          enc_comun_negras       Double       NA
+      12        enc_area_protegida       Double       NA
+      13     enc_area_no_protegida       Double       NA
+      14               un_vivienda       Double       NA
+      15                  un_mixto       Double       NA
+      16                 un_no_res       Double       NA
+      17                    un_lea       Double       NA
+      18 un_mixto_no_res_industria       Double       NA
+      19  un_mixto_no_res_comercio       Double       NA
+      20 un_mixto_no_res_servicios       Double       NA
+      21      un_mixto_no_res_agro       Double       NA
+      22  un_mixto_no_res_sin_info       Double       NA
+      23       un_no_res_industria       Double       NA
+      24        un_no_res_comercio       Double       NA
+      25       un_no_res_servicios       Double       NA
+      26            un_no_res_agro       Double       NA
+      27   un_no_res_institucional       Double       NA
+      28            un_no_res_lote       Double       NA
+      29          un_no_res_parque       Double       NA
+      30          un_no_res_minero       Double       NA
+      31      un_no_res_proteccion       Double       NA
+      32     u_no_res_construccion       Double       NA
+      33         u_no_res_sin_info       Double       NA
+      34                 viviendas       Double       NA
+      35                  viv_casa       Double       NA
+      36           viv_apartamento       Double       NA
+      37                viv_cuarto       Double       NA
+      38         viv_trad_indigena       Double       NA
+      39           viv_trad_etnica       Double       NA
+      40                  viv_otro       Double       NA
+      41      viv_ocupado_personas       Double       NA
+      42  viv_ocupado_sin_personas       Double       NA
+      43              viv_temporal       Double       NA
+      44            viv_desocupado       Double       NA
+      45                   hogares       Double       NA
+      46               viv_energia       Double       NA
+      47           viv_sin_energia       Double       NA
+      48     viv_energia_estrato_1       Double       NA
+      49     viv_energia_estrato_2       Double       NA
+      50     viv_energia_estrato_3       Double       NA
+      51     viv_energia_estrato_4       Double       NA
+      52     viv_energia_estrato_5       Double       NA
+      53     viv_energia_estrato_6       Double       NA
+      54   viv_energia_sin_estrato       Double       NA
+      55             viv_acueducto       Double       NA
+      56         viv_sin_acueducto       Double       NA
+      57        viv_alcantarillado       Double       NA
+      58    viv_sin_alcantarillado       Double       NA
+      59                   viv_gas       Double       NA
+      60               viv_sin_gas       Double       NA
+      61          viv_sin_info_gas       Double       NA
+      62           viv_rec_basuras       Double       NA
+      63       viv_sin_rec_basuras       Double       NA
+      64              viv_internet       Double       NA
+      65          viv_sin_internet       Double       NA
+      66     viv_sin_info_internet       Double       NA
+      67                  personas       Double       NA
+      68                  per_leas       Double       NA
+      69  per_hogares_particulares       Double       NA
+      70                   hombres       Double       NA
+      71                   mujeres       Double       NA
+      72                 per_0_a_9       Double       NA
+      73               per_10_a_19       Double       NA
+      74               per_20_a_29       Double       NA
+      75               per_30_a_39       Double       NA
+      76               per_40_a_49       Double       NA
+      77               per_50_a_59       Double       NA
+      78               per_60_a_69       Double       NA
+      79               per_70_a_79       Double       NA
+      80                per_80_mas       Double       NA
+      81           per_ed_primaria       Double       NA
+      82         per_ed_secundaria       Double       NA
+      83           per_ed_superior       Double       NA
+      84           per_ed_posgrado       Double       NA
+      85      per_ed_sin_educacion       Double       NA
+      86           per_ed_sin_info       Double       NA
                                                                                                                descripcion
       1                                                                                            Código del departamento
       2                                                                                            Nombre del departamento

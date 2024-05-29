@@ -24,27 +24,27 @@ divipola_table <- function() {
 #'
 #' @examples
 #' dptos <- c("TOLIMA", "HUILA", "AMAZONAS")
-#' codes <- divipola_department_code(dptos)
+#' codes <- name_to_code_dep(dptos)
 #'
 #' @return character vector with the DIVIPOLA codes of the departments
 #'
 #' @export
-divipola_department_code <- function(department_name) {
+name_to_code_dep <- function(department_name) {
   checkmate::assert_character(department_name)
 
   divipola <- divipola_table()
-  dpts <- divipola[
-    !duplicated(divipola$nombre_departamento),
-    c("codigo_departamento", "nombre_departamento")
+  dptos <- divipola[
+    !duplicated(divipola$departamento),
+    c("codigo_departamento", "departamento")
   ]
   fixed_tokens <- iconv(
-    dpts$nombre_departamento,
+    tolower(dptos$departamento),
     from = "utf-8",
     to = "ASCII//TRANSLIT"
   )
   departments_codes <- NULL
-  for (dpt in department_name) {
-    input_token <- iconv(toupper(dpt),
+  for (dpto in department_name) {
+    input_token <- iconv(tolower(dpto),
       from = "UTF-8",
       to = "ASCII//TRANSLIT"
     )
@@ -56,17 +56,17 @@ divipola_department_code <- function(department_name) {
     ))
     min_distance_i <- which(distances$distance == min(distances$distance))
     if (length(min_distance_i) == 1) {
-      dpt_code <- dpts$codigo_departamento[min_distance_i]
+      dpto_code <- dptos$codigo_departamento[min_distance_i]
     } else {
       min_location <- distances$location[min_distance_i]
       min_location_i <- min_distance_i[which.min(min_location)]
-      dpt_code <- dpts$codigo_departamento[min_location_i]
+      dpto_code <- dptos$codigo_departamento[min_location_i]
     }
     if (min(distances$distance) > 0.11) {
-      warning(dpt, " cannot be found as a department name")
+      warning(dpto, " cannot be found as a department name")
       departments_codes <- c(departments_codes, NA)
     } else {
-      departments_codes <- c(departments_codes, dpt_code)
+      departments_codes <- c(departments_codes, dpto_code)
     }
   }
   return(departments_codes)
@@ -88,37 +88,37 @@ divipola_department_code <- function(department_name) {
 #' @examples
 #' dptos <- c("HUILA", "ANTIOQUIA")
 #' mpios <- c("PITALITO", "TURBO")
-#' codes <- divipola_municipality_code(dptos, mpios)
+#' codes <- name_to_code_mun(dptos, mpios)
 #'
 #' @return character vector with the DIVIPOLA codes of the municipalities
 #'
 #' @export
-divipola_municipality_code <- function(department_name, municipality_name) {
+name_to_code_mun <- function(department_name, municipality_name) {
   checkmate::assert_character(department_name)
   checkmate::assert_character(municipality_name)
   stopifnot("`department_name` and `municipality_name` must be the same
             length" = length(department_name) == length(municipality_name))
 
   divipola <- divipola_table()
-  dpts <- suppressWarnings(divipola_department_code(department_name))
+  dptos <- suppressWarnings(name_to_code_dep(department_name))
   municipalities_codes <- NULL
   for (i in seq_along(municipality_name)) {
     input_token <- iconv(
-      toupper(municipality_name[i]),
+      tolower(municipality_name[i]),
       from = "utf-8",
       to = "ASCII//TRANSLIT"
     )
-    dpt_code <- dpts[i]
-    if (is.na(dpt_code)) {
+    dpto_code <- dptos[i]
+    if (is.na(dpto_code)) {
       warning(department_name[i], " cannot be found as a department name")
       municipalities_codes <- c(municipalities_codes, NA)
       next
     }
-    filtered_mps <- divipola[which(
-      divipola$codigo_departamento == dpt_code
+    filtered_mpios <- divipola[which(
+      divipola$codigo_departamento == dpto_code
     ), ]
     fixed_tokens <- iconv(
-      filtered_mps$nombre_municipio,
+      tolower(filtered_mpios$municipio),
       from = "utf-8",
       to = "ASCII//TRANSLIT"
     )
@@ -130,17 +130,17 @@ divipola_municipality_code <- function(department_name, municipality_name) {
     ))
     min_distance_i <- which(distances$distance == min(distances$distance))
     if (length(min_distance_i) == 1) {
-      mp_code <- filtered_mps$codigo_municipio[min_distance_i]
+      mpio_code <- filtered_mpios$codigo_municipio[min_distance_i]
     } else {
       min_location <- distances$location[min_distance_i]
       min_location_i <- min_distance_i[which.min(min_location)]
-      mp_code <- filtered_mps$codigo_municipio[min_location_i]
+      mpio_code <- filtered_mpios$codigo_municipio[min_location_i]
     }
     if (min(distances$distance) > 0.11) {
       warning(municipality_name[i], " cannot be found as a municipality name")
       municipalities_codes <- c(municipalities_codes, NA)
     } else {
-      municipalities_codes <- c(municipalities_codes, mp_code)
+      municipalities_codes <- c(municipalities_codes, mpio_code)
     }
   }
   return(municipalities_codes)
@@ -156,29 +156,29 @@ divipola_municipality_code <- function(department_name, municipality_name) {
 #'
 #' @examples
 #' dptos <- c("73", "05", "11")
-#' names <- divipola_department_name(dptos)
+#' names <- code_to_name_dep(dptos)
 #'
 #' @return character vector with the DIVIPOLA name of the departments
 #'
 #' @export
-divipola_department_name <- function(department_code) {
+code_to_name_dep <- function(department_code) {
   checkmate::assert_character(department_code, n.chars = 2)
 
   divipola <- divipola_table()
-  dpts <- divipola[
-    !duplicated(divipola$nombre_departamento),
-    c("codigo_departamento", "nombre_departamento")
+  dptos <- divipola[
+    !duplicated(divipola$departamento),
+    c("codigo_departamento", "departamento")
   ]
   departments_names <- NULL
   for (code in department_code) {
-    dpt_name <- dpts$nombre_departamento[which(
-      dpts$codigo_departamento == code
+    dpto_name <- dptos$departamento[which(
+      dptos$codigo_departamento == code
     )]
-    if (rlang::is_empty(dpt_name)) {
+    if (rlang::is_empty(dpto_name)) {
       warning(code, " cannot be found as a department code")
       departments_names <- c(departments_names, NA)
     } else {
-      departments_names <- c(departments_names, dpt_name)
+      departments_names <- c(departments_names, dpto_name)
     }
   }
   return(departments_names)
@@ -194,26 +194,77 @@ divipola_department_name <- function(department_code) {
 #'
 #' @examples
 #' mpios <- c("73001", "11001", "05615")
-#' names <- divipola_municipality_name(mpios)
+#' names <- code_to_name_mun(mpios)
 #'
 #' @return character vector with the DIVIPOLA name of the municipalities
 #'
 #' @export
-divipola_municipality_name <- function(municipality_code) {
+code_to_name_mun <- function(municipality_code) {
   checkmate::assert_character(municipality_code, n.chars = 5)
 
-  mps <- divipola_table()
+  mpios <- divipola_table()
   municipalities_names <- NULL
   for (code in municipality_code) {
-    mp_name <- mps$nombre_municipio[which(
-      mps$codigo_municipio == code
+    mpio_name <- mpios$municipio[which(
+      mpios$codigo_municipio == code
     )]
-    if (rlang::is_empty(mp_name)) {
+    if (rlang::is_empty(mpio_name)) {
       warning(code, " cannot be found as a municipality code")
       municipalities_names <- c(municipalities_names, NA)
     } else {
-      municipalities_names <- c(municipalities_names, mp_name)
+      municipalities_names <- c(municipalities_names, mpio_name)
     }
   }
   return(municipalities_names)
+}
+
+#' Translate department names to  official departments' DIVIPOLA names
+#'
+#' @description
+#' Department names are usually manually input, which leads to multiple errors
+#' and lack of standardisation. This functions translates department names to
+#' their respective official names from DIVIPOLA
+#'
+#' @param department_name character vector with the names to be translated
+#'
+#' @examples
+#' dptos <- c("Bogota DC", "San Andres")
+#' official_names <- trans_divipola_department(dptos)
+#'
+#' @return character vector with the DIVIPOLA name of the departments
+#'
+#' @export
+name_to_standard_dep <- function(department_name) {
+  divipola_codes <- name_to_code_dep(department_name)
+  divipola_names <- code_to_name_dep(divipola_codes)
+  return(divipola_names)
+}
+
+#' Translate municipality names to  official municipalities' DIVIPOLA names
+#'
+#' @description
+#' Municipality names are usually manually input, which leads to multiple errors
+#' and lack of standardization. This functions translates municipality names to
+#' their respective official names from DIVIPOLA
+#'
+#' @param department_name character vector with the names of the
+#' departments containing the municipalities
+#' @param municipality_name character vector with the names to be translated
+#'
+#' @examples
+#'
+#' dptos <- c("Bogota", "Antioquia", "Tolima")
+#' mpios <- c("Bogota DC", "Carmen dell Viboral", "CarmendeApicala")
+#' official_names <- trans_divipola_municipality(dptos, mpios)
+#'
+#' @return character vector with the DIVIPOLA name of the municipalities
+#'
+#' @export
+name_to_standard_mun <- function(department_name, municipality_name) {
+  divipola_codes <- name_to_code_mun(
+    department_name,
+    municipality_name
+  )
+  divipola_names <- code_to_name_mun(divipola_codes)
+  return(divipola_names)
 }

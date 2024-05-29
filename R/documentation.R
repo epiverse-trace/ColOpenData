@@ -1,7 +1,7 @@
 #' Download data dictionaries
 #'
 #' @description
-#' Demographic and climate datasets contain data dictionaries to understand
+#' Geospatial and climate datasets contain data dictionaries to understand
 #' internal tags and named columns
 #'
 #' @param dataset character with the dataset name
@@ -43,6 +43,7 @@ dictionary <- function(dataset) {
 #' \code{"geospatial"}, \code{"climate"}). Default is \code{"all"}
 #'
 #' @return \code{data.frame} object with the available datasets
+#'
 #' @examples
 #' list <- list_datasets("geospatial")
 #'
@@ -51,7 +52,7 @@ list_datasets <- function(module = "all") {
   checkmate::assert_character(module)
   checkmate::assert_choice(module, c(
     "all", "demographic", "geospatial",
-    "climate"
+    "climate", "population_projections"
   ))
 
   base_path <- retrieve_value_key("base_path")
@@ -84,6 +85,7 @@ list_datasets <- function(module = "all") {
 #'  }
 #'
 #' @return \code{data.frame} object with the available datasets
+#'
 #' @examples
 #' found <- look_up("demographic", c("sex", "age"), "and")
 #'

@@ -13,7 +13,7 @@ dictionary(dataset)
 \code{data.frame} object with data dictionary
 }
 \description{
-Demographic and climate datasets contain data dictionaries to understand
+Geospatial and climate datasets contain data dictionaries to understand
 internal tags and named columns
 }
 \examples{

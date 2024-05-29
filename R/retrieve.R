@@ -38,12 +38,12 @@ retrieve_path <- function(dataset) {
 
   ext <- list(
     geospatial = ".gpkg",
-    demographic = ".csv"
+    demographic = ".csv",
+    population_projections = ".csv"
   )
   base_path <- retrieve_value_key("base_path")
   all_datasets <- list_datasets()
   dataset_info <- all_datasets[which(all_datasets$name == dataset), ]
-  # If dataset exists, build path
   if (nrow(dataset_info) == 1) {
     group_path <- retrieve_value_key(dataset_info$group)
     category_path <- retrieve_value_key(dataset_info$category)
@@ -61,9 +61,7 @@ retrieve_path <- function(dataset) {
   return(file_path)
 }
 
-#' Retrieve climate directory path of named dataset
-#'
-#' @param dataset character with the dataset name
+#' Retrieve climate directory path
 #'
 #' @description
 #' Climate data is retrieved from a general directory. Path is build for said

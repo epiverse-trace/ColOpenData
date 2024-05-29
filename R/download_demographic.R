@@ -2,21 +2,22 @@
 #'
 #' @description
 #' This function downloads demographic datasets from the National Population
-#' and Dwelling Census (CNPV) and Population Projections
+#' and Dwelling Census (CNPV) of 2018.
 #'
-#' @param dataset character with the demographic dataset name
+#' @param dataset character with the demographic dataset name. Please use
+#' \code{list_datasets("demographic")} to check available datasets
 #'
 #' @examples
 #' house_under_15 <- download_demographic("DANE_CNPVH_2018_1HD")
 #'
 #' @return \code{data.frame} object with downloaded data
+#'
 #' @export
 download_demographic <- function(dataset) {
   checkmate::assert_character(dataset)
   stopifnot(
     "`dataset` name format is not correct" =
-      (startsWith(dataset, "DANE_CNPV") |
-        startsWith(dataset, "DANE_PP"))
+      (startsWith(dataset, "DANE_CNPV"))
   )
 
   dataset_path <- retrieve_path(dataset)

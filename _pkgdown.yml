@@ -13,12 +13,12 @@ articles:
   - demographic_data
   - geospatial_data
   - climate_data
+  - population_projections
 - title: Merge data
   navbar: Merge data
   contents:
   - merge_geo_dem
-  
-    
+
 reference:
 - title: Demographic Data
   contents:
@@ -36,11 +36,13 @@ reference:
   contents:
   - stations_in_roi
   - aggregate_climate
+- title: Popoulation Projections
+  contents:
+  - download_pop_projections
 - title: Merge geospatial and demographic data
   contents:
-  - merge_geo_dem
+  - merge_geo_demographic
 
-  
 - title: Documentation and Dictionaries
 - subtitle: List available datasets
   contents:
@@ -58,7 +60,9 @@ reference:
   - divipola_table
 - subtitle: DIVIPOLA helper functions
   contents:
-  - divipola_department_code
-  - divipola_municipality_code
-  - divipola_department_name
-  - divipola_municipality_name
+  - name_to_code_dep
+  - name_to_code_mun
+  - code_to_name_dep
+  - code_to_name_mun
+  - name_to_standard_dep
+  - name_to_standard_mun
