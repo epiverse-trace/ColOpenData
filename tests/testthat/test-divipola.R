@@ -88,6 +88,6 @@ test_that("Translate divipola department name works as expected", {
 
 test_that("Translate divipola municipality name works as expected", {
   expect_identical(trans_divipola_municipality(
-    c("Antioquia"), c("Sta fe de antioquia")
+    "Antioquia", "Sta fe de antioquia"
   ), "Santa Fé de Antioquia")
 })
