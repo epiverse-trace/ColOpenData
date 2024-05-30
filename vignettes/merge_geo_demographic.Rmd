@@ -89,7 +89,8 @@ ggplot(data = merged_data) +
   ) +
   scale_fill_gradient("Count", low = "#10bed2", high = "#deff00") +
   ggtitle(
-    label = "Proportion of people who reported using home remedies to treat a health problem",
+    label = "Proportion of people who reported using home remedies to treat
+    a health problem",
     subtitle = "Colombia"
   )
 ```
