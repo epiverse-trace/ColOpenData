@@ -19,5 +19,6 @@ and Dwelling Census (CNPV) of 2018.
 }
 \examples{
 house_under_15 <- download_demographic("DANE_CNPVH_2018_1HD")
+head(house_under_15)
 
 }

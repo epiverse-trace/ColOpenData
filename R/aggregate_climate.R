@@ -22,6 +22,7 @@
 #' roi <- sf::st_as_sf(geometry)
 #' tssm <- download_climate_geom(roi, "2021-11-14", "2021-11-20", "TSSM_CON")
 #' daily_tssm <- aggregate_climate(tssm, "day")
+#' head(daily_tssm)
 #'
 #' @return \code{data.frame} object with the aggregated data
 #'

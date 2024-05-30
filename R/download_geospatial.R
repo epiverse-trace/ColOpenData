@@ -26,6 +26,7 @@
 #'
 #' @examples
 #' departments <- download_geospatial("department", TRUE, FALSE)
+#' head(departments)
 #'
 #' @return \code{data.frame} object with downloaded data
 #'

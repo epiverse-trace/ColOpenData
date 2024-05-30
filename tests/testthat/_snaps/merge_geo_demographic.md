@@ -1,7 +1,7 @@
 # Merge geospational demographic works as expected
 
     Code
-      merge_geo_demographic(demographic_dataset = "DANE_CNPVH_2018_1HM", column = "condicion")
+      merge_geo_demographic("DANE_CNPVH_2018_1HD")
     Message
       Original data is retrieved from the National Administrative Department
       of Statistics (Departamento Administrativo Nacional de Estadística -
@@ -9,54 +9,43 @@
       Reformatted by package authors.
       Stored by Universidad de Los Andes under the Epiverse TRACE iniative.
     Output
-      Simple feature collection with 1122 features and 11 fields
+      Simple feature collection with 33 features and 9 fields
       Geometry type: MULTIPOLYGON
       Dimension:     XY
       Bounding box:  xmin: -81.73562 ymin: -4.229406 xmax: -66.84722 ymax: 13.39473
       Geodetic CRS:  WGS 84
       First 10 features:
-         codigo_municipio codigo_departamento codigo_municipio_sin_con   municipio
-      1             05001                  05                      001    Medellín
-      2             05002                  05                      002   Abejorral
-      3             05004                  05                      004    Abriaquí
-      4             05021                  05                      021  Alejandría
-      5             05030                  05                      030       Amagá
-      6             05031                  05                      031      Amalfi
-      7             05034                  05                      034       Andes
-      8             05036                  05                      036 Angelópolis
-      9             05038                  05                      038   Angostura
-      10            05040                  05                      040       Anorí
-         version       area  latitud  longitud total_hogares
-      1     2018  374830625 6.257590 -75.61103        815493
-      2     2018  507134114 5.803728 -75.43847          6028
-      3     2018  296955980 6.627569 -76.08598           776
-      4     2018  128932153 6.365534 -75.09060          1384
-      5     2018   84132477 6.032922 -75.70800          8884
-      6     2018 1209126871 6.977789 -74.98124          6798
-      7     2018  402502562 5.623952 -75.92459         12242
-      8     2018   81876302 6.121430 -75.71595          1722
-      9     2018  338666482 6.861499 -75.35832          3316
-      10    2018 1413773904 7.193111 -75.10849          4741
-         hogares_con_menores_de_15_anos total_menores_de_15_anos
-      1                          283536                   403928
-      2                            2278                     3545
-      3                             281                      435
-      4                             564                      857
-      5                            3553                     5017
-      6                            3113                     4959
-      7                            5030                     7784
-      8                             657                     1016
-      9                            1615                     2525
-      10                           2436                     4120
+         codigo_departamento departamento version        area    latitud  longitud
+      1                   05    Antioquia    2018 62804708983  6.9227964 -75.56499
+      2                   08    Atlántico    2018  3315752105 10.6770095 -74.96522
+      3                   11 Bogotá, D.C.    2018  1622852605  4.3161077 -74.18107
+      4                   13      Bolívar    2018 26719196397  8.7452708 -74.50864
+      5                   15       Boyacá    2018 23138048132  5.7766072 -73.10207
+      6                   17       Caldas    2018  7425221672  5.3420663 -75.30688
+      7                   18      Caquetá    2018 90103008160  0.7985562 -73.95947
+      8                   19        Cauca    2018 31242914793  2.3968339 -76.82423
+      9                   20        Cesar    2018 22562344407  9.5366599 -73.51783
+      10                  23      Córdoba    2018 25086546966  8.3585498 -75.79201
+         total_hogares hogares_con_menores_de_15_anos total_menores_de_15_anos
+      1        1983566                         778216                  1173475
+      2         625123                         328051                   556253
+      3        2514482                         927769                  1331282
+      4         542694                         290370                   513311
+      5         381868                         158874                   252952
+      6         309680                         114765                   169983
+      7         116166                          59067                    99985
+      8         432493                         194630                   306779
+      9         316717                         178781                   325361
+      10        466615                         242715                   421017
                                geometry
-      1  MULTIPOLYGON (((-75.66974 6...
-      2  MULTIPOLYGON (((-75.46938 5...
-      3  MULTIPOLYGON (((-76.08351 6...
-      4  MULTIPOLYGON (((-75.0332 6....
-      5  MULTIPOLYGON (((-75.67587 6...
-      6  MULTIPOLYGON (((-74.91836 7...
-      7  MULTIPOLYGON (((-75.86822 5...
-      8  MULTIPOLYGON (((-75.69149 6...
-      9  MULTIPOLYGON (((-75.27173 6...
-      10 MULTIPOLYGON (((-74.90935 7...
+      1  MULTIPOLYGON (((-76.41355 8...
+      2  MULTIPOLYGON (((-74.84946 1...
+      3  MULTIPOLYGON (((-74.07419 4...
+      4  MULTIPOLYGON (((-76.17318 9...
+      5  MULTIPOLYGON (((-72.17368 7...
+      6  MULTIPOLYGON (((-74.67154 5...
+      7  MULTIPOLYGON (((-74.89423 2...
+      8  MULTIPOLYGON (((-76.45922 3...
+      9  MULTIPOLYGON (((-73.45374 1...
+      10 MULTIPOLYGON (((-75.91797 9...
 

@@ -2485,11 +2485,6 @@
       download_climate(code = "05001", start_date = "2018-10-01", end_date = "2018-11-10",
         tag = "THSM_CON")
     Message
-      Original data is retrieved from the National Administrative Department
-      of Statistics (Departamento Administrativo Nacional de Estadística -
-      DANE).
-      Reformatted by package authors.
-      Stored by Universidad de Los Andes under the Epiverse TRACE iniative.
       Original data is retrieved from the Institute of Hydrology, Meteorology
       and Environmental Studies (Instituto de Hidrología, Meteorología y
       Estudios Ambientales - IDEAM).

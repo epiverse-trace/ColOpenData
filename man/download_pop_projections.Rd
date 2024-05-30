@@ -45,5 +45,5 @@ after COVID-19. Available years are different for each spatial level:
 }
 \examples{
 pop_proj <- download_pop_projections("national", 2020, 2030)
-
+head(pop_proj)
 }

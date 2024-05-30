@@ -18,6 +18,6 @@ Retrieve departments' DIVIPOLA official names from their DIVIPOLA codes
 }
 \examples{
 dptos <- c("73", "05", "11")
-names <- code_to_name_dep(dptos)
+code_to_name_dep(dptos)
 
 }

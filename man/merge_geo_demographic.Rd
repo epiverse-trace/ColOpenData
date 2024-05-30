@@ -4,29 +4,23 @@
 \alias{merge_geo_demographic}
 \title{Match and merge geospatial and demographic datasets}
 \usage{
-merge_geo_demographic(demographic_dataset, column)
+merge_geo_demographic(demographic_dataset)
 }
 \arguments{
 \item{demographic_dataset}{character with the demographic dataset name.
 Please use \code{list_datasets("demographic")} to check available datasets}
-
-\item{column}{character with the column we are interested in. It depends on
-the demographic dataset, so it is important to have checked the dataset
-beforehand}
 }
 \value{
 \code{data.frame} object with the merged data
 }
 \description{
-This function downloads a demographic and a geospatial dataset, does a
-pivot to the demographic dataset based on a column of interest and merges
-with a geospatial dataset according to the level of the demographic dataset.
-Since the smallest level of spatial aggregation present in the demographic
-datasets is municipality, this functions can only match with the municipality
-and department code of geospatial datasets.
+This function adds the key information of a demographic dataset to a
+geospatial dataset based on the spatial aggregation level. Since the smallest
+level of spatial aggregation present in the demographic datasets is
+municipality, this function can only merge with geospatial datasets that
+present municipality or department level.
 }
 \examples{
-census_file <- "DANE_CNPVV_2018_9VD"
-merged <- merge_geo_demographic(census_file, "tipo_de_servicio_sanitario")
-
+merged <- merge_geo_demographic("DANE_CNPVV_2018_9VD")
+head(merged)
 }

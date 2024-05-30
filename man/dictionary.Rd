@@ -18,5 +18,6 @@ internal tags and named columns
 }
 \examples{
 dict <- dictionary("DANE_MGN_2018_SETU")
+head(dict)
 
 }

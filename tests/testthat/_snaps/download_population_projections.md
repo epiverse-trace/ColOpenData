@@ -1,7 +1,7 @@
-# Download population_projections works as expected
+# Download pop_projections works as expected
 
     Code
-      download_population_projections(spatial_level = "department", start_year = 2010,
+      download_pop_projections(spatial_level = "department", start_year = 2010,
         end_year = 2027)
     Condition
       Warning:

@@ -17,7 +17,7 @@ articles:
 - title: Merge data
   navbar: Merge data
   contents:
-  - merge_geo_dem
+  - merge_geo_demographic
 
 reference:
 - title: Demographic Data
