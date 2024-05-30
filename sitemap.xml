@@ -1,168 +1,58 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/404.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/articles/climate_data.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/articles/demographic_data.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/articles/geospatial_data.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/articles/merge_geo_dem.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/articles/population_projections.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/index.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/aggregate_annual.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/aggregate_climate.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/aggregate_daily.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/aggregate_monthly.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/annual_bshg.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/annual_ptpm.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/annual_tmn.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/annual_tmx.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/annual_tssm.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/code_to_name_dep.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/code_to_name_mun.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/daily_bshg.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/daily_tssm.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/dictionary.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/divipola_table.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/download_climate.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/download_climate_geom.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/download_climate_stations.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/download_demographic.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/download_geospatial.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/download_pop_projections.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/list_datasets.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/look_up.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/merge_geo_demographic.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/monthly_bshg.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/monthly_ptpm.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/monthly_tmn.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/monthly_tmx.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/monthly_tssm.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/name_to_code_dep.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/name_to_code_mun.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/name_to_standard_dep.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/name_to_standard_mun.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/retrieve_climate.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/retrieve_climate_path.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/retrieve_dict_path.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/retrieve_path.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/retrieve_support_path.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/retrieve_table.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/retrieve_value_key.html</loc>
-  </url>
-  <url>
-    <loc>https://epiverse-trace.github.io/ColOpenData/reference/stations_in_roi.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/404.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/LICENSE-text.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/LICENSE.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/articles/climate_data.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/articles/demographic_data.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/articles/geospatial_data.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/articles/index.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/articles/merge_geo_demographic.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/articles/population_projections.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/authors.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/index.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/news/index.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/aggregate_annual.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/aggregate_climate.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/aggregate_daily.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/aggregate_monthly.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/annual_bshg.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/annual_ptpm.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/annual_tmn.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/annual_tmx.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/annual_tssm.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/code_to_name_dep.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/code_to_name_mun.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/daily_bshg.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/daily_tssm.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/dictionary.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/divipola_table.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/download_climate.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/download_climate_geom.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/download_climate_stations.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/download_demographic.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/download_geospatial.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/download_pop_projections.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/index.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/list_datasets.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/look_up.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/merge_geo_demographic.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/monthly_bshg.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/monthly_ptpm.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/monthly_tmn.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/monthly_tmx.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/monthly_tssm.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/name_to_code_dep.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/name_to_code_mun.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/name_to_standard_dep.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/name_to_standard_mun.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/retrieve_climate.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/retrieve_climate_path.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/retrieve_dict_path.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/retrieve_path.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/retrieve_support_path.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/retrieve_table.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/retrieve_value_key.html</loc></url>
+<url><loc>https://epiverse-trace.github.io/ColOpenData/reference/stations_in_roi.html</loc></url>
 </urlset>
+
