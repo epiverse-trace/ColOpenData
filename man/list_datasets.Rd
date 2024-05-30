@@ -19,5 +19,6 @@ category and description
 }
 \examples{
 list <- list_datasets("geospatial")
+head(list)
 
 }

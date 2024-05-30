@@ -75,8 +75,8 @@ head(merged_data)
 ```{r plot}
 # Calculate the proportion
 merged_data <- merged_data %>%
-  mutate(proportion_home_remedies = uso_remedios_caseros / 	
-total_personas_que_tuvieron_alguna_enfermedad)
+  mutate(proportion_home_remedies = uso_remedios_caseros /
+    total_personas_que_tuvieron_alguna_enfermedad)
 
 # Plot the proportion by department
 ggplot(data = merged_data) +

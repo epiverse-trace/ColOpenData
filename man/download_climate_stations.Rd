@@ -38,5 +38,6 @@ stations <- stations_in_roi(roi)
 tssm <- download_climate_stations(
   stations, "2021-11-14", "2021-11-20", "TSSM_CON"
 )
+head(tssm)
 
 }

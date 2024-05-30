@@ -17,6 +17,6 @@ Retrieve departments' DIVIPOLA codes from their names
 }
 \examples{
 dptos <- c("TOLIMA", "HUILA", "AMAZONAS")
-codes <- name_to_code_dep(dptos)
+name_to_code_dep(dptos)
 
 }

@@ -18,6 +18,6 @@ Retrieve municipalities' DIVIPOLA official names from their DIVIPOLA codes
 }
 \examples{
 mpios <- c("73001", "11001", "05615")
-names <- code_to_name_mun(mpios)
+code_to_name_mun(mpios)
 
 }

@@ -38,5 +38,6 @@ include a summarized version of the National Population and Dwelling Census
 }
 \examples{
 departments <- download_geospatial("department", TRUE, FALSE)
+head(departments)
 
 }

@@ -19,6 +19,6 @@ their respective official names from DIVIPOLA
 }
 \examples{
 dptos <- c("Bogota DC", "San Andres")
-official_names <- name_to_standard_dep(dptos)
+name_to_standard_dep(dptos)
 
 }

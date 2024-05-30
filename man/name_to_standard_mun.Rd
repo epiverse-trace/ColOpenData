@@ -24,6 +24,6 @@ their respective official names from DIVIPOLA
 
 dptos <- c("Bogota", "Antioquia", "Tolima")
 mpios <- c("Bogota DC", "Carmen dell Viboral", "CarmendeApicala")
-official_names <- name_to_standard_mun(dptos, mpios)
+name_to_standard_mun(dptos, mpios)
 
 }

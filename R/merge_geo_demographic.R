@@ -1,11 +1,11 @@
 #' Match and merge geospatial and demographic datasets
 #'
 #' @description
-#' This function adds the key information of a demographic dataset to a 
+#' This function adds the key information of a demographic dataset to a
 #' geospatial dataset based on the spatial aggregation level. Since the smallest
-#' level of spatial aggregation present in the demographic datasets is 
-#' municipality, this function can only merge with geospatial datasets that 
-#' present municipality or department level. 
+#' level of spatial aggregation present in the demographic datasets is
+#' municipality, this function can only merge with geospatial datasets that
+#' present municipality or department level.
 #'
 #' @param demographic_dataset character with the demographic dataset name.
 #' Please use \code{list_datasets("demographic")} to check available datasets
@@ -27,7 +27,7 @@ merge_geo_demographic <- function(demographic_dataset) {
   spatial_level <- selected_dataset$level[1]
   cen <- download_demographic(demographic_dataset)
   total_col <- names(cen)[length(names(cen))]
-  column <- names(cen)[length(names(cen))-1]
+  column <- names(cen)[length(names(cen)) - 1]
   cols_exclude <- c(
     total_col, column, "codigo_departamento", "departamento",
     "codigo_municipio", "municipio", "indice_de_masculinidad",

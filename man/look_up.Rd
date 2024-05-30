@@ -31,5 +31,6 @@ descriptions
 }
 \examples{
 found <- look_up("demographic", c("sex", "age"), "and")
+head(found)
 
 }

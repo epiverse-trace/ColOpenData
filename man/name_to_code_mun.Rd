@@ -25,6 +25,6 @@ the municipalities
 \examples{
 dptos <- c("HUILA", "ANTIOQUIA")
 mpios <- c("PITALITO", "TURBO")
-codes <- name_to_code_mun(dptos, mpios)
+name_to_code_mun(dptos, mpios)
 
 }
