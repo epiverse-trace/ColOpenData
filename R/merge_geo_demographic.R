@@ -1,29 +1,23 @@
 #' Match and merge geospatial and demographic datasets
 #'
 #' @description
-#' This function downloads a demographic and a geospatial dataset, does a
-#' pivot to the demographic dataset based on a column of interest and merges
-#' with a geospatial dataset according to the level of the demographic dataset.
-#' Since the smallest level of spatial aggregation present in the demographic
-#' datasets is municipality, this functions can only match with the municipality
-#' and department code of geospatial datasets.
+#' This function adds the key information of a demographic dataset to a 
+#' geospatial dataset based on the spatial aggregation level. Since the smallest
+#' level of spatial aggregation present in the demographic datasets is 
+#' municipality, this function can only merge with geospatial datasets that 
+#' present municipality or department level. 
 #'
 #' @param demographic_dataset character with the demographic dataset name.
 #' Please use \code{list_datasets("demographic")} to check available datasets
-#' @param column character with the column we are interested in. It depends on
-#' the demographic dataset, so it is important to have checked the dataset
-#' beforehand
 #'
 #' @return \code{data.frame} object with the merged data
 #'
 #' @examples
-#' census_file <- "DANE_CNPVV_2018_9VD"
-#' merged <- merge_geo_demographic(census_file, "tipo_de_servicio_sanitario")
-#'
+#' merged <- merge_geo_demographic("DANE_CNPVV_2018_9VD")
+#' head(merged)
 #' @export
-merge_geo_demographic <- function(demographic_dataset, column) {
+merge_geo_demographic <- function(demographic_dataset) {
   checkmate::assert_character(demographic_dataset)
-  checkmate::assert_character(column)
 
   datasets <- list_datasets("demographic")
   selected_dataset <- datasets[datasets$name == demographic_dataset, ]
@@ -32,11 +26,8 @@ merge_geo_demographic <- function(demographic_dataset, column) {
   }
   spatial_level <- selected_dataset$level[1]
   cen <- download_demographic(demographic_dataset)
-  if (!column %in% colnames(cen)) {
-    stop("Column of interest provided is not part of the demographic dataset.
-         Plase select another column.")
-  }
   total_col <- names(cen)[length(names(cen))]
+  column <- names(cen)[length(names(cen))-1]
   cols_exclude <- c(
     total_col, column, "codigo_departamento", "departamento",
     "codigo_municipio", "municipio", "indice_de_masculinidad",

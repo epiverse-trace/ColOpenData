@@ -9,7 +9,8 @@
 #'
 #' @examples
 #' house_under_15 <- download_demographic("DANE_CNPVH_2018_1HD")
-#'
+#' head(house_under_15)
+#' 
 #' @return \code{data.frame} object with downloaded data
 #'
 #' @export

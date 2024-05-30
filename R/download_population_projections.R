@@ -25,7 +25,7 @@
 #'
 #' @examples
 #' pop_proj <- download_pop_projections("national", 2020, 2030)
-#'
+#' head(pop_proj)
 #' @return \code{data.frame} object with downloaded data
 #'
 #' @export

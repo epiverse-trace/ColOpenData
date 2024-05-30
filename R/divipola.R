@@ -24,7 +24,7 @@ divipola_table <- function() {
 #'
 #' @examples
 #' dptos <- c("TOLIMA", "HUILA", "AMAZONAS")
-#' codes <- name_to_code_dep(dptos)
+#' name_to_code_dep(dptos)
 #'
 #' @return character vector with the DIVIPOLA codes of the departments
 #'
@@ -88,7 +88,7 @@ name_to_code_dep <- function(department_name) {
 #' @examples
 #' dptos <- c("HUILA", "ANTIOQUIA")
 #' mpios <- c("PITALITO", "TURBO")
-#' codes <- name_to_code_mun(dptos, mpios)
+#' name_to_code_mun(dptos, mpios)
 #'
 #' @return character vector with the DIVIPOLA codes of the municipalities
 #'
@@ -156,7 +156,7 @@ name_to_code_mun <- function(department_name, municipality_name) {
 #'
 #' @examples
 #' dptos <- c("73", "05", "11")
-#' names <- code_to_name_dep(dptos)
+#' code_to_name_dep(dptos)
 #'
 #' @return character vector with the DIVIPOLA name of the departments
 #'
@@ -194,7 +194,7 @@ code_to_name_dep <- function(department_code) {
 #'
 #' @examples
 #' mpios <- c("73001", "11001", "05615")
-#' names <- code_to_name_mun(mpios)
+#' code_to_name_mun(mpios)
 #'
 #' @return character vector with the DIVIPOLA name of the municipalities
 #'
@@ -229,7 +229,7 @@ code_to_name_mun <- function(municipality_code) {
 #'
 #' @examples
 #' dptos <- c("Bogota DC", "San Andres")
-#' official_names <- name_to_standard_dep(dptos)
+#' name_to_standard_dep(dptos)
 #'
 #' @return character vector with the DIVIPOLA name of the departments
 #'
@@ -255,7 +255,7 @@ name_to_standard_dep <- function(department_name) {
 #'
 #' dptos <- c("Bogota", "Antioquia", "Tolima")
 #' mpios <- c("Bogota DC", "Carmen dell Viboral", "CarmendeApicala")
-#' official_names <- name_to_standard_mun(dptos, mpios)
+#' name_to_standard_mun(dptos, mpios)
 #'
 #' @return character vector with the DIVIPOLA name of the municipalities
 #'

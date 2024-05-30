@@ -10,6 +10,7 @@
 #'
 #' @examples
 #' dict <- dictionary("DANE_MGN_2018_SETU")
+#' head(dict)
 #'
 #' @export
 dictionary <- function(dataset) {
@@ -46,6 +47,7 @@ dictionary <- function(dataset) {
 #'
 #' @examples
 #' list <- list_datasets("geospatial")
+#' head(list)
 #'
 #' @export
 list_datasets <- function(module = "all") {
@@ -88,6 +90,7 @@ list_datasets <- function(module = "all") {
 #'
 #' @examples
 #' found <- look_up("demographic", c("sex", "age"), "and")
+#' head(found)
 #'
 #' @export
 look_up <- function(module = "all", keywords, logic = "or") {

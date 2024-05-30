@@ -15,7 +15,8 @@
 #'
 #' @examples
 #' tssm <- download_climate("17001", "2021-11-14", "2021-11-20", "TSSM_CON")
-#'
+#' head(tssm)
+#' 
 #' @return \code{data.frame} object with observations from the stations in the
 #' area
 #'
@@ -25,14 +26,16 @@ download_climate <- function(code, start_date, end_date, tag) {
 
   if (nchar(code) == 5) {
     # Municipalities have a five digit code
-    mpios <- download_geospatial("municipality", include_cnpv = FALSE)
+    mpios <- suppressMessages(download_geospatial("municipality", 
+                                                  include_cnpv = FALSE))
     filtered_area <- mpios[
       which(mpios$codigo_municipio == code),
       "codigo_municipio"
     ]
   } else if (nchar(code) == 2) {
     # Departments have a two digit code
-    dptos <- download_geospatial("department", include_cnpv = FALSE)
+    dptos <- suppressMessages(download_geospatial("department", 
+                                                  include_cnpv = FALSE))
     filtered_area <- dptos[
       which(dptos$codigo_departamento == code),
       "codigo_departamento"
@@ -75,7 +78,8 @@ download_climate <- function(code, start_date, end_date, tag) {
 #' geometry <- sf::st_sfc(polygon)
 #' roi <- sf::st_as_sf(geometry)
 #' tssm <- download_climate_geom(roi, "2021-11-14", "2021-11-20", "TSSM_CON")
-#'
+#' head(tssm)
+#' 
 #' @return \code{data.frame} object with observations from the stations in the
 #' area
 #'
@@ -123,6 +127,7 @@ download_climate_geom <- function(geometry, start_date, end_date,
 #' tssm <- download_climate_stations(
 #'   stations, "2021-11-14", "2021-11-20", "TSSM_CON"
 #' )
+#' head(tssm)
 #'
 #' @return \code{data.frame} object with observations from the stations in the
 #' area
@@ -229,6 +234,7 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
 #' geometry <- sf::st_sfc(polygon)
 #' roi <- sf::st_as_sf(geometry)
 #' stations <- stations_in_roi(roi)
+#' head(stations)
 #'
 #' @return \code{data.frame} object with the stations contained inside the
 #' consulted geometry
