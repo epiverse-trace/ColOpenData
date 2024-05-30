@@ -37,7 +37,7 @@ library(ggplot2)
 ::: {style="text-align: justify;"}
 Geospatial and demographic data can be merged based on the spatial aggregation level (SAL). While geospatial data can be aggregated down to the block level, demographic data is typically available only at the department and municipality levels. Therefore, these are the only SAL that can be accessed in both types of data for merging.
 
-Now, the `merge_geo_demographic()` function only takes by parameter the demographic dataset of interest.  Therefore, we should first access the demographic documentation to know which dataset we want to work with. Let's suposse we want to select a dataset at the deparment level.
+Now, the `merge_geo_demographic()` function only takes by parameter the demographic dataset of interest.  Therefore, we should first access the demographic documentation to know which dataset we want to work with. Let's suppose we want to select a dataset at the department level.
 :::
 
 ```{r documentation, echo =TRUE}
