@@ -1,0 +1,199 @@
+---
+title: "Maps and plots with ColOpenData"
+output: 
+  rmarkdown::html_vignette:
+    df_print: tibble
+vignette: >
+  %\VignetteIndexEntry{Maps and plots with ColOpenData}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+::: {style="text-align: justify;"}
+**ColOpenData** can be used to access open geospatial data from Colombia. This data is retrieved from the Geostatistical National Framework (MGN), published by the National Administrative Department of Statistics [(DANE)](https://www.dane.gov.co/index.php/en/). The MGN contains the political-administrative division and is used to reference census statistical information. Further information can be obtained directly from DANE [here](https://www.dane.gov.co/index.php/actualidad-dane/5454-el-dane-actualizo-el-marco-geoestadistico-nacional-a-2018).
+
+This package contains the 2018's version of the MGN, which also included a summarized version of the National Population and Dwelling Census (CNPV) in different aggregation levels. Each level is stored in a different dataset, which can be retrieved using the `download_geospatial` function, which requires three arguments:
+
+-   `spatial_level` character with the spatial level to be consulted
+-   `include_geom` logical for including (or not) geometry. Default is `TRUE`
+-   `include_cnpv` logical for including (or not) CNPV demographic and socioeconomic information Default is `TRUE`.
+
+Available levels of aggregation come from the official spatial division provided by DANE, with their names corresponding to:
+:::
+
+```{r available datasets, echo = FALSE}
+code <- c(
+  "DPTO", "MPIO",
+  "MPIOCL", "MZN",
+  "SECR", "SECU",
+  "SETR", "SETU",
+  "ZU"
+)
+level <- c(
+  "Department", "Municipality",
+  "Municipality including Class", "Block", "Rural Sector", "Urban Sector",
+  "Rural Section", "Urban Section", "Urban Zone"
+)
+dictionary_key <- c(
+  "DANE_MGN_2018_DPTO", "DANE_MGN_2018_MPIO",
+  "DANE_MGN_2018_MPIOCL", "DANE_MGN_2018_MZN",
+  "DANE_MGN_2018_SECR", "DANE_MGN_2018_SECU",
+  "DANE_MGN_2018_SETR", "DANE_MGN_2018_SETU",
+  "DANE_MGN_2018_ZU"
+)
+
+mgncnpv <- data.frame(
+  Code = code, Level = level, Name = dictionary_key,
+  stringsAsFactors = FALSE
+)
+knitr::kable(mgncnpv)
+```
+
+::: {style="text-align: justify;"}
+In this vignette you will learn:
+
+1. How to download geospatial data using **ColOpenData**
+2. How to use census data included in geospatial datasets
+3. How to visualize spatial data using **leaflet** and **ggplot2**
+
+We will be using geospatial data at the level of Municipality (MPIO) for the department of Tolima and we will calculate the percentage of houses with internet connection at each municipality. Later, we will build some plots using the previously mentioned approaches for dynamic and static plots.
+
+We will start by importing the needed libraries.
+:::
+
+```{r library imports, results = "hide", warning = FALSE, message = FALSE}
+library(ColOpenData)
+library(dplyr)
+library(sf)
+library(ggplot2)
+library(leaflet)
+```
+
+::: {style="text-align: justify;"}
+**Disclaimer: all data is loaded to the environment in the user's R session, but is not downloaded to user's computer. Spatial datasets can be very long and might take a while to be loaded in the environment**
+:::
+
+## Downloading geospatial data
+
+::: {style="text-align: justify;"}
+First, we download the data using the function `download_geospatial`, including the geometries and the census related information.
+:::
+
+```{r download data}
+mpio <- download_geospatial(
+  spatial_level = "MPIO",
+  include_geom = TRUE,
+  include_cnpv = TRUE
+)
+head(mpio)
+```
+
+::: {style="text-align: justify;"}
+After downloading, we have to filter by the municipality code using the DIVIPOLA code for Tolima. For further details on DIVIPOLA codification and functions please refer to [Documentation and Dictionaries](https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html#DIVIPOLA)
+:::
+
+```{r}
+name_to_code_dep("Tolima")
+```
+
+::: {style="text-align: justify;"}
+To understand which column contains the departments' codes and filter for Tolima, we will need the corresponding dataset dictionary. To download the dictionary we can use the `dictionary` function. This function uses the dataset name to download the associated information. For further information please refer to the documentation on dictionaries previously mentioned.
+:::
+
+```{r dictionary for urban sections}
+dict <- dictionary("DANE_MGN_2018_MPIO")
+
+head(dict)
+```
+
+::: {style="text-align: justify;"}
+After exploring the dictionary, we can identify the column that contains the individual municipality codes is [codigo_departamento]{.underline}. We will filter based on that column.
+:::
+
+```{r filter and internet coverage}
+tolima <- mpio %>% filter(codigo_departamento == "73")
+```
+
+::: {style="text-align: justify;"}
+To calculate the percentage of houses with internet connection, we will need to know the number of houses with internet connection and the total of houses in each SECU. From the dictionary we get that the number of houses with internet connection is [STP19_INT1]{.underline} and the total of houses is [STVIVIENDA]{.underline}. We will calculate the percentage as follows:
+:::
+
+```{r}
+tolima <- tolima %>% mutate(internet = round(viv_internet / viviendas, 2))
+```
+
+## Static plots (ggplot2)
+
+::: {style="text-align: justify;"}
+[`ggplot2`](https://ggplot2.tidyverse.org/) can be used to generate static plots of spatial data by using the geometry `geom_sf` as follows:
+:::
+
+```{r ggplot2 basic}
+ggplot(data = tolima) +
+  geom_sf(mapping = aes(fill = internet), color = NA)
+```
+
+::: {style="text-align: justify;"}
+The generated plot by default uses a blue palette, which makes it hard to observe small differences in internet coverage across municipalities. Color palettes and themes can be defined for each plot using the aesthetic and scales, which can be consulted in the `ggplot2` [documentation](https://ggplot2.tidyverse.org/reference/index.html#scales). We will use a gradient with a two-color diverging palette, to make the differences more visible.
+:::
+
+```{r ggplot2}
+ggplot(data = tolima) +
+  geom_sf(mapping = aes(fill = internet), color = NA) +
+  theme_minimal() +
+  theme(
+    panel.grid = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank()
+  ) +
+  scale_fill_gradient("Percentage", low = "#10bed2", high = "#deff00") +
+  ggtitle(
+    label = "Internet coverage",
+    subtitle = "Tolima, Colombia"
+  )
+```
+
+## Dynamic plots (leaflet)
+
+::: {style="text-align: justify;"}
+For dynamic plots, we can use [`leaflet`](https://rstudio.github.io/leaflet/), which is an open-source library for interactive maps. To create the same plot we first will create the color palette.
+:::
+
+```{r define color palette}
+colfunc <- colorRampPalette(c("#10bed2", "#deff00"))
+pal <- colorNumeric(
+  palette = colfunc(100),
+  domain = tolima$internet
+)
+```
+
+::: {style="text-align: justify;"}
+With the previous color palette we can generate the interactive plot. The package also includes open source maps for the base map like [OpenStreetMap](https://www.openstreetmap.org/#map=5/4.632/-74.299) and [CartoDB](https://carto.com/basemaps). For further details on `leaflet`, please refer to the package's [documentation](https://rstudio.github.io/leaflet/reference/index.html).
+:::
+
+```{r leaflet}
+leaflet(tolima) %>%
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addPolygons(
+    stroke = TRUE,
+    weight = 0,
+    color = NA,
+    fillColor = ~ pal(tolima$internet),
+    fillOpacity = 1,
+    popup = paste0(tolima$internet)
+  ) %>%
+  addLegend(
+    position = "bottomright",
+    pal = pal,
+    values = ~ tolima$internet,
+    opacity = 1,
+    title = "Internet Coverage"
+  )
+```

@@ -1,0 +1,127 @@
+---
+title: "Population Projections with ColOpenData"
+output: 
+  rmarkdown::html_vignette:
+    df_print: tibble
+vignette: >
+  %\VignetteIndexEntry{Population Projections with ColOpenData}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+::: {style="text-align: justify;"}
+We can use **ColOpenData** to retrieve population projections and back-projections on multiple levels of spatial aggregation, including municipalities, departments and national levels. Availability of years depends on spatial levels. These projections include differentiation by gender and even ethnic groups; however, the latter is only available for municipalities.
+
+Availability of years by spatial levels goes as follows:
+:::
+
+```{r available datasets, echo = FALSE}
+level <- c(
+  "National", "National with sex",
+  "Department", "Department with Sex",
+  "Municipality", "Municipality with Sex",
+  "Municipaity with Sex and Ethnic Groups"
+)
+years <- c(
+  "1950 - 2070", "1985 - 2050",
+  "1985 - 2050", "1985 - 2050", "1985 - 2035", "1985 - 2035",
+  "2018 - 2035"
+)
+dictionary_key <- c(
+  "DANE_MGN_2018_DPTO", "DANE_MGN_2018_MPIO",
+  "DANE_MGN_2018_MPIOCL", "DANE_MGN_2018_MZN",
+  "DANE_MGN_2018_SECR", "DANE_MGN_2018_SECU",
+  "DANE_MGN_2018_SETR", "DANE_MGN_2018_SETU",
+  "DANE_MGN_2018_ZU"
+)
+
+mgncnpv <- data.frame(
+  Level = level, Years = years,
+  stringsAsFactors = FALSE
+)
+knitr::kable(mgncnpv)
+```
+
+::: {style="text-align: justify;"}
+For this example, we will present projections and back projections of national population by area, sex and age for the period from 1950 to 2070. We will observe the expected female population under 99 by personalized age brackets for 2034.
+:::
+
+We will first load the needed libraries.
+
+```{r}
+library(ColOpenData)
+library(dplyr)
+library(ggplot2)
+```
+
+Now we can download the data. We will use the function `download_pop_projections`, which has five parameters:
+
+- `spatial_level` character with the spatial level to be consulted. Can be either `"national"`,  `"department"` or `"municipality"`
+- `start_year` numeric with the start year to be consulted
+- `end_year` numeric with the end year to be consulted
+- `include_sex` logical for including (or not) division by sex. Default is `FALSE`
+- `include_ethnic` logical for including (or not) division by ethnic group (only available for `"municipality"`). Default is `FALSE`
+
+```{r download data}
+asen <- download_pop_projections(
+  spatial_level = "national",
+  start_year = 2034,
+  end_year = 2034,
+  include_sex = TRUE,
+  include_ethnic = FALSE
+)
+```
+We will filter the downloaded data for ages under 99.
+
+```{r filtered projections}
+female_2034 <- asen %>%
+  filter(
+    area == "total",
+    sexo == "mujer",
+    edad != "100_y_mas"
+  ) %>%
+  mutate(edad = as.numeric(edad))
+```
+
+Age groups will be defined by breaks and included in the original dataset.
+
+```{r age groups}
+age_groups <- cut(female_2034$edad,
+  breaks = c(-1, 2, 12, 19, 29, 39, 49, 59, 69, 79, 89, 99),
+  labels = c(
+    "0-2", "3-12", "13-19", "20-29", "30-39", "40-49",
+    "50-59", "60-69", "70-79", "80-89", "90-99"
+  )
+)
+female_groups <- female_2034 %>%
+  mutate(age_group = age_groups) %>%
+  group_by(age_group) %>%
+  summarise(total_sum = sum(total))
+```
+
+Finally, we can plot the output.
+
+```{r plot population}
+ggplot(female_groups, aes(
+  x = age_group,
+  y = total_sum
+)) +
+  geom_bar(stat = "identity", fill = "#f04a4c", color = "black", width = 0.6) +
+  labs(
+    title = "Female population counts in Colombia by age group for 2034",
+    x = "Age group",
+    y = "Female population"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(hjust = 0.5)
+  )
+```
