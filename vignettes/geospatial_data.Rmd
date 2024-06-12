@@ -59,9 +59,9 @@ knitr::kable(mgncnpv)
 ::: {style="text-align: justify;"}
 In this vignette you will learn:
 
-1. How to download geospatial data using **ColOpenData**
-2. How to use census data included in geospatial datasets
-3. How to visualize spatial data using **leaflet** and **ggplot2**
+1.  How to download geospatial data using **ColOpenData**
+2.  How to use census data included in geospatial datasets
+3.  How to visualize spatial data using **leaflet** and **ggplot2**
 
 We will be using geospatial data at the level of Municipality (MPIO) for the department of Tolima and we will calculate the percentage of houses with internet connection at each municipality. Later, we will build some plots using the previously mentioned approaches for dynamic and static plots.
 
