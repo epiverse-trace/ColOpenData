@@ -154,8 +154,7 @@ Department of Statistics (DANE). Naming is stated as follows:</p>
 </ul>
 </li>
 <li>Details: These are related to each individual dataset. For further
-details please check the function <code><a href="../reference/list_datasets.html">list_datasets()</a></code>
-below.</li>
+details please check the function <code>list_datasets</code> below.</li>
 </ul>
 </div>
 <div style="text-align: justify;">
@@ -277,8 +276,8 @@ download data and include:</p>
 </table>
 <div style="text-align: justify;">
 <p>These tags are meant to be used for download using
-<code><a href="../reference/download_climate.html">download_climate()</a></code>, <code><a href="../reference/download_climate_geom.html">download_climate_geom()</a></code>
-and <code><a href="../reference/download_climate_stations.html">download_climate_stations()</a></code>. See <a href="https://epiverse-trace.github.io/ColOpenData/articles/climate_data.html">How
+<code>download_climate</code>, <code>download_climate_geom</code> and
+<code>download_climate_stations</code>. See <a href="https://epiverse-trace.github.io/ColOpenData/articles/climate_data.html">How
 to download climate data using ColOpenData</a> for further details.</p>
 </div>
 </div>
@@ -300,9 +299,9 @@ Projection with ColOpenData</a></p>
 </h2>
 <div style="text-align: justify;">
 <p>To check available datasets you can use the
-<code><a href="../reference/list_datasets.html">list_datasets()</a></code> function. This function can also be
-filtered with the <code>module</code> parameter to indicate a specific
-module. Default is <code>"all"</code>, but can be filtered by
+<code>list_datasets</code> function. This function can also be filtered
+with the <code>module</code> parameter to indicate a specific module.
+Default is <code>"all"</code>, but can be filtered by
 <code>"demographic"</code>, <code>"geospatial"</code>,
 <code>"climate"</code> and <code>"population_projections"</code>.</p>
 </div>
@@ -357,8 +356,8 @@ level and information for individual datasets.</p>
 <div style="text-align: justify;">
 <p>Sometimes, going through each dataset to find specific information
 can be tiring. If you want to look for an specific word or set of words
-within datasets quickly, you can use the <code><a href="../reference/look_up.html">look_up()</a></code>
-function, which takes by parameter:</p>
+within datasets quickly, you can use the <code>look_up</code>function,
+which takes by parameter:</p>
 <ol style="list-style-type: decimal">
 <li>The module you wish to search within (default is
 <code>"all"</code>).</li>
@@ -514,9 +513,8 @@ two digits for individual identification, while municipalities have
 five. The five numbers in municipalities’ codes include the department
 where they are located (first two digits) and the number of the
 municipality within the department (last three digits). The codes for
-each municipality and department can be consulted in <a href="https://www.datos.gov.co/widgets/gdxc-w37w" class="external-link">this table</a>
-provided by the National Platform of Colombian Open Data. They can also
-be consulted using the DIVIPOLA table function:</p>
+each municipality and department can be consulted in the following <a href="https://www.datos.gov.co/widgets/gdxc-w37w" class="external-link">table</a>. They can
+also be consulted using the DIVIPOLA table function:</p>
 </div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">divipola</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/divipola_table.html">divipola_table</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -530,8 +528,8 @@ be consulted using the DIVIPOLA table function:</p>
 <span><span class="co">#&gt; 6                  05            05031    Antioquia     Amalfi Municipio</span></span></code></pre></div>
 <div style="text-align: justify;">
 <p>To get the DIVIPOLA code of a municipality or department we can use
-the auxiliary functions <code>divipola_municipality_code()</code> and
-<code>divipola_department_code()</code> in <strong>ColOpenData</strong>.
+the auxiliary functions <code>divipola_municipality_code</code> and
+<code>divipola_department_code</code> in <strong>ColOpenData</strong>.
 To retrieve a department code we only have to include the department’s
 name:</p>
 </div>
@@ -551,8 +549,8 @@ municipalities’ names across departments.</p>
 datasets.</p>
 <p>On the other hand, departments’ and municipalities’ codes can be
 translated to retrieve their official names using
-<code>divipola_municipality_name()</code> and
-<code>divipola_department_name()</code>.</p>
+<code>divipola_municipality_name</code> and
+<code>divipola_department_name</code>.</p>
 </div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/code_to_name_mun.html">code_to_name_mun</a></span><span class="op">(</span><span class="st">"15001"</span><span class="op">)</span></span>

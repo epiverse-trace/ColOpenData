@@ -219,10 +219,10 @@ Manizales in Colombia. We will download Maximum Temperature (TMX_CON)
 from 2013 to 2016, to observe the increase in temperature during 2015
 and 2016 due to the impact of El Nino (ENSO).</p>
 <p><strong>ColOpenData</strong> offers three methods to do this, using
-different functions: - <code><a href="../reference/download_climate_stations.html">download_climate_stations()</a></code> to
+different functions: - <code>download_climate_stations</code> to
 download climate data from previously selected stations -
-<code><a href="../reference/download_climate_geom.html">download_climate_geom()</a></code> to download climate data from a
-specified geometry (ROI) - <code><a href="../reference/download_climate.html">download_climate()</a></code> to download
+<code>download_climate_geom</code> to download climate data from a
+specified geometry (ROI) - <code>download_climate</code> to download
 climate data from municipalities’ or departments’ already loaded
 geometries</p>
 <p>In this example, we will follow the three methods to get the same
@@ -274,7 +274,7 @@ library for further details).</p>
 <script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addPolygons","args":[[[[{"lng":[-75.678072,-75.327859,-75.327859,-75.678072,-75.678072],"lat":[5.166278,5.166278,4.982247,4.982247,5.166278]}]]],null,null,{"interactive":true,"className":"","stroke":true,"color":"#2e6930","weight":2,"opacity":0.6,"fill":true,"fillColor":"#2e6930","fillOpacity":0.2,"smoothFactor":1,"noClip":false},null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[4.982247,5.166278],"lng":[-75.678072,-75.327859]}},"evals":[],"jsHooks":[]}</script><div style="text-align: justify;">
 <p>We can make a first exploration to check if there are any stations
 contained inside of it, using the function
-<code><a href="../reference/stations_in_roi.html">stations_in_roi()</a></code>.</p>
+<code>stations_in_roi</code></p>
 </div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stations</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/stations_in_roi.html">stations_in_roi</a></span><span class="op">(</span><span class="va">roi</span><span class="op">)</span></span>
@@ -338,10 +338,9 @@ contained inside of it, using the function
 <p>We can see that in the region there are 129 stations. Different
 categories are recorded by different stations, and can be checked at the
 column <u>categoria</u>. To understand the category of each station we
-can use the <a href="http://www.ideam.gov.co/documents/10182/557765/Definiciones+CNE.pdf/25e1cca5-ee47-4eaf-86c0-c4f5192a9937" class="external-link">definition
-catalog</a> provided by IDEAM. Stations under the categories
-<em>Climática Principal</em> and <em>Climática Ordinaria</em> have
-records of temperature.</p>
+can use the definition catalog provided by IDEAM <a href="http://www.ideam.gov.co/documents/10182/557765/Definiciones+CNE.pdf/25e1cca5-ee47-4eaf-86c0-c4f5192a9937" class="external-link">here</a>.
+Stations under the categories <em>Climática Principal</em> and
+<em>Climática Ordinaria</em> have records of temperature.</p>
 <p>Some stations are suspended, which means they are not taking
 measurements at the moment. This information is found at the column
 <u>estado</u> where, if suspended, the observation would be
@@ -415,13 +414,13 @@ period of interest and collected information for Dry-bulb Temperature
 (TSSM_CON). It is important to consider that after data collection, some
 information might be lost due to quality attributes.</p>
 <p>With the stations, we can access TMX_CON from 2013 to 2016. To do so,
-we can use the function <code><a href="../reference/download_climate_stations.html">download_climate_stations()</a></code>. This
+we can use the function <code>download_climate_stations</code>. This
 function has the following parameters:</p>
 <ul>
 <li>
 <code>stations</code>: <code>data.frame</code> containing the
 stations’ codes. This <code>data.frame</code> must be retrieved from the
-function <code><a href="../reference/stations_in_roi.html">stations_in_roi()</a></code>.</li>
+function <code>stations_in_roi</code>.</li>
 <li>
 <code>start_date</code>: character with the first date to consult in
 the format <code>"YYYY-MM-DD"</code>.</li>
@@ -461,8 +460,7 @@ unique station code, longitude, latitude, date, hour, tag requested and
 value recorded at the specified time. The tidy structure reports a row
 for each observation, which makes the subset and plot easier.</p>
 <p>To plot a time series of the stations’ data we can use
-<code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot()</a></code> function from <code>ggplot2</code> package as
-follows:</p>
+<code>ggplot2</code> as follows:</p>
 </div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">max_temperature_stations</span><span class="op">)</span> <span class="op">+</span></span>
@@ -478,7 +476,7 @@ follows:</p>
 and we have missing information in some periods. Additionally, by having
 the data daily we cannot easily see big changes along time. To aid this
 issue, we will use the aggregation function
-<code><a href="../reference/aggregate_climate.html">aggregate_climate()</a></code>, which aggregates climate data by time.
+<code>aggregate_climate</code>, which aggregates climate data by time.
 This function takes by parameter the desired aggregation.</p>
 </div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -499,7 +497,7 @@ This function takes by parameter the desired aggregation.</p>
 <div style="text-align: justify;">
 <p>To retrieve climate data for any ROI in the country, without manually
 extracting the stations’ data, we can use the function
-<code><a href="../reference/download_climate_geom.html">download_climate_geom()</a></code>. The function has the following
+<code>download_climate_geom</code>. The function has the following
 parameters:</p>
 <ul>
 <li>
@@ -552,14 +550,13 @@ and Dictionaries</a>. We will filter for the city of Manizales in the
 department Caldas.</p>
 </div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">manizales_code</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/name_to_code_mun.html">name_to_code_mun</a></span><span class="op">(</span><span class="st">"Caldas"</span>, <span class="st">"Manizales"</span><span class="op">)</span></span>
-<span><span class="va">manizales_code</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/name_to_code_mun.html">name_to_code_mun</a></span><span class="op">(</span><span class="st">"Caldas"</span>, <span class="st">"Manizales"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "17001"</span></span></code></pre></div>
 <div style="text-align: justify;">
-<p>The function <code><a href="../reference/download_climate.html">download_climate()</a></code> will require almost the
-same arguments as <code><a href="../reference/download_climate_geom.html">download_climate_geom()</a></code>, but instead of
-an <code>sf</code> object, it will take a character containing the
-DIVIPOLA code:</p>
+<p>The function <code>download_climate</code> will require almost the
+same arguments as <code>download_climate_geom</code>, but instead of an
+<code>sf</code> object, it will take a character containing the DIVIPOLA
+code:</p>
 <ul>
 <li>
 <code>code</code>: character with the DIVIPOLA code for the
@@ -577,7 +574,7 @@ the format <code>"YYYY-MM_DD"</code>. (Last available date is
 </div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">max_temperature_mpio</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_climate.html">download_climate</a></span><span class="op">(</span></span>
-<span>  code <span class="op">=</span> <span class="va">manizales_code</span>,</span>
+<span>  code <span class="op">=</span> <span class="st">"17001"</span>,</span>
 <span>  start_date <span class="op">=</span> <span class="st">"2013-01-01"</span>,</span>
 <span>  end_date <span class="op">=</span> <span class="st">"2016-12-31"</span>,</span>
 <span>  tag <span class="op">=</span> <span class="st">"TMX_CON"</span></span>
