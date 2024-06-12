@@ -1,6 +1,6 @@
 pandoc: 3.1.11
-pkgdown: 2.0.9.9000
-pkgdown_sha: 5b77312fe520d755687cd2154d760ee509b58d1e
+pkgdown: 2.0.9
+pkgdown_sha: ~
 articles:
   climate_data: climate_data.html
   demographic_data: demographic_data.html
@@ -8,7 +8,7 @@ articles:
   geospatial_data: geospatial_data.html
   merge_geo_demographic: merge_geo_demographic.html
   population_projections: population_projections.html
-last_built: 2024-05-30T16:31Z
+last_built: 2024-06-12T18:04Z
 urls:
   reference: https://epiverse-trace.github.io/ColOpenData/reference
   article: https://epiverse-trace.github.io/ColOpenData/articles

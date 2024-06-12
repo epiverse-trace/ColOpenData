@@ -5,6 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="ColOpenData">
 <title>How to download climate data using ColOpenData • ColOpenData</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
@@ -14,57 +15,77 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="How to download climate data using ColOpenData">
-<meta name="description" content="ColOpenData">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="How to download climate data using ColOpenData">
 <meta property="og:description" content="ColOpenData">
 <meta property="og:image" content="https://epiverse-trace.github.io/ColOpenData/logo.svg">
-<!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-XZ471458FQ"></script><script>
+<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]--><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-XZ471458FQ"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
+
   gtag('config', 'G-XZ471458FQ');
 </script>
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    <nav class="navbar navbar-expand-lg fixed-top bg-dark" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
+    
+
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-dark" data-bs-theme="dark"><div class="container">
     <a href="https://epiverse-trace.github.io/" class="external-link"><img src="https://epiverse-trace.github.io/blueprints/logo_white.svg" id="logo" alt="Epiverse-TRACE"></a>
     <a class="navbar-brand me-2" href="../index.html">ColOpenData</a>
+
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+
+    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="active nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><hr class="dropdown-divider"></li>
-    <li><h6 class="dropdown-header" data-toc-skip>Documentation and Dictionaries</h6></li>
-    <li><a class="dropdown-item" href="../articles/documentation_and_dictionaries.html">Documentation and Dictionaries</a></li>
-    <li><hr class="dropdown-divider"></li>
-    <li><h6 class="dropdown-header" data-toc-skip>Download data</h6></li>
-    <li><a class="dropdown-item" href="../articles/demographic_data.html">A Deep Dive into Colombian Demographics Using ColOpenData</a></li>
-    <li><a class="dropdown-item" href="../articles/geospatial_data.html">Maps and plots with ColOpenData</a></li>
-    <li><a class="dropdown-item" href="../articles/climate_data.html">How to download climate data using ColOpenData</a></li>
-    <li><a class="dropdown-item" href="../articles/population_projections.html">Population Projections with ColOpenData</a></li>
-    <li><hr class="dropdown-divider"></li>
-    <li><h6 class="dropdown-header" data-toc-skip>Merge data</h6></li>
-    <li><a class="dropdown-item" href="../articles/merge_geo_demographic.html">Integration of Geospatial and Demographic data</a></li>
-  </ul>
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
-<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
+<li class="active nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <h6 class="dropdown-header" data-toc-skip>Documentation and Dictionaries</h6>
+    <a class="dropdown-item" href="../articles/documentation_and_dictionaries.html">Documentation and Dictionaries</a>
+    <div class="dropdown-divider"></div>
+    <h6 class="dropdown-header" data-toc-skip>Download data</h6>
+    <a class="dropdown-item" href="../articles/demographic_data.html">A Deep Dive into Colombian Demographics Using ColOpenData</a>
+    <a class="dropdown-item" href="../articles/geospatial_data.html">Maps and plots with ColOpenData</a>
+    <a class="dropdown-item" href="../articles/climate_data.html">How to download climate data using ColOpenData</a>
+    <a class="dropdown-item" href="../articles/population_projections.html">Population Projections with ColOpenData</a>
+    <div class="dropdown-divider"></div>
+    <h6 class="dropdown-header" data-toc-skip>Merge data</h6>
+    <a class="dropdown-item" href="../articles/merge_geo_demographic.html">Integration of Geospatial and Demographic data</a>
+  </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
       </ul>
-<ul class="navbar-nav">
-<li class="nav-item"><form class="form-inline" role="search">
- <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
-</form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/epiverse-trace/ColOpenData/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/epiverse-trace/ColOpenData/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
 </div>
+
+    
   </div>
 </nav><div class="container template-article">
 
@@ -77,10 +98,15 @@
 <script src="climate_data_files/leaflet-binding-2.2.2/leaflet.js"></script><script src="climate_data_files/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script><script src="climate_data_files/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script><div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>How to download climate data using ColOpenData</h1>
-                        <small class="dont-index">Source: <a href="https://github.com/epiverse-trace/ColOpenData/blob/HEAD/vignettes/climate_data.Rmd" class="external-link"><code>vignettes/climate_data.Rmd</code></a></small>
+            
+      
+      <small class="dont-index">Source: <a href="https://github.com/epiverse-trace/ColOpenData/blob/HEAD/vignettes/climate_data.Rmd" class="external-link"><code>vignettes/climate_data.Rmd</code></a></small>
       <div class="d-none name"><code>climate_data.Rmd</code></div>
     </div>
-        <div style="text-align: justify;">
+
+    
+    
+<div style="text-align: justify;">
 <p><strong>ColOpenData</strong> can be used to access open climate data
 from Colombia. This climate data is retrieved from the Institute of
 Hydrology, Meteorology and Environmental Studies <a href="http://www.ideam.gov.co/" class="external-link">(IDEAM)</a>. The climate module allows
@@ -193,10 +219,10 @@ Manizales in Colombia. We will download Maximum Temperature (TMX_CON)
 from 2013 to 2016, to observe the increase in temperature during 2015
 and 2016 due to the impact of El Nino (ENSO).</p>
 <p><strong>ColOpenData</strong> offers three methods to do this, using
-different functions: - <code>download_climate_stations</code> to
+different functions: - <code><a href="../reference/download_climate_stations.html">download_climate_stations()</a></code> to
 download climate data from previously selected stations -
-<code>download_climate_geom</code> to download climate data from a
-specified geometry (ROI) - <code>download_climate</code> to download
+<code><a href="../reference/download_climate_geom.html">download_climate_geom()</a></code> to download climate data from a
+specified geometry (ROI) - <code><a href="../reference/download_climate.html">download_climate()</a></code> to download
 climate data from municipalities’ or departments’ already loaded
 geometries</p>
 <p>In this example, we will follow the three methods to get the same
@@ -248,7 +274,7 @@ library for further details).</p>
 <script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addPolygons","args":[[[[{"lng":[-75.678072,-75.327859,-75.327859,-75.678072,-75.678072],"lat":[5.166278,5.166278,4.982247,4.982247,5.166278]}]]],null,null,{"interactive":true,"className":"","stroke":true,"color":"#2e6930","weight":2,"opacity":0.6,"fill":true,"fillColor":"#2e6930","fillOpacity":0.2,"smoothFactor":1,"noClip":false},null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[4.982247,5.166278],"lng":[-75.678072,-75.327859]}},"evals":[],"jsHooks":[]}</script><div style="text-align: justify;">
 <p>We can make a first exploration to check if there are any stations
 contained inside of it, using the function
-<code>stations_in_roi</code></p>
+<code><a href="../reference/stations_in_roi.html">stations_in_roi()</a></code>.</p>
 </div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stations</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/stations_in_roi.html">stations_in_roi</a></span><span class="op">(</span><span class="va">roi</span><span class="op">)</span></span>
@@ -312,9 +338,10 @@ contained inside of it, using the function
 <p>We can see that in the region there are 129 stations. Different
 categories are recorded by different stations, and can be checked at the
 column <u>categoria</u>. To understand the category of each station we
-can use the definition catalog provided by IDEAM <a href="http://www.ideam.gov.co/documents/10182/557765/Definiciones+CNE.pdf/25e1cca5-ee47-4eaf-86c0-c4f5192a9937" class="external-link">here</a>.
-Stations under the categories <em>Climática Principal</em> and
-<em>Climática Ordinaria</em> have records of temperature.</p>
+can use the <a href="http://www.ideam.gov.co/documents/10182/557765/Definiciones+CNE.pdf/25e1cca5-ee47-4eaf-86c0-c4f5192a9937" class="external-link">definition
+catalog</a> provided by IDEAM. Stations under the categories
+<em>Climática Principal</em> and <em>Climática Ordinaria</em> have
+records of temperature.</p>
 <p>Some stations are suspended, which means they are not taking
 measurements at the moment. This information is found at the column
 <u>estado</u> where, if suspended, the observation would be
@@ -388,13 +415,13 @@ period of interest and collected information for Dry-bulb Temperature
 (TSSM_CON). It is important to consider that after data collection, some
 information might be lost due to quality attributes.</p>
 <p>With the stations, we can access TMX_CON from 2013 to 2016. To do so,
-we can use the function <code>download_climate_stations</code>. This
+we can use the function <code><a href="../reference/download_climate_stations.html">download_climate_stations()</a></code>. This
 function has the following parameters:</p>
 <ul>
 <li>
 <code>stations</code>: <code>data.frame</code> containing the
 stations’ codes. This <code>data.frame</code> must be retrieved from the
-function <code>stations_in_roi</code>.</li>
+function <code><a href="../reference/stations_in_roi.html">stations_in_roi()</a></code>.</li>
 <li>
 <code>start_date</code>: character with the first date to consult in
 the format <code>"YYYY-MM-DD"</code>.</li>
@@ -434,7 +461,8 @@ unique station code, longitude, latitude, date, hour, tag requested and
 value recorded at the specified time. The tidy structure reports a row
 for each observation, which makes the subset and plot easier.</p>
 <p>To plot a time series of the stations’ data we can use
-<code>ggplot2</code> as follows:</p>
+<code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot()</a></code> function from <code>ggplot2</code> package as
+follows:</p>
 </div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">max_temperature_stations</span><span class="op">)</span> <span class="op">+</span></span>
@@ -450,7 +478,7 @@ for each observation, which makes the subset and plot easier.</p>
 and we have missing information in some periods. Additionally, by having
 the data daily we cannot easily see big changes along time. To aid this
 issue, we will use the aggregation function
-<code>aggregate_climate</code>, which aggregates climate data by time.
+<code><a href="../reference/aggregate_climate.html">aggregate_climate()</a></code>, which aggregates climate data by time.
 This function takes by parameter the desired aggregation.</p>
 </div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -471,7 +499,7 @@ This function takes by parameter the desired aggregation.</p>
 <div style="text-align: justify;">
 <p>To retrieve climate data for any ROI in the country, without manually
 extracting the stations’ data, we can use the function
-<code>download_climate_geom</code>. The function has the following
+<code><a href="../reference/download_climate_geom.html">download_climate_geom()</a></code>. The function has the following
 parameters:</p>
 <ul>
 <li>
@@ -524,13 +552,14 @@ and Dictionaries</a>. We will filter for the city of Manizales in the
 department Caldas.</p>
 </div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/name_to_code_mun.html">name_to_code_mun</a></span><span class="op">(</span><span class="st">"Caldas"</span>, <span class="st">"Manizales"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">manizales_code</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/name_to_code_mun.html">name_to_code_mun</a></span><span class="op">(</span><span class="st">"Caldas"</span>, <span class="st">"Manizales"</span><span class="op">)</span></span>
+<span><span class="va">manizales_code</span></span>
 <span><span class="co">#&gt; [1] "17001"</span></span></code></pre></div>
 <div style="text-align: justify;">
-<p>The function <code>download_climate</code> will require almost the
-same arguments as <code>download_climate_geom</code>, but instead of an
-<code>sf</code> object, it will take a character containing the DIVIPOLA
-code:</p>
+<p>The function <code><a href="../reference/download_climate.html">download_climate()</a></code> will require almost the
+same arguments as <code><a href="../reference/download_climate_geom.html">download_climate_geom()</a></code>, but instead of
+an <code>sf</code> object, it will take a character containing the
+DIVIPOLA code:</p>
 <ul>
 <li>
 <code>code</code>: character with the DIVIPOLA code for the
@@ -548,7 +577,7 @@ the format <code>"YYYY-MM_DD"</code>. (Last available date is
 </div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">max_temperature_mpio</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_climate.html">download_climate</a></span><span class="op">(</span></span>
-<span>  code <span class="op">=</span> <span class="st">"17001"</span>,</span>
+<span>  code <span class="op">=</span> <span class="va">manizales_code</span>,</span>
 <span>  start_date <span class="op">=</span> <span class="st">"2013-01-01"</span>,</span>
 <span>  end_date <span class="op">=</span> <span class="st">"2016-12-31"</span>,</span>
 <span>  tag <span class="op">=</span> <span class="st">"TMX_CON"</span></span>
@@ -598,16 +627,26 @@ version of <strong>ColOpenData</strong>.</p></li>
 </ul>
 </div>
 </div>
-  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
 </div>
+
+
+
     <footer><div class="pkgdown-footer-left">
   <p>Developed by M. Camila Tavera-Cifuentes, Julian Otero, Juan D. Umana, Juan Montenegro-Torres.</p>
 </div>
+
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
 </div>
+
     </footer>
 </div>
+
+  
+
+  
+
   </body>
 </html>
