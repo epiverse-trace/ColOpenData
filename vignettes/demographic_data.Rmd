@@ -23,13 +23,13 @@ The available CNPV information is divided in four categories: households, person
 
 In this vignette you will learn:
 
-1.  How to download demographic data using **ColOpenData**
-2.  How to filter, group, mutate and aggregate demographic data
-3.  How to visualize data using **ggplot2**
+1. How to download demographic data using **ColOpenData**
+2. How to filter, group, mutate and aggregate demographic data
+3. How to visualize data using **ggplot2**
 
 As the goal of this vignette is to show some examples on how to use the data, we will load some specific libraries but that does not mean they are required to use the data in all cases.
 
-In order to access its documentation we need to use the function `list_datasets()` and indicate as a parameter the module we are interested in. It is important to take a good look at this to have a clearer understanding of what we count with, before just throwing ourselves to work with the data. Now, we should start by loading all necessary libraries.
+In order to access its documentation we need to use the function `list_datasets` and indicate as a parameter the module we are interested in. It is important to take a good look at this to have a clearer understanding of what we count with, before just throwing ourselves to work with the data. Now, we should start by loading all necessary libraries. 
 :::
 
 ```{r libraries, message=FALSE, warning=FALSE, results="hide"}
@@ -55,9 +55,8 @@ datasets_dem <- list_datasets("demographic")
 
 head(datasets_dem)
 ```
-
 ::: {style="text-align: justify;"}
-After checking the documentation, we can load the data we want to work with. To do this, we will use the `download_demographic()` function that takes by parameter the dataset name, presented in the documentation. For this first example we will focus on a CNPV dataset.
+After checking the documentation, we can load the data we want to work with. To do this, we will use the `download_demographic` function that takes by parameter the dataset name, presented in the documentation. For this first example we will focus on a CNPV dataset.
 :::
 
 ### Data load
@@ -141,7 +140,6 @@ Also, with the CNPV data, we could merge data from the different categories and 
 literacy <- download_demographic("DANE_CNPVPD_2018_16PM")
 marital_status <- download_demographic("DANE_CNPVPS_2018_7PM")
 ```
-
 ::: {style="text-align: justify;"}
 For this example, we will focus on a specific municipality, examining the total area and specifically concentrating on the age group between 15 and 24 years old. Since we want to compare both datasets simultaneously, it's important to first ensure they have the same population count under identical conditions. Most columns in the demographic datasets contain a [total]{.underline} value, which aggregates data across all conditions. For instance, the "sex" column includes "male", "female", and ["total"]{.underline}, representing both genders combined. Similarly, the "marital status" column's ['total']{.underline} value encompasses the entire population, irrespective of their marital status.
 :::

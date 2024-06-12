@@ -61,13 +61,13 @@ library(dplyr)
 library(ggplot2)
 ```
 
-Now we can download the data. We will use the function `download_pop_projections()`, which has five parameters:
+Now we can download the data. We will use the function `download_pop_projections`, which has five parameters:
 
--   `spatial_level` character with the spatial level to be consulted. Can be either `"national"`, `"department"` or `"municipality"`
--   `start_year` numeric with the start year to be consulted
--   `end_year` numeric with the end year to be consulted
--   `include_sex` logical for including (or not) division by sex. Default is `FALSE`
--   `include_ethnic` logical for including (or not) division by ethnic group (only available for `"municipality"`). Default is `FALSE`
+- `spatial_level` character with the spatial level to be consulted. Can be either `"national"`,  `"department"` or `"municipality"`
+- `start_year` numeric with the start year to be consulted
+- `end_year` numeric with the end year to be consulted
+- `include_sex` logical for including (or not) division by sex. Default is `FALSE`
+- `include_ethnic` logical for including (or not) division by ethnic group (only available for `"municipality"`). Default is `FALSE`
 
 ```{r download data}
 asen <- download_pop_projections(
@@ -78,7 +78,6 @@ asen <- download_pop_projections(
   include_ethnic = FALSE
 )
 ```
-
 We will filter the downloaded data for ages under 99.
 
 ```{r filtered projections}
