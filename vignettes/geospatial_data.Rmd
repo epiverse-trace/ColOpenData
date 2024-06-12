@@ -104,11 +104,11 @@ name_to_code_dep("Tolima")
 ```
 
 ::: {style="text-align: justify;"}
-To understand which column contains the departments' codes and filter for Tolima, we will need the corresponding dataset dictionary. To download the dictionary we can use the `dictionary` function. This function uses the dataset name to download the associated information. For further information please refer to the documentation on dictionaries previously mentioned.
+To understand which column contains the departments' codes and filter for Tolima, we will need the corresponding dataset dictionary. To download the dictionary we can use the `geospatial_dictionary()` function. This function uses the dataset name to download the associated information. For further information please refer to the documentation on dictionaries previously mentioned.
 :::
 
 ```{r dictionary for urban sections}
-dict <- dictionary("DANE_MGN_2018_MPIO")
+dict <- geospatial_dictionary("municipality")
 
 head(dict)
 ```

@@ -143,7 +143,7 @@ From the original 129 stations, 40 were working for some or the whole period of 
 With the stations, we can access TMX_CON from 2013 to 2016. To do so, we can use the function `download_climate_stations`. This function has the following parameters:
 
 -   `stations`: `data.frame` containing the stations' codes. This `data.frame` must be retrieved from the function `stations_in_roi`.
--   `start_date`: character with the first date to consult in the format `"YYYY-MM-DD"`.
+-   `start_date`: character with the first date to consult in the format `"YYYY-MM-DD"`. (First available date is `"1920-01-01"`).
 -   `end_date`: character with the last date to consult in the format `"YYYY-MM_DD"`. (Last available date is `"2023-05-31"`).
 -   `tag`: character containing climate tag to consult.
 :::
@@ -197,7 +197,7 @@ ggplot(data = max_temperature_month) +
 To retrieve climate data for any ROI in the country, without manually extracting the stations' data, we can use the function `download_climate_geom`. The function has the following parameters:
 
 -   `geometry`: `sf` geometry containing the geometry for a given ROI. This geometry can be either a `POLYGON` or `MULTIPOLYGON`.
--   `start_date`: character with the first date to consult in the format `"YYYY-MM-DD"`.
+-   `start_date`: character with the first date to consult in the format `"YYYY-MM-DD"`. (First available date is `"1920-01-01"`).
 -   `end_date`: character with the last date to consult in the format `"YYYY-MM_DD"`. (Last available date is `"2023-05-31"`).
 -   `tag`: character containing climate tag to consult.
 
@@ -239,7 +239,7 @@ name_to_code_mun("Caldas", "Manizales")
 The function `download_climate` will require almost the same arguments as `download_climate_geom`, but instead of an `sf` object, it will take a character containing the DIVIPOLA code:
 
 -   `code`: character with the DIVIPOLA code for the area.
--   `start_date`: character with the first date to consult in the format `"YYYY-MM-DD"`.
+-   `start_date`: character with the first date to consult in the format `"YYYY-MM-DD"`. (First available date is `"1920-01-01"`).
 -   `end_date`: character with the last date to consult in the format `"YYYY-MM_DD"`. (Last available date is `"2023-05-31"`).
 -   `tag`: character containing climate tag to consult.
 :::

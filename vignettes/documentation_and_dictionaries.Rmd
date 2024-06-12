@@ -155,37 +155,25 @@ area_sex_datasets <- look_up(
 head(area_sex_datasets)
 ```
 
-## Dictionaries
+## Geospatial dictionaries
 
 ::: {style="text-align: justify;"}
-Dictionaries are provided to understand some tags and column names inside each module. These dictionaries are provided in Spanish, since they are retrieved directly from the sources.
-:::
-
-#### Demographic
-
-::: {style="text-align: justify;"}
-Dictionaries are not provided for this module since they are not needed. Demographic datasets include comprehensive column names and variables, and they are self-contained.
-:::
-
-#### Geospatial
-
-::: {style="text-align: justify;"}
-Datasets inside the geospatial module contain a summarized version of the census and a dictionary is needed to understand all aggregated variables. These dictionaries contain the necessary metadata to use the available information. To retrieve them, we can use the function `dictionary`, using the dataset name as a parameter:
+Datasets inside the geospatial module contain a summarized version of the census and a dictionary is needed to understand all aggregated variables. These dictionaries contain the necessary metadata to use the available information. To retrieve them, we can use the function `geospatial_dictionary()`, using the spatial level as a parameter:
 :::
 
 ```{r dictionary for MGNCNPV at municipalities}
-dict_mpio <- dictionary("DANE_MGN_2018_MPIO")
+dict_mpio <- geospatial_dictionary("municipality")
 head(dict_mpio)
 ```
 
-#### Climate
+## Climate tags
 
 ::: {style="text-align: justify;"}
-Climate data is not stored in multiple datasets but as an unique dataset with numerous tags. These tags can also be consulted through the function `dictionary`, using the name of the only climate dataset available.
+Climate data is not stored in multiple datasets but as an unique dataset with numerous tags. These tags can also be consulted through the function `climate_tags()`.
 :::
 
 ```{r dicionary for climate data}
-dict_climate <- dictionary("IDEAM_CLIMATE_2023_MAY")
+dict_climate <- climate_tags()
 head(dict_climate)
 ```
 
