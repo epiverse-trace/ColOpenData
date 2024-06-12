@@ -5,7 +5,7 @@
 <!-- `packagename` is extracted from the DESCRIPTION file -->
 <!-- `gh_repo` is extracted via a special environment variable in GitHub Actions -->
 
-# {{ packagename }} <img src="man/figures/logo.svg" align="right" width="200"/>
+# ColOpenData <img src="man/figures/logo.svg" align="right" width="200"/>
 
 <!-- badges: start -->
 
@@ -57,28 +57,30 @@ four categories:
   of 2018. The CNPV data corresponds to the most recent census available
   to date and the information is presented as an answer to three
   questions: How many are we?, Where are we? and How do we live? Further
-  information can be consulted
-  [here](https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/censo-nacional-de-poblacion-y-vivenda-2018).
+  information can be consulted at the [CNPV
+  results](https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/censo-nacional-de-poblacion-y-vivenda-2018).
 
 - **Geospatial:** This data is retrieved from the National
   Geostatistical Framework (MGN), which includes maps and a summarized
   version of the 2018 census, aggregated to spatial geometries. The data
   is available at different aggregation levels including: Blocks, Urban
   and Rural Sections, Urban and Rural Sectors, Urban Areas,
-  Municipalities and Departments. More information is available
-  [here](https://www.dane.gov.co/index.php/actualidad-dane/5454-el-dane-actualizo-el-marco-geoestadistico-nacional-a-2018).
+  Municipalities and Departments. More information is available at [MGN
+  update
+  news](https://www.dane.gov.co/index.php/actualidad-dane/5454-el-dane-actualizo-el-marco-geoestadistico-nacional-a-2018).
 
 - **Climate:** Climate data is recovered from backup information
   provided by IDEAM, containing historical data from the first station
   in the country until May 31st 2023. This backup includes temperature,
   precipitation, sunshine duration, wind direction, among others. More
-  information can be found [here](http://www.ideam.gov.co/).
+  information can be found at [IDEAM website](http://www.ideam.gov.co/).
 
 - **Population projections:** Population Projections data contains the
   population projections and back projections from 1950 to 2070,
   considering the post COVID-19 update, which was calculated based on
-  the results of CNPV of 2018. Further information can be consulted
-  [here](https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/proyecciones-de-poblacion).
+  the results of CNPV of 2018. Further information can be consulted at
+  [DANE
+  website](https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/proyecciones-de-poblacion).
 
 Documentation and vignettes are available for the modules in the [user
 vignettes](https://epiverse-trace.github.io/ColOpenData/).
