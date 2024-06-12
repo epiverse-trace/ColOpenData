@@ -7,13 +7,15 @@ test_that("List datasets works as expected", {
 })
 
 test_that("Dictionary errors are thrown", {
-  expect_error(dictionary("DANE_MGN_2018"))
-  expect_error(dictionary(4))
-  expect_error(dictionary("DANE_CNPVPS_2018_10HM"))
+  expect_error(geospatial_dictionary("DANE_MGN_2018_MPIO"))
 })
 
 test_that("Dictionary works as expected", {
-  expect_snapshot(dictionary("DANE_MGN_2018_DPTO"))
+  expect_snapshot(geospatial_dictionary("mpio"))
+})
+
+test_that("Climate tags works as expected", {
+  expect_snapshot(climate_tags())
 })
 
 test_that("Lookup errors are thrown", {
