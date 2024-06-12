@@ -17,9 +17,9 @@ knitr::opts_chunk$set(
 ```
 
 ::: {style="text-align: justify;"}
-**ColOpenData** can be used to access open geospatial data from Colombia. This data is retrieved from the Geostatistical National Framework (MGN), published by the National Administrative Department of Statistics [(DANE)](https://www.dane.gov.co/index.php/en/). The MGN contains the political-administrative division and is used to reference census statistical information. Further information can be obtained directly from DANE [here](https://www.dane.gov.co/index.php/actualidad-dane/5454-el-dane-actualizo-el-marco-geoestadistico-nacional-a-2018).
+**ColOpenData** can be used to access open geospatial data from Colombia. This data is retrieved from the Geostatistical National Framework (MGN), published by the National Administrative Department of Statistics [(DANE)](https://www.dane.gov.co/index.php/en/). The MGN contains the political-administrative division and is used to reference census statistical information. Further information can be obtained from [MGN update news](https://www.dane.gov.co/index.php/actualidad-dane/5454-el-dane-actualizo-el-marco-geoestadistico-nacional-a-2018) provided by DANE.
 
-This package contains the 2018's version of the MGN, which also included a summarized version of the National Population and Dwelling Census (CNPV) in different aggregation levels. Each level is stored in a different dataset, which can be retrieved using the `download_geospatial` function, which requires three arguments:
+This package contains the 2018's version of the MGN, which also included a summarized version of the National Population and Dwelling Census (CNPV) in different aggregation levels. Each level is stored in a different dataset, which can be retrieved using the `download_geospatial()` function, which requires three arguments:
 
 -   `spatial_level` character with the spatial level to be consulted
 -   `include_geom` logical for including (or not) geometry. Default is `TRUE`
@@ -59,9 +59,9 @@ knitr::kable(mgncnpv)
 ::: {style="text-align: justify;"}
 In this vignette you will learn:
 
-1. How to download geospatial data using **ColOpenData**
-2. How to use census data included in geospatial datasets
-3. How to visualize spatial data using **leaflet** and **ggplot2**
+1.  How to download geospatial data using **ColOpenData**
+2.  How to use census data included in geospatial datasets
+3.  How to visualize spatial data using **leaflet** and **ggplot2**
 
 We will be using geospatial data at the level of Municipality (MPIO) for the department of Tolima and we will calculate the percentage of houses with internet connection at each municipality. Later, we will build some plots using the previously mentioned approaches for dynamic and static plots.
 
@@ -73,6 +73,7 @@ library(ColOpenData)
 library(dplyr)
 library(sf)
 library(ggplot2)
+# library(knitr)
 library(leaflet)
 ```
 
@@ -83,7 +84,7 @@ library(leaflet)
 ## Downloading geospatial data
 
 ::: {style="text-align: justify;"}
-First, we download the data using the function `download_geospatial`, including the geometries and the census related information.
+First, we download the data using the function `download_geospatial()`, including the geometries and the census related information.
 :::
 
 ```{r download data}
@@ -100,11 +101,12 @@ After downloading, we have to filter by the municipality code using the DIVIPOLA
 :::
 
 ```{r}
-name_to_code_dep("Tolima")
+tolima_code <- name_to_code_dep("Tolima")
+tolima_code
 ```
 
 ::: {style="text-align: justify;"}
-To understand which column contains the departments' codes and filter for Tolima, we will need the corresponding dataset dictionary. To download the dictionary we can use the `dictionary` function. This function uses the dataset name to download the associated information. For further information please refer to the documentation on dictionaries previously mentioned.
+To understand which column contains the departments' codes and filter for Tolima, we will need the corresponding dataset dictionary. To download the dictionary we can use the `geospatial_dictionary()` function. This function uses the dataset name to download the associated information. For further information please refer to the documentation on dictionaries previously mentioned.
 :::
 
 ```{r dictionary for urban sections}
@@ -114,11 +116,11 @@ head(dict)
 ```
 
 ::: {style="text-align: justify;"}
-After exploring the dictionary, we can identify the column that contains the individual municipality codes is [codigo_departamento]{.underline}. We will filter based on that column.
+After exploring the dictionary, we can identify the column that contains the individual municipality code is [codigo_departamento]{.underline}. We will filter based on that column.
 :::
 
 ```{r filter and internet coverage}
-tolima <- mpio %>% filter(codigo_departamento == "73")
+tolima <- mpio %>% filter(codigo_departamento == tolima_code)
 ```
 
 ::: {style="text-align: justify;"}
@@ -132,7 +134,7 @@ tolima <- tolima %>% mutate(internet = round(viv_internet / viviendas, 2))
 ## Static plots (ggplot2)
 
 ::: {style="text-align: justify;"}
-[`ggplot2`](https://ggplot2.tidyverse.org/) can be used to generate static plots of spatial data by using the geometry `geom_sf` as follows:
+[`ggplot2`](https://ggplot2.tidyverse.org/) can be used to generate static plots of spatial data by using the geometry `geom_sf()` as follows:
 :::
 
 ```{r ggplot2 basic}
