@@ -217,7 +217,7 @@ name_to_code_mun("Boyacá", "Tunja")
 ```
 
 ::: {style="text-align: justify;"}
-These individual codes can be used to filter information in the datasets.
+These individual codes can be used to filter information in the datasets. 
 
 On the other hand, departments' and municipalities' codes can be translated to retrieve their official names using `divipola_municipality_name` and `divipola_department_name`.
 :::
@@ -225,3 +225,4 @@ On the other hand, departments' and municipalities' codes can be translated to r
 ```{r tunja name}
 code_to_name_mun("15001")
 ```
+
