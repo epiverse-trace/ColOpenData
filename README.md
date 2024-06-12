@@ -5,7 +5,7 @@
 <!-- `packagename` is extracted from the DESCRIPTION file -->
 <!-- `gh_repo` is extracted via a special environment variable in GitHub Actions -->
 
-# ColOpenData <img src="man/figures/logo.svg" align="right" width="200" />
+# {{ packagename }} <img src="man/figures/logo.svg" align="right" width="200"/>
 
 <!-- badges: start -->
 
@@ -17,6 +17,7 @@ coverage](https://codecov.io/gh/epiverse-trace/ColOpenData/branch/main/graph/bad
 [![lifecycle-experimental](https://raw.githubusercontent.com/reconverse/reconverse.github.io/master/images/badge-experimental.svg)](https://www.reconverse.org/lifecycle.html#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ColOpenData)](https://CRAN.R-project.org/package=ColOpenData)
+
 <!-- badges: end -->
 
 **ColOpenData** is a package designed to access curated and wrangled
