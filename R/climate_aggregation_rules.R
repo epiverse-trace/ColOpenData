@@ -88,7 +88,7 @@ annual_tmx <- function(group) {
 #' @keywords internal
 monthly_tmn <- function(group) {
   if (nrow(group) >= 16) {
-    value <- round(max(group$value, na.rm = TRUE), 2)
+    value <- round(min(group$value, na.rm = TRUE), 2)
   } else {
     value <- NA
   }
@@ -100,7 +100,7 @@ monthly_tmn <- function(group) {
 #' @keywords internal
 annual_tmn <- function(group) {
   if (nrow(group) >= 9) {
-    value <- round(max(group$value, na.rm = TRUE), 2)
+    value <- round(min(group$value, na.rm = TRUE), 2)
   } else {
     value <- NA
   }
