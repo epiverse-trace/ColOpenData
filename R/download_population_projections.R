@@ -73,14 +73,13 @@ download_pop_projections <- function(spatial_level, start_year, end_year,
     dplyr::select(-dplyr::all_of(c("start", "end")))
   included_years <- seq(start_year, end_year)
   needed_datasets <- unique(pp_years[pp_years$year %in% included_years, "name"])
-  population_projections <- list()
+  population_projections <- data.frame()
   for (dataset in needed_datasets) {
     dataset_path <- retrieve_path(dataset)
     pp_data <- retrieve_table(dataset_path)
     pp_data_filtered <- pp_data %>% dplyr::filter(.data$ano %in% included_years)
-    population_projections <- rbind(population_projections, list(pp_data_filtered))
+    population_projections <- rbind(population_projections, pp_data_filtered)
   }
-  population_projections <- dplyr::bind_rows(population_projections)
   message(strwrap(
     prefix = "\n", initial = "",
     c(
