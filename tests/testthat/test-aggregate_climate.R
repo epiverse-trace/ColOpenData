@@ -72,12 +72,12 @@ test_that("Aggregation for minimum temperature works as expected", {
 })
 
 test_that("Aggregation for maximum temperature works as expected", {
-  expect_s3_class(aggregate_climate(base_tmn, "year"), "data.frame")
-  month_tmn <- aggregate_climate(base_tmn, "month")
-  expect_identical(min(month_tmn[
-    which(month_tmn$station == 21245040),
+  expect_s3_class(aggregate_climate(base_tmx, "year"), "data.frame")
+  month_tmx <- aggregate_climate(base_tmx, "month")
+  expect_identical(max(month_tmx[
+    which(month_tmx$station == 21245010),
     "value"
-  ]), 19.7)
+  ]), 34.2)
 })
 
 test_that("Aggregation for precipitation works as expected", {

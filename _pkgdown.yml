@@ -48,9 +48,10 @@ reference:
 - subtitle: Look up keywords in datasets
   contents:
   - look_up
-- subtitle: Dictionaries
+- subtitle: Helper functions
   contents:
-  - dictionary
+  - geospatial_dictionary
+  - climate_tags
   
 - title: DIVIPOLA
 - subtitle: DIVIPOLA table

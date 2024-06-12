@@ -1,37 +1,55 @@
 #' Download data dictionaries
 #'
 #' @description
-#' Geospatial and climate datasets contain data dictionaries to understand
-#' internal tags and named columns
+#' Retrieve geospatial data dictionaries to understand internal tags and named
+#' columns. Dictionaries are only available in Spanish
 #'
-#' @param dataset character with the dataset name
+#' @param spatial_level character with the spatial level to be consulted
+#' \itemize{
+#' \item \code{"DPTO"} or \code{"department"}: Department
+#' \item \code{"MPIO"} or \code{"municipality"}: Municipality
+#' \item \code{"MPIOCL"} or \code{"municipality_class"}: Municipality including
+#' class
+#' \item \code{"SETU"} or \code{"urban_sector"}: Urban Sector
+#' \item \code{"SETR"} or \code{"rural_sector"}: Rural Sector
+#' \item \code{"SECU"} or \code{"urban_section"}: Urban Section
+#' \item \code{"SECR"} or \code{"rural_section"}: Rural Section
+#' \item \code{"ZU" } or \code{"urban_zone"}: Urban Zone
+#' \item \code{"MZN"} or \code{"block"}: Block
+#' }
 #'
 #' @return \code{data.frame} object with data dictionary
 #'
 #' @examples
-#' dict <- dictionary("DANE_MGN_2018_SETU")
+#' dict <- geospatial_dictionary("setu")
 #' head(dict)
 #'
 #' @export
-dictionary <- function(dataset) {
-  checkmate::assert_character(dataset)
-
-  datasets <- list_datasets()
-  if (dataset %in% datasets$name) {
-    tryCatch(
-      {
-        dict_path <- sprintf("DICT_%s", dataset)
-        path <- retrieve_dict_path(dict_path)
-        dict <- retrieve_table(path, ";")
-      },
-      error = function(e) {
-        stop("This dataset does not have (or need) an associated dictionary")
-      }
-    )
-  } else {
-    stop("`dataset` not found")
-  }
+geospatial_dictionary <- function(spatial_level) {
+  dataset <- retrieve_geospatial_name(spatial_level)
+  dict_path <- sprintf("DICT_%s", dataset)
+  path <- retrieve_dict_path(dict_path)
+  dict <- retrieve_table(path, ";")
   return(dict)
+}
+
+#' List climate (IDEAM) tags
+#'
+#' @description
+#' Retrieve available climate tags to be consulted. The list is only available
+#' in Spanish
+#'
+#' @return \code{data.frame} object with available tags
+#'
+#' @examples
+#' dict <- climate_tags()
+#' head(dict)
+#'
+#' @export
+climate_tags <- function() {
+  path <- retrieve_dict_path("DICT_IDEAM_CLIMATE_2023_MAY")
+  climate_dict <- retrieve_table(path, ";")
+  return(climate_dict)
 }
 
 #' Download list of available datasets

@@ -35,37 +35,12 @@ download_geospatial <- function(spatial_level, include_geom = TRUE,
                                 include_cnpv = TRUE) {
   checkmate::assert_logical(include_geom)
   checkmate::assert_logical(include_cnpv)
-  spatial_level <- tolower(spatial_level)
-  checkmate::assert_choice(tolower(spatial_level), c(
-    "dpto", "mpio", "setu", "setr", "secu", "secr", "mpiocl", "mzn", "zu",
-    "department", "municipality", "municipality_class", "urban_sector",
-    "rural_sector", "urban_section", "rural_section", "urban_zone", "block"
-  ))
   stopifnot(
     "At least one of the groups (`geom` and/or `cnpv`)
             must be TRUE" = any(include_geom, include_cnpv)
   )
-  if (spatial_level %in% c(
-    "dpto", "mpio", "setu", "setr", "secu", "secr", "mpiocl", "mzn", "zu"
-  )) {
-    levels_trans <- list(
-      dpto = "department",
-      mpio = "municipality",
-      mpiocl = "municipality_class",
-      setu = "urban_sector",
-      setr = "rural_sector",
-      secu = "urban_section",
-      secr = "rural_section",
-      zu = "urban_zone",
-      mzn = "block"
-    )
-    spatial_level <- levels_trans[[spatial_level]]
-  }
 
-  all_datasets <- list_datasets("geospatial")
-  geo_dataset <- all_datasets %>%
-    dplyr::filter(.data$level == spatial_level)
-  dataset <- geo_dataset$name
+  dataset <- retrieve_geospatial_name(spatial_level)
   dataset_path <- retrieve_path(dataset)
   geospatial_data <- sf::st_read(dataset_path, quiet = TRUE)
   geospatial_vars <- c("area", "latitud", "longitud")
@@ -90,4 +65,45 @@ download_geospatial <- function(spatial_level, include_geom = TRUE,
     )
   ))
   return(geospatial_data)
+}
+
+#' Retrieve geospatial dataset name for consultation
+#'
+#' @description
+#' Retrieve a geospatial dataset name from the spatial level. Checks the
+#' existence of the spatial level and datasets
+#'
+#' @param spatial_level character with the spatial level to be consulted
+#'
+#' @return character containing the geospatial dataset name. If the input is
+#' invalid an error will be thrown
+#'
+#' @keywords internal
+retrieve_geospatial_name <- function(spatial_level) {
+  checkmate::assert_choice(tolower(spatial_level), c(
+    "dpto", "mpio", "setu", "setr", "secu", "secr", "mpiocl", "mzn", "zu",
+    "department", "municipality", "municipality_class", "urban_sector",
+    "rural_sector", "urban_section", "rural_section", "urban_zone", "block"
+  ))
+  if (spatial_level %in% c(
+    "dpto", "mpio", "setu", "setr", "secu", "secr", "mpiocl", "mzn", "zu"
+  )) {
+    levels_trans <- list(
+      dpto = "department",
+      mpio = "municipality",
+      mpiocl = "municipality_class",
+      setu = "urban_sector",
+      setr = "rural_sector",
+      secu = "urban_section",
+      secr = "rural_section",
+      zu = "urban_zone",
+      mzn = "block"
+    )
+    spatial_level <- levels_trans[[spatial_level]]
+  }
+  all_datasets <- list_datasets("geospatial")
+  geo_dataset <- all_datasets %>%
+    dplyr::filter(.data$level == spatial_level)
+  dataset_name <- geo_dataset$name
+  return(dataset_name)
 }
