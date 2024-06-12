@@ -46,7 +46,7 @@ All datasets are retrieved from the National Administrative Department of Statis
     -   Personas Demográfico: **CNPVPD**
 -   Year:
     -   Census data: **2018**
--   Details: These are related to each individual dataset. For further details please check the function `list_datasets` below.
+-   Details: These are related to each individual dataset. For further details please check the function `list_datasets()` below.
 :::
 
 ::: {style="text-align: justify;"}
@@ -91,7 +91,7 @@ knitr::kable(IDEAM_tags)
 ```
 
 ::: {style="text-align: justify;"}
-These tags are meant to be used for download using `download_climate`, `download_climate_geom` and `download_climate_stations`. See [How to download climate data using ColOpenData](https://epiverse-trace.github.io/ColOpenData/articles/climate_data.html) for further details.
+These tags are meant to be used for download using `download_climate()`, `download_climate_geom()` and `download_climate_stations()`. See [How to download climate data using ColOpenData](https://epiverse-trace.github.io/ColOpenData/articles/climate_data.html) for further details.
 :::
 
 ## Understanding Population Projections
@@ -105,7 +105,7 @@ For examples on how to consult the data please refer to [Population Projection w
 ## List Data
 
 ::: {style="text-align: justify;"}
-To check available datasets you can use the `list_datasets` function. This function can also be filtered with the `module` parameter to indicate a specific module. Default is `"all"`, but can be filtered by `"demographic"`, `"geospatial"`, `"climate"` and `"population_projections"`.
+To check available datasets you can use the `list_datasets()` function. This function can also be filtered with the `module` parameter to indicate a specific module. Default is `"all"`, but can be filtered by `"demographic"`, `"geospatial"`, `"climate"` and `"population_projections"`.
 :::
 
 ```{r setup}
@@ -133,7 +133,7 @@ Using this function, we can retrieve all names, source, aggregation level and in
 ## List Data Using Keywords
 
 ::: {style="text-align: justify;"}
-Sometimes, going through each dataset to find specific information can be tiring. If you want to look for an specific word or set of words within datasets quickly, you can use the `look_up`function, which takes by parameter:
+Sometimes, going through each dataset to find specific information can be tiring. If you want to look for an specific word or set of words within datasets quickly, you can use the `look_up()` function, which takes by parameter:
 
 1.  The module you wish to search within (default is `"all"`).
 2.  The word (or words) you are interested in (input as a character or vector of characters).
@@ -192,7 +192,7 @@ head(dict_climate)
 ## DIVIPOLA
 
 ::: {style="text-align: justify;"}
-DIVIPOLA codification is a standardized frame for the whole country, and contains departments' and municipalities' codes. Departments have two digits for individual identification, while municipalities have five. The five numbers in municipalities' codes include the department where they are located (first two digits) and the number of the municipality within the department (last three digits). The codes for each municipality and department can be consulted in the following [table](https://www.datos.gov.co/widgets/gdxc-w37w). They can also be consulted using the DIVIPOLA table function:
+DIVIPOLA codification is a standardized frame for the whole country, and contains departments' and municipalities' codes. Departments have two digits for individual identification, while municipalities have five. The five numbers in municipalities' codes include the department where they are located (first two digits) and the number of the municipality within the department (last three digits). The codes for each municipality and department can be consulted in [this table](https://www.datos.gov.co/widgets/gdxc-w37w) provided by the National Platform of Colombian Open Data. They can also be consulted using the DIVIPOLA table function:
 :::
 
 ```{r divipola-table}
@@ -201,7 +201,7 @@ head(divipola)
 ```
 
 ::: {style="text-align: justify;"}
-To get the DIVIPOLA code of a municipality or department we can use the auxiliary functions `divipola_municipality_code` and `divipola_department_code` in **ColOpenData**. To retrieve a department code we only have to include the department's name:
+To get the DIVIPOLA code of a municipality or department we can use the auxiliary functions `divipola_municipality_code()` and `divipola_department_code()` in **ColOpenData**. To retrieve a department code we only have to include the department's name:
 :::
 
 ```{r cordoba}
@@ -217,12 +217,11 @@ name_to_code_mun("Boyacá", "Tunja")
 ```
 
 ::: {style="text-align: justify;"}
-These individual codes can be used to filter information in the datasets. 
+These individual codes can be used to filter information in the datasets.
 
-On the other hand, departments' and municipalities' codes can be translated to retrieve their official names using `divipola_municipality_name` and `divipola_department_name`.
+On the other hand, departments' and municipalities' codes can be translated to retrieve their official names using `divipola_municipality_name()` and `divipola_department_name()`.
 :::
 
 ```{r tunja name}
 code_to_name_mun("15001")
 ```
-
