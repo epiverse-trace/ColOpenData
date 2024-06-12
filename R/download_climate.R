@@ -171,7 +171,7 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
           value = station_filtered$value,
           stringsAsFactors = FALSE
         )
-        climate_data[[length(climate_data) + 1]] <- station_obs
+        climate_data <- rbind(climate_data, list(station_obs))
       }
     }
   }
