@@ -37,7 +37,7 @@ library(ggplot2)
 ::: {style="text-align: justify;"}
 Geospatial and demographic data can be merged based on the spatial aggregation level (SAL). While geospatial data can be aggregated down to the block level, demographic data is typically available only at the department and municipality levels. Therefore, these are the only SAL that can be accessed in both types of data for merging.
 
-Now, the `merge_geo_demographic()` function only takes by parameter the demographic dataset of interest.  Therefore, we should first access the demographic documentation to know which dataset we want to work with. Let's suppose we want to select a dataset at the department level.
+Now, the `merge_geo_demographic()` function only takes by parameter the demographic dataset of interest. Therefore, we should first access the demographic documentation to know which dataset we want to work with. Let's suppose we want to select a dataset at the department level.
 :::
 
 ```{r documentation, echo =TRUE}
@@ -68,6 +68,7 @@ head(chosen_data)
 merged_data <- merge_geo_demographic("DANE_CNPVPD_2018_14BPD")
 head(merged_data)
 ```
+
 ::: {style="text-align: justify;"}
 `merged_data` presents geospatial information related to departments, as well as the information related to the health service attended by the population. We can use this dataset to visualize the proportion of people in each department who used home remedies for health issues. To achieve this, we will calculate the proportion by dividing the count of people who reported using home remedies ("uso_remedios_caseros") by the total count of people who reported experiencing a health problem in each department.
 :::
@@ -94,4 +95,3 @@ ggplot(data = merged_data) +
     subtitle = "Colombia"
   )
 ```
-
