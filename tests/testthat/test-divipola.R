@@ -27,10 +27,6 @@ test_that("Divipola municipality code throws errors", {
     c("Bolivar", "Bolivar"),
     c(444, 555)
   ))
-  expect_error(name_to_code_mun(
-    "Bolivar",
-    c("Soplaviento", "Cartagena")
-  ))
   expect_warning(name_to_code_mun(
     c("Bolivar", "Panamá"),
     c("Soplaviento", "Cartagena")
@@ -52,6 +48,16 @@ test_that("Divipola municipality code works as expected", {
   expect_identical(
     name_to_code_mun(
       c("Antioquia", "Antioquia"),
+      c(
+        "Puerto Berrio",
+        "Puerto Triunfo"
+      )
+    ),
+    c("05579", "05591")
+  )
+  expect_identical(
+    name_to_code_mun(
+      c("Antioquia"),
       c(
         "Puerto Berrio",
         "Puerto Triunfo"
