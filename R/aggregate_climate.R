@@ -120,7 +120,7 @@ aggregate_daily <- function(hourly_data, FUN) {
     .data$station,
     .data$longitude, .data$latitude, .data$date, .data$tag
   ) %>%
-    dplyr::reframe(value = FUN(pick(everything())))
+    dplyr::reframe(value = FUN(dplyr::pick(dplyr::everything())))
   return(aggregated_day)
 }
 
@@ -141,7 +141,7 @@ aggregate_monthly <- function(daily_data, FUN) {
       .data$station, .data$longitude, .data$latitude,
       .data$tag, .data$year, .data$month
     ) %>%
-    dplyr::reframe(value = FUN(pick(everything()))) %>%
+    dplyr::reframe(value = FUN(dplyr::pick(dplyr::everything()))) %>%
     dplyr::mutate(date = as.Date(
       paste(.data$year, .data$month,
         "01",
@@ -173,7 +173,7 @@ aggregate_annual <- function(monthly_data, FUN) {
       .data$station, .data$longitude, .data$latitude,
       .data$tag, .data$year
     ) %>%
-    dplyr::reframe(value = FUN(pick(everything()))) %>%
+    dplyr::reframe(value = FUN(dplyr::pick(dplyr::everything()))) %>%
     dplyr::mutate(date = as.Date(paste(.data$year, "01", "01", sep = "-"),
       format = "%Y-%m-%d"
     )) %>%
