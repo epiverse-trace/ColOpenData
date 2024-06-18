@@ -115,10 +115,11 @@ aggregate_climate <- function(climate_data, frequency) {
 #'
 #' @keywords internal
 aggregate_daily <- function(hourly_data, FUN) {
-  aggregated_day <- dplyr::group_by(hourly_data,
-      .data$station,
-      .data$longitude, .data$latitude, .data$date, .data$tag
-    ) %>%
+  aggregated_day <- dplyr::group_by(
+    hourly_data,
+    .data$station,
+    .data$longitude, .data$latitude, .data$date, .data$tag
+  ) %>%
     dplyr::reframe(value = FUN(pick(everything())))
   return(aggregated_day)
 }
