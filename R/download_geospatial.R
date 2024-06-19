@@ -85,6 +85,7 @@ retrieve_geospatial_name <- function(spatial_level) {
     "department", "municipality", "municipality_class", "urban_sector",
     "rural_sector", "urban_section", "rural_section", "urban_zone", "block"
   ))
+  spatial_level <- tolower(spatial_level)
   if (spatial_level %in% c(
     "dpto", "mpio", "setu", "setr", "secu", "secr", "mpiocl", "mzn", "zu"
   )) {
