@@ -80,7 +80,8 @@ download_geospatial <- function(spatial_level, include_geom = TRUE,
 #'
 #' @keywords internal
 retrieve_geospatial_name <- function(spatial_level) {
-  checkmate::assert_choice(tolower(spatial_level), c(
+  spatial_level <- tolower(spatial_level)
+  checkmate::assert_choice(spatial_level, c(
     "dpto", "mpio", "setu", "setr", "secu", "secr", "mpiocl", "mzn", "zu",
     "department", "municipality", "municipality_class", "urban_sector",
     "rural_sector", "urban_section", "rural_section", "urban_zone", "block"
