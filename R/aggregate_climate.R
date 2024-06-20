@@ -116,10 +116,11 @@ aggregate_climate <- function(climate_data, frequency) {
 #' @keywords internal
 aggregate_daily <- function(hourly_data, FUN) {
   aggregated_day <- dplyr::group_by(
-    hourly_data, .data$station,
+    hourly_data,
+    .data$station,
     .data$longitude, .data$latitude, .data$date, .data$tag
   ) %>%
-    dplyr::do(data.frame(value = FUN(.data)))
+    dplyr::reframe(value = FUN(dplyr::pick(dplyr::everything())))
   return(aggregated_day)
 }
 
@@ -140,7 +141,7 @@ aggregate_monthly <- function(daily_data, FUN) {
       .data$station, .data$longitude, .data$latitude,
       .data$tag, .data$year, .data$month
     ) %>%
-    dplyr::do(data.frame(value = FUN(.data))) %>%
+    dplyr::reframe(value = FUN(dplyr::pick(dplyr::everything()))) %>%
     dplyr::mutate(date = as.Date(
       paste(.data$year, .data$month,
         "01",
@@ -172,7 +173,7 @@ aggregate_annual <- function(monthly_data, FUN) {
       .data$station, .data$longitude, .data$latitude,
       .data$tag, .data$year
     ) %>%
-    dplyr::do(data.frame(value = FUN(.data))) %>%
+    dplyr::reframe(value = FUN(dplyr::pick(dplyr::everything()))) %>%
     dplyr::mutate(date = as.Date(paste(.data$year, "01", "01", sep = "-"),
       format = "%Y-%m-%d"
     )) %>%

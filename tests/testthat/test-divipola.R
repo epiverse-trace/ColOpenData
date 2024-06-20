@@ -39,7 +39,7 @@ test_that("Divipola municipality code throws errors", {
     c(444, 555)
   ))
   
-  # Expect error warning when one of the input pairs ("Bolivar", "Soplaviento")
+  # Expect warning when one of the input pairs ("Bolivar", "Soplaviento")
   # is correct and the other one is not ("Panama", "Cartagena"), since Panama is
   # not a department of Colombia
   expect_warning(name_to_code_mun(
@@ -47,7 +47,7 @@ test_that("Divipola municipality code throws errors", {
     c("Soplaviento", "Cartagena")
   ))
   
-  # Expect error warning when one of the input pairs ("Bolivar", "Cartagena") is
+  # Expect warning when one of the input pairs ("Bolivar", "Cartagena") is
   # correct and the other one is not ("Bolivar", "S"), since S is not a municipality
   # in Bolivar
   expect_warning(name_to_code_mun(

@@ -19,12 +19,18 @@ character vector with the DIVIPOLA codes of the municipalities
 \description{
 Retrieve municipalities' DIVIPOLA codes from their names. Since there are
 municipalities with the same names in different departments, the input must
-include a two vectors of the same length: one for the departments and one for
-the municipalities
+include a two vectors: one for the departments and one for the municipalities
+in said departments. If only one department is provided, it will try to
+search all municipalities inside that department. Otherwise, the vectors must
+be the same length
 }
 \examples{
 dptos <- c("HUILA", "ANTIOQUIA")
 mpios <- c("PITALITO", "TURBO")
 name_to_code_mun(dptos, mpios)
+
+dpto_2 <- "ANTIOQUIA"
+mpios_2 <- c("RIONEGRO", "GUARNE", "MARINILLA")
+name_to_code_mun(dpto_2, mpios_2)
 
 }
