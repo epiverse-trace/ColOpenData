@@ -1,7 +1,7 @@
 test_that("Divipola department code throws errors", {
   # Expect error when department_name is not a character
   expect_error(name_to_code_dep(5678))
-  
+
   # Expect error when department_name does not exist
   expect_warning(name_to_code_dep("CARTAGO"))
 })
@@ -32,13 +32,13 @@ test_that("Divipola municipality code throws errors", {
     c(6787, 13),
     c("Soplaviento", "Cartagena")
   ))
-  
+
   # Expect error when municipality_name is not a character
   expect_error(name_to_code_mun(
     c("Bolivar", "Bolivar"),
     c(444, 555)
   ))
-  
+
   # Expect warning when one of the input pairs ("Bolivar", "Soplaviento")
   # is correct and the other one is not ("Panama", "Cartagena"), since Panama is
   # not a department of Colombia
@@ -46,7 +46,7 @@ test_that("Divipola municipality code throws errors", {
     c("Bolivar", "Panamá"),
     c("Soplaviento", "Cartagena")
   ))
-  
+
   # Expect warning when one of the input pairs ("Bolivar", "Cartagena") is
   # correct and the other one is not ("Bolivar", "S"), since S is not a municipality
   # in Bolivar
@@ -66,7 +66,7 @@ test_that("Divipola municipality code works as expected", {
     ),
     c("68615", "05615")
   )
-  
+
   # Expect specific vector from a proper request including municipalities with
   # similar names (Same begining) in the same department (Also, quite common)
   expect_identical(
@@ -79,13 +79,12 @@ test_that("Divipola municipality code works as expected", {
     ),
     c("05579", "05591")
   )
-  
-  # Expect specific vector from a proper request when there are multiple 
+
+  # Expect specific vector from a proper request when there are multiple
   # municipalities from the same department
-  municipalities
   expect_identical(
     name_to_code_mun(
-      c("Antioquia"),
+      "Antioquia",
       c(
         "Puerto Berrio",
         "Puerto Triunfo"
@@ -98,11 +97,11 @@ test_that("Divipola municipality code works as expected", {
 test_that("Divipola department name throws errors", {
   # Expect error when department_code is not a character
   expect_error(code_to_name_dep(c(73, 05)))
-  
+
   # Expect warning when some of the elements in department_code are not a
   # character
   expect_warning(code_to_name_dep(c(73, "14")))
-  
+
   # Expect warning when the department code does not exist
   expect_warning(code_to_name_dep("04"))
 })
@@ -115,14 +114,14 @@ test_that("Divipola department name works as expected", {
 test_that("Divipola municipality and department name throws errors", {
   # Expect error when department_code and municipality_code are not a character
   expect_error(code_to_name_mun(c(05001, 73001)))
-  
+
   # Expect error when only one of the arguments is not a character
   expect_error(code_to_name_mun(05678, "14"))
-  
+
   # Expect warning when only one of the arguments is not a real municipality
   # code
   expect_warning(code_to_name_mun(c("05001", "73048")))
-  
+
   # Expect error when introducing a municipality code inside the department
   # function
   expect_error(code_to_name_dep("04678"))

@@ -17,7 +17,7 @@ stations_test <- stations_in_roi(ibague)
 test_that("Stations in ROI throws errors", {
   # Expect error when geometry is not an sf data.frame
   expect_error(stations_in_roi("geometry"))
-  
+
   # Expect error when the introduced region contains no stations
   expect_error(stations_in_roi(no_stations_area))
 })
@@ -25,7 +25,7 @@ test_that("Stations in ROI throws errors", {
 test_that("Stations in ROI works as expected", {
   # Expect specific dataset on request
   expect_snapshot(stations_test)
-  
+
   # Expect that retrieved stations have a data.frame structure
   expect_s3_class(stations_in_roi(ibague), "data.frame")
 })
@@ -55,7 +55,7 @@ test_that("Climate Stations throws errors", {
     end_date = 675,
     tag = "PTPM_CON"
   ))
-  
+
   # Expect error when tag does not exist
   expect_error(download_climate_stations(
     stations = stations_test,
@@ -63,7 +63,7 @@ test_that("Climate Stations throws errors", {
     end_date = "2010-12-10",
     tag = "PTPM_CONS"
   ))
-  
+
   # Expect error when end_date is lower than start_date
   expect_error(download_climate_stations(
     stations = stations_test,
@@ -71,7 +71,7 @@ test_that("Climate Stations throws errors", {
     end_date = "2010-12-10",
     tag = "NB_CON"
   ))
-  
+
   # Expect error when start_date is not a character that can be formatted as
   # "YYY-MM-DD"
   expect_error(download_climate_stations(
@@ -80,7 +80,7 @@ test_that("Climate Stations throws errors", {
     end_date = "2010-12-10",
     tag = "TSSM_CON"
   ))
-  
+
   # Expect error when there is no data available for the given dates
   expect_error(download_climate_stations(
     stations = stations_test,
@@ -112,14 +112,14 @@ test_that("Climate data from geometry throws errors", {
 })
 
 test_that("Climate data from geometry works as expected", {
-  # Expect specific dataset on request  
+  # Expect specific dataset on request
   expect_snapshot(download_climate_geom(
     geometry = ibague,
     start_date = "2010-10-01",
     end_date = "2010-11-10",
     tag = "PTPM_CON"
   ))
-  
+
   # Expect retrieved climate dataset to contain specific columns
   expect_identical(colnames(download_climate_geom(
     geometry = ibague,
@@ -141,7 +141,7 @@ test_that("Climate data from code throws errors", {
     end_date = "2010-12-10",
     tag = "PTPM_CON"
   ))
-  
+
   # Expect error when code is not 2 (department) or 5 (municipality) characters
   # long
   expect_error(download_climate(
@@ -150,7 +150,7 @@ test_that("Climate data from code throws errors", {
     end_date = "2010-12-10",
     tag = "PTPM_CON"
   ))
-  
+
   # Expect error when code does not exist in DIVIPOLA codes
   expect_error(download_climate(
     code = "04",

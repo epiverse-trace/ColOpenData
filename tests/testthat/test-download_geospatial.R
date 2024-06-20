@@ -1,7 +1,7 @@
 test_that("Download geospatial errors are thrown", {
   # Expect error on empty input
   expect_error(download_geospatial())
-  
+
   # Expect error when spatial_level doe snot exist
   expect_error(download_geospatial("mpios"))
 
