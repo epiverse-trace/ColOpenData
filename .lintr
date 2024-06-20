@@ -36,3 +36,4 @@ exclusions: list(
     # particular, it uses `sapply()`.
     "R/stanmodels.R"
   )
+  
