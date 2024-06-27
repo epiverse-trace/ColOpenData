@@ -1,4 +1,4 @@
-# Merge geospational demographic works as expected
+# Merge geospatial and demographic works as expected
 
     Code
       merge_geo_demographic("DANE_CNPVH_2018_1HD")

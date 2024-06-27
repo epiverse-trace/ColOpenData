@@ -127,16 +127,16 @@ retrieve_support_path <- function(dataset) {
 #'
 #' @keywords internal
 retrieve_table <- function(dataset_path, sep = ";") {
-  request <- httr2::request(base_url = dataset_path)
-  response <- httr2::req_perform(request)
-  content <- httr2::resp_body_string(response)
   downloaded_data <- suppressMessages(
     suppressWarnings(
-      readr::read_delim(content,
-        delim = sep,
-        escape_double = FALSE,
-        trim_ws = TRUE,
-        show_col_types = FALSE
+      utils::read.csv2(dataset_path,
+        sep = sep,
+        header = TRUE,
+        colClasses = c(
+          codigo_departamento = "character",
+          codigo_municipio = "character"
+        ),
+        fileEncoding = "UTF-8"
       )
     )
   )
@@ -157,28 +157,27 @@ retrieve_table <- function(dataset_path, sep = ";") {
 #'
 #' @keywords internal
 retrieve_climate <- function(dataset_path, start_date, end_date) {
-  base_request <- httr2::request(base_url = dataset_path)
-  request <- httr2::req_error(base_request, is_error = \(resp) FALSE)
-  response <- httr2::req_perform(request)
   downloaded_data <- data.frame()
-  if (httr2::resp_status(response) == 200) {
-    content <- httr2::resp_body_string(response)
-    station_data <- suppressMessages(
-      suppressWarnings(
-        readr::read_delim(content,
-          delim = "|",
-          escape_double = FALSE,
-          trim_ws = TRUE,
-          show_col_types = FALSE
+  try(
+    {
+      station_data <- suppressMessages(
+        suppressWarnings(
+          utils::read.table(dataset_path,
+            sep = "|",
+            header = TRUE,
+            fileEncoding = "UTF-8",
+            numerals = "no.loss"
+          )
         )
       )
-    )
-    names(station_data) <- c("date", "value")
-    station_data$date <- as.POSIXct(station_data$date,
-      format = "%Y-%m-%d %H:%M:%S",
-      tz = "UTC"
-    )
-    downloaded_data <- station_data
-  }
+      names(station_data) <- c("date", "value")
+      station_data$date <- as.POSIXct(station_data$date,
+        format = "%Y-%m-%d %H:%M:%S",
+        tz = "UTC"
+      )
+      downloaded_data <- station_data
+    },
+    silent = TRUE
+  )
   return(downloaded_data)
 }
