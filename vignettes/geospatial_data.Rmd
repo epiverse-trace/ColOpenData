@@ -169,9 +169,10 @@ For dynamic plots, we can use [`leaflet`](https://rstudio.github.io/leaflet/), w
 
 ```{r define color palette}
 colfunc <- colorRampPalette(c("#10bed2", "#deff00"))
+internet <- st_drop_geometry(tolima["internet"])
 pal <- colorNumeric(
   palette = colfunc(100),
-  domain = tolima["internet"]
+  domain = internet
 )
 ```
 
@@ -186,14 +187,14 @@ leaflet(tolima) %>%
     stroke = TRUE,
     weight = 0,
     color = NA,
-    fillColor = ~ pal(tolima["internet"]),
+    fillColor = ~ pal(internet),
     fillOpacity = 1,
-    popup = paste0(tolima["internet"])
+    popup = paste0(internet)
   ) %>%
   addLegend(
     position = "bottomright",
     pal = pal,
-    values = ~ tolima["internet"],
+    values = ~ internet,
     opacity = 1,
     title = "Internet Coverage"
   )
