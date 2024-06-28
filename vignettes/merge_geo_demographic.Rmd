@@ -45,7 +45,7 @@ Now, the `merge_geo_demographic()` function only takes by parameter the demograp
 datasets_dem <- list_datasets("demographic")
 
 # Available demographic datasets at the department level
-department_datasets <- datasets_dem[datasets_dem$level == "department", ]
+department_datasets <- datasets_dem[datasets_dem["level"] == "department", ]
 head(department_datasets)
 ```
 
