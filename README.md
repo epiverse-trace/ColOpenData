@@ -5,7 +5,7 @@
 <!-- `packagename` is extracted from the DESCRIPTION file -->
 <!-- `gh_repo` is extracted via a special environment variable in GitHub Actions -->
 
-# ColOpenData <img src="man/figures/logo.svg" align="right" width="200"/>
+# {{ packagename }} <img src="man/figures/logo.svg" align="right" width="200"/>
 
 <!-- badges: start -->
 
@@ -21,13 +21,13 @@ status](https://www.r-pkg.org/badges/version/ColOpenData)](https://CRAN.R-projec
 <!-- badges: end -->
 
 **ColOpenData** is a package designed to access curated and wrangled
-Colombian demographic, geospatial and climate data, retrieved from
-various open Colombian data sources. The package addresses the challenge
-of scattered Colombian data across multiple web sources by providing
-functions that enable users to select and load desired datasets without
-the need for extensive data acquisition processes. Additionally, the
-tidy data structure offered for demographic and climate data facilitates
-analysis and visualization.
+Colombian demographic, geospatial, climate and population projections
+data, retrieved from various open Colombian data sources. The package
+addresses the challenge of scattered Colombian data across multiple web
+sources by providing functions that enable users to select and load
+desired datasets without the need for extensive data acquisition
+processes. Additionally, the tidy data structure offered for demographic
+and climate data facilitates analysis and visualization.
 
 ColOpenData is developed at [Universidad de Los
 Andes](https://uniandes.edu.co/) as part of the [Epiverse-TRACE
@@ -62,7 +62,7 @@ four categories:
 
 - **Geospatial:** This data is retrieved from the National
   Geostatistical Framework (MGN), which includes maps and a summarized
-  version of the 2018 census, aggregated to spatial geometries. The data
+  version of the 2018 CNPV, aggregated to spatial geometries. The data
   is available at different aggregation levels including: Blocks, Urban
   and Rural Sections, Urban and Rural Sectors, Urban Areas,
   Municipalities and Departments. More information is available at [MGN
@@ -71,14 +71,15 @@ four categories:
 
 - **Climate:** Climate data is recovered from backup information
   provided by IDEAM, containing historical data from the first station
-  in the country until May 31st 2023. This backup includes temperature,
-  precipitation, sunshine duration, wind direction, among others. More
-  information can be found at [IDEAM website](http://www.ideam.gov.co/).
+  in the country (January 1st 1920) until May 31st 2023. This backup
+  includes temperature, precipitation, sunshine duration, wind
+  direction, among others. More information can be found at [IDEAM
+  website](http://www.ideam.gov.co/).
 
 - **Population projections:** Population Projections data contains the
   population projections and back projections from 1950 to 2070,
   considering the post COVID-19 update, which was calculated based on
-  the results of CNPV of 2018. Further information can be consulted at
+  the results of 2018 CNPV. Further information can be consulted at
   [DANE
   website](https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/proyecciones-de-poblacion).
 
@@ -92,6 +93,10 @@ the user to download census, geospatial and climate data.
 
 - [cancensus](https://mountainmath.github.io/cancensus/): Canada
 - [censobr](https://ipeagit.github.io/censobr/): Brazil
+- [chilemapas](https://github.com/pachadotdev/chilemapas/): Chile
+- [geobr](https://ipeagit.github.io/geobr/) : Brazil
+- [georAr](https://github.com/PoliticaArgentina/geoAr): Argentina
+- [geouy](https://github.com/RichDeto/geouy): Uruguay
 - [tidycensus](https://walker-data.com/tidycensus/): US
 - [geofi](https://ropengov.github.io/geofi/): Finland
 - [climate](https://bczernecki.github.io/climate/)
