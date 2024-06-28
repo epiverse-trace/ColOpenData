@@ -193,7 +193,7 @@ leaflet(tolima) %>%
   addLegend(
     position = "bottomright",
     pal = pal,
-    values = ~tolima[["internet"]],
+    values = ~ tolima[["internet"]],
     opacity = 1,
     title = "Internet Coverage"
   )
