@@ -31,19 +31,19 @@ SOURCE_GROUP_YEARS_DETAILS
 ::: {style="text-align: justify;"}
 Demographic datasets are available for municipalities and departments, and contain data for Dwellings, Households, Population and Population Projections in five categories.
 
--   Viviendas (Dwellings)
--   Hogares (Households)
--   Personas Social (Persons social)
--   Personas Demográfico (Persons demographic)
+-   Viviendas (Dwellings).
+-   Hogares (Households).
+-   Personas Social (Persons Social).
+-   Personas Demográfico (Persons Demographic).
 
 All datasets are retrieved from the National Administrative Department of Statistics (DANE). Naming is stated as follows:
 
--   Source: **DANE**
--   Group: Names include the categories
-    -   Viviendas: **CNPVV**
-    -   Hogares: **CNPVH**
-    -   Personas Social: **CNPVPS**
-    -   Personas Demográfico: **CNPVPD**
+-   Source: **DANE**.
+-   Group: Names include the categories.
+    -   Viviendas: **CNPVV**.
+    -   Hogares: **CNPVH**.
+    -   Personas Social: **CNPVPS**.
+    -   Personas Demográfico: **CNPVPD**.
 -   Year:
     -   Census data: **2018**
 -   Details: These are related to each individual dataset. For further details please check the function `list_datasets()` below.
@@ -56,7 +56,7 @@ For hands on examples please check [A Deep Dive into Colombian Demographics Usin
 #### Understanding Geospatial Datasets
 
 ::: {style="text-align: justify;"}
-Geospatial datasets naming is related to the level of aggregation, since they are available from Blocks to Departments. All these datasets come from DANE, and are part of the Geostatistical National Framework (MGN), which for 2018 included a summarized version of the National Population and Dwelling Census (CNPV). Available spatial levels include: department, municipality, urban and rural sector, urban and rural section, urban zone and blocks. Please check [Maps and plots with ColOpenData](https://epiverse-trace.github.io/ColOpenData/articles/geospatial_data.html) for further details.
+Geospatial datasets naming is related to the level of aggregation, since they are available from Blocks to Departments. All these datasets come from DANE, and are part of the National Geostatistical Framework (MGN), which for 2018 included a summarized version of the National Population and Dwelling Census (CNPV). Available spatial levels include: department, municipality, urban and rural sector, urban and rural section, urban zone and blocks. Please check [Maps and plots with ColOpenData](https://epiverse-trace.github.io/ColOpenData/articles/geospatial_data.html) for further details.
 :::
 
 ## Understanding Climate Dataset
@@ -180,7 +180,7 @@ head(dict_climate)
 ## DIVIPOLA
 
 ::: {style="text-align: justify;"}
-DIVIPOLA codification is a standardized frame for the whole country, and contains departments' and municipalities' codes. Departments have two digits for individual identification, while municipalities have five. The five numbers in municipalities' codes include the department where they are located (first two digits) and the number of the municipality within the department (last three digits). The codes for each municipality and department can be consulted in [this table](https://www.datos.gov.co/widgets/gdxc-w37w) provided by the National Platform of Colombian Open Data. They can also be consulted using the DIVIPOLA table function:
+DIVIPOLA codification is a standardized frame for the whole country, and contains departments' and municipalities' codes. Departments have two digits for individual identification, while municipalities have five. The five numbers in municipalities' codes include the department where they are located (first two digits) and the number of the municipality within the department (last three digits). The codes for each municipality and department can be consulted in [this table](https://www.datos.gov.co/widgets/gdxc-w37w) provided by the National Platform of Colombian Open Data. They can also be consulted using the `divipola_table()` function.
 :::
 
 ```{r divipola-table}
