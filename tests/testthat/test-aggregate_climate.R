@@ -1,14 +1,16 @@
 # Municipality 1
 lat_1 <- c(6.373761, 6.373761, 6.163823, 6.163823, 6.373761)
 lon_1 <- c(-75.71929, -75.4723, -75.4723, -75.71929, -75.71929)
-polygon_1 <- sf::st_polygon(x = list(cbind(lon_1, lat_1))) %>% sf::st_sfc()
-medellin <- sf::st_as_sf(polygon_1)
+medellin <- sf::st_polygon(x = list(cbind(lon_1, lat_1))) %>%
+  sf::st_sfc() %>%
+  sf::st_as_sf()
 
 # Municipality 2
 lat_2 <- c(4.700691, 4.700691, 4.256457, 4.256457, 4.700691)
 lon_2 <- c(-75.5221, -74.96571, -74.96571, -75.5221, -75.5221)
-polygon_2 <- sf::st_polygon(x = list(cbind(lon_2, lat_2))) %>% sf::st_sfc()
-ibague <- sf::st_as_sf(polygon_2)
+ibague <- sf::st_polygon(x = list(cbind(lon_2, lat_2))) %>%
+  sf::st_sfc() %>%
+  sf::st_as_sf()
 
 # Base data TSSM (Temperature)
 base_tssm <- download_climate_geom(
@@ -44,7 +46,7 @@ base_tmx <- download_climate_geom(
 
 # Base data PTPM (Precipitation)
 base_ptpm <- download_climate_geom(
-  geometry = ibague,
+  geometry = medellin,
   start_date = "2020-06-14",
   end_date = "2020-10-12",
   tag = "PTPM_CON"
@@ -74,6 +76,9 @@ test_that("Aggregation for dry-bulb temperature works as expected", {
 
   # Expect that the result of adding long period of time is done right (TSSM)
   expect_identical(nrow(na.omit(aggregate_climate(base_tssm, "year"))), 2L)
+
+  # Expect specific dataset from a proper request
+  expect_snapshot(aggregate_climate(base_tssm, "year"))
 })
 
 test_that("Aggregation for sunshine duration works as expected", {
@@ -83,8 +88,9 @@ test_that("Aggregation for sunshine duration works as expected", {
   # Expect that the result of adding long period of time is done right (BSHG)
   expect_identical(nrow(aggregate_climate(base_bshg, "month")), 15L)
 
-  # Expect specific dataset from a proper request
-  expect_snapshot(aggregate_climate(base_bshg, "year"))
+  # Expect correct date range
+  year_bshg <- aggregate_climate(base_bshg, "year")
+  expect_equal(max(year_bshg$date), as.Date("1990-01-01"))
 })
 
 test_that("Aggregation for minimum temperature works as expected", {
@@ -115,6 +121,9 @@ test_that("Aggregation for precipitation works as expected", {
   # Expect that output has a data.frame structure for PTPM
   expect_s3_class(aggregate_climate(base_ptpm, "month"), "data.frame")
 
+  # Expect data.frame structure
+  expect_equal(dim(aggregate_climate(base_ptpm, "year")), c(8, 6))
+
   # Expect specific dataset from a proper request
-  expect_snapshot(aggregate_climate(base_ptpm, "year"))
+  expect_snapshot(aggregate_climate(base_ptpm, "month"))
 })
