@@ -7,10 +7,12 @@
 divipola_table()
 }
 \value{
-\code{data.frame} object with DIVIPOLA table
+\code{data.frame} object with DIVIPOLA table.
 }
 \description{
-Retrieve DIVIPOLA table including departments and municipalities
+Retrieve DIVIPOLA table including departments and municipalities. DIVIPOLA
+codification includes individual codes for each department and municipality
+following the political and administrative division.
 }
 \examples{
 divipola <- divipola_table()

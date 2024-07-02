@@ -7,15 +7,15 @@
 name_to_standard_dep(department_name)
 }
 \arguments{
-\item{department_name}{character vector with the names to be translated}
+\item{department_name}{character vector with the names to be translated.}
 }
 \value{
-character vector with the DIVIPOLA name of the departments
+character vector with the DIVIPOLA name of the departments.
 }
 \description{
 Department names are usually manually input, which leads to multiple errors
 and lack of standardization. This functions translates department names to
-their respective official names from DIVIPOLA
+their respective official names from DIVIPOLA.
 }
 \examples{
 dptos <- c("Bogota DC", "San Andres")

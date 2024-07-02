@@ -7,11 +7,11 @@
 climate_tags()
 }
 \value{
-\code{data.frame} object with available tags
+\code{data.frame} object with available tags.
 }
 \description{
 Retrieve available climate tags to be consulted. The list is only available
-in Spanish
+in Spanish.
 }
 \examples{
 dict <- climate_tags()

@@ -8,29 +8,29 @@ name_to_code_mun(department_name, municipality_name)
 }
 \arguments{
 \item{department_name}{character vector with the names of the
-departments containing the municipalities}
+departments containing the municipalities.}
 
 \item{municipality_name}{character vector with the names of the
-municipalities}
+municipalities.}
 }
 \value{
-character vector with the DIVIPOLA codes of the municipalities
+character vector with the DIVIPOLA codes of the municipalities.
 }
 \description{
 Retrieve municipalities' DIVIPOLA codes from their names. Since there are
 municipalities with the same names in different departments, the input must
-include a two vectors: one for the departments and one for the municipalities
+include two vectors: one for the departments and one for the municipalities
 in said departments. If only one department is provided, it will try to
-search all municipalities inside that department. Otherwise, the vectors must
-be the same length
+match all municipalities in the second vector inside that department.
+Otherwise, the vectors must be the same length.
 }
 \examples{
-dptos <- c("HUILA", "ANTIOQUIA")
-mpios <- c("PITALITO", "TURBO")
+dptos <- c("Huila", "Antioquia")
+mpios <- c("Pitalito", "Turbo")
 name_to_code_mun(dptos, mpios)
 
-dpto_2 <- "ANTIOQUIA"
-mpios_2 <- c("RIONEGRO", "GUARNE", "MARINILLA")
+dpto_2 <- "Antioquia"
+mpios_2 <- c("Rionegro", "Guarne", "Marinilla")
 name_to_code_mun(dpto_2, mpios_2)
 
 }

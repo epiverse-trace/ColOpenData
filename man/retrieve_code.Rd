@@ -7,17 +7,17 @@
 retrieve_code(input_token, fixed_tokens, codes_list)
 }
 \arguments{
-\item{input_token}{Input token to search in fixed tokens}
+\item{input_token}{Input token to search in fixed tokens.}
 
-\item{fixed_tokens}{Vector of tokens to match against}
+\item{fixed_tokens}{Vector of tokens to match against.}
 
-\item{codes_list}{Vector of target codes}
+\item{codes_list}{Vector of target codes.}
 }
 \value{
-character containing the matched code
+character containing the matched code.
 }
 \description{
 Retrieve code from list of codes, matching an input token against a list
-of fixed tokens
+of fixed tokens.
 }
 \keyword{internal}

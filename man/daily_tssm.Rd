@@ -7,10 +7,10 @@
 daily_tssm(group)
 }
 \arguments{
-\item{group}{\code{data.frame} object with filtered and grouped data}
+\item{group}{\code{data.frame} object with filtered and grouped data.}
 }
 \value{
-numeric value calculated
+numeric value calculated.
 }
 \description{
 Climate temporal aggregation rules are provided by the source, and guarantee
@@ -20,13 +20,13 @@ aggregation is not available for all climate data, and is only available for
 information under the tags \code{TSSM_CON}, \code{TMN_CON}, \code{TMX_CON},
 \code{PTPM_CON}, and \code{BSHG_CON}. Internal functions are provided as a
 set of comprehensible rules to aggregate the data for daily, monthly and
-annual frequencies
+annual frequencies.
 }
 \section{Methods}{
 
 Aggregation can only be performed from the previous level, meaning for
 monthly aggregation, the data must be already aggregated daily, and for
-annual aggregation the data must be monthly
+annual aggregation the data must be monthly.
 }
 
 \keyword{internal}

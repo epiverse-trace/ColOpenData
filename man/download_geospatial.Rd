@@ -7,31 +7,32 @@
 download_geospatial(spatial_level, include_geom = TRUE, include_cnpv = TRUE)
 }
 \arguments{
-\item{spatial_level}{character with the spatial level to be consulted
+\item{spatial_level}{character with the spatial level to be consulted:
 \itemize{
-\item \code{"DPTO"} or \code{"department"}: Department
-\item \code{"MPIO"} or \code{"municipality"}: Municipality
+\item \code{"DPTO"} or \code{"department"}: Department.
+\item \code{"MPIO"} or \code{"municipality"}: Municipality.
 \item \code{"MPIOCL"} or \code{"municipality_class"}: Municipality including
-class
-\item \code{"SETU"} or \code{"urban_sector"}: Urban Sector
-\item \code{"SETR"} or \code{"rural_sector"}: Rural Sector
-\item \code{"SECU"} or \code{"urban_section"}: Urban Section
-\item \code{"SECR"} or \code{"rural_section"}: Rural Section
-\item \code{"ZU" } or \code{"urban_zone"}: Urban Zone
-\item \code{"MZN"} or \code{"block"}: Block
+class.
+\item \code{"SETU"} or \code{"urban_sector"}: Urban Sector.
+\item \code{"SETR"} or \code{"rural_sector"}: Rural Sector.
+\item \code{"SECU"} or \code{"urban_section"}: Urban Section.
+\item \code{"SECR"} or \code{"rural_section"}: Rural Section.
+\item \code{"ZU" } or \code{"urban_zone"}: Urban Zone.
+\item \code{"MZN"} or \code{"block"}: Block.
 }}
 
-\item{include_geom}{logical for including (or not) the geometry.
-Default is \code{TRUE}}
+\item{include_geom}{logical for including (or not) the spatial geometry.
+Default is \code{TRUE}. If \code{TRUE}, the function will return an
+\code{"sf"} \code{data.frame}.}
 
 \item{include_cnpv}{logical for including (or not) CNPV demographic and
-socioeconomic information. Default is \code{TRUE}}
+socioeconomic information. Default is \code{TRUE}.}
 }
 \value{
-\code{data.frame} object with downloaded data
+\code{data.frame} object with downloaded data.
 }
 \description{
-This function downloads geospatial datasets from the Geostatistical National
+This function downloads geospatial datasets from the National Geostatistical
 Framework at different levels of spatial aggregation. These datasets
 include a summarized version of the National Population and Dwelling Census
 (CNPV) with demographic and socioeconomic information for each spatial unit.

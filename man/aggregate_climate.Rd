@@ -8,20 +8,20 @@ aggregate_climate(climate_data, frequency)
 }
 \arguments{
 \item{climate_data}{\code{data.frame} obtained from download functions. Only
-observations under the same tag can be aggregated}
+observations under the same tag can be aggregated.}
 
-\item{frequency}{character with the aggregation frequency. (\code{"day"},
-\code{"month"} or \code{"year"})}
+\item{frequency}{character with the aggregation frequency: (\code{"day"},
+\code{"month"} or \code{"year"}).}
 }
 \value{
-\code{data.frame} object with the aggregated data
+\code{data.frame} object with the aggregated data.
 }
 \description{
 Aggregate time series downloaded climate data to day, month or year.
 Only observations under the tags \code{TSSM_CON}, \code{TMN_CON},
 \code{TMX_CON}, \code{PTPM_CON}, and \code{BSHG_CON} can be aggregated,
 since are the ones where methodology for aggregation is explicitly provided
-from the source
+by the source.
 }
 \examples{
 lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)

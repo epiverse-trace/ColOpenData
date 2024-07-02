@@ -7,14 +7,14 @@
 retrieve_geospatial_name(spatial_level)
 }
 \arguments{
-\item{spatial_level}{character with the spatial level to be consulted}
+\item{spatial_level}{character with the spatial level to be consulted.}
 }
 \value{
 character containing the geospatial dataset name. If the input is
-invalid an error will be thrown
+invalid an error will be thrown.
 }
 \description{
 Retrieve a geospatial dataset name from the spatial level. Checks the
-existence of the spatial level and datasets
+existence of the spatial level and datasets.
 }
 \keyword{internal}

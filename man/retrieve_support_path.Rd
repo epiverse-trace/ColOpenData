@@ -7,13 +7,13 @@
 retrieve_support_path(dataset)
 }
 \arguments{
-\item{dataset}{character with the support dataset name}
+\item{dataset}{character with the support dataset name.}
 }
 \value{
-character with path to retrieve the dataset from server
+character with path to retrieve the dataset from server.
 }
 \description{
 Support data is used for internal purposes and they are not included in the
-general documentation file
+general documentation file.
 }
 \keyword{internal}

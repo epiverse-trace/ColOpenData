@@ -1,12 +1,14 @@
 #' Retrieve DIVIPOLA table
 #'
 #' @description
-#' Retrieve DIVIPOLA table including departments and municipalities
+#' Retrieve DIVIPOLA table including departments and municipalities. DIVIPOLA
+#' codification includes individual codes for each department and municipality
+#' following the political and administrative division.
 #'
 #' @examples
 #' divipola <- divipola_table()
 #'
-#' @return \code{data.frame} object with DIVIPOLA table
+#' @return \code{data.frame} object with DIVIPOLA table.
 #'
 #' @export
 divipola_table <- function() {
@@ -18,15 +20,15 @@ divipola_table <- function() {
 #' Retrieve departments' DIVIPOLA codes from names
 #'
 #' @description
-#' Retrieve departments' DIVIPOLA codes from their names
+#' Retrieve departments' DIVIPOLA codes from their names.
 #'
-#' @param department_name character vector with the names of the departments
+#' @param department_name character vector with the names of the departments.
 #'
 #' @examples
-#' dptos <- c("TOLIMA", "HUILA", "AMAZONAS")
+#' dptos <- c("Tolima", "Huila", "Amazonas")
 #' name_to_code_dep(dptos)
 #'
-#' @return character vector with the DIVIPOLA codes of the departments
+#' @return character vector with the DIVIPOLA codes of the departments.
 #'
 #' @export
 name_to_code_dep <- function(department_name) {
@@ -34,11 +36,11 @@ name_to_code_dep <- function(department_name) {
 
   divipola <- divipola_table()
   dptos <- divipola[
-    !duplicated(divipola$departamento),
+    !duplicated(divipola[["departamento"]]),
     c("codigo_departamento", "departamento")
   ]
   fixed_tokens <- iconv(
-    tolower(dptos$departamento),
+    tolower(dptos[["departamento"]]),
     from = "utf-8",
     to = "ASCII//TRANSLIT"
   )
@@ -47,7 +49,7 @@ name_to_code_dep <- function(department_name) {
     from = "UTF-8",
     to = "ASCII//TRANSLIT"
   )
-  codes_list <- dptos$codigo_departamento
+  codes_list <- dptos[["codigo_departamento"]]
   department_code <- rep_len(NA, length(department_name))
   for (i in seq_along(department_name)) {
     input_token <- input_tokens[i]
@@ -66,26 +68,26 @@ name_to_code_dep <- function(department_name) {
 #' @description
 #' Retrieve municipalities' DIVIPOLA codes from their names. Since there are
 #' municipalities with the same names in different departments, the input must
-#' include a two vectors: one for the departments and one for the municipalities
+#' include two vectors: one for the departments and one for the municipalities
 #' in said departments. If only one department is provided, it will try to
-#' search all municipalities inside that department. Otherwise, the vectors must
-#' be the same length
+#' match all municipalities in the second vector inside that department.
+#' Otherwise, the vectors must be the same length.
 #'
 #' @param department_name character vector with the names of the
-#' departments containing the municipalities
+#' departments containing the municipalities.
 #' @param municipality_name character vector with the names of the
-#' municipalities
+#' municipalities.
 #'
 #' @examples
-#' dptos <- c("HUILA", "ANTIOQUIA")
-#' mpios <- c("PITALITO", "TURBO")
+#' dptos <- c("Huila", "Antioquia")
+#' mpios <- c("Pitalito", "Turbo")
 #' name_to_code_mun(dptos, mpios)
 #'
-#' dpto_2 <- "ANTIOQUIA"
-#' mpios_2 <- c("RIONEGRO", "GUARNE", "MARINILLA")
+#' dpto_2 <- "Antioquia"
+#' mpios_2 <- c("Rionegro", "Guarne", "Marinilla")
 #' name_to_code_mun(dpto_2, mpios_2)
 #'
-#' @return character vector with the DIVIPOLA codes of the municipalities
+#' @return character vector with the DIVIPOLA codes of the municipalities.
 #'
 #' @export
 name_to_code_mun <- function(department_name, municipality_name) {
@@ -113,14 +115,15 @@ name_to_code_mun <- function(department_name, municipality_name) {
     if (is.na(dpto_code)) {
       next
     } else {
-      filtered_mpios <- divipola[divipola$codigo_departamento == dpto_code, ]
+      filtered_mpios <- divipola[divipola[["codigo_departamento"]] ==
+        dpto_code, ]
       fixed_tokens <- iconv(
-        tolower(filtered_mpios$municipio),
+        tolower(filtered_mpios[["municipio"]]),
         from = "utf-8",
         to = "ASCII//TRANSLIT"
       )
       input_token <- input_tokens[i]
-      codes_list <- filtered_mpios$codigo_municipio
+      codes_list <- filtered_mpios[["codigo_municipio"]]
       mpio_code <- retrieve_code(input_token, fixed_tokens, codes_list)
       if (is.na(mpio_code)) {
         warning(
@@ -140,13 +143,13 @@ name_to_code_mun <- function(department_name, municipality_name) {
 #'
 #' @description
 #' Retrieve code from list of codes, matching an input token against a list
-#' of fixed tokens
+#' of fixed tokens.
 #'
-#' @param input_token Input token to search in fixed tokens
-#' @param fixed_tokens Vector of tokens to match against
-#' @param codes_list Vector of target codes
+#' @param input_token Input token to search in fixed tokens.
+#' @param fixed_tokens Vector of tokens to match against.
+#' @param codes_list Vector of target codes.
 #'
-#' @return character containing the matched code
+#' @return character containing the matched code.
 #'
 #' @keywords internal
 retrieve_code <- function(input_token, fixed_tokens, codes_list) {
@@ -156,14 +159,15 @@ retrieve_code <- function(input_token, fixed_tokens, codes_list) {
     method = "cosine",
     window = max(8, nchar(input_token), na.rm = TRUE)
   )
-  if (min(distances$distance) > 0.11) {
+  if (min(distances[["distance"]]) > 0.11) {
     code <- NA
   } else {
-    min_distance_i <- which(distances$distance == min(distances$distance))
+    min_distance_i <- which(distances[["distance"]] ==
+      min(distances[["distance"]]))
     if (length(min_distance_i) == 1) {
       code <- codes_list[min_distance_i]
     } else {
-      min_location <- distances$location[min_distance_i]
+      min_location <- distances[["location"]][min_distance_i]
       min_location_i <- min_distance_i[which.min(min_location)]
       code <- codes_list[min_location_i]
     }
@@ -175,16 +179,16 @@ retrieve_code <- function(input_token, fixed_tokens, codes_list) {
 #' Retrieve departments' DIVIPOLA names from codes
 #'
 #' @description
-#' Retrieve departments' DIVIPOLA official names from their DIVIPOLA codes
+#' Retrieve departments' DIVIPOLA official names from their DIVIPOLA codes.
 #'
 #' @param department_code character vector with the DIVIPOLA codes of the
-#' departments
+#' departments.
 #'
 #' @examples
 #' dptos <- c("73", "05", "11")
 #' code_to_name_dep(dptos)
 #'
-#' @return character vector with the DIVIPOLA name of the departments
+#' @return character vector with the DIVIPOLA name of the departments.
 #'
 #' @export
 code_to_name_dep <- function(department_code) {
@@ -192,11 +196,11 @@ code_to_name_dep <- function(department_code) {
 
   divipola <- divipola_table()
   dptos <- divipola[
-    !duplicated(divipola$departamento),
+    !duplicated(divipola[["departamento"]]),
     c("codigo_departamento", "departamento")
   ]
-  inds <- match(department_code, dptos$codigo_departamento)
-  departments_names <- ifelse(is.na(inds), NA, dptos$departamento[inds])
+  inds <- match(department_code, dptos[["codigo_departamento"]])
+  departments_names <- ifelse(is.na(inds), NA, dptos[["departamento"]][inds])
   if (any(is.na(inds))) {
     warning(
       toString(department_code[is.na(inds)]),
@@ -209,30 +213,30 @@ code_to_name_dep <- function(department_code) {
 #' Retrieve municipalities' DIVIPOLA names from codes
 #'
 #' @description
-#' Retrieve municipalities' DIVIPOLA official names from their DIVIPOLA codes
+#' Retrieve municipalities' DIVIPOLA official names from their DIVIPOLA codes.
 #'
 #' @param municipality_code character vector with the DIVIPOLA codes of the
-#' municipalities
+#' municipalities.
 #'
 #' @examples
 #' mpios <- c("73001", "11001", "05615")
 #' code_to_name_mun(mpios)
 #'
-#' @return character vector with the DIVIPOLA name of the municipalities
+#' @return character vector with the DIVIPOLA name of the municipalities.
 #'
 #' @export
 code_to_name_mun <- function(municipality_code) {
   checkmate::assert_character(municipality_code, n.chars = 5)
 
   mpios <- divipola_table()
-  inds <- match(municipality_code, mpios$codigo_municipio)
+  inds <- match(municipality_code, mpios[["codigo_municipio"]])
   if (any(is.na(inds))) {
     warning(
       toString(municipality_code[is.na(inds)]),
       " cannot be found as municipality(ies) code(s)"
     )
   }
-  municipalties_names <- ifelse(is.na(inds), NA, mpios$municipio[inds])
+  municipalties_names <- ifelse(is.na(inds), NA, mpios[["municipio"]][inds])
   return(municipalties_names)
 }
 
@@ -241,15 +245,15 @@ code_to_name_mun <- function(municipality_code) {
 #' @description
 #' Department names are usually manually input, which leads to multiple errors
 #' and lack of standardization. This functions translates department names to
-#' their respective official names from DIVIPOLA
+#' their respective official names from DIVIPOLA.
 #'
-#' @param department_name character vector with the names to be translated
+#' @param department_name character vector with the names to be translated.
 #'
 #' @examples
 #' dptos <- c("Bogota DC", "San Andres")
 #' name_to_standard_dep(dptos)
 #'
-#' @return character vector with the DIVIPOLA name of the departments
+#' @return character vector with the DIVIPOLA name of the departments.
 #'
 #' @export
 name_to_standard_dep <- function(department_name) {
@@ -263,19 +267,19 @@ name_to_standard_dep <- function(department_name) {
 #' @description
 #' Municipality names are usually manually input, which leads to multiple errors
 #' and lack of standardization. This functions translates municipality names to
-#' their respective official names from DIVIPOLA
+#' their respective official names from DIVIPOLA.
 #'
 #' @param department_name character vector with the names of the
-#' departments containing the municipalities
-#' @param municipality_name character vector with the names to be translated
+#' departments containing the municipalities.
+#' @param municipality_name character vector with the names to be translated.
 #'
 #' @examples
 #'
 #' dptos <- c("Bogota", "Antioquia", "Tolima")
-#' mpios <- c("Bogota DC", "Carmen dell Viboral", "CarmendeApicala")
+#' mpios <- c("Bogota DC", "Carmen del Viboral", "CarmendeApicala")
 #' name_to_standard_mun(dptos, mpios)
 #'
-#' @return character vector with the DIVIPOLA name of the municipalities
+#' @return character vector with the DIVIPOLA name of the municipalities.
 #'
 #' @export
 name_to_standard_mun <- function(department_name, municipality_name) {

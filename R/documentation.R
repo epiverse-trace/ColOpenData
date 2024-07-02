@@ -2,27 +2,27 @@
 #'
 #' @description
 #' Retrieve geospatial data dictionaries to understand internal tags and named
-#' columns. Dictionaries are only available in Spanish
+#' columns. Dictionaries are only available in Spanish.
 #'
-#' @param spatial_level character with the spatial level to be consulted
+#' @param spatial_level character with the spatial level to be consulted:
 #' \itemize{
-#' \item \code{"DPTO"} or \code{"department"}: Department
-#' \item \code{"MPIO"} or \code{"municipality"}: Municipality
+#' \item \code{"DPTO"} or \code{"department"}: Department.
+#' \item \code{"MPIO"} or \code{"municipality"}: Municipality.
 #' \item \code{"MPIOCL"} or \code{"municipality_class"}: Municipality including
-#' class
-#' \item \code{"SETU"} or \code{"urban_sector"}: Urban Sector
-#' \item \code{"SETR"} or \code{"rural_sector"}: Rural Sector
-#' \item \code{"SECU"} or \code{"urban_section"}: Urban Section
-#' \item \code{"SECR"} or \code{"rural_section"}: Rural Section
-#' \item \code{"ZU" } or \code{"urban_zone"}: Urban Zone
-#' \item \code{"MZN"} or \code{"block"}: Block
+#' class.
+#' \item \code{"SETU"} or \code{"urban_sector"}: Urban Sector.
+#' \item \code{"SETR"} or \code{"rural_sector"}: Rural Sector.
+#' \item \code{"SECU"} or \code{"urban_section"}: Urban Section.
+#' \item \code{"SECR"} or \code{"rural_section"}: Rural Section.
+#' \item \code{"ZU" } or \code{"urban_zone"}: Urban Zone.
+#' \item \code{"MZN"} or \code{"block"}: Block.
 #' }
-#'
-#' @return \code{data.frame} object with data dictionary
 #'
 #' @examples
 #' dict <- geospatial_dictionary("setu")
 #' head(dict)
+#'
+#' @return \code{data.frame} object with geospatial data dictionary.
 #'
 #' @export
 geospatial_dictionary <- function(spatial_level) {
@@ -37,13 +37,13 @@ geospatial_dictionary <- function(spatial_level) {
 #'
 #' @description
 #' Retrieve available climate tags to be consulted. The list is only available
-#' in Spanish
-#'
-#' @return \code{data.frame} object with available tags
+#' in Spanish.
 #'
 #' @examples
 #' dict <- climate_tags()
 #' head(dict)
+#'
+#' @return \code{data.frame} object with available tags.
 #'
 #' @export
 climate_tags <- function() {
@@ -56,16 +56,16 @@ climate_tags <- function() {
 #'
 #' @description
 #' List all available datasets by name, including group, source, year, level,
-#' category and description
+#' category and description.
 #'
 #' @param module character with module to be consulted (\code{"demographic"},
-#' \code{"geospatial"}, \code{"climate"}). Default is \code{"all"}
-#'
-#' @return \code{data.frame} object with the available datasets
+#' \code{"geospatial"}, \code{"climate"}). Default is \code{"all"}.
 #'
 #' @examples
 #' list <- list_datasets("geospatial")
 #' head(list)
+#'
+#' @return \code{data.frame} object with the available datasets.
 #'
 #' @export
 list_datasets <- function(module = "all") {
@@ -80,7 +80,7 @@ list_datasets <- function(module = "all") {
   documentation <- file.path(base_path, documentation_path)
   listed <- retrieve_table(documentation)
   if (module != "all") {
-    listed <- listed[listed$group == module, ]
+    listed <- listed[listed[["group"]] == module, ]
   }
   return(listed)
 }
@@ -89,14 +89,14 @@ list_datasets <- function(module = "all") {
 #'
 #' @description
 #' List available datasets containing user-specified keywords in their
-#' descriptions
+#' descriptions.
 #'
 #' @param module character with module to be consulted (\code{"demographic"},
-#' \code{"geospatial"}, \code{"climate"}). Default is \code{"all"}
+#' \code{"geospatial"}, \code{"climate"}). Default is \code{"all"}.
 #' @param keywords character or vector of characters to be look up in the
-#' description
+#' description.
 #' @param logic A character string specifying the matching logic.
-#' Can be either \code{"or"} or \code{"and"}. Default is \code{"or"}
+#' Can be either \code{"or"} or \code{"and"}. Default is \code{"or"}:
 #' \itemize{
 #' \item \code{logic = "or"}: Matches rows containing at least one of the
 #' specified keywords in their descriptions.
@@ -104,11 +104,11 @@ list_datasets <- function(module = "all") {
 #' keywords in their descriptions.
 #'  }
 #'
-#' @return \code{data.frame} object with the available datasets
-#'
 #' @examples
 #' found <- look_up("demographic", c("sex", "age"), "and")
 #' head(found)
+#'
+#' @return \code{data.frame} object with the available datasets.
 #'
 #' @export
 look_up <- function(module = "all", keywords, logic = "or") {
@@ -123,13 +123,13 @@ look_up <- function(module = "all", keywords, logic = "or") {
   listed <- list_datasets(module)
   if (logic == "or") {
     found <- listed[grep(paste(keywords, collapse = "|"),
-      listed$description,
+      listed[["description"]],
       ignore.case = TRUE
     ), ]
   } else if (logic == "and") {
     found <- listed[rowSums(sapply(keywords,
       grepl,
-      listed$description,
+      listed[["description"]],
       ignore.case = TRUE
     )) == length(keywords), ]
   } else {

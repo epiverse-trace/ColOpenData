@@ -64,17 +64,28 @@
       1088 INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES
       1094 INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES
       1095 INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES
-           fecha_suspension mpio_cdpmp dpto_ccdgo                   geometry
-      89               <NA>      73124         73 POINT (-75.50036 4.435667)
-      90               <NA>      73001         73 POINT (-75.28606 4.482056)
-      100              <NA>      73001         73 POINT (-75.24386 4.470361)
-      101        2014-08-28      73001         73    POINT (-75.22906 4.402)
-      112              <NA>      73001         73 POINT (-75.24867 4.418389)
-      340              <NA>      73043         73 POINT (-75.32778 4.670778)
-      1086             <NA>      73001         73 POINT (-75.26017 4.463139)
-      1088 2018-06-20 11:05      73001         73 POINT (-75.30428 4.466667)
-      1094             <NA>      73001         73 POINT (-75.31453 4.540139)
-      1095             <NA>      73001         73 POINT (-75.07539 4.542444)
+           fecha_suspension codigo_municipio codigo_departamento
+      89               <NA>            73124                  73
+      90               <NA>            73001                  73
+      100              <NA>            73001                  73
+      101        2014-08-28            73001                  73
+      112              <NA>            73001                  73
+      340              <NA>            73043                  73
+      1086             <NA>            73001                  73
+      1088 2018-06-20 11:05            73001                  73
+      1094             <NA>            73001                  73
+      1095             <NA>            73001                  73
+                             geometry
+      89   POINT (-75.50036 4.435667)
+      90   POINT (-75.28606 4.482056)
+      100  POINT (-75.24386 4.470361)
+      101     POINT (-75.22906 4.402)
+      112  POINT (-75.24867 4.418389)
+      340  POINT (-75.32778 4.670778)
+      1086 POINT (-75.26017 4.463139)
+      1088 POINT (-75.30428 4.466667)
+      1094 POINT (-75.31453 4.540139)
+      1095 POINT (-75.07539 4.542444)
 
 # Climate Stations works as expected
 

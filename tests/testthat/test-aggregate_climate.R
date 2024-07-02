@@ -70,7 +70,7 @@ test_that("Aggregation for dry-bulb temperature works as expected", {
   # Expect that non-addable dates are not aggreegated (climate aggregtion rules)
   month_tssm <- aggregate_climate(base_tssm, "month")
   expect_identical(month_tssm[
-    which(month_tssm$date == "2015-04-01"),
+    which(month_tssm[["date"]] == "2015-04-01"),
     "value"
   ][[1]], c(NA_real_, NA_real_))
 
@@ -90,7 +90,7 @@ test_that("Aggregation for sunshine duration works as expected", {
 
   # Expect correct date range
   year_bshg <- aggregate_climate(base_bshg, "year")
-  expect_equal(max(year_bshg$date), as.Date("1990-01-01"))
+  expect_equal(max(year_bshg[["date"]]), as.Date("1990-01-01"))
 })
 
 test_that("Aggregation for minimum temperature works as expected", {
@@ -112,7 +112,7 @@ test_that("Aggregation for maximum temperature works as expected", {
   # Expect specific value for monthly aggregates in TMX
   month_tmx <- aggregate_climate(base_tmx, "month")
   expect_identical(max(month_tmx[
-    which(month_tmx$station == 21245010),
+    which(month_tmx[["station"]] == 21245010),
     "value"
   ]), 34.2)
 })
