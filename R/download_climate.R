@@ -25,33 +25,25 @@ download_climate <- function(code, start_date, end_date, tag) {
   checkmate::assert_character(code)
   args <- check_climate_args(start_date, end_date, tag)
 
+  divipola <- divipola_table()
+  data_path <- retrieve_support_path("IDEAM_STATIONS_2023_MAY")
+  stations <- retrieve_table(data_path, ";")
+
   if (nchar(code) == 5) {
     # Municipalities have a five digit code
-    mpios <- suppressMessages(download_geospatial("municipality",
-      include_cnpv = FALSE
-    ))
-    filtered_area <- mpios[
-      which(mpios$codigo_municipio == code),
-      "codigo_municipio"
-    ]
+    filtered_stations <- stations[which(stations$codigo_municipio == code), ]
   } else if (nchar(code) == 2) {
     # Departments have a two digit code
-    dptos <- suppressMessages(download_geospatial("department",
-      include_cnpv = FALSE
-    ))
-    filtered_area <- dptos[
-      which(dptos$codigo_departamento == code),
-      "codigo_departamento"
-    ]
+    filtered_stations <- stations[which(stations$codigo_departamento == code), ]
   } else {
     stop("`code` must be either five digits for municipalities or two
             digits for departments")
   }
-  if (nrow(filtered_area) == 0) {
+  if (nrow(filtered_stations) == 0) {
     stop("`code` cannot be found")
   }
-  climate <- download_climate_geom(
-    geometry = filtered_area,
+  climate <- download_climate_stations(
+    stations = filtered_stations,
     start_date = args[["start_date"]],
     end_date = args[["end_date"]],
     tag = args[["tag"]]
