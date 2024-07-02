@@ -1,40 +1,33 @@
-# Aggregation for sunshine duration works as expected
+# Aggregation for dry-bulb temperature works as expected
 
     Code
-      aggregate_climate(base_bshg, "year")
+      aggregate_climate(base_tssm, "year")
     Output
-      # A tibble: 3 x 6
-         station longitude latitude   date       tag      value
-           <dbl> <chr>     <chr>      <date>     <chr>    <lgl>
-      1 27015090 -75.55325 6.31969444 1990-01-01 BSHG_CON NA   
-      2 27015210 -75.5     6.28333333 1990-01-01 BSHG_CON NA   
-      3 27015330 -75.59    6.22       1990-01-01 BSHG_CON NA   
+      # A tibble: 4 x 6
+         station longitude latitude date       tag      value
+           <dbl>     <dbl>    <dbl> <date>     <chr>    <dbl>
+      1 27015090     -75.6     6.32 2014-01-01 TSSM_CON  24.4
+      2 27015090     -75.6     6.32 2015-01-01 TSSM_CON  NA  
+      3 27015330     -75.6     6.22 2014-01-01 TSSM_CON  25.0
+      4 27015330     -75.6     6.22 2015-01-01 TSSM_CON  NA  
 
 # Aggregation for precipitation works as expected
 
     Code
-      aggregate_climate(base_ptpm, "year")
+      aggregate_climate(base_ptpm, "month")
     Output
-      # A tibble: 19 x 6
-          station longitude    latitude   date       tag      value
-            <dbl> <chr>        <chr>      <date>     <chr>    <lgl>
-       1 21210020 -75.32163889 4.55630556 2020-01-01 PTPM_CON NA   
-       2 21210030 -75.30083333 4.51105556 2020-01-01 PTPM_CON NA   
-       3 21210080 -75.28994444 4.49427778 2020-01-01 PTPM_CON NA   
-       4 21210110 -75.27788889 4.52094444 2020-01-01 PTPM_CON NA   
-       5 21210120 -75.23941667 4.49091667 2020-01-01 PTPM_CON NA   
-       6 21210140 -75.49686111 4.38375    2020-01-01 PTPM_CON NA   
-       7 21210180 -75.40983333 4.5195     2020-01-01 PTPM_CON NA   
-       8 21210190 -75.14841667 4.2745     2020-01-01 PTPM_CON NA   
-       9 21210200 -75.07344444 4.33513889 2020-01-01 PTPM_CON NA   
-      10 21210220 -75.32566667 4.58011111 2020-01-01 PTPM_CON NA   
-      11 21210230 -75.20775    4.42972222 2020-01-01 PTPM_CON NA   
-      12 21210240 -75.22055556 4.42102778 2020-01-01 PTPM_CON NA   
-      13 21210260 -75.38333333 4.63333333 2020-01-01 PTPM_CON NA   
-      14 21215130 -75.51858333 4.34138889 2020-01-01 PTPM_CON NA   
-      15 21220050 -75.05305556 4.35344444 2020-01-01 PTPM_CON NA   
-      16 21240030 -75.07538889 4.54244444 2020-01-01 PTPM_CON NA   
-      17 21240070 -75.09       4.6375     2020-01-01 PTPM_CON NA   
-      18 21245010 -75.20052222 4.42966667 2020-01-01 PTPM_CON NA   
-      19 22050100 -75.09694444 4.65655556 2020-01-01 PTPM_CON NA   
+      # A tibble: 40 x 6
+          station longitude latitude date       tag      value
+            <dbl>     <dbl>    <dbl> <date>     <chr>    <dbl>
+       1 26205080     -75.7     6.34 2020-06-01 PTPM_CON   NA 
+       2 26205080     -75.7     6.34 2020-07-01 PTPM_CON  325.
+       3 26205080     -75.7     6.34 2020-08-01 PTPM_CON  147.
+       4 26205080     -75.7     6.34 2020-09-01 PTPM_CON  252.
+       5 26205080     -75.7     6.34 2020-10-01 PTPM_CON   NA 
+       6 27010770     -75.7     6.18 2020-06-01 PTPM_CON   NA 
+       7 27010770     -75.7     6.18 2020-07-01 PTPM_CON  393 
+       8 27010770     -75.7     6.18 2020-08-01 PTPM_CON  292 
+       9 27010770     -75.7     6.18 2020-09-01 PTPM_CON  337 
+      10 27010770     -75.7     6.18 2020-10-01 PTPM_CON   NA 
+      # i 30 more rows
 
