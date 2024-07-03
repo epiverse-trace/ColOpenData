@@ -7,12 +7,12 @@
 retrieve_table(dataset_path, sep = ";")
 }
 \arguments{
-\item{dataset_path}{character path to the dataset on server}
+\item{dataset_path}{character path to the dataset on server.}
 
-\item{sep}{separator for table data}
+\item{sep}{separator for table data.}
 }
 \value{
-\code{data.frame} object with downloaded data
+\code{data.frame} object with downloaded data.
 }
 \description{
 Retrieve table (csv and data) file

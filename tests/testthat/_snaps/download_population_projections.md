@@ -6,7 +6,7 @@
     Condition
       Warning:
       Use of .data in tidyselect expressions was deprecated in tidyselect 1.2.0.
-      i Please use `"year"` instead of `.data$year`
+      i Please use `all_of(var)` (or `any_of(var)`) instead of `.data[[var]]`
     Message
       Original data is retrieved from the National Administrative Department
       of Statistics (Departamento Administrativo Nacional de Estadística -

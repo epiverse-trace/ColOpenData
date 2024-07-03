@@ -1,34 +1,35 @@
 #' Download geospatial dataset
 #'
 #' @description
-#' This function downloads geospatial datasets from the Geostatistical National
+#' This function downloads geospatial datasets from the National Geostatistical
 #' Framework at different levels of spatial aggregation. These datasets
 #' include a summarized version of the National Population and Dwelling Census
 #' (CNPV) with demographic and socioeconomic information for each spatial unit.
 #'
-#' @param spatial_level character with the spatial level to be consulted
+#' @param spatial_level character with the spatial level to be consulted:
 #' \itemize{
-#' \item \code{"DPTO"} or \code{"department"}: Department
-#' \item \code{"MPIO"} or \code{"municipality"}: Municipality
+#' \item \code{"DPTO"} or \code{"department"}: Department.
+#' \item \code{"MPIO"} or \code{"municipality"}: Municipality.
 #' \item \code{"MPIOCL"} or \code{"municipality_class"}: Municipality including
-#' class
-#' \item \code{"SETU"} or \code{"urban_sector"}: Urban Sector
-#' \item \code{"SETR"} or \code{"rural_sector"}: Rural Sector
-#' \item \code{"SECU"} or \code{"urban_section"}: Urban Section
-#' \item \code{"SECR"} or \code{"rural_section"}: Rural Section
-#' \item \code{"ZU" } or \code{"urban_zone"}: Urban Zone
-#' \item \code{"MZN"} or \code{"block"}: Block
+#' class.
+#' \item \code{"SETU"} or \code{"urban_sector"}: Urban Sector.
+#' \item \code{"SETR"} or \code{"rural_sector"}: Rural Sector.
+#' \item \code{"SECU"} or \code{"urban_section"}: Urban Section.
+#' \item \code{"SECR"} or \code{"rural_section"}: Rural Section.
+#' \item \code{"ZU" } or \code{"urban_zone"}: Urban Zone.
+#' \item \code{"MZN"} or \code{"block"}: Block.
 #' }
-#' @param include_geom logical for including (or not) the geometry.
-#' Default is \code{TRUE}
+#' @param include_geom logical for including (or not) the spatial geometry.
+#' Default is \code{TRUE}. If \code{TRUE}, the function will return an
+#' \code{"sf"} \code{data.frame}.
 #' @param include_cnpv logical for including (or not) CNPV demographic and
-#' socioeconomic information. Default is \code{TRUE}
+#' socioeconomic information. Default is \code{TRUE}.
 #'
 #' @examples
 #' departments <- download_geospatial("department", TRUE, FALSE)
 #' head(departments)
 #'
-#' @return \code{data.frame} object with downloaded data
+#' @return \code{data.frame} object with downloaded data.
 #'
 #' @export
 download_geospatial <- function(spatial_level, include_geom = TRUE,
@@ -71,12 +72,12 @@ download_geospatial <- function(spatial_level, include_geom = TRUE,
 #'
 #' @description
 #' Retrieve a geospatial dataset name from the spatial level. Checks the
-#' existence of the spatial level and datasets
+#' existence of the spatial level and datasets.
 #'
-#' @param spatial_level character with the spatial level to be consulted
+#' @param spatial_level character with the spatial level to be consulted.
 #'
 #' @return character containing the geospatial dataset name. If the input is
-#' invalid an error will be thrown
+#' invalid an error will be thrown.
 #'
 #' @keywords internal
 retrieve_geospatial_name <- function(spatial_level) {
@@ -104,7 +105,7 @@ retrieve_geospatial_name <- function(spatial_level) {
   }
   all_datasets <- list_datasets("geospatial")
   geo_dataset <- all_datasets %>%
-    dplyr::filter(.data$level == spatial_level)
-  dataset_name <- geo_dataset$name
+    dplyr::filter(.data[["level"]] == spatial_level)
+  dataset_name <- geo_dataset[["name"]]
   return(dataset_name)
 }

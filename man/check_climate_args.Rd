@@ -8,22 +8,22 @@ check_climate_args(start_date, end_date, tag)
 }
 \arguments{
 \item{start_date}{character with the first date to consult in the format
-\code{"YYYY-MM-DD"}. (First available date is \code{"1920-01-01"})}
+\code{"YYYY-MM-DD"}. (First available date is \code{"1920-01-01"}).}
 
 \item{end_date}{character with the last date to consult in the format
-\code{"YYYY-MM-DD"}. (Last available date is \code{"2023-05-31"})}
+\code{"YYYY-MM-DD"}. (Last available date is \code{"2023-05-31"}).}
 
-\item{tag}{character containing climate tag to consult}
+\item{tag}{character containing climate tag to consult.}
 }
 \value{
 list with the arguments in the needed formats. If the input is
-invalid an error will be thrown
+invalid an error will be thrown.
 }
 \description{
 Climate functions have three common arguments: \code{start_date},
 \code{end_date} and \code{tag}. This function checks that \code{start_date}
 and \code{end_date} can be converted to date using the format "YYYY-MM-DD",
 that \code{end_date} is greater than \code{start_date}, and that the
-\code{tag} requested exists
+\code{tag} requested exists.
 }
 \keyword{internal}

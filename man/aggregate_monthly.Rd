@@ -7,12 +7,12 @@
 aggregate_monthly(daily_data, FUN)
 }
 \arguments{
-\item{daily_data}{\code{data.frame} with daily aggregated data}
+\item{daily_data}{\code{data.frame} with daily aggregated data.}
 
-\item{FUN}{Function to use for aggregation}
+\item{FUN}{Function to use for aggregation.}
 }
 \value{
-\code{data.frame} object with monthly aggregated data
+\code{data.frame} object with monthly aggregated data.
 }
 \description{
 Calculate monthly aggregate of climate data

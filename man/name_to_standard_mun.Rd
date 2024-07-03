@@ -8,22 +8,22 @@ name_to_standard_mun(department_name, municipality_name)
 }
 \arguments{
 \item{department_name}{character vector with the names of the
-departments containing the municipalities}
+departments containing the municipalities.}
 
-\item{municipality_name}{character vector with the names to be translated}
+\item{municipality_name}{character vector with the names to be translated.}
 }
 \value{
-character vector with the DIVIPOLA name of the municipalities
+character vector with the DIVIPOLA name of the municipalities.
 }
 \description{
 Municipality names are usually manually input, which leads to multiple errors
 and lack of standardization. This functions translates municipality names to
-their respective official names from DIVIPOLA
+their respective official names from DIVIPOLA.
 }
 \examples{
 
 dptos <- c("Bogota", "Antioquia", "Tolima")
-mpios <- c("Bogota DC", "Carmen dell Viboral", "CarmendeApicala")
+mpios <- c("Bogota DC", "Carmen del Viboral", "CarmendeApicala")
 name_to_standard_mun(dptos, mpios)
 
 }

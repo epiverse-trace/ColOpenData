@@ -7,13 +7,13 @@
 retrieve_dict_path(dataset)
 }
 \arguments{
-\item{dataset}{character with the dictionary name}
+\item{dataset}{character with the dictionary name.}
 }
 \value{
-character with path to retrieve the dataset from server
+character with path to retrieve the dataset from server.
 }
 \description{
 Dictionaries are not included in the general documentation file. Therefore,
-the path is built internally
+the path is built internally.
 }
 \keyword{internal}

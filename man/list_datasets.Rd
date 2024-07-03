@@ -8,14 +8,14 @@ list_datasets(module = "all")
 }
 \arguments{
 \item{module}{character with module to be consulted (\code{"demographic"},
-\code{"geospatial"}, \code{"climate"}). Default is \code{"all"}}
+\code{"geospatial"}, \code{"climate"}). Default is \code{"all"}.}
 }
 \value{
-\code{data.frame} object with the available datasets
+\code{data.frame} object with the available datasets.
 }
 \description{
 List all available datasets by name, including group, source, year, level,
-category and description
+category and description.
 }
 \examples{
 list <- list_datasets("geospatial")

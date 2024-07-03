@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 ```
 
 ::: {style="text-align: justify;"}
-**ColOpenData** can be used to access open geospatial data from Colombia. This data is retrieved from the Geostatistical National Framework (MGN), published by the National Administrative Department of Statistics [(DANE)](https://www.dane.gov.co/index.php/en/). The MGN contains the political-administrative division and is used to reference census statistical information. Further information can be obtained from [MGN update news](https://www.dane.gov.co/index.php/actualidad-dane/5454-el-dane-actualizo-el-marco-geoestadistico-nacional-a-2018) provided by DANE.
+**ColOpenData** can be used to access open geospatial data from Colombia. This data is retrieved from the National Geostatistical Framework (MGN), published by the National Administrative Department of Statistics [(DANE)](https://www.dane.gov.co/index.php/en/). The MGN contains the political-administrative division and is used to reference census statistical information. Further information can be obtained from [MGN update news](https://www.dane.gov.co/index.php/actualidad-dane/5454-el-dane-actualizo-el-marco-geoestadistico-nacional-a-2018) provided by DANE.
 
 This package contains the 2018's version of the MGN, which also included a summarized version of the National Population and Dwelling Census (CNPV) in different aggregation levels. Each level is stored in a different dataset, which can be retrieved using the `download_geospatial()` function, which requires three arguments:
 
@@ -59,9 +59,9 @@ knitr::kable(mgncnpv)
 ::: {style="text-align: justify;"}
 In this vignette you will learn:
 
-1.  How to download geospatial data using **ColOpenData**
-2.  How to use census data included in geospatial datasets
-3.  How to visualize spatial data using **leaflet** and **ggplot2**
+1.  How to download geospatial data using **ColOpenData**.
+2.  How to use census data included in geospatial datasets.
+3.  How to visualize spatial data using **leaflet** and **ggplot2**.
 
 We will be using geospatial data at the level of Municipality (MPIO) for the department of Tolima and we will calculate the percentage of houses with internet connection at each municipality. Later, we will build some plots using the previously mentioned approaches for dynamic and static plots.
 
@@ -73,7 +73,6 @@ library(ColOpenData)
 library(dplyr)
 library(sf)
 library(ggplot2)
-# library(knitr)
 library(leaflet)
 ```
 
@@ -172,7 +171,7 @@ For dynamic plots, we can use [`leaflet`](https://rstudio.github.io/leaflet/), w
 colfunc <- colorRampPalette(c("#10bed2", "#deff00"))
 pal <- colorNumeric(
   palette = colfunc(100),
-  domain = tolima$internet
+  domain = tolima[["internet"]]
 )
 ```
 
@@ -187,14 +186,14 @@ leaflet(tolima) %>%
     stroke = TRUE,
     weight = 0,
     color = NA,
-    fillColor = ~ pal(tolima$internet),
+    fillColor = ~ pal(tolima[["internet"]]),
     fillOpacity = 1,
-    popup = paste0(tolima$internet)
+    popup = paste0(tolima[["internet"]])
   ) %>%
   addLegend(
     position = "bottomright",
     pal = pal,
-    values = ~ tolima$internet,
+    values = ~ tolima[["internet"]],
     opacity = 1,
     title = "Internet Coverage"
   )

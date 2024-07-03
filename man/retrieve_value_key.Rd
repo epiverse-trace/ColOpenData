@@ -7,12 +7,12 @@
 retrieve_value_key(key)
 }
 \arguments{
-\item{key}{character key}
+\item{key}{character key.}
 }
 \value{
-character containing associated value
+character containing associated value.
 }
 \description{
-Retrieve value from key included in configuration file
+Retrieve value from key included in configuration file.
 }
 \keyword{internal}

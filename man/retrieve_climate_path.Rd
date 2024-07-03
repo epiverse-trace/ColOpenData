@@ -7,10 +7,10 @@
 retrieve_climate_path()
 }
 \value{
-character with path to retrieve the dataset from server
+character with path to retrieve the dataset from server.
 }
 \description{
 Climate data is retrieved from a general directory. Path is build for said
-directory
+directory.
 }
 \keyword{internal}

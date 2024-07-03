@@ -29,7 +29,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: end -->
 
-**ColOpenData** is a package designed to access curated and wrangled Colombian demographic, geospatial and climate data, retrieved from various open Colombian data sources. The package addresses the challenge of scattered Colombian data across multiple web sources by providing functions that enable users to select and load desired datasets without the need for extensive data acquisition processes. Additionally, the tidy data structure offered for demographic and climate data facilitates analysis and visualization.
+**ColOpenData** is a package designed to access curated and wrangled Colombian demographic, geospatial, climate and population projections data, retrieved from various open Colombian data sources. The package addresses the challenge of scattered Colombian data across multiple web sources by providing functions that enable users to select and load desired datasets without the need for extensive data acquisition processes. Additionally, the tidy data structure offered for demographic and climate data facilitates analysis and visualization.
 
 ColOpenData is developed at [Universidad de Los Andes](https://uniandes.edu.co/) as part of the [Epiverse-TRACE program](https://data.org/initiatives/epiverse/).
 
@@ -48,11 +48,11 @@ pak::pak("epiverse-trace/ColOpenData")
 
 -   **Demographic:** Demographic and Socioeconomic data presents information from the National Population and Dwelling Census (CNPV) of 2018. The CNPV data corresponds to the most recent census available to date and the information is presented as an answer to three questions: How many are we?, Where are we? and How do we live? Further information can be consulted at the [CNPV results](https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/censo-nacional-de-poblacion-y-vivenda-2018).
 
--   **Geospatial:** This data is retrieved from the National Geostatistical Framework (MGN), which includes maps and a summarized version of the 2018 census, aggregated to spatial geometries. The data is available at different aggregation levels including: Blocks, Urban and Rural Sections, Urban and Rural Sectors, Urban Areas, Municipalities and Departments. More information is available at [MGN update news](https://www.dane.gov.co/index.php/actualidad-dane/5454-el-dane-actualizo-el-marco-geoestadistico-nacional-a-2018).
+-   **Geospatial:** This data is retrieved from the National Geostatistical Framework (MGN), which includes maps and a summarized version of the 2018 CNPV, aggregated to spatial geometries. The data is available at different aggregation levels including: Blocks, Urban and Rural Sections, Urban and Rural Sectors, Urban Areas, Municipalities and Departments. More information is available at [MGN update news](https://www.dane.gov.co/index.php/actualidad-dane/5454-el-dane-actualizo-el-marco-geoestadistico-nacional-a-2018).
 
--   **Climate:** Climate data is recovered from backup information provided by IDEAM, containing historical data from the first station in the country until May 31st 2023. This backup includes temperature, precipitation, sunshine duration, wind direction, among others. More information can be found at [IDEAM website](http://www.ideam.gov.co/).
+-   **Climate:** Climate data is recovered from backup information provided by IDEAM, containing historical data from the first station in the country (January 1st 1920) until May 31st 2023. This backup includes temperature, precipitation, sunshine duration, wind direction, among others. More information can be found at [IDEAM website](http://www.ideam.gov.co/).
 
--   **Population projections:** Population Projections data contains the population projections and back projections from 1950 to 2070, considering the post COVID-19 update, which was calculated based on the results of CNPV of 2018. Further information can be consulted at [DANE website](https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/proyecciones-de-poblacion).
+-   **Population projections:** Population Projections data contains the population projections and back projections from 1950 to 2070, considering the post COVID-19 update, which was calculated based on the results of 2018 CNPV. Further information can be consulted at [DANE website](https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/proyecciones-de-poblacion).
 
 Documentation and vignettes are available for the modules in the [user vignettes](https://epiverse-trace.github.io/ColOpenData/).
 
@@ -62,6 +62,10 @@ Similar R packages are offered for international communities, allowing the user 
 
 -   [cancensus](https://mountainmath.github.io/cancensus/): Canada
 -   [censobr](https://ipeagit.github.io/censobr/): Brazil
+-   [chilemapas](https://github.com/pachadotdev/chilemapas/): Chile
+-   [geobr](https://ipeagit.github.io/geobr/) : Brazil
+-   [georAr](https://github.com/PoliticaArgentina/geoAr): Argentina
+-   [geouy](https://github.com/RichDeto/geouy): Uruguay
 -   [tidycensus](https://walker-data.com/tidycensus/): US
 -   [geofi](https://ropengov.github.io/geofi/): Finland
 -   [climate](https://bczernecki.github.io/climate/)

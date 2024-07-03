@@ -3,22 +3,23 @@
 #' @description
 #' Download climate data from stations contained in a municipality or
 #' department. This data is retrieved from local meteorological stations
-#' provided by IDEAM
+#' provided by IDEAM.
 #'
 #' @param code character with the DIVIPOLA code for the area (2 digits for
-#' departments and 5 digits for municipalities)
+#' departments and 5 digits for municipalities).
 #' @param start_date character with the first date to consult in the format
-#' \code{"YYYY-MM-DD"}. (First available date is \code{"1920-01-01"})
+#' \code{"YYYY-MM-DD"}. (First available date is \code{"1920-01-01"}).
 #' @param end_date character with the last date to consult in the format
-#' \code{"YYYY-MM-DD"}. (Last available date is \code{"2023-05-31"})
-#' @param tag character containing climate tag to consult
+#' \code{"YYYY-MM-DD"}. (Last available date is \code{"2023-05-31"}).
+#' @param tag character containing climate tag to consult. Please use
+#' \code{cliamte_tags()} to check IDEAM tags.
 #'
 #' @examples
 #' tssm <- download_climate("17001", "2021-11-14", "2021-11-20", "TSSM_CON")
 #' head(tssm)
 #'
 #' @return \code{data.frame} object with observations from the stations in the
-#' area
+#' area.
 #'
 #' @export
 download_climate <- function(code, start_date, end_date, tag) {
@@ -31,10 +32,14 @@ download_climate <- function(code, start_date, end_date, tag) {
 
   if (nchar(code) == 5) {
     # Municipalities have a five digit code
-    filtered_stations <- stations[which(stations$codigo_municipio == code), ]
+    filtered_stations <- stations[
+      which(stations[["codigo_municipio"]] == code),
+    ]
   } else if (nchar(code) == 2) {
     # Departments have a two digit code
-    filtered_stations <- stations[which(stations$codigo_departamento == code), ]
+    filtered_stations <- stations[
+      which(stations[["codigo_departamento"]] == code),
+    ]
   } else {
     stop("`code` must be either five digits for municipalities or two
             digits for departments")
@@ -56,15 +61,15 @@ download_climate <- function(code, start_date, end_date, tag) {
 #' @description
 #' Download climate data from stations contained in a Region of Interest
 #' (ROI/geometry). This data is retrieved from local meteorological stations
-#' provided by IDEAM
+#' provided by IDEAM.
 #'
 #' @param geometry \code{sf} object containing the geometry for a given ROI.
-#' The geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}
+#' The geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}.
 #' @param start_date character with the first date to consult in the format
-#' \code{"YYYY-MM-DD"}. (First available date is \code{"1920-01-01"})
+#' \code{"YYYY-MM-DD"}. (First available date is \code{"1920-01-01"}).
 #' @param end_date character with the last date to consult in the format
-#' \code{"YYYY-MM-DD"}. (Last available date is \code{"2023-05-31"})
-#' @param tag character containing climate tag to consult
+#' \code{"YYYY-MM-DD"}. (Last available date is \code{"2023-05-31"}).
+#' @param tag character containing climate tag to consult.
 #'
 #' @examples
 #' lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)
@@ -76,11 +81,10 @@ download_climate <- function(code, start_date, end_date, tag) {
 #' head(tssm)
 #'
 #' @return \code{data.frame} object with observations from the stations in the
-#' area
+#' area.
 #'
 #' @export
-download_climate_geom <- function(geometry, start_date, end_date,
-                                  tag) {
+download_climate_geom <- function(geometry, start_date, end_date, tag) {
   checkmate::assert_class(geometry, "sf")
   args <- check_climate_args(start_date, end_date, tag)
 
@@ -98,17 +102,16 @@ download_climate_geom <- function(geometry, start_date, end_date,
 #'
 #' @description
 #' Download climate data from IDEAM stations by individual codes.This data is
-#' retrieved from local meteorological stations provided by IDEAM
+#' retrieved from local meteorological stations provided by IDEAM.
 #'
 #' @param stations \code{data.frame} containing the stations' codes and
-#' location
-#' \code{data.frame} must be retrieved from the function
+#' location. \code{data.frame} must be retrieved from the function
 #' \code{stations_in_roi()}
 #' @param start_date character with the first date to consult in the format
-#' \code{"YYYY-MM-DD"}. (First available date is \code{"1920-01-01"})
+#' \code{"YYYY-MM-DD"}. (First available date is \code{"1920-01-01"}).
 #' @param end_date character with the last date to consult in the format
-#' \code{"YYYY-MM-DD"}. (Last available date is \code{"2023-05-31"})
-#' @param tag character containing climate tag to consult
+#' \code{"YYYY-MM-DD"}. (Last available date is \code{"2023-05-31"}).
+#' @param tag character containing climate tag to consult.
 #'
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
@@ -126,7 +129,7 @@ download_climate_geom <- function(geometry, start_date, end_date,
 #' head(tssm)
 #'
 #' @return \code{data.frame} object with observations from the stations in the
-#' area
+#' area.
 #'
 #' @export
 download_climate_stations <- function(stations, start_date, end_date, tag) {
@@ -139,7 +142,7 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
   args <- check_climate_args(start_date, end_date, tag)
 
   path_data <- retrieve_climate_path()
-  path_stations <- paste0(args[["tag"]], "@", stations$codigo, ".data")
+  path_stations <- paste0(args[["tag"]], "@", stations[["codigo"]], ".data")
   climate_data <- list()
   for (i in seq_along(path_stations)) {
     dataset_path <- file.path(path_data, path_stations[i])
@@ -148,19 +151,19 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
     if (!rlang::is_empty(downloaded_station)) {
       station_filtered <- downloaded_station %>%
         dplyr::filter(
-          .data$date >= args[["start_date"]],
-          .data$date <= args[["end_date"]] + 1
+          .data[["date"]] >= args[["start_date"]],
+          .data[["date"]] <= args[["end_date"]] + 1
         )
       n_obs <- nrow(station_filtered)
       if (n_obs > 0) {
         station_obs <- data.frame(
-          station = rep(stations$codigo[i], n_obs),
-          longitude = rep(stations$longitud[i], n_obs),
-          latitude = rep(stations$latitud[i], n_obs),
-          date = format(station_filtered$date, "%Y-%m-%d"),
-          hour = format(station_filtered$date, "%H:%M:%S"),
+          station = rep(stations[["codigo"]][i], n_obs),
+          longitude = rep(stations[["longitud"]][i], n_obs),
+          latitude = rep(stations[["latitud"]][i], n_obs),
+          date = format(station_filtered[["date"]], "%Y-%m-%d"),
+          hour = format(station_filtered[["date"]], "%H:%M:%S"),
           tag = rep(args[["tag"]], n_obs),
-          value = station_filtered$value,
+          value = station_filtered[["value"]],
           stringsAsFactors = FALSE
         )
         climate_data <- rbind(climate_data, list(station_obs))
@@ -190,10 +193,10 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
 #'
 #' @description
 #' Download and filter climate stations contained inside a region of interest
-#' (ROI)
+#' (ROI).
 #'
 #' @param geometry \code{sf} object containing the geometry for a given ROI.
-#' The geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}
+#' The geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}.
 #'
 #' @examples
 #' lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)
@@ -205,7 +208,7 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
 #' head(stations)
 #'
 #' @return \code{data.frame} object with the stations contained inside the
-#' consulted geometry
+#' consulted geometry.
 #'
 #' @export
 stations_in_roi <- function(geometry) {
@@ -213,7 +216,7 @@ stations_in_roi <- function(geometry) {
 
   crs <- sf::st_crs(geometry)
   data_path <- retrieve_support_path("IDEAM_STATIONS_2023_MAY")
-  stations <- retrieve_table(data_path, ",")
+  stations <- retrieve_table(data_path, ";")
   geo_stations <- sf::st_as_sf(stations,
     coords = c("longitud", "latitud"),
     remove = FALSE
@@ -240,16 +243,16 @@ stations_in_roi <- function(geometry) {
 #' \code{end_date} and \code{tag}. This function checks that \code{start_date}
 #' and \code{end_date} can be converted to date using the format "YYYY-MM-DD",
 #' that \code{end_date} is greater than \code{start_date}, and that the
-#' \code{tag} requested exists
+#' \code{tag} requested exists.
 #'
 #' @param start_date character with the first date to consult in the format
-#' \code{"YYYY-MM-DD"}. (First available date is \code{"1920-01-01"})
+#' \code{"YYYY-MM-DD"}. (First available date is \code{"1920-01-01"}).
 #' @param end_date character with the last date to consult in the format
-#' \code{"YYYY-MM-DD"}. (Last available date is \code{"2023-05-31"})
-#' @param tag character containing climate tag to consult
+#' \code{"YYYY-MM-DD"}. (Last available date is \code{"2023-05-31"}).
+#' @param tag character containing climate tag to consult.
 #'
 #' @return list with the arguments in the needed formats. If the input is
-#' invalid an error will be thrown
+#' invalid an error will be thrown.
 #'
 #' @keywords internal
 check_climate_args <- function(start_date, end_date, tag) {
