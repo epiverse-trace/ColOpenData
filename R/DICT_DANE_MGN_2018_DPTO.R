@@ -5,4 +5,4 @@
 #' dataset
 #' @name DICT_DANE_MGN_2018_DPTO
 #' @usage data(DICT_DANE_MGN_2018_DPTO)
-"DICT_DANE_MGN_2018_DPTO"
+"dpto"

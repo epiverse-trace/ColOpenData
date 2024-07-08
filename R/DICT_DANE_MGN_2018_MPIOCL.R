@@ -5,4 +5,4 @@
 #' (including class) dataset
 #' @name DICT_DANE_MGN_2018_MPIOCL
 #' @usage data(DICT_DANE_MGN_2018_MPIOCL)
-"DICT_DANE_MGN_2018_MPIOCL"
+"mpiocl"

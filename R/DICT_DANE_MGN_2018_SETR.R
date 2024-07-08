@@ -5,4 +5,4 @@
 #' section dataset
 #' @name DICT_DANE_MGN_2018_SETR
 #' @usage data(DICT_DANE_MGN_2018_SETR)
-"DICT_DANE_MGN_2018_SETR"
+"setr"

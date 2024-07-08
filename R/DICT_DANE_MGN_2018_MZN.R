@@ -5,4 +5,4 @@
 #' dataset
 #' @name DICT_DANE_MGN_2018_MZN
 #' @usage data(DICT_DANE_MGN_2018_MZN)
-"DICT_DANE_MGN_2018_MZN"
+"mzn"
