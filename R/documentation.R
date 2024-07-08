@@ -27,10 +27,13 @@
 #' @export
 geospatial_dictionary <- function(spatial_level) {
   dataset <- retrieve_geospatial_name(spatial_level)
-  dict_path <- sprintf("DICT_%s", dataset)
-  path <- retrieve_dict_path(dict_path)
-  dict <- retrieve_table(path, ";")
-  return(dict)
+  file <- sprintf("DICT_%s.rda", dataset)
+  path <- retrieve_dict_path(file)
+  load(path)
+  obj_name <- ls()[ls() != "path"]  
+  to_remove <- c("dataset", "file", "spatial_level")
+  final_name <- setdiff(obj_name, to_remove)
+  return(get(final_name))
 }
 
 #' List climate (IDEAM) tags
@@ -47,9 +50,12 @@ geospatial_dictionary <- function(spatial_level) {
 #'
 #' @export
 climate_tags <- function() {
-  path <- retrieve_dict_path("DICT_IDEAM_CLIMATE_2023_MAY")
-  climate_dict <- retrieve_table(path, ";")
-  return(climate_dict)
+  path <- retrieve_dict_path("climate_tags.rda")
+  print(path)
+  load(path)
+  obj_name <- ls()[ls() != "path"] 
+  print(obj_name)
+  return(get(obj_name))
 }
 
 #' Download list of available datasets
