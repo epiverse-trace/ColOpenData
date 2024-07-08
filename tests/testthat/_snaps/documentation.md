@@ -300,7 +300,7 @@
 # Climate tags works as expected
 
     Code
-      climate_tags()
+      get_climate_tags()
     Output
            etiqueta                                   variable
       1    TSSM_CON                Temperatura seca (ambiente)
