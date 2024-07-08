@@ -43,18 +43,16 @@ geospatial_dictionary <- function(spatial_level) {
 #' in Spanish.
 #'
 #' @examples
-#' dict <- climate_tags()
+#' dict <- get_climate_tags()
 #' head(dict)
 #'
 #' @return \code{data.frame} object with available tags.
 #'
 #' @export
-climate_tags <- function() {
+get_climate_tags <- function() {
   path <- retrieve_dict_path("climate_tags.rda")
-  print(path)
   load(path)
   obj_name <- ls()[ls() != "path"]
-  print(obj_name)
   return(get(obj_name))
 }
 
