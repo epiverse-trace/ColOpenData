@@ -21,7 +21,7 @@ test_that("Dictionary works as expected", {
 test_that("Climate tags works as expected", {
   # Expect specific dataset from a proper request (no arguments for this
   # function)
-  expect_snapshot(climate_tags())
+  expect_snapshot(get_climate_tags())
 })
 
 test_that("Lookup errors are thrown", {
