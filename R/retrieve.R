@@ -90,10 +90,11 @@ retrieve_climate_path <- function() {
 #' @keywords internal
 retrieve_dict_path <- function(dict_name) {
   dict_file <- system.file(
-    "extdata", 
-    dict_name, 
-    package = "ColOpenData", 
-    mustWork = TRUE)
+    "extdata",
+    dict_name,
+    package = "ColOpenData",
+    mustWork = TRUE
+  )
   return(dict_file)
 }
 

@@ -30,7 +30,7 @@ geospatial_dictionary <- function(spatial_level) {
   file <- sprintf("DICT_%s.rda", dataset)
   path <- retrieve_dict_path(file)
   load(path)
-  obj_name <- ls()[ls() != "path"]  
+  obj_name <- ls()[ls() != "path"]
   to_remove <- c("dataset", "file", "spatial_level")
   final_name <- setdiff(obj_name, to_remove)
   return(get(final_name))
@@ -53,7 +53,7 @@ climate_tags <- function() {
   path <- retrieve_dict_path("climate_tags.rda")
   print(path)
   load(path)
-  obj_name <- ls()[ls() != "path"] 
+  obj_name <- ls()[ls() != "path"]
   print(obj_name)
   return(get(obj_name))
 }
