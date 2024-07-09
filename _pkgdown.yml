@@ -51,7 +51,7 @@ reference:
 - subtitle: Helper functions
   contents:
   - geospatial_dictionary
-  - climate_tags
+  - get_climate_tags
   
 - title: DIVIPOLA
 - subtitle: DIVIPOLA table
