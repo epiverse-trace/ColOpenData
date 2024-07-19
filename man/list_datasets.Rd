@@ -7,6 +7,9 @@
 list_datasets(language = "ES", module = "all")
 }
 \arguments{
+\item{language}{language of all variables (\code{"EN"}, \code{"ES"}.
+Default is \code{"ES"}.}
+
 \item{module}{character with module to be consulted (\code{"demographic"},
 \code{"geospatial"}, \code{"climate"}). Default is \code{"all"}.}
 }

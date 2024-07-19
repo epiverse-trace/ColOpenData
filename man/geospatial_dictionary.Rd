@@ -7,6 +7,9 @@
 geospatial_dictionary(language = "ES", spatial_level)
 }
 \arguments{
+\item{language}{language of the dictionary variables (\code{"EN"},
+\code{"ES"}. Default is \code{"ES"}.}
+
 \item{spatial_level}{character with the spatial level to be consulted:
 \itemize{
 \item \code{"DPTO"} or \code{"department"}: Department.
@@ -26,10 +29,10 @@ class.
 }
 \description{
 Retrieve geospatial data dictionaries to understand internal tags and named
-columns. Dictionaries are only available in Spanish.
+columns. Dictionaries are available in English and Spanish.
 }
 \examples{
-dict <- geospatial_dictionary("setu")
+dict <- geospatial_dictionary("EN", "setu")
 head(dict)
 
 }

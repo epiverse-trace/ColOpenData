@@ -10,6 +10,9 @@ look_up(module = "all", language = "EN", keywords, logic = "or")
 \item{module}{character with module to be consulted (\code{"demographic"},
 \code{"geospatial"}, \code{"climate"}). Default is \code{"all"}.}
 
+\item{language}{language of the keywords (\code{"EN"}, \code{"ES"}.
+Default is \code{"EN"}.}
+
 \item{keywords}{character or vector of characters to be look up in the
 description.}
 
@@ -30,7 +33,7 @@ List available datasets containing user-specified keywords in their
 descriptions.
 }
 \examples{
-found <- look_up("demographic", c("sex", "age"), "and")
+found <- look_up("demographic", "EN", c("sex", "age"), "and")
 head(found)
 
 }
