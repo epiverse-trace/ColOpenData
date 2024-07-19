@@ -5,7 +5,7 @@
 \alias{climate_tags}
 \title{climate_tags}
 \format{
-An object of class \code{data.frame} with 20 rows and 3 columns.
+An object of class \code{list} of length 2.
 }
 \usage{
 data(climate_tags)

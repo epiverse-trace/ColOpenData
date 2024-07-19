@@ -4,7 +4,7 @@
 \alias{list_datasets}
 \title{Download list of available datasets}
 \usage{
-list_datasets(module = "all")
+list_datasets(language = "ES", module = "all")
 }
 \arguments{
 \item{module}{character with module to be consulted (\code{"demographic"},
@@ -18,7 +18,7 @@ List all available datasets by name, including group, source, year, level,
 category and description.
 }
 \examples{
-list <- list_datasets("geospatial")
+list <- list_datasets("EN", "geospatial")
 head(list)
 
 }

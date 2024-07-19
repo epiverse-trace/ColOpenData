@@ -4,7 +4,7 @@
 \alias{look_up}
 \title{Filter list of available datasets based on keywords given by the user}
 \usage{
-look_up(module = "all", keywords, logic = "or")
+look_up(module = "all", language = "EN", keywords, logic = "or")
 }
 \arguments{
 \item{module}{character with module to be consulted (\code{"demographic"},

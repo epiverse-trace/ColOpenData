@@ -42,7 +42,7 @@ Now, the `merge_geo_demographic()` function only takes by parameter the demograp
 
 ```{r documentation, echo =TRUE}
 # Available demographic datasets
-datasets_dem <- list_datasets("demographic")
+datasets_dem <- list_datasets("EN", "demographic")
 
 # Available demographic datasets at the department level
 department_datasets <- datasets_dem[datasets_dem["level"] == "department", ]

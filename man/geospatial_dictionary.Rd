@@ -4,7 +4,7 @@
 \alias{geospatial_dictionary}
 \title{Download data dictionaries}
 \usage{
-geospatial_dictionary(spatial_level)
+geospatial_dictionary(language = "ES", spatial_level)
 }
 \arguments{
 \item{spatial_level}{character with the spatial level to be consulted:
