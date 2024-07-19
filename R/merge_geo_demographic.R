@@ -8,7 +8,7 @@
 #' present municipality or department level.
 #'
 #' @param demographic_dataset character with the demographic dataset name.
-#' Please use \code{list_datasets(""EN"M demographic")} to check available 
+#' Please use \code{list_datasets(""EN"M demographic")} to check available
 #' datasets.
 #'
 #' @examples
