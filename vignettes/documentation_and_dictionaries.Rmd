@@ -163,7 +163,7 @@ Datasets inside the geospatial module contain a summarized version of the census
 :::
 
 ```{r dictionary for MGNCNPV at municipalities}
-dict_mpio <- geospatial_dictionary("municipality")
+dict_mpio <- geospatial_dictionary("EN","municipality")
 head(dict_mpio)
 ```
 

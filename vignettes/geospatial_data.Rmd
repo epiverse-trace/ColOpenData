@@ -109,8 +109,7 @@ To understand which column contains the departments' codes and filter for Tolima
 :::
 
 ```{r dictionary for urban sections}
-dict <- geospatial_dictionary("municipality")
-
+dict <- geospatial_dictionary("EN", "municipality")
 head(dict)
 ```
 
