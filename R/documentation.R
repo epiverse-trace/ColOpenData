@@ -2,8 +2,11 @@
 #'
 #' @description
 #' Retrieve geospatial data dictionaries to understand internal tags and named
-#' columns. Dictionaries are only available in Spanish.
-#'
+#' columns. Dictionaries are available in English and Spanish.
+#' 
+#' 
+#' @param language language of the dictionary variables (\code{"EN"},
+#' \code{"ES"}. Default is \code{"ES"}.
 #' @param spatial_level character with the spatial level to be consulted:
 #' \itemize{
 #' \item \code{"DPTO"} or \code{"department"}: Department.
@@ -19,7 +22,7 @@
 #' }
 #'
 #' @examples
-#' dict <- geospatial_dictionary("setu")
+#' dict <- geospatial_dictionary("EN", "setu")
 #' head(dict)
 #'
 #' @return \code{data.frame} object with geospatial data dictionary.
@@ -64,6 +67,8 @@ get_climate_tags <- function() {
 #' List all available datasets by name, including group, source, year, level,
 #' category and description.
 #'
+#' @param language language of all variables (\code{"EN"}, \code{"ES"}.
+#' Default is \code{"ES"}.
 #' @param module character with module to be consulted (\code{"demographic"},
 #' \code{"geospatial"}, \code{"climate"}). Default is \code{"all"}.
 #'
@@ -125,6 +130,8 @@ list_datasets <- function(language = "ES", module = "all") {
 #'
 #' @param module character with module to be consulted (\code{"demographic"},
 #' \code{"geospatial"}, \code{"climate"}). Default is \code{"all"}.
+#' @param language language of the keywords (\code{"EN"}, \code{"ES"}. 
+#' Default is \code{"EN"}.
 #' @param keywords character or vector of characters to be look up in the
 #' description.
 #' @param logic A character string specifying the matching logic.
@@ -137,7 +144,7 @@ list_datasets <- function(language = "ES", module = "all") {
 #'  }
 #'
 #' @examples
-#' found <- look_up("demographic", c("sex", "age"), "and")
+#' found <- look_up("demographic", "EN", c("sex", "age"), "and")
 #' head(found)
 #'
 #' @return \code{data.frame} object with the available datasets.
