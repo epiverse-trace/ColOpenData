@@ -8,7 +8,8 @@
 #' present municipality or department level.
 #'
 #' @param demographic_dataset character with the demographic dataset name.
-#' Please use \code{list_datasets("demographic")} to check available datasets.
+#' Please use \code{list_datasets(""EN"M demographic")} to check available 
+#' datasets.
 #'
 #' @examples
 #' merged <- merge_geo_demographic("DANE_CNPVV_2018_9VD")
@@ -19,7 +20,7 @@
 merge_geo_demographic <- function(demographic_dataset) {
   checkmate::assert_character(demographic_dataset)
 
-  datasets <- list_datasets("demographic")
+  datasets <- list_datasets("EN", "demographic")
   selected_dataset <- datasets[datasets[["name"]] == demographic_dataset, ]
   if (nrow(selected_dataset) == 0) {
     stop("`demographic_dataset` cannot be found")

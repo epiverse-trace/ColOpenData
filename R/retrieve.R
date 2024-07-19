@@ -42,7 +42,7 @@ retrieve_path <- function(dataset) {
     population_projections = ".csv"
   )
   base_path <- retrieve_value_key("base_path")
-  all_datasets <- list_datasets()
+  all_datasets <- list_datasets("EN")
   dataset_info <- all_datasets[which(all_datasets[["name"]] == dataset), ]
   if (nrow(dataset_info) == 1) {
     group_path <- retrieve_value_key(dataset_info[["group"]])

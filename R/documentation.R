@@ -25,15 +25,17 @@
 #' @return \code{data.frame} object with geospatial data dictionary.
 #'
 #' @export
-geospatial_dictionary <- function(spatial_level) {
+geospatial_dictionary <- function(language="ES", spatial_level) {
   dataset <- retrieve_geospatial_name(spatial_level)
-  file <- sprintf("DICT_%s.rda", dataset)
-  path <- retrieve_dict_path(file)
+  file <- sprintf("DICT_%s", dataset)
+  path <- retrieve_dict_path("geospatial_dictionaries.rda")
   load(path)
-  obj_name <- ls()[ls() != "path"]
-  to_remove <- c("dataset", "file", "spatial_level")
+  obj_name <- ls()
+  to_remove <- c("path", "dataset", "file", "spatial_level", "language")
   final_name <- setdiff(obj_name, to_remove)
-  return(get(final_name))
+  object <- get(final_name)
+  specific <- object[[language]][[file]]
+  return(specific)
 }
 
 #' List climate (IDEAM) tags
@@ -66,27 +68,53 @@ get_climate_tags <- function() {
 #' \code{"geospatial"}, \code{"climate"}). Default is \code{"all"}.
 #'
 #' @examples
-#' list <- list_datasets("geospatial")
+#' list <- list_datasets("EN", "geospatial")
 #' head(list)
 #'
 #' @return \code{data.frame} object with the available datasets.
 #'
 #' @export
-list_datasets <- function(module = "all") {
+list_datasets <- function(language="ES", module = "all") {
   checkmate::assert_character(module)
+  checkmate::assert_character(language)
   checkmate::assert_choice(module, c(
     "all", "demographic", "geospatial",
     "climate", "population_projections"
   ))
-
-  base_path <- retrieve_value_key("base_path")
-  documentation_path <- retrieve_value_key("documentation")
-  documentation <- file.path(base_path, documentation_path)
-  listed <- retrieve_table(documentation)
-  if (module != "all") {
-    listed <- listed[listed[["group"]] == module, ]
+  checkmate::assert_choice(language, c(
+    "ES", "EN"
+  ))
+  path <- retrieve_dict_path("datasets_list.rda")
+  load(path)
+  all_objects <- ls()
+  obj_name <- setdiff(all_objects, 
+                      c("path", "module", "language"))
+  object <- get(obj_name)
+  
+  if (language=="ES"){
+    modules_trans <- list(
+      all = "todos",
+      demographic = "demografico",
+      geospatial = "geoespacial",
+      climate = "clima",
+      population_projections = "proyecciones_poblacionales"
+    )
+    module <- modules_trans[[module]]
+    file <- object$ES
+    if (module != "todos") {
+      file <- file[file[["grupo"]] == module, ]
+    }
   }
-  return(listed)
+  else if (language=="EN"){
+    file <- object$EN
+    if (module != "all") {
+      file <- file[file[["group"]] == module, ]
+    }
+  }
+  else {
+    stop("Invalid language parameter. Please provide 'ES' or 'EN'.")
+  }
+  return(file)
 }
 
 #' Filter list of available datasets based on keywords given by the user
@@ -115,7 +143,7 @@ list_datasets <- function(module = "all") {
 #' @return \code{data.frame} object with the available datasets.
 #'
 #' @export
-look_up <- function(module = "all", keywords, logic = "or") {
+look_up <- function(module = "all", language="EN", keywords, logic = "or") {
   checkmate::assert_character(module)
   checkmate::assert_character(keywords)
   checkmate::assert_character(logic)
@@ -123,24 +151,48 @@ look_up <- function(module = "all", keywords, logic = "or") {
     module,
     c("all", "demographic", "geospatial", "climate")
   )
-
-  listed <- list_datasets(module)
-  if (logic == "or") {
-    found <- listed[grep(paste(keywords, collapse = "|"),
-      listed[["description"]],
-      ignore.case = TRUE
-    ), ]
-  } else if (logic == "and") {
-    found <- listed[rowSums(sapply(keywords,
-      grepl,
-      listed[["description"]],
-      ignore.case = TRUE
-    )) == length(keywords), ]
-  } else {
-    stop("Invalid logic parameter. Please provide 'or' or 'and'.")
+  listed <- list_datasets(language, module)
+  if (language == "ES"){
+      if (logic == "or") {
+        found <- listed[grep(paste(keywords, collapse = "|"),
+                             listed[["descripcion"]],
+                             ignore.case = TRUE
+        ), ]
+      } else if (logic == "and") {
+        found <- listed[rowSums(sapply(keywords,
+                                       grepl,
+                                       listed[["descripcion"]],
+                                       ignore.case = TRUE
+        )) == length(keywords), ]
+      }
+      else {
+        stop("Invalid logic parameter. Please provide 'or' or 'and'.")
+      }
   }
+  
+  else if (language == "EN"){
+    if (logic == "or") {
+      found <- listed[grep(paste(keywords, collapse = "|"),
+                           listed[["description"]],
+                           ignore.case = TRUE
+      ), ]
+    } else if (logic == "and") {
+      found <- listed[rowSums(sapply(keywords,
+                                     grepl,
+                                     listed[["description"]],
+                                     ignore.case = TRUE
+      )) == length(keywords), ]
+    } else {
+      stop("Invalid logic parameter. Please provide 'or' or 'and'.")
+    }
+  }
+  else {
+    stop("Invalid language parameter. Please provide 'ES' or 'EN'.")
+  }
+
   if (nrow(found) == 0) {
     stop("Cannot find datasets with the consulted keywords")
   }
+  
   return(found)
 }
