@@ -105,7 +105,7 @@ For examples on how to consult the data please refer to [Population Projection w
 ## List Data
 
 ::: {style="text-align: justify;"}
-To check available datasets you can use the `list_datasets()` function. The asscoiated information can be presented both in English (EN) and Spanish (ES) with the `language` parameter. Default is `"ES"`, but can be `"EN"` as well. This function can also be filtered with the `module` parameter to indicate a specific module. Default is `"all"`, but can be filtered by `"demographic"`, `"geospatial"`, `"climate"` and `"population_projections"`.
+To check available datasets you can use the `list_datasets()` function. The associated information can be presented both in English (EN) and Spanish (ES) with the `language` parameter. Default is `"ES"`, but can be `"EN"` as well. This function can also be filtered with the `module` parameter to indicate a specific module. Default is `"all"`, but can be filtered by `"demographic"`, `"geospatial"`, `"climate"` and `"population_projections"`.
 :::
 
 ```{r setup}

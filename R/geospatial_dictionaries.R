@@ -1,4 +1,4 @@
-#' Dictionaries for geospatial datasets in english and spanish
+#' Dictionaries for geospatial datasets in English and Spanish
 #'
 #' @title geospatial_dictionaries
 #' @description dictionaries of variables presented in geospatial datasets
