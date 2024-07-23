@@ -11,9 +11,9 @@ An object of class \code{list} of length 2.
 data(datasets_list)
 }
 \description{
-list of datasets description in spanish and english
+list of datasets description in English and Spanish
 }
 \details{
-List containing both datasets description in spanish and english
+List containing both datasets description in English and Spanish
 }
 \keyword{datasets}

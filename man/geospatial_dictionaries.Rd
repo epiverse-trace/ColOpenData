@@ -14,6 +14,6 @@ data(geospatial_dictionaries)
 dictionaries of variables presented in geospatial datasets
 }
 \details{
-Dictionaries for geospatial datasets in english and spanish
+Dictionaries for geospatial datasets in English and Spanish
 }
 \keyword{datasets}
