@@ -20,7 +20,7 @@
 merge_geo_demographic <- function(demographic_dataset) {
   checkmate::assert_character(demographic_dataset)
 
-  datasets <- list_datasets("EN", "demographic")
+  datasets <- list_datasets("demographic", "EN")
   selected_dataset <- datasets[datasets[["name"]] == demographic_dataset, ]
   if (nrow(selected_dataset) == 0) {
     stop("`demographic_dataset` cannot be found")

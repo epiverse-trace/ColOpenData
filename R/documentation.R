@@ -155,7 +155,7 @@ look_up <- function(module = "all", language = "EN", keywords, logic = "or") {
     module,
     c("all", "demographic", "geospatial", "climate")
   )
-  listed <- list_datasets(language, module)
+  listed <- list_datasets(module, language)
   if (language == "ES") {
     if (logic == "or") {
       found <- listed[grep(paste(keywords, collapse = "|"),

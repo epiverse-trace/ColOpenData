@@ -103,7 +103,7 @@ retrieve_geospatial_name <- function(spatial_level) {
     )
     spatial_level <- levels_trans[[spatial_level]]
   }
-  all_datasets <- list_datasets("EN", "geospatial")
+  all_datasets <- list_datasets("geospatial", "EN")
   geo_dataset <- all_datasets %>%
     dplyr::filter(.data[["level"]] == spatial_level)
   dataset_name <- geo_dataset[["name"]]
