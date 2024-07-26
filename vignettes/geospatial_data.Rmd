@@ -105,11 +105,11 @@ tolima_code
 ```
 
 ::: {style="text-align: justify;"}
-To understand which column contains the departments' codes and filter for Tolima, we will need the corresponding dataset dictionary. To download the dictionary we can use the `geospatial_dictionary()` function. This function uses the dataset name to download the associated information. For further information please refer to the documentation on dictionaries previously mentioned.
+To understand which column contains the departments' codes and filter for Tolima, we will need the corresponding dataset dictionary. To download the dictionary we can use the `geospatial_dictionary()` function. This function uses as parameters the dataset name to download the associated information and language of this information. For further information please refer to the documentation on dictionaries previously mentioned.
 :::
 
 ```{r dictionary for urban sections}
-dict <- geospatial_dictionary("EN", "municipality")
+dict <- geospatial_dictionary("municipality", "EN")
 head(dict)
 ```
 

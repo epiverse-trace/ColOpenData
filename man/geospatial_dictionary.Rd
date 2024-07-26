@@ -4,12 +4,9 @@
 \alias{geospatial_dictionary}
 \title{Download data dictionaries}
 \usage{
-geospatial_dictionary(language = "ES", spatial_level)
+geospatial_dictionary(spatial_level, language = "ES")
 }
 \arguments{
-\item{language}{language of the dictionary variables (\code{"EN"},
-\code{"ES"}. Default is \code{"ES"}.}
-
 \item{spatial_level}{character with the spatial level to be consulted:
 \itemize{
 \item \code{"DPTO"} or \code{"department"}: Department.
@@ -23,6 +20,9 @@ class.
 \item \code{"ZU" } or \code{"urban_zone"}: Urban Zone.
 \item \code{"MZN"} or \code{"block"}: Block.
 }}
+
+\item{language}{language of the dictionary variables (\code{"EN"},
+\code{"ES"}. Default is \code{"ES"}.}
 }
 \value{
 \code{data.frame} object with geospatial data dictionary.

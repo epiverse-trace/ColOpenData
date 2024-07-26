@@ -46,7 +46,7 @@ download_pop_projections <- function(spatial_level, start_year, end_year,
             available at the level of municipality")
   }
 
-  all_datasets <- list_datasets("EN", "population_projections")
+  all_datasets <- list_datasets("population_projections", "EN")
   pp_datasets <- all_datasets %>%
     dplyr::filter(
       .data[["level"]] == spatial_level,

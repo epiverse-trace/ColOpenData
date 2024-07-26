@@ -1,27 +1,36 @@
 test_that("List datasets errors are thrown", {
   # Expect error when category does not exist
-  expect_error(list_datasets(language = "EN", module = "dem"))
+  expect_error(list_datasets(module = "dem", language = "EN"))
 
   # Expect error when language does not exist
-  expect_error(list_datasets(language = "FR", module = "demographic"))
+  expect_error(list_datasets(module = "demographic", language = "FR"))
 })
 
 test_that("List datasets works as expected", {
   # Expect specific dataset from a proper request
-  expect_snapshot(list_datasets(language = "EN", module = "geospatial"))
+  expect_snapshot(list_datasets(module = "geospatial", language = "EN"))
 })
 
 test_that("Dictionary errors are thrown", {
   # Expect error when spatial_level does not exist
-  expect_error(geospatial_dictionary("EN", "DANE_MGN_2018_MPIO"))
+  expect_error(geospatial_dictionary(
+    spatial_level = "DANE_MGN_2018_MPIO",
+    language = "EN"
+  ))
 
   # Expect error when language does not exist
-  expect_error(geospatial_dictionary("IT", "DANE_MGN_2018_MPIO"))
+  expect_error(geospatial_dictionary(
+    spatial_level = "DANE_MGN_2018_MPIO",
+    language = "IT"
+  ))
 })
 
 test_that("Dictionary works as expected", {
   # Expect specific dataset from a proper request
-  expect_snapshot(geospatial_dictionary("EN", "mpio"))
+  expect_snapshot(geospatial_dictionary(
+    spatial_level = "mpio",
+    language = "EN"
+  ))
 })
 
 test_that("Climate tags works as expected", {
