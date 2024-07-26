@@ -28,15 +28,12 @@
 #' @return \code{data.frame} object with geospatial data dictionary.
 #'
 #' @export
-geospatial_dictionary <- function(language = "ES", spatial_level) {
+geospatial_dictionary <- function(spatial_level, language = "ES") {
   dataset <- retrieve_geospatial_name(spatial_level)
   file <- sprintf("DICT_%s", dataset)
   path <- retrieve_dict_path("geospatial_dictionaries.rda")
   load(path)
-  obj_name <- ls()
-  to_remove <- c("path", "dataset", "file", "spatial_level", "language")
-  final_name <- setdiff(obj_name, to_remove)
-  object <- get(final_name)
+  object <- get("geospatial_dictionaries")
   specific <- object[[language]][[file]]
   return(specific)
 }
@@ -57,7 +54,7 @@ geospatial_dictionary <- function(language = "ES", spatial_level) {
 get_climate_tags <- function() {
   path <- retrieve_dict_path("climate_tags.rda")
   load(path)
-  obj_name <- ls()[ls() != "path"]
+  obj_name <- "climate_tags"
   return(get(obj_name))
 }
 
@@ -79,7 +76,7 @@ get_climate_tags <- function() {
 #' @return \code{data.frame} object with the available datasets.
 #'
 #' @export
-list_datasets <- function(language = "ES", module = "all") {
+list_datasets <- function(module = "all", language = "ES") {
   checkmate::assert_character(module)
   checkmate::assert_character(language)
   checkmate::assert_choice(module, c(
