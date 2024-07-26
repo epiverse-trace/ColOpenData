@@ -20,7 +20,7 @@
 #' }
 #' @param language language of the dictionary variables (\code{"EN"},
 #' \code{"ES"}. Default is \code{"ES"}.
-#' 
+#'
 #' @examples
 #' dict <- geospatial_dictionary("EN", "setu")
 #' head(dict)
