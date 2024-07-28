@@ -29,13 +29,17 @@
 #'
 #' @export
 geospatial_dictionary <- function(spatial_level, language = "ES") {
+  checkmate::assert_character(spatial_level)
+  checkmate::assert_character(language)
+  checkmate::assert_choice(language, c(
+    "ES", "EN"
+  ))
   dataset <- retrieve_geospatial_name(spatial_level)
-  file <- sprintf("DICT_%s", dataset)
+  dict_level <- sprintf("DICT_%s", dataset)
   path <- retrieve_dict_path("geospatial_dictionaries.rda")
   load(path)
-  object <- get("geospatial_dictionaries")
-  specific <- object[[language]][[file]]
-  return(specific)
+  geo_dictionary <- geospatial_dictionaries[[language]][[dict_level]]
+  return(geo_dictionary)
 }
 
 #' List climate (IDEAM) tags
@@ -43,19 +47,29 @@ geospatial_dictionary <- function(spatial_level, language = "ES") {
 #' @description
 #' Retrieve available climate tags to be consulted. The list is only available
 #' in Spanish.
+#' 
+#' @param language language of the tags (\code{"EN"}, \code{"ES"}. Default is 
+#' \code{"ES"}.
 #'
 #' @examples
-#' dict <- get_climate_tags()
+#' dict <- get_climate_tags(language = "ES")
 #' head(dict)
 #'
 #' @return \code{data.frame} object with available tags.
 #'
 #' @export
-get_climate_tags <- function() {
+get_climate_tags <- function(language = "ES") {
+  checkmate::assert_character(language)
+  checkmate::assert_choice(language, c(
+    "ES", "EN"
+  ))
+  if (!(language %in% c("ES", "EN"))) {
+    stop("Invalid language parameter. Please provide 'ES' or 'EN'.")
+  }
   path <- retrieve_dict_path("climate_tags.rda")
   load(path)
-  obj_name <- "climate_tags"
-  return(get(obj_name))
+  tags <- climate_tags[[language]]
+  return(tags)
 }
 
 #' Download list of available datasets
