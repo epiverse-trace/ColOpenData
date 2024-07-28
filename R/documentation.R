@@ -22,7 +22,7 @@
 #' \code{"ES"}. Default is \code{"ES"}.
 #'
 #' @examples
-#' dict <- geospatial_dictionary("EN", "setu")
+#' dict <- geospatial_dictionary("setu", "EN")
 #' head(dict)
 #'
 #' @return \code{data.frame} object with geospatial data dictionary.
@@ -70,7 +70,7 @@ get_climate_tags <- function() {
 #' Default is \code{"ES"}.
 #'
 #' @examples
-#' list <- list_datasets("EN", "geospatial")
+#' list <- list_datasets("geospatial", "EN")
 #' head(list)
 #'
 #' @return \code{data.frame} object with the available datasets.
