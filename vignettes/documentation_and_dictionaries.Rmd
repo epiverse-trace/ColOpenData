@@ -170,7 +170,7 @@ head(dict_mpio)
 ## Climate tags
 
 ::: {style="text-align: justify;"}
-Climate data is not stored in multiple datasets but as an unique dataset with numerous tags. These tags can also be consulted through the function `get_climate_tags()`.
+Climate data is not stored in multiple datasets but as an unique dataset with numerous tags. These tags can also be consulted through the function `get_climate_tags()`, which takes by parameter the tags language, that can be `"EN"` or `"ES"` (default is `"ES"`).
 :::
 
 ```{r dicionary for climate data}

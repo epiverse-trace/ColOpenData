@@ -39,7 +39,7 @@
 # Climate tags works as expected
 
     Code
-      get_climate_tags()
+      get_climate_tags(language = "ES")
     Output
            etiqueta                                   variable
       1    TSSM_CON                Temperatura seca (ambiente)
@@ -69,7 +69,7 @@
       4                                   Diaria
       5                       Horaria (24 horas)
       6  Horaria (07:00, 13:00, 18:00 y/o 19:00)
-      7                        Horaria (24 horas
+      7                       Horaria (24 horas)
       8  Horaria (07:00, 13:00, 18:00 y/o 19:00)
       9  Horaria (07:00, 13:00, 18:00 y/o 19:00)
       10                                  Diaria

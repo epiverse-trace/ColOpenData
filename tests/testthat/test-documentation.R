@@ -35,12 +35,12 @@ test_that("Dictionary works as expected", {
 
 test_that("Climate tags errors are thrown", {
   # Expect error when language does not exist
-  expect_error(get_climate_tags(language="DE"))
+  expect_error(get_climate_tags(language = "DE"))
 })
 
 test_that("Climate tags works as expected", {
-  # Expect specific dataset from a proper request 
-  expect_snapshot(get_climate_tags(language="ES"))
+  # Expect specific dataset from a proper request
+  expect_snapshot(get_climate_tags(language = "ES"))
 })
 
 test_that("Lookup errors are thrown", {

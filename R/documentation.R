@@ -47,8 +47,8 @@ geospatial_dictionary <- function(spatial_level, language = "ES") {
 #' @description
 #' Retrieve available climate tags to be consulted. The list is only available
 #' in Spanish.
-#' 
-#' @param language language of the tags (\code{"EN"}, \code{"ES"}. Default is 
+#'
+#' @param language language of the tags (\code{"EN"}, \code{"ES"}. Default is
 #' \code{"ES"}.
 #'
 #' @examples
