@@ -32,7 +32,7 @@ Retrieve geospatial data dictionaries to understand internal tags and named
 columns. Dictionaries are available in English and Spanish.
 }
 \examples{
-dict <- geospatial_dictionary("EN", "setu")
+dict <- geospatial_dictionary("setu", "EN")
 head(dict)
 
 }

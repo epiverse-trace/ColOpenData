@@ -21,7 +21,7 @@ List all available datasets by name, including group, source, year, level,
 category and description.
 }
 \examples{
-list <- list_datasets("EN", "geospatial")
+list <- list_datasets("geospatial", "EN")
 head(list)
 
 }
