@@ -1,7 +1,7 @@
 # List datasets works as expected
 
     Code
-      list_datasets(language = "EN", module = "geospatial")
+      list_datasets(module = "geospatial", language = "EN")
     Output
       # A tibble: 9 x 7
         name                 group      source year  level        category description
@@ -19,7 +19,7 @@
 # Dictionary works as expected
 
     Code
-      geospatial_dictionary("EN", "mpio")
+      geospatial_dictionary(spatial_level = "mpio", language = "EN")
     Output
       # A tibble: 88 x 4
          variable                 type         length description                     
