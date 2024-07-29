@@ -43,25 +43,25 @@
     Output
            etiqueta                                   variable
       1    TSSM_CON                Temperatura seca (ambiente)
-      2    THSM_CON                         Temperatura húmeda
-      3     TMN_CON                         Temperatura mínima
-      4     TMX_CON                         Temperatura máxima
-      5    TSTG_CON Temperatura seca (ambiente) del termógrafo
+      2    THSM_CON                         Temperatura humeda
+      3     TMN_CON                         Temperatura minima
+      4     TMX_CON                         Temperatura maxima
+      5    TSTG_CON Temperatura seca (ambiente) del termografo
       6      HR_CAL                           Humedad relativa
-      7    HRHG_CON            Humedad relativa del hidrógrafo
-      8      TV_CAL                           Tensión de vapor
-      9     TPR_CAL                             Punto de rocío
-      10   PTPM_CON                              Precipitación
-      11   PTPG_CON                              Precipitación
-      12   EVTE_CON                                Evaporación
-      13     FA_CON                       Fenómeno atmosférico
+      7    HRHG_CON            Humedad relativa del hidrografo
+      8      TV_CAL                           Tension de vapor
+      9     TPR_CAL                             Punto de rocio
+      10   PTPM_CON                              Precipitacion
+      11   PTPG_CON                              Precipitacion
+      12   EVTE_CON                                Evaporacion
+      13     FA_CON                       Fenomeno atmosferico
       14     NB_CON                                  Nubosidad
       15   RCAM_CON                       Recorrido del viento
       16   BSHG_CON                               Brillo solar
       17   VVAG_CON                       Velocidad del viento
-      18   DVAG_CON                       Dirección del viento
-      19 VVMXAG_CON                Velocidad máxima del viento
-      20 DVMXAG_CON                Dirección máxima del viento
+      18   DVAG_CON                       Direccion del viento
+      19 VVMXAG_CON                Velocidad maxima del viento
+      20 DVMXAG_CON                Direccion maxima del viento
                                       frecuencia
       1  Horaria (07:00, 13:00, 18:00 y/o 19:00)
       2  Horaria (07:00, 13:00, 18:00 y/o 19:00)
