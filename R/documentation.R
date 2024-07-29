@@ -38,6 +38,7 @@ geospatial_dictionary <- function(spatial_level, language = "ES") {
   dict_level <- sprintf("DICT_%s", dataset)
   path <- retrieve_dict_path("geospatial_dictionaries.rda")
   load(path)
+  geospatial_dictionaries <- get("geospatial_dictionaries")
   geo_dictionary <- geospatial_dictionaries[[language]][[dict_level]]
   return(geo_dictionary)
 }
@@ -68,6 +69,7 @@ get_climate_tags <- function(language = "ES") {
   }
   path <- retrieve_dict_path("climate_tags.rda")
   load(path)
+  climate_tags <- get("climate_tags")
   tags <- climate_tags[[language]]
   return(tags)
 }
@@ -102,6 +104,7 @@ list_datasets <- function(module = "all", language = "ES") {
   ))
   path <- retrieve_dict_path("datasets_list.rda")
   load(path)
+  datasets_list <- get("datasets_list")
   all_objects <- ls()
   obj_name <- setdiff(
     all_objects,
