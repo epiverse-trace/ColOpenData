@@ -161,46 +161,42 @@ look_up <- function(keywords, module = "all", logic = "or", language = "EN") {
   )
   checkmate::assert_choice(logic, c("or", "and"))
   checkmate::assert_choice(language, c("ES", "EN"))
-  listed <- list_datasets(module, language)
+  ds <- list_datasets(module, language)
   if (language == "ES") {
     if (logic == "or") {
-      found <- listed[grep(paste(keywords, collapse = "|"),
-        listed[["descripcion"]],
+      found <- ds[grep(paste(keywords, collapse = "|"),
+        ds[["descripcion"]],
         ignore.case = TRUE
       ), ]
     } else if (logic == "and") {
-      found <- listed[
-        rowSums(vapply(
-          keywords,
-          function(keyword) {
-            grepl(keyword,
-              listed[["descripcion"]],
-              ignore.case = TRUE
-            )
-          },
-          logical(nrow(listed))
-        )) == length(keywords),
-      ]
+      found <- ds[rowSums(vapply(
+        keywords,
+        function(keyword) {
+          grepl(keyword,
+            ds[["descripcion"]],
+            ignore.case = TRUE
+          )
+        },
+        logical(nrow(ds))
+      )) == length(keywords), ]
     }
   } else if (language == "EN") {
     if (logic == "or") {
-      found <- listed[grep(paste(keywords, collapse = "|"),
-        listed[["description"]],
+      found <- ds[grep(paste(keywords, collapse = "|"),
+        ds[["description"]],
         ignore.case = TRUE
       ), ]
     } else if (logic == "and") {
-      found <- listed[
-        rowSums(vapply(
-          keywords,
-          function(keyword) {
-            grepl(keyword,
-              listed[["description"]],
-              ignore.case = TRUE
-            )
-          },
-          logical(nrow(listed))
-        )) == length(keywords),
-      ]
+      found <- ds[rowSums(vapply(
+        keywords,
+        function(keyword) {
+          grepl(keyword,
+            ds[["description"]],
+            ignore.case = TRUE
+          )
+        },
+        logical(nrow(ds))
+      )) == length(keywords), ]
     }
   }
   if (nrow(found) == 0) {
