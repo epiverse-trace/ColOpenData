@@ -5,7 +5,6 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="ColOpenData is a package that acquires and wrangles Colombian socioeconomic, geospatial, population and climate data. It solves the problem of Colombian data being issued in different web pages and sources by using functions that allow the user to select the desired database and download it without having to do the exhausting acquisition process.">
 <title>Colombian Open Data Download and Wrangling • ColOpenData</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -13,17 +12,15 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
-<script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="lightswitch.js"></script><script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Colombian Open Data Download and Wrangling">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Colombian Open Data Download and Wrangling">
+<meta name="description" content="ColOpenData is a package that acquires and wrangles Colombian socioeconomic, geospatial, population and climate data. It solves the problem of Colombian data being issued in different web pages and sources by using functions that allow the user to select the desired database and download it without having to do the exhausting acquisition process.">
 <meta property="og:description" content="ColOpenData is a package that acquires and wrangles Colombian socioeconomic, geospatial, population and climate data. It solves the problem of Colombian data being issued in different web pages and sources by using functions that allow the user to select the desired database and download it without having to do the exhausting acquisition process.">
 <meta property="og:image" content="https://epiverse-trace.github.io/ColOpenData/logo.svg">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]--><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-XZ471458FQ"></script><script>
+<!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-XZ471458FQ"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -33,59 +30,58 @@
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
 
-    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-dark" data-bs-theme="dark"><div class="container">
+
+    <nav class="navbar navbar-expand-lg fixed-top " aria-label="Site navigation"><div class="container">
     <a href="https://epiverse-trace.github.io/" class="external-link"><img src="https://epiverse-trace.github.io/blueprints/logo_white.svg" id="logo" alt="Epiverse-TRACE"></a>
     <a class="navbar-brand me-2" href="index.html">ColOpenData</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="reference/index.html">Reference</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <h6 class="dropdown-header" data-toc-skip>Documentation and Dictionaries</h6>
-    <a class="dropdown-item" href="articles/documentation_and_dictionaries.html">Documentation and Dictionaries</a>
-    <div class="dropdown-divider"></div>
-    <h6 class="dropdown-header" data-toc-skip>Download data</h6>
-    <a class="dropdown-item" href="articles/demographic_data.html">A Deep Dive into Colombian Demographics Using ColOpenData</a>
-    <a class="dropdown-item" href="articles/geospatial_data.html">Maps and plots with ColOpenData</a>
-    <a class="dropdown-item" href="articles/climate_data.html">How to download climate data using ColOpenData</a>
-    <a class="dropdown-item" href="articles/population_projections.html">Population Projections with ColOpenData</a>
-    <div class="dropdown-divider"></div>
-    <h6 class="dropdown-header" data-toc-skip>Merge data</h6>
-    <a class="dropdown-item" href="articles/merge_geo_demographic.html">Integration of Geospatial and Demographic data</a>
-  </div>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Documentation and Dictionaries</h6></li>
+    <li><a class="dropdown-item" href="articles/documentation_and_dictionaries.html">Documentation and Dictionaries</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Download data</h6></li>
+    <li><a class="dropdown-item" href="articles/demographic_data.html">A Deep Dive into Colombian Demographics Using ColOpenData</a></li>
+    <li><a class="dropdown-item" href="articles/geospatial_data.html">Maps and plots with ColOpenData</a></li>
+    <li><a class="dropdown-item" href="articles/climate_data.html">How to download climate data using ColOpenData</a></li>
+    <li><a class="dropdown-item" href="articles/population_projections.html">Population Projections with ColOpenData</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Merge data</h6></li>
+    <li><a class="dropdown-item" href="articles/merge_geo_demographic.html">Integration of Geospatial and Demographic data</a></li>
+  </ul>
 </li>
-<li class="nav-item">
-  <a class="nav-link" href="news/index.html">Changelog</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/epiverse-trace/ColOpenData/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/epiverse-trace/ColOpenData/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-lightswitch" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Light switch"><span class="fa fa-sun"></span></button>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-lightswitch">
+<li><button class="dropdown-item" data-bs-theme-value="light"><span class="fa fa-sun"></span> Light</button></li>
+    <li><button class="dropdown-item" data-bs-theme-value="dark"><span class="fa fa-moon"></span> Dark</button></li>
+    <li><button class="dropdown-item" data-bs-theme-value="auto"><span class="fa fa-adjust"></span> Auto</button></li>
+  </ul>
 </li>
       </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-home">
 <div class="row">
@@ -96,7 +92,8 @@
 </div>
 <!-- badges: start -->
 
-<p><strong>ColOpenData</strong> is a package designed to access curated and wrangled Colombian demographic, geospatial and climate data, retrieved from various open Colombian data sources. The package addresses the challenge of scattered Colombian data across multiple web sources by providing functions that enable users to select and load desired datasets without the need for extensive data acquisition processes. Additionally, the tidy data structure offered for demographic and climate data facilitates analysis and visualization.</p>
+<!-- badges: end -->
+<p><strong>ColOpenData</strong> is a package designed to access curated and wrangled Colombian demographic, geospatial, climate and population projections data, retrieved from various open Colombian data sources. The package addresses the challenge of scattered Colombian data across multiple web sources by providing functions that enable users to select and load desired datasets without the need for extensive data acquisition processes. Additionally, the tidy data structure offered for demographic and climate data facilitates analysis and visualization.</p>
 <p>ColOpenData is developed at <a href="https://uniandes.edu.co/" class="external-link">Universidad de Los Andes</a> as part of the <a href="https://data.org/initiatives/epiverse/" class="external-link">Epiverse-TRACE program</a>.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -111,10 +108,10 @@
 </h2>
 <p><strong>ColOpenData</strong> contains data from two public data sources: The National Administrative Department of Statistics <a href="https://www.dane.gov.co/index.php/en/" class="external-link">(DANE)</a>, and the Institute of Hydrology, Meteorology and Environmental Studies <a href="http://www.ideam.gov.co/" class="external-link">(IDEAM)</a>. The available data is divided in four categories:</p>
 <ul>
-<li><p><strong>Demographic:</strong> Demographic and Socioeconomic data presents information from the National Population and Dwelling Census (CNPV) of 2018. The CNPV data corresponds to the most recent census available to date and the information is presented as an answer to three questions: How many are we?, Where are we? and How do we live? Further information can be consulted <a href="https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/censo-nacional-de-poblacion-y-vivenda-2018" class="external-link">here</a>.</p></li>
-<li><p><strong>Geospatial:</strong> This data is retrieved from the National Geostatistical Framework (MGN), which includes maps and a summarized version of the 2018 census, aggregated to spatial geometries. The data is available at different aggregation levels including: Blocks, Urban and Rural Sections, Urban and Rural Sectors, Urban Areas, Municipalities and Departments. More information is available <a href="https://www.dane.gov.co/index.php/actualidad-dane/5454-el-dane-actualizo-el-marco-geoestadistico-nacional-a-2018" class="external-link">here</a>.</p></li>
-<li><p><strong>Climate:</strong> Climate data is recovered from backup information provided by IDEAM, containing historical data from the first station in the country until May 31st 2023. This backup includes temperature, precipitation, sunshine duration, wind direction, among others. More information can be found <a href="http://www.ideam.gov.co/" class="external-link">here</a>.</p></li>
-<li><p><strong>Population projections:</strong> Population Projections data contains the population projections and back projections from 1950 to 2070, considering the post COVID-19 update, which was calculated based on the results of CNPV of 2018. Further information can be consulted <a href="https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/proyecciones-de-poblacion" class="external-link">here</a>.</p></li>
+<li><p><strong>Demographic:</strong> Demographic and Socioeconomic data presents information from the National Population and Dwelling Census (CNPV) of 2018. The CNPV data corresponds to the most recent census available to date and the information is presented as an answer to three questions: How many are we?, Where are we? and How do we live? Further information can be consulted at the <a href="https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/censo-nacional-de-poblacion-y-vivenda-2018" class="external-link">CNPV results</a>.</p></li>
+<li><p><strong>Geospatial:</strong> This data is retrieved from the National Geostatistical Framework (MGN), which includes maps and a summarized version of the 2018 CNPV, aggregated to spatial geometries. The data is available at different aggregation levels including: Blocks, Urban and Rural Sections, Urban and Rural Sectors, Urban Areas, Municipalities and Departments. More information is available at <a href="https://www.dane.gov.co/index.php/actualidad-dane/5454-el-dane-actualizo-el-marco-geoestadistico-nacional-a-2018" class="external-link">MGN update news</a>.</p></li>
+<li><p><strong>Climate:</strong> Climate data is recovered from backup information provided by IDEAM, containing historical data from the first station in the country (January 1st 1920) until May 31st 2023. This backup includes temperature, precipitation, sunshine duration, wind direction, among others. More information can be found at <a href="http://www.ideam.gov.co/" class="external-link">IDEAM website</a>.</p></li>
+<li><p><strong>Population projections:</strong> Population Projections data contains the population projections and back projections from 1950 to 2070, considering the post COVID-19 update, which was calculated based on the results of 2018 CNPV. Further information can be consulted at <a href="https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/proyecciones-de-poblacion" class="external-link">DANE website</a>.</p></li>
 </ul>
 <p>Documentation and vignettes are available for the modules in the <a href="https://epiverse-trace.github.io/ColOpenData/">user vignettes</a>.</p>
 <div class="section level3">
@@ -126,6 +123,14 @@
 <a href="https://mountainmath.github.io/cancensus/" class="external-link">cancensus</a>: Canada</li>
 <li>
 <a href="https://ipeagit.github.io/censobr/" class="external-link">censobr</a>: Brazil</li>
+<li>
+<a href="https://github.com/pachadotdev/chilemapas/" class="external-link">chilemapas</a>: Chile</li>
+<li>
+<a href="https://ipeagit.github.io/geobr/" class="external-link">geobr</a> : Brazil</li>
+<li>
+<a href="https://github.com/PoliticaArgentina/geoAr" class="external-link">georAr</a>: Argentina</li>
+<li>
+<a href="https://github.com/RichDeto/geouy" class="external-link">geouy</a>: Uruguay</li>
 <li>
 <a href="https://walker-data.com/tidycensus/" class="external-link">tidycensus</a>: US</li>
 <li>
@@ -192,10 +197,8 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>M. Camila Tavera-Cifuentes <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0009-0007-1610-4583" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Maria Camila Tavera-Cifuentes <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0009-0007-1610-4583" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Julian Otero <br><small class="roles"> Author </small> <a href="https://orcid.org/0009-0006-0429-7747" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Juan D. Umana <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-0316-6164" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Juan Montenegro-Torres <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-2755-4743" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
@@ -216,19 +219,19 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by M. Camila Tavera-Cifuentes, Julian Otero, Juan D. Umana, Juan Montenegro-Torres.</p>
+  <p>Developed by Maria Camila Tavera-Cifuentes, Julian Otero.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
     </footer>
 </div>
 
-  
 
-  
+
+
 
   </body>
 </html>
