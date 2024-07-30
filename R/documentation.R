@@ -169,8 +169,7 @@ look_up <- function(keywords, module = "all", logic = "or", language = "EN") {
         ignore.case = TRUE
       ), ]
     } else if (logic == "and") {
-      found <- ds[rowSums(vapply(
-        keywords, function(keyword) {
+      found <- ds[rowSums(vapply(keywords, function(keyword) {
           grepl(keyword, ds[["descripcion"]], ignore.case = TRUE)
         },
         logical(nrow(ds))
@@ -183,8 +182,7 @@ look_up <- function(keywords, module = "all", logic = "or", language = "EN") {
         ignore.case = TRUE
       ), ]
     } else if (logic == "and") {
-      found <- ds[rowSums(vapply(
-        keywords, function(keyword) {
+      found <- ds[rowSums(vapply(keywords, function(keyword) {
           grepl(keyword, ds[["description"]], ignore.case = TRUE)
         },
         logical(nrow(ds))
