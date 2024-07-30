@@ -98,13 +98,7 @@ list_datasets <- function(module = "all", language = "ES") {
   path <- retrieve_dict_path("datasets_list.rda")
   load(path)
   datasets_list <- get("datasets_list")
-  all_objects <- ls()
-  obj_name <- setdiff(
-    all_objects,
-    c("path", "module", "language")
-  )
-  object <- get(obj_name)
-
+  object <- get(datasets_list)
   if (language == "ES") {
     modules_trans <- list(
       all = "todos",
