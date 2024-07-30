@@ -1,0 +1,279 @@
+---
+title: "How to download climate data using ColOpenData?"
+output: 
+  rmarkdown::html_vignette:
+    df_print: tibble
+vignette: >
+  %\VignetteIndexEntry{How to download climate data using ColOpenData?}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+::: {style="text-align: justify;"}
+**{ColOpenData}** can be used to access open climate data from Colombia. This climate data is retrieved from the Institute of Hydrology, Meteorology and Environmental Studies [(IDEAM)](http://www.ideam.gov.co/). The climate module allows the user to consult climate data for any Region of Interest (ROI) inside the country and retrieve the information for each station contained inside.
+
+The available information from IDEAM can be accessed using specific internal tags as follows:
+:::
+
+```{r IDEAM table, echo = FALSE}
+tags <- c(
+  "TSSM_CON", "THSM_CON", "TMN_CON", "TMX_CON", "TSTG_CON", "HR_CAL",
+  "HRHG_CON", "TV_CAL", "TPR_CAL", "PTPM_CON", "PTPG_CON", "EVTE_CON",
+  "FA_CON", "NB_CON", "RCAM_CON", "BSHG_CON", "VVAG_CON", "DVAG_CON",
+  "VVMXAG_CON", "DVMXAG_CON"
+)
+variable <- c(
+  "Dry-bulb Temperature", "Wet-bulb Temperature",
+  "Minimum Temperature", "Maximum Temperature",
+  "Dry-bulb Temperature (Termograph)", "Relative Humidity",
+  "Relative Humidity (Hydrograph)", "Vapour Pressure", "Dew Point",
+  "Precipitation (Daily)", "Precipitation (Hourly)", "Evaporation",
+  "Atmospheric Phenomenon", "Cloudiness", "Wind Trajectory",
+  "Sunshine Duration", "Wind Speed", "Wind Direction",
+  "Maximum Wind Speed", "Maximum Wind Direction"
+)
+
+IDEAM_tags <- data.frame(
+  Tags = tags, Variable = variable,
+  stringsAsFactors = FALSE
+)
+knitr::kable(IDEAM_tags)
+```
+
+::: {style="text-align: justify;"}
+Each observation is subject to the availability of stations in the ROI and the stations' status (active, maintenance or suspended), as well as quality filters implemented by IDEAM.
+
+In this vignette you will learn how to use **{ColOpenData}** to:
+1. Download climate data from:
+  - previously selected stations using the `download_climate_stations()` function,
+  - a specified geometry (ROI) using the `download_climate_geom()` function,
+  - municipalities' or departments' already loaded geometries using the `download_climate()` function.
+2. Aggregate climate data by different frequencies
+3. Plot downloaded climate data
+
+The example below will show how to download Maximum Temperature data (TMX_CON) between 2013 and 2016 from  the municipality of Manizales in Colombia. This data will highlight the increase in temperatures observed during 2015 and 2016 due to the impact of El Nino (ENSO).
+
+The following packages are needed to run the example.
+:::
+
+```{r library imports, results = "hide", warning = FALSE, message = FALSE}
+library(ColOpenData)
+library(dplyr)
+library(sf)
+library(leaflet)
+library(ggplot2)
+```
+
+::: {style="text-align: justify;"}
+**Disclaimer: all data is loaded to the environment in the user's R session, but is not downloaded to user's computer.**
+:::
+
+## Retrieving climate data for a ROI using stations' data
+
+::: {style="text-align: justify;"}
+We will need to create a spatial polygon around the municipality of Manizales and use that as our ROI to retrieve the climate data. The GPS coordinates of the geometry are needed to create the spatial polygon. For simplicity, we will build a bounding box with the four points which bound the municipality, and transform the created geometry into an `sf` object (see [**sf**](https://r-spatial.github.io/sf/articles/sf1.html) library for further details).
+:::
+
+```{r polygon creation}
+lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)
+lon <- c(-75.678072, -75.327859, -75.327859, -75.678072, -75.678072)
+
+polygon <- st_polygon(x = list(cbind(lon, lat))) %>% st_sfc()
+
+roi <- st_as_sf(polygon)
+```
+
+With our created ROI, we can make a simple visualization using `leaflet()` from the {leaflet} package.
+
+```{r polygon plot}
+leaflet(roi) %>%
+  addProviderTiles("OpenStreetMap") %>%
+  addPolygons(
+    stroke = TRUE,
+    weight = 2,
+    color = "#2e6930",
+    fillColor = "#2e6930",
+    opacity = 0.6
+  )
+```
+
+::: {style="text-align: justify;"}
+We can make a first exploration to check if there are any stations contained inside of it, using the function `stations_in_roi()`
+:::
+
+```{r stations in roi}
+stations <- stations_in_roi(roi)
+
+head(stations)
+```
+
+::: {style="text-align: justify;"}
+We can see that there are 129 stations in the region. Different categories are recorded by different stations, and can be checked at the column [categoria]{.underline}. To understand the category of each station we can use the definition catalog provided by IDEAM [here](http://www.ideam.gov.co/documents/10182/557765/Definiciones+CNE.pdf/25e1cca5-ee47-4eaf-86c0-c4f5192a9937). Stations under the categories *Climática Principal* and *Climática Ordinaria* have records of temperature.
+
+Some stations are suspended, which means they are not taking measurements at the moment. This information is found at the column [estado]{.underline} where, if suspended, the observation would be *Suspendida*. Also, at the column [fecha_suspension]{.underline} the observation would be different from `NA`, since suspended stations would have an associated suspension date. However, even if a station is suspended, the historical data (up to the suspension date) can be accessed.
+
+To filter the stations that recorded information during the desired period, we can delete the stations with suspension dates before 2013.
+:::
+
+```{r stations filtered}
+cw_stations <- stations %>%
+  filter(
+    as.Date(fecha_suspension) > as.Date("2013-01-01") | estado == "Activa",
+    categoria %in% c("Climática Principal", "Climática Ordinaria")
+  )
+
+head(cw_stations)
+```
+
+::: {style="text-align: justify;"}
+From the original 129 stations, 40 were working for some or the whole period of interest and collected information for Dry-bulb Temperature (TSSM_CON). It is important to consider that after data collection, some information might be lost due to quality attributes.
+
+With the stations, we can access TMX_CON from 2013 to 2016. To do so, we can use the function `download_climate_stations()`. This function has the following parameters:
+
+-   `stations`: `data.frame` containing the stations' codes. This `data.frame` must be retrieved from the function `stations_in_roi`.
+-   `start_date`: character with the first date to consult in the format `"YYYY-MM-DD"`.
+-   `end_date`: character with the last date to consult in the format `"YYYY-MM_DD"`. (Last available date is `"2023-05-31"`).
+-   `tag`: character containing climate tag to consult.
+:::
+
+```{r download climate stations}
+max_temperature_stations <- download_climate_stations(
+  stations = cw_stations,
+  start_date = "2013-01-01",
+  end_date = "2016-12-31",
+  tag = "TMX_CON"
+)
+
+head(max_temperature_stations)
+```
+
+::: {style="text-align: justify;"}
+The returned tidy `data.frame` includes: individual and unique station code, longitude, latitude, date, hour, tag requested and value recorded at the specified time. The tidy structure reports a row for each observation, which makes the subset and plot easier.
+
+To plot a time series of the stations' data we can use `{ggplot2}` as follows:
+:::
+
+```{r plot temperatures stations}
+ggplot(data = max_temperature_stations) +
+  geom_line(aes(x = date, y = value, group = station), color = "#106ba0") +
+  ggtitle("Max Temperature in Manizales by station") +
+  xlab("Date") +
+  ylab("Temperature [°C]") +
+  theme_minimal() +
+  facet_grid(rows = vars(station))
+```
+
+::: {style="text-align: justify;"}
+As we can see, only two stations have data for the selected period, and we have missing information in some periods. Additionally, by having the data daily we cannot easily see big changes over time. To increase the resolution of the plot, we will use the aggregation function `aggregate_climate`, which aggregates climate data by time. This function aggregates the parameter of interest based on the chosen period.
+:::
+
+```{r}
+max_temperature_month <- max_temperature_stations %>% aggregate_climate("month")
+
+ggplot(data = max_temperature_month) +
+  geom_line(aes(x = date, y = value, group = station), color = "#106ba0") +
+  ggtitle("Dry-bulb Temperature") +
+  xlab("Date") +
+  ylab("Dry-bulb temperature [C]") +
+  theme_minimal() +
+  facet_grid(rows = vars(station))
+```
+
+## Retrieving climate data for a ROI
+
+::: {style="text-align: justify;"}
+To retrieve climate data for any ROI in the country, without manually extracting the stations' data, we can use the function `download_climate_geom`. The function has the following parameters:
+
+-   `geometry`: `sf` geometry containing the geometry for a given ROI. This geometry can be either a `POLYGON` or `MULTIPOLYGON`.
+-   `start_date`: character with the first date to consult in the format `"YYYY-MM-DD"`.
+-   `end_date`: character with the last date to consult in the format `"YYYY-MM_DD"`. (Last available date is `"2023-05-31"`).
+-   `tag`: character containing climate tag to consult.
+
+We will use the same ROI created for the previous example, and add the aggregation for month. We can add the aggregation function to the workflow using the pipe operator `%>%`.
+:::
+
+```{r download climate data, results = "hide", warning = FALSE, message = FALSE}
+max_temperature_roi <- download_climate_geom(
+  geometry = roi,
+  start_date = "2013-01-01",
+  end_date = "2016-12-31",
+  tag = "TMX_CON"
+) %>% aggregate_climate("month")
+```
+
+```{r plot temperatures roi}
+ggplot(data = max_temperature_roi) +
+  geom_line(aes(x = date, y = value, group = station), color = "#106ba0") +
+  ggtitle("Dry-bulb Temperature") +
+  xlab("Date") +
+  ylab("Dry-bulb temperature [C]") +
+  theme_minimal() +
+  facet_grid(rows = vars(station))
+```
+
+## Retrieving climate data for municipality
+
+::: {style="text-align: justify;"}
+To make the download process even easier, and avoid the creation of already known geometries like municipalities or departments, **{ColOpenData}** offers an extra function to download data using the areas' DIVIPOLA code.
+
+DIVIPOLA codification is standardized for the whole country, and contains departments' and municipalities' codes. For further details on DIVIPOLA codification and functions please refer to [Documentation and Dictionaries](https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html#DIVIPOLA). We will filter for the city of Manizales in the department Caldas.
+:::
+
+```{r}
+name_to_code_mun("Caldas", "Manizales")
+```
+
+::: {style="text-align: justify;"}
+The function `download_climate()` will require almost the same arguments as `download_climate_geom()`, but instead of an `sf` object, it will take a character containing the DIVIPOLA code:
+
+-   `code`: character with the DIVIPOLA code for the area.
+-   `start_date`: character with the first date to consult in the format `"YYYY-MM-DD"`.
+-   `end_date`: character with the last date to consult in the format `"YYYY-MM_DD"`. (Last available date is `"2023-05-31"`).
+-   `tag`: character containing climate tag to consult.
+:::
+
+```{r download climate mpio, results = "hide", warning = FALSE, message = FALSE}
+max_temperature_mpio <- download_climate(
+  code = "17001",
+  start_date = "2013-01-01",
+  end_date = "2016-12-31",
+  tag = "TMX_CON"
+) %>% aggregate_climate("month")
+```
+
+```{r plot temperatures mpios}
+ggplot(data = max_temperature_mpio) +
+  geom_line(aes(x = date, y = value, group = station), color = "#106ba0") +
+  ggtitle("Dry-bulb Temperature") +
+  xlab("Date") +
+  ylab("Dry-bulb temperature [C]") +
+  theme_minimal() +
+  facet_grid(rows = vars(station))
+```
+
+::: {style="text-align: justify;"}
+As stated at the beginning of this vignette, the three methods display the same results.
+:::
+
+## Disclaimer
+
+::: {style="text-align: justify;"}
+-   Data availability is subdued to station's measurements and quality filters. In most cases, this leads to a lower amount of data, considering the extensive amount of climate stations.
+
+-   Temporal aggregation is only available for some tags and is limited to the ones who have a specific methodology of aggregation reported by IDEAM. The daily, monthly and annual aggregation is available for:
+
+    -   `TSSM_CON`: Dry-bulb temperature
+    -   `TMX_CON`: Maximum temperature
+    -   `TMN_CON`: Minimum temperature
+    -   `PTPM_CON`: Precipitation
+    -   `BSHG_CON`: Sunshine duration
+
+-   Temporal and spatial interpolation are not included in this version of **{ColOpenData}**.
+:::

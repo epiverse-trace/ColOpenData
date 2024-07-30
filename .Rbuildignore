@@ -1,10 +1,10 @@
 ^LICENSE\.md$
 ^\.github$
 ^README\.Rmd$
+^README\.html$
 ^codecov\.yml$
 ^_pkgdown\.yml$
 ^docs$
-^pkgdown$
 ^\.lintr$
 ^.*\.Rproj$
 ^\.Rproj\.user$
