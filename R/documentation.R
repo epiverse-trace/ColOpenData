@@ -181,10 +181,9 @@ look_up <- function(keywords, module = "all", logic = "or", language = "EN") {
         ignore.case = TRUE
       ), ]
     } else if (logic == "and") {
-      found <- listed[rowSums(sapply(keywords,
-                                     grepl,
-                                     listed[["description"]],
-                                     ignore.case = TRUE
+      found <- listed[rowSums(vapply(keywords,
+                                     function(keyword) grepl(keyword, listed[["description"]], ignore.case = TRUE),
+                                     logical(length(listed[["description"]]))
       )) == length(keywords), ]
     }
   }
