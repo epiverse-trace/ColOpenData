@@ -135,10 +135,10 @@ Using this function, we can retrieve all names, source, aggregation level and in
 ::: {style="text-align: justify;"}
 Sometimes, going through each dataset to find specific information can be tiring. If you want to look for an specific word or set of words within datasets quickly, you can use the `look_up()` function, which takes by parameter:
 
-1.  The module you wish to search within (default is `"all"`).
-2.  The language the keywords would be, can be `"EN"` or `"ES"` (default is `"EN"`).
-3.  The word (or words) you are interested in (input as a character or vector of characters).
-4.  The search condition: `"and"` to find datasets containing all specified words, or `"or"` to find datasets containing any of the specified words (default is `"or"`). If you are searching for a single word, you can use either `"and"`or `"or"` for this parameter.
+1.  The word (or words) you are interested in (input as a character or vector of characters).
+2.  The module you wish to search within (default is `"all"`).
+3.  The search condition: `"and"` to find datasets containing all specified words, or `"or"` to find datasets containing any of the specified words (default is `"or"`). If you are searching for a single word, you can use either `"and"`or `"or"` for this parameter.
+4.  The language the keywords would be, can be `"EN"` or `"ES"` (default is `"EN"`).
 :::
 
 ```{r list datasets with information by age}
@@ -150,7 +150,7 @@ We can specify a module to make a more narrow and precise search.
 
 ```{r list datasets with information by area and sex in demographic module}
 area_sex_datasets <- look_up(
-  module = "demographic", keywords = c("area", "sex"),
+  keywords = c("area", "sex"), module = "demographic",
   logic = "and"
 )
 head(area_sex_datasets)

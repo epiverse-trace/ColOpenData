@@ -87,7 +87,7 @@
 # Lookup works as expected
 
     Code
-      look_up(language = "EN", keywords = c("school", "age"), logic = "and")
+      look_up(keywords = c("school", "age"), logic = "and", language = "EN")
     Output
       # A tibble: 2 x 7
         name                  group       source year  level      category description

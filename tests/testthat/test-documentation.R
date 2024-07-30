@@ -56,16 +56,16 @@ test_that("Lookup errors are thrown", {
   expect_error(look_up(keywords = "households", logic = "nor"))
 
   # Expect error when module does not exist
-  expect_error(look_up(module = "population", keywords = "households"))
+  expect_error(look_up(keywords = "households", module = "population"))
 
   # Expect error when language does not exist
-  expect_error(look_up(language = "PT"))
+  expect_error(look_up(keywords = "households", language = "PT"))
 })
 
 test_that("Lookup works as expected", {
   # Expect that output has a data.frame structure for a proper request
-  expect_s3_class(look_up(language = "EN", keywords = "school", logic = "or"), "data.frame")
+  expect_s3_class(look_up(keywords = "school", logic = "or",  language = "EN"), "data.frame")
 
   # Expect specific dataset from a proper request
-  expect_snapshot(look_up(language = "EN", keywords = c("school", "age"), logic = "and"))
+  expect_snapshot(look_up(keywords = c("school", "age"), logic = "and", language = "EN"))
 })

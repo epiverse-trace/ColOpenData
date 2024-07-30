@@ -61,12 +61,7 @@ geospatial_dictionary <- function(spatial_level, language = "ES") {
 #' @export
 get_climate_tags <- function(language = "ES") {
   checkmate::assert_character(language)
-  checkmate::assert_choice(language, c(
-    "ES", "EN"
-  ))
-  if (!(language %in% c("ES", "EN"))) {
-    stop("Invalid language parameter. Please provide 'ES' or 'EN'.")
-  }
+  checkmate::assert_choice(language, c("ES", "EN"))
   path <- retrieve_dict_path("climate_tags.rda")
   load(path)
   climate_tags <- get("climate_tags")
@@ -99,9 +94,7 @@ list_datasets <- function(module = "all", language = "ES") {
     "all", "demographic", "geospatial",
     "climate", "population_projections"
   ))
-  checkmate::assert_choice(language, c(
-    "ES", "EN"
-  ))
+  checkmate::assert_choice(language, c("ES", "EN"))
   path <- retrieve_dict_path("datasets_list.rda")
   load(path)
   datasets_list <- get("datasets_list")
@@ -130,9 +123,7 @@ list_datasets <- function(module = "all", language = "ES") {
     if (module != "all") {
       file <- file[file[["group"]] == module, ]
     }
-  } else {
-    stop("Invalid language parameter. Please provide 'ES' or 'EN'.")
-  }
+  } 
   return(file)
 }
 
@@ -142,12 +133,10 @@ list_datasets <- function(module = "all", language = "ES") {
 #' List available datasets containing user-specified keywords in their
 #' descriptions.
 #'
-#' @param module character with module to be consulted (\code{"demographic"},
-#' \code{"geospatial"}, \code{"climate"}). Default is \code{"all"}.
-#' @param language language of the keywords (\code{"EN"}, \code{"ES"}.
-#' Default is \code{"EN"}.
 #' @param keywords character or vector of characters to be look up in the
 #' description.
+#' @param module character with module to be consulted (\code{"demographic"},
+#' \code{"geospatial"}, \code{"climate"}). Default is \code{"all"}.
 #' @param logic A character string specifying the matching logic.
 #' Can be either \code{"or"} or \code{"and"}. Default is \code{"or"}:
 #' \itemize{
@@ -156,6 +145,8 @@ list_datasets <- function(module = "all", language = "ES") {
 #' \item \code{logic = "and"}: Matches rows containing all of the specified
 #' keywords in their descriptions.
 #'  }
+#' @param language language of the keywords (\code{"EN"}, \code{"ES"}.
+#' Default is \code{"EN"}.
 #'
 #' @examples
 #' found <- look_up("demographic", "EN", c("sex", "age"), "and")
@@ -164,14 +155,15 @@ list_datasets <- function(module = "all", language = "ES") {
 #' @return \code{data.frame} object with the available datasets.
 #'
 #' @export
-look_up <- function(module = "all", language = "EN", keywords, logic = "or") {
-  checkmate::assert_character(module)
+look_up <- function(keywords, module = "all", logic = "or", language = "EN") {
   checkmate::assert_character(keywords)
+  checkmate::assert_character(module)
   checkmate::assert_character(logic)
-  checkmate::assert_choice(
-    module,
-    c("all", "demographic", "geospatial", "climate")
-  )
+  checkmate::assert_character(language)
+  checkmate::assert_choice(module,
+    c("all", "demographic", "geospatial", "climate"))
+  checkmate::assert_choice(logic, c("or", "and"))
+  checkmate::assert_choice(language, c("ES", "EN"))
   listed <- list_datasets(module, language)
   if (language == "ES") {
     if (logic == "or") {
@@ -185,9 +177,7 @@ look_up <- function(module = "all", language = "EN", keywords, logic = "or") {
         listed[["descripcion"]],
         ignore.case = TRUE
       )) == length(keywords), ]
-    } else {
-      stop("Invalid logic parameter. Please provide 'or' or 'and'.")
-    }
+    } 
   } else if (language == "EN") {
     if (logic == "or") {
       found <- listed[grep(paste(keywords, collapse = "|"),
@@ -200,16 +190,10 @@ look_up <- function(module = "all", language = "EN", keywords, logic = "or") {
         listed[["description"]],
         ignore.case = TRUE
       )) == length(keywords), ]
-    } else {
-      stop("Invalid logic parameter. Please provide 'or' or 'and'.")
-    }
-  } else {
-    stop("Invalid language parameter. Please provide 'ES' or 'EN'.")
-  }
-
+    } 
+  } 
   if (nrow(found) == 0) {
     stop("Cannot find datasets with the consulted keywords")
   }
-
   return(found)
 }
