@@ -1,6 +1,6 @@
 Package: ColOpenData
 Title: Colombian Open Data Download and Wrangling
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: c(
     person("Maria Camila", "Tavera-Cifuentes", , "mc.tavera@uniandes.edu.co", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0007-1610-4583")),
@@ -8,7 +8,7 @@ Authors@R: c(
            comment = c(ORCID = "0009-0006-0429-7747")),
     person("Natalia", "Nino-Machado", , "n.nino58@uniandes.edu.co", role = "ctb",
            comment = c(ORCID = "0000-0001-7887-9439")),
-    person("Catalina", "Gonzales-Uribe", , "cgonzalez@uniandes.edu.co", role = "ctb",
+    person("Catalina", "Gonzalez-Uribe", , "cgonzalez@uniandes.edu.co", role = "ctb",
            comment = c(ORCID = "0000-0002-3322-5017")),
     person("Juan Manuel", "Cordovez", , "jucordov@uniandes.edu.co", role = "ctb",
            comment = c(ORCID = "0000-0002-4005-3567")),
