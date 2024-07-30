@@ -123,7 +123,7 @@ list_datasets <- function(module = "all", language = "ES") {
     if (module != "all") {
       file <- file[file[["group"]] == module, ]
     }
-  } 
+  }
   return(file)
 }
 
@@ -160,8 +160,10 @@ look_up <- function(keywords, module = "all", logic = "or", language = "EN") {
   checkmate::assert_character(module)
   checkmate::assert_character(logic)
   checkmate::assert_character(language)
-  checkmate::assert_choice(module,
-    c("all", "demographic", "geospatial", "climate"))
+  checkmate::assert_choice(
+    module,
+    c("all", "demographic", "geospatial", "climate")
+  )
   checkmate::assert_choice(logic, c("or", "and"))
   checkmate::assert_choice(language, c("ES", "EN"))
   listed <- list_datasets(module, language)
@@ -177,7 +179,7 @@ look_up <- function(keywords, module = "all", logic = "or", language = "EN") {
         listed[["descripcion"]],
         ignore.case = TRUE
       )) == length(keywords), ]
-    } 
+    }
   } else if (language == "EN") {
     if (logic == "or") {
       found <- listed[grep(paste(keywords, collapse = "|"),
@@ -190,8 +192,8 @@ look_up <- function(keywords, module = "all", logic = "or", language = "EN") {
         listed[["description"]],
         ignore.case = TRUE
       )) == length(keywords), ]
-    } 
-  } 
+    }
+  }
   if (nrow(found) == 0) {
     stop("Cannot find datasets with the consulted keywords")
   }

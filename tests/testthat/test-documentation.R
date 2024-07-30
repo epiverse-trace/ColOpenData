@@ -64,7 +64,7 @@ test_that("Lookup errors are thrown", {
 
 test_that("Lookup works as expected", {
   # Expect that output has a data.frame structure for a proper request
-  expect_s3_class(look_up(keywords = "school", logic = "or",  language = "EN"), "data.frame")
+  expect_s3_class(look_up(keywords = "school", logic = "or", language = "EN"), "data.frame")
 
   # Expect specific dataset from a proper request
   expect_snapshot(look_up(keywords = c("school", "age"), logic = "and", language = "EN"))
