@@ -25,8 +25,6 @@
 download_climate <- function(code, start_date, end_date, tag) {
   checkmate::assert_character(code)
   args <- check_climate_args(start_date, end_date, tag)
-
-  divipola <- divipola_table()
   data_path <- retrieve_support_path("IDEAM_STATIONS_2023_MAY")
   stations <- retrieve_table(data_path, ";")
 

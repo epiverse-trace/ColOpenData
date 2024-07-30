@@ -97,17 +97,9 @@ list_datasets <- function(module = "all", language = "ES") {
     "climate", "population_projections"
   ))
   checkmate::assert_choice(language, c("ES", "EN"))
-
   path <- retrieve_dict_path("datasets_list.rda")
   load(path)
-  datasets_list <- get("datasets_list")
-  all_objects <- ls()
-  obj_name <- setdiff(
-    all_objects,
-    c("path", "module", "language")
-  )
-  object <- get(obj_name)
-
+  ds_list <- get("datasets_list")
   if (language == "ES") {
     modules_trans <- list(
       all = "todos",
@@ -117,12 +109,12 @@ list_datasets <- function(module = "all", language = "ES") {
       population_projections = "proyecciones_poblacionales"
     )
     module <- modules_trans[[module]]
-    file <- object$ES
+    file <- ds_list$ES
     if (module != "todos") {
       file <- file[file[["grupo"]] == module, ]
     }
   } else {
-    file <- object$EN
+    file <- ds_list$EN
     if (module != "all") {
       file <- file[file[["group"]] == module, ]
     }

@@ -201,7 +201,7 @@ code_to_name_dep <- function(department_code) {
   ]
   inds <- match(department_code, dptos[["codigo_departamento"]])
   departments_names <- ifelse(is.na(inds), NA, dptos[["departamento"]][inds])
-  if (any(is.na(inds))) {
+  if (anyNA(inds)) {
     warning(
       toString(department_code[is.na(inds)]),
       " cannot be found as department(s) code(s)"
@@ -230,7 +230,7 @@ code_to_name_mun <- function(municipality_code) {
 
   mpios <- divipola_table()
   inds <- match(municipality_code, mpios[["codigo_municipio"]])
-  if (any(is.na(inds))) {
+  if (anyNA(inds)) {
     warning(
       toString(municipality_code[is.na(inds)]),
       " cannot be found as municipality(ies) code(s)"
