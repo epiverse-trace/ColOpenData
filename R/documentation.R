@@ -161,29 +161,31 @@ look_up <- function(keywords, module = "all", logic = "or", language = "EN") {
   )
   checkmate::assert_choice(logic, c("or", "and"))
   checkmate::assert_choice(language, c("ES", "EN"))
-  ds <- list_datasets(module, language)
+  listed <- list_datasets(module, language)
   if (language == "ES") {
     if (logic == "or") {
-      found <- ds[grep(paste(keywords, collapse = "|"),
-        ds[["descripcion"]],
+      found <- listed[grep(paste(keywords, collapse = "|"),
+        listed[["descripcion"]],
         ignore.case = TRUE
       ), ]
     } else if (logic == "and") {
-      found <- ds[rowSums(vapply(
-        keywords, grepl(keyword, ds[["descripcion"]], ignore.case = TRUE),
-        logical(nrow(ds))
+      found <- listed[rowSums(sapply(keywords,
+                                     grepl,
+                                     listed[["descripcion"]],
+                                     ignore.case = TRUE
       )) == length(keywords), ]
     }
   } else if (language == "EN") {
     if (logic == "or") {
-      found <- ds[grep(paste(keywords, collapse = "|"),
-        ds[["description"]],
+      found <- listed[grep(paste(keywords, collapse = "|"),
+        listed[["description"]],
         ignore.case = TRUE
       ), ]
     } else if (logic == "and") {
-      found <- ds[rowSums(vapply(
-        keywords, grepl(keyword, ds[["description"]], ignore.case = TRUE),
-        logical(nrow(ds))
+      found <- listed[rowSums(sapply(keywords,
+                                     grepl,
+                                     listed[["description"]],
+                                     ignore.case = TRUE
       )) == length(keywords), ]
     }
   }
