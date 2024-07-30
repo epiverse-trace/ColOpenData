@@ -34,6 +34,7 @@ geospatial_dictionary <- function(spatial_level, language = "ES") {
   checkmate::assert_choice(language, c(
     "ES", "EN"
   ))
+  
   dataset <- retrieve_geospatial_name(spatial_level)
   dict_level <- sprintf("DICT_%s", dataset)
   path <- retrieve_dict_path("geospatial_dictionaries.rda")
@@ -62,6 +63,7 @@ geospatial_dictionary <- function(spatial_level, language = "ES") {
 get_climate_tags <- function(language = "ES") {
   checkmate::assert_character(language)
   checkmate::assert_choice(language, c("ES", "EN"))
+  
   path <- retrieve_dict_path("climate_tags.rda")
   load(path)
   climate_tags <- get("climate_tags")
@@ -95,6 +97,7 @@ list_datasets <- function(module = "all", language = "ES") {
     "climate", "population_projections"
   ))
   checkmate::assert_choice(language, c("ES", "EN"))
+  
   path <- retrieve_dict_path("datasets_list.rda")
   load(path)
   datasets_list <- get("datasets_list")
@@ -118,7 +121,7 @@ list_datasets <- function(module = "all", language = "ES") {
     if (module != "todos") {
       file <- file[file[["grupo"]] == module, ]
     }
-  } else if (language == "EN") {
+  } else {
     file <- object$EN
     if (module != "all") {
       file <- file[file[["group"]] == module, ]
