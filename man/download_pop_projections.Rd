@@ -14,36 +14,38 @@ download_pop_projections(
 }
 \arguments{
 \item{spatial_level}{character with the spatial level to be consulted.
-Can be either \code{"national"}, \code{"department"} or \code{"municipality"}}
+Can be either \code{"national"}, \code{"department"} or
+\code{"municipality"}.}
 
-\item{start_year}{numeric with the start year to be consulted}
+\item{start_year}{numeric with the start year to be consulted.}
 
-\item{end_year}{numeric with the end year to be consulted}
+\item{end_year}{numeric with the end year to be consulted.}
 
 \item{include_sex}{logical for including (or not) division by sex. Default
-is \code{FALSE}}
+is \code{FALSE}.}
 
 \item{include_ethnic}{logical for including (or not) division by ethnic
-group (only available for \code{"municipality"}). Default is \code{FALSE}}
+group (only available for \code{"municipality"}). Default is \code{FALSE}.}
 }
 \value{
-\code{data.frame} object with downloaded data
+\code{data.frame} object with downloaded data.
 }
 \description{
 This function downloads population projections and back projections taken
 from the National Population and Dwelling Census of 2018 (CNPV), adjusted
 after COVID-19. Available years are different for each spatial level:
 \itemize{
-\item \code{"national"}: 1950 - 2070
-\item \code{"national"} with sex: 1985 - 2050
-\item \code{"department"}: 1985 - 2050
-\item \code{"department"} with sex: 1985 - 2050
-\item \code{"municipality"}: 1985 - 2035
-\item \code{"municipality"} with sex: 1985 - 2035
-\item \code{"municipality"} with sex and ethnic groups: 2018 - 2035
+\item \code{"national"}: 1950 - 2070.
+\item \code{"national"} with sex: 1985 - 2050.
+\item \code{"department"}: 1985 - 2050.
+\item \code{"department"} with sex: 1985 - 2050.
+\item \code{"municipality"}: 1985 - 2035.
+\item \code{"municipality"} with sex: 1985 - 2035.
+\item \code{"municipality"} with sex and ethnic groups: 2018 - 2035.
 }
 }
 \examples{
 pop_proj <- download_pop_projections("national", 2020, 2030)
 head(pop_proj)
+
 }

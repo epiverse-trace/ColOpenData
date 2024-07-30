@@ -23,13 +23,13 @@ The available CNPV information is divided in four categories: households, person
 
 In this vignette you will learn:
 
-1. How to download demographic data using **ColOpenData**
-2. How to filter, group, mutate and aggregate demographic data
-3. How to visualize data using **ggplot2**
+1.  How to download demographic data using **ColOpenData**.
+2.  How to filter, group, mutate and aggregate demographic data.
+3.  How to visualize data using **ggplot2**.
 
 As the goal of this vignette is to show some examples on how to use the data, we will load some specific libraries but that does not mean they are required to use the data in all cases.
 
-In order to access its documentation we need to use the function `list_datasets` and indicate as a parameter the module we are interested in. It is important to take a good look at this to have a clearer understanding of what we count with, before just throwing ourselves to work with the data. Now, we should start by loading all necessary libraries. 
+In order to access its documentation we need to use the function `list_datasets()` and indicate as a parameter the module we are interested in. It is important to take a good look at this to have a clearer understanding of what we count with, before just throwing ourselves to work with the data. Now, we should start by loading all necessary libraries.
 :::
 
 ```{r libraries, message=FALSE, warning=FALSE, results="hide"}
@@ -51,12 +51,13 @@ First, we have to access the demographic documentation, to check available datas
 :::
 
 ```{r documentation, echo =TRUE}
-datasets_dem <- list_datasets("demographic")
+datasets_dem <- list_datasets("demographic", "EN")
 
 head(datasets_dem)
 ```
+
 ::: {style="text-align: justify;"}
-After checking the documentation, we can load the data we want to work with. To do this, we will use the `download_demographic` function that takes by parameter the dataset name, presented in the documentation. For this first example we will focus on a CNPV dataset.
+After checking the documentation, we can load the data we want to work with. To do this, we will use the `download_demographic()` function that takes by parameter the dataset name, presented in the documentation. For this first example we will focus on a CNPV dataset.
 :::
 
 ### Data load
@@ -122,134 +123,6 @@ ggplot(proportions_wss, aes(
     y = "Proportion"
   ) +
   theme_minimal() +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    plot.title = element_text(hjust = 0.5)
-  )
-```
-
-## Data Integration: Combining Datasets for Enhanced Analysis
-
-::: {style="text-align: justify;"}
-Also, with the CNPV data, we could merge data from the different categories and compare information. For example, we would download a dataset from the persons demographic category and another one from persons social. The first one presents information regarding population's literacy and the second one regarding its marital status. The following datasets might take a while to download.
-:::
-
-### Data load
-
-```{r more data load, include=TRUE, echo=TRUE}
-literacy <- download_demographic("DANE_CNPVPD_2018_16PM")
-marital_status <- download_demographic("DANE_CNPVPS_2018_7PM")
-```
-::: {style="text-align: justify;"}
-For this example, we will focus on a specific municipality, examining the total area and specifically concentrating on the age group between 15 and 24 years old. Since we want to compare both datasets simultaneously, it's important to first ensure they have the same population count under identical conditions. Most columns in the demographic datasets contain a [total]{.underline} value, which aggregates data across all conditions. For instance, the "sex" column includes "male", "female", and ["total"]{.underline}, representing both genders combined. Similarly, the "marital status" column's ['total']{.underline} value encompasses the entire population, irrespective of their marital status.
-:::
-
-### Data check
-
-::: {style="text-align: justify;"}
-Since the age group in literacy is complete, we can just filter using the desired age range and the total counts for other variables, including area, sex and ability to read.
-:::
-
-```{r literacy}
-lit <- literacy %>%
-  filter(
-    municipio == "Villapinzón",
-    grupo_de_edad == "entre_15_y_24_anos",
-    area == "total",
-    sabe_leer_y_escribir == "total",
-    sexo == "total"
-  ) %>%
-  select(sexo, total)
-
-head(lit)
-```
-
-::: {style="text-align: justify;"}
-We will now filter marital status for people between 15 and 24 years. This dataset age groups are divided from 15 to 19 and from 20 to 24 years old, so we will need to merge the two groups. To do this, we can group by a common variable, like sex and add as follows:
-:::
-
-```{r}
-ms_15_24 <- marital_status %>%
-  filter(
-    municipio == "Villapinzón",
-    area == "total",
-    grupo_de_edad %in% c("15_a_19", "20_a_24"),
-    estado_civil == "total",
-    sexo == "total"
-  ) %>%
-  group_by(sexo) %>%
-  summarise(total = sum(total)) %>%
-  select(sexo, total)
-
-head(ms_15_24)
-```
-
-::: {style="text-align: justify;"}
-Now that we know that both data sets contain the same counts, we can start to look at the specific information we want. For the literacy data set, we would focus on the people that do not know how to read neither write.
-:::
-
-### Data filter and plot
-
-::: {style="text-align: justify;"}
-We can filter the literacy data. For this purpose we will filter the column "sabe_leer_y_escribir" for the value "no". We will also create a column containing the proportion of people that cannot read compared to the total population within the age range.
-:::
-
-```{r}
-lit_filt <- literacy %>%
-  filter(
-    municipio == "Villapinzón",
-    sabe_leer_y_escribir == "no",
-    grupo_de_edad == "entre_15_y_24_anos",
-    area == "total"
-  ) %>%
-  mutate(
-    estado = "no_sabe_leer_y_escribir",
-    proporcion = total / lit$total
-  ) %>%
-  select(estado, sexo, proporcion)
-```
-
-::: {style="text-align: justify;"}
-To filter the marital status dataset we will filter by the two age groups again. We will group by marital status and sex, sum by the total counts and create a column containing the proportion of each marital status compared to the population within the age group.
-:::
-
-```{r}
-ms_15_24_filt <- marital_status %>%
-  filter(
-    municipio == "Villapinzón",
-    area == "total",
-    grupo_de_edad %in% c("15_a_19", "20_a_24")
-  ) %>%
-  group_by(estado_civil, sexo) %>%
-  summarise(total = sum(total)) %>%
-  mutate(proporcion = total / ms_15_24$total) %>%
-  select(estado_civil, sexo, proporcion) %>%
-  rename(estado = estado_civil)
-```
-
-Finally, we can merge the two datasets and plot the outcome.
-
-```{r}
-merged_df <- bind_rows(lit_filt, ms_15_24_filt) %>%
-  filter(
-    sexo != "total",
-    estado != "total"
-  )
-
-ggplot(merged_df, aes(x = estado, y = proporcion, fill = sexo)) +
-  geom_bar(stat = "identity", position = "dodge") +
-  scale_fill_manual(
-    values = c(mujer = "#f04a4c", hombre = "#aec800"),
-    labels = c("Female", "Male")
-  ) +
-  labs(
-    title = "Proportion of people in Villapinzón by marital status and
-    iliteracy by sex",
-    x = "Status",
-    y = "Proportion",
-    fill = "Sex"
-  ) +
-  theme_bw() +
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1),
     plot.title = element_text(hjust = 0.5)

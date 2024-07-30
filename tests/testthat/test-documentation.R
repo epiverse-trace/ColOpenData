@@ -1,30 +1,71 @@
 test_that("List datasets errors are thrown", {
-  expect_error(list_datasets(category = "dem"))
+  # Expect error when category does not exist
+  expect_error(list_datasets(module = "dem", language = "EN"))
+
+  # Expect error when language does not exist
+  expect_error(list_datasets(module = "demographic", language = "FR"))
 })
 
 test_that("List datasets works as expected", {
-  expect_snapshot(list_datasets("geospatial"))
+  # Expect specific dataset from a proper request
+  expect_snapshot(list_datasets(module = "geospatial", language = "EN"))
 })
 
 test_that("Dictionary errors are thrown", {
-  expect_error(dictionary("DANE_MGN_2018"))
-  expect_error(dictionary(4))
-  expect_error(dictionary("DANE_CNPVPS_2018_10HM"))
+  # Expect error when spatial_level does not exist
+  expect_error(geospatial_dictionary(
+    spatial_level = "DANE_MGN_2018_MPIO",
+    language = "EN"
+  ))
+
+  # Expect error when language does not exist
+  expect_error(geospatial_dictionary(
+    spatial_level = "DANE_MGN_2018_MPIO",
+    language = "IT"
+  ))
 })
 
 test_that("Dictionary works as expected", {
-  expect_snapshot(dictionary("DANE_MGN_2018_DPTO"))
+  # Expect specific dataset from a proper request
+  expect_snapshot(geospatial_dictionary(
+    spatial_level = "mpio",
+    language = "EN"
+  ))
+})
+
+test_that("Climate tags errors are thrown", {
+  # Expect error when language does not exist
+  expect_error(get_climate_tags(language = "DE"))
+})
+
+test_that("Climate tags works as expected", {
+  # Expect specific dataset from a proper request
+  expect_snapshot(get_climate_tags(language = "ES"))
 })
 
 test_that("Lookup errors are thrown", {
+  # Expect error when keywords is not a character
   expect_error(look_up(keywords = 0L))
+
+  # Expect error when keywords are not found in any dataset
   expect_error(look_up(keywords = "dog"))
+
+  # Expect error when logic is TRUE or FALSE (as presented in documentation, it
+  # will respond to "and" / "or")
   expect_error(look_up(keywords = "households", logic = TRUE))
   expect_error(look_up(keywords = "households", logic = "nor"))
-  expect_error(look_up(module = "population", keywords = "households"))
+
+  # Expect error when module does not exist
+  expect_error(look_up(keywords = "households", module = "population"))
+
+  # Expect error when language does not exist
+  expect_error(look_up(keywords = "households", language = "PT"))
 })
 
 test_that("Lookup works as expected", {
-  expect_s3_class(look_up(keywords = "school", logic = "or"), "data.frame")
-  expect_snapshot(look_up(keywords = c("school", "age"), logic = "and"))
+  # Expect that output has a data.frame structure for a proper request
+  expect_s3_class(look_up(keywords = "school", logic = "or", language = "EN"), "data.frame")
+
+  # Expect specific dataset from a proper request
+  expect_snapshot(look_up(keywords = c("school", "age"), logic = "and", language = "EN"))
 })
