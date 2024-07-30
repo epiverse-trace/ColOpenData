@@ -4,17 +4,14 @@
 \alias{look_up}
 \title{Filter list of available datasets based on keywords given by the user}
 \usage{
-look_up(module = "all", language = "EN", keywords, logic = "or")
+look_up(keywords, module = "all", logic = "or", language = "EN")
 }
 \arguments{
-\item{module}{character with module to be consulted (\code{"demographic"},
-\code{"geospatial"}, \code{"climate"}). Default is \code{"all"}.}
-
-\item{language}{language of the keywords (\code{"EN"}, \code{"ES"}.
-Default is \code{"EN"}.}
-
 \item{keywords}{character or vector of characters to be look up in the
 description.}
+
+\item{module}{character with module to be consulted (\code{"demographic"},
+\code{"geospatial"}, \code{"climate"}). Default is \code{"all"}.}
 
 \item{logic}{A character string specifying the matching logic.
 Can be either \code{"or"} or \code{"and"}. Default is \code{"or"}:
@@ -24,6 +21,9 @@ specified keywords in their descriptions.
 \item \code{logic = "and"}: Matches rows containing all of the specified
 keywords in their descriptions.
 }}
+
+\item{language}{language of the keywords (\code{"EN"}, \code{"ES"}.
+Default is \code{"EN"}.}
 }
 \value{
 \code{data.frame} object with the available datasets.

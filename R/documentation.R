@@ -149,7 +149,7 @@ list_datasets <- function(module = "all", language = "ES") {
 #' Default is \code{"EN"}.
 #'
 #' @examples
-#' found <- look_up("demographic", "EN", c("sex", "age"), "and")
+#' found <- look_up(c("sex", "age"), "demographic", "and", "EN")
 #' head(found)
 #'
 #' @return \code{data.frame} object with the available datasets.
