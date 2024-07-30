@@ -33,7 +33,7 @@ List available datasets containing user-specified keywords in their
 descriptions.
 }
 \examples{
-found <- look_up("demographic", "EN", c("sex", "age"), "and")
+found <- look_up(c("sex", "age"), "demographic", "and", "EN")
 head(found)
 
 }
