@@ -10,10 +10,10 @@ license: MIT
 title: 'ColOpenData: Colombian Open Data Download and Wrangling'
 version: 0.1.0
 abstract: ColOpenData is a package that acquires and wrangles Colombian socioeconomic,
-  geospatial and climate data. It solves the problem of Colombian data being issued
-  in different web pages and sources by using functions that allow the user to select
-  the desired database and download it without having to do the exhausting acquisition
-  process.
+  geospatial, population and climate data. It solves the problem of Colombian data
+  being issued in different web pages and sources by using functions that allow the
+  user to select the desired database and download it without having to do the exhausting
+  acquisition process.
 authors:
 - family-names: Tavera-Cifuentes
   given-names: M. Camila
@@ -70,6 +70,7 @@ references:
     email: michellang@gmail.com
     orcid: https://orcid.org/0000-0001-9754-0393
   year: '2024'
+  doi: 10.32614/CRAN.package.checkmate
 - type: software
   title: config
   abstract: 'config: Manage Environment Specific Configuration Values'
@@ -81,6 +82,7 @@ references:
     given-names: JJ
     email: jj@rstudio.com
   year: '2024'
+  doi: 10.32614/CRAN.package.config
 - type: software
   title: dplyr
   abstract: 'dplyr: A Grammar of Data Manipulation'
@@ -105,6 +107,7 @@ references:
     email: davis@posit.co
     orcid: https://orcid.org/0000-0003-4777-038X
   year: '2024'
+  doi: 10.32614/CRAN.package.dplyr
 - type: software
   title: httr2
   abstract: 'httr2: Perform HTTP Requests and Process the Responses'
@@ -114,8 +117,9 @@ references:
   authors:
   - family-names: Wickham
     given-names: Hadley
-    email: hadley@rstudio.com
+    email: hadley@posit.co
   year: '2024'
+  doi: 10.32614/CRAN.package.httr2
 - type: software
   title: magrittr
   abstract: 'magrittr: A Forward-Pipe Operator for R'
@@ -130,6 +134,7 @@ references:
     given-names: Hadley
     email: hadley@rstudio.com
   year: '2024'
+  doi: 10.32614/CRAN.package.magrittr
 - type: software
   title: readr
   abstract: 'readr: Read Rectangular Text Data'
@@ -147,6 +152,7 @@ references:
     email: jenny@posit.co
     orcid: https://orcid.org/0000-0002-6983-2759
   year: '2024'
+  doi: 10.32614/CRAN.package.readr
 - type: software
   title: rlang
   abstract: 'rlang: Functions for Base Types and Core R and ''Tidyverse'' Features'
@@ -161,6 +167,7 @@ references:
     given-names: Hadley
     email: hadley@posit.co
   year: '2024'
+  doi: 10.32614/CRAN.package.rlang
 - type: software
   title: sf
   abstract: 'sf: Simple Features for R'
@@ -173,6 +180,7 @@ references:
     email: edzer.pebesma@uni-muenster.de
     orcid: https://orcid.org/0000-0001-8049-7069
   year: '2024'
+  doi: 10.32614/CRAN.package.sf
 - type: software
   title: utils
   abstract: 'R: A Language and Environment for Statistical Computing'
@@ -183,6 +191,7 @@ references:
     name: R Foundation for Statistical Computing
     address: Vienna, Austria
   year: '2024'
+  doi: 10.32614/CRAN.package.utils
 - type: software
   title: stringdist
   abstract: 'stringdist: Approximate String Matching, Fuzzy Text Search, and String
@@ -197,6 +206,7 @@ references:
     email: mark.vanderloo@gmail.com
     orcid: https://orcid.org/0000-0002-9807-4686
   year: '2024'
+  doi: 10.32614/CRAN.package.stringdist
 - type: software
   title: tidyr
   abstract: 'tidyr: Tidy Messy Data'
@@ -213,17 +223,7 @@ references:
   - family-names: Girlich
     given-names: Maximilian
   year: '2024'
-- type: software
-  title: stringr
-  abstract: 'stringr: Simple, Consistent Wrappers for Common String Operations'
-  notes: Imports
-  url: https://stringr.tidyverse.org
-  repository: https://CRAN.R-project.org/package=stringr
-  authors:
-  - family-names: Wickham
-    given-names: Hadley
-    email: hadley@posit.co
-  year: '2024'
+  doi: 10.32614/CRAN.package.tidyr
 - type: software
   title: ggplot2
   abstract: 'ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics'
@@ -263,6 +263,7 @@ references:
     name-particle: van den
     orcid: https://orcid.org/0000-0002-9335-7468
   year: '2024'
+  doi: 10.32614/CRAN.package.ggplot2
 - type: software
   title: knitr
   abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
@@ -275,6 +276,7 @@ references:
     email: xie@yihui.name
     orcid: https://orcid.org/0000-0003-0645-5666
   year: '2024'
+  doi: 10.32614/CRAN.package.knitr
 - type: software
   title: leaflet
   abstract: 'leaflet: Create Interactive Web Maps with the JavaScript ''Leaflet''
@@ -295,6 +297,7 @@ references:
   - family-names: Xie
     given-names: Yihui
   year: '2024'
+  doi: 10.32614/CRAN.package.leaflet
 - type: software
   title: rmarkdown
   abstract: 'rmarkdown: Dynamic Documents for R'
@@ -338,6 +341,7 @@ references:
     email: rich@posit.co
     orcid: https://orcid.org/0000-0003-3925-190X
   year: '2024'
+  doi: 10.32614/CRAN.package.rmarkdown
 - type: software
   title: spelling
   abstract: 'spelling: Tools for Spell Checking in R'
@@ -353,6 +357,7 @@ references:
     given-names: Jim
     email: james.hester@rstudio.com
   year: '2024'
+  doi: 10.32614/CRAN.package.spelling
 - type: software
   title: testthat
   abstract: 'testthat: Unit Testing for R'
@@ -364,5 +369,6 @@ references:
     given-names: Hadley
     email: hadley@posit.co
   year: '2024'
+  doi: 10.32614/CRAN.package.testthat
   version: '>= 3.0.0'
 
