@@ -13,3 +13,4 @@ default:
   climate: "climate/IDEAM_CLIMATE_2023_MAY"
   DIVIPOLA: "support/DIVIPOLA.csv"
   IDEAM_STATIONS_2023_MAY: "support/IDEAM_STATIONS_2023_MAY.csv"
+  
