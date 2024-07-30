@@ -170,8 +170,7 @@ look_up <- function(keywords, module = "all", logic = "or", language = "EN") {
       ), ]
     } else if (logic == "and") {
       found <- listed[
-        rowSums(vapply
-        (
+        rowSums(vapply(
           keywords,
           function(keyword) {
             grepl(keyword,
@@ -191,8 +190,7 @@ look_up <- function(keywords, module = "all", logic = "or", language = "EN") {
       ), ]
     } else if (logic == "and") {
       found <- listed[
-        rowSums(vapply
-        (
+        rowSums(vapply(
           keywords,
           function(keyword) {
             grepl(keyword,
