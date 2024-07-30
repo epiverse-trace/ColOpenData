@@ -105,7 +105,7 @@ For examples on how to consult the data please refer to [Population Projection w
 ## List Data
 
 ::: {style="text-align: justify;"}
-To check available datasets you can use the `list_datasets()` function. This function can also be filtered with the `module` parameter to indicate a specific module. Default is `"all"`, but can be filtered by `"demographic"`, `"geospatial"`, `"climate"` and `"population_projections"`.
+To check available datasets you can use the `list_datasets()` function. The associated information can be filtered with the `module` parameter to indicate a specific module. Default is `"all"`, but can be filtered by `"demographic"`, `"geospatial"`, `"climate"` and `"population_projections"`. This function can also be presented both in English (EN) and Spanish (ES) with the `language` parameter. Default is `"ES"`, but can be `"EN"` as well.  
 :::
 
 ```{r setup}
@@ -113,14 +113,14 @@ library(ColOpenData)
 ```
 
 ```{r list datasets}
-datasets <- list_datasets()
+datasets <- list_datasets(language = "EN")
 head(datasets)
 ```
 
 To list only demographic datasets we can use:
 
 ```{r list demographic datasets}
-demographic_datasets <- list_datasets(module = "demographic")
+demographic_datasets <- list_datasets(module = "demographic", language = "EN")
 head(demographic_datasets)
 ```
 
@@ -135,9 +135,10 @@ Using this function, we can retrieve all names, source, aggregation level and in
 ::: {style="text-align: justify;"}
 Sometimes, going through each dataset to find specific information can be tiring. If you want to look for an specific word or set of words within datasets quickly, you can use the `look_up()` function, which takes by parameter:
 
-1.  The module you wish to search within (default is `"all"`).
-2.  The word (or words) you are interested in (input as a character or vector of characters).
+1.  The word (or words) you are interested in (input as a character or vector of characters).
+2.  The module you wish to search within (default is `"all"`).
 3.  The search condition: `"and"` to find datasets containing all specified words, or `"or"` to find datasets containing any of the specified words (default is `"or"`). If you are searching for a single word, you can use either `"and"`or `"or"` for this parameter.
+4.  The language the keywords would be, can be `"EN"` or `"ES"` (default is `"EN"`).
 :::
 
 ```{r list datasets with information by age}
@@ -149,7 +150,7 @@ We can specify a module to make a more narrow and precise search.
 
 ```{r list datasets with information by area and sex in demographic module}
 area_sex_datasets <- look_up(
-  module = "demographic", keywords = c("area", "sex"),
+  keywords = c("area", "sex"), module = "demographic",
   logic = "and"
 )
 head(area_sex_datasets)
@@ -158,22 +159,22 @@ head(area_sex_datasets)
 ## Geospatial dictionaries
 
 ::: {style="text-align: justify;"}
-Datasets inside the geospatial module contain a summarized version of the census and a dictionary is needed to understand all aggregated variables. These dictionaries contain the necessary metadata to use the available information. To retrieve them, we can use the function `geospatial_dictionary()`, using the spatial level as a parameter:
+Datasets inside the geospatial module contain a summarized version of the census and a dictionary is needed to understand all aggregated variables. These dictionaries contain the necessary metadata to use the available information. To retrieve them, we can use the function `geospatial_dictionary()`, using the spatial level and language as parameters:
 :::
 
 ```{r dictionary for MGNCNPV at municipalities}
-dict_mpio <- geospatial_dictionary("municipality")
+dict_mpio <- geospatial_dictionary("municipality", "EN")
 head(dict_mpio)
 ```
 
 ## Climate tags
 
 ::: {style="text-align: justify;"}
-Climate data is not stored in multiple datasets but as an unique dataset with numerous tags. These tags can also be consulted through the function `climate_tags()`.
+Climate data is not stored in multiple datasets but as an unique dataset with numerous tags. These tags can also be consulted through the function `get_climate_tags()`, which takes by parameter the tags language, that can be `"EN"` or `"ES"` (default is `"ES"`).
 :::
 
 ```{r dicionary for climate data}
-dict_climate <- climate_tags()
+dict_climate <- get_climate_tags()
 head(dict_climate)
 ```
 

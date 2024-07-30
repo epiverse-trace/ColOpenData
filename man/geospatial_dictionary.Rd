@@ -4,7 +4,7 @@
 \alias{geospatial_dictionary}
 \title{Download data dictionaries}
 \usage{
-geospatial_dictionary(spatial_level)
+geospatial_dictionary(spatial_level, language = "ES")
 }
 \arguments{
 \item{spatial_level}{character with the spatial level to be consulted:
@@ -20,16 +20,19 @@ class.
 \item \code{"ZU" } or \code{"urban_zone"}: Urban Zone.
 \item \code{"MZN"} or \code{"block"}: Block.
 }}
+
+\item{language}{language of the dictionary variables (\code{"EN"},
+\code{"ES"}. Default is \code{"ES"}.}
 }
 \value{
 \code{data.frame} object with geospatial data dictionary.
 }
 \description{
 Retrieve geospatial data dictionaries to understand internal tags and named
-columns. Dictionaries are only available in Spanish.
+columns. Dictionaries are available in English and Spanish.
 }
 \examples{
-dict <- geospatial_dictionary("setu")
+dict <- geospatial_dictionary("setu", "EN")
 head(dict)
 
 }

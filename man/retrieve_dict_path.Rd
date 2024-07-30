@@ -4,13 +4,13 @@
 \alias{retrieve_dict_path}
 \title{Retrieve dictionary path of named dataset}
 \usage{
-retrieve_dict_path(dataset)
+retrieve_dict_path(dict_name)
 }
 \arguments{
 \item{dataset}{character with the dictionary name.}
 }
 \value{
-character with path to retrieve the dataset from server.
+character with path to retrieve the dataset.
 }
 \description{
 Dictionaries are not included in the general documentation file. Therefore,

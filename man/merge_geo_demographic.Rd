@@ -8,7 +8,8 @@ merge_geo_demographic(demographic_dataset)
 }
 \arguments{
 \item{demographic_dataset}{character with the demographic dataset name.
-Please use \code{list_datasets("demographic")} to check available datasets.}
+Please use \code{list_datasets(""EN"M demographic")} to check available
+datasets.}
 }
 \value{
 \code{data.frame} object with the merged data.

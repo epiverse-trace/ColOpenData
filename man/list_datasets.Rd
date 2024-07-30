@@ -4,11 +4,14 @@
 \alias{list_datasets}
 \title{Download list of available datasets}
 \usage{
-list_datasets(module = "all")
+list_datasets(module = "all", language = "ES")
 }
 \arguments{
 \item{module}{character with module to be consulted (\code{"demographic"},
 \code{"geospatial"}, \code{"climate"}). Default is \code{"all"}.}
+
+\item{language}{language of all variables (\code{"EN"}, \code{"ES"}.
+Default is \code{"ES"}.}
 }
 \value{
 \code{data.frame} object with the available datasets.
@@ -18,7 +21,7 @@ List all available datasets by name, including group, source, year, level,
 category and description.
 }
 \examples{
-list <- list_datasets("geospatial")
+list <- list_datasets("geospatial", "EN")
 head(list)
 
 }

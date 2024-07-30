@@ -42,7 +42,7 @@ retrieve_path <- function(dataset) {
     population_projections = ".csv"
   )
   base_path <- retrieve_value_key("base_path")
-  all_datasets <- list_datasets()
+  all_datasets <- list_datasets(language = "EN")
   dataset_info <- all_datasets[which(all_datasets[["name"]] == dataset), ]
   if (nrow(dataset_info) == 1) {
     group_path <- retrieve_value_key(dataset_info[["group"]])
@@ -85,15 +85,17 @@ retrieve_climate_path <- function() {
 #'
 #' @param dataset character with the dictionary name.
 #'
-#' @return character with path to retrieve the dataset from server.
+#' @return character with path to retrieve the dataset.
 #'
 #' @keywords internal
-retrieve_dict_path <- function(dataset) {
-  base_path <- retrieve_value_key("base_path")
-  group_path <- retrieve_value_key("dictionaries")
-  dataset_path <- sprintf("%s.csv", dataset)
-  file_path <- file.path(base_path, group_path, dataset_path)
-  return(file_path)
+retrieve_dict_path <- function(dict_name) {
+  dict_file <- system.file(
+    "extdata",
+    dict_name,
+    package = "ColOpenData",
+    mustWork = TRUE
+  )
+  return(dict_file)
 }
 
 #' Retrieve support dataset path

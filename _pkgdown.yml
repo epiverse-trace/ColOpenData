@@ -51,7 +51,7 @@ reference:
 - subtitle: Helper functions
   contents:
   - geospatial_dictionary
-  - climate_tags
+  - get_climate_tags
   
 - title: DIVIPOLA
 - subtitle: DIVIPOLA table
@@ -61,3 +61,9 @@ reference:
   contents:
   - starts_with("name")
   - starts_with("code")
+  
+- title: Data
+  contents:
+  - climate_tags
+  - datasets_list
+  - geospatial_dictionaries
