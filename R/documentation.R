@@ -169,11 +169,19 @@ look_up <- function(keywords, module = "all", logic = "or", language = "EN") {
         ignore.case = TRUE
       ), ]
     } else if (logic == "and") {
-      found <- listed[rowSums(sapply(keywords,
-        grepl,
-        listed[["descripcion"]],
-        ignore.case = TRUE
-      )) == length(keywords), ]
+      found <- listed[
+        rowSums(vapply
+        (
+          keywords,
+          function(keyword) {
+            grepl(keyword,
+              listed[["descripcion"]],
+              ignore.case = TRUE
+            )
+          },
+          logical(nrow(listed))
+        )) == length(keywords),
+      ]
     }
   } else if (language == "EN") {
     if (logic == "or") {
@@ -182,11 +190,19 @@ look_up <- function(keywords, module = "all", logic = "or", language = "EN") {
         ignore.case = TRUE
       ), ]
     } else if (logic == "and") {
-      found <- listed[rowSums(sapply(keywords,
-        grepl,
-        listed[["description"]],
-        ignore.case = TRUE
-      )) == length(keywords), ]
+      found <- listed[
+        rowSums(vapply
+        (
+          keywords,
+          function(keyword) {
+            grepl(keyword,
+              listed[["description"]],
+              ignore.case = TRUE
+            )
+          },
+          logical(nrow(listed))
+        )) == length(keywords),
+      ]
     }
   }
   if (nrow(found) == 0) {
