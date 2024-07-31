@@ -128,3 +128,15 @@ ggplot(proportions_wss, aes(
     plot.title = element_text(hjust = 0.5)
   )
 ```
+
+## Merge geospatial and demographic
+
+::: {style="text-align: justify;"}
+Geospatial and demographic data can be merged based on the spatial aggregation level. While geospatial data can be aggregated down to the block level, demographic data is typically available only at the department and municipality levels.
+
+To download a merged dataset, we only will need the name of the desired demographic dataset, being careful about the requested level of aggregation. We would use the function `merge_geo_demographic()` using the dataset name as a parameter.s
+:::
+
+```{r merge geo dem, eval = FALSE}
+merged_data <- merge_geo_demographic("DANE_CNPVV_2018_8VD")
+```
