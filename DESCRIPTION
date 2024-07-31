@@ -1,5 +1,5 @@
 Package: ColOpenData
-Title: Colombian Open Data Download and Wrangling
+Title: Download Colombian Demographic, Climate and Geospatial Data
 Version: 0.2.0
 Authors@R: c(
     person("Maria Camila", "Tavera-Cifuentes", , "mc.tavera@uniandes.edu.co", role = c("aut", "cre"),
@@ -21,12 +21,11 @@ Authors@R: c(
     person("Joshua W.", "Lambert", , "joshua.lambert@lshtm.ac.uk", role = "rev",
            comment = c(ORCID = "0000-0001-5218-3046"))
   )
-Description: ColOpenData is a package that acquires and wrangles Colombian
-    socioeconomic, geospatial, population and climate data. It solves the
-    problem of Colombian data being issued in different web pages and
-    sources by using functions that allow the user to select the desired
-    database and download it without having to do the exhausting
-    acquisition process.
+Description: This package acquires and wrangles Colombian socioeconomic,
+    geospatial, population and climate data. It solves the problem of
+    Colombian data being issued in different web pages and sources by
+    using functions that allow the user to select the desired database and
+    download it without having to do the exhausting acquisition process.
 License: MIT + file LICENSE
 URL: https://github.com/epiverse-trace/ColOpenData,
     https://epiverse-trace.github.io/ColOpenData/

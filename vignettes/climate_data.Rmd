@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 ```
 
 ::: {style="text-align: justify;"}
-**ColOpenData** can be used to access open climate data from Colombia. This climate data is retrieved from the Institute of Hydrology, Meteorology and Environmental Studies [(IDEAM)](http://www.ideam.gov.co/). The climate module allows the user to consult climate data for any Region of Interest (ROI) inside the country and retrieve the information for each station contained inside.
+**ColOpenData** can be used to access open climate data from Colombia. This climate data is retrieved from the Institute of Hydrology, Meteorology and Environmental Studies [(IDEAM)](https://www.ideam.gov.co/). The climate module allows the user to consult climate data for any Region of Interest (ROI) inside the country and retrieve the information for each station contained inside.
 
 The available information from IDEAM can be accessed using specific internal tags as follows:
 :::
@@ -111,7 +111,7 @@ head(stations)
 ```
 
 ::: {style="text-align: justify;"}
-We can see that in the region there are 129 stations. Different categories are recorded by different stations, and can be checked at the column [categoria]{.underline}. To understand the category of each station we can use the [definition catalog](http://www.ideam.gov.co/documents/10182/557765/Definiciones+CNE.pdf/25e1cca5-ee47-4eaf-86c0-c4f5192a9937) provided by IDEAM. Stations under the categories *Climática Principal* and *Climática Ordinaria* have records of temperature.
+We can see that in the region there are 129 stations. Different categories are recorded by different stations, and can be checked at the column [categoria]{.underline}. Stations under the categories *Climática Principal* and *Climática Ordinaria* have records of temperature.
 
 Some stations are suspended, which means they are not taking measurements at the moment. This information is found at the column [estado]{.underline} where, if suspended, the observation would be *Suspendida* Also, at the column [fecha_suspension]{.underline} the observation would be different from `NA`, since suspended stations would have an associated suspension date. However, even if a station is suspended, the historical data (up to the suspension date) can be accessed.
 
