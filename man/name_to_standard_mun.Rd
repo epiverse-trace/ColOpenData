@@ -22,8 +22,8 @@ their respective official names from DIVIPOLA.
 }
 \examples{
 
-dptos <- c("Bogota", "Antioquia", "Tolima")
-mpios <- c("Bogota DC", "Carmen del Viboral", "CarmendeApicala")
+dptos <- c("Bogota", "Tolima")
+mpios <- c("Bogota DC", "CarmendeApicala")
 name_to_standard_mun(dptos, mpios)
 
 }

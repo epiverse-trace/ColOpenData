@@ -28,12 +28,14 @@ Download climate data from stations contained in a Region of Interest
 provided by IDEAM.
 }
 \examples{
-lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)
-lon <- c(-75.678072, -75.327859, -75.327859, -75.678072, -75.678072)
+\dontrun{
+lat <- c(4.172817, 4.172817, 4.136050, 4.136050, 4.172817)
+lon <- c(-74.749121, -74.686169, -74.686169, -74.749121, -74.749121)
 polygon <- sf::st_polygon(x = list(cbind(lon, lat)))
 geometry <- sf::st_sfc(polygon)
 roi <- sf::st_as_sf(geometry)
-tssm <- download_climate_geom(roi, "2021-11-14", "2021-11-20", "TSSM_CON")
-head(tssm)
+ptpm <- download_climate_geom(roi, "2022-11-14", "2022-11-20", "PTPM_CON")
+head(ptpm)
+}
 
 }

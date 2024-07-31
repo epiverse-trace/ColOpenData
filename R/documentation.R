@@ -176,7 +176,7 @@ look_up <- function(keywords, module = "all", logic = "or", language = "EN") {
         ignore.case = TRUE
       )) == length(keywords), ]
     }
-  } else if (language == "EN") {
+  } else {
     if (logic == "or") {
       found <- listed[grep(paste(keywords, collapse = "|"),
         listed[["description"]],

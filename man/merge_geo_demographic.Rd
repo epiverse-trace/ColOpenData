@@ -22,7 +22,9 @@ municipality, this function can only merge with geospatial datasets that
 present municipality or department level.
 }
 \examples{
+\dontrun{
 merged <- merge_geo_demographic("DANE_CNPVV_2018_9VD")
 head(merged)
+}
 
 }

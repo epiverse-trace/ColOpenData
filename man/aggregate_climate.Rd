@@ -24,13 +24,15 @@ since are the ones where methodology for aggregation is explicitly provided
 by the source.
 }
 \examples{
-lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)
-lon <- c(-75.678072, -75.327859, -75.327859, -75.678072, -75.678072)
+\dontrun{
+lat <- c(4.172817, 4.172817, 4.136050, 4.136050, 4.172817)
+lon <- c(-74.749121, -74.686169, -74.686169, -74.749121, -74.749121)
 polygon <- sf::st_polygon(x = list(cbind(lon, lat)))
 geometry <- sf::st_sfc(polygon)
 roi <- sf::st_as_sf(geometry)
-tssm <- download_climate_geom(roi, "2021-11-14", "2021-11-20", "TSSM_CON")
-daily_tssm <- aggregate_climate(tssm, "day")
-head(daily_tssm)
+ptpm <- download_climate_geom(roi, "2022-11-01", "2022-12-31", "PTPM_CON")
+monthly_ptpm <- aggregate_climate(ptpm, "month")
+head(monthly_ptpm)
+}
 
 }

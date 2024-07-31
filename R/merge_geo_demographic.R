@@ -12,8 +12,10 @@
 #' datasets.
 #'
 #' @examples
+#' \dontrun{
 #' merged <- merge_geo_demographic("DANE_CNPVV_2018_9VD")
 #' head(merged)
+#' }
 #'
 #' @return \code{data.frame} object with the merged data.
 #' @export

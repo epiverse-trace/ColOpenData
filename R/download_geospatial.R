@@ -26,8 +26,10 @@
 #' socioeconomic information. Default is \code{TRUE}.
 #'
 #' @examples
+#' \dontrun{
 #' departments <- download_geospatial("department", TRUE, FALSE)
 #' head(departments)
+#' }
 #'
 #' @return \code{data.frame} object with downloaded data.
 #'

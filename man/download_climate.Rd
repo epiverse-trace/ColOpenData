@@ -29,7 +29,9 @@ department. This data is retrieved from local meteorological stations
 provided by IDEAM.
 }
 \examples{
-tssm <- download_climate("17001", "2021-11-14", "2021-11-20", "TSSM_CON")
-head(tssm)
+\dontrun{
+ptpm <- download_climate("73148", "2021-11-14", "2021-11-20", "PTPM_CON")
+head(ptpm)
+}
 
 }
