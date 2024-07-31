@@ -7,7 +7,11 @@
 retrieve_dict_path(dict_name)
 }
 \arguments{
+<<<<<<< Updated upstream
 \item{dict_name}{character with the dictionary name.}
+=======
+\item{dict_name}{character with the dictionary file name.}
+>>>>>>> Stashed changes
 }
 \value{
 character with path to retrieve the dataset.

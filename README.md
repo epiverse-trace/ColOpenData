@@ -5,7 +5,7 @@
 <!-- `packagename` is extracted from the DESCRIPTION file -->
 <!-- `gh_repo` is extracted via a special environment variable in GitHub Actions -->
 
-# ColOpenData <img src="man/figures/logo.svg" align="right" width="200"/>
+# {{ packagename }} <img src="man/figures/logo.svg" align="right" width="200"/>
 
 <!-- badges: start -->
 
@@ -48,9 +48,14 @@ pak::pak("epiverse-trace/ColOpenData")
 **ColOpenData** contains data from two public data sources: The National
 Administrative Department of Statistics
 [(DANE)](https://www.dane.gov.co/index.php/en/), and the Institute of
+<<<<<<< Updated upstream
 Hydrology, Meteorology and Environmental Studies
 [(IDEAM)](https://www.ideam.gov.co/). The available data is divided in
 four categories:
+=======
+Hydrology, Meteorology and Environmental Studies (IDEAM). The available
+data is divided in four categories:
+>>>>>>> Stashed changes
 
 - **Demographic:** Demographic and Socioeconomic data presents
   information from the National Population and Dwelling Census (CNPV)
@@ -73,8 +78,12 @@ four categories:
   provided by IDEAM, containing historical data from the first station
   in the country (January 1st 1920) until May 31st 2023. This backup
   includes temperature, precipitation, sunshine duration, wind
+<<<<<<< Updated upstream
   direction, among others. More information can be found at [IDEAM
   website](https://www.ideam.gov.co/).
+=======
+  direction, among others.
+>>>>>>> Stashed changes
 
 - **Population projections:** Population Projections data contains the
   population projections and back projections from 1950 to 2070,
