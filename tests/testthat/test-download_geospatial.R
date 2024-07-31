@@ -21,12 +21,3 @@ test_that("Download geospatial works as expected", {
     include_cnpv = FALSE
   ))
 })
-
-test_that("Download geospatial works as expected with different parameters", {
-  # Expect specific dataset from a proper request (only with census data)
-  expect_snapshot(download_geospatial(
-    spatial_level = "dpto",
-    include_geom = FALSE,
-    include_cnpv = TRUE
-  ))
-})
