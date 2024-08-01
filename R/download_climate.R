@@ -214,6 +214,7 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
 #' The geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}.
 #'
 #' @examples
+#' \dontrun{
 #' lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)
 #' lon <- c(-75.678072, -75.327859, -75.327859, -75.678072, -75.678072)
 #' polygon <- sf::st_polygon(x = list(cbind(lon, lat)))
@@ -221,6 +222,7 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
 #' roi <- sf::st_as_sf(geometry)
 #' stations <- stations_in_roi(roi)
 #' head(stations)
+#' }
 #'
 #' @return \code{data.frame} object with the stations contained inside the
 #' consulted geometry.

@@ -2,7 +2,7 @@
 
     Code
       download_pop_projections(spatial_level = "department", start_year = 2010,
-        end_year = 2027)
+        end_year = 2020)
     Condition
       Warning:
       Use of .data in tidyselect expressions was deprecated in tidyselect 1.2.0.
@@ -1008,795 +1008,102 @@
       991                   05                  Antioquia 2020
       992                   05                  Antioquia 2020
       993                   05                  Antioquia 2020
-      994                   05                  Antioquia 2021
-      995                   05                  Antioquia 2021
-      996                   05                  Antioquia 2021
-      997                   05                  Antioquia 2022
-      998                   05                  Antioquia 2022
-      999                   05                  Antioquia 2022
-      1000                  05                  Antioquia 2023
-      1001                  05                  Antioquia 2023
-      1002                  05                  Antioquia 2023
-      1003                  05                  Antioquia 2024
-      1004                  05                  Antioquia 2024
-      1005                  05                  Antioquia 2024
-      1006                  05                  Antioquia 2025
-      1007                  05                  Antioquia 2025
-      1008                  05                  Antioquia 2025
-      1009                  05                  Antioquia 2026
-      1010                  05                  Antioquia 2026
-      1011                  05                  Antioquia 2026
-      1012                  05                  Antioquia 2027
-      1013                  05                  Antioquia 2027
-      1014                  05                  Antioquia 2027
-      1015                  08                  Atlántico 2020
-      1016                  08                  Atlántico 2020
-      1017                  08                  Atlántico 2020
-      1018                  08                  Atlántico 2021
-      1019                  08                  Atlántico 2021
-      1020                  08                  Atlántico 2021
-      1021                  08                  Atlántico 2022
-      1022                  08                  Atlántico 2022
-      1023                  08                  Atlántico 2022
-      1024                  08                  Atlántico 2023
-      1025                  08                  Atlántico 2023
-      1026                  08                  Atlántico 2023
-      1027                  08                  Atlántico 2024
-      1028                  08                  Atlántico 2024
-      1029                  08                  Atlántico 2024
-      1030                  08                  Atlántico 2025
-      1031                  08                  Atlántico 2025
-      1032                  08                  Atlántico 2025
-      1033                  08                  Atlántico 2026
-      1034                  08                  Atlántico 2026
-      1035                  08                  Atlántico 2026
-      1036                  08                  Atlántico 2027
-      1037                  08                  Atlántico 2027
-      1038                  08                  Atlántico 2027
-      1039                  11               Bogotá, D.C. 2020
-      1040                  11               Bogotá, D.C. 2020
-      1041                  11               Bogotá, D.C. 2020
-      1042                  11               Bogotá, D.C. 2021
-      1043                  11               Bogotá, D.C. 2021
-      1044                  11               Bogotá, D.C. 2021
-      1045                  11               Bogotá, D.C. 2022
-      1046                  11               Bogotá, D.C. 2022
-      1047                  11               Bogotá, D.C. 2022
-      1048                  11               Bogotá, D.C. 2023
-      1049                  11               Bogotá, D.C. 2023
-      1050                  11               Bogotá, D.C. 2023
-      1051                  11               Bogotá, D.C. 2024
-      1052                  11               Bogotá, D.C. 2024
-      1053                  11               Bogotá, D.C. 2024
-      1054                  11               Bogotá, D.C. 2025
-      1055                  11               Bogotá, D.C. 2025
-      1056                  11               Bogotá, D.C. 2025
-      1057                  11               Bogotá, D.C. 2026
-      1058                  11               Bogotá, D.C. 2026
-      1059                  11               Bogotá, D.C. 2026
-      1060                  11               Bogotá, D.C. 2027
-      1061                  11               Bogotá, D.C. 2027
-      1062                  11               Bogotá, D.C. 2027
-      1063                  13                    Bolívar 2020
-      1064                  13                    Bolívar 2020
-      1065                  13                    Bolívar 2020
-      1066                  13                    Bolívar 2021
-      1067                  13                    Bolívar 2021
-      1068                  13                    Bolívar 2021
-      1069                  13                    Bolívar 2022
-      1070                  13                    Bolívar 2022
-      1071                  13                    Bolívar 2022
-      1072                  13                    Bolívar 2023
-      1073                  13                    Bolívar 2023
-      1074                  13                    Bolívar 2023
-      1075                  13                    Bolívar 2024
-      1076                  13                    Bolívar 2024
-      1077                  13                    Bolívar 2024
-      1078                  13                    Bolívar 2025
-      1079                  13                    Bolívar 2025
-      1080                  13                    Bolívar 2025
-      1081                  13                    Bolívar 2026
-      1082                  13                    Bolívar 2026
-      1083                  13                    Bolívar 2026
-      1084                  13                    Bolívar 2027
-      1085                  13                    Bolívar 2027
-      1086                  13                    Bolívar 2027
-      1087                  15                     Boyacá 2020
-      1088                  15                     Boyacá 2020
-      1089                  15                     Boyacá 2020
-      1090                  15                     Boyacá 2021
-      1091                  15                     Boyacá 2021
-      1092                  15                     Boyacá 2021
-      1093                  15                     Boyacá 2022
-      1094                  15                     Boyacá 2022
-      1095                  15                     Boyacá 2022
-      1096                  15                     Boyacá 2023
-      1097                  15                     Boyacá 2023
-      1098                  15                     Boyacá 2023
-      1099                  15                     Boyacá 2024
-      1100                  15                     Boyacá 2024
-      1101                  15                     Boyacá 2024
-      1102                  15                     Boyacá 2025
-      1103                  15                     Boyacá 2025
-      1104                  15                     Boyacá 2025
-      1105                  15                     Boyacá 2026
-      1106                  15                     Boyacá 2026
-      1107                  15                     Boyacá 2026
-      1108                  15                     Boyacá 2027
-      1109                  15                     Boyacá 2027
-      1110                  15                     Boyacá 2027
-      1111                  17                     Caldas 2020
-      1112                  17                     Caldas 2020
-      1113                  17                     Caldas 2020
-      1114                  17                     Caldas 2021
-      1115                  17                     Caldas 2021
-      1116                  17                     Caldas 2021
-      1117                  17                     Caldas 2022
-      1118                  17                     Caldas 2022
-      1119                  17                     Caldas 2022
-      1120                  17                     Caldas 2023
-      1121                  17                     Caldas 2023
-      1122                  17                     Caldas 2023
-      1123                  17                     Caldas 2024
-      1124                  17                     Caldas 2024
-      1125                  17                     Caldas 2024
-      1126                  17                     Caldas 2025
-      1127                  17                     Caldas 2025
-      1128                  17                     Caldas 2025
-      1129                  17                     Caldas 2026
-      1130                  17                     Caldas 2026
-      1131                  17                     Caldas 2026
-      1132                  17                     Caldas 2027
-      1133                  17                     Caldas 2027
-      1134                  17                     Caldas 2027
-      1135                  18                    Caquetá 2020
-      1136                  18                    Caquetá 2020
-      1137                  18                    Caquetá 2020
-      1138                  18                    Caquetá 2021
-      1139                  18                    Caquetá 2021
-      1140                  18                    Caquetá 2021
-      1141                  18                    Caquetá 2022
-      1142                  18                    Caquetá 2022
-      1143                  18                    Caquetá 2022
-      1144                  18                    Caquetá 2023
-      1145                  18                    Caquetá 2023
-      1146                  18                    Caquetá 2023
-      1147                  18                    Caquetá 2024
-      1148                  18                    Caquetá 2024
-      1149                  18                    Caquetá 2024
-      1150                  18                    Caquetá 2025
-      1151                  18                    Caquetá 2025
-      1152                  18                    Caquetá 2025
-      1153                  18                    Caquetá 2026
-      1154                  18                    Caquetá 2026
-      1155                  18                    Caquetá 2026
-      1156                  18                    Caquetá 2027
-      1157                  18                    Caquetá 2027
-      1158                  18                    Caquetá 2027
-      1159                  19                      Cauca 2020
-      1160                  19                      Cauca 2020
-      1161                  19                      Cauca 2020
-      1162                  19                      Cauca 2021
-      1163                  19                      Cauca 2021
-      1164                  19                      Cauca 2021
-      1165                  19                      Cauca 2022
-      1166                  19                      Cauca 2022
-      1167                  19                      Cauca 2022
-      1168                  19                      Cauca 2023
-      1169                  19                      Cauca 2023
-      1170                  19                      Cauca 2023
-      1171                  19                      Cauca 2024
-      1172                  19                      Cauca 2024
-      1173                  19                      Cauca 2024
-      1174                  19                      Cauca 2025
-      1175                  19                      Cauca 2025
-      1176                  19                      Cauca 2025
-      1177                  19                      Cauca 2026
-      1178                  19                      Cauca 2026
-      1179                  19                      Cauca 2026
-      1180                  19                      Cauca 2027
-      1181                  19                      Cauca 2027
-      1182                  19                      Cauca 2027
-      1183                  20                      Cesar 2020
-      1184                  20                      Cesar 2020
-      1185                  20                      Cesar 2020
-      1186                  20                      Cesar 2021
-      1187                  20                      Cesar 2021
-      1188                  20                      Cesar 2021
-      1189                  20                      Cesar 2022
-      1190                  20                      Cesar 2022
-      1191                  20                      Cesar 2022
-      1192                  20                      Cesar 2023
-      1193                  20                      Cesar 2023
-      1194                  20                      Cesar 2023
-      1195                  20                      Cesar 2024
-      1196                  20                      Cesar 2024
-      1197                  20                      Cesar 2024
-      1198                  20                      Cesar 2025
-      1199                  20                      Cesar 2025
-      1200                  20                      Cesar 2025
-      1201                  20                      Cesar 2026
-      1202                  20                      Cesar 2026
-      1203                  20                      Cesar 2026
-      1204                  20                      Cesar 2027
-      1205                  20                      Cesar 2027
-      1206                  20                      Cesar 2027
-      1207                  23                    Córdoba 2020
-      1208                  23                    Córdoba 2020
-      1209                  23                    Córdoba 2020
-      1210                  23                    Córdoba 2021
-      1211                  23                    Córdoba 2021
-      1212                  23                    Córdoba 2021
-      1213                  23                    Córdoba 2022
-      1214                  23                    Córdoba 2022
-      1215                  23                    Córdoba 2022
-      1216                  23                    Córdoba 2023
-      1217                  23                    Córdoba 2023
-      1218                  23                    Córdoba 2023
-      1219                  23                    Córdoba 2024
-      1220                  23                    Córdoba 2024
-      1221                  23                    Córdoba 2024
-      1222                  23                    Córdoba 2025
-      1223                  23                    Córdoba 2025
-      1224                  23                    Córdoba 2025
-      1225                  23                    Córdoba 2026
-      1226                  23                    Córdoba 2026
-      1227                  23                    Córdoba 2026
-      1228                  23                    Córdoba 2027
-      1229                  23                    Córdoba 2027
-      1230                  23                    Córdoba 2027
-      1231                  25               Cundinamarca 2020
-      1232                  25               Cundinamarca 2020
-      1233                  25               Cundinamarca 2020
-      1234                  25               Cundinamarca 2021
-      1235                  25               Cundinamarca 2021
-      1236                  25               Cundinamarca 2021
-      1237                  25               Cundinamarca 2022
-      1238                  25               Cundinamarca 2022
-      1239                  25               Cundinamarca 2022
-      1240                  25               Cundinamarca 2023
-      1241                  25               Cundinamarca 2023
-      1242                  25               Cundinamarca 2023
-      1243                  25               Cundinamarca 2024
-      1244                  25               Cundinamarca 2024
-      1245                  25               Cundinamarca 2024
-      1246                  25               Cundinamarca 2025
-      1247                  25               Cundinamarca 2025
-      1248                  25               Cundinamarca 2025
-      1249                  25               Cundinamarca 2026
-      1250                  25               Cundinamarca 2026
-      1251                  25               Cundinamarca 2026
-      1252                  25               Cundinamarca 2027
-      1253                  25               Cundinamarca 2027
-      1254                  25               Cundinamarca 2027
-      1255                  27                      Chocó 2020
-      1256                  27                      Chocó 2020
-      1257                  27                      Chocó 2020
-      1258                  27                      Chocó 2021
-      1259                  27                      Chocó 2021
-      1260                  27                      Chocó 2021
-      1261                  27                      Chocó 2022
-      1262                  27                      Chocó 2022
-      1263                  27                      Chocó 2022
-      1264                  27                      Chocó 2023
-      1265                  27                      Chocó 2023
-      1266                  27                      Chocó 2023
-      1267                  27                      Chocó 2024
-      1268                  27                      Chocó 2024
-      1269                  27                      Chocó 2024
-      1270                  27                      Chocó 2025
-      1271                  27                      Chocó 2025
-      1272                  27                      Chocó 2025
-      1273                  27                      Chocó 2026
-      1274                  27                      Chocó 2026
-      1275                  27                      Chocó 2026
-      1276                  27                      Chocó 2027
-      1277                  27                      Chocó 2027
-      1278                  27                      Chocó 2027
-      1279                  41                      Huila 2020
-      1280                  41                      Huila 2020
-      1281                  41                      Huila 2020
-      1282                  41                      Huila 2021
-      1283                  41                      Huila 2021
-      1284                  41                      Huila 2021
-      1285                  41                      Huila 2022
-      1286                  41                      Huila 2022
-      1287                  41                      Huila 2022
-      1288                  41                      Huila 2023
-      1289                  41                      Huila 2023
-      1290                  41                      Huila 2023
-      1291                  41                      Huila 2024
-      1292                  41                      Huila 2024
-      1293                  41                      Huila 2024
-      1294                  41                      Huila 2025
-      1295                  41                      Huila 2025
-      1296                  41                      Huila 2025
-      1297                  41                      Huila 2026
-      1298                  41                      Huila 2026
-      1299                  41                      Huila 2026
-      1300                  41                      Huila 2027
-      1301                  41                      Huila 2027
-      1302                  41                      Huila 2027
-      1303                  44                 La Guajira 2020
-      1304                  44                 La Guajira 2020
-      1305                  44                 La Guajira 2020
-      1306                  44                 La Guajira 2021
-      1307                  44                 La Guajira 2021
-      1308                  44                 La Guajira 2021
-      1309                  44                 La Guajira 2022
-      1310                  44                 La Guajira 2022
-      1311                  44                 La Guajira 2022
-      1312                  44                 La Guajira 2023
-      1313                  44                 La Guajira 2023
-      1314                  44                 La Guajira 2023
-      1315                  44                 La Guajira 2024
-      1316                  44                 La Guajira 2024
-      1317                  44                 La Guajira 2024
-      1318                  44                 La Guajira 2025
-      1319                  44                 La Guajira 2025
-      1320                  44                 La Guajira 2025
-      1321                  44                 La Guajira 2026
-      1322                  44                 La Guajira 2026
-      1323                  44                 La Guajira 2026
-      1324                  44                 La Guajira 2027
-      1325                  44                 La Guajira 2027
-      1326                  44                 La Guajira 2027
-      1327                  47                  Magdalena 2020
-      1328                  47                  Magdalena 2020
-      1329                  47                  Magdalena 2020
-      1330                  47                  Magdalena 2021
-      1331                  47                  Magdalena 2021
-      1332                  47                  Magdalena 2021
-      1333                  47                  Magdalena 2022
-      1334                  47                  Magdalena 2022
-      1335                  47                  Magdalena 2022
-      1336                  47                  Magdalena 2023
-      1337                  47                  Magdalena 2023
-      1338                  47                  Magdalena 2023
-      1339                  47                  Magdalena 2024
-      1340                  47                  Magdalena 2024
-      1341                  47                  Magdalena 2024
-      1342                  47                  Magdalena 2025
-      1343                  47                  Magdalena 2025
-      1344                  47                  Magdalena 2025
-      1345                  47                  Magdalena 2026
-      1346                  47                  Magdalena 2026
-      1347                  47                  Magdalena 2026
-      1348                  47                  Magdalena 2027
-      1349                  47                  Magdalena 2027
-      1350                  47                  Magdalena 2027
-      1351                  50                       Meta 2020
-      1352                  50                       Meta 2020
-      1353                  50                       Meta 2020
-      1354                  50                       Meta 2021
-      1355                  50                       Meta 2021
-      1356                  50                       Meta 2021
-      1357                  50                       Meta 2022
-      1358                  50                       Meta 2022
-      1359                  50                       Meta 2022
-      1360                  50                       Meta 2023
-      1361                  50                       Meta 2023
-      1362                  50                       Meta 2023
-      1363                  50                       Meta 2024
-      1364                  50                       Meta 2024
-      1365                  50                       Meta 2024
-      1366                  50                       Meta 2025
-      1367                  50                       Meta 2025
-      1368                  50                       Meta 2025
-      1369                  50                       Meta 2026
-      1370                  50                       Meta 2026
-      1371                  50                       Meta 2026
-      1372                  50                       Meta 2027
-      1373                  50                       Meta 2027
-      1374                  50                       Meta 2027
-      1375                  52                     Nariño 2020
-      1376                  52                     Nariño 2020
-      1377                  52                     Nariño 2020
-      1378                  52                     Nariño 2021
-      1379                  52                     Nariño 2021
-      1380                  52                     Nariño 2021
-      1381                  52                     Nariño 2022
-      1382                  52                     Nariño 2022
-      1383                  52                     Nariño 2022
-      1384                  52                     Nariño 2023
-      1385                  52                     Nariño 2023
-      1386                  52                     Nariño 2023
-      1387                  52                     Nariño 2024
-      1388                  52                     Nariño 2024
-      1389                  52                     Nariño 2024
-      1390                  52                     Nariño 2025
-      1391                  52                     Nariño 2025
-      1392                  52                     Nariño 2025
-      1393                  52                     Nariño 2026
-      1394                  52                     Nariño 2026
-      1395                  52                     Nariño 2026
-      1396                  52                     Nariño 2027
-      1397                  52                     Nariño 2027
-      1398                  52                     Nariño 2027
-      1399                  54         Norte de Santander 2020
-      1400                  54         Norte de Santander 2020
-      1401                  54         Norte de Santander 2020
-      1402                  54         Norte de Santander 2021
-      1403                  54         Norte de Santander 2021
-      1404                  54         Norte de Santander 2021
-      1405                  54         Norte de Santander 2022
-      1406                  54         Norte de Santander 2022
-      1407                  54         Norte de Santander 2022
-      1408                  54         Norte de Santander 2023
-      1409                  54         Norte de Santander 2023
-      1410                  54         Norte de Santander 2023
-      1411                  54         Norte de Santander 2024
-      1412                  54         Norte de Santander 2024
-      1413                  54         Norte de Santander 2024
-      1414                  54         Norte de Santander 2025
-      1415                  54         Norte de Santander 2025
-      1416                  54         Norte de Santander 2025
-      1417                  54         Norte de Santander 2026
-      1418                  54         Norte de Santander 2026
-      1419                  54         Norte de Santander 2026
-      1420                  54         Norte de Santander 2027
-      1421                  54         Norte de Santander 2027
-      1422                  54         Norte de Santander 2027
-      1423                  63                    Quindio 2020
-      1424                  63                    Quindio 2020
-      1425                  63                    Quindio 2020
-      1426                  63                    Quindio 2021
-      1427                  63                    Quindio 2021
-      1428                  63                    Quindio 2021
-      1429                  63                    Quindio 2022
-      1430                  63                    Quindio 2022
-      1431                  63                    Quindio 2022
-      1432                  63                    Quindio 2023
-      1433                  63                    Quindio 2023
-      1434                  63                    Quindio 2023
-      1435                  63                    Quindio 2024
-      1436                  63                    Quindio 2024
-      1437                  63                    Quindio 2024
-      1438                  63                    Quindio 2025
-      1439                  63                    Quindio 2025
-      1440                  63                    Quindio 2025
-      1441                  63                    Quindio 2026
-      1442                  63                    Quindio 2026
-      1443                  63                    Quindio 2026
-      1444                  63                    Quindio 2027
-      1445                  63                    Quindio 2027
-      1446                  63                    Quindio 2027
-      1447                  66                  Risaralda 2020
-      1448                  66                  Risaralda 2020
-      1449                  66                  Risaralda 2020
-      1450                  66                  Risaralda 2021
-      1451                  66                  Risaralda 2021
-      1452                  66                  Risaralda 2021
-      1453                  66                  Risaralda 2022
-      1454                  66                  Risaralda 2022
-      1455                  66                  Risaralda 2022
-      1456                  66                  Risaralda 2023
-      1457                  66                  Risaralda 2023
-      1458                  66                  Risaralda 2023
-      1459                  66                  Risaralda 2024
-      1460                  66                  Risaralda 2024
-      1461                  66                  Risaralda 2024
-      1462                  66                  Risaralda 2025
-      1463                  66                  Risaralda 2025
-      1464                  66                  Risaralda 2025
-      1465                  66                  Risaralda 2026
-      1466                  66                  Risaralda 2026
-      1467                  66                  Risaralda 2026
-      1468                  66                  Risaralda 2027
-      1469                  66                  Risaralda 2027
-      1470                  66                  Risaralda 2027
-      1471                  68                  Santander 2020
-      1472                  68                  Santander 2020
-      1473                  68                  Santander 2020
-      1474                  68                  Santander 2021
-      1475                  68                  Santander 2021
-      1476                  68                  Santander 2021
-      1477                  68                  Santander 2022
-      1478                  68                  Santander 2022
-      1479                  68                  Santander 2022
-      1480                  68                  Santander 2023
-      1481                  68                  Santander 2023
-      1482                  68                  Santander 2023
-      1483                  68                  Santander 2024
-      1484                  68                  Santander 2024
-      1485                  68                  Santander 2024
-      1486                  68                  Santander 2025
-      1487                  68                  Santander 2025
-      1488                  68                  Santander 2025
-      1489                  68                  Santander 2026
-      1490                  68                  Santander 2026
-      1491                  68                  Santander 2026
-      1492                  68                  Santander 2027
-      1493                  68                  Santander 2027
-      1494                  68                  Santander 2027
-      1495                  70                      Sucre 2020
-      1496                  70                      Sucre 2020
-      1497                  70                      Sucre 2020
-      1498                  70                      Sucre 2021
-      1499                  70                      Sucre 2021
-      1500                  70                      Sucre 2021
-      1501                  70                      Sucre 2022
-      1502                  70                      Sucre 2022
-      1503                  70                      Sucre 2022
-      1504                  70                      Sucre 2023
-      1505                  70                      Sucre 2023
-      1506                  70                      Sucre 2023
-      1507                  70                      Sucre 2024
-      1508                  70                      Sucre 2024
-      1509                  70                      Sucre 2024
-      1510                  70                      Sucre 2025
-      1511                  70                      Sucre 2025
-      1512                  70                      Sucre 2025
-      1513                  70                      Sucre 2026
-      1514                  70                      Sucre 2026
-      1515                  70                      Sucre 2026
-      1516                  70                      Sucre 2027
-      1517                  70                      Sucre 2027
-      1518                  70                      Sucre 2027
-      1519                  73                     Tolima 2020
-      1520                  73                     Tolima 2020
-      1521                  73                     Tolima 2020
-      1522                  73                     Tolima 2021
-      1523                  73                     Tolima 2021
-      1524                  73                     Tolima 2021
-      1525                  73                     Tolima 2022
-      1526                  73                     Tolima 2022
-      1527                  73                     Tolima 2022
-      1528                  73                     Tolima 2023
-      1529                  73                     Tolima 2023
-      1530                  73                     Tolima 2023
-      1531                  73                     Tolima 2024
-      1532                  73                     Tolima 2024
-      1533                  73                     Tolima 2024
-      1534                  73                     Tolima 2025
-      1535                  73                     Tolima 2025
-      1536                  73                     Tolima 2025
-      1537                  73                     Tolima 2026
-      1538                  73                     Tolima 2026
-      1539                  73                     Tolima 2026
-      1540                  73                     Tolima 2027
-      1541                  73                     Tolima 2027
-      1542                  73                     Tolima 2027
-      1543                  76            Valle del Cauca 2020
-      1544                  76            Valle del Cauca 2020
-      1545                  76            Valle del Cauca 2020
-      1546                  76            Valle del Cauca 2021
-      1547                  76            Valle del Cauca 2021
-      1548                  76            Valle del Cauca 2021
-      1549                  76            Valle del Cauca 2022
-      1550                  76            Valle del Cauca 2022
-      1551                  76            Valle del Cauca 2022
-      1552                  76            Valle del Cauca 2023
-      1553                  76            Valle del Cauca 2023
-      1554                  76            Valle del Cauca 2023
-      1555                  76            Valle del Cauca 2024
-      1556                  76            Valle del Cauca 2024
-      1557                  76            Valle del Cauca 2024
-      1558                  76            Valle del Cauca 2025
-      1559                  76            Valle del Cauca 2025
-      1560                  76            Valle del Cauca 2025
-      1561                  76            Valle del Cauca 2026
-      1562                  76            Valle del Cauca 2026
-      1563                  76            Valle del Cauca 2026
-      1564                  76            Valle del Cauca 2027
-      1565                  76            Valle del Cauca 2027
-      1566                  76            Valle del Cauca 2027
-      1567                  81                     Arauca 2020
-      1568                  81                     Arauca 2020
-      1569                  81                     Arauca 2020
-      1570                  81                     Arauca 2021
-      1571                  81                     Arauca 2021
-      1572                  81                     Arauca 2021
-      1573                  81                     Arauca 2022
-      1574                  81                     Arauca 2022
-      1575                  81                     Arauca 2022
-      1576                  81                     Arauca 2023
-      1577                  81                     Arauca 2023
-      1578                  81                     Arauca 2023
-      1579                  81                     Arauca 2024
-      1580                  81                     Arauca 2024
-      1581                  81                     Arauca 2024
-      1582                  81                     Arauca 2025
-      1583                  81                     Arauca 2025
-      1584                  81                     Arauca 2025
-      1585                  81                     Arauca 2026
-      1586                  81                     Arauca 2026
-      1587                  81                     Arauca 2026
-      1588                  81                     Arauca 2027
-      1589                  81                     Arauca 2027
-      1590                  81                     Arauca 2027
-      1591                  85                   Casanare 2020
-      1592                  85                   Casanare 2020
-      1593                  85                   Casanare 2020
-      1594                  85                   Casanare 2021
-      1595                  85                   Casanare 2021
-      1596                  85                   Casanare 2021
-      1597                  85                   Casanare 2022
-      1598                  85                   Casanare 2022
-      1599                  85                   Casanare 2022
-      1600                  85                   Casanare 2023
-      1601                  85                   Casanare 2023
-      1602                  85                   Casanare 2023
-      1603                  85                   Casanare 2024
-      1604                  85                   Casanare 2024
-      1605                  85                   Casanare 2024
-      1606                  85                   Casanare 2025
-      1607                  85                   Casanare 2025
-      1608                  85                   Casanare 2025
-      1609                  85                   Casanare 2026
-      1610                  85                   Casanare 2026
-      1611                  85                   Casanare 2026
-      1612                  85                   Casanare 2027
-      1613                  85                   Casanare 2027
-      1614                  85                   Casanare 2027
-      1615                  86                   Putumayo 2020
-      1616                  86                   Putumayo 2020
-      1617                  86                   Putumayo 2020
-      1618                  86                   Putumayo 2021
-      1619                  86                   Putumayo 2021
-      1620                  86                   Putumayo 2021
-      1621                  86                   Putumayo 2022
-      1622                  86                   Putumayo 2022
-      1623                  86                   Putumayo 2022
-      1624                  86                   Putumayo 2023
-      1625                  86                   Putumayo 2023
-      1626                  86                   Putumayo 2023
-      1627                  86                   Putumayo 2024
-      1628                  86                   Putumayo 2024
-      1629                  86                   Putumayo 2024
-      1630                  86                   Putumayo 2025
-      1631                  86                   Putumayo 2025
-      1632                  86                   Putumayo 2025
-      1633                  86                   Putumayo 2026
-      1634                  86                   Putumayo 2026
-      1635                  86                   Putumayo 2026
-      1636                  86                   Putumayo 2027
-      1637                  86                   Putumayo 2027
-      1638                  86                   Putumayo 2027
-      1639                  88 Archipiélago de San Andrés 2020
-      1640                  88 Archipiélago de San Andrés 2020
-      1641                  88 Archipiélago de San Andrés 2020
-      1642                  88 Archipiélago de San Andrés 2021
-      1643                  88 Archipiélago de San Andrés 2021
-      1644                  88 Archipiélago de San Andrés 2021
-      1645                  88 Archipiélago de San Andrés 2022
-      1646                  88 Archipiélago de San Andrés 2022
-      1647                  88 Archipiélago de San Andrés 2022
-      1648                  88 Archipiélago de San Andrés 2023
-      1649                  88 Archipiélago de San Andrés 2023
-      1650                  88 Archipiélago de San Andrés 2023
-      1651                  88 Archipiélago de San Andrés 2024
-      1652                  88 Archipiélago de San Andrés 2024
-      1653                  88 Archipiélago de San Andrés 2024
-      1654                  88 Archipiélago de San Andrés 2025
-      1655                  88 Archipiélago de San Andrés 2025
-      1656                  88 Archipiélago de San Andrés 2025
-      1657                  88 Archipiélago de San Andrés 2026
-      1658                  88 Archipiélago de San Andrés 2026
-      1659                  88 Archipiélago de San Andrés 2026
-      1660                  88 Archipiélago de San Andrés 2027
-      1661                  88 Archipiélago de San Andrés 2027
-      1662                  88 Archipiélago de San Andrés 2027
-      1663                  91                   Amazonas 2020
-      1664                  91                   Amazonas 2020
-      1665                  91                   Amazonas 2020
-      1666                  91                   Amazonas 2021
-      1667                  91                   Amazonas 2021
-      1668                  91                   Amazonas 2021
-      1669                  91                   Amazonas 2022
-      1670                  91                   Amazonas 2022
-      1671                  91                   Amazonas 2022
-      1672                  91                   Amazonas 2023
-      1673                  91                   Amazonas 2023
-      1674                  91                   Amazonas 2023
-      1675                  91                   Amazonas 2024
-      1676                  91                   Amazonas 2024
-      1677                  91                   Amazonas 2024
-      1678                  91                   Amazonas 2025
-      1679                  91                   Amazonas 2025
-      1680                  91                   Amazonas 2025
-      1681                  91                   Amazonas 2026
-      1682                  91                   Amazonas 2026
-      1683                  91                   Amazonas 2026
-      1684                  91                   Amazonas 2027
-      1685                  91                   Amazonas 2027
-      1686                  91                   Amazonas 2027
-      1687                  94                    Guainía 2020
-      1688                  94                    Guainía 2020
-      1689                  94                    Guainía 2020
-      1690                  94                    Guainía 2021
-      1691                  94                    Guainía 2021
-      1692                  94                    Guainía 2021
-      1693                  94                    Guainía 2022
-      1694                  94                    Guainía 2022
-      1695                  94                    Guainía 2022
-      1696                  94                    Guainía 2023
-      1697                  94                    Guainía 2023
-      1698                  94                    Guainía 2023
-      1699                  94                    Guainía 2024
-      1700                  94                    Guainía 2024
-      1701                  94                    Guainía 2024
-      1702                  94                    Guainía 2025
-      1703                  94                    Guainía 2025
-      1704                  94                    Guainía 2025
-      1705                  94                    Guainía 2026
-      1706                  94                    Guainía 2026
-      1707                  94                    Guainía 2026
-      1708                  94                    Guainía 2027
-      1709                  94                    Guainía 2027
-      1710                  94                    Guainía 2027
-      1711                  95                   Guaviare 2020
-      1712                  95                   Guaviare 2020
-      1713                  95                   Guaviare 2020
-      1714                  95                   Guaviare 2021
-      1715                  95                   Guaviare 2021
-      1716                  95                   Guaviare 2021
-      1717                  95                   Guaviare 2022
-      1718                  95                   Guaviare 2022
-      1719                  95                   Guaviare 2022
-      1720                  95                   Guaviare 2023
-      1721                  95                   Guaviare 2023
-      1722                  95                   Guaviare 2023
-      1723                  95                   Guaviare 2024
-      1724                  95                   Guaviare 2024
-      1725                  95                   Guaviare 2024
-      1726                  95                   Guaviare 2025
-      1727                  95                   Guaviare 2025
-      1728                  95                   Guaviare 2025
-      1729                  95                   Guaviare 2026
-      1730                  95                   Guaviare 2026
-      1731                  95                   Guaviare 2026
-      1732                  95                   Guaviare 2027
-      1733                  95                   Guaviare 2027
-      1734                  95                   Guaviare 2027
-      1735                  97                     Vaupés 2020
-      1736                  97                     Vaupés 2020
-      1737                  97                     Vaupés 2020
-      1738                  97                     Vaupés 2021
-      1739                  97                     Vaupés 2021
-      1740                  97                     Vaupés 2021
-      1741                  97                     Vaupés 2022
-      1742                  97                     Vaupés 2022
-      1743                  97                     Vaupés 2022
-      1744                  97                     Vaupés 2023
-      1745                  97                     Vaupés 2023
-      1746                  97                     Vaupés 2023
-      1747                  97                     Vaupés 2024
-      1748                  97                     Vaupés 2024
-      1749                  97                     Vaupés 2024
-      1750                  97                     Vaupés 2025
-      1751                  97                     Vaupés 2025
-      1752                  97                     Vaupés 2025
-      1753                  97                     Vaupés 2026
-      1754                  97                     Vaupés 2026
-      1755                  97                     Vaupés 2026
-      1756                  97                     Vaupés 2027
-      1757                  97                     Vaupés 2027
-      1758                  97                     Vaupés 2027
-      1759                  99                    Vichada 2020
-      1760                  99                    Vichada 2020
-      1761                  99                    Vichada 2020
-      1762                  99                    Vichada 2021
-      1763                  99                    Vichada 2021
-      1764                  99                    Vichada 2021
-      1765                  99                    Vichada 2022
-      1766                  99                    Vichada 2022
-      1767                  99                    Vichada 2022
-      1768                  99                    Vichada 2023
-      1769                  99                    Vichada 2023
-      1770                  99                    Vichada 2023
-      1771                  99                    Vichada 2024
-      1772                  99                    Vichada 2024
-      1773                  99                    Vichada 2024
-      1774                  99                    Vichada 2025
-      1775                  99                    Vichada 2025
-      1776                  99                    Vichada 2025
-      1777                  99                    Vichada 2026
-      1778                  99                    Vichada 2026
-      1779                  99                    Vichada 2026
-      1780                  99                    Vichada 2027
-      1781                  99                    Vichada 2027
-      1782                  99                    Vichada 2027
+      994                   08                  Atlántico 2020
+      995                   08                  Atlántico 2020
+      996                   08                  Atlántico 2020
+      997                   11               Bogotá, D.C. 2020
+      998                   11               Bogotá, D.C. 2020
+      999                   11               Bogotá, D.C. 2020
+      1000                  13                    Bolívar 2020
+      1001                  13                    Bolívar 2020
+      1002                  13                    Bolívar 2020
+      1003                  15                     Boyacá 2020
+      1004                  15                     Boyacá 2020
+      1005                  15                     Boyacá 2020
+      1006                  17                     Caldas 2020
+      1007                  17                     Caldas 2020
+      1008                  17                     Caldas 2020
+      1009                  18                    Caquetá 2020
+      1010                  18                    Caquetá 2020
+      1011                  18                    Caquetá 2020
+      1012                  19                      Cauca 2020
+      1013                  19                      Cauca 2020
+      1014                  19                      Cauca 2020
+      1015                  20                      Cesar 2020
+      1016                  20                      Cesar 2020
+      1017                  20                      Cesar 2020
+      1018                  23                    Córdoba 2020
+      1019                  23                    Córdoba 2020
+      1020                  23                    Córdoba 2020
+      1021                  25               Cundinamarca 2020
+      1022                  25               Cundinamarca 2020
+      1023                  25               Cundinamarca 2020
+      1024                  27                      Chocó 2020
+      1025                  27                      Chocó 2020
+      1026                  27                      Chocó 2020
+      1027                  41                      Huila 2020
+      1028                  41                      Huila 2020
+      1029                  41                      Huila 2020
+      1030                  44                 La Guajira 2020
+      1031                  44                 La Guajira 2020
+      1032                  44                 La Guajira 2020
+      1033                  47                  Magdalena 2020
+      1034                  47                  Magdalena 2020
+      1035                  47                  Magdalena 2020
+      1036                  50                       Meta 2020
+      1037                  50                       Meta 2020
+      1038                  50                       Meta 2020
+      1039                  52                     Nariño 2020
+      1040                  52                     Nariño 2020
+      1041                  52                     Nariño 2020
+      1042                  54         Norte de Santander 2020
+      1043                  54         Norte de Santander 2020
+      1044                  54         Norte de Santander 2020
+      1045                  63                    Quindio 2020
+      1046                  63                    Quindio 2020
+      1047                  63                    Quindio 2020
+      1048                  66                  Risaralda 2020
+      1049                  66                  Risaralda 2020
+      1050                  66                  Risaralda 2020
+      1051                  68                  Santander 2020
+      1052                  68                  Santander 2020
+      1053                  68                  Santander 2020
+      1054                  70                      Sucre 2020
+      1055                  70                      Sucre 2020
+      1056                  70                      Sucre 2020
+      1057                  73                     Tolima 2020
+      1058                  73                     Tolima 2020
+      1059                  73                     Tolima 2020
+      1060                  76            Valle del Cauca 2020
+      1061                  76            Valle del Cauca 2020
+      1062                  76            Valle del Cauca 2020
+      1063                  81                     Arauca 2020
+      1064                  81                     Arauca 2020
+      1065                  81                     Arauca 2020
+      1066                  85                   Casanare 2020
+      1067                  85                   Casanare 2020
+      1068                  85                   Casanare 2020
+      1069                  86                   Putumayo 2020
+      1070                  86                   Putumayo 2020
+      1071                  86                   Putumayo 2020
+      1072                  88 Archipiélago de San Andrés 2020
+      1073                  88 Archipiélago de San Andrés 2020
+      1074                  88 Archipiélago de San Andrés 2020
+      1075                  91                   Amazonas 2020
+      1076                  91                   Amazonas 2020
+      1077                  91                   Amazonas 2020
+      1078                  94                    Guainía 2020
+      1079                  94                    Guainía 2020
+      1080                  94                    Guainía 2020
+      1081                  95                   Guaviare 2020
+      1082                  95                   Guaviare 2020
+      1083                  95                   Guaviare 2020
+      1084                  97                     Vaupés 2020
+      1085                  97                     Vaupés 2020
+      1086                  97                     Vaupés 2020
+      1087                  99                    Vichada 2020
+      1088                  99                    Vichada 2020
+      1089                  99                    Vichada 2020
                                         area   total
       1                             cabecera 4382447
       2    centros_poblados_y_rural_disperso 1417713
@@ -2791,793 +2098,100 @@
       991                           cabecera 5250157
       992  centros_poblados_y_rural_disperso 1399244
       993                              total 6649401
-      994                           cabecera 5350556
-      995  centros_poblados_y_rural_disperso 1375663
-      996                              total 6726219
-      997                           cabecera 5424921
-      998  centros_poblados_y_rural_disperso 1362925
-      999                              total 6787846
-      1000                          cabecera 5494521
-      1001 centros_poblados_y_rural_disperso 1353839
-      1002                             total 6848360
-      1003                          cabecera 5551824
-      1004 centros_poblados_y_rural_disperso 1351897
-      1005                             total 6903721
-      1006                          cabecera 5600952
-      1007 centros_poblados_y_rural_disperso 1350873
-      1008                             total 6951825
-      1009                          cabecera 5643692
-      1010 centros_poblados_y_rural_disperso 1350625
-      1011                             total 6994317
-      1012                          cabecera 5681698
-      1013 centros_poblados_y_rural_disperso 1351697
-      1014                             total 7033395
-      1015                          cabecera 2556249
-      1016 centros_poblados_y_rural_disperso  137416
-      1017                             total 2693665
-      1018                          cabecera 2601879
-      1019 centros_poblados_y_rural_disperso  139123
-      1020                             total 2741002
-      1021                          cabecera 2634865
-      1022 centros_poblados_y_rural_disperso  140093
-      1023                             total 2774958
-      1024                          cabecera 2662451
-      1025 centros_poblados_y_rural_disperso  141114
-      1026                             total 2803565
-      1027                          cabecera 2685141
-      1028 centros_poblados_y_rural_disperso  141983
-      1029                             total 2827124
-      1030                          cabecera 2702376
-      1031 centros_poblados_y_rural_disperso  142793
-      1032                             total 2845169
-      1033                          cabecera 2715635
-      1034 centros_poblados_y_rural_disperso  143504
-      1035                             total 2859139
-      1036                          cabecera 2726274
-      1037 centros_poblados_y_rural_disperso  144242
-      1038                             total 2870516
-      1039                          cabecera 7704034
-      1040 centros_poblados_y_rural_disperso   28127
-      1041                             total 7732161
-      1042                          cabecera 7793869
-      1043 centros_poblados_y_rural_disperso   29465
-      1044                             total 7823334
-      1045                          cabecera 7842853
-      1046 centros_poblados_y_rural_disperso   30463
-      1047                             total 7873316
-      1048                          cabecera 7875957
-      1049 centros_poblados_y_rural_disperso   31324
-      1050                             total 7907281
-      1051                          cabecera 7897503
-      1052 centros_poblados_y_rural_disperso   32036
-      1053                             total 7929539
-      1054                          cabecera 7905282
-      1055 centros_poblados_y_rural_disperso   32616
-      1056                             total 7937898
-      1057                          cabecera 7902685
-      1058 centros_poblados_y_rural_disperso   33069
-      1059                             total 7935754
-      1060                          cabecera 7894481
-      1061 centros_poblados_y_rural_disperso   33410
-      1062                             total 7927891
-      1063                          cabecera 1606341
-      1064 centros_poblados_y_rural_disperso  562953
-      1065                             total 2169294
-      1066                          cabecera 1624099
-      1067 centros_poblados_y_rural_disperso  578674
-      1068                             total 2202773
-      1069                          cabecera 1635733
-      1070 centros_poblados_y_rural_disperso  591451
-      1071                             total 2227184
-      1072                          cabecera 1644271
-      1073 centros_poblados_y_rural_disperso  603012
-      1074                             total 2247283
-      1075                          cabecera 1651875
-      1076 centros_poblados_y_rural_disperso  612648
-      1077                             total 2264523
-      1078                          cabecera 1657867
-      1079 centros_poblados_y_rural_disperso  620903
-      1080                             total 2278770
-      1081                          cabecera 1662490
-      1082 centros_poblados_y_rural_disperso  628248
-      1083                             total 2290738
-      1084                          cabecera 1666360
-      1085 centros_poblados_y_rural_disperso  634858
-      1086                             total 2301218
-      1087                          cabecera  742548
-      1088 centros_poblados_y_rural_disperso  514741
-      1089                             total 1257289
-      1090                          cabecera  758077
-      1091 centros_poblados_y_rural_disperso  513562
-      1092                             total 1271639
-      1093                          cabecera  772082
-      1094 centros_poblados_y_rural_disperso  512953
-      1095                             total 1285035
-      1096                          cabecera  786220
-      1097 centros_poblados_y_rural_disperso  512580
-      1098                             total 1298800
-      1099                          cabecera  798089
-      1100 centros_poblados_y_rural_disperso  513894
-      1101                             total 1311983
-      1102                          cabecera  808583
-      1103 centros_poblados_y_rural_disperso  515539
-      1104                             total 1324122
-      1105                          cabecera  817954
-      1106 centros_poblados_y_rural_disperso  517456
-      1107                             total 1335410
-      1108                          cabecera  826470
-      1109 centros_poblados_y_rural_disperso  519694
-      1110                             total 1346164
-      1111                          cabecera  769688
-      1112 centros_poblados_y_rural_disperso  251747
-      1113                             total 1021435
-      1114                          cabecera  780970
-      1115 centros_poblados_y_rural_disperso  247665
-      1116                             total 1028635
-      1117                          cabecera  790023
-      1118 centros_poblados_y_rural_disperso  244128
-      1119                             total 1034151
-      1120                          cabecera  798911
-      1121 centros_poblados_y_rural_disperso  241373
-      1122                             total 1040284
-      1123                          cabecera  806309
-      1124 centros_poblados_y_rural_disperso  239801
-      1125                             total 1046110
-      1126                          cabecera  812660
-      1127 centros_poblados_y_rural_disperso  238622
-      1128                             total 1051282
-      1129                          cabecera  818170
-      1130 centros_poblados_y_rural_disperso  237755
-      1131                             total 1055925
-      1132                          cabecera  822984
-      1133 centros_poblados_y_rural_disperso  237261
-      1134                             total 1060245
-      1135                          cabecera  268652
-      1136 centros_poblados_y_rural_disperso  145036
-      1137                             total  413688
-      1138                          cabecera  272904
-      1139 centros_poblados_y_rural_disperso  145363
-      1140                             total  418267
-      1141                          cabecera  276155
-      1142 centros_poblados_y_rural_disperso  145642
-      1143                             total  421797
-      1144                          cabecera  278964
-      1145 centros_poblados_y_rural_disperso  146089
-      1146                             total  425053
-      1147                          cabecera  281414
-      1148 centros_poblados_y_rural_disperso  146748
-      1149                             total  428162
-      1150                          cabecera  283439
-      1151 centros_poblados_y_rural_disperso  147445
-      1152                             total  430884
-      1153                          cabecera  285050
-      1154 centros_poblados_y_rural_disperso  148197
-      1155                             total  433247
-      1156                          cabecera  286313
-      1157 centros_poblados_y_rural_disperso  149076
-      1158                             total  435389
-      1159                          cabecera  551920
-      1160 centros_poblados_y_rural_disperso  956141
-      1161                             total 1508061
-      1162                          cabecera  553237
-      1163 centros_poblados_y_rural_disperso  972047
-      1164                             total 1525284
-      1165                          cabecera  554157
-      1166 centros_poblados_y_rural_disperso  987108
-      1167                             total 1541265
-      1168                          cabecera  555626
-      1169 centros_poblados_y_rural_disperso 1002419
-      1170                             total 1558045
-      1171                          cabecera  558270
-      1172 centros_poblados_y_rural_disperso 1016236
-      1173                             total 1574506
-      1174                          cabecera  561251
-      1175 centros_poblados_y_rural_disperso 1028920
-      1176                             total 1590171
-      1177                          cabecera  564311
-      1178 centros_poblados_y_rural_disperso 1040834
-      1179                             total 1605145
-      1180                          cabecera  567480
-      1181 centros_poblados_y_rural_disperso 1052188
-      1182                             total 1619668
-      1183                          cabecera  969600
-      1184 centros_poblados_y_rural_disperso  321319
-      1185                             total 1290919
-      1186                          cabecera  992155
-      1187 centros_poblados_y_rural_disperso  330223
-      1188                             total 1322378
-      1189                          cabecera 1010938
-      1190 centros_poblados_y_rural_disperso  338224
-      1191                             total 1349162
-      1192                          cabecera 1028048
-      1193 centros_poblados_y_rural_disperso  345533
-      1194                             total 1373581
-      1195                          cabecera 1043435
-      1196 centros_poblados_y_rural_disperso  352051
-      1197                             total 1395486
-      1198                          cabecera 1056928
-      1199 centros_poblados_y_rural_disperso  357931
-      1200                             total 1414859
-      1201                          cabecera 1069034
-      1202 centros_poblados_y_rural_disperso  363304
-      1203                             total 1432338
-      1204                          cabecera 1080177
-      1205 centros_poblados_y_rural_disperso  368376
-      1206                             total 1448553
-      1207                          cabecera  957601
-      1208 centros_poblados_y_rural_disperso  884984
-      1209                             total 1842585
-      1210                          cabecera  964198
-      1211 centros_poblados_y_rural_disperso  900138
-      1212                             total 1864336
-      1213                          cabecera  969074
-      1214 centros_poblados_y_rural_disperso  913137
-      1215                             total 1882211
-      1216                          cabecera  973453
-      1217 centros_poblados_y_rural_disperso  925458
-      1218                             total 1898911
-      1219                          cabecera  978040
-      1220 centros_poblados_y_rural_disperso  936738
-      1221                             total 1914778
-      1222                          cabecera  982243
-      1223 centros_poblados_y_rural_disperso  947093
-      1224                             total 1929336
-      1225                          cabecera  986097
-      1226 centros_poblados_y_rural_disperso  956699
-      1227                             total 1942796
-      1228                          cabecera  989718
-      1229 centros_poblados_y_rural_disperso  965762
-      1230                             total 1955480
-      1231                          cabecera 2316850
-      1232 centros_poblados_y_rural_disperso  831104
-      1233                             total 3147954
-      1234                          cabecera 2412496
-      1235 centros_poblados_y_rural_disperso  821193
-      1236                             total 3233689
-      1237                          cabecera 2511490
-      1238 centros_poblados_y_rural_disperso  823147
-      1239                             total 3334637
-      1240                          cabecera 2616482
-      1241 centros_poblados_y_rural_disperso  828845
-      1242                             total 3445327
-      1243                          cabecera 2712978
-      1244 centros_poblados_y_rural_disperso  840315
-      1245                             total 3553293
-      1246                          cabecera 2804899
-      1247 centros_poblados_y_rural_disperso  852508
-      1248                             total 3657407
-      1249                          cabecera 2893377
-      1250 centros_poblados_y_rural_disperso  865052
-      1251                             total 3758429
-      1252                          cabecera 2979486
-      1253 centros_poblados_y_rural_disperso  877923
-      1254                             total 3857409
-      1255                          cabecera  251171
-      1256 centros_poblados_y_rural_disperso  311216
-      1257                             total  562387
-      1258                          cabecera  253163
-      1259 centros_poblados_y_rural_disperso  320685
-      1260                             total  573848
-      1261                          cabecera  255404
-      1262 centros_poblados_y_rural_disperso  329117
-      1263                             total  584521
-      1264                          cabecera  257328
-      1265 centros_poblados_y_rural_disperso  337810
-      1266                             total  595138
-      1267                          cabecera  259951
-      1268 centros_poblados_y_rural_disperso  345527
-      1269                             total  605478
-      1270                          cabecera  262503
-      1271 centros_poblados_y_rural_disperso  352579
-      1272                             total  615082
-      1273                          cabecera  264856
-      1274 centros_poblados_y_rural_disperso  359184
-      1275                             total  624040
-      1276                          cabecera  266943
-      1277 centros_poblados_y_rural_disperso  365721
-      1278                             total  632664
-      1279                          cabecera  687414
-      1280 centros_poblados_y_rural_disperso  449497
-      1281                             total 1136911
-      1282                          cabecera  693584
-      1283 centros_poblados_y_rural_disperso  457627
-      1284                             total 1151211
-      1285                          cabecera  699526
-      1286 centros_poblados_y_rural_disperso  464937
-      1287                             total 1164463
-      1288                          cabecera  705917
-      1289 centros_poblados_y_rural_disperso  472536
-      1290                             total 1178453
-      1291                          cabecera  712640
-      1292 centros_poblados_y_rural_disperso  479633
-      1293                             total 1192273
-      1294                          cabecera  719024
-      1295 centros_poblados_y_rural_disperso  486294
-      1296                             total 1205318
-      1297                          cabecera  725038
-      1298 centros_poblados_y_rural_disperso  492633
-      1299                             total 1217671
-      1300                          cabecera  730852
-      1301 centros_poblados_y_rural_disperso  498681
-      1302                             total 1229533
-      1303                          cabecera  481253
-      1304 centros_poblados_y_rural_disperso  482814
-      1305                             total  964067
-      1306                          cabecera  500332
-      1307 centros_poblados_y_rural_disperso  492749
-      1308                             total  993081
-      1309                          cabecera  515338
-      1310 centros_poblados_y_rural_disperso  501783
-      1311                             total 1017121
-      1312                          cabecera  529039
-      1313 centros_poblados_y_rural_disperso  509358
-      1314                             total 1038397
-      1315                          cabecera  540264
-      1316 centros_poblados_y_rural_disperso  516988
-      1317                             total 1057252
-      1318                          cabecera  550147
-      1319 centros_poblados_y_rural_disperso  523704
-      1320                             total 1073851
-      1321                          cabecera  559005
-      1322 centros_poblados_y_rural_disperso  529798
-      1323                             total 1088803
-      1324                          cabecera  567399
-      1325 centros_poblados_y_rural_disperso  535348
-      1326                             total 1102747
-      1327                          cabecera  987845
-      1328 centros_poblados_y_rural_disperso  438178
-      1329                             total 1426023
-      1330                          cabecera 1001595
-      1331 centros_poblados_y_rural_disperso  452559
-      1332                             total 1454154
-      1333                          cabecera 1011191
-      1334 centros_poblados_y_rural_disperso  465175
-      1335                             total 1476366
-      1336                          cabecera 1019464
-      1337 centros_poblados_y_rural_disperso  476699
-      1338                             total 1496163
-      1339                          cabecera 1026917
-      1340 centros_poblados_y_rural_disperso  486865
-      1341                             total 1513782
-      1342                          cabecera 1033279
-      1343 centros_poblados_y_rural_disperso  495759
-      1344                             total 1529038
-      1345                          cabecera 1038748
-      1346 centros_poblados_y_rural_disperso  503789
-      1347                             total 1542537
-      1348                          cabecera 1044003
-      1349 centros_poblados_y_rural_disperso  510864
-      1350                             total 1554867
-      1351                          cabecera  824056
-      1352 centros_poblados_y_rural_disperso  257976
-      1353                             total 1082032
-      1354                          cabecera  835553
-      1355 centros_poblados_y_rural_disperso  262551
-      1356                             total 1098104
-      1357                          cabecera  846615
-      1358 centros_poblados_y_rural_disperso  267195
-      1359                             total 1113810
-      1360                          cabecera  858142
-      1361 centros_poblados_y_rural_disperso  271943
-      1362                             total 1130085
-      1363                          cabecera  869506
-      1364 centros_poblados_y_rural_disperso  276260
-      1365                             total 1145766
-      1366                          cabecera  880077
-      1367 centros_poblados_y_rural_disperso  280274
-      1368                             total 1160351
-      1369                          cabecera  889994
-      1370 centros_poblados_y_rural_disperso  284010
-      1371                             total 1174004
-      1372                          cabecera  899378
-      1373 centros_poblados_y_rural_disperso  287733
-      1374                             total 1187111
-      1375                          cabecera  730402
-      1376 centros_poblados_y_rural_disperso  935052
-      1377                             total 1665454
-      1378                          cabecera  736214
-      1379 centros_poblados_y_rural_disperso  942572
-      1380                             total 1678786
-      1381                          cabecera  741411
-      1382 centros_poblados_y_rural_disperso  947591
-      1383                             total 1689002
-      1384                          cabecera  746748
-      1385 centros_poblados_y_rural_disperso  952822
-      1386                             total 1699570
-      1387                          cabecera  752021
-      1388 centros_poblados_y_rural_disperso  957869
-      1389                             total 1709890
-      1390                          cabecera  756828
-      1391 centros_poblados_y_rural_disperso  962453
-      1392                             total 1719281
-      1393                          cabecera  761198
-      1394 centros_poblados_y_rural_disperso  966651
-      1395                             total 1727849
-      1396                          cabecera  765198
-      1397 centros_poblados_y_rural_disperso  970746
-      1398                             total 1735944
-      1399                          cabecera 1275646
-      1400 centros_poblados_y_rural_disperso  341563
-      1401                             total 1617209
-      1402                          cabecera 1307684
-      1403 centros_poblados_y_rural_disperso  346657
-      1404                             total 1654341
-      1405                          cabecera 1328451
-      1406 centros_poblados_y_rural_disperso  350524
-      1407                             total 1678975
-      1408                          cabecera 1343079
-      1409 centros_poblados_y_rural_disperso  353661
-      1410                             total 1696740
-      1411                          cabecera 1353250
-      1412 centros_poblados_y_rural_disperso  356320
-      1413                             total 1709570
-      1414                          cabecera 1359676
-      1415 centros_poblados_y_rural_disperso  358316
-      1416                             total 1717992
-      1417                          cabecera 1363322
-      1418 centros_poblados_y_rural_disperso  359976
-      1419                             total 1723298
-      1420                          cabecera 1364973
-      1421 centros_poblados_y_rural_disperso  361757
-      1422                             total 1726730
-      1423                          cabecera  486029
-      1424 centros_poblados_y_rural_disperso   67292
-      1425                             total  553321
-      1426                          cabecera  490442
-      1427 centros_poblados_y_rural_disperso   66657
-      1428                             total  557099
-      1429                          cabecera  492893
-      1430 centros_poblados_y_rural_disperso   66917
-      1431                             total  559810
-      1432                          cabecera  495526
-      1433 centros_poblados_y_rural_disperso   67550
-      1434                             total  563076
-      1435                          cabecera  497785
-      1436 centros_poblados_y_rural_disperso   68263
-      1437                             total  566048
-      1438                          cabecera  499565
-      1439 centros_poblados_y_rural_disperso   68995
-      1440                             total  568560
-      1441                          cabecera  500928
-      1442 centros_poblados_y_rural_disperso   69800
-      1443                             total  570728
-      1444                          cabecera  501991
-      1445 centros_poblados_y_rural_disperso   70728
-      1446                             total  572719
-      1447                          cabecera  762638
-      1448 centros_poblados_y_rural_disperso  200141
-      1449                             total  962779
-      1450                          cabecera  771884
-      1451 centros_poblados_y_rural_disperso  196403
-      1452                             total  968287
-      1453                          cabecera  775780
-      1454 centros_poblados_y_rural_disperso  194358
-      1455                             total  970138
-      1456                          cabecera  779222
-      1457 centros_poblados_y_rural_disperso  193082
-      1458                             total  972304
-      1459                          cabecera  781555
-      1460 centros_poblados_y_rural_disperso  192324
-      1461                             total  973879
-      1462                          cabecera  782966
-      1463 centros_poblados_y_rural_disperso  191673
-      1464                             total  974639
-      1465                          cabecera  783663
-      1466 centros_poblados_y_rural_disperso  191130
-      1467                             total  974793
-      1468                          cabecera  783800
-      1469 centros_poblados_y_rural_disperso  190819
-      1470                             total  974619
-      1471                          cabecera 1744233
-      1472 centros_poblados_y_rural_disperso  537975
-      1473                             total 2282208
-      1474                          cabecera 1777109
-      1475 centros_poblados_y_rural_disperso  534988
-      1476                             total 2312097
-      1477                          cabecera 1802328
-      1478 centros_poblados_y_rural_disperso  532910
-      1479                             total 2335238
-      1480                          cabecera 1826647
-      1481 centros_poblados_y_rural_disperso  530480
-      1482                             total 2357127
-      1483                          cabecera 1847055
-      1484 centros_poblados_y_rural_disperso  529681
-      1485                             total 2376736
-      1486                          cabecera 1864327
-      1487 centros_poblados_y_rural_disperso  528887
-      1488                             total 2393214
-      1489                          cabecera 1879215
-      1490 centros_poblados_y_rural_disperso  528104
-      1491                             total 2407319
-      1492                          cabecera 1892563
-      1493 centros_poblados_y_rural_disperso  527423
-      1494                             total 2419986
-      1495                          cabecera  590920
-      1496 centros_poblados_y_rural_disperso  359692
-      1497                             total  950612
-      1498                          cabecera  598031
-      1499 centros_poblados_y_rural_disperso  368862
-      1500                             total  966893
-      1501                          cabecera  603687
-      1502 centros_poblados_y_rural_disperso  377255
-      1503                             total  980942
-      1504                          cabecera  608774
-      1505 centros_poblados_y_rural_disperso  385286
-      1506                             total  994060
-      1507                          cabecera  613634
-      1508 centros_poblados_y_rural_disperso  392410
-      1509                             total 1006044
-      1510                          cabecera  618038
-      1511 centros_poblados_y_rural_disperso  398788
-      1512                             total 1016826
-      1513                          cabecera  621988
-      1514 centros_poblados_y_rural_disperso  404681
-      1515                             total 1026669
-      1516                          cabecera  625772
-      1517 centros_poblados_y_rural_disperso  410128
-      1518                             total 1035900
-      1519                          cabecera  924589
-      1520 centros_poblados_y_rural_disperso  429749
-      1521                             total 1354338
-      1522                          cabecera  932382
-      1523 centros_poblados_y_rural_disperso  429549
-      1524                             total 1361931
-      1525                          cabecera  938727
-      1526 centros_poblados_y_rural_disperso  429075
-      1527                             total 1367802
-      1528                          cabecera  945672
-      1529 centros_poblados_y_rural_disperso  428712
-      1530                             total 1374384
-      1531                          cabecera  951724
-      1532 centros_poblados_y_rural_disperso  429224
-      1533                             total 1380948
-      1534                          cabecera  956963
-      1535 centros_poblados_y_rural_disperso  429863
-      1536                             total 1386826
-      1537                          cabecera  961671
-      1538 centros_poblados_y_rural_disperso  430448
-      1539                             total 1392119
-      1540                          cabecera  966011
-      1541 centros_poblados_y_rural_disperso  431090
-      1542                             total 1397101
-      1543                          cabecera 3906328
-      1544 centros_poblados_y_rural_disperso  676049
-      1545                             total 4582377
-      1546                          cabecera 3937232
-      1547 centros_poblados_y_rural_disperso  676532
-      1548                             total 4613764
-      1549                          cabecera 3954741
-      1550 centros_poblados_y_rural_disperso  671323
-      1551                             total 4626064
-      1552                          cabecera 3972260
-      1553 centros_poblados_y_rural_disperso  665769
-      1554                             total 4638029
-      1555                          cabecera 3986159
-      1556 centros_poblados_y_rural_disperso  661208
-      1557                             total 4647367
-      1558                          cabecera 3995831
-      1559 centros_poblados_y_rural_disperso  656681
-      1560                             total 4652512
-      1561                          cabecera 4002306
-      1562 centros_poblados_y_rural_disperso  652129
-      1563                             total 4654435
-      1564                          cabecera 4006898
-      1565 centros_poblados_y_rural_disperso  647599
-      1566                             total 4654497
-      1567                          cabecera  189171
-      1568 centros_poblados_y_rural_disperso  102081
-      1569                             total  291252
-      1570                          cabecera  194149
-      1571 centros_poblados_y_rural_disperso  106488
-      1572                             total  300637
-      1573                          cabecera  198159
-      1574 centros_poblados_y_rural_disperso  109469
-      1575                             total  307628
-      1576                          cabecera  201155
-      1577 centros_poblados_y_rural_disperso  111942
-      1578                             total  313097
-      1579                          cabecera  203505
-      1580 centros_poblados_y_rural_disperso  113893
-      1581                             total  317398
-      1582                          cabecera  205266
-      1583 centros_poblados_y_rural_disperso  115457
-      1584                             total  320723
-      1585                          cabecera  206604
-      1586 centros_poblados_y_rural_disperso  116742
-      1587                             total  323346
-      1588                          cabecera  207626
-      1589 centros_poblados_y_rural_disperso  117901
-      1590                             total  325527
-      1591                          cabecera  315408
-      1592 centros_poblados_y_rural_disperso  128124
-      1593                             total  443532
-      1594                          cabecera  323586
-      1595 centros_poblados_y_rural_disperso  128512
-      1596                             total  452098
-      1597                          cabecera  330773
-      1598 centros_poblados_y_rural_disperso  129200
-      1599                             total  459973
-      1600                          cabecera  337972
-      1601 centros_poblados_y_rural_disperso  129803
-      1602                             total  467775
-      1603                          cabecera  344587
-      1604 centros_poblados_y_rural_disperso  130557
-      1605                             total  475144
-      1606                          cabecera  350721
-      1607 centros_poblados_y_rural_disperso  131217
-      1608                             total  481938
-      1609                          cabecera  356398
-      1610 centros_poblados_y_rural_disperso  131860
-      1611                             total  488258
-      1612                          cabecera  361777
-      1613 centros_poblados_y_rural_disperso  132474
-      1614                             total  494251
-      1615                          cabecera  185589
-      1616 centros_poblados_y_rural_disperso  179294
-      1617                             total  364883
-      1618                          cabecera  190143
-      1619 centros_poblados_y_rural_disperso  181070
-      1620                             total  371213
-      1621                          cabecera  194348
-      1622 centros_poblados_y_rural_disperso  182747
-      1623                             total  377095
-      1624                          cabecera  198450
-      1625 centros_poblados_y_rural_disperso  184592
-      1626                             total  383042
-      1627                          cabecera  202466
-      1628 centros_poblados_y_rural_disperso  186250
-      1629                             total  388716
-      1630                          cabecera  206247
-      1631 centros_poblados_y_rural_disperso  187741
-      1632                             total  393988
-      1633                          cabecera  209786
-      1634 centros_poblados_y_rural_disperso  189147
-      1635                             total  398933
-      1636                          cabecera  213015
-      1637 centros_poblados_y_rural_disperso  190659
-      1638                             total  403674
-      1639                          cabecera   44308
-      1640 centros_poblados_y_rural_disperso   17590
-      1641                             total   61898
-      1642                          cabecera   44196
-      1643 centros_poblados_y_rural_disperso   17963
-      1644                             total   62159
-      1645                          cabecera   44284
-      1646 centros_poblados_y_rural_disperso   17971
-      1647                             total   62255
-      1648                          cabecera   44409
-      1649 centros_poblados_y_rural_disperso   17860
-      1650                             total   62269
-      1651                          cabecera   44563
-      1652 centros_poblados_y_rural_disperso   17686
-      1653                             total   62249
-      1654                          cabecera   44723
-      1655 centros_poblados_y_rural_disperso   17458
-      1656                             total   62181
-      1657                          cabecera   44869
-      1658 centros_poblados_y_rural_disperso   17199
-      1659                             total   62068
-      1660                          cabecera   45047
-      1661 centros_poblados_y_rural_disperso   16880
-      1662                             total   61927
-      1663                          cabecera   39835
-      1664 centros_poblados_y_rural_disperso   40637
-      1665                             total   80472
-      1666                          cabecera   41089
-      1667 centros_poblados_y_rural_disperso   41082
-      1668                             total   82171
-      1669                          cabecera   42170
-      1670 centros_poblados_y_rural_disperso   41520
-      1671                             total   83690
-      1672                          cabecera   43220
-      1673 centros_poblados_y_rural_disperso   41836
-      1674                             total   85056
-      1675                          cabecera   44170
-      1676 centros_poblados_y_rural_disperso   42148
-      1677                             total   86318
-      1678                          cabecera   45049
-      1679 centros_poblados_y_rural_disperso   42431
-      1680                             total   87480
-      1681                          cabecera   45879
-      1682 centros_poblados_y_rural_disperso   42676
-      1683                             total   88555
-      1684                          cabecera   46662
-      1685 centros_poblados_y_rural_disperso   42919
-      1686                             total   89581
-      1687                          cabecera   23575
-      1688 centros_poblados_y_rural_disperso   28431
-      1689                             total   52006
-      1690                          cabecera   24456
-      1691 centros_poblados_y_rural_disperso   29127
-      1692                             total   53583
-      1693                          cabecera   25306
-      1694 centros_poblados_y_rural_disperso   29785
-      1695                             total   55091
-      1696                          cabecera   26161
-      1697 centros_poblados_y_rural_disperso   30390
-      1698                             total   56551
-      1699                          cabecera   26944
-      1700 centros_poblados_y_rural_disperso   30990
-      1701                             total   57934
-      1702                          cabecera   27691
-      1703 centros_poblados_y_rural_disperso   31549
-      1704                             total   59240
-      1705                          cabecera   28380
-      1706 centros_poblados_y_rural_disperso   32113
-      1707                             total   60493
-      1708                          cabecera   29079
-      1709 centros_poblados_y_rural_disperso   32646
-      1710                             total   61725
-      1711                          cabecera   49591
-      1712 centros_poblados_y_rural_disperso   39459
-      1713                             total   89050
-      1714                          cabecera   51222
-      1715 centros_poblados_y_rural_disperso   40495
-      1716                             total   91717
-      1717                          cabecera   52990
-      1718 centros_poblados_y_rural_disperso   41635
-      1719                             total   94625
-      1720                          cabecera   54734
-      1721 centros_poblados_y_rural_disperso   42882
-      1722                             total   97616
-      1723                          cabecera   56402
-      1724 centros_poblados_y_rural_disperso   44095
-      1725                             total  100497
-      1726                          cabecera   57976
-      1727 centros_poblados_y_rural_disperso   45261
-      1728                             total  103237
-      1729                          cabecera   59449
-      1730 centros_poblados_y_rural_disperso   46406
-      1731                             total  105855
-      1732                          cabecera   60815
-      1733 centros_poblados_y_rural_disperso   47592
-      1734                             total  108407
-      1735                          cabecera   12482
-      1736 centros_poblados_y_rural_disperso   30706
-      1737                             total   43188
-      1738                          cabecera   12708
-      1739 centros_poblados_y_rural_disperso   31670
-      1740                             total   44378
-      1741                          cabecera   12918
-      1742 centros_poblados_y_rural_disperso   32661
-      1743                             total   45579
-      1744                          cabecera   13139
-      1745 centros_poblados_y_rural_disperso   33638
-      1746                             total   46777
-      1747                          cabecera   13336
-      1748 centros_poblados_y_rural_disperso   34625
-      1749                             total   47961
-      1750                          cabecera   13514
-      1751 centros_poblados_y_rural_disperso   35628
-      1752                             total   49142
-      1753                          cabecera   13679
-      1754 centros_poblados_y_rural_disperso   36643
-      1755                             total   50322
-      1756                          cabecera   13836
-      1757 centros_poblados_y_rural_disperso   37670
-      1758                             total   51506
-      1759                          cabecera   29106
-      1760 centros_poblados_y_rural_disperso   86090
-      1761                             total  115196
-      1762                          cabecera   29298
-      1763 centros_poblados_y_rural_disperso   88972
-      1764                             total  118270
-      1765                          cabecera   29700
-      1766 centros_poblados_y_rural_disperso   91242
-      1767                             total  120942
-      1768                          cabecera   29940
-      1769 centros_poblados_y_rural_disperso   93364
-      1770                             total  123304
-      1771                          cabecera   30319
-      1772 centros_poblados_y_rural_disperso   95158
-      1773                             total  125477
-      1774                          cabecera   30662
-      1775 centros_poblados_y_rural_disperso   96805
-      1776                             total  127467
-      1777                          cabecera   30969
-      1778 centros_poblados_y_rural_disperso   98335
-      1779                             total  129304
-      1780                          cabecera   31168
-      1781 centros_poblados_y_rural_disperso   99901
-      1782                             total  131069
+      994                           cabecera 2556249
+      995  centros_poblados_y_rural_disperso  137416
+      996                              total 2693665
+      997                           cabecera 7704034
+      998  centros_poblados_y_rural_disperso   28127
+      999                              total 7732161
+      1000                          cabecera 1606341
+      1001 centros_poblados_y_rural_disperso  562953
+      1002                             total 2169294
+      1003                          cabecera  742548
+      1004 centros_poblados_y_rural_disperso  514741
+      1005                             total 1257289
+      1006                          cabecera  769688
+      1007 centros_poblados_y_rural_disperso  251747
+      1008                             total 1021435
+      1009                          cabecera  268652
+      1010 centros_poblados_y_rural_disperso  145036
+      1011                             total  413688
+      1012                          cabecera  551920
+      1013 centros_poblados_y_rural_disperso  956141
+      1014                             total 1508061
+      1015                          cabecera  969600
+      1016 centros_poblados_y_rural_disperso  321319
+      1017                             total 1290919
+      1018                          cabecera  957601
+      1019 centros_poblados_y_rural_disperso  884984
+      1020                             total 1842585
+      1021                          cabecera 2316850
+      1022 centros_poblados_y_rural_disperso  831104
+      1023                             total 3147954
+      1024                          cabecera  251171
+      1025 centros_poblados_y_rural_disperso  311216
+      1026                             total  562387
+      1027                          cabecera  687414
+      1028 centros_poblados_y_rural_disperso  449497
+      1029                             total 1136911
+      1030                          cabecera  481253
+      1031 centros_poblados_y_rural_disperso  482814
+      1032                             total  964067
+      1033                          cabecera  987845
+      1034 centros_poblados_y_rural_disperso  438178
+      1035                             total 1426023
+      1036                          cabecera  824056
+      1037 centros_poblados_y_rural_disperso  257976
+      1038                             total 1082032
+      1039                          cabecera  730402
+      1040 centros_poblados_y_rural_disperso  935052
+      1041                             total 1665454
+      1042                          cabecera 1275646
+      1043 centros_poblados_y_rural_disperso  341563
+      1044                             total 1617209
+      1045                          cabecera  486029
+      1046 centros_poblados_y_rural_disperso   67292
+      1047                             total  553321
+      1048                          cabecera  762638
+      1049 centros_poblados_y_rural_disperso  200141
+      1050                             total  962779
+      1051                          cabecera 1744233
+      1052 centros_poblados_y_rural_disperso  537975
+      1053                             total 2282208
+      1054                          cabecera  590920
+      1055 centros_poblados_y_rural_disperso  359692
+      1056                             total  950612
+      1057                          cabecera  924589
+      1058 centros_poblados_y_rural_disperso  429749
+      1059                             total 1354338
+      1060                          cabecera 3906328
+      1061 centros_poblados_y_rural_disperso  676049
+      1062                             total 4582377
+      1063                          cabecera  189171
+      1064 centros_poblados_y_rural_disperso  102081
+      1065                             total  291252
+      1066                          cabecera  315408
+      1067 centros_poblados_y_rural_disperso  128124
+      1068                             total  443532
+      1069                          cabecera  185589
+      1070 centros_poblados_y_rural_disperso  179294
+      1071                             total  364883
+      1072                          cabecera   44308
+      1073 centros_poblados_y_rural_disperso   17590
+      1074                             total   61898
+      1075                          cabecera   39835
+      1076 centros_poblados_y_rural_disperso   40637
+      1077                             total   80472
+      1078                          cabecera   23575
+      1079 centros_poblados_y_rural_disperso   28431
+      1080                             total   52006
+      1081                          cabecera   49591
+      1082 centros_poblados_y_rural_disperso   39459
+      1083                             total   89050
+      1084                          cabecera   12482
+      1085 centros_poblados_y_rural_disperso   30706
+      1086                             total   43188
+      1087                          cabecera   29106
+      1088 centros_poblados_y_rural_disperso   86090
+      1089                             total  115196
 

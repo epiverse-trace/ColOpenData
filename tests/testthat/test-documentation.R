@@ -74,7 +74,9 @@ test_that("Lookup works as expected", {
     look_up(keywords = "school", logic = "or", language = "ES"),
     "data.frame"
   )
+})
 
+test_that("Lookup works as expected with different parameters", {
   # Expect specific dataset from a proper request
   expect_snapshot(look_up(
     keywords = c("school", "age"), logic = "and",

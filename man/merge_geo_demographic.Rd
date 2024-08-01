@@ -4,12 +4,17 @@
 \alias{merge_geo_demographic}
 \title{Match and merge geospatial and demographic datasets}
 \usage{
-merge_geo_demographic(demographic_dataset)
+merge_geo_demographic(demographic_dataset, simplified = TRUE)
 }
 \arguments{
 \item{demographic_dataset}{character with the demographic dataset name.
 Please use \code{list_datasets(""EN"M demographic")} to check available
 datasets.}
+
+\item{simplified}{logical for indicating if the downloaded spatial data
+should be a simplified version of the geometries. Simplified versions are
+lighter but less precise, and are recommended for easier applications like
+plots. Default is \code{TRUE}.}
 }
 \value{
 \code{data.frame} object with the merged data.
