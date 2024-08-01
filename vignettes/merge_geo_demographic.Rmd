@@ -1,0 +1,99 @@
+---
+title: "Integration of Geospatial and Demographic data"
+output: 
+  rmarkdown::html_vignette:
+    df_print: tibble
+vignette: >
+  %\VignetteIndexEntry{Integration of Geospatial and Demographic data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+::: {style="text-align: justify;"}
+As you know, **ColOpenData** can be used to access both [geospatial](https://epiverse-trace.github.io/ColOpenData/articles/geospatial_data.html) and [demographic](https://epiverse-trace.github.io/ColOpenData/articles/demographic_data.html) data from Colombia, in independent modules. However, we thought it would be helpful to present a module that incorporates a way to merge information between geospatial and demographic data. In this vignette you will learn how to use the function `merge_geo_demographic()`.
+:::
+
+```{r libraries, message=FALSE, warning=FALSE, results="hide"}
+library(ColOpenData)
+library(dplyr)
+library(ggplot2)
+```
+
+::: {style="text-align: justify;"}
+**Disclaimer: all data is loaded to the environment in the user's R session, but is not downloaded to user's computer.**
+:::
+
+## How to merge geospatial and demographic data
+
+### Documentation access
+
+::: {style="text-align: justify;"}
+Geospatial and demographic data can be merged based on the spatial aggregation level (SAL). While geospatial data can be aggregated down to the block level, demographic data is typically available only at the department and municipality levels. Therefore, these are the only SAL that can be accessed in both types of data for merging.
+
+Now, the `merge_geo_demographic()` function only takes by parameter the demographic dataset of interest. Therefore, we should first access the demographic documentation to know which dataset we want to work with. Let's suppose we want to select a dataset at the department level.
+:::
+
+```{r documentation, echo =TRUE}
+# Available demographic datasets
+datasets_dem <- list_datasets("demographic", "EN")
+
+# Available demographic datasets at the department level
+department_datasets <- datasets_dem[datasets_dem["level"] == "department", ]
+head(department_datasets)
+```
+
+::: {style="text-align: justify;"}
+After reviewing the available datasets, we can select the one we wish to work with and take a closer look. For instance, let's suppose we choose the dataset "DANE_CNPVPD_2018_14BPD".
+:::
+
+```{r data, echo =TRUE}
+# Download demographic dataset
+chosen_data <- download_demographic("DANE_CNPVPD_2018_14BPD")
+head(chosen_data)
+```
+
+::: {style="text-align: justify;"}
+`chosen_data` presents information regarding health service attended by people that in the last thirty days had an illness, accident, dental problem or other health problem. Now, we can use the `merge_geo_demographic()` function. 
+
+The `simplified` argument downloads a simplified version of the geometries. This is not recommended for very accurate applications, but for a simple plot the approximation is enough. Also, it makes the download process much faster. To override this, you could use `simplified = FALSE`.
+:::
+
+```{r merge data, echo =TRUE}
+# Download demographic dataset
+merged_data <- merge_geo_demographic("DANE_CNPVPD_2018_14BPD")
+head(merged_data)
+```
+
+::: {style="text-align: justify;"}
+`merged_data` presents geospatial information related to departments, as well as the information related to the health service attended by the population. We can use this dataset to visualize the proportion of people in each department who used home remedies for health issues. To achieve this, we will calculate the proportion by dividing the count of people who reported using home remedies ("uso_remedios_caseros") by the total count of people who reported experiencing a health problem in each department.
+:::
+
+```{r plot}
+# Calculate the proportion
+merged_data <- merged_data %>%
+  mutate(proportion_home_remedies = uso_remedios_caseros /
+    total_personas_que_tuvieron_alguna_enfermedad)
+
+# Plot the proportion by department
+ggplot(data = merged_data) +
+  geom_sf(mapping = aes(fill = proportion_home_remedies), color = "white") +
+  theme_minimal() +
+  theme(
+    panel.grid = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank()
+  ) +
+  scale_fill_gradient("Count", low = "#10bed2", high = "#deff00") +
+  ggtitle(
+    label = "Proportion of people who reported using home remedies to treat
+    a health problem",
+    subtitle = "Colombia"
+  )
+```
