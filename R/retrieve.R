@@ -83,11 +83,7 @@ retrieve_climate_path <- function() {
 #' Dictionaries are not included in the general documentation file. Therefore,
 #' the path is built internally.
 #'
-<<<<<<< Updated upstream
 #' @param dict_name character with the dictionary name.
-=======
-#' @param dict_name character with the dictionary file name.
->>>>>>> Stashed changes
 #'
 #' @return character with path to retrieve the dataset.
 #'
