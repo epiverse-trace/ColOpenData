@@ -7,17 +7,17 @@
 retrieve_climate(dataset_path, start_date, end_date)
 }
 \arguments{
-\item{dataset_path}{character path to the climate dataset on server}
+\item{dataset_path}{character path to the climate dataset on server.}
 
 \item{start_date}{character with the first date to consult in the format
-\code{"YYYY-MM-DD"}}
+\code{"YYYY-MM-DD"}. (First available date is \code{"1920-01-01"}).}
 
 \item{end_date}{character with the last date to consult in the format
-\code{"YYYY-MM-DD"} (Last available date is \code{"2023-05-31"})}
+\code{"YYYY-MM-DD"} (Last available date is \code{"2023-05-31"}).}
 }
 \value{
 \code{data.frame} object with downloaded data filtered for requested
-dates
+dates.
 }
 \description{
 Retrieve climate table file from one station

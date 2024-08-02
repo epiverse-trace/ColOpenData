@@ -8,29 +8,31 @@ aggregate_climate(climate_data, frequency)
 }
 \arguments{
 \item{climate_data}{\code{data.frame} obtained from download functions. Only
-observations under the same tag can be aggregated}
+observations under the same tag can be aggregated.}
 
-\item{frequency}{character with the aggregation frequency. (\code{"day"},
-\code{"month"} or \code{"year"})}
+\item{frequency}{character with the aggregation frequency: (\code{"day"},
+\code{"month"} or \code{"year"}).}
 }
 \value{
-\code{data.frame} object with the aggregated data
+\code{data.frame} object with the aggregated data.
 }
 \description{
 Aggregate time series downloaded climate data to day, month or year.
 Only observations under the tags \code{TSSM_CON}, \code{TMN_CON},
 \code{TMX_CON}, \code{PTPM_CON}, and \code{BSHG_CON} can be aggregated,
 since are the ones where methodology for aggregation is explicitly provided
-from the source
+by the source.
 }
 \examples{
-lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)
-lon <- c(-75.678072, -75.327859, -75.327859, -75.678072, -75.678072)
+\dontrun{
+lat <- c(4.172817, 4.172817, 4.136050, 4.136050, 4.172817)
+lon <- c(-74.749121, -74.686169, -74.686169, -74.749121, -74.749121)
 polygon <- sf::st_polygon(x = list(cbind(lon, lat)))
 geometry <- sf::st_sfc(polygon)
 roi <- sf::st_as_sf(geometry)
-tssm <- download_climate_geom(roi, "2021-11-14", "2021-11-20", "TSSM_CON")
-daily_tssm <- aggregate_climate(tssm, "day")
-head(daily_tssm)
+ptpm <- download_climate_geom(roi, "2022-11-01", "2022-12-31", "PTPM_CON")
+monthly_ptpm <- aggregate_climate(ptpm, "month")
+head(monthly_ptpm)
+}
 
 }

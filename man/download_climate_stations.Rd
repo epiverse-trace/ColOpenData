@@ -8,36 +8,37 @@ download_climate_stations(stations, start_date, end_date, tag)
 }
 \arguments{
 \item{stations}{\code{data.frame} containing the stations' codes and
-location
-\code{data.frame} must be retrieved from the function
+location. \code{data.frame} must be retrieved from the function
 \code{stations_in_roi()}}
 
 \item{start_date}{character with the first date to consult in the format
-\code{"YYYY-MM-DD"}}
+\code{"YYYY-MM-DD"}. (First available date is \code{"1920-01-01"}).}
 
 \item{end_date}{character with the last date to consult in the format
-\code{"YYYY-MM-DD"} (Last available date is \code{"2023-05-31"})}
+\code{"YYYY-MM-DD"}. (Last available date is \code{"2023-05-31"}).}
 
-\item{tag}{character containing climate tag to consult}
+\item{tag}{character containing climate tag to consult.}
 }
 \value{
 \code{data.frame} object with observations from the stations in the
-area
+area.
 }
 \description{
 Download climate data from IDEAM stations by individual codes.This data is
-retrieved from local meteorological stations provided by IDEAM
+retrieved from local meteorological stations provided by IDEAM.
 }
 \examples{
-lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)
-lon <- c(-75.678072, -75.327859, -75.327859, -75.678072, -75.678072)
+\dontrun{
+lat <- c(4.172817, 4.172817, 4.136050, 4.136050, 4.172817)
+lon <- c(-74.749121, -74.686169, -74.686169, -74.749121, -74.749121)
 polygon <- sf::st_polygon(x = list(cbind(lon, lat)))
 geometry <- sf::st_sfc(polygon)
 roi <- sf::st_as_sf(geometry)
 stations <- stations_in_roi(roi)
-tssm <- download_climate_stations(
-  stations, "2021-11-14", "2021-11-20", "TSSM_CON"
+ptpm <- download_climate_stations(
+  stations, "2022-11-14", "2022-11-20", "PTPM_CON"
 )
-head(tssm)
+head(ptpm)
+}
 
 }

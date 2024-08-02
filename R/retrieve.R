@@ -1,11 +1,11 @@
 #' Retrieve value from key
 #'
 #' @description
-#' Retrieve value from key included in configuration file
+#' Retrieve value from key included in configuration file.
 #'
-#' @param key character key
+#' @param key character key.
 #'
-#' @return character containing associated value
+#' @return character containing associated value.
 #'
 #' @keywords internal
 retrieve_value_key <- function(key) {
@@ -24,13 +24,13 @@ retrieve_value_key <- function(key) {
 
 #' Retrieve demographic and geospatial path of named dataset
 #'
-#' @param dataset character with the dataset name
-#'
 #' @description
 #' Demographic and Geospatial datasets are included in the general documentation
-#' file. Path is built from information in the general file
+#' file. Path is built from information in the general file.
 #'
-#' @return character with path to retrieve the dataset from server
+#' @param dataset character with the dataset name.
+#'
+#' @return character with path to retrieve the dataset from server.
 #'
 #' @keywords internal
 retrieve_path <- function(dataset) {
@@ -42,12 +42,12 @@ retrieve_path <- function(dataset) {
     population_projections = ".csv"
   )
   base_path <- retrieve_value_key("base_path")
-  all_datasets <- list_datasets()
-  dataset_info <- all_datasets[which(all_datasets$name == dataset), ]
+  all_datasets <- list_datasets(language = "EN")
+  dataset_info <- all_datasets[which(all_datasets[["name"]] == dataset), ]
   if (nrow(dataset_info) == 1) {
-    group_path <- retrieve_value_key(dataset_info$group)
-    category_path <- retrieve_value_key(dataset_info$category)
-    dataset_path <- paste0(dataset, ext[[dataset_info$group]])
+    group_path <- retrieve_value_key(dataset_info[["group"]])
+    category_path <- retrieve_value_key(dataset_info[["category"]])
+    dataset_path <- paste0(dataset, ext[[dataset_info[["group"]]]])
     file_path <- file.path(
       base_path, group_path,
       category_path, dataset_path
@@ -65,9 +65,9 @@ retrieve_path <- function(dataset) {
 #'
 #' @description
 #' Climate data is retrieved from a general directory. Path is build for said
-#' directory
+#' directory.
 #'
-#' @return character with path to retrieve the dataset from server
+#' @return character with path to retrieve the dataset from server.
 #'
 #' @keywords internal
 retrieve_climate_path <- function() {
@@ -79,32 +79,34 @@ retrieve_climate_path <- function() {
 
 #' Retrieve dictionary path of named dataset
 #'
-#' @param dataset character with the dictionary name
-#'
 #' @description
 #' Dictionaries are not included in the general documentation file. Therefore,
-#' the path is built internally
+#' the path is built internally.
 #'
-#' @return character with path to retrieve the dataset from server
+#' @param dict_name character with the dictionary name.
+#'
+#' @return character with path to retrieve the dataset.
 #'
 #' @keywords internal
-retrieve_dict_path <- function(dataset) {
-  base_path <- retrieve_value_key("base_path")
-  group_path <- retrieve_value_key("dictionaries")
-  dataset_path <- sprintf("%s.csv", dataset)
-  file_path <- file.path(base_path, group_path, dataset_path)
-  return(file_path)
+retrieve_dict_path <- function(dict_name) {
+  dict_file <- system.file(
+    "extdata",
+    dict_name,
+    package = "ColOpenData",
+    mustWork = TRUE
+  )
+  return(dict_file)
 }
 
 #' Retrieve support dataset path
 #'
-#' @param dataset character with the support dataset name
-#'
 #' @description
 #' Support data is used for internal purposes and they are not included in the
-#' general documentation file
+#' general documentation file.
 #'
-#' @return character with path to retrieve the dataset from server
+#' @param dataset character with the support dataset name.
+#'
+#' @return character with path to retrieve the dataset from server.
 #'
 #' @keywords internal
 retrieve_support_path <- function(dataset) {
@@ -119,24 +121,23 @@ retrieve_support_path <- function(dataset) {
 
 #' Retrieve table (csv and data) file
 #'
-#' @param dataset_path character path to the dataset on server
+#' @param dataset_path character path to the dataset on server.
+#' @param sep separator for table data.
 #'
-#' @param sep separator for table data
-#'
-#' @return \code{data.frame} object with downloaded data
+#' @return \code{data.frame} object with downloaded data.
 #'
 #' @keywords internal
 retrieve_table <- function(dataset_path, sep = ";") {
-  request <- httr2::request(base_url = dataset_path)
-  response <- httr2::req_perform(request)
-  content <- httr2::resp_body_string(response)
   downloaded_data <- suppressMessages(
     suppressWarnings(
-      readr::read_delim(content,
-        delim = sep,
-        escape_double = FALSE,
-        trim_ws = TRUE,
-        show_col_types = FALSE
+      utils::read.csv2(dataset_path,
+        sep = sep,
+        header = TRUE,
+        colClasses = c(
+          codigo_departamento = "character",
+          codigo_municipio = "character"
+        ),
+        fileEncoding = "UTF-8"
       )
     )
   )
@@ -146,39 +147,38 @@ retrieve_table <- function(dataset_path, sep = ";") {
 
 #' Retrieve climate table file from one station
 #'
-#' @param dataset_path character path to the climate dataset on server
+#' @param dataset_path character path to the climate dataset on server.
 #' @param start_date character with the first date to consult in the format
-#' \code{"YYYY-MM-DD"}
+#' \code{"YYYY-MM-DD"}. (First available date is \code{"1920-01-01"}).
 #' @param end_date character with the last date to consult in the format
-#' \code{"YYYY-MM-DD"} (Last available date is \code{"2023-05-31"})
+#' \code{"YYYY-MM-DD"} (Last available date is \code{"2023-05-31"}).
 #'
 #' @return \code{data.frame} object with downloaded data filtered for requested
-#' dates
+#' dates.
 #'
 #' @keywords internal
 retrieve_climate <- function(dataset_path, start_date, end_date) {
-  base_request <- httr2::request(base_url = dataset_path)
-  request <- httr2::req_error(base_request, is_error = \(resp) FALSE)
-  response <- httr2::req_perform(request)
   downloaded_data <- data.frame()
-  if (httr2::resp_status(response) == 200) {
-    content <- httr2::resp_body_string(response)
-    station_data <- suppressMessages(
-      suppressWarnings(
-        readr::read_delim(content,
-          delim = "|",
-          escape_double = FALSE,
-          trim_ws = TRUE,
-          show_col_types = FALSE
+  try(
+    {
+      station_data <- suppressMessages(
+        suppressWarnings(
+          utils::read.table(dataset_path,
+            sep = "|",
+            header = TRUE,
+            fileEncoding = "UTF-8",
+            numerals = "no.loss"
+          )
         )
       )
-    )
-    names(station_data) <- c("date", "value")
-    station_data$date <- as.POSIXct(station_data$date,
-      format = "%Y-%m-%d %H:%M:%S",
-      tz = "UTC"
-    )
-    downloaded_data <- station_data
-  }
+      names(station_data) <- c("date", "value")
+      station_data[["date"]] <- as.POSIXct(station_data[["date"]],
+        format = "%Y-%m-%d %H:%M:%S",
+        tz = "UTC"
+      )
+      downloaded_data <- station_data
+    },
+    silent = TRUE
+  )
   return(downloaded_data)
 }

@@ -7,13 +7,13 @@
 retrieve_path(dataset)
 }
 \arguments{
-\item{dataset}{character with the dataset name}
+\item{dataset}{character with the dataset name.}
 }
 \value{
-character with path to retrieve the dataset from server
+character with path to retrieve the dataset from server.
 }
 \description{
 Demographic and Geospatial datasets are included in the general documentation
-file. Path is built from information in the general file
+file. Path is built from information in the general file.
 }
 \keyword{internal}

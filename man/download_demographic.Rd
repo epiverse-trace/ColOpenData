@@ -8,10 +8,11 @@ download_demographic(dataset)
 }
 \arguments{
 \item{dataset}{character with the demographic dataset name. Please use
-\code{list_datasets("demographic")} to check available datasets}
+\code{list_datasets("demographic", "EN")} or
+\code{list_datasets("demographic", "ES")} to check available datasets.}
 }
 \value{
-\code{data.frame} object with downloaded data
+\code{data.frame} object with downloaded data.
 }
 \description{
 This function downloads demographic datasets from the National Population

@@ -37,55 +37,67 @@ library(ggplot2)
 ::: {style="text-align: justify;"}
 Geospatial and demographic data can be merged based on the spatial aggregation level (SAL). While geospatial data can be aggregated down to the block level, demographic data is typically available only at the department and municipality levels. Therefore, these are the only SAL that can be accessed in both types of data for merging.
 
-Now, the `merge_geo_demographic()` function only takes by parameter the demographic dataset of interest.  Therefore, we should first access the demographic documentation to know which dataset we want to work with. Let's suppose we want to select a dataset at the department level.
+Now, the `merge_geo_demographic()` function takes as a  parameter the demographic dataset of interest. Therefore, we should first access the demographic documentation to know which dataset we want to work with. Let's suppose we want to select a dataset at the department level. We can load all demographic available datasets and then filter the level by the desired SAL.
 :::
 
 ```{r documentation, echo =TRUE}
-# Available demographic datasets
-datasets_dem <- list_datasets("demographic")
+datasets_dem <- list_datasets("demographic", "EN")
 
-# Available demographic datasets at the department level
-department_datasets <- datasets_dem[datasets_dem$level == "department", ]
+department_datasets <- datasets_dem[datasets_dem["level"] == "department", ]
+
 head(department_datasets)
 ```
 
 ::: {style="text-align: justify;"}
-After reviewing the available datasets, we can select the one we wish to work with and take a closer look. For instance, let's suppose we choose the dataset "DANE_CNPVPD_2018_14BPD".
+After reviewing the available datasets, we can select the one we wish to work with and take a closer look. For instance, let's suppose we choose the dataset ["DANE_CNPVPD_2018_14BPD"]{.underline}.
 :::
 
 ```{r data, echo =TRUE}
-# Download demographic dataset
-chosen_data <- download_demographic("DANE_CNPVPD_2018_14BPD")
-head(chosen_data)
+chosen_dataset <- download_demographic("DANE_CNPVPD_2018_14BPD")
+
+head(chosen_dataset)
 ```
 
 ::: {style="text-align: justify;"}
-`chosen_data` presents information regarding health service attended by people that in the last thirty days had an illness, accident, dental problem or other health problem. Now, we can use the `merge_geo_demographic()` function.
+`chosen_data` presents information regarding health service attended by people that in the last thirty days had an illness, accident, dental problem or other health problem. Now, we can use the `merge_geo_demographic()` function. 
+
+The `simplified` argument downloads a simplified version of the geometries. This is not recommended for very accurate applications, but for a simple plot the approximation is enough. Also, it makes the download process much faster. To override this, you could use `simplified = FALSE`.
 :::
 
 ```{r merge data, echo =TRUE}
-# Download demographic dataset
-merged_data <- merge_geo_demographic("DANE_CNPVPD_2018_14BPD")
+merged_data <- merge_geo_demographic(
+  demographic_dataset =
+    "DANE_CNPVPD_2018_14BPD"
+)
+
 head(merged_data)
 ```
+
 ::: {style="text-align: justify;"}
 `merged_data` presents geospatial information related to departments, as well as the information related to the health service attended by the population. We can use this dataset to visualize the proportion of people in each department who used home remedies for health issues. To achieve this, we will calculate the proportion by dividing the count of people who reported using home remedies ("uso_remedios_caseros") by the total count of people who reported experiencing a health problem in each department.
 :::
 
-```{r plot}
-# Calculate the proportion
+```{r mutate}
 merged_data <- merged_data %>%
   mutate(proportion_home_remedies = uso_remedios_caseros /
     total_personas_que_tuvieron_alguna_enfermedad)
+```
 
-# Plot the proportion by department
+::: {style="text-align: justify;"}
+We can now plot the results
+:::
+
+```{r plot}
 ggplot(data = merged_data) +
   geom_sf(mapping = aes(fill = proportion_home_remedies), color = "white") +
   theme_minimal() +
   theme(
+    plot.background = element_rect(fill = "white", colour = "white"),
+    panel.background = element_rect(fill = "white", colour = "white"),
     panel.grid = element_blank(),
     axis.text = element_blank(),
-    axis.ticks = element_blank()
+    axis.ticks = element_blank(),
+    plot.title = element_text(hjust = 0.5)
   ) +
   scale_fill_gradient("Count", low = "#10bed2", high = "#deff00") +
   ggtitle(
@@ -94,4 +106,3 @@ ggplot(data = merged_data) +
     subtitle = "Colombia"
   )
 ```
-

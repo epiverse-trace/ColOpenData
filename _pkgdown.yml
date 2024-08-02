@@ -29,9 +29,7 @@ reference:
 - title: Climate Data
 - subtitle: Download climate data
   contents:
-  - download_climate
-  - download_climate_geom
-  - download_climate_stations
+  - starts_with("download_climate")
 - subtitle: Helper functions
   contents:
   - stations_in_roi
@@ -50,9 +48,10 @@ reference:
 - subtitle: Look up keywords in datasets
   contents:
   - look_up
-- subtitle: Dictionaries
+- subtitle: Helper functions
   contents:
-  - dictionary
+  - geospatial_dictionary
+  - get_climate_tags
   
 - title: DIVIPOLA
 - subtitle: DIVIPOLA table
@@ -60,9 +59,11 @@ reference:
   - divipola_table
 - subtitle: DIVIPOLA helper functions
   contents:
-  - name_to_code_dep
-  - name_to_code_mun
-  - code_to_name_dep
-  - code_to_name_mun
-  - name_to_standard_dep
-  - name_to_standard_mun
+  - starts_with("name")
+  - starts_with("code")
+  
+- title: Data
+  contents:
+  - climate_tags
+  - datasets_list
+  - geospatial_dictionaries

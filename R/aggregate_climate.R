@@ -5,26 +5,26 @@
 #' Only observations under the tags \code{TSSM_CON}, \code{TMN_CON},
 #' \code{TMX_CON}, \code{PTPM_CON}, and \code{BSHG_CON} can be aggregated,
 #' since are the ones where methodology for aggregation is explicitly provided
-#' from the source
+#' by the source.
 #'
 #' @param climate_data \code{data.frame} obtained from download functions. Only
-#' observations under the same tag can be aggregated
-#' @param frequency character with the aggregation frequency. (\code{"day"},
-#'  \code{"month"} or \code{"year"})
-#'
-#' @importFrom rlang .data
+#' observations under the same tag can be aggregated.
+#' @param frequency character with the aggregation frequency: (\code{"day"},
+#'  \code{"month"} or \code{"year"}).
 #'
 #' @examples
-#' lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)
-#' lon <- c(-75.678072, -75.327859, -75.327859, -75.678072, -75.678072)
+#' \dontrun{
+#' lat <- c(4.172817, 4.172817, 4.136050, 4.136050, 4.172817)
+#' lon <- c(-74.749121, -74.686169, -74.686169, -74.749121, -74.749121)
 #' polygon <- sf::st_polygon(x = list(cbind(lon, lat)))
 #' geometry <- sf::st_sfc(polygon)
 #' roi <- sf::st_as_sf(geometry)
-#' tssm <- download_climate_geom(roi, "2021-11-14", "2021-11-20", "TSSM_CON")
-#' daily_tssm <- aggregate_climate(tssm, "day")
-#' head(daily_tssm)
+#' ptpm <- download_climate_geom(roi, "2022-11-01", "2022-12-31", "PTPM_CON")
+#' monthly_ptpm <- aggregate_climate(ptpm, "month")
+#' head(monthly_ptpm)
+#' }
 #'
-#' @return \code{data.frame} object with the aggregated data
+#' @return \code{data.frame} object with the aggregated data.
 #'
 #' @export
 aggregate_climate <- function(climate_data, frequency) {
@@ -33,7 +33,7 @@ aggregate_climate <- function(climate_data, frequency) {
     "station", "longitude", "latitude",
     "date", "hour", "tag", "value"
   ))
-  tag <- unique(climate_data$tag)
+  tag <- unique(climate_data[["tag"]])
   stopifnot(
     "Aggregation is only possible for individual tags" =
       length(tag) == 1
@@ -79,27 +79,42 @@ aggregate_climate <- function(climate_data, frequency) {
   selected_tag <- aggregation_functions[[tag]]
 
   if (frequency == "day") {
-    if (!is.null(selected_tag$day)) {
-      aggregated_data <- aggregate_daily(climate_data, selected_tag$day)
+    if (!is.null(selected_tag[["day"]])) {
+      aggregated_data <- aggregate_daily(
+        climate_data,
+        selected_tag[["day"]]
+      )
     } else {
       aggregated_data <- climate_data
-      warning(selected_tag$warning_msg)
+      warning(selected_tag[["warning_msg"]])
     }
   } else if (frequency == "month") {
-    if (!is.null(selected_tag$day)) {
-      aggregated_data <- aggregate_daily(climate_data, selected_tag$day) %>%
-        aggregate_monthly(selected_tag$month)
+    if (!is.null(selected_tag[["day"]])) {
+      aggregated_data <- aggregate_daily(
+        climate_data,
+        selected_tag[["day"]]
+      ) %>%
+        aggregate_monthly(selected_tag[["month"]])
     } else {
-      aggregated_data <- aggregate_monthly(climate_data, selected_tag$month)
+      aggregated_data <- aggregate_monthly(
+        climate_data,
+        selected_tag[["month"]]
+      )
     }
   } else {
-    if (!is.null(selected_tag$day)) {
-      aggregated_data <- aggregate_daily(climate_data, selected_tag$day) %>%
-        aggregate_monthly(selected_tag$month) %>%
-        aggregate_annual(selected_tag$year)
+    if (!is.null(selected_tag[["day"]])) {
+      aggregated_data <- aggregate_daily(
+        climate_data,
+        selected_tag[["day"]]
+      ) %>%
+        aggregate_monthly(selected_tag[["month"]]) %>%
+        aggregate_annual(selected_tag[["year"]])
     } else {
-      aggregated_data <- aggregate_monthly(climate_data, selected_tag$month) %>%
-        aggregate_annual(selected_tag$year)
+      aggregated_data <- aggregate_monthly(
+        climate_data,
+        selected_tag[["month"]]
+      ) %>%
+        aggregate_annual(selected_tag[["year"]])
     }
   }
 
@@ -108,41 +123,49 @@ aggregate_climate <- function(climate_data, frequency) {
 
 #' Calculate daily aggregate of climate data
 #'
-#' @param hourly_data \code{data.frame} with hourly aggregated data
-#' @param FUN Function to use for aggregation
+#' @param hourly_data \code{data.frame} with hourly aggregated data.
+#' @param FUN Function to use for aggregation.
 #'
-#' @return \code{data.frame} object with daily aggregated data
+#' @return \code{data.frame} object with daily aggregated data.
 #'
 #' @keywords internal
 aggregate_daily <- function(hourly_data, FUN) {
   aggregated_day <- dplyr::group_by(
-    hourly_data, .data$station,
-    .data$longitude, .data$latitude, .data$date, .data$tag
+    hourly_data,
+    .data[["station"]],
+    .data[["longitude"]],
+    .data[["latitude"]],
+    .data[["date"]],
+    .data[["tag"]]
   ) %>%
-    dplyr::do(data.frame(value = FUN(.data)))
+    dplyr::reframe(value = FUN(dplyr::pick(dplyr::everything())))
   return(aggregated_day)
 }
 
 #' Calculate monthly aggregate of climate data
 #'
-#' @param daily_data \code{data.frame} with daily aggregated data
-#' @param FUN Function to use for aggregation
+#' @param daily_data \code{data.frame} with daily aggregated data.
+#' @param FUN Function to use for aggregation.
 #'
-#' @return \code{data.frame} object with monthly aggregated data
+#' @return \code{data.frame} object with monthly aggregated data.
 #'
 #' @keywords internal
 aggregate_monthly <- function(daily_data, FUN) {
   aggregated_month <- dplyr::mutate(daily_data,
-    month = format(as.Date(.data$date), "%m"),
-    year = format(as.Date(.data$date), "%Y")
+    month = format(as.Date(.data[["date"]]), "%m"),
+    year = format(as.Date(.data[["date"]]), "%Y")
   ) %>%
     dplyr::group_by(
-      .data$station, .data$longitude, .data$latitude,
-      .data$tag, .data$year, .data$month
+      .data[["station"]],
+      .data[["longitude"]],
+      .data[["latitude"]],
+      .data[["tag"]],
+      .data[["year"]],
+      .data[["month"]]
     ) %>%
-    dplyr::do(data.frame(value = FUN(.data))) %>%
+    dplyr::reframe(value = FUN(dplyr::pick(dplyr::everything()))) %>%
     dplyr::mutate(date = as.Date(
-      paste(.data$year, .data$month,
+      paste(.data[["year"]], .data[["month"]],
         "01",
         sep = "-"
       ),
@@ -158,22 +181,25 @@ aggregate_monthly <- function(daily_data, FUN) {
 
 #' Calculate annual aggregate of climate data
 #'
-#' @param monthly_data \code{data.frame} with monthly aggregated data
-#' @param FUN Function to use for aggregation
+#' @param monthly_data \code{data.frame} with monthly aggregated data.
+#' @param FUN Function to use for aggregation.
 #'
-#' @return \code{data.frame} object with annual aggregated data
+#' @return \code{data.frame} object with annual aggregated data.
 #'
 #' @keywords internal
 aggregate_annual <- function(monthly_data, FUN) {
   aggregated_year <- dplyr::mutate(monthly_data,
-    year = format(as.Date(.data$date), "%Y")
+    year = format(as.Date(.data[["date"]]), "%Y")
   ) %>%
     dplyr::group_by(
-      .data$station, .data$longitude, .data$latitude,
-      .data$tag, .data$year
+      .data[["station"]],
+      .data[["longitude"]],
+      .data[["latitude"]],
+      .data[["tag"]],
+      .data[["year"]]
     ) %>%
-    dplyr::do(data.frame(value = FUN(.data))) %>%
-    dplyr::mutate(date = as.Date(paste(.data$year, "01", "01", sep = "-"),
+    dplyr::reframe(value = FUN(dplyr::pick(dplyr::everything()))) %>%
+    dplyr::mutate(date = as.Date(paste(.data[["year"]], "01", "01", sep = "-"),
       format = "%Y-%m-%d"
     )) %>%
     dplyr::ungroup() %>%

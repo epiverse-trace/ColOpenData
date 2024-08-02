@@ -8,13 +8,13 @@ code_to_name_dep(department_code)
 }
 \arguments{
 \item{department_code}{character vector with the DIVIPOLA codes of the
-departments}
+departments.}
 }
 \value{
-character vector with the DIVIPOLA name of the departments
+character vector with the DIVIPOLA name of the departments.
 }
 \description{
-Retrieve departments' DIVIPOLA official names from their DIVIPOLA codes
+Retrieve departments' DIVIPOLA official names from their DIVIPOLA codes.
 }
 \examples{
 dptos <- c("73", "05", "11")

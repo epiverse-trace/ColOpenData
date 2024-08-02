@@ -8,13 +8,13 @@ code_to_name_mun(municipality_code)
 }
 \arguments{
 \item{municipality_code}{character vector with the DIVIPOLA codes of the
-municipalities}
+municipalities.}
 }
 \value{
-character vector with the DIVIPOLA name of the municipalities
+character vector with the DIVIPOLA name of the municipalities.
 }
 \description{
-Retrieve municipalities' DIVIPOLA official names from their DIVIPOLA codes
+Retrieve municipalities' DIVIPOLA official names from their DIVIPOLA codes.
 }
 \examples{
 mpios <- c("73001", "11001", "05615")
