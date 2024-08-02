@@ -55,9 +55,9 @@ merge_geo_demographic <- function(demographic_dataset, simplified = TRUE) {
         names_from = dplyr::all_of(column),
         values_from = dplyr::all_of(total_col)
       )
-    geospatial <- suppressMessages(download_geospatial("department", 
-                                                       simplified = simplified,
-                                                       include_cnpv = FALSE
+    geospatial <- suppressMessages(download_geospatial("department",
+      simplified = simplified,
+      include_cnpv = FALSE
     ))
     merged_data <- merge(geospatial, filtered_df,
       by.x = "codigo_departamento",
@@ -72,9 +72,9 @@ merge_geo_demographic <- function(demographic_dataset, simplified = TRUE) {
         names_from = dplyr::all_of(column),
         values_from = dplyr::all_of(total_col)
       )
-    geospatial <- suppressMessages(download_geospatial("municipality", 
-                                                       simplified = simplified,
-                                                       include_cnpv = FALSE
+    geospatial <- suppressMessages(download_geospatial("municipality",
+      simplified = simplified,
+      include_cnpv = FALSE
     ))
     merged_data <- merge(geospatial, filtered_df,
       by.x = "codigo_municipio",

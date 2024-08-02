@@ -51,6 +51,7 @@ knitr::kable(IDEAM_tags)
 Each observation is subject to the availability of stations in the ROI and the stations' status (active, maintenance or suspended), as well as quality filters implemented by IDEAM.
 
 In this vignette you will learn: 
+
 1. How to download climate data using **ColOpenData**.
 2. How to aggregate climate data by different frequencies 
 3. How to plot downloaded climate data
@@ -106,7 +107,7 @@ We can make a first exploration to check if there are any stations contained ins
 :::
 
 ```{r stations in roi}
-stations <- stations_in_roi(roi)
+stations <- stations_in_roi(geometry = roi)
 
 head(stations)
 ```
@@ -160,11 +161,16 @@ To plot a time series of the stations' data we can use `ggplot()` function from 
 ```{r plot temperatures stations}
 ggplot(data = tssm_stations) +
   geom_line(aes(x = date, y = value, group = station), color = "#106ba0") +
-  ggtitle("Max Temperature in Espinal by station") +
+  ggtitle("Dry-bulb Temperature in Espinal by station") +
   xlab("Date") +
   ylab("Temperature [°C]") +
+  facet_grid(rows = vars(station)) +
   theme_minimal() +
-  facet_grid(rows = vars(station))
+  theme(
+    plot.background = element_rect(fill = "white", colour = "white"),
+    panel.background = element_rect(fill = "white", colour = "white"),
+    plot.title = element_text(hjust = 0.5)
+  )
 ```
 
 ::: {style="text-align: justify;"}
@@ -172,15 +178,20 @@ As we can see, only one station has data for the selected period. However, by ha
 :::
 
 ```{r plot monthly}
-tssm_month <- tssm_stations %>% aggregate_climate("month")
+tssm_month <- tssm_stations %>% aggregate_climate(frequency = "month")
 
 ggplot(data = tssm_month) +
   geom_line(aes(x = date, y = value, group = station), color = "#106ba0") +
-  ggtitle("Dry-bulb Temperature") +
+  ggtitle("Dry-bulb Temperature in Espinal by station") +
   xlab("Date") +
   ylab("Dry-bulb temperature [C]") +
+  facet_grid(rows = vars(station)) +
   theme_minimal() +
-  facet_grid(rows = vars(station))
+  theme(
+    plot.background = element_rect(fill = "white", colour = "white"),
+    panel.background = element_rect(fill = "white", colour = "white"),
+    plot.title = element_text(hjust = 0.5)
+  )
 ```
 ## Other methods
 ::: {style="text-align: justify;"}
@@ -200,7 +211,7 @@ tssm_roi <- download_climate_geom(
   start_date = "2013-01-01",
   end_date = "2016-12-31",
   tag = "TSSM_CON"
-) %>% aggregate_climate("month")
+) %>% aggregate_climate(frequency = "month")
 ```
 
 To make the download process even easier, and avoid the creation of already known geometries like municipalities or departments, **ColOpenData** offers an extra function to download data using the areas' DIVIPOLA code.
@@ -230,7 +241,7 @@ tssm_mpio <- download_climate(
   start_date = "2013-01-01",
   end_date = "2016-12-31",
   tag = "TMX_CON"
-) %>% aggregate_climate("month")
+) %>% aggregate_climate(frequency = "month")
 ```
 
 ## Disclaimer

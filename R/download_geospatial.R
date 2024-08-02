@@ -38,7 +38,7 @@
 #' @return \code{data.frame} object with downloaded data.
 #'
 #' @export
-download_geospatial <- function(spatial_level, simplified = TRUE, 
+download_geospatial <- function(spatial_level, simplified = TRUE,
                                 include_geom = TRUE, include_cnpv = TRUE) {
   checkmate::assert_logical(simplified)
   checkmate::assert_logical(include_geom)
@@ -47,17 +47,17 @@ download_geospatial <- function(spatial_level, simplified = TRUE,
     "At least one of the groups (`geom` and/or `cnpv`)
             must be TRUE" = any(include_geom, include_cnpv)
   )
-  
+
   dataset <- retrieve_geospatial_name(spatial_level)
   dataset_path <- retrieve_path(dataset)
-  
-  if(simplified){
+
+  if (simplified) {
     dataset_path <- sub("\\.gpkg$", "_SIM.gpkg", dataset_path)
   }
   geospatial_data <- sf::st_read(dataset_path, quiet = TRUE)
   geospatial_vars <- c("area", "latitud", "longitud")
   shape_vars <- c("shape_length", "shape_area")
-  
+
   if (include_geom && !include_cnpv) {
     last_base_index <- which(colnames(geospatial_data) == "longitud")
     geospatial_data <- geospatial_data %>%

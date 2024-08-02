@@ -103,7 +103,7 @@ To understand which column contains the internet related information, we will ne
 :::
 
 ```{r dictionary for urban sections}
-dict <- geospatial_dictionary("dpto", "EN")
+dict <- geospatial_dictionary(spatial_level = "dpto", language = "EN")
 
 head(dict)
 ```
@@ -127,6 +127,8 @@ ggplot(data = internet_cov) +
   geom_sf(mapping = aes(fill = internet), color = NA) +
   theme_minimal() +
   theme(
+    plot.background = element_rect(fill = "white", colour = "white"),
+    panel.background = element_rect(fill = "white", colour = "white"),
     panel.grid = element_blank(),
     axis.text = element_blank(),
     axis.ticks = element_blank()

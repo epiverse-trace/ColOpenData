@@ -5,7 +5,7 @@
 #' and Dwelling Census (CNPV) of 2018.
 #'
 #' @param dataset character with the demographic dataset name. Please use
-#' \code{list_datasets("demographic", "EN")} or 
+#' \code{list_datasets("demographic", "EN")} or
 #' \code{list_datasets("demographic", "ES")} to check available datasets.
 #'
 #' @examples

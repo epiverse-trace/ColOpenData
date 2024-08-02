@@ -114,6 +114,7 @@ library(ColOpenData)
 
 ```{r list datasets}
 datasets <- list_datasets(language = "EN")
+
 head(datasets)
 ```
 
@@ -121,6 +122,7 @@ To list only demographic datasets we can use:
 
 ```{r list demographic datasets}
 demographic_datasets <- list_datasets(module = "demographic", language = "EN")
+
 head(demographic_datasets)
 ```
 
@@ -143,6 +145,7 @@ Sometimes, going through each dataset to find specific information can be tiring
 
 ```{r list datasets with information by age}
 age_datasets <- look_up(keywords = "age")
+
 head(age_datasets)
 ```
 
@@ -150,9 +153,12 @@ We can specify a module to make a more narrow and precise search.
 
 ```{r list datasets with information by area and sex in demographic module}
 area_sex_datasets <- look_up(
-  keywords = c("area", "sex"), module = "demographic",
-  logic = "and"
+  keywords = c("area", "sex"),
+  module = "demographic",
+  logic = "and",
+  language = "EN"
 )
+
 head(area_sex_datasets)
 ```
 
@@ -163,7 +169,11 @@ Datasets inside the geospatial module contain a summarized version of the census
 :::
 
 ```{r dictionary for MGNCNPV at municipalities}
-dict_mpio <- geospatial_dictionary("municipality", "EN")
+dict_mpio <- geospatial_dictionary(
+  spatial_level = "municipality",
+  language = "EN"
+)
+
 head(dict_mpio)
 ```
 
@@ -174,7 +184,8 @@ Climate data is not stored in multiple datasets but as an unique dataset with nu
 :::
 
 ```{r dicionary for climate data}
-dict_climate <- get_climate_tags()
+dict_climate <- get_climate_tags(language = "EN")
+
 head(dict_climate)
 ```
 
@@ -194,7 +205,7 @@ To get the DIVIPOLA code of a municipality or department we can use the auxiliar
 :::
 
 ```{r cordoba}
-name_to_code_dep("Guajira")
+name_to_code_dep(department_name = "Guajira")
 ```
 
 ::: {style="text-align: justify;"}
@@ -202,7 +213,10 @@ To retrieve a municipality code we must include the department name and the muni
 :::
 
 ```{r divipola tunja}
-name_to_code_mun("Boyacá", "Tunja")
+name_to_code_mun(
+  department_name = "Boyacá",
+  municipality_name = "Tunja"
+)
 ```
 
 ::: {style="text-align: justify;"}
@@ -212,5 +226,5 @@ On the other hand, departments' and municipalities' codes can be translated to r
 :::
 
 ```{r tunja name}
-code_to_name_mun("15001")
+code_to_name_mun(municipality_code = "15001")
 ```
