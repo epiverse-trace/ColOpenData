@@ -1,10 +1,10 @@
 Package: ColOpenData
 Title: Download Colombian Demographic, Climate and Geospatial Data
-Version: 0.2.0
+Version: 0.3.0
 Authors@R: c(
-    person("Maria Camila", "Tavera-Cifuentes", , "mc.tavera@uniandes.edu.co", role = c("aut", "cre"),
+    person("Maria Camila", "Tavera-Cifuentes", , "mc.tavera@uniandes.edu.co", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0009-0007-1610-4583")),
-    person("Julian", "Otero", , "jd.otero10@uniandes.edu.co", role = "aut",
+    person("Julian", "Otero", , "jd.otero10@uniandes.edu.co", role = c("aut", "cph"),
            comment = c(ORCID = "0009-0006-0429-7747")),
     person("Natalia", "Nino-Machado", , "n.nino58@uniandes.edu.co", role = "ctb",
            comment = c(ORCID = "0000-0001-7887-9439")),
@@ -21,7 +21,7 @@ Authors@R: c(
     person("Joshua W.", "Lambert", , "joshua.lambert@lshtm.ac.uk", role = "rev",
            comment = c(ORCID = "0000-0001-5218-3046"))
   )
-Description: This package acquires and wrangles Colombian socioeconomic,
+Description: Downloads wrangled Colombian socioeconomic,
     geospatial, population and climate data. It solves the problem of
     Colombian data being issued in different web pages and sources by
     using functions that allow the user to select the desired database and

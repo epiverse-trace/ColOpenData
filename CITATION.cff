@@ -7,13 +7,12 @@ cff-version: 1.2.0
 message: 'To cite package "ColOpenData" in publications use:'
 type: software
 license: MIT
-title: 'ColOpenData: Colombian Open Data Download and Wrangling'
-version: 0.2.0
-abstract: ColOpenData is a package that acquires and wrangles Colombian socioeconomic,
-  geospatial, population and climate data. It solves the problem of Colombian data
-  being issued in different web pages and sources by using functions that allow the
-  user to select the desired database and download it without having to do the exhausting
-  acquisition process.
+title: 'ColOpenData: Download Colombian Demographic, Climate and Geospatial Data'
+version: 0.3.0
+abstract: Downloads wrangled Colombian socioeconomic, geospatial, population and climate
+  data. It solves the problem of Colombian data being issued in different web pages
+  and sources by using functions that allow the user to select the desired database
+  and download it without having to do the exhausting acquisition process.
 authors:
 - family-names: Tavera-Cifuentes
   given-names: Maria Camila
