@@ -8,8 +8,8 @@ merge_geo_demographic(demographic_dataset, simplified = TRUE)
 }
 \arguments{
 \item{demographic_dataset}{character with the demographic dataset name.
-Please use \code{list_datasets(""EN"M demographic")} to check available
-datasets.}
+Please use \code{list_datasets("demographic", "EN")} or
+\code{list_datasets("demographic", "ES")} to check available datasets.}
 
 \item{simplified}{logical for indicating if the downloaded spatial data
 should be a simplified version of the geometries. Simplified versions are
@@ -28,7 +28,7 @@ present municipality or department level.
 }
 \examples{
 \dontrun{
-merged <- merge_geo_demographic("DANE_CNPVV_2018_9VD")
+merged <- merge_geo_demographic("DANE_CNPVV_2018_9VD", TRUE)
 head(merged)
 }
 

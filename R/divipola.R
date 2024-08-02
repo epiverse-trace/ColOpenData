@@ -171,7 +171,6 @@ retrieve_code <- function(input_token, fixed_tokens, codes_list) {
   return(code)
 }
 
-
 #' Retrieve departments' DIVIPOLA names from codes
 #'
 #' @description
@@ -270,7 +269,6 @@ name_to_standard_dep <- function(department_name) {
 #' @param municipality_name character vector with the names to be translated.
 #'
 #' @examples
-#'
 #' dptos <- c("Bogota", "Tolima")
 #' mpios <- c("Bogota DC", "CarmendeApicala")
 #' name_to_standard_mun(dptos, mpios)

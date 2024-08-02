@@ -4,7 +4,6 @@
 #' Retrieve geospatial data dictionaries to understand internal tags and named
 #' columns. Dictionaries are available in English and Spanish.
 #'
-#'
 #' @param spatial_level character with the spatial level to be consulted:
 #' \itemize{
 #' \item \code{"DPTO"} or \code{"department"}: Department.
@@ -18,8 +17,8 @@
 #' \item \code{"ZU" } or \code{"urban_zone"}: Urban Zone.
 #' \item \code{"MZN"} or \code{"block"}: Block.
 #' }
-#' @param language language of the dictionary variables (\code{"EN"},
-#' \code{"ES"}. Default is \code{"ES"}.
+#' @param language character with the language of the dictionary variables
+#' (\code{"EN"} or \code{"ES"}. Default is \code{"ES"}.
 #'
 #' @examples
 #' dict <- geospatial_dictionary("setu", "EN")
@@ -50,14 +49,14 @@ geospatial_dictionary <- function(spatial_level, language = "ES") {
 #' Retrieve available climate tags to be consulted. The list is only available
 #' in Spanish.
 #'
-#' @param language language of the tags (\code{"EN"}, \code{"ES"}. Default is
-#' \code{"ES"}.
+#' @param language character with the language of the tags (\code{"EN"} or
+#' \code{"ES"}. Default is \code{"ES"}.
 #'
 #' @examples
-#' dict <- get_climate_tags(language = "ES")
+#' dict <- get_climate_tags("ES")
 #' head(dict)
 #'
-#' @return \code{data.frame} object with available tags.
+#' @return \code{data.frame} object with available climate tags.
 #'
 #' @export
 get_climate_tags <- function(language = "ES") {
@@ -78,9 +77,9 @@ get_climate_tags <- function(language = "ES") {
 #' category and description.
 #'
 #' @param module character with module to be consulted (\code{"demographic"},
-#' \code{"geospatial"}, \code{"climate"}). Default is \code{"all"}.
-#' @param language language of all variables (\code{"EN"}, \code{"ES"}.
-#' Default is \code{"ES"}.
+#' \code{"geospatial"} or \code{"climate"}). Default is \code{"all"}.
+#' @param language character with the language of dataset details (\code{"EN"}
+#' or \code{"ES"}. Default is \code{"ES"}.
 #'
 #' @examples
 #' list <- list_datasets("geospatial", "EN")
@@ -140,14 +139,15 @@ list_datasets <- function(module = "all", language = "ES") {
 #' \item \code{logic = "and"}: Matches rows containing all of the specified
 #' keywords in their descriptions.
 #'  }
-#' @param language language of the keywords (\code{"EN"}, \code{"ES"}.
-#' Default is \code{"EN"}.
+#' @param language character with the language of the keywords (\code{"EN"} or
+#' \code{"ES"}. Default is \code{"EN"}.
 #'
 #' @examples
 #' found <- look_up(c("sex", "age"), "demographic", "and", "EN")
 #' head(found)
 #'
-#' @return \code{data.frame} object with the available datasets.
+#' @return \code{data.frame} object with the available datasets containing
+#' information related to the consulted keywords.
 #'
 #' @export
 look_up <- function(keywords, module = "all", logic = "or", language = "EN") {

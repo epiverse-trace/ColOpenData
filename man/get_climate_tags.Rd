@@ -7,18 +7,18 @@
 get_climate_tags(language = "ES")
 }
 \arguments{
-\item{language}{language of the tags (\code{"EN"}, \code{"ES"}. Default is
-\code{"ES"}.}
+\item{language}{character with the language of the tags (\code{"EN"} or
+\code{"ES"}. Default is \code{"ES"}.}
 }
 \value{
-\code{data.frame} object with available tags.
+\code{data.frame} object with available climate tags.
 }
 \description{
 Retrieve available climate tags to be consulted. The list is only available
 in Spanish.
 }
 \examples{
-dict <- get_climate_tags(language = "ES")
+dict <- get_climate_tags("ES")
 head(dict)
 
 }

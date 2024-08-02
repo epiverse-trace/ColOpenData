@@ -21,8 +21,8 @@ class.
 \item \code{"MZN"} or \code{"block"}: Block.
 }}
 
-\item{language}{language of the dictionary variables (\code{"EN"},
-\code{"ES"}. Default is \code{"ES"}.}
+\item{language}{character with the language of the dictionary variables
+(\code{"EN"} or \code{"ES"}. Default is \code{"ES"}.}
 }
 \value{
 \code{data.frame} object with geospatial data dictionary.

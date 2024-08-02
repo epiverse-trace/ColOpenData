@@ -22,11 +22,12 @@ specified keywords in their descriptions.
 keywords in their descriptions.
 }}
 
-\item{language}{language of the keywords (\code{"EN"}, \code{"ES"}.
-Default is \code{"EN"}.}
+\item{language}{character with the language of the keywords (\code{"EN"} or
+\code{"ES"}. Default is \code{"EN"}.}
 }
 \value{
-\code{data.frame} object with the available datasets.
+\code{data.frame} object with the available datasets containing
+information related to the consulted keywords.
 }
 \description{
 List available datasets containing user-specified keywords in their

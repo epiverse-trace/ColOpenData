@@ -21,8 +21,8 @@
 #' }
 #' @param simplified logical for indicating if the downloaded spatial data
 #' should be a simplified version of the geometries. Simplified versions are
-#' lighter but less precise, and are recommended for easier applications like
-#' plots. Default is \code{TRUE}.
+#' lighter but less precise, and are only recommended for easier applications
+#' like plots. Default is \code{TRUE}.
 #' @param include_geom logical for including (or not) the spatial geometry.
 #' Default is \code{TRUE}. If \code{TRUE}, the function will return an
 #' \code{"sf"} \code{data.frame}.
@@ -50,6 +50,7 @@ download_geospatial <- function(spatial_level, simplified = TRUE,
   
   dataset <- retrieve_geospatial_name(spatial_level)
   dataset_path <- retrieve_path(dataset)
+  
   if(simplified){
     dataset_path <- sub("\\.gpkg$", "_SIM.gpkg", dataset_path)
   }
