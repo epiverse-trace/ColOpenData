@@ -126,18 +126,18 @@ aggregation level (SAL). While geospatial data can be aggregated down to
 the block level, demographic data is typically available only at the
 department and municipality levels. Therefore, these are the only SAL
 that can be accessed in both types of data for merging.</p>
-<p>Now, the <code><a href="../reference/merge_geo_demographic.html">merge_geo_demographic()</a></code> function only takes by
+<p>Now, the <code><a href="../reference/merge_geo_demographic.html">merge_geo_demographic()</a></code> function takes as a
 parameter the demographic dataset of interest. Therefore, we should
 first access the demographic documentation to know which dataset we want
 to work with. Let’s suppose we want to select a dataset at the
-department level.</p>
+department level. We can load all demographic available datasets and
+then filter the level by the desired SAL.</p>
 </div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Available demographic datasets</span></span>
-<span><span class="va">datasets_dem</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/list_datasets.html">list_datasets</a></span><span class="op">(</span><span class="st">"demographic"</span>, <span class="st">"EN"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">datasets_dem</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/list_datasets.html">list_datasets</a></span><span class="op">(</span><span class="st">"demographic"</span>, <span class="st">"EN"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Available demographic datasets at the department level</span></span>
 <span><span class="va">department_datasets</span> <span class="op">&lt;-</span> <span class="va">datasets_dem</span><span class="op">[</span><span class="va">datasets_dem</span><span class="op">[</span><span class="st">"level"</span><span class="op">]</span> <span class="op">==</span> <span class="st">"department"</span>, <span class="op">]</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">department_datasets</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 7</span></span></span>
 <span><span class="co">#&gt;   name                 group       source year  level      category  description</span></span>
@@ -151,17 +151,17 @@ department level.</p>
 <div style="text-align: justify;">
 <p>After reviewing the available datasets, we can select the one we wish
 to work with and take a closer look. For instance, let’s suppose we
-choose the dataset “DANE_CNPVPD_2018_14BPD”.</p>
+choose the dataset <u>“DANE_CNPVPD_2018_14BPD”</u>.</p>
 </div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Download demographic dataset</span></span>
-<span><span class="va">chosen_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_demographic.html">download_demographic</a></span><span class="op">(</span><span class="st">"DANE_CNPVPD_2018_14BPD"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">chosen_dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_demographic.html">download_demographic</a></span><span class="op">(</span><span class="st">"DANE_CNPVPD_2018_14BPD"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Original data is retrieved from the National Administrative Department</span></span>
 <span><span class="co">#&gt; of Statistics (Departamento Administrativo Nacional de Estadística -</span></span>
 <span><span class="co">#&gt; DANE).</span></span>
 <span><span class="co">#&gt; Reformatted by package authors.</span></span>
 <span><span class="co">#&gt; Stored by Universidad de Los Andes under the Epiverse TRACE iniative.</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">chosen_data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">chosen_dataset</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   codigo_departamento departamento  sexo grupo_de_edad  area</span></span>
 <span><span class="co">#&gt; 1               total     Nacional total         total total</span></span>
 <span><span class="co">#&gt; 2               total     Nacional total         total total</span></span>
@@ -181,15 +181,23 @@ choose the dataset “DANE_CNPVPD_2018_14BPD”.</p>
 service attended by people that in the last thirty days had an illness,
 accident, dental problem or other health problem. Now, we can use the
 <code><a href="../reference/merge_geo_demographic.html">merge_geo_demographic()</a></code> function.</p>
+<p>The <code>simplified</code> argument downloads a simplified version
+of the geometries. This is not recommended for very accurate
+applications, but for a simple plot the approximation is enough. Also,
+it makes the download process much faster. To override this, you could
+use <code>simplified = FALSE</code>.</p>
 </div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Download demographic dataset</span></span>
-<span><span class="va">merged_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/merge_geo_demographic.html">merge_geo_demographic</a></span><span class="op">(</span><span class="st">"DANE_CNPVPD_2018_14BPD"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">merged_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/merge_geo_demographic.html">merge_geo_demographic</a></span><span class="op">(</span></span>
+<span>  demographic_dataset <span class="op">=</span></span>
+<span>    <span class="st">"DANE_CNPVPD_2018_14BPD"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; Original data is retrieved from the National Administrative Department</span></span>
 <span><span class="co">#&gt; of Statistics (Departamento Administrativo Nacional de Estadística -</span></span>
 <span><span class="co">#&gt; DANE).</span></span>
 <span><span class="co">#&gt; Reformatted by package authors.</span></span>
 <span><span class="co">#&gt; Stored by Universidad de Los Andes under the Epiverse TRACE iniative.</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">merged_data</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Simple feature collection with 6 features and 17 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
@@ -239,12 +247,12 @@ accident, dental problem or other health problem. Now, we can use the
 <span><span class="co">#&gt; 5                             61                10023           2503</span></span>
 <span><span class="co">#&gt; 6                            112                 6743           2784</span></span>
 <span><span class="co">#&gt;   no_hizo_nada                       geometry</span></span>
-<span><span class="co">#&gt; 1        15430 MULTIPOLYGON (((-76.41355 8...</span></span>
-<span><span class="co">#&gt; 2         3271 MULTIPOLYGON (((-74.84946 1...</span></span>
-<span><span class="co">#&gt; 3        22317 MULTIPOLYGON (((-74.07419 4...</span></span>
+<span><span class="co">#&gt; 1        15430 MULTIPOLYGON (((-74.83058 8...</span></span>
+<span><span class="co">#&gt; 2         3271 MULTIPOLYGON (((-74.91077 1...</span></span>
+<span><span class="co">#&gt; 3        22317 MULTIPOLYGON (((-74.15067 4...</span></span>
 <span><span class="co">#&gt; 4         4677 MULTIPOLYGON (((-76.17318 9...</span></span>
-<span><span class="co">#&gt; 5         3080 MULTIPOLYGON (((-72.17368 7...</span></span>
-<span><span class="co">#&gt; 6         2398 MULTIPOLYGON (((-74.67154 5...</span></span></code></pre></div>
+<span><span class="co">#&gt; 5         3080 MULTIPOLYGON (((-72.04767 7...</span></span>
+<span><span class="co">#&gt; 6         2398 MULTIPOLYGON (((-74.66496 5...</span></span></code></pre></div>
 <div style="text-align: justify;">
 <p><code>merged_data</code> presents geospatial information related to
 departments, as well as the information related to the health service
@@ -256,19 +264,23 @@ dividing the count of people who reported using home remedies
 experiencing a health problem in each department.</p>
 </div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Calculate the proportion</span></span>
-<span><span class="va">merged_data</span> <span class="op">&lt;-</span> <span class="va">merged_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">merged_data</span> <span class="op">&lt;-</span> <span class="va">merged_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>proportion_home_remedies <span class="op">=</span> <span class="va">uso_remedios_caseros</span> <span class="op">/</span></span>
-<span>    <span class="va">total_personas_que_tuvieron_alguna_enfermedad</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Plot the proportion by department</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">merged_data</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="va">total_personas_que_tuvieron_alguna_enfermedad</span><span class="op">)</span></span></code></pre></div>
+<div style="text-align: justify;">
+<p>We can now plot the results</p>
+</div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">merged_data</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span>mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">proportion_home_remedies</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
+<span>    plot.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"white"</span>, colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
+<span>    panel.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"white"</span>, colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
 <span>    panel.grid <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>    axis.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>    axis.ticks <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>    axis.ticks <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">scale_fill_gradient</a></span><span class="op">(</span><span class="st">"Count"</span>, low <span class="op">=</span> <span class="st">"#10bed2"</span>, high <span class="op">=</span> <span class="st">"#deff00"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span></span>

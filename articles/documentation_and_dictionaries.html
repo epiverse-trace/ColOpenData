@@ -301,6 +301,7 @@ but can be <code>"EN"</code> as well.</p>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/epiverse-trace/ColOpenData" class="external-link">ColOpenData</a></span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/list_datasets.html">list_datasets</a></span><span class="op">(</span>language <span class="op">=</span> <span class="st">"EN"</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 7</span></span></span>
 <span><span class="co">#&gt;   name                 group      source year  level        category description</span></span>
@@ -314,6 +315,7 @@ but can be <code>"EN"</code> as well.</p>
 <p>To list only demographic datasets we can use:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">demographic_datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/list_datasets.html">list_datasets</a></span><span class="op">(</span>module <span class="op">=</span> <span class="st">"demographic"</span>, language <span class="op">=</span> <span class="st">"EN"</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">demographic_datasets</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 7</span></span></span>
 <span><span class="co">#&gt;   name                group       source year  level        category description</span></span>
@@ -356,6 +358,7 @@ searching for a single word, you can use either <code>"and"</code>or
 </div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">age_datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/look_up.html">look_up</a></span><span class="op">(</span>keywords <span class="op">=</span> <span class="st">"age"</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">age_datasets</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 7</span></span></span>
 <span><span class="co">#&gt;   name                 group       source year  level       category description</span></span>
@@ -369,9 +372,12 @@ searching for a single word, you can use either <code>"and"</code>or
 <p>We can specify a module to make a more narrow and precise search.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">area_sex_datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/look_up.html">look_up</a></span><span class="op">(</span></span>
-<span>  keywords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"area"</span>, <span class="st">"sex"</span><span class="op">)</span>, module <span class="op">=</span> <span class="st">"demographic"</span>,</span>
-<span>  logic <span class="op">=</span> <span class="st">"and"</span></span>
+<span>  keywords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"area"</span>, <span class="st">"sex"</span><span class="op">)</span>,</span>
+<span>  module <span class="op">=</span> <span class="st">"demographic"</span>,</span>
+<span>  logic <span class="op">=</span> <span class="st">"and"</span>,</span>
+<span>  language <span class="op">=</span> <span class="st">"EN"</span></span>
 <span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">area_sex_datasets</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 7</span></span></span>
 <span><span class="co">#&gt;   name                 group       source year  level       category description</span></span>
@@ -395,7 +401,11 @@ available information. To retrieve them, we can use the function
 language as parameters:</p>
 </div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dict_mpio</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/geospatial_dictionary.html">geospatial_dictionary</a></span><span class="op">(</span><span class="st">"municipality"</span>, <span class="st">"EN"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">dict_mpio</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/geospatial_dictionary.html">geospatial_dictionary</a></span><span class="op">(</span></span>
+<span>  spatial_level <span class="op">=</span> <span class="st">"municipality"</span>,</span>
+<span>  language <span class="op">=</span> <span class="st">"EN"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dict_mpio</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 4</span></span></span>
 <span><span class="co">#&gt;   variable                 type         length description                      </span></span>
@@ -418,22 +428,23 @@ tags language, that can be <code>"EN"</code> or <code>"ES"</code>
 (default is <code>"ES"</code>).</p>
 </div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dict_climate</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_climate_tags.html">get_climate_tags</a></span><span class="op">(</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">dict_climate</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_climate_tags.html">get_climate_tags</a></span><span class="op">(</span>language <span class="op">=</span> <span class="st">"EN"</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dict_climate</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   etiqueta                                   variable</span></span>
-<span><span class="co">#&gt; 1 TSSM_CON                Temperatura seca (ambiente)</span></span>
-<span><span class="co">#&gt; 2 THSM_CON                         Temperatura humeda</span></span>
-<span><span class="co">#&gt; 3  TMN_CON                         Temperatura minima</span></span>
-<span><span class="co">#&gt; 4  TMX_CON                         Temperatura maxima</span></span>
-<span><span class="co">#&gt; 5 TSTG_CON Temperatura seca (ambiente) del termografo</span></span>
-<span><span class="co">#&gt; 6   HR_CAL                           Humedad relativa</span></span>
-<span><span class="co">#&gt;                                frecuencia</span></span>
-<span><span class="co">#&gt; 1 Horaria (07:00, 13:00, 18:00 y/o 19:00)</span></span>
-<span><span class="co">#&gt; 2 Horaria (07:00, 13:00, 18:00 y/o 19:00)</span></span>
-<span><span class="co">#&gt; 3                                  Diaria</span></span>
-<span><span class="co">#&gt; 4                                  Diaria</span></span>
-<span><span class="co">#&gt; 5                      Horaria (24 horas)</span></span>
-<span><span class="co">#&gt; 6 Horaria (07:00, 13:00, 18:00 y/o 19:00)</span></span></code></pre></div>
+<span><span class="co">#&gt;        tag                          variable</span></span>
+<span><span class="co">#&gt; 1 TSSM_CON              Dry-bulb Temperature</span></span>
+<span><span class="co">#&gt; 2 THSM_CON              Wet-bulb Temperature</span></span>
+<span><span class="co">#&gt; 3  TMN_CON               Minimum Temperature</span></span>
+<span><span class="co">#&gt; 4  TMX_CON               Maximum Temperature</span></span>
+<span><span class="co">#&gt; 5 TSTG_CON Dry-bulb Temperature (Termograph)</span></span>
+<span><span class="co">#&gt; 6   HR_CAL                 Relative Humidity</span></span>
+<span><span class="co">#&gt;                                   frequency</span></span>
+<span><span class="co">#&gt; 1 Hourly (07:00, 13:00, 18:00 and/or 19:00)</span></span>
+<span><span class="co">#&gt; 2 Hourly (07:00, 13:00, 18:00 and/or 19:00)</span></span>
+<span><span class="co">#&gt; 3                                     Daily</span></span>
+<span><span class="co">#&gt; 4                                     Daily</span></span>
+<span><span class="co">#&gt; 5                         Hourly (24 hours)</span></span>
+<span><span class="co">#&gt; 6 Hourly (07:00, 13:00, 18:00 and/or 19:00)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="divipola">DIVIPOLA<a class="anchor" aria-label="anchor" href="#divipola"></a>
@@ -467,7 +478,7 @@ To retrieve a department code we only have to include the department’s
 name:</p>
 </div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/name_to_code_dep.html">name_to_code_dep</a></span><span class="op">(</span><span class="st">"Guajira"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/name_to_code_dep.html">name_to_code_dep</a></span><span class="op">(</span>department_name <span class="op">=</span> <span class="st">"Guajira"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "44"</span></span></code></pre></div>
 <div style="text-align: justify;">
 <p>To retrieve a municipality code we must include the department name
@@ -475,7 +486,10 @@ and the municipality name. This is to consider repetition among
 municipalities’ names across departments.</p>
 </div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/name_to_code_mun.html">name_to_code_mun</a></span><span class="op">(</span><span class="st">"Boyacá"</span>, <span class="st">"Tunja"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/name_to_code_mun.html">name_to_code_mun</a></span><span class="op">(</span></span>
+<span>  department_name <span class="op">=</span> <span class="st">"Boyacá"</span>,</span>
+<span>  municipality_name <span class="op">=</span> <span class="st">"Tunja"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "15001"</span></span></code></pre></div>
 <div style="text-align: justify;">
 <p>These individual codes can be used to filter information in the
@@ -486,7 +500,7 @@ translated to retrieve their official names using
 <code>divipola_department_name()</code>.</p>
 </div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/code_to_name_mun.html">code_to_name_mun</a></span><span class="op">(</span><span class="st">"15001"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/code_to_name_mun.html">code_to_name_mun</a></span><span class="op">(</span>municipality_code <span class="op">=</span> <span class="st">"15001"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "Tunja"</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -102,7 +102,7 @@
 <div style="text-align: justify;">
 <p><strong>ColOpenData</strong> can be used to access open climate data
 from Colombia. This climate data is retrieved from the Institute of
-Hydrology, Meteorology and Environmental Studies <a href="http://www.ideam.gov.co/" class="external-link">(IDEAM)</a>. The climate module allows
+Hydrology, Meteorology and Environmental Studies <a href="https://www.ideam.gov.co/" class="external-link">(IDEAM)</a>. The climate module allows
 the user to consult climate data for any Region of Interest (ROI) inside
 the country and retrieve the information for each station contained
 inside.</p>
@@ -201,16 +201,17 @@ internal tags as follows:</p>
 <p>Each observation is subject to the availability of stations in the
 ROI and the stations’ status (active, maintenance or suspended), as well
 as quality filters implemented by IDEAM.</p>
-<p>In this vignette you will learn: 1. How to download climate data
-using <strong>ColOpenData</strong> by three different methods - Download
-from named stations - Download from geometry (<code>sf</code>) -
-Download from named geometry (municipality or department) 2. How to
-aggregate climate data by different frequencies 3. How to plot
-downloaded climate data</p>
+<p>In this vignette you will learn:</p>
+<ol style="list-style-type: decimal">
+<li>How to download climate data using
+<strong>ColOpenData</strong>.</li>
+<li>How to aggregate climate data by different frequencies</li>
+<li>How to plot downloaded climate data</li>
+</ol>
 <p>For this example we will retrieve data for the municipality of
-Manizales in Colombia. We will download Maximum Temperature (TMX_CON)
-from 2013 to 2016, to observe the increase in temperature during 2015
-and 2016 due to the impact of El Nino (ENSO).</p>
+Espinal in Colombia. We will download Dry-Bulb Temperature (TSSM_CON)
+from 2013 to 2016, to observe the increase in the average temperature
+during 2015 and 2016 due to the impact of El Nino (ENSO).</p>
 <p><strong>ColOpenData</strong> offers three methods to do this, using
 different functions: - <code><a href="../reference/download_climate_stations.html">download_climate_stations()</a></code> to
 download climate data from previously selected stations -
@@ -237,19 +238,17 @@ user’s R session, but is not downloaded to user’s computer.</strong></p>
 </h2>
 <div style="text-align: justify;">
 <p>For this example, we will need to create a spatial polygon around the
-municipality of Manizales and use that as our ROI to retrieve the
-climate data. To create the spatial polygon we need to introduce the
-coordinates of the geometry. For simplicity, we will build a bounding
-box by introducing the 4 points which bound the municipality, and
-transform the created geometry into an <code>sf</code> object (see <a href="https://r-spatial.github.io/sf/articles/sf1.html" class="external-link"><strong>sf</strong></a>
+municipality of Espinal and use that as our ROI to retrieve the climate
+data. To create the spatial polygon we need to introduce the coordinates
+of the geometry. For simplicity, we will build a bounding box by
+introducing the 4 points which bound the municipality, and transform the
+created geometry into an <code>sf</code> object (see <a href="https://r-spatial.github.io/sf/articles/sf1.html" class="external-link"><strong>sf</strong></a>
 library for further details).</p>
 </div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5.166278</span>, <span class="fl">5.166278</span>, <span class="fl">4.982247</span>, <span class="fl">4.982247</span>, <span class="fl">5.166278</span><span class="op">)</span></span>
-<span><span class="va">lon</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">75.678072</span>, <span class="op">-</span><span class="fl">75.327859</span>, <span class="op">-</span><span class="fl">75.327859</span>, <span class="op">-</span><span class="fl">75.678072</span>, <span class="op">-</span><span class="fl">75.678072</span><span class="op">)</span></span>
-<span></span>
+<code class="sourceCode R"><span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4.263744</span>, <span class="fl">4.263744</span>, <span class="fl">4.078156</span>, <span class="fl">4.078156</span>, <span class="fl">4.263744</span><span class="op">)</span></span>
+<span><span class="va">lon</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">75.042067</span>, <span class="op">-</span><span class="fl">74.777022</span>, <span class="op">-</span><span class="fl">74.777022</span>, <span class="op">-</span><span class="fl">75.042067</span>, <span class="op">-</span><span class="fl">75.042067</span><span class="op">)</span></span>
 <span><span class="va">polygon</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st.html" class="external-link">st_polygon</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">lon</span>, <span class="va">lat</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html" class="external-link">st_sfc</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
 <span><span class="va">roi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="va">polygon</span><span class="op">)</span></span></code></pre></div>
 <p>With our created ROI, we can make a simple visualization using
 <code>leaflet</code>.</p>
@@ -264,84 +263,82 @@ library for further details).</p>
 <span>    opacity <span class="op">=</span> <span class="fl">0.6</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <div class="leaflet html-widget html-fill-item" id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:768px;height:474.660074165637px;"></div>
-<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addPolygons","args":[[[[{"lng":[-75.678072,-75.327859,-75.327859,-75.678072,-75.678072],"lat":[5.166278,5.166278,4.982247,4.982247,5.166278]}]]],null,null,{"interactive":true,"className":"","stroke":true,"color":"#2e6930","weight":2,"opacity":0.6,"fill":true,"fillColor":"#2e6930","fillOpacity":0.2,"smoothFactor":1,"noClip":false},null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[4.982247,5.166278],"lng":[-75.678072,-75.327859]}},"evals":[],"jsHooks":[]}</script><div style="text-align: justify;">
+<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["OpenStreetMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addPolygons","args":[[[[{"lng":[-75.042067,-74.777022,-74.777022,-75.042067,-75.042067],"lat":[4.263744,4.263744,4.078156,4.078156,4.263744]}]]],null,null,{"interactive":true,"className":"","stroke":true,"color":"#2e6930","weight":2,"opacity":0.6,"fill":true,"fillColor":"#2e6930","fillOpacity":0.2,"smoothFactor":1,"noClip":false},null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[4.078156,4.263744],"lng":[-75.042067,-74.777022]}},"evals":[],"jsHooks":[]}</script><div style="text-align: justify;">
 <p>We can make a first exploration to check if there are any stations
 contained inside of it, using the function
 <code><a href="../reference/stations_in_roi.html">stations_in_roi()</a></code>.</p>
 </div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">stations</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/stations_in_roi.html">stations_in_roi</a></span><span class="op">(</span><span class="va">roi</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">stations</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/stations_in_roi.html">stations_in_roi</a></span><span class="op">(</span>geometry <span class="op">=</span> <span class="va">roi</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">stations</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Simple feature collection with 6 features and 20 fields</span></span>
 <span><span class="co">#&gt; Geometry type: POINT</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
-<span><span class="co">#&gt; Bounding box:  xmin: -75.51667 ymin: 5.029778 xmax: -75.35611 ymax: 5.1</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: -75 ymin: 4.15 xmax: -74.78361 ymax: 4.258278</span></span>
 <span><span class="co">#&gt; CRS:           NA</span></span>
-<span><span class="co">#&gt;        codigo                           nombre           categoria</span></span>
-<span><span class="co">#&gt; 138  26155220      VILLAMARIA - AUT [26155220] Climática Principal</span></span>
-<span><span class="co">#&gt; 139  26155210         TORRE 4 - AUT [26155210] Climática Principal</span></span>
-<span><span class="co">#&gt; 140  26155230            EMAS - AUT [26155230] Climática Principal</span></span>
-<span><span class="co">#&gt; 266  26155110   AEROPUERTO LA NUBIA [26155110] Sinóptica Principal</span></span>
-<span><span class="co">#&gt; 749  26155170 TESORITO FINCA  - AUT [26155170] Climática Ordinaria</span></span>
-<span><span class="co">#&gt; 1119 26157090              PLAYA LA [26157090]        Limnimétrica</span></span>
-<span><span class="co">#&gt;                     tecnologia     estado departamento  municipio    latitud</span></span>
-<span><span class="co">#&gt; 138  Automática con Telemetría     Activa       Caldas Villamaria 5.04866667</span></span>
-<span><span class="co">#&gt; 139  Automática con Telemetría Suspendida       Caldas  Manizales 5.06077778</span></span>
-<span><span class="co">#&gt; 140  Automática con Telemetría     Activa       Caldas  Manizales    5.08525</span></span>
-<span><span class="co">#&gt; 266               Convencional     Activa       Caldas  Manizales 5.02977778</span></span>
-<span><span class="co">#&gt; 749  Automática con Telemetría     Activa       Caldas  Manizales 5.03222222</span></span>
-<span><span class="co">#&gt; 1119              Convencional Suspendida       Caldas  Manizales        5.1</span></span>
-<span><span class="co">#&gt;          longitud altitud fecha_instalacion</span></span>
-<span><span class="co">#&gt; 138  -75.51388889    1906        2004-06-14</span></span>
-<span><span class="co">#&gt; 139  -75.35611111    3787        2004-07-14</span></span>
-<span><span class="co">#&gt; 140  -75.50713889    2211        2004-06-10</span></span>
-<span><span class="co">#&gt; 266  -75.46991667    2104        1968-06-15</span></span>
-<span><span class="co">#&gt; 749  -75.43833333    2325  1992-10-14 19:00</span></span>
-<span><span class="co">#&gt; 1119 -75.51666667     250        1984-07-15</span></span>
-<span><span class="co">#&gt;                              area_operativa         corriente area_hidrografica</span></span>
-<span><span class="co">#&gt; 138  Area Operativa 09 - Cauca-Valle-Caldas          San Juan   Magdalena Cauca</span></span>
-<span><span class="co">#&gt; 139  Area Operativa 09 - Cauca-Valle-Caldas          San Juan   Magdalena Cauca</span></span>
-<span><span class="co">#&gt; 140  Area Operativa 09 - Cauca-Valle-Caldas          San Juan   Magdalena Cauca</span></span>
-<span><span class="co">#&gt; 266  Area Operativa 09 - Cauca-Valle-Caldas           Orinoco   Magdalena Cauca</span></span>
-<span><span class="co">#&gt; 749  Area Operativa 09 - Cauca-Valle-Caldas                 0   Magdalena Cauca</span></span>
-<span><span class="co">#&gt; 1119 Area Operativa 09 - Cauca-Valle-Caldas Quebrada Olivares   Magdalena Cauca</span></span>
-<span><span class="co">#&gt;      zona_hidrografica subzona_hidrografica</span></span>
-<span><span class="co">#&gt; 138              Cauca        Río Chinchiná</span></span>
-<span><span class="co">#&gt; 139    Medio Magdalena          Río Guarinó</span></span>
-<span><span class="co">#&gt; 140              Cauca        Río Chinchiná</span></span>
-<span><span class="co">#&gt; 266              Cauca        Río Chinchiná</span></span>
-<span><span class="co">#&gt; 749              Cauca        Río Chinchiná</span></span>
-<span><span class="co">#&gt; 1119             Cauca        Río Chinchiná</span></span>
+<span><span class="co">#&gt;        codigo                      nombre           categoria</span></span>
+<span><span class="co">#&gt; 78   21185090    NATAIMA - AUT [21185090]   Agrometeorológica</span></span>
+<span><span class="co">#&gt; 1544 21170020    DOS AGUAS LAS [21170020]       Pluviométrica</span></span>
+<span><span class="co">#&gt; 1692 21180220 AEROPUERTO FARCA [21180220]       Pluviométrica</span></span>
+<span><span class="co">#&gt; 1929 21180230  BAMBU EL MOLINO [21180230]       Pluviométrica</span></span>
+<span><span class="co">#&gt; 1935 21215090        MARANONES [21215090] Climática Ordinaria</span></span>
+<span><span class="co">#&gt; 2084 21215080         CHICORAL [21215080] Climática Ordinaria</span></span>
+<span><span class="co">#&gt;                     tecnologia     estado departamento       municipio</span></span>
+<span><span class="co">#&gt; 78   Automática con Telemetría     Activa       Tolima         Espinal</span></span>
+<span><span class="co">#&gt; 1544              Convencional     Activa       Tolima Suárez (Tolima)</span></span>
+<span><span class="co">#&gt; 1692              Convencional Suspendida       Tolima         Espinal</span></span>
+<span><span class="co">#&gt; 1929              Convencional Suspendida       Tolima         Espinal</span></span>
+<span><span class="co">#&gt; 1935              Convencional Suspendida       Tolima         Espinal</span></span>
+<span><span class="co">#&gt; 2084              Convencional     Activa       Tolima         Espinal</span></span>
+<span><span class="co">#&gt;         latitud     longitud altitud fecha_instalacion</span></span>
+<span><span class="co">#&gt; 78   4.18813889 -74.96047222     393        2005-10-16</span></span>
+<span><span class="co">#&gt; 1544 4.25827778 -74.78361111    3394        1951-01-15</span></span>
+<span><span class="co">#&gt; 1692       4.15        -74.9     350        1979-11-15</span></span>
+<span><span class="co">#&gt; 1929        4.2        -75.0     390        1979-11-15</span></span>
+<span><span class="co">#&gt; 1935 4.21666667 -74.93333333     370        1959-06-15</span></span>
+<span><span class="co">#&gt; 2084 4.23152778 -74.99536111     432        1963-05-15</span></span>
+<span><span class="co">#&gt;                  area_operativa   corriente area_hidrografica zona_hidrografica</span></span>
+<span><span class="co">#&gt; 78   Area Operativa 10 - Tolima      Cuinde   Magdalena Cauca    Alto Magdalena</span></span>
+<span><span class="co">#&gt; 1544 Area Operativa 10 - Tolima      Coello   Magdalena Cauca    Alto Magdalena</span></span>
+<span><span class="co">#&gt; 1692 Area Operativa 10 - Tolima       Tuamo   Magdalena Cauca    Alto Magdalena</span></span>
+<span><span class="co">#&gt; 1929 Area Operativa 10 - Tolima Rio Salinas   Magdalena Cauca    Alto Magdalena</span></span>
+<span><span class="co">#&gt; 1935 Area Operativa 10 - Tolima      Blanco   Magdalena Cauca    Alto Magdalena</span></span>
+<span><span class="co">#&gt; 2084 Area Operativa 10 - Tolima       Luisa   Magdalena Cauca    Alto Magdalena</span></span>
+<span><span class="co">#&gt;                                 subzona_hidrografica</span></span>
+<span><span class="co">#&gt; 78           Río Luisa y otros directos al Magdalena</span></span>
+<span><span class="co">#&gt; 1544 Directos Magdalena entre ríos Cabrera y Sumapaz</span></span>
+<span><span class="co">#&gt; 1692         Río Luisa y otros directos al Magdalena</span></span>
+<span><span class="co">#&gt; 1929         Río Luisa y otros directos al Magdalena</span></span>
+<span><span class="co">#&gt; 1935                                      Río Coello</span></span>
+<span><span class="co">#&gt; 2084                                      Río Coello</span></span>
 <span><span class="co">#&gt;                                                          entidad</span></span>
-<span><span class="co">#&gt; 138  INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES</span></span>
-<span><span class="co">#&gt; 139  INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES</span></span>
-<span><span class="co">#&gt; 140  INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES</span></span>
-<span><span class="co">#&gt; 266  INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES</span></span>
-<span><span class="co">#&gt; 749  INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES</span></span>
-<span><span class="co">#&gt; 1119 INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES</span></span>
+<span><span class="co">#&gt; 78   INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES</span></span>
+<span><span class="co">#&gt; 1544 INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES</span></span>
+<span><span class="co">#&gt; 1692 INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES</span></span>
+<span><span class="co">#&gt; 1929 INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES</span></span>
+<span><span class="co">#&gt; 1935 INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES</span></span>
+<span><span class="co">#&gt; 2084 INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES</span></span>
 <span><span class="co">#&gt;      fecha_suspension codigo_municipio codigo_departamento</span></span>
-<span><span class="co">#&gt; 138              &lt;NA&gt;            17873                  17</span></span>
-<span><span class="co">#&gt; 139        2010-09-29            17446                  17</span></span>
-<span><span class="co">#&gt; 140              &lt;NA&gt;            17001                  17</span></span>
-<span><span class="co">#&gt; 266              &lt;NA&gt;            17001                  17</span></span>
-<span><span class="co">#&gt; 749              &lt;NA&gt;            17001                  17</span></span>
-<span><span class="co">#&gt; 1119       1996-04-15            17001                  17</span></span>
+<span><span class="co">#&gt; 78               &lt;NA&gt;            73268                  73</span></span>
+<span><span class="co">#&gt; 1544             &lt;NA&gt;            73770                  73</span></span>
+<span><span class="co">#&gt; 1692       2000-04-15            73268                  73</span></span>
+<span><span class="co">#&gt; 1929       1984-10-15            73319                  73</span></span>
+<span><span class="co">#&gt; 1935       1971-08-15            73200                  73</span></span>
+<span><span class="co">#&gt; 2084             &lt;NA&gt;            73268                  73</span></span>
 <span><span class="co">#&gt;                        geometry</span></span>
-<span><span class="co">#&gt; 138  POINT (-75.51389 5.048667)</span></span>
-<span><span class="co">#&gt; 139  POINT (-75.35611 5.060778)</span></span>
-<span><span class="co">#&gt; 140   POINT (-75.50714 5.08525)</span></span>
-<span><span class="co">#&gt; 266  POINT (-75.46992 5.029778)</span></span>
-<span><span class="co">#&gt; 749  POINT (-75.43833 5.032222)</span></span>
-<span><span class="co">#&gt; 1119      POINT (-75.51667 5.1)</span></span></code></pre></div>
+<span><span class="co">#&gt; 78   POINT (-74.96047 4.188139)</span></span>
+<span><span class="co">#&gt; 1544 POINT (-74.78361 4.258278)</span></span>
+<span><span class="co">#&gt; 1692         POINT (-74.9 4.15)</span></span>
+<span><span class="co">#&gt; 1929            POINT (-75 4.2)</span></span>
+<span><span class="co">#&gt; 1935 POINT (-74.93333 4.216667)</span></span>
+<span><span class="co">#&gt; 2084 POINT (-74.99536 4.231528)</span></span></code></pre></div>
 <div style="text-align: justify;">
-<p>We can see that in the region there are 129 stations. Different
+<p>We can see that in the region there are 24 stations. Different
 categories are recorded by different stations, and can be checked at the
-column <u>categoria</u>. To understand the category of each station we
-can use the <a href="http://www.ideam.gov.co/documents/10182/557765/Definiciones+CNE.pdf/25e1cca5-ee47-4eaf-86c0-c4f5192a9937" class="external-link">definition
-catalog</a> provided by IDEAM. Stations under the categories
-<em>Climática Principal</em> and <em>Climática Ordinaria</em> have
-records of temperature.</p>
+column <u>categoria</u>. Stations under the categories <em>Climática
+Principal</em> and <em>Climática Ordinaria</em> have records of
+temperature.</p>
 <p>Some stations are suspended, which means they are not taking
 measurements at the moment. This information is found at the column
 <u>estado</u> where, if suspended, the observation would be
@@ -362,58 +359,29 @@ period, we can delete the stations with suspension dates before
 <span>  <span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">cw_stations</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Simple feature collection with 6 features and 20 fields</span></span>
+<span><span class="co">#&gt; Simple feature collection with 1 feature and 20 fields</span></span>
 <span><span class="co">#&gt; Geometry type: POINT</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
-<span><span class="co">#&gt; Bounding box:  xmin: -75.66667 ymin: 5.017778 xmax: -75.35658 ymax: 5.08525</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: -74.99536 ymin: 4.231528 xmax: -74.99536 ymax: 4.231528</span></span>
 <span><span class="co">#&gt; CRS:           NA</span></span>
-<span><span class="co">#&gt;       codigo                                      nombre           categoria</span></span>
-<span><span class="co">#&gt; 1   26155220                 VILLAMARIA - AUT [26155220] Climática Principal</span></span>
-<span><span class="co">#&gt; 2   26155230                       EMAS - AUT [26155230] Climática Principal</span></span>
-<span><span class="co">#&gt; 3   26155170            TESORITO FINCA  - AUT [26155170] Climática Ordinaria</span></span>
-<span><span class="co">#&gt; 4 2615500122 LA ESPERANZA ANDALUCIA - AUT   [2615500122] Climática Principal</span></span>
-<span><span class="co">#&gt; 5   26155190                    ALGARROBO EL  [26155190] Climática Principal</span></span>
-<span><span class="co">#&gt; 6   26155090                      SANTAGUEDA  [26155090] Climática Principal</span></span>
-<span><span class="co">#&gt;                  tecnologia estado departamento          municipio    latitud</span></span>
-<span><span class="co">#&gt; 1 Automática con Telemetría Activa       Caldas         Villamaria 5.04866667</span></span>
-<span><span class="co">#&gt; 2 Automática con Telemetría Activa       Caldas          Manizales    5.08525</span></span>
-<span><span class="co">#&gt; 3 Automática con Telemetría Activa       Caldas          Manizales 5.03222222</span></span>
-<span><span class="co">#&gt; 4 Automática con Telemetría Activa       Caldas          Manizales 5.01777778</span></span>
-<span><span class="co">#&gt; 5              Convencional Activa       Caldas          Manizales 5.06666667</span></span>
-<span><span class="co">#&gt; 6              Convencional Activa       Caldas Palestina (Caldas) 5.08333333</span></span>
-<span><span class="co">#&gt;       longitud altitud fecha_instalacion                         area_operativa</span></span>
-<span><span class="co">#&gt; 1 -75.51388889    1906        2004-06-14 Area Operativa 09 - Cauca-Valle-Caldas</span></span>
-<span><span class="co">#&gt; 2 -75.50713889    2211        2004-06-10 Area Operativa 09 - Cauca-Valle-Caldas</span></span>
-<span><span class="co">#&gt; 3 -75.43833333    2325  1992-10-14 19:00 Area Operativa 09 - Cauca-Valle-Caldas</span></span>
-<span><span class="co">#&gt; 4 -75.35658333    3316  2017-04-19 19:00 Area Operativa 09 - Cauca-Valle-Caldas</span></span>
-<span><span class="co">#&gt; 5 -75.58333333    1202        1992-11-15 Area Operativa 09 - Cauca-Valle-Caldas</span></span>
-<span><span class="co">#&gt; 6 -75.66666667    1010        1964-01-15 Area Operativa 09 - Cauca-Valle-Caldas</span></span>
-<span><span class="co">#&gt;           corriente area_hidrografica zona_hidrografica subzona_hidrografica</span></span>
-<span><span class="co">#&gt; 1          San Juan   Magdalena Cauca             Cauca        Río Chinchiná</span></span>
-<span><span class="co">#&gt; 2          San Juan   Magdalena Cauca             Cauca        Río Chinchiná</span></span>
-<span><span class="co">#&gt; 3                 0   Magdalena Cauca             Cauca        Río Chinchiná</span></span>
-<span><span class="co">#&gt; 4                 0   Magdalena Cauca             Cauca        Río Chinchiná</span></span>
-<span><span class="co">#&gt; 5 Qda Santa Barbara   Magdalena Cauca             Cauca        Río Chinchiná</span></span>
-<span><span class="co">#&gt; 6 Qda Santa Barbara   Magdalena Cauca             Cauca        Río Chinchiná</span></span>
+<span><span class="co">#&gt;     codigo              nombre           categoria   tecnologia estado</span></span>
+<span><span class="co">#&gt; 1 21215080 CHICORAL [21215080] Climática Ordinaria Convencional Activa</span></span>
+<span><span class="co">#&gt;   departamento municipio    latitud     longitud altitud fecha_instalacion</span></span>
+<span><span class="co">#&gt; 1       Tolima   Espinal 4.23152778 -74.99536111     432        1963-05-15</span></span>
+<span><span class="co">#&gt;               area_operativa corriente area_hidrografica zona_hidrografica</span></span>
+<span><span class="co">#&gt; 1 Area Operativa 10 - Tolima     Luisa   Magdalena Cauca    Alto Magdalena</span></span>
+<span><span class="co">#&gt;   subzona_hidrografica</span></span>
+<span><span class="co">#&gt; 1           Río Coello</span></span>
 <span><span class="co">#&gt;                                                       entidad fecha_suspension</span></span>
 <span><span class="co">#&gt; 1 INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES             &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 2 INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES             &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 3 INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES             &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 4 INSTITUTO DE HIDROLOGIA METEOROLOGIA Y ESTUDIOS AMBIENTALES             &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 5                            FEDERACION NACIONAL DE CAFETEROS             &lt;NA&gt;</span></span>
-<span><span class="co">#&gt; 6                            FEDERACION NACIONAL DE CAFETEROS             &lt;NA&gt;</span></span>
 <span><span class="co">#&gt;   codigo_municipio codigo_departamento                   geometry</span></span>
-<span><span class="co">#&gt; 1            17873                  17 POINT (-75.51389 5.048667)</span></span>
-<span><span class="co">#&gt; 2            17001                  17  POINT (-75.50714 5.08525)</span></span>
-<span><span class="co">#&gt; 3            17001                  17 POINT (-75.43833 5.032222)</span></span>
-<span><span class="co">#&gt; 4            17001                  17 POINT (-75.35658 5.017778)</span></span>
-<span><span class="co">#&gt; 5            17001                  17 POINT (-75.58333 5.066667)</span></span>
-<span><span class="co">#&gt; 6            17524                  17 POINT (-75.66667 5.083333)</span></span></code></pre></div>
+<span><span class="co">#&gt; 1            73268                  73 POINT (-74.99536 4.231528)</span></span></code></pre></div>
 <div style="text-align: justify;">
-<p>From the original 129 stations, 40 were working for some or the whole
-period of interest and collected information for Dry-bulb Temperature
-(TSSM_CON). It is important to consider that after data collection, some
-information might be lost due to quality attributes.</p>
+<p>From the original 24 stations, only 1 was working for some or the
+whole period of interest and collected information for Dry-Bulb
+Temperature (TSSM_CON). It is important to consider that after data
+collection, some information might be lost due to quality
+attributes.</p>
 <p>With the stations, we can access TMX_CON from 2013 to 2016. To do so,
 we can use the function <code><a href="../reference/download_climate_stations.html">download_climate_stations()</a></code>. This
 function has the following parameters:</p>
@@ -435,11 +403,11 @@ the format <code>"YYYY-MM_DD"</code>. (Last available date is
 </ul>
 </div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">max_temperature_stations</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_climate_stations.html">download_climate_stations</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">tssm_stations</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_climate_stations.html">download_climate_stations</a></span><span class="op">(</span></span>
 <span>  stations <span class="op">=</span> <span class="va">cw_stations</span>,</span>
 <span>  start_date <span class="op">=</span> <span class="st">"2013-01-01"</span>,</span>
 <span>  end_date <span class="op">=</span> <span class="st">"2016-12-31"</span>,</span>
-<span>  tag <span class="op">=</span> <span class="st">"TMX_CON"</span></span>
+<span>  tag <span class="op">=</span> <span class="st">"TSSM_CON"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Original data is retrieved from the Institute of Hydrology, Meteorology</span></span>
 <span><span class="co">#&gt; and Environmental Studies (Instituto de Hidrología, Meteorología y</span></span>
@@ -447,14 +415,14 @@ the format <code>"YYYY-MM_DD"</code>. (Last available date is
 <span><span class="co">#&gt; Reformatted by package authors.</span></span>
 <span><span class="co">#&gt; Stored by Universidad de Los Andes under the Epiverse TRACE iniative.</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">max_temperature_stations</span><span class="op">)</span></span>
-<span><span class="co">#&gt;    station    longitude   latitude       date     hour     tag value</span></span>
-<span><span class="co">#&gt; 1 26155170 -75.43833333 5.03222222 2013-01-01 19:00:00 TMX_CON  20.2</span></span>
-<span><span class="co">#&gt; 2 26155170 -75.43833333 5.03222222 2013-01-02 19:00:00 TMX_CON  21.0</span></span>
-<span><span class="co">#&gt; 3 26155170 -75.43833333 5.03222222 2013-01-03 19:00:00 TMX_CON  21.4</span></span>
-<span><span class="co">#&gt; 4 26155170 -75.43833333 5.03222222 2013-01-04 19:00:00 TMX_CON  20.6</span></span>
-<span><span class="co">#&gt; 5 26155170 -75.43833333 5.03222222 2013-01-05 19:00:00 TMX_CON  22.4</span></span>
-<span><span class="co">#&gt; 6 26155170 -75.43833333 5.03222222 2013-01-06 19:00:00 TMX_CON  22.2</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">tssm_stations</span><span class="op">)</span></span>
+<span><span class="co">#&gt;    station    longitude   latitude       date     hour      tag value</span></span>
+<span><span class="co">#&gt; 1 21215080 -74.99536111 4.23152778 2013-01-01 07:00:00 TSSM_CON  23.2</span></span>
+<span><span class="co">#&gt; 2 21215080 -74.99536111 4.23152778 2013-01-01 13:00:00 TSSM_CON  32.0</span></span>
+<span><span class="co">#&gt; 3 21215080 -74.99536111 4.23152778 2013-01-01 18:00:00 TSSM_CON  27.2</span></span>
+<span><span class="co">#&gt; 4 21215080 -74.99536111 4.23152778 2013-01-02 07:00:00 TSSM_CON  22.6</span></span>
+<span><span class="co">#&gt; 5 21215080 -74.99536111 4.23152778 2013-01-02 13:00:00 TSSM_CON  32.0</span></span>
+<span><span class="co">#&gt; 6 21215080 -74.99536111 4.23152778 2013-01-02 18:00:00 TSSM_CON  27.0</span></span></code></pre></div>
 <div style="text-align: justify;">
 <p>The returned tidy <code>data.frame</code> includes: individual and
 unique station code, longitude, latitude, date, hour, tag requested and
@@ -465,40 +433,46 @@ for each observation, which makes the subset and plot easier.</p>
 follows:</p>
 </div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">max_temperature_stations</span><span class="op">)</span> <span class="op">+</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tssm_stations</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">value</span>, group <span class="op">=</span> <span class="va">station</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"#106ba0"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Max Temperature in Manizales by station"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Dry-bulb Temperature in Espinal by station"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Date"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Temperature [°C]"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">station</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">station</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
+<span>    plot.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"white"</span>, colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
+<span>    panel.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"white"</span>, colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
+<span>    plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="climate_data_files/figure-html/plot%20temperatures%20stations-1.png" width="768"></p>
 <div style="text-align: justify;">
-<p>As we can see, only two stations have data for the selected period,
-and we have missing information in some periods. Additionally, by having
-the data daily we cannot easily see big changes along time. To aid this
-issue, we will use the aggregation function
-<code><a href="../reference/aggregate_climate.html">aggregate_climate()</a></code>, which aggregates climate data by time.
-This function takes by parameter the desired aggregation.</p>
+<p>As we can see, only one station has data for the selected period.
+However, by having the data measured by hours, we cannot easily observe
+changes in the temperature patterns along time. To aid this issue, we
+will use the aggregation function <code><a href="../reference/aggregate_climate.html">aggregate_climate()</a></code>,
+which aggregates climate data by time. This function takes by parameter
+the desired aggregation.</p>
 </div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">max_temperature_month</span> <span class="op">&lt;-</span> <span class="va">max_temperature_stations</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/aggregate_climate.html">aggregate_climate</a></span><span class="op">(</span><span class="st">"month"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">tssm_month</span> <span class="op">&lt;-</span> <span class="va">tssm_stations</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/aggregate_climate.html">aggregate_climate</a></span><span class="op">(</span>frequency <span class="op">=</span> <span class="st">"month"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">max_temperature_month</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">tssm_month</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">value</span>, group <span class="op">=</span> <span class="va">station</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"#106ba0"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Dry-bulb Temperature"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Dry-bulb Temperature in Espinal by station"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Date"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Dry-bulb temperature [C]"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">station</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">station</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="climate_data_files/figure-html/unnamed-chunk-2-1.png" width="768"></p>
-</div>
-<div class="section level2">
-<h2 id="retrieving-climate-data-for-a-roi">Retrieving climate data for a ROI<a class="anchor" aria-label="anchor" href="#retrieving-climate-data-for-a-roi"></a>
-</h2>
-<div style="text-align: justify;">
-<p>To retrieve climate data for any ROI in the country, without manually
-extracting the stations’ data, we can use the function
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
+<span>    plot.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"white"</span>, colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
+<span>    panel.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"white"</span>, colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span>,</span>
+<span>    plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<p><img src="climate_data_files/figure-html/plot%20monthly-1.png" width="768">
+## Other methods ::: {style=“text-align: justify;”} To retrieve climate
+data for any ROI in the country, without manually extracting the
+stations’ data, we can use the function
 <code><a href="../reference/download_climate_geom.html">download_climate_geom()</a></code>. The function has the following
 parameters:</p>
 <ul>
@@ -517,31 +491,18 @@ the format <code>"YYYY-MM_DD"</code>. (Last available date is
 <li>
 <code>tag</code>: character containing climate tag to consult.</li>
 </ul>
-<p>We will use the same ROI created for the previous example, and add
-the aggregation for month. We can add the aggregation function to the
-workflow using the pipe operator <code>%&gt;%</code>.</p>
-</div>
+<p>To replicate the previous example, we can just use the previously
+created ROI and add the aggregation for month. We can add the
+aggregation function to the workflow using the pipe operator
+<code>%&gt;%</code>. The following code should retrieve the same results
+as the previous one. :::</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">max_temperature_roi</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_climate_geom.html">download_climate_geom</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">tssm_roi</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_climate_geom.html">download_climate_geom</a></span><span class="op">(</span></span>
 <span>  geometry <span class="op">=</span> <span class="va">roi</span>,</span>
 <span>  start_date <span class="op">=</span> <span class="st">"2013-01-01"</span>,</span>
 <span>  end_date <span class="op">=</span> <span class="st">"2016-12-31"</span>,</span>
-<span>  tag <span class="op">=</span> <span class="st">"TMX_CON"</span></span>
-<span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/aggregate_climate.html">aggregate_climate</a></span><span class="op">(</span><span class="st">"month"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">max_temperature_roi</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">value</span>, group <span class="op">=</span> <span class="va">station</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"#106ba0"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Dry-bulb Temperature"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Date"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Dry-bulb temperature [C]"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">station</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="climate_data_files/figure-html/plot%20temperatures%20roi-1.png" width="768"></p>
-</div>
-<div class="section level2">
-<h2 id="retrieving-climate-data-for-municipality">Retrieving climate data for municipality<a class="anchor" aria-label="anchor" href="#retrieving-climate-data-for-municipality"></a>
-</h2>
-<div style="text-align: justify;">
+<span>  tag <span class="op">=</span> <span class="st">"TSSM_CON"</span></span>
+<span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/aggregate_climate.html">aggregate_climate</a></span><span class="op">(</span>frequency <span class="op">=</span> <span class="st">"month"</span><span class="op">)</span></span></code></pre></div>
 <p>To make the download process even easier, and avoid the creation of
 already known geometries like municipalities or departments,
 <strong>ColOpenData</strong> offers an extra function to download data
@@ -549,13 +510,12 @@ using the areas’ DIVIPOLA code.</p>
 <p>DIVIPOLA codification is standardized for the whole country, and
 contains departments’ and municipalities’ codes. For further details on
 DIVIPOLA codification and functions please refer to <a href="https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html#DIVIPOLA">Documentation
-and Dictionaries</a>. We will filter for the city of Manizales in the
-department Caldas.</p>
-</div>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">manizales_code</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/name_to_code_mun.html">name_to_code_mun</a></span><span class="op">(</span><span class="st">"Caldas"</span>, <span class="st">"Manizales"</span><span class="op">)</span></span>
-<span><span class="va">manizales_code</span></span>
-<span><span class="co">#&gt; [1] "17001"</span></span></code></pre></div>
+and Dictionaries</a>. We will filter for the city of Espinal in the
+department Tolima. :::</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">espinal_code</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/name_to_code_mun.html">name_to_code_mun</a></span><span class="op">(</span><span class="st">"Tolima"</span>, <span class="st">"Espinal"</span><span class="op">)</span></span>
+<span><span class="va">espinal_code</span></span>
+<span><span class="co">#&gt; [1] "73268"</span></span></code></pre></div>
 <div style="text-align: justify;">
 <p>The function <code><a href="../reference/download_climate.html">download_climate()</a></code> will require almost the
 same arguments as <code><a href="../reference/download_climate_geom.html">download_climate_geom()</a></code>, but instead of
@@ -576,27 +536,17 @@ the format <code>"YYYY-MM_DD"</code>. (Last available date is
 <li>
 <code>tag</code>: character containing climate tag to consult.</li>
 </ul>
+<p>The code below can be used to get the same results as the previous
+two examples, without the need to create a whole geometry or filtering
+individual stations.</p>
 </div>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">max_temperature_mpio</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_climate.html">download_climate</a></span><span class="op">(</span></span>
-<span>  code <span class="op">=</span> <span class="va">manizales_code</span>,</span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tssm_mpio</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_climate.html">download_climate</a></span><span class="op">(</span></span>
+<span>  code <span class="op">=</span> <span class="va">espinal_code</span>,</span>
 <span>  start_date <span class="op">=</span> <span class="st">"2013-01-01"</span>,</span>
 <span>  end_date <span class="op">=</span> <span class="st">"2016-12-31"</span>,</span>
 <span>  tag <span class="op">=</span> <span class="st">"TMX_CON"</span></span>
-<span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/aggregate_climate.html">aggregate_climate</a></span><span class="op">(</span><span class="st">"month"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">max_temperature_mpio</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">date</span>, y <span class="op">=</span> <span class="va">value</span>, group <span class="op">=</span> <span class="va">station</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"#106ba0"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Dry-bulb Temperature"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Date"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Dry-bulb temperature [C]"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span>rows <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html" class="external-link">vars</a></span><span class="op">(</span><span class="va">station</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="climate_data_files/figure-html/plot%20temperatures%20mpios-1.png" width="768"></p>
-<div style="text-align: justify;">
-<p>As stated at the beginning of this vignette, the three methods
-display the same results.</p>
-</div>
+<span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/aggregate_climate.html">aggregate_climate</a></span><span class="op">(</span>frequency <span class="op">=</span> <span class="st">"month"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="disclaimer">Disclaimer<a class="anchor" aria-label="anchor" href="#disclaimer"></a>

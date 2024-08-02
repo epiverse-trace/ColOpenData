@@ -76,18 +76,18 @@ in Spanish.</p>
 
 
 <dl><dt id="arg-language">language<a class="anchor" aria-label="anchor" href="#arg-language"></a></dt>
-<dd><p>language of the tags (<code>"EN"</code>, <code>"ES"</code>. Default is
-<code>"ES"</code>.</p></dd>
+<dd><p>character with the language of the tags (<code>"EN"</code> or
+<code>"ES"</code>. Default is <code>"ES"</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p><code>data.frame</code> object with available tags.</p>
+    <p><code>data.frame</code> object with available climate tags.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">dict</span> <span class="op">&lt;-</span> <span class="fu">get_climate_tags</span><span class="op">(</span>language <span class="op">=</span> <span class="st">"ES"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">dict</span> <span class="op">&lt;-</span> <span class="fu">get_climate_tags</span><span class="op">(</span><span class="st">"ES"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dict</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   etiqueta                                   variable</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 TSSM_CON                Temperatura seca (ambiente)</span>
