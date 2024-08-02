@@ -8,16 +8,22 @@
 #' present municipality or department level.
 #'
 #' @param demographic_dataset character with the demographic dataset name.
-#' Please use \code{list_datasets(""EN"M demographic")} to check available
-#' datasets.
+#' Please use \code{list_datasets("demographic", "EN")} or
+#' \code{list_datasets("demographic", "ES")} to check available datasets.
+#' @param simplified logical for indicating if the downloaded spatial data
+#' should be a simplified version of the geometries. Simplified versions are
+#' lighter but less precise, and are recommended for easier applications like
+#' plots. Default is \code{TRUE}.
 #'
 #' @examples
-#' merged <- merge_geo_demographic("DANE_CNPVV_2018_9VD")
+#' \dontrun{
+#' merged <- merge_geo_demographic("DANE_CNPVV_2018_9VD", TRUE)
 #' head(merged)
+#' }
 #'
 #' @return \code{data.frame} object with the merged data.
 #' @export
-merge_geo_demographic <- function(demographic_dataset) {
+merge_geo_demographic <- function(demographic_dataset, simplified = TRUE) {
   checkmate::assert_character(demographic_dataset)
 
   datasets <- list_datasets("demographic", "EN")
@@ -50,6 +56,7 @@ merge_geo_demographic <- function(demographic_dataset) {
         values_from = dplyr::all_of(total_col)
       )
     geospatial <- suppressMessages(download_geospatial("department",
+      simplified = simplified,
       include_cnpv = FALSE
     ))
     merged_data <- merge(geospatial, filtered_df,
@@ -66,6 +73,7 @@ merge_geo_demographic <- function(demographic_dataset) {
         values_from = dplyr::all_of(total_col)
       )
     geospatial <- suppressMessages(download_geospatial("municipality",
+      simplified = simplified,
       include_cnpv = FALSE
     ))
     merged_data <- merge(geospatial, filtered_df,

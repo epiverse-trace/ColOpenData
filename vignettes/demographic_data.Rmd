@@ -51,7 +51,7 @@ First, we have to access the demographic documentation, to check available datas
 :::
 
 ```{r documentation, echo =TRUE}
-datasets_dem <- list_datasets("demographic", "EN")
+datasets_dem <- list_datasets(module = "demographic", language = "EN")
 
 head(datasets_dem)
 ```
@@ -63,7 +63,7 @@ After checking the documentation, we can load the data we want to work with. To 
 ### Data load
 
 ```{r data load, echo=TRUE}
-public_services_d <- download_demographic("DANE_CNPVV_2018_8VD")
+public_services_d <- download_demographic(dataset = "DANE_CNPVV_2018_8VD")
 
 head(public_services_d)
 ```
@@ -124,6 +124,8 @@ ggplot(proportions_wss, aes(
   ) +
   theme_minimal() +
   theme(
+    plot.background = element_rect(fill = "white", colour = "white"),
+    panel.background = element_rect(fill = "white", colour = "white"),
     axis.text.x = element_text(angle = 45, hjust = 1),
     plot.title = element_text(hjust = 0.5)
   )

@@ -4,12 +4,17 @@
 \alias{merge_geo_demographic}
 \title{Match and merge geospatial and demographic datasets}
 \usage{
-merge_geo_demographic(demographic_dataset)
+merge_geo_demographic(demographic_dataset, simplified = TRUE)
 }
 \arguments{
 \item{demographic_dataset}{character with the demographic dataset name.
-Please use \code{list_datasets(""EN"M demographic")} to check available
-datasets.}
+Please use \code{list_datasets("demographic", "EN")} or
+\code{list_datasets("demographic", "ES")} to check available datasets.}
+
+\item{simplified}{logical for indicating if the downloaded spatial data
+should be a simplified version of the geometries. Simplified versions are
+lighter but less precise, and are recommended for easier applications like
+plots. Default is \code{TRUE}.}
 }
 \value{
 \code{data.frame} object with the merged data.
@@ -22,7 +27,9 @@ municipality, this function can only merge with geospatial datasets that
 present municipality or department level.
 }
 \examples{
-merged <- merge_geo_demographic("DANE_CNPVV_2018_9VD")
+\dontrun{
+merged <- merge_geo_demographic("DANE_CNPVV_2018_9VD", TRUE)
 head(merged)
+}
 
 }

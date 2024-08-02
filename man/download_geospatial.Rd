@@ -4,7 +4,12 @@
 \alias{download_geospatial}
 \title{Download geospatial dataset}
 \usage{
-download_geospatial(spatial_level, include_geom = TRUE, include_cnpv = TRUE)
+download_geospatial(
+  spatial_level,
+  simplified = TRUE,
+  include_geom = TRUE,
+  include_cnpv = TRUE
+)
 }
 \arguments{
 \item{spatial_level}{character with the spatial level to be consulted:
@@ -20,6 +25,11 @@ class.
 \item \code{"ZU" } or \code{"urban_zone"}: Urban Zone.
 \item \code{"MZN"} or \code{"block"}: Block.
 }}
+
+\item{simplified}{logical for indicating if the downloaded spatial data
+should be a simplified version of the geometries. Simplified versions are
+lighter but less precise, and are only recommended for easier applications
+like plots. Default is \code{TRUE}.}
 
 \item{include_geom}{logical for including (or not) the spatial geometry.
 Default is \code{TRUE}. If \code{TRUE}, the function will return an
@@ -38,7 +48,9 @@ include a summarized version of the National Population and Dwelling Census
 (CNPV) with demographic and socioeconomic information for each spatial unit.
 }
 \examples{
-departments <- download_geospatial("department", TRUE, FALSE)
+\dontrun{
+departments <- download_geospatial("department")
 head(departments)
+}
 
 }

@@ -84,7 +84,7 @@
       19                                  Diaria
       20                                  Diaria
 
-# Lookup works as expected
+# Lookup works as expected with different parameters
 
     Code
       look_up(keywords = c("school", "age"), logic = "and", language = "EN")

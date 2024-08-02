@@ -10,7 +10,7 @@
 <!-- badges: start -->
 
 [![License:
-MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit/)
+MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit)
 [![R-CMD-check](https://github.com/epiverse-trace/ColOpenData/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/epiverse-trace/ColOpenData/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/epiverse-trace/ColOpenData/branch/main/graph/badge.svg)](https://app.codecov.io/gh/epiverse-trace/ColOpenData?branch=main)
@@ -49,7 +49,7 @@ pak::pak("epiverse-trace/ColOpenData")
 Administrative Department of Statistics
 [(DANE)](https://www.dane.gov.co/index.php/en/), and the Institute of
 Hydrology, Meteorology and Environmental Studies
-[(IDEAM)](http://www.ideam.gov.co/). The available data is divided in
+[(IDEAM)](https://www.ideam.gov.co/). The available data is divided in
 four categories:
 
 - **Demographic:** Demographic and Socioeconomic data presents
@@ -74,7 +74,7 @@ four categories:
   in the country (January 1st 1920) until May 31st 2023. This backup
   includes temperature, precipitation, sunshine duration, wind
   direction, among others. More information can be found at [IDEAM
-  website](http://www.ideam.gov.co/).
+  website](https://www.ideam.gov.co/).
 
 - **Population projections:** Population Projections data contains the
   population projections and back projections from 1950 to 2070,
@@ -111,7 +111,7 @@ development team. However, it still may change over time.
 ### Contributions
 
 Contributions are welcome via [pull
-requests](https://github.com/ColOpenData/pulls).
+requests](https://github.com/epiverse-trace/ColOpenData/pulls).
 
 ### Code of Conduct
 

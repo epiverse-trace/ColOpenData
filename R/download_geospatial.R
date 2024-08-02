@@ -19,6 +19,10 @@
 #' \item \code{"ZU" } or \code{"urban_zone"}: Urban Zone.
 #' \item \code{"MZN"} or \code{"block"}: Block.
 #' }
+#' @param simplified logical for indicating if the downloaded spatial data
+#' should be a simplified version of the geometries. Simplified versions are
+#' lighter but less precise, and are only recommended for easier applications
+#' like plots. Default is \code{TRUE}.
 #' @param include_geom logical for including (or not) the spatial geometry.
 #' Default is \code{TRUE}. If \code{TRUE}, the function will return an
 #' \code{"sf"} \code{data.frame}.
@@ -26,14 +30,17 @@
 #' socioeconomic information. Default is \code{TRUE}.
 #'
 #' @examples
-#' departments <- download_geospatial("department", TRUE, FALSE)
+#' \dontrun{
+#' departments <- download_geospatial("department")
 #' head(departments)
+#' }
 #'
 #' @return \code{data.frame} object with downloaded data.
 #'
 #' @export
-download_geospatial <- function(spatial_level, include_geom = TRUE,
-                                include_cnpv = TRUE) {
+download_geospatial <- function(spatial_level, simplified = TRUE,
+                                include_geom = TRUE, include_cnpv = TRUE) {
+  checkmate::assert_logical(simplified)
   checkmate::assert_logical(include_geom)
   checkmate::assert_logical(include_cnpv)
   stopifnot(
@@ -43,9 +50,14 @@ download_geospatial <- function(spatial_level, include_geom = TRUE,
 
   dataset <- retrieve_geospatial_name(spatial_level)
   dataset_path <- retrieve_path(dataset)
+
+  if (simplified) {
+    dataset_path <- sub("\\.gpkg$", "_SIM.gpkg", dataset_path)
+  }
   geospatial_data <- sf::st_read(dataset_path, quiet = TRUE)
   geospatial_vars <- c("area", "latitud", "longitud")
   shape_vars <- c("shape_length", "shape_area")
+
   if (include_geom && !include_cnpv) {
     last_base_index <- which(colnames(geospatial_data) == "longitud")
     geospatial_data <- geospatial_data %>%

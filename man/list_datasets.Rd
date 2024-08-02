@@ -8,10 +8,10 @@ list_datasets(module = "all", language = "ES")
 }
 \arguments{
 \item{module}{character with module to be consulted (\code{"demographic"},
-\code{"geospatial"}, \code{"climate"}). Default is \code{"all"}.}
+\code{"geospatial"} or \code{"climate"}). Default is \code{"all"}.}
 
-\item{language}{language of all variables (\code{"EN"}, \code{"ES"}.
-Default is \code{"ES"}.}
+\item{language}{character with the language of dataset details (\code{"EN"}
+or \code{"ES"}. Default is \code{"ES"}.}
 }
 \value{
 \code{data.frame} object with the available datasets.

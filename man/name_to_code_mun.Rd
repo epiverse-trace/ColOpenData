@@ -29,8 +29,4 @@ dptos <- c("Huila", "Antioquia")
 mpios <- c("Pitalito", "Turbo")
 name_to_code_mun(dptos, mpios)
 
-dpto_2 <- "Antioquia"
-mpios_2 <- c("Rionegro", "Guarne", "Marinilla")
-name_to_code_mun(dpto_2, mpios_2)
-
 }

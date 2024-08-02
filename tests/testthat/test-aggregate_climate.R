@@ -1,52 +1,59 @@
-# Municipality 1
-lat_1 <- c(6.373761, 6.373761, 6.163823, 6.163823, 6.373761)
-lon_1 <- c(-75.71929, -75.4723, -75.4723, -75.71929, -75.71929)
-medellin <- sf::st_polygon(x = list(cbind(lon_1, lat_1))) %>%
+lat <- c(6.373761, 6.373761, 4.256457, 4.256457, 6.373761)
+lon <- c(-75.71929, -74.96571, -74.96571, -75.71929, -75.71929)
+roi <- sf::st_polygon(x = list(cbind(lon, lat))) %>%
   sf::st_sfc() %>%
   sf::st_as_sf()
+stations <- stations_in_roi(roi)
 
-# Municipality 2
-lat_2 <- c(4.700691, 4.700691, 4.256457, 4.256457, 4.700691)
-lon_2 <- c(-75.5221, -74.96571, -74.96571, -75.5221, -75.5221)
-ibague <- sf::st_polygon(x = list(cbind(lon_2, lat_2))) %>%
-  sf::st_sfc() %>%
-  sf::st_as_sf()
+# Filtering stations for faster execution
+stations_tssm <- stations[stations$codigo %in% c(27015090, 27015330), ]
+stations_bshg <- stations[stations$codigo %in% c(
+  27015090, 27015210,
+  27015330
+), ]
+stations_tmn <- stations[stations$codigo %in% c(21245010, 21245040), ]
+stations_tmx <- stations[stations$codigo %in% c(21215130, 21245010), ]
+stations_ptpm <- stations[stations$codigo %in% c(
+  27010770, 27010810, 27011110,
+  27011120, 27015090, 26205080,
+  27011270, 27015330
+), ]
 
 # Base data TSSM (Temperature)
-base_tssm <- download_climate_geom(
-  geometry = medellin,
+base_tssm <- download_climate_stations(
+  stations = stations_tssm,
   start_date = "2014-01-01",
   end_date = "2015-04-05",
   tag = "TSSM_CON"
 )
 
 # Base data BSHG (Sunshine duration)
-base_bshg <- download_climate_geom(
-  geometry = medellin,
+base_bshg <- download_climate_stations(
+  stations = stations_bshg,
   start_date = "1990-01-01",
   end_date = "1990-05-16",
   tag = "BSHG_CON"
 )
 
 # Base data TMN (Minimum temperature)
-base_tmn <- download_climate_geom(
-  geometry = ibague,
+base_tmn <- download_climate_stations(
+  stations = stations_tmn,
   start_date = "2010-04-01",
   end_date = "2010-10-31",
   tag = "TMN_CON"
 )
 
 # Base data TMX (Maximum temperature)
-base_tmx <- download_climate_geom(
-  geometry = ibague,
+base_tmx <- download_climate_stations(
+  stations = stations_tmx,
   start_date = "2020-04-01",
   end_date = "2020-04-30",
   tag = "TMX_CON"
 )
 
 # Base data PTPM (Precipitation)
-base_ptpm <- download_climate_geom(
-  geometry = medellin,
+base_ptpm <- download_climate_stations(
+  stations = stations_ptpm,
   start_date = "2020-06-14",
   end_date = "2020-10-12",
   tag = "PTPM_CON"

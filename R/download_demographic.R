@@ -5,7 +5,8 @@
 #' and Dwelling Census (CNPV) of 2018.
 #'
 #' @param dataset character with the demographic dataset name. Please use
-#' \code{list_datasets("demographic", "EN")} to check available datasets.
+#' \code{list_datasets("demographic", "EN")} or
+#' \code{list_datasets("demographic", "ES")} to check available datasets.
 #'
 #' @examples
 #' house_under_15 <- download_demographic("DANE_CNPVH_2018_1HD")

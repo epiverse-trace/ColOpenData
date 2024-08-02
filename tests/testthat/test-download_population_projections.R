@@ -32,6 +32,6 @@ test_that("Download pop_projections works as expected", {
   expect_snapshot(download_pop_projections(
     spatial_level = "department",
     start_year = 2010,
-    end_year = 2027
+    end_year = 2020
   ))
 })

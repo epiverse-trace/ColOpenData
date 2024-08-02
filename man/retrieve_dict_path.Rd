@@ -7,7 +7,7 @@
 retrieve_dict_path(dict_name)
 }
 \arguments{
-\item{dataset}{character with the dictionary name.}
+\item{dict_name}{character with the dictionary name.}
 }
 \value{
 character with path to retrieve the dataset.

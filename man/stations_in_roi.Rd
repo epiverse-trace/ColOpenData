@@ -19,6 +19,7 @@ Download and filter climate stations contained inside a region of interest
 (ROI).
 }
 \examples{
+\dontrun{
 lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)
 lon <- c(-75.678072, -75.327859, -75.327859, -75.678072, -75.678072)
 polygon <- sf::st_polygon(x = list(cbind(lon, lat)))
@@ -26,5 +27,6 @@ geometry <- sf::st_sfc(polygon)
 roi <- sf::st_as_sf(geometry)
 stations <- stations_in_roi(roi)
 head(stations)
+}
 
 }

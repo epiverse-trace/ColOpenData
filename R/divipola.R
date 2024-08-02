@@ -83,10 +83,6 @@ name_to_code_dep <- function(department_name) {
 #' mpios <- c("Pitalito", "Turbo")
 #' name_to_code_mun(dptos, mpios)
 #'
-#' dpto_2 <- "Antioquia"
-#' mpios_2 <- c("Rionegro", "Guarne", "Marinilla")
-#' name_to_code_mun(dpto_2, mpios_2)
-#'
 #' @return character vector with the DIVIPOLA codes of the municipalities.
 #'
 #' @export
@@ -174,7 +170,6 @@ retrieve_code <- function(input_token, fixed_tokens, codes_list) {
   }
   return(code)
 }
-
 
 #' Retrieve departments' DIVIPOLA names from codes
 #'
@@ -274,9 +269,8 @@ name_to_standard_dep <- function(department_name) {
 #' @param municipality_name character vector with the names to be translated.
 #'
 #' @examples
-#'
-#' dptos <- c("Bogota", "Antioquia", "Tolima")
-#' mpios <- c("Bogota DC", "Carmen del Viboral", "CarmendeApicala")
+#' dptos <- c("Bogota", "Tolima")
+#' mpios <- c("Bogota DC", "CarmendeApicala")
 #' name_to_standard_mun(dptos, mpios)
 #'
 #' @return character vector with the DIVIPOLA name of the municipalities.

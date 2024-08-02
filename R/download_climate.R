@@ -15,8 +15,10 @@
 #' \code{cliamte_tags()} to check IDEAM tags.
 #'
 #' @examples
-#' tssm <- download_climate("17001", "2021-11-14", "2021-11-20", "TSSM_CON")
-#' head(tssm)
+#' \dontrun{
+#' ptpm <- download_climate("73148", "2021-11-14", "2021-11-20", "PTPM_CON")
+#' head(ptpm)
+#' }
 #'
 #' @return \code{data.frame} object with observations from the stations in the
 #' area.
@@ -25,6 +27,7 @@
 download_climate <- function(code, start_date, end_date, tag) {
   checkmate::assert_character(code)
   args <- check_climate_args(start_date, end_date, tag)
+
   data_path <- retrieve_support_path("IDEAM_STATIONS_2023_MAY")
   stations <- retrieve_table(data_path, ";")
 
@@ -70,13 +73,15 @@ download_climate <- function(code, start_date, end_date, tag) {
 #' @param tag character containing climate tag to consult.
 #'
 #' @examples
-#' lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)
-#' lon <- c(-75.678072, -75.327859, -75.327859, -75.678072, -75.678072)
+#' \dontrun{
+#' lat <- c(4.172817, 4.172817, 4.136050, 4.136050, 4.172817)
+#' lon <- c(-74.749121, -74.686169, -74.686169, -74.749121, -74.749121)
 #' polygon <- sf::st_polygon(x = list(cbind(lon, lat)))
 #' geometry <- sf::st_sfc(polygon)
 #' roi <- sf::st_as_sf(geometry)
-#' tssm <- download_climate_geom(roi, "2021-11-14", "2021-11-20", "TSSM_CON")
-#' head(tssm)
+#' ptpm <- download_climate_geom(roi, "2022-11-14", "2022-11-20", "PTPM_CON")
+#' head(ptpm)
+#' }
 #'
 #' @return \code{data.frame} object with observations from the stations in the
 #' area.
@@ -115,16 +120,18 @@ download_climate_geom <- function(geometry, start_date, end_date, tag) {
 #' @importFrom rlang .data
 #'
 #' @examples
-#' lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)
-#' lon <- c(-75.678072, -75.327859, -75.327859, -75.678072, -75.678072)
+#' \dontrun{
+#' lat <- c(4.172817, 4.172817, 4.136050, 4.136050, 4.172817)
+#' lon <- c(-74.749121, -74.686169, -74.686169, -74.749121, -74.749121)
 #' polygon <- sf::st_polygon(x = list(cbind(lon, lat)))
 #' geometry <- sf::st_sfc(polygon)
 #' roi <- sf::st_as_sf(geometry)
 #' stations <- stations_in_roi(roi)
-#' tssm <- download_climate_stations(
-#'   stations, "2021-11-14", "2021-11-20", "TSSM_CON"
+#' ptpm <- download_climate_stations(
+#'   stations, "2022-11-14", "2022-11-20", "PTPM_CON"
 #' )
-#' head(tssm)
+#' head(ptpm)
+#' }
 #'
 #' @return \code{data.frame} object with observations from the stations in the
 #' area.
@@ -141,6 +148,16 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
 
   path_data <- retrieve_climate_path()
   path_stations <- paste0(args[["tag"]], "@", stations[["codigo"]], ".data")
+
+  # Filter to make a faster request if there are too many stations
+  if (nrow(stations) > 5) {
+    path_existing_stations <- retrieve_support_path("IDEAM_AVAILABLE_INFO")
+    existing_data <- retrieve_table(path_existing_stations)
+    stations <- stations[which(path_stations %in% existing_data[["file"]]), ]
+    path_stations <- path_stations[which(path_stations %in%
+      existing_data[["file"]])]
+  }
+
   climate_data <- list()
   for (i in seq_along(path_stations)) {
     dataset_path <- file.path(path_data, path_stations[i])
@@ -197,6 +214,7 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
 #' The geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}.
 #'
 #' @examples
+#' \dontrun{
 #' lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)
 #' lon <- c(-75.678072, -75.327859, -75.327859, -75.678072, -75.678072)
 #' polygon <- sf::st_polygon(x = list(cbind(lon, lat)))
@@ -204,6 +222,7 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
 #' roi <- sf::st_as_sf(geometry)
 #' stations <- stations_in_roi(roi)
 #' head(stations)
+#' }
 #'
 #' @return \code{data.frame} object with the stations contained inside the
 #' consulted geometry.

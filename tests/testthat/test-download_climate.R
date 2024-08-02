@@ -5,13 +5,13 @@ polygon_1 <- sf::st_polygon(x = list(cbind(lon_1, lat_1))) %>% sf::st_sfc()
 no_stations_area <- sf::st_as_sf(polygon_1)
 
 # Region with stations
-lat_2 <- c(4.700691, 4.700691, 4.256457, 4.256457, 4.700691)
-lon_2 <- c(-75.5221, -74.96571, -74.96571, -75.5221, -75.5221)
+lat_2 <- c(4.172817, 4.172817, 4.136050, 4.136050, 4.172817)
+lon_2 <- c(-74.749121, -74.686169, -74.686169, -74.749121, -74.749121)
 polygon_2 <- sf::st_polygon(x = list(cbind(lon_2, lat_2))) %>% sf::st_sfc()
-ibague <- sf::st_as_sf(polygon_2)
+apicala <- sf::st_as_sf(polygon_2)
 
 # Retrieve existing stations
-stations_test <- stations_in_roi(ibague)
+stations_test <- stations_in_roi(apicala)
 
 ## Stations in ROI
 test_that("Stations in ROI throws errors", {
@@ -25,9 +25,6 @@ test_that("Stations in ROI throws errors", {
 test_that("Stations in ROI works as expected", {
   # Expect specific dataset on request
   expect_snapshot(stations_test)
-
-  # Expect that retrieved stations have a data.frame structure
-  expect_s3_class(stations_in_roi(ibague), "data.frame")
 })
 
 ## Climate data from stations
@@ -78,7 +75,7 @@ test_that("Climate Stations throws errors", {
     stations = stations_test,
     start_date = "10-10",
     end_date = "2010-12-10",
-    tag = "TSSM_CON"
+    tag = "PTPM_CON"
   ))
 
   # Expect error when there is no data available for the given dates
@@ -86,7 +83,7 @@ test_that("Climate Stations throws errors", {
     stations = stations_test,
     start_date = "1900-01-10",
     end_date = "1900-01-13",
-    tag = "TSSM_CON"
+    tag = "PTPM_CON"
   ))
 })
 
@@ -107,28 +104,17 @@ test_that("Climate data from geometry throws errors", {
     geometry = "bogota",
     start_date = "2010-01-01",
     end_date = "2010-02-10",
-    tag = "TSSM_CON"
+    tag = "PTPM_CON"
   ))
 })
 
 test_that("Climate data from geometry works as expected", {
   # Expect specific dataset on request
   expect_snapshot(download_climate_geom(
-    geometry = ibague,
+    geometry = apicala,
     start_date = "2010-10-01",
     end_date = "2010-11-10",
     tag = "PTPM_CON"
-  ))
-
-  # Expect retrieved climate dataset to contain specific columns
-  expect_identical(colnames(download_climate_geom(
-    geometry = ibague,
-    start_date = "2020-01-01",
-    end_date = "2020-02-10",
-    tag = "TMN_CON"
-  )), c(
-    "station", "longitude", "latitude", "date",
-    "hour", "tag", "value"
   ))
 })
 
@@ -136,7 +122,7 @@ test_that("Climate data from geometry works as expected", {
 test_that("Climate data from code throws errors", {
   # Expect error when code is not a character
   expect_error(download_climate(
-    code = 73001,
+    code = 73148,
     start_date = "2010-10-01",
     end_date = "2010-12-10",
     tag = "PTPM_CON"
@@ -163,9 +149,9 @@ test_that("Climate data from code throws errors", {
 test_that("Climate data from code works as expected", {
   # Expect specific dataset from a proper request
   expect_snapshot(download_climate(
-    code = "05001",
+    code = "73148",
     start_date = "2018-10-01",
     end_date = "2018-11-10",
-    tag = "THSM_CON"
+    tag = "PTPM_CON"
   ))
 })

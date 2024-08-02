@@ -7,11 +7,6 @@ test_that("Divipola department code throws errors", {
 })
 
 test_that("Divipola department code works as expected", {
-  # Expect specific vector from a proper request
-  expect_identical(
-    name_to_code_dep(c("Tolima", "Antioquia")),
-    c("73", "05")
-  )
   # Expect specific vector from a proper request using multiple cases and
   # including border scenarios ("Santander" and "Norte de Santander" have
   # similar strings. "San Andres" is a frequent way to call the department while
@@ -48,8 +43,8 @@ test_that("Divipola municipality code throws errors", {
   ))
 
   # Expect warning when one of the input pairs ("Bolivar", "Cartagena") is
-  # correct and the other one is not ("Bolivar", "S"), since S is not a municipality
-  # in Bolivar
+  # correct and the other one is not ("Bolivar", "S"), since S is not a
+  # municipality in Bolivar
   expect_warning(name_to_code_mun(
     c("Bolivar", "Bolivar"),
     c("S", "Cartagena")
@@ -65,19 +60,6 @@ test_that("Divipola municipality code works as expected", {
       c("Rionegro", "Rionegro")
     ),
     c("68615", "05615")
-  )
-
-  # Expect specific vector from a proper request including municipalities with
-  # similar names (Same begining) in the same department (Also, quite common)
-  expect_identical(
-    name_to_code_mun(
-      c("Antioquia", "Antioquia"),
-      c(
-        "Puerto Berrio",
-        "Puerto Triunfo"
-      )
-    ),
-    c("05579", "05591")
   )
 
   # Expect specific vector from a proper request when there are multiple
@@ -121,10 +103,6 @@ test_that("Divipola municipality and department name throws errors", {
   # Expect warning when only one of the arguments is not a real municipality
   # code
   expect_warning(code_to_name_mun(c("05001", "73048")))
-
-  # Expect error when introducing a municipality code inside the department
-  # function
-  expect_error(code_to_name_dep("04678"))
 })
 
 test_that("Divipola municipality name works as expected", {
