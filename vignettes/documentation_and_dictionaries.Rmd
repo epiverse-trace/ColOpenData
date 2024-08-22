@@ -192,7 +192,7 @@ head(dict_climate)
 ## DIVIPOLA
 
 ::: {style="text-align: justify;"}
-DIVIPOLA codification is a standardized frame for the whole country, and contains departments' and municipalities' codes. Departments have two digits for individual identification, while municipalities have five. The five numbers in municipalities' codes include the department where they are located (first two digits) and the number of the municipality within the department (last three digits). The codes for each municipality and department can be consulted in [this table](https://www.datos.gov.co/widgets/gdxc-w37w) provided by the National Platform of Colombian Open Data. They can also be consulted using the `divipola_table()` function.
+DIVIPOLA codification is a standardized frame for the whole country, and contains departments' and municipalities' codes. Departments have two digits for individual identification, while municipalities have five. The five numbers in municipalities' codes include the department where they are located (first two digits) and the number of the municipality within the department (last three digits). The codes for each municipality and department can be consulted using the `divipola_table()` function.
 :::
 
 ```{r divipola-table}
