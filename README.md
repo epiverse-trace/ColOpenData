@@ -39,7 +39,7 @@ You can install the CRAN version of ColOpenData with:
 
 ``` r
 install.packages("ColOpenData")
-#> Installing package into 'C:/Users/Julia/AppData/Local/Temp/RtmpwxaNEo/temp_libpath575034e5549e'
+#> Installing package into '/home/runner/work/_temp/Library'
 #> (as 'lib' is unspecified)
 #> Warning: package 'ColOpenData' is not available for this version of R
 #> 
