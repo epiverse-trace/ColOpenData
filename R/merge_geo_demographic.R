@@ -16,7 +16,7 @@
 #' plots. Default is \code{TRUE}.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' merged <- merge_geo_demographic("DANE_CNPVV_2018_9VD", TRUE)
 #' head(merged)
 #' }

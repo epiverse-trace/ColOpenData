@@ -15,7 +15,7 @@
 #' \code{cliamte_tags()} to check IDEAM tags.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ptpm <- download_climate("73148", "2021-11-14", "2021-11-20", "PTPM_CON")
 #' head(ptpm)
 #' }
@@ -73,7 +73,7 @@ download_climate <- function(code, start_date, end_date, tag) {
 #' @param tag character containing climate tag to consult.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' lat <- c(4.172817, 4.172817, 4.136050, 4.136050, 4.172817)
 #' lon <- c(-74.749121, -74.686169, -74.686169, -74.749121, -74.749121)
 #' polygon <- sf::st_polygon(x = list(cbind(lon, lat)))
@@ -120,7 +120,7 @@ download_climate_geom <- function(geometry, start_date, end_date, tag) {
 #' @importFrom rlang .data
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' lat <- c(4.172817, 4.172817, 4.136050, 4.136050, 4.172817)
 #' lon <- c(-74.749121, -74.686169, -74.686169, -74.749121, -74.749121)
 #' polygon <- sf::st_polygon(x = list(cbind(lon, lat)))
@@ -214,7 +214,7 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
 #' The geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)
 #' lon <- c(-75.678072, -75.327859, -75.327859, -75.678072, -75.678072)
 #' polygon <- sf::st_polygon(x = list(cbind(lon, lat)))
