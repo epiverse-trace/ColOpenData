@@ -2,4 +2,5 @@
 
 0 errors | 0 warnings | 1 note
 
-* This is a new release.
+* We removed problematic external links
+* We replaced the usage of `dontrun` for `donttest`
