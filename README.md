@@ -15,8 +15,6 @@ MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.or
 [![Codecov test
 coverage](https://codecov.io/gh/epiverse-trace/ColOpenData/branch/main/graph/badge.svg)](https://app.codecov.io/gh/epiverse-trace/ColOpenData?branch=main)
 [![lifecycle-experimental](https://raw.githubusercontent.com/reconverse/reconverse.github.io/master/images/badge-experimental.svg)](https://www.reconverse.org/lifecycle.html#experimental)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/ColOpenData)](https://CRAN.R-project.org/package=ColOpenData)
 
 <!-- badges: end -->
 
@@ -39,7 +37,7 @@ You can install the CRAN version of ColOpenData with:
 
 ``` r
 install.packages("ColOpenData")
-#> Installing package into '/home/runner/work/_temp/Library'
+#> Installing package into 'C:/Users/Julia/AppData/Local/Temp/RtmpwZnATh/temp_libpath46443860632b'
 #> (as 'lib' is unspecified)
 #> Warning: package 'ColOpenData' is not available for this version of R
 #> 
