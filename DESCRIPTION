@@ -21,11 +21,11 @@ Authors@R: c(
     person("Joshua W.", "Lambert", , "joshua.lambert@lshtm.ac.uk", role = "rev",
            comment = c(ORCID = "0000-0001-5218-3046"))
   )
-Description: Downloads wrangled Colombian socioeconomic, geospatial,
-    population and climate data from DANE <https://www.dane.gov.co/> (National
-Administrative Department of Statistics)  and IDEAM <https://ideam.gov.co> (Institute of Hydrology,
-Meteorology and Environmental Studies). It solves the problem
-    of Colombian data being issued in different web pages and sources by
+Description: Downloads wrangled Colombian socioeconomic, geospatial,population 
+    and climate data from DANE <https://www.dane.gov.co/> (National 
+    Administrative Department of Statistics)  and IDEAM <https://ideam.gov.co> 
+    (Institute of Hydrology, Meteorology and Environmental Studies). It solves 
+    the problem of Colombian data being issued in different web pages and sources by
     using functions that allow the user to select the desired database and
     download it without having to do the exhausting acquisition process.
 License: MIT + file LICENSE
