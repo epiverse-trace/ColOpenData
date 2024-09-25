@@ -125,10 +125,167 @@ socioeconomic information. Default is <code>TRUE</code>.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="va">departments</span> <span class="op">&lt;-</span> <span class="fu">download_geospatial</span><span class="op">(</span><span class="st">"department"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Original data is retrieved from the National Administrative Department</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> of Statistics (Departamento Administrativo Nacional de Estadística -</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> DANE).</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Reformatted by package authors.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Stored by Universidad de Los Andes under the Epiverse TRACE iniative.</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">departments</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 6 features and 88 fields</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: MULTIPOLYGON</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Dimension:     XY</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Bounding box:  xmin: -77.92834 ymin: -0.70584 xmax: -66.84722 ymax: 6.324304</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Geodetic CRS:  WGS 84</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   codigo_departamento    departamento version         area   latitud  longitud</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                  18         Caquetá    2018  90103008160 0.7985562 -73.95947</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                  19           Cauca    2018  31242914793 2.3968339 -76.82423</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                  86        Putumayo    2018  25976283135 0.4522600 -75.85591</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                  76 Valle del Cauca    2018  20665544525 3.8588583 -76.51869</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                  94         Guainía    2018  71289354481 2.7278429 -68.81661</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6                  99         Vichada    2018 100063370591 4.7135571 -69.41400</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   encuestas enc_etnico enc_no_etnico enc_resguardo_indigena enc_comun_negras</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    163381       1117        162264                   1117                0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    622959      83033        539926                  70827            12206</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    147797       4704        143093                   4659               45</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   1674673      18250       1656423                   3618            14632</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5     13059       3675          9384                   3675                0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6     24915       6870         18045                   6870                0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   enc_area_protegida enc_area_no_protegida un_vivienda un_mixto un_no_res</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                544                162837      132937     5429     24804</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                226                622733      446806    10837    165011</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3               1389                146408      107456     3397     36789</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4              21431               1653242     1410067    39096    224820</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                532                 12527       11111      293      1553</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6                171                 24744       20051      747      4016</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   un_lea un_mixto_no_res_industria un_mixto_no_res_comercio</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    211                        96                     3860</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    324                       328                     6147</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    173                        67                     2572</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    690                      1920                    22705</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5    102                        12                      154</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6    101                        12                      548</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   un_mixto_no_res_servicios un_mixto_no_res_agro un_mixto_no_res_sin_info</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                      1117                  243                      113</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                      2276                 2016                       70</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                       717                   29                       12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                     11986                 2357                      128</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                       106                    6                       15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6                       151                   22                       14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   un_no_res_industria un_no_res_comercio un_no_res_servicios un_no_res_agro</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                 160               5422                2511           3052</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                 810              10334                9455          43342</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                 188               4402                2485           6665</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                5572              50097               40191          32665</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                  15                244                 263             24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6                  13                601                 418             25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   un_no_res_institucional un_no_res_lote un_no_res_parque un_no_res_minero</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                    1250          10099              678               12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                    3515          86486             3155              105</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                    1428          18445              368               74</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                    5452          67080             6881              169</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                     149            597               35                7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6                     220           2290              109                3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   un_no_res_proteccion u_no_res_construccion u_no_res_sin_info viviendas</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                   96                  1453                71    138366</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                  969                  6596               244    457643</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                  319                  2334                81    110853</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                 1340                 14970               403   1449163</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                    5                   206                 8     11404</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6                    6                   325                 6     20798</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   viv_casa viv_apartamento viv_cuarto viv_trad_indigena viv_trad_etnica</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   115307           18322       3591               493              35</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2   372096           33837      18177             30035            2187</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    90540           11052       8098               684              49</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4   902928          490230      52855              1173             518</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5     8577             690        311              1697              34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6    14875            1163        719              3823              88</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   viv_otro viv_ocupado_personas viv_ocupado_sin_personas viv_temporal</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1      618               110525                     4306         7299</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2     1311               367793                    24327        32268</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3      430                91508                     3418         5761</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4     1459              1231570                    64873        41444</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5       95                 9364                       72          660</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6      130                17699                      184          906</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   viv_desocupado hogares viv_energia viv_sin_energia viv_energia_estrato_1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1          16236  116166       93242           17283                 70029</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2          33255  432493      336910           30883                228576</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3          10166  107053       70944           20564                 58033</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4         111276 1267039     1216379           15191                321720</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5           1308    9953        5822            3542                  3421</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6           2009   19162        7697           10002                  5721</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   viv_energia_estrato_2 viv_energia_estrato_3 viv_energia_estrato_4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                 16659                  3868                   523</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                 51555                 22577                 10705</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                  9096                  1002                    46</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                438056                295053                 84368</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                  1401                   144                     5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6                  1351                   214                     5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   viv_energia_estrato_5 viv_energia_estrato_6 viv_energia_sin_estrato</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                    20                     7                    2136</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                  2682                   564                   20251</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                    15                    37                    2715</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                 54589                 16599                    5994</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                     3                     1                     847</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6                     1                     1                     404</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   viv_acueducto viv_sin_acueducto viv_alcantarillado viv_sin_alcantarillado</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1         80362             30163              72630                  37895</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2        239233            128560             163290                 204503</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3         47315             44193              49898                  41610</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4       1174360             57210            1119657                 111913</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5          2047              7317               2621                   6743</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6          6506             11193               1140                  16559</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   viv_gas viv_sin_gas viv_sin_info_gas viv_rec_basuras viv_sin_rec_basuras</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   40608       67966             1951           80237               30288</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  101100      264114             2579          163693              204100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3   13261       77496              751           54930               36578</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 1003741      218169             9660         1156676               74894</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5       0        9364                0            3615                5749</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6       0       17699                0            6424               11275</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   viv_internet viv_sin_internet viv_sin_info_internet personas per_leas</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1        16740            91374                  2411   359602    11260</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2        57774           307230                  2789  1243503     7969</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3         9947            80704                   857   283197     5720</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4       683961           537450                 10159  3789874    27645</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5          693             8442                   229    44431     6849</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6          903            16357                   439    76642     5237</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   per_hogares_particulares hombres mujeres per_0_a_9 per_10_a_19 per_20_a_29</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                   348342  182378  177224     63844       78433       62230</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                  1235534  615833  627670    198781      224899      218267</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                   277477  142900  140297     47232       60789       51033</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                  3762229 1800614 1989260    460691      571709      632594</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                    37582   23214   21217     11162       12028        7334</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6                    71405   40694   35948     19441       19099       12840</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   per_30_a_39 per_40_a_49 per_50_a_59 per_60_a_69 per_70_a_79 per_80_mas</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1       50014       39637       31396       19015       10148       4885</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2      184644      141446      119102       81959       48453      25952</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3       42216       32710       23515       14118        7828       3756</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4      556818      489478      468483      325926      183070     101105</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5        5070        3781        2749        1327         739        241</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6        9268        6869        4910        2628        1104        483</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   per_ed_primaria per_ed_secundaria per_ed_superior per_ed_posgrado</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1          113225             24649           17680             904</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2          434283            195877          105690            7288</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3           85979             30892           20987             501</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4          851033            446077          636722           44248</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5           18602              2788            2227              28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6           27247              7596            2690              32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   per_ed_sin_educacion per_ed_sin_info shape_length shape_area</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                17844           10238     21.38429   7.318485</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                56673           17057     13.95026   2.534419</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3                11058            5630     12.70792   2.107965</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4               111703           49860     12.65087   1.679487</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5                 2545            1886     21.17905   5.747937</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6                 6874            3657     17.29261   8.100680</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             geom</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 MULTIPOLYGON (((-73.66003 1...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 MULTIPOLYGON (((-76.05542 3...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 MULTIPOLYGON (((-76.08495 1...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 MULTIPOLYGON (((-77.2381 4....</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 MULTIPOLYGON (((-69.84572 1...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 MULTIPOLYGON (((-67.7076 4....</span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -141,7 +298,7 @@ socioeconomic information. Default is <code>TRUE</code>.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>

@@ -17,8 +17,8 @@
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Download Colombian Demographic, Climate and Geospatial Data">
-<meta name="description" content="Downloads wrangled Colombian socioeconomic, geospatial, population and climate data. It solves the problem of Colombian data being issued in different web pages and sources by using functions that allow the user to select the desired database and download it without having to do the exhausting acquisition process.">
-<meta property="og:description" content="Downloads wrangled Colombian socioeconomic, geospatial, population and climate data. It solves the problem of Colombian data being issued in different web pages and sources by using functions that allow the user to select the desired database and download it without having to do the exhausting acquisition process.">
+<meta name="description" content="Downloads wrangled Colombian socioeconomic, geospatial,population and climate data from DANE &lt;https://www.dane.gov.co/&gt; (National Administrative Department of Statistics) and IDEAM &lt;https://ideam.gov.co&gt; (Institute of Hydrology, Meteorology and Environmental Studies). It solves the problem of Colombian data being issued in different web pages and sources by using functions that allow the user to select the desired database and download it without having to do the exhausting acquisition process.">
+<meta property="og:description" content="Downloads wrangled Colombian socioeconomic, geospatial,population and climate data from DANE &lt;https://www.dane.gov.co/&gt; (National Administrative Department of Statistics) and IDEAM &lt;https://ideam.gov.co&gt; (Institute of Hydrology, Meteorology and Environmental Studies). It solves the problem of Colombian data being issued in different web pages and sources by using functions that allow the user to select the desired database and download it without having to do the exhausting acquisition process.">
 <meta property="og:image" content="https://epiverse-trace.github.io/ColOpenData/logo.svg">
 <!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-XZ471458FQ"></script><script>
   window.dataLayer = window.dataLayer || [];
@@ -99,19 +99,29 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of ColOpenData from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>You can install the CRAN version of ColOpenData with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ColOpenData"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Installing package into 'C:/Users/Julia/AppData/Local/Temp/RtmpwZnATh/temp_libpath46443860632b'</span></span>
+<span><span class="co">#&gt; (as 'lib' is unspecified)</span></span>
+<span><span class="co">#&gt; Warning: package 'ColOpenData' is not available for this version of R</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; A version of this package for your version of R might be available elsewhere,</span></span>
+<span><span class="co">#&gt; see the ideas at</span></span>
+<span><span class="co">#&gt; https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages</span></span></code></pre></div>
+<p>You can also install the development version of ColOpenData from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"epiverse-trace/ColOpenData"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="quick-overview">Quick Overview<a class="anchor" aria-label="anchor" href="#quick-overview"></a>
 </h2>
-<p><strong>ColOpenData</strong> contains data from two public data sources: The National Administrative Department of Statistics <a href="https://www.dane.gov.co/index.php/en/" class="external-link">(DANE)</a>, and the Institute of Hydrology, Meteorology and Environmental Studies <a href="https://www.ideam.gov.co/" class="external-link">(IDEAM)</a>. The available data is divided in four categories:</p>
+<p><strong>ColOpenData</strong> contains data from two public data sources: The National Administrative Department of Statistics <a href="https://www.dane.gov.co/" class="external-link">(DANE)</a>, and the Institute of Hydrology, Meteorology and Environmental Studies <a href="https://ideam.gov.co" class="external-link">(IDEAM)</a>. The available data is divided in four categories:</p>
 <ul>
-<li><p><strong>Demographic:</strong> Demographic and Socioeconomic data presents information from the National Population and Dwelling Census (CNPV) of 2018. The CNPV data corresponds to the most recent census available to date and the information is presented as an answer to three questions: How many are we?, Where are we? and How do we live? Further information can be consulted at the <a href="https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/censo-nacional-de-poblacion-y-vivenda-2018" class="external-link">CNPV results</a>.</p></li>
-<li><p><strong>Geospatial:</strong> This data is retrieved from the National Geostatistical Framework (MGN), which includes maps and a summarized version of the 2018 CNPV, aggregated to spatial geometries. The data is available at different aggregation levels including: Blocks, Urban and Rural Sections, Urban and Rural Sectors, Urban Areas, Municipalities and Departments. More information is available at <a href="https://www.dane.gov.co/index.php/actualidad-dane/5454-el-dane-actualizo-el-marco-geoestadistico-nacional-a-2018" class="external-link">MGN update news</a>.</p></li>
-<li><p><strong>Climate:</strong> Climate data is recovered from backup information provided by IDEAM, containing historical data from the first station in the country (January 1st 1920) until May 31st 2023. This backup includes temperature, precipitation, sunshine duration, wind direction, among others. More information can be found at <a href="https://www.ideam.gov.co/" class="external-link">IDEAM website</a>.</p></li>
+<li><p><strong>Demographic:</strong> Demographic and Socioeconomic data presents information from the National Population and Dwelling Census (CNPV) of 2018. The CNPV data corresponds to the most recent census available to date and the information is presented as an answer to three questions: How many are we?, Where are we? and How do we live?</p></li>
+<li><p><strong>Geospatial:</strong> This data is retrieved from the National Geostatistical Framework (MGN), which includes maps and a summarized version of the 2018 CNPV, aggregated to spatial geometries. The data is available at different aggregation levels including: Blocks, Urban and Rural Sections, Urban and Rural Sectors, Urban Areas, Municipalities and Departments.</p></li>
+<li><p><strong>Climate:</strong> Climate data is recovered from backup information provided by IDEAM, containing historical data from the first station in the country (January 1st 1920) until May 31st 2023. This backup includes temperature, precipitation, sunshine duration, wind direction, among others..</p></li>
 <li><p><strong>Population projections:</strong> Population Projections data contains the population projections and back projections from 1950 to 2070, considering the post COVID-19 update, which was calculated based on the results of 2018 CNPV. Further information can be consulted at <a href="https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/proyecciones-de-poblacion" class="external-link">DANE website</a>.</p></li>
 </ul>
 <p>Documentation and vignettes are available for the modules in the <a href="https://epiverse-trace.github.io/ColOpenData/">user vignettes</a>.</p>
@@ -164,6 +174,7 @@
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
+<li><a href="https://cloud.r-project.org/package=ColOpenData" class="external-link">View on CRAN</a></li>
 <li><a href="https://github.com/epiverse-trace/ColOpenData/" class="external-link">Browse source code</a></li>
 <li><a href="https://github.com/epiverse-trace/ColOpenData/issues" class="external-link">Report a bug</a></li>
 </ul>
@@ -211,7 +222,6 @@
 <li><a href="https://github.com/epiverse-trace/ColOpenData/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/epiverse-trace/ColOpenData/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://app.codecov.io/gh/epiverse-trace/ColOpenData?branch=main" class="external-link"><img src="https://codecov.io/gh/epiverse-trace/ColOpenData/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://www.reconverse.org/lifecycle.html#experimental" class="external-link"><img src="https://raw.githubusercontent.com/reconverse/reconverse.github.io/master/images/badge-experimental.svg" alt="lifecycle-experimental"></a></li>
-<li><a href="https://CRAN.R-project.org/package=ColOpenData" class="external-link"><img src="https://www.r-pkg.org/badges/version/ColOpenData" alt="CRAN status"></a></li>
 </ul>
 </div>
 
@@ -224,7 +234,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>
