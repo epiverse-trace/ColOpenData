@@ -48,7 +48,7 @@ include a summarized version of the National Population and Dwelling Census
 (CNPV) with demographic and socioeconomic information for each spatial unit.
 }
 \examples{
-\dontrun{
+\donttest{
 departments <- download_geospatial("department")
 head(departments)
 }

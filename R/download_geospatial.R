@@ -30,7 +30,7 @@
 #' socioeconomic information. Default is \code{TRUE}.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' departments <- download_geospatial("department")
 #' head(departments)
 #' }
