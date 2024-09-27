@@ -193,10 +193,14 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
   message(strwrap(
     prefix = "\n", initial = "",
     c(
-      "Original data is retrieved from the Institute of Hydrology, Meteorology
-      and Environmental Studies (Instituto de Hidrolog\u00eda,
-      Meteorolog\u00eda y Estudios Ambientales - IDEAM).",
-      "Reformatted by package authors.",
+      "ColOpenData provides open data derived from IDEAM and DANE but with 
+      modifications for specific functional needs. These changes may alter 
+      the structure, format, or content, meaning the data does not reflect the
+      official dataset. The package is developed independently, with no 
+      endorsement or involvement from these institutions or any Colombian 
+      government body. The authors of ColOpenData are not liable for how users 
+      utilize the data, and users are responsible for any outcomes from their 
+      use or analysis of the data.",
       "Stored by Universidad de Los Andes under the Epiverse TRACE iniative."
     )
   ))
