@@ -4,14 +4,16 @@
       download_geospatial(spatial_level = "department", simplified = TRUE,
         include_geom = TRUE, include_cnpv = FALSE)
     Message
-      ColOpenData provides open data derived from IDEAM and DANE but with
-      modifications for specific functional needs. These changes may alter
-      the structure, format, or content, meaning the data does not reflect
-      the official dataset. The package is developed independently, with no
-      endorsement or involvement from these institutions or any Colombian
-      government body. The authors of ColOpenData are not liable for how
-      users utilize the data, and users are responsible for any outcomes from
-      their use or analysis of the data.
+      ColOpenData provides open data derived from The National Administrative
+      Department of Statistics (DANE), and the Institute of Hydrology,
+      Meteorology and Environmental Studies (IDEAM)but with modifications for
+      specific functional needs. These changes may alter the structure,
+      format, or content, meaning the data does not reflect the official
+      dataset. The package is developed independently, with no endorsement or
+      involvement from these institutions or any Colombian government body.
+      The authors of ColOpenData are not liable for how users utilize the
+      data, and users are responsible for any outcomes from their use or
+      analysis of the data.
       Stored by Universidad de Los Andes under the Epiverse TRACE iniative.
     Output
       Simple feature collection with 33 features and 6 fields
@@ -49,14 +51,16 @@
       download_geospatial(spatial_level = "dpto", simplified = TRUE, include_geom = FALSE,
         include_cnpv = TRUE)
     Message
-      ColOpenData provides open data derived from IDEAM and DANE but with
-      modifications for specific functional needs. These changes may alter
-      the structure, format, or content, meaning the data does not reflect
-      the official dataset. The package is developed independently, with no
-      endorsement or involvement from these institutions or any Colombian
-      government body. The authors of ColOpenData are not liable for how
-      users utilize the data, and users are responsible for any outcomes from
-      their use or analysis of the data.
+      ColOpenData provides open data derived from The National Administrative
+      Department of Statistics (DANE), and the Institute of Hydrology,
+      Meteorology and Environmental Studies (IDEAM)but with modifications for
+      specific functional needs. These changes may alter the structure,
+      format, or content, meaning the data does not reflect the official
+      dataset. The package is developed independently, with no endorsement or
+      involvement from these institutions or any Colombian government body.
+      The authors of ColOpenData are not liable for how users utilize the
+      data, and users are responsible for any outcomes from their use or
+      analysis of the data.
       Stored by Universidad de Los Andes under the Epiverse TRACE iniative.
     Output
          codigo_departamento                                             departamento
