@@ -41,7 +41,7 @@ You can install the CRAN version of ColOpenData with:
 install.packages("ColOpenData")
 ```
 
-You can also  install the development version of ColOpenData from [GitHub](https://github.com/) with:
+You can also install the development version of ColOpenData from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("pak")
@@ -60,6 +60,23 @@ pak::pak("epiverse-trace/ColOpenData")
 
 -   **Population projections:** Population Projections data contains the population projections and back projections from 1950 to 2070, considering the post COVID-19 update, which was calculated based on the results of 2018 CNPV.
 
+Documentation and vignettes are available for the modules in the [user vignettes](https://epiverse-trace.github.io/ColOpenData/).
+
+### Related R Packages
+
+Similar R packages are offered for international communities, allowing the user to download census, geospatial and climate data.
+
+-   [cancensus](https://mountainmath.github.io/cancensus/): Canada
+-   [censobr](https://ipeagit.github.io/censobr/): Brazil
+-   [chilemapas](https://github.com/pachadotdev/chilemapas/): Chile
+-   [geobr](https://ipeagit.github.io/geobr/) : Brazil
+-   [georAr](https://github.com/PoliticaArgentina/geoAr): Argentina
+-   [geouy](https://github.com/RichDeto/geouy): Uruguay
+-   [tidycensus](https://walker-data.com/tidycensus/): US
+-   [geofi](https://ropengov.github.io/geofi/): Finland
+-   [climate](https://bczernecki.github.io/climate/)
+
+### Disclaimer
 
 ColOpenData stores and distributes open data originally obtained from IDEAM and 
 DANE. It is important to note that the data retrieved from these sources has 
@@ -77,22 +94,6 @@ solely responsible for how they utilize the data, and any conclusions drawn,
 analyses performed, or actions taken based on this data are the user's 
 responsibility. This package and its authors make no claims to represent or act 
 on behalf of IDEAM, DANE, or any other official entity.
-
-Documentation and vignettes are available for the modules in the [user vignettes](https://epiverse-trace.github.io/ColOpenData/).
-
-### Related R Packages
-
-Similar R packages are offered for international communities, allowing the user to download census, geospatial and climate data.
-
--   [cancensus](https://mountainmath.github.io/cancensus/): Canada
--   [censobr](https://ipeagit.github.io/censobr/): Brazil
--   [chilemapas](https://github.com/pachadotdev/chilemapas/): Chile
--   [geobr](https://ipeagit.github.io/geobr/) : Brazil
--   [georAr](https://github.com/PoliticaArgentina/geoAr): Argentina
--   [geouy](https://github.com/RichDeto/geouy): Uruguay
--   [tidycensus](https://walker-data.com/tidycensus/): US
--   [geofi](https://ropengov.github.io/geofi/): Finland
--   [climate](https://bczernecki.github.io/climate/)
 
 ### Lifecycle
 
