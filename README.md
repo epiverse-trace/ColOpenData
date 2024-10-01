@@ -37,13 +37,8 @@ You can install the CRAN version of ColOpenData with:
 
 ``` r
 install.packages("ColOpenData")
-#> Installing package into 'C:/Users/Julia/AppData/Local/Temp/RtmpwZnATh/temp_libpath46443860632b'
+#> Installing package into '/home/runner/work/_temp/Library'
 #> (as 'lib' is unspecified)
-#> Warning: package 'ColOpenData' is not available for this version of R
-#> 
-#> A version of this package for your version of R might be available elsewhere,
-#> see the ideas at
-#> https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages
 ```
 
 You can also install the development version of ColOpenData from
@@ -57,10 +52,9 @@ pak::pak("epiverse-trace/ColOpenData")
 ## Quick Overview
 
 **ColOpenData** contains data from two public data sources: The National
-Administrative Department of Statistics
-[(DANE)](https://www.dane.gov.co/), and the Institute of Hydrology,
-Meteorology and Environmental Studies [(IDEAM)](https://ideam.gov.co).
-The available data is divided in four categories:
+Administrative Department of Statistics (DANE), and the Institute of
+Hydrology, Meteorology and Environmental Studies (IDEAM). The available
+data is divided in four categories:
 
 - **Demographic:** Demographic and Socioeconomic data presents
   information from the National Population and Dwelling Census (CNPV)
@@ -79,14 +73,12 @@ The available data is divided in four categories:
   provided by IDEAM, containing historical data from the first station
   in the country (January 1st 1920) until May 31st 2023. This backup
   includes temperature, precipitation, sunshine duration, wind
-  direction, among others..
+  direction, among others.
 
 - **Population projections:** Population Projections data contains the
   population projections and back projections from 1950 to 2070,
   considering the post COVID-19 update, which was calculated based on
-  the results of 2018 CNPV. Further information can be consulted at
-  [DANE
-  website](https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/proyecciones-de-poblacion).
+  the results of 2018 CNPV.
 
 Documentation and vignettes are available for the modules in the [user
 vignettes](https://epiverse-trace.github.io/ColOpenData/).
@@ -105,6 +97,27 @@ the user to download census, geospatial and climate data.
 - [tidycensus](https://walker-data.com/tidycensus/): US
 - [geofi](https://ropengov.github.io/geofi/): Finland
 - [climate](https://bczernecki.github.io/climate/)
+
+### Disclaimer
+
+ColOpenData stores and distributes open data originally obtained from
+IDEAM and DANE. It is important to note that the data retrieved from
+these sources has been processed, transformed, and adapted to meet the
+functional requirements of this package. These modifications may result
+in changes to the structure, format, or content of the original data,
+and as such, the data provided by this package does not represent the
+official datasets as maintained by IDEAM or DANE. The development of
+this package is completely independent of these institutions, and
+neither IDEAM, DANE, nor any other Colombian government body endorses,
+sponsors, or is involved in the creation or maintenance of this package.
+Consequently, they bear no responsibility for the data as presented
+within this package. Furthermore, the authors of the ColOpenData assume
+no liability for any outcomes resulting from the use or misuse of the
+data provided. The user is solely responsible for how they utilize the
+data, and any conclusions drawn, analyses performed, or actions taken
+based on this data are the user’s responsibility. This package and its
+authors make no claims to represent or act on behalf of IDEAM, DANE, or
+any other official entity.
 
 ### Lifecycle
 
