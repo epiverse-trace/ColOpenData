@@ -102,10 +102,10 @@ download_pop_projections <- function(spatial_level, start_year, end_year,
       Meteorology and Environmental Studies (IDEAM)but with modifications for
       specific functional needs. These changes may alter the structure, format,
       or content, meaning the data does not reflect the official dataset. The
-      package is developed independently, with no endorsement or involvement 
-      from these institutions or any Colombian government body. The authors of 
-      ColOpenData are not liable for how users utilize the data, and users are 
-      responsible for any outcomes from their use or analysis of the data.", 
+      package is developed independently, with no endorsement or involvement
+      from these institutions or any Colombian government body. The authors of
+      ColOpenData are not liable for how users utilize the data, and users are
+      responsible for any outcomes from their use or analysis of the data.",
       "Stored by Universidad de Los Andes under the Epiverse TRACE iniative."
     )
   ))
