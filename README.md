@@ -37,8 +37,6 @@ You can install the CRAN version of ColOpenData with:
 
 ``` r
 install.packages("ColOpenData")
-#> Installing package into '/home/runner/work/_temp/Library'
-#> (as 'lib' is unspecified)
 ```
 
 You can also install the development version of ColOpenData from
@@ -51,9 +49,9 @@ pak::pak("epiverse-trace/ColOpenData")
 
 ## Quick Overview
 
-**ColOpenData** contains data from two public data sources: The National
-Administrative Department of Statistics (DANE), and the Institute of
-Hydrology, Meteorology and Environmental Studies (IDEAM). The available
+**ColOpenData** contains data from two public data sources: Departamento
+Administrativo Nacional de Estadística (DANE), and Instituto de
+Hidrología, Meteorología y Estudios Ambientales (IDEAM). The available
 data is divided in four categories:
 
 - **Demographic:** Demographic and Socioeconomic data presents
@@ -83,7 +81,7 @@ data is divided in four categories:
 Documentation and vignettes are available for the modules in the [user
 vignettes](https://epiverse-trace.github.io/ColOpenData/).
 
-### Related R Packages
+### Similar R Packages
 
 Similar R packages are offered for international communities, allowing
 the user to download census, geospatial and climate data.

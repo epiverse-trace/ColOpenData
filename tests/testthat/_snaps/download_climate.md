@@ -29,9 +29,9 @@
       download_climate_stations(stations = stations_test, start_date = "2010-10-01",
         end_date = "2010-12-10", tag = "PTPM_CON")
     Message
-      ColOpenData provides open data derived from The National Administrative
-      Department of Statistics (DANE), and the Institute of Hydrology,
-      Meteorology and Environmental Studies (IDEAM)but with modifications for
+      ColOpenData provides open data derived from Departamento Administrativo
+      Nacional de Estadística (DANE), and Instituto de Hidrología,
+      Meteorología y Estudios Ambientales (IDEAM)but with modifications for
       specific functional needs. These changes may alter the structure,
       format, or content, meaning the data does not reflect the official
       dataset. The package is developed independently, with no endorsement or
@@ -119,9 +119,9 @@
       download_climate_geom(geometry = apicala, start_date = "2010-10-01", end_date = "2010-11-10",
         tag = "PTPM_CON")
     Message
-      ColOpenData provides open data derived from The National Administrative
-      Department of Statistics (DANE), and the Institute of Hydrology,
-      Meteorology and Environmental Studies (IDEAM)but with modifications for
+      ColOpenData provides open data derived from Departamento Administrativo
+      Nacional de Estadística (DANE), and Instituto de Hidrología,
+      Meteorología y Estudios Ambientales (IDEAM)but with modifications for
       specific functional needs. These changes may alter the structure,
       format, or content, meaning the data does not reflect the official
       dataset. The package is developed independently, with no endorsement or
@@ -179,9 +179,9 @@
       download_climate(code = "73148", start_date = "2018-10-01", end_date = "2018-11-10",
         tag = "PTPM_CON")
     Message
-      ColOpenData provides open data derived from The National Administrative
-      Department of Statistics (DANE), and the Institute of Hydrology,
-      Meteorology and Environmental Studies (IDEAM)but with modifications for
+      ColOpenData provides open data derived from Departamento Administrativo
+      Nacional de Estadística (DANE), and Instituto de Hidrología,
+      Meteorología y Estudios Ambientales (IDEAM)but with modifications for
       specific functional needs. These changes may alter the structure,
       format, or content, meaning the data does not reflect the official
       dataset. The package is developed independently, with no endorsement or
