@@ -8,10 +8,16 @@
       Use of .data in tidyselect expressions was deprecated in tidyselect 1.2.0.
       i Please use `all_of(var)` (or `any_of(var)`) instead of `.data[[var]]`
     Message
-      Original data is retrieved from the National Administrative Department
-      of Statistics (Departamento Administrativo Nacional de Estadística -
-      DANE).
-      Reformatted by package authors.
+      ColOpenData provides open data derived from Departamento Administrativo
+      Nacional de Estadística (DANE), and Instituto de Hidrología,
+      Meteorología y Estudios Ambientales (IDEAM)but with modifications for
+      specific functional needs. These changes may alter the structure,
+      format, or content, meaning the data does not reflect the official
+      dataset. The package is developed independently, with no endorsement or
+      involvement from these institutions or any Colombian government body.
+      The authors of ColOpenData are not liable for how users utilize the
+      data, and users are responsible for any outcomes from their use or
+      analysis of the data.
       Stored by Universidad de Los Andes under the Epiverse TRACE iniative.
     Output
            codigo_departamento               departamento  ano
