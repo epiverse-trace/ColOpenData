@@ -28,7 +28,7 @@ processes. Additionally, the tidy data structure offered for demographic
 and climate data facilitates analysis and visualization.
 
 ColOpenData is developed at [Universidad de Los
-Andes](https://uniandes.edu.co/es) as part of the [Epiverse-TRACE
+Andes](https://www.uniandes.edu.co:443/es) as part of the [Epiverse-TRACE
 program](https://data.org/initiatives/epiverse/).
 
 ## Installation
