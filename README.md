@@ -28,7 +28,7 @@ processes. Additionally, the tidy data structure offered for demographic
 and climate data facilitates analysis and visualization.
 
 ColOpenData is developed at [Universidad de Los
-Andes](https://www.uniandes.edu.co:443/es) as part of the [Epiverse-TRACE
+Andes](https://uniandes.edu.co/es) as part of the [Epiverse-TRACE
 program](https://data.org/initiatives/epiverse/).
 
 ## Installation
@@ -37,12 +37,12 @@ You can install the CRAN version of ColOpenData with:
 
 ``` r
 install.packages("ColOpenData")
-#> Installing package into 'C:/Users/ASUS/AppData/Local/Temp/RtmpGAqKBn/temp_libpath4c9c4ce17445'
+#> Installing package into 'C:/Users/ASUS/AppData/Local/Temp/RtmpGAqKBn/temp_libpath4c9c3aba6e4c'
 #> (as 'lib' is unspecified)
 #> package 'ColOpenData' successfully unpacked and MD5 sums checked
 #> 
 #> The downloaded binary packages are in
-#>  C:\Users\ASUS\AppData\Local\Temp\RtmpmepthL\downloaded_packages
+#>  C:\Users\ASUS\AppData\Local\Temp\RtmpkL5zwV\downloaded_packages
 ```
 
 You can also install the development version of ColOpenData from

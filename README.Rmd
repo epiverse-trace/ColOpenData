@@ -31,7 +31,7 @@ knitr::opts_chunk$set(
 
 **ColOpenData** is a package designed to access curated and wrangled Colombian demographic, geospatial, climate and population projections data, retrieved from various open Colombian data sources. The package addresses the challenge of scattered Colombian data across multiple web sources by providing functions that enable users to select and load desired datasets without the need for extensive data acquisition processes. Additionally, the tidy data structure offered for demographic and climate data facilitates analysis and visualization.
 
-ColOpenData is developed at [Universidad de Los Andes](https://uniandes.edu.co/es) as part of the [Epiverse-TRACE program](https://data.org/initiatives/epiverse/).
+ColOpenData is developed at [Universidad de Los Andes](https://www.uniandes.edu.co:443/es) as part of the [Epiverse-TRACE program](https://data.org/initiatives/epiverse/).
 
 ## Installation
 
