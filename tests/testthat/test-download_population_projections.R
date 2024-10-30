@@ -1,4 +1,6 @@
 test_that("Download population projections errors are thrown", {
+  skip_on_cran()
+
   # Expect error when spatial_level is incorrect
   expect_error(download_pop_projections(
     spatial_level = "depto",
@@ -28,6 +30,8 @@ test_that("Download population projections errors are thrown", {
 })
 
 test_that("Download pop_projections works as expected", {
+  skip_on_cran()
+
   # Expect specific dataset from a proper request
   expect_snapshot(download_pop_projections(
     spatial_level = "department",

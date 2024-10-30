@@ -12,12 +12,13 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  eval = identical(tolower(Sys.getenv("NOT_CRAN")), "true")
 )
 ```
 
 ::: {style="text-align: justify;"}
-**ColOpenData** can be used to access open climate data from Colombia. This climate data is retrieved from the Institute of Hydrology, Meteorology and Environmental Studies [(IDEAM)](https://www.ideam.gov.co/). The climate module allows the user to consult climate data for any Region of Interest (ROI) inside the country and retrieve the information for each station contained inside.
+**ColOpenData** can be used to access open climate data from Colombia. This climate data is retrieved from the Institute of Hydrology, Meteorology and Environmental Studies (IDEAM). The climate module allows the user to consult climate data for any Region of Interest (ROI) inside the country and retrieve the information for each station contained inside.
 
 The available information from IDEAM can be accessed using specific internal tags as follows:
 :::

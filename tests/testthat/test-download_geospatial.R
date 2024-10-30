@@ -1,4 +1,6 @@
 test_that("Download geospatial errors are thrown", {
+  skip_on_cran()
+
   # Expect error on empty input
   expect_error(download_geospatial())
 
@@ -15,6 +17,8 @@ test_that("Download geospatial errors are thrown", {
 })
 
 test_that("Download geospatial works as expected", {
+  skip_on_cran()
+
   # Expect specific dataset from a proper request (only with geometry)
   expect_snapshot(download_geospatial(
     spatial_level = "department",
@@ -25,6 +29,8 @@ test_that("Download geospatial works as expected", {
 })
 
 test_that("Download geospatial works as expected with different parameters", {
+  skip_on_cran()
+
   # Expect specific dataset from a proper request (only with census data)
   expect_snapshot(download_geospatial(
     spatial_level = "dpto",

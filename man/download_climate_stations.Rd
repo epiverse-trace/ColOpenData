@@ -28,7 +28,7 @@ Download climate data from IDEAM stations by individual codes.This data is
 retrieved from local meteorological stations provided by IDEAM.
 }
 \examples{
-\dontrun{
+\donttest{
 lat <- c(4.172817, 4.172817, 4.136050, 4.136050, 4.172817)
 lon <- c(-74.749121, -74.686169, -74.686169, -74.749121, -74.749121)
 polygon <- sf::st_polygon(x = list(cbind(lon, lat)))
