@@ -1,4 +1,6 @@
 test_that("Download demographic errors are thrown", {
+  skip_on_cran()
+
   # Expect error when introducing a string that does not start with "DANE_CNPV"
   expect_error(download_demographic("MGNCNPV06"))
 
@@ -10,6 +12,8 @@ test_that("Download demographic errors are thrown", {
 })
 
 test_that("Download demographic works as expected", {
+  skip_on_cran()
+
   # Expect specific dataset from a proper request
   expect_snapshot(download_demographic("DANE_CNPVH_2018_1HD"))
 })
