@@ -28,7 +28,7 @@ processes. Additionally, the tidy data structure offered for demographic
 and climate data facilitates analysis and visualization.
 
 ColOpenData is developed at [Universidad de Los
-Andes](https://uniandes.edu.co/) as part of the [Epiverse-TRACE
+Andes](https://uniandes.edu.co/es) as part of the [Epiverse-TRACE
 program](https://data.org/initiatives/epiverse/).
 
 ## Installation
@@ -37,13 +37,12 @@ You can install the CRAN version of ColOpenData with:
 
 ``` r
 install.packages("ColOpenData")
-#> Installing package into 'C:/Users/Julia/AppData/Local/Temp/RtmpwZnATh/temp_libpath46443860632b'
+#> Installing package into 'C:/Users/ASUS/AppData/Local/Temp/RtmpGAqKBn/temp_libpath4c9c4ce17445'
 #> (as 'lib' is unspecified)
-#> Warning: package 'ColOpenData' is not available for this version of R
+#> package 'ColOpenData' successfully unpacked and MD5 sums checked
 #> 
-#> A version of this package for your version of R might be available elsewhere,
-#> see the ideas at
-#> https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages
+#> The downloaded binary packages are in
+#>  C:\Users\ASUS\AppData\Local\Temp\RtmpmepthL\downloaded_packages
 ```
 
 You can also install the development version of ColOpenData from
@@ -57,10 +56,9 @@ pak::pak("epiverse-trace/ColOpenData")
 ## Quick Overview
 
 **ColOpenData** contains data from two public data sources: The National
-Administrative Department of Statistics
-[(DANE)](https://www.dane.gov.co/), and the Institute of Hydrology,
-Meteorology and Environmental Studies [(IDEAM)](https://ideam.gov.co).
-The available data is divided in four categories:
+Administrative Department of Statistics (DANE), and the Institute of
+Hydrology, Meteorology and Environmental Studies (IDEAM). The available
+data is divided in four categories:
 
 - **Demographic:** Demographic and Socioeconomic data presents
   information from the National Population and Dwelling Census (CNPV)
@@ -79,14 +77,12 @@ The available data is divided in four categories:
   provided by IDEAM, containing historical data from the first station
   in the country (January 1st 1920) until May 31st 2023. This backup
   includes temperature, precipitation, sunshine duration, wind
-  direction, among others..
+  direction, among others.
 
 - **Population projections:** Population Projections data contains the
   population projections and back projections from 1950 to 2070,
   considering the post COVID-19 update, which was calculated based on
-  the results of 2018 CNPV. Further information can be consulted at
-  [DANE
-  website](https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/proyecciones-de-poblacion).
+  the results of 2018 CNPV.
 
 Documentation and vignettes are available for the modules in the [user
 vignettes](https://epiverse-trace.github.io/ColOpenData/).
