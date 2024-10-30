@@ -19,6 +19,7 @@ Download and filter climate stations contained inside a region of interest
 (ROI).
 }
 \examples{
+\dontshow{if (identical(tolower(Sys.getenv("NOT_CRAN")), "true")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
 lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)
 lon <- c(-75.678072, -75.327859, -75.327859, -75.678072, -75.678072)
@@ -28,5 +29,5 @@ roi <- sf::st_as_sf(geometry)
 stations <- stations_in_roi(roi)
 head(stations)
 }
-
+\dontshow{\}) # examplesIf}
 }

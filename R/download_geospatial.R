@@ -29,7 +29,7 @@
 #' @param include_cnpv logical for including (or not) CNPV demographic and
 #' socioeconomic information. Default is \code{TRUE}.
 #'
-#' @examples
+#' @examplesIf identical(tolower(Sys.getenv("NOT_CRAN")), "true")
 #' \donttest{
 #' departments <- download_geospatial("department")
 #' head(departments)

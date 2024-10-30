@@ -15,7 +15,7 @@
 #' lighter but less precise, and are recommended for easier applications like
 #' plots. Default is \code{TRUE}.
 #'
-#' @examples
+#' @examplesIf identical(tolower(Sys.getenv("NOT_CRAN")), "true")
 #' \donttest{
 #' merged <- merge_geo_demographic("DANE_CNPVV_2018_9VD", TRUE)
 #' head(merged)

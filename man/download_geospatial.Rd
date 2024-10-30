@@ -48,9 +48,10 @@ include a summarized version of the National Population and Dwelling Census
 (CNPV) with demographic and socioeconomic information for each spatial unit.
 }
 \examples{
+\dontshow{if (identical(tolower(Sys.getenv("NOT_CRAN")), "true")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
 departments <- download_geospatial("department")
 head(departments)
 }
-
+\dontshow{\}) # examplesIf}
 }

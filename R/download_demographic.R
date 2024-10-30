@@ -8,7 +8,7 @@
 #' \code{list_datasets("demographic", "EN")} or
 #' \code{list_datasets("demographic", "ES")} to check available datasets.
 #'
-#' @examples
+#' @examplesIf identical(tolower(Sys.getenv("NOT_CRAN")), "true")
 #' house_under_15 <- download_demographic("DANE_CNPVH_2018_1HD")
 #' head(house_under_15)
 #'

@@ -14,7 +14,7 @@
 #' @param tag character containing climate tag to consult. Please use
 #' \code{cliamte_tags()} to check IDEAM tags.
 #'
-#' @examples
+#' @examplesIf identical(tolower(Sys.getenv("NOT_CRAN")), "true")
 #' \donttest{
 #' ptpm <- download_climate("73148", "2021-11-14", "2021-11-20", "PTPM_CON")
 #' head(ptpm)
@@ -72,7 +72,7 @@ download_climate <- function(code, start_date, end_date, tag) {
 #' \code{"YYYY-MM-DD"}. (Last available date is \code{"2023-05-31"}).
 #' @param tag character containing climate tag to consult.
 #'
-#' @examples
+#' @examplesIf identical(tolower(Sys.getenv("NOT_CRAN")), "true")
 #' \donttest{
 #' lat <- c(4.172817, 4.172817, 4.136050, 4.136050, 4.172817)
 #' lon <- c(-74.749121, -74.686169, -74.686169, -74.749121, -74.749121)
@@ -119,7 +119,7 @@ download_climate_geom <- function(geometry, start_date, end_date, tag) {
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #'
-#' @examples
+#' @examplesIf identical(tolower(Sys.getenv("NOT_CRAN")), "true")
 #' \donttest{
 #' lat <- c(4.172817, 4.172817, 4.136050, 4.136050, 4.172817)
 #' lon <- c(-74.749121, -74.686169, -74.686169, -74.749121, -74.749121)
@@ -213,7 +213,7 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
 #' @param geometry \code{sf} object containing the geometry for a given ROI.
 #' The geometry can be either a \code{POLYGON} or \code{MULTIPOLYGON}.
 #'
-#' @examples
+#' @examplesIf identical(tolower(Sys.getenv("NOT_CRAN")), "true")
 #' \donttest{
 #' lat <- c(5.166278, 5.166278, 4.982247, 4.982247, 5.166278)
 #' lon <- c(-75.678072, -75.327859, -75.327859, -75.678072, -75.678072)

@@ -21,8 +21,9 @@ and lack of standardization. This functions translates municipality names to
 their respective official names from DIVIPOLA.
 }
 \examples{
+\dontshow{if (identical(tolower(Sys.getenv("NOT_CRAN")), "true")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 dptos <- c("Bogota", "Tolima")
 mpios <- c("Bogota DC", "CarmendeApicala")
 name_to_standard_mun(dptos, mpios)
-
+\dontshow{\}) # examplesIf}
 }

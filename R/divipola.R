@@ -5,7 +5,7 @@
 #' codification includes individual codes for each department and municipality
 #' following the political and administrative division.
 #'
-#' @examples
+#' @examplesIf identical(tolower(Sys.getenv("NOT_CRAN")), "true")
 #' divipola <- divipola_table()
 #'
 #' @return \code{data.frame} object with DIVIPOLA table.
@@ -24,7 +24,7 @@ divipola_table <- function() {
 #'
 #' @param department_name character vector with the names of the departments.
 #'
-#' @examples
+#' @examplesIf identical(tolower(Sys.getenv("NOT_CRAN")), "true")
 #' dptos <- c("Tolima", "Huila", "Amazonas")
 #' name_to_code_dep(dptos)
 #'
@@ -78,7 +78,7 @@ name_to_code_dep <- function(department_name) {
 #' @param municipality_name character vector with the names of the
 #' municipalities.
 #'
-#' @examples
+#' @examplesIf identical(tolower(Sys.getenv("NOT_CRAN")), "true")
 #' dptos <- c("Huila", "Antioquia")
 #' mpios <- c("Pitalito", "Turbo")
 #' name_to_code_mun(dptos, mpios)
@@ -179,7 +179,7 @@ retrieve_code <- function(input_token, fixed_tokens, codes_list) {
 #' @param department_code character vector with the DIVIPOLA codes of the
 #' departments.
 #'
-#' @examples
+#' @examplesIf identical(tolower(Sys.getenv("NOT_CRAN")), "true")
 #' dptos <- c("73", "05", "11")
 #' code_to_name_dep(dptos)
 #'
@@ -213,7 +213,7 @@ code_to_name_dep <- function(department_code) {
 #' @param municipality_code character vector with the DIVIPOLA codes of the
 #' municipalities.
 #'
-#' @examples
+#' @examplesIf identical(tolower(Sys.getenv("NOT_CRAN")), "true")
 #' mpios <- c("73001", "11001", "05615")
 #' code_to_name_mun(mpios)
 #'
@@ -244,7 +244,7 @@ code_to_name_mun <- function(municipality_code) {
 #'
 #' @param department_name character vector with the names to be translated.
 #'
-#' @examples
+#' @examplesIf identical(tolower(Sys.getenv("NOT_CRAN")), "true")
 #' dptos <- c("Bogota DC", "San Andres")
 #' name_to_standard_dep(dptos)
 #'
@@ -268,7 +268,7 @@ name_to_standard_dep <- function(department_name) {
 #' departments containing the municipalities.
 #' @param municipality_name character vector with the names to be translated.
 #'
-#' @examples
+#' @examplesIf identical(tolower(Sys.getenv("NOT_CRAN")), "true")
 #' dptos <- c("Bogota", "Tolima")
 #' mpios <- c("Bogota DC", "CarmendeApicala")
 #' name_to_standard_mun(dptos, mpios)

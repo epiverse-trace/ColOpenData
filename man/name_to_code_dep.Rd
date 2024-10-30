@@ -16,7 +16,8 @@ character vector with the DIVIPOLA codes of the departments.
 Retrieve departments' DIVIPOLA codes from their names.
 }
 \examples{
+\dontshow{if (identical(tolower(Sys.getenv("NOT_CRAN")), "true")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 dptos <- c("Tolima", "Huila", "Amazonas")
 name_to_code_dep(dptos)
-
+\dontshow{\}) # examplesIf}
 }

@@ -19,7 +19,8 @@ This function downloads demographic datasets from the National Population
 and Dwelling Census (CNPV) of 2018.
 }
 \examples{
+\dontshow{if (identical(tolower(Sys.getenv("NOT_CRAN")), "true")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 house_under_15 <- download_demographic("DANE_CNPVH_2018_1HD")
 head(house_under_15)
-
+\dontshow{\}) # examplesIf}
 }

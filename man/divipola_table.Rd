@@ -15,6 +15,7 @@ codification includes individual codes for each department and municipality
 following the political and administrative division.
 }
 \examples{
+\dontshow{if (identical(tolower(Sys.getenv("NOT_CRAN")), "true")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 divipola <- divipola_table()
-
+\dontshow{\}) # examplesIf}
 }

@@ -28,6 +28,7 @@ Download climate data from stations contained in a Region of Interest
 provided by IDEAM.
 }
 \examples{
+\dontshow{if (identical(tolower(Sys.getenv("NOT_CRAN")), "true")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
 lat <- c(4.172817, 4.172817, 4.136050, 4.136050, 4.172817)
 lon <- c(-74.749121, -74.686169, -74.686169, -74.749121, -74.749121)
@@ -37,5 +38,5 @@ roi <- sf::st_as_sf(geometry)
 ptpm <- download_climate_geom(roi, "2022-11-14", "2022-11-20", "PTPM_CON")
 head(ptpm)
 }
-
+\dontshow{\}) # examplesIf}
 }

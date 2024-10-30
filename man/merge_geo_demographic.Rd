@@ -27,9 +27,10 @@ municipality, this function can only merge with geospatial datasets that
 present municipality or department level.
 }
 \examples{
+\dontshow{if (identical(tolower(Sys.getenv("NOT_CRAN")), "true")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
 merged <- merge_geo_demographic("DANE_CNPVV_2018_9VD", TRUE)
 head(merged)
 }
-
+\dontshow{\}) # examplesIf}
 }
