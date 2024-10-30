@@ -81,5 +81,8 @@ merge_geo_demographic <- function(demographic_dataset, simplified = TRUE) {
       by.y = "codigo_municipio", all.x = TRUE
     )
   }
+  if (colnames(merged_data)[ncol(merged_data)] == "geometry") {
+    sf::st_geometry(merged_data) <- "geom"
+  }
   return(merged_data)
 }
