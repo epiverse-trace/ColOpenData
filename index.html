@@ -36,7 +36,7 @@
     <a href="https://epiverse-trace.github.io/" class="external-link"><img src="https://epiverse-trace.github.io/blueprints/logo_white.svg" id="logo" alt="Epiverse-TRACE"></a>
     <a class="navbar-brand me-2" href="index.html">ColOpenData</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,20 +95,19 @@
 
 <!-- badges: end -->
 <p><strong>ColOpenData</strong> is a package designed to access curated and wrangled Colombian demographic, geospatial, climate and population projections data, retrieved from various open Colombian data sources. The package addresses the challenge of scattered Colombian data across multiple web sources by providing functions that enable users to select and load desired datasets without the need for extensive data acquisition processes. Additionally, the tidy data structure offered for demographic and climate data facilitates analysis and visualization.</p>
-<p>ColOpenData is developed at <a href="https://uniandes.edu.co/" class="external-link">Universidad de Los Andes</a> as part of the <a href="https://data.org/initiatives/epiverse/" class="external-link">Epiverse-TRACE program</a>.</p>
+<p>ColOpenData is developed at <a href="https://uniandes.edu.co/es" class="external-link">Universidad de Los Andes</a> as part of the <a href="https://data.org/initiatives/epiverse/" class="external-link">Epiverse-TRACE program</a>.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>You can install the CRAN version of ColOpenData with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ColOpenData"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Installing package into 'C:/Users/Julia/AppData/Local/Temp/RtmpwZnATh/temp_libpath46443860632b'</span></span>
+<span><span class="co">#&gt; Installing package into 'C:/Users/ASUS/AppData/Local/Temp/RtmpGAqKBn/temp_libpath4c9c4ce17445'</span></span>
 <span><span class="co">#&gt; (as 'lib' is unspecified)</span></span>
-<span><span class="co">#&gt; Warning: package 'ColOpenData' is not available for this version of R</span></span>
+<span><span class="co">#&gt; package 'ColOpenData' successfully unpacked and MD5 sums checked</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; A version of this package for your version of R might be available elsewhere,</span></span>
-<span><span class="co">#&gt; see the ideas at</span></span>
-<span><span class="co">#&gt; https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages</span></span></code></pre></div>
+<span><span class="co">#&gt; The downloaded binary packages are in</span></span>
+<span><span class="co">#&gt;  C:\Users\ASUS\AppData\Local\Temp\RtmpmepthL\downloaded_packages</span></span></code></pre></div>
 <p>You can also install the development version of ColOpenData from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
@@ -117,12 +116,12 @@
 <div class="section level2">
 <h2 id="quick-overview">Quick Overview<a class="anchor" aria-label="anchor" href="#quick-overview"></a>
 </h2>
-<p><strong>ColOpenData</strong> contains data from two public data sources: The National Administrative Department of Statistics <a href="https://www.dane.gov.co/" class="external-link">(DANE)</a>, and the Institute of Hydrology, Meteorology and Environmental Studies <a href="https://ideam.gov.co" class="external-link">(IDEAM)</a>. The available data is divided in four categories:</p>
+<p><strong>ColOpenData</strong> contains data from two public data sources: The National Administrative Department of Statistics (DANE), and the Institute of Hydrology, Meteorology and Environmental Studies (IDEAM). The available data is divided in four categories:</p>
 <ul>
 <li><p><strong>Demographic:</strong> Demographic and Socioeconomic data presents information from the National Population and Dwelling Census (CNPV) of 2018. The CNPV data corresponds to the most recent census available to date and the information is presented as an answer to three questions: How many are we?, Where are we? and How do we live?</p></li>
 <li><p><strong>Geospatial:</strong> This data is retrieved from the National Geostatistical Framework (MGN), which includes maps and a summarized version of the 2018 CNPV, aggregated to spatial geometries. The data is available at different aggregation levels including: Blocks, Urban and Rural Sections, Urban and Rural Sectors, Urban Areas, Municipalities and Departments.</p></li>
-<li><p><strong>Climate:</strong> Climate data is recovered from backup information provided by IDEAM, containing historical data from the first station in the country (January 1st 1920) until May 31st 2023. This backup includes temperature, precipitation, sunshine duration, wind direction, among others..</p></li>
-<li><p><strong>Population projections:</strong> Population Projections data contains the population projections and back projections from 1950 to 2070, considering the post COVID-19 update, which was calculated based on the results of 2018 CNPV. Further information can be consulted at <a href="https://www.dane.gov.co/index.php/estadisticas-por-tema/demografia-y-poblacion/proyecciones-de-poblacion" class="external-link">DANE website</a>.</p></li>
+<li><p><strong>Climate:</strong> Climate data is recovered from backup information provided by IDEAM, containing historical data from the first station in the country (January 1st 1920) until May 31st 2023. This backup includes temperature, precipitation, sunshine duration, wind direction, among others.</p></li>
+<li><p><strong>Population projections:</strong> Population Projections data contains the population projections and back projections from 1950 to 2070, considering the post COVID-19 update, which was calculated based on the results of 2018 CNPV.</p></li>
 </ul>
 <p>Documentation and vignettes are available for the modules in the <a href="https://epiverse-trace.github.io/ColOpenData/">user vignettes</a>.</p>
 <div class="section level3">
