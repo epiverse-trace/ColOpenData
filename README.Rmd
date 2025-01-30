@@ -80,7 +80,8 @@ Similar R packages are offered for international communities, allowing the user 
 
 ### Lifecycle
 
-This package is currently *experimental*, as defined by the [RECON software lifecycle](https://www.reconverse.org/lifecycle.html). Therefore, this is a functional draft and can be tested outside of the development team. However, it still may change over time.
+This package is currently *stable*, as defined by the [RECON software lifecycle](https://www.reconverse.org/lifecycle.html). Therefore, this is a functional package and it is documented and tested. However, it still may change over time.
+
 
 ### Contributions
 

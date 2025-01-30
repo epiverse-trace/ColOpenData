@@ -42,12 +42,12 @@ You can install the CRAN version of ColOpenData with:
 
 ``` r
 install.packages("ColOpenData")
-#> Installing package into 'C:/Users/ASUS/AppData/Local/Temp/RtmpysFj5I/temp_libpath3ef84bc81758'
+#> Installing package into 'C:/Users/ASUS/AppData/Local/Temp/Rtmpeq2ENv/temp_libpath265c753a5674'
 #> (as 'lib' is unspecified)
 #> package 'ColOpenData' successfully unpacked and MD5 sums checked
 #> 
 #> The downloaded binary packages are in
-#>  C:\Users\ASUS\AppData\Local\Temp\RtmpyslAhW\downloaded_packages
+#>  C:\Users\ASUS\AppData\Local\Temp\RtmpCAlEWG\downloaded_packages
 ```
 
 You can also install the development version of ColOpenData from
@@ -109,10 +109,10 @@ the user to download census, geospatial and climate data.
 
 ### Lifecycle
 
-This package is currently *experimental*, as defined by the [RECON
-software lifecycle](https://www.reconverse.org/lifecycle.html).
-Therefore, this is a functional draft and can be tested outside of the
-development team. However, it still may change over time.
+This package is currently *stable*, as defined by the [RECON software
+lifecycle](https://www.reconverse.org/lifecycle.html). Therefore, this
+is a functional package and it is documented and tested. However, it
+still may change over time.
 
 ### Contributions
 
