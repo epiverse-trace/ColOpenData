@@ -14,7 +14,12 @@ MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.or
 [![R-CMD-check](https://github.com/epiverse-trace/ColOpenData/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/epiverse-trace/ColOpenData/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/epiverse-trace/ColOpenData/branch/main/graph/badge.svg)](https://app.codecov.io/gh/epiverse-trace/ColOpenData?branch=main)
-[![lifecycle-experimental](https://raw.githubusercontent.com/reconverse/reconverse.github.io/master/images/badge-experimental.svg)](https://www.reconverse.org/lifecycle.html#experimental)
+\[\![lifecycle: [![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/epiparameter)](https://CRAN.R-project.org/package=epiparameter)
+[![CRAN
+downloads](https://cranlogs.r-pkg.org/badges/epiparameter)](https://cran.r-project.org/package=epiparameter)
 
 <!-- badges: end -->
 
@@ -37,12 +42,12 @@ You can install the CRAN version of ColOpenData with:
 
 ``` r
 install.packages("ColOpenData")
-#> Installing package into 'C:/Users/ASUS/AppData/Local/Temp/RtmpsZxXrB/temp_libpath22f054e24b80'
+#> Installing package into 'C:/Users/ASUS/AppData/Local/Temp/RtmpysFj5I/temp_libpath3ef84bc81758'
 #> (as 'lib' is unspecified)
 #> package 'ColOpenData' successfully unpacked and MD5 sums checked
 #> 
 #> The downloaded binary packages are in
-#>  C:\Users\ASUS\AppData\Local\Temp\RtmpQNeHEm\downloaded_packages
+#>  C:\Users\ASUS\AppData\Local\Temp\RtmpyslAhW\downloaded_packages
 ```
 
 You can also install the development version of ColOpenData from
