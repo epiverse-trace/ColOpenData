@@ -42,12 +42,8 @@ You can install the CRAN version of ColOpenData with:
 
 ``` r
 install.packages("ColOpenData")
-#> Installing package into 'C:/Users/ASUS/AppData/Local/Temp/RtmpysFj5I/temp_libpath3ef84bc81758'
+#> Installing package into '/home/runner/work/_temp/Library'
 #> (as 'lib' is unspecified)
-#> package 'ColOpenData' successfully unpacked and MD5 sums checked
-#> 
-#> The downloaded binary packages are in
-#>  C:\Users\ASUS\AppData\Local\Temp\RtmpyslAhW\downloaded_packages
 ```
 
 You can also install the development version of ColOpenData from
