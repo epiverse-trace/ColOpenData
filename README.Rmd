@@ -47,7 +47,7 @@ install.packages("ColOpenData")
 
 You can also install the development version of ColOpenData from [GitHub](https://github.com/) with:
 
-``` r
+```{r eval=FALSE, include=TRUE}
 # install.packages("pak")
 pak::pak("epiverse-trace/ColOpenData")
 ```
