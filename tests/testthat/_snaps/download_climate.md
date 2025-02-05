@@ -37,9 +37,9 @@
       dataset. The package is developed independently, with no endorsement or
       involvement from these institutions or any Colombian government body.
       The authors of ColOpenData are not liable for how users utilize the
-      data, and users areresponsible for any outcomes from their use or
+      data, and users are responsible for any outcomes from their use or
       analysis of the data.
-      Stored by Universidad de Los Andes under the Epiverse TRACE iniative.
+      Stored by Universidad de Los Andes under the Epiverse TRACE initiative.
     Output
           station    longitude   latitude       date     hour      tag value
       1  21190290 -74.71311111 4.16102778 2010-10-01 07:00:00 PTPM_CON    34
@@ -127,9 +127,9 @@
       dataset. The package is developed independently, with no endorsement or
       involvement from these institutions or any Colombian government body.
       The authors of ColOpenData are not liable for how users utilize the
-      data, and users areresponsible for any outcomes from their use or
+      data, and users are responsible for any outcomes from their use or
       analysis of the data.
-      Stored by Universidad de Los Andes under the Epiverse TRACE iniative.
+      Stored by Universidad de Los Andes under the Epiverse TRACE initiative.
     Output
           station    longitude   latitude       date     hour      tag value
       1  21190290 -74.71311111 4.16102778 2010-10-01 07:00:00 PTPM_CON    34
@@ -187,9 +187,9 @@
       dataset. The package is developed independently, with no endorsement or
       involvement from these institutions or any Colombian government body.
       The authors of ColOpenData are not liable for how users utilize the
-      data, and users areresponsible for any outcomes from their use or
+      data, and users are responsible for any outcomes from their use or
       analysis of the data.
-      Stored by Universidad de Los Andes under the Epiverse TRACE iniative.
+      Stored by Universidad de Los Andes under the Epiverse TRACE initiative.
     Output
           station    longitude   latitude       date     hour      tag value
       1  21190290 -74.71311111 4.16102778 2018-10-01 07:00:00 PTPM_CON    44
