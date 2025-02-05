@@ -23,7 +23,7 @@
 #' @param include_ethnic logical for including (or not) division by ethnic
 #' group (only available for \code{"municipality"}). Default is \code{FALSE}.
 #'
-#' @examples
+#' @examplesIf identical(tolower(Sys.getenv("NOT_CRAN")), "true")
 #' pop_proj <- download_pop_projections("national", 2020, 2030)
 #' head(pop_proj)
 #'

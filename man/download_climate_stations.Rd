@@ -28,6 +28,7 @@ Download climate data from IDEAM stations by individual codes.This data is
 retrieved from local meteorological stations provided by IDEAM.
 }
 \examples{
+\dontshow{if (identical(tolower(Sys.getenv("NOT_CRAN")), "true")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
 lat <- c(4.172817, 4.172817, 4.136050, 4.136050, 4.172817)
 lon <- c(-74.749121, -74.686169, -74.686169, -74.749121, -74.749121)
@@ -40,5 +41,5 @@ ptpm <- download_climate_stations(
 )
 head(ptpm)
 }
-
+\dontshow{\}) # examplesIf}
 }

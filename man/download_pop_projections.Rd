@@ -45,7 +45,8 @@ after COVID-19. Available years are different for each spatial level:
 }
 }
 \examples{
+\dontshow{if (identical(tolower(Sys.getenv("NOT_CRAN")), "true")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 pop_proj <- download_pop_projections("national", 2020, 2030)
 head(pop_proj)
-
+\dontshow{\}) # examplesIf}
 }

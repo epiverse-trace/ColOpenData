@@ -17,7 +17,8 @@ character vector with the DIVIPOLA name of the municipalities.
 Retrieve municipalities' DIVIPOLA official names from their DIVIPOLA codes.
 }
 \examples{
+\dontshow{if (identical(tolower(Sys.getenv("NOT_CRAN")), "true")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 mpios <- c("73001", "11001", "05615")
 code_to_name_mun(mpios)
-
+\dontshow{\}) # examplesIf}
 }

@@ -25,8 +25,9 @@ match all municipalities in the second vector inside that department.
 Otherwise, the vectors must be the same length.
 }
 \examples{
+\dontshow{if (identical(tolower(Sys.getenv("NOT_CRAN")), "true")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 dptos <- c("Huila", "Antioquia")
 mpios <- c("Pitalito", "Turbo")
 name_to_code_mun(dptos, mpios)
-
+\dontshow{\}) # examplesIf}
 }

@@ -14,7 +14,12 @@ MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.or
 [![R-CMD-check](https://github.com/epiverse-trace/ColOpenData/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/epiverse-trace/ColOpenData/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/epiverse-trace/ColOpenData/branch/main/graph/badge.svg)](https://app.codecov.io/gh/epiverse-trace/ColOpenData?branch=main)
-[![lifecycle-experimental](https://raw.githubusercontent.com/reconverse/reconverse.github.io/master/images/badge-experimental.svg)](https://www.reconverse.org/lifecycle.html#experimental)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/ColOpenData)](https://CRAN.R-project.org/package=ColOpenData)
+[![CRAN
+downloads](https://cranlogs.r-pkg.org/badges/ColOpenData)](https://cran.r-project.org/package=ColOpenData)
 
 <!-- badges: end -->
 
@@ -28,8 +33,8 @@ processes. Additionally, the tidy data structure offered for demographic
 and climate data facilitates analysis and visualization.
 
 ColOpenData is developed at [Universidad de Los
-Andes](https://uniandes.edu.co/) as part of the [Epiverse-TRACE
-program](https://data.org/initiatives/epiverse/).
+Andes](https://www.uniandes.edu.co:443/es) as part of the
+[Epiverse-TRACE program](https://data.org/initiatives/epiverse/).
 
 ## Installation
 
@@ -121,10 +126,10 @@ official entity.
 
 ### Lifecycle
 
-This package is currently *experimental*, as defined by the [RECON
-software lifecycle](https://www.reconverse.org/lifecycle.html).
-Therefore, this is a functional draft and can be tested outside of the
-development team. However, it still may change over time.
+This package is currently *stable*, as defined by the [RECON software
+lifecycle](https://www.reconverse.org/lifecycle.html). Therefore, this
+is a functional package and it is documented and tested. However, it
+still may change over time.
 
 ### Contributions
 

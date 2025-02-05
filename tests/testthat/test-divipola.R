@@ -1,4 +1,6 @@
 test_that("Divipola department code throws errors", {
+  skip_on_cran()
+
   # Expect error when department_name is not a character
   expect_error(name_to_code_dep(5678))
 
@@ -7,6 +9,8 @@ test_that("Divipola department code throws errors", {
 })
 
 test_that("Divipola department code works as expected", {
+  skip_on_cran()
+
   # Expect specific vector from a proper request using multiple cases and
   # including border scenarios ("Santander" and "Norte de Santander" have
   # similar strings. "San Andres" is a frequent way to call the department while
@@ -22,6 +26,8 @@ test_that("Divipola department code works as expected", {
 })
 
 test_that("Divipola municipality code throws errors", {
+  skip_on_cran()
+
   # Expect error when department_name is not a character
   expect_error(name_to_code_mun(
     c(6787, 13),
@@ -52,6 +58,8 @@ test_that("Divipola municipality code throws errors", {
 })
 
 test_that("Divipola municipality code works as expected", {
+  skip_on_cran()
+
   # Expect specific vector from a proper request including municipalities with
   # same name in different departments (This is quite common in Colombia)
   expect_identical(
@@ -77,6 +85,8 @@ test_that("Divipola municipality code works as expected", {
 })
 
 test_that("Divipola department name throws errors", {
+  skip_on_cran()
+
   # Expect error when department_code is not a character
   expect_error(code_to_name_dep(c(73, 05)))
 
@@ -89,11 +99,15 @@ test_that("Divipola department name throws errors", {
 })
 
 test_that("Divipola department name works as expected", {
+  skip_on_cran()
+
   # Expect specific vector from a proper request
   expect_identical(code_to_name_dep("05"), "Antioquia")
 })
 
 test_that("Divipola municipality and department name throws errors", {
+  skip_on_cran()
+
   # Expect error when department_code and municipality_code are not a character
   expect_error(code_to_name_mun(c(05001, 73001)))
 
@@ -106,16 +120,22 @@ test_that("Divipola municipality and department name throws errors", {
 })
 
 test_that("Divipola municipality name works as expected", {
+  skip_on_cran()
+
   # Expect specific vector from a proper request
   expect_identical(code_to_name_mun("05051"), "Arboletes")
 })
 
 test_that("Translate divipola department name works as expected", {
+  skip_on_cran()
+
   # Expect specific vector from a proper request
   expect_identical(name_to_standard_dep("Bogota"), "Bogotá, D.C.")
 })
 
 test_that("Translate divipola municipality name works as expected", {
+  skip_on_cran()
+
   # Expect specific vector from a proper request with a border scenario
   # (Shortened municipality name, which is frequently used)
   expect_identical(name_to_standard_mun(

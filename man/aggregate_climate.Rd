@@ -24,6 +24,7 @@ since are the ones where methodology for aggregation is explicitly provided
 by the source.
 }
 \examples{
+\dontshow{if (identical(tolower(Sys.getenv("NOT_CRAN")), "true")) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 \donttest{
 lat <- c(4.172817, 4.172817, 4.136050, 4.136050, 4.172817)
 lon <- c(-74.749121, -74.686169, -74.686169, -74.749121, -74.749121)
@@ -34,5 +35,5 @@ ptpm <- download_climate_geom(roi, "2022-11-01", "2022-12-31", "PTPM_CON")
 monthly_ptpm <- aggregate_climate(ptpm, "month")
 head(monthly_ptpm)
 }
-
+\dontshow{\}) # examplesIf}
 }
