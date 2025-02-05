@@ -8,10 +8,13 @@ message: 'To cite package "ColOpenData" in publications use:'
 type: software
 license: MIT
 title: 'ColOpenData: Download Colombian Demographic, Climate and Geospatial Data'
-version: 0.3.0
-abstract: Downloads wrangled Colombian socioeconomic, geospatial, population and climate
-  data from DANE and IDEAM. It solves the problem of Colombian data being issued in
-  different web pages and sources by using functions that allow the user to select
+version: 0.3.1
+doi: 10.32614/CRAN.package.ColOpenData
+abstract: Downloads wrangled Colombian socioeconomic, geospatial,population and climate
+  data from DANE <https://www.dane.gov.co/> (National Administrative Department of
+  Statistics) and IDEAM <https://ideam.gov.co> (Institute of Hydrology, Meteorology
+  and Environmental Studies). It solves the problem of Colombian data being issued
+  in different web pages and sources by using functions that allow the user to select
   the desired database and download it without having to do the exhausting acquisition
   process.
 authors:
@@ -23,6 +26,7 @@ authors:
   given-names: Julian
   email: jd.otero10@uniandes.edu.co
   orcid: https://orcid.org/0009-0006-0429-7747
+repository: https://CRAN.R-project.org/package=ColOpenData
 repository-code: https://github.com/epiverse-trace/ColOpenData
 url: https://epiverse-trace.github.io/ColOpenData/
 contact:
@@ -48,7 +52,7 @@ references:
   institution:
     name: R Foundation for Statistical Computing
     address: Vienna, Austria
-  year: '2024'
+  year: '2025'
   version: '>= 3.3.0'
 - type: software
   title: checkmate
@@ -61,7 +65,7 @@ references:
     given-names: Michel
     email: michellang@gmail.com
     orcid: https://orcid.org/0000-0001-9754-0393
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.checkmate
 - type: software
   title: config
@@ -73,7 +77,7 @@ references:
   - family-names: Allaire
     given-names: JJ
     email: jj@rstudio.com
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.config
 - type: software
   title: dplyr
@@ -98,7 +102,7 @@ references:
     given-names: Davis
     email: davis@posit.co
     orcid: https://orcid.org/0000-0003-4777-038X
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.dplyr
 - type: software
   title: magrittr
@@ -113,7 +117,7 @@ references:
   - family-names: Wickham
     given-names: Hadley
     email: hadley@rstudio.com
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.magrittr
 - type: software
   title: rlang
@@ -128,7 +132,7 @@ references:
   - family-names: Wickham
     given-names: Hadley
     email: hadley@posit.co
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.rlang
 - type: software
   title: sf
@@ -141,7 +145,7 @@ references:
     given-names: Edzer
     email: edzer.pebesma@uni-muenster.de
     orcid: https://orcid.org/0000-0001-8049-7069
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.sf
 - type: software
   title: stringdist
@@ -156,7 +160,7 @@ references:
     name-particle: van der
     email: mark.vanderloo@gmail.com
     orcid: https://orcid.org/0000-0002-9807-4686
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.stringdist
 - type: software
   title: tidyr
@@ -173,7 +177,7 @@ references:
     email: davis@posit.co
   - family-names: Girlich
     given-names: Maximilian
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.tidyr
 - type: software
   title: utils
@@ -184,7 +188,7 @@ references:
   institution:
     name: R Foundation for Statistical Computing
     address: Vienna, Austria
-  year: '2024'
+  year: '2025'
 - type: software
   title: ggplot2
   abstract: 'ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics'
@@ -223,7 +227,7 @@ references:
     given-names: Teun
     name-particle: van den
     orcid: https://orcid.org/0000-0002-9335-7468
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.ggplot2
 - type: software
   title: knitr
@@ -236,7 +240,7 @@ references:
     given-names: Yihui
     email: xie@yihui.name
     orcid: https://orcid.org/0000-0003-0645-5666
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.knitr
 - type: software
   title: leaflet
@@ -257,7 +261,7 @@ references:
     given-names: Bhaskar
   - family-names: Xie
     given-names: Yihui
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.leaflet
 - type: software
   title: rmarkdown
@@ -301,7 +305,7 @@ references:
     given-names: Richard
     email: rich@posit.co
     orcid: https://orcid.org/0000-0003-3925-190X
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.rmarkdown
 - type: software
   title: spelling
@@ -312,12 +316,12 @@ references:
   authors:
   - family-names: Ooms
     given-names: Jeroen
-    email: jeroen@berkeley.edu
+    email: jeroenooms@gmail.com
     orcid: https://orcid.org/0000-0002-4035-0289
   - family-names: Hester
     given-names: Jim
     email: james.hester@rstudio.com
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.spelling
 - type: software
   title: testthat
@@ -329,7 +333,7 @@ references:
   - family-names: Wickham
     given-names: Hadley
     email: hadley@posit.co
-  year: '2024'
+  year: '2025'
   doi: 10.32614/CRAN.package.testthat
   version: '>= 3.0.0'
 
