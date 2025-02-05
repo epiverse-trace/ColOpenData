@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 ```
 
 ::: {style="text-align: justify;"}
-**ColOpenData** can be used to access open geospatial data from Colombia. This data is retrieved from the National Geostatistical Framework (MGN), published by the National Administrative Department of Statistics (DANE). The MGN contains the political-administrative division and is used to reference census statistical information.
+**ColOpenData** can be used to access open geospatial data from Colombia. This data is retrieved from the National Geostatistical Framework (MGN), published by Departamento Administrativo Nacional de Estadística (DANE). The MGN contains the political-administrative division and is used to reference census statistical information.
 
 This package contains the 2018's version of the MGN, which also included a summarized version of the National Population and Dwelling Census (CNPV) in different aggregation levels. Each level is stored in a different dataset, which can be retrieved using the `download_geospatial()` function, which requires three arguments:
 

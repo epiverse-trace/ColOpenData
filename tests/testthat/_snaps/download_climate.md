@@ -29,10 +29,16 @@
       download_climate_stations(stations = stations_test, start_date = "2010-10-01",
         end_date = "2010-12-10", tag = "PTPM_CON")
     Message
-      Original data is retrieved from the Institute of Hydrology, Meteorology
-      and Environmental Studies (Instituto de Hidrología, Meteorología y
-      Estudios Ambientales - IDEAM).
-      Reformatted by package authors.
+      ColOpenData provides open data derived from Departamento Administrativo
+      Nacional de Estadística (DANE), and Instituto de Hidrología,
+      Meteorología y Estudios Ambientales (IDEAM) but with modifications for
+      specific functional needs. These changes may alter the structure,
+      format, or content, meaning the data does not reflect the official
+      dataset. The package is developed independently, with no endorsement or
+      involvement from these institutions or any Colombian government body.
+      The authors of ColOpenData are not liable for how users utilize the
+      data, and users areresponsible for any outcomes from their use or
+      analysis of the data.
       Stored by Universidad de Los Andes under the Epiverse TRACE iniative.
     Output
           station    longitude   latitude       date     hour      tag value
@@ -113,10 +119,16 @@
       download_climate_geom(geometry = apicala, start_date = "2010-10-01", end_date = "2010-11-10",
         tag = "PTPM_CON")
     Message
-      Original data is retrieved from the Institute of Hydrology, Meteorology
-      and Environmental Studies (Instituto de Hidrología, Meteorología y
-      Estudios Ambientales - IDEAM).
-      Reformatted by package authors.
+      ColOpenData provides open data derived from Departamento Administrativo
+      Nacional de Estadística (DANE), and Instituto de Hidrología,
+      Meteorología y Estudios Ambientales (IDEAM) but with modifications for
+      specific functional needs. These changes may alter the structure,
+      format, or content, meaning the data does not reflect the official
+      dataset. The package is developed independently, with no endorsement or
+      involvement from these institutions or any Colombian government body.
+      The authors of ColOpenData are not liable for how users utilize the
+      data, and users areresponsible for any outcomes from their use or
+      analysis of the data.
       Stored by Universidad de Los Andes under the Epiverse TRACE iniative.
     Output
           station    longitude   latitude       date     hour      tag value
@@ -167,10 +179,16 @@
       download_climate(code = "73148", start_date = "2018-10-01", end_date = "2018-11-10",
         tag = "PTPM_CON")
     Message
-      Original data is retrieved from the Institute of Hydrology, Meteorology
-      and Environmental Studies (Instituto de Hidrología, Meteorología y
-      Estudios Ambientales - IDEAM).
-      Reformatted by package authors.
+      ColOpenData provides open data derived from Departamento Administrativo
+      Nacional de Estadística (DANE), and Instituto de Hidrología,
+      Meteorología y Estudios Ambientales (IDEAM) but with modifications for
+      specific functional needs. These changes may alter the structure,
+      format, or content, meaning the data does not reflect the official
+      dataset. The package is developed independently, with no endorsement or
+      involvement from these institutions or any Colombian government body.
+      The authors of ColOpenData are not liable for how users utilize the
+      data, and users areresponsible for any outcomes from their use or
+      analysis of the data.
       Stored by Universidad de Los Andes under the Epiverse TRACE iniative.
     Output
           station    longitude   latitude       date     hour      tag value

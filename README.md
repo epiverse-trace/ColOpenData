@@ -42,8 +42,6 @@ You can install the CRAN version of ColOpenData with:
 
 ``` r
 install.packages("ColOpenData")
-#> Installing package into '/home/runner/work/_temp/Library'
-#> (as 'lib' is unspecified)
 ```
 
 You can also install the development version of ColOpenData from
@@ -56,9 +54,9 @@ pak::pak("epiverse-trace/ColOpenData")
 
 ## Quick Overview
 
-**ColOpenData** contains data from two public data sources: The National
-Administrative Department of Statistics (DANE), and the Institute of
-Hydrology, Meteorology and Environmental Studies (IDEAM). The available
+**ColOpenData** contains data from two public data sources: Departamento
+Administrativo Nacional de Estadística (DANE), and Instituto de
+Hidrología, Meteorología y Estudios Ambientales (IDEAM). The available
 data is divided in four categories:
 
 - **Demographic:** Demographic and Socioeconomic data presents
@@ -88,7 +86,7 @@ data is divided in four categories:
 Documentation and vignettes are available for the modules in the [user
 vignettes](https://epiverse-trace.github.io/ColOpenData/).
 
-### Related R Packages
+### Similar R Packages
 
 Similar R packages are offered for international communities, allowing
 the user to download census, geospatial and climate data.
@@ -102,6 +100,29 @@ the user to download census, geospatial and climate data.
 - [tidycensus](https://walker-data.com/tidycensus/): US
 - [geofi](https://ropengov.github.io/geofi/): Finland
 - [climate](https://bczernecki.github.io/climate/)
+
+### Disclaimer
+
+ColOpenData stores and distributes open data originally obtained from
+Departamento Administrativo Nacional de Estadística (DANE), and
+Instituto de Hidrología, Meteorología y Estudios Ambientales (IDEAM). It
+is important to note that the data retrieved from these sources has been
+processed, transformed, and adapted to meet the functional requirements
+of this package. These modifications may result in changes to the
+structure, format, or content of the original data, and as such, the
+data provided by this package does not represent the official datasets
+as maintained by IDEAM or DANE. The development of this package is
+completely independent of these institutions, and neither IDEAM, DANE,
+nor any other Colombian government body endorses, sponsors, or is
+involved in the creation or maintenance of this package. Consequently,
+they bear no responsibility for the data as presented within this
+package. Furthermore, the authors of the ColOpenData assume no liability
+for any outcomes resulting from the use or misuse of the data provided.
+The user is solely responsible for how they utilize the data, and any
+conclusions drawn, analyses performed, or actions taken based on this
+data are the user’s responsibility. This package and its authors make no
+claims to represent or act on behalf of IDEAM, DANE, or any other
+official entity.
 
 ### Lifecycle
 

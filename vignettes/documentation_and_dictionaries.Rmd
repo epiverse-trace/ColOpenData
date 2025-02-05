@@ -37,7 +37,7 @@ Demographic datasets are available for municipalities and departments, and conta
 -   Personas Social (Persons Social).
 -   Personas Demográfico (Persons Demographic).
 
-All datasets are retrieved from the National Administrative Department of Statistics (DANE). Naming is stated as follows:
+All datasets are retrieved from Departamento Administrativo Nacional de Estadística (DANE). Naming is stated as follows:
 
 -   Source: **DANE**.
 -   Group: Names include the categories.
@@ -63,7 +63,7 @@ Geospatial datasets naming is related to the level of aggregation, since they ar
 ## Understanding Climate Dataset
 
 ::: {style="text-align: justify;"}
-This module's data is stored in an unique dataset, and the information required to use the related functions is the area of interest, dates, and tags be consulted. Individual tags are required to download data and include:
+This module's data is retrieved from Instituto de Hidrología, Meteorología y Estudios Ambientales (IDEAM) and is stored in an unique dataset, and the information required to use the related functions is the area of interest, dates, and tags to be consulted. Individual tags are required to download data and include:
 :::
 
 ```{r IDEAM table, echo = FALSE}
@@ -98,7 +98,7 @@ These tags are meant to be used for download using `download_climate()`, `downlo
 ## Understanding Population Projections
 
 ::: {style="text-align: justify;"}
-Population projections and back-projections are available for national, department and municipality levels, and divided by sex and ethnicity (the latter is only available for municipalities). The names of the datasets relate to the source, years included, sex and ethnicity.
+Population projections and back-projections retrieved from DANE are available for national, department and municipality levels, and divided by sex and ethnicity (the latter is only available for municipalities). The names of the datasets relate to the source, years included, sex and ethnicity.
 
 For examples on how to consult the data please refer to [Population Projection with ColOpenData](https://epiverse-trace.github.io/ColOpenData/articles/population_projections.html)
 :::

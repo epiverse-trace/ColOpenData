@@ -41,11 +41,11 @@ ColOpenData is developed at [Universidad de Los Andes](https://www.uniandes.edu.
 
 You can install the CRAN version of ColOpenData with:
 
-```{r}
+```{r eval=FALSE, include=TRUE}
 install.packages("ColOpenData")
 ```
 
-You can also  install the development version of ColOpenData from [GitHub](https://github.com/) with:
+You can also install the development version of ColOpenData from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("pak")
@@ -54,7 +54,7 @@ pak::pak("epiverse-trace/ColOpenData")
 
 ## Quick Overview
 
-**ColOpenData** contains data from two public data sources: The National Administrative Department of Statistics (DANE), and the Institute of Hydrology, Meteorology and Environmental Studies (IDEAM). The available data is divided in four categories:
+**ColOpenData** contains data from two public data sources: Departamento Administrativo Nacional de Estadística (DANE), and Instituto de Hidrología, Meteorología y Estudios Ambientales (IDEAM). The available data is divided in four categories:
 
 -   **Demographic:** Demographic and Socioeconomic data presents information from the National Population and Dwelling Census (CNPV) of 2018. The CNPV data corresponds to the most recent census available to date and the information is presented as an answer to three questions: How many are we?, Where are we? and How do we live?
 
@@ -66,7 +66,7 @@ pak::pak("epiverse-trace/ColOpenData")
 
 Documentation and vignettes are available for the modules in the [user vignettes](https://epiverse-trace.github.io/ColOpenData/).
 
-### Related R Packages
+### Similar R Packages
 
 Similar R packages are offered for international communities, allowing the user to download census, geospatial and climate data.
 
@@ -79,6 +79,20 @@ Similar R packages are offered for international communities, allowing the user 
 -   [tidycensus](https://walker-data.com/tidycensus/): US
 -   [geofi](https://ropengov.github.io/geofi/): Finland
 -   [climate](https://bczernecki.github.io/climate/)
+
+### Disclaimer
+
+ColOpenData stores and distributes open data originally obtained from Departamento Administrativo Nacional de Estadística (DANE), and Instituto de Hidrología, Meteorología y Estudios Ambientales (IDEAM). It is important to note that the data retrieved from these sources has been processed, transformed, and adapted to meet the functional requirements of this package. These modifications may result in changes to the structure, format, or content of the original data, and as such, the data provided by this package does not represent the official datasets as maintained by IDEAM or DANE.
+The development of this package is completely independent of these institutions, 
+and neither IDEAM, DANE, nor any other Colombian government body endorses, 
+sponsors, or is involved in the creation or maintenance of this package. 
+Consequently, they bear no responsibility for the data as presented within this 
+package. Furthermore, the authors of the ColOpenData assume no liability for any
+outcomes resulting from the use or misuse of the data provided. The user is 
+solely responsible for how they utilize the data, and any conclusions drawn, 
+analyses performed, or actions taken based on this data are the user's 
+responsibility. This package and its authors make no claims to represent or act 
+on behalf of IDEAM, DANE, or any other official entity.
 
 ### Lifecycle
 

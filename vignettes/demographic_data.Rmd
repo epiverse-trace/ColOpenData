@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 ```
 
 ::: {style="text-align: justify;"}
-**ColOpenData** can be used to access open demographic data from Colombia. This demographic data is retrieved from the National Administrative Department of Statistics (DANE). The demographic module allows you to consult demographic data from the National Population and Dwelling Census (CNPV) of 2018 and Population Projections.
+**ColOpenData** can be used to access open demographic data from Colombia. This demographic data is retrieved from Departamento Administrativo Nacional de Estadística (DANE). The demographic module allows you to consult demographic data from the National Population and Dwelling Census (CNPV) of 2018 and Population Projections.
 
 The available CNPV information is divided in four categories: households, persons demographic, persons social and dwellings. The population projections information presents data from 1950 to 2070 for a national level, from 1985 to 2050 for a departmental level and from 1985 to 2035 for a municipal level. All data documentation can be accessed as explained at [Documentation and Dictionaries](https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html).
 
