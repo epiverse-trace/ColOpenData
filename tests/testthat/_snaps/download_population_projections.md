@@ -10,7 +10,7 @@
     Message
       ColOpenData provides open data derived from Departamento Administrativo
       Nacional de Estadística (DANE), and Instituto de Hidrología,
-      Meteorología y Estudios Ambientales (IDEAM)but with modifications for
+      Meteorología y Estudios Ambientales (IDEAM) but with modifications for
       specific functional needs. These changes may alter the structure,
       format, or content, meaning the data does not reflect the official
       dataset. The package is developed independently, with no endorsement or
@@ -18,7 +18,7 @@
       The authors of ColOpenData are not liable for how users utilize the
       data, and users are responsible for any outcomes from their use or
       analysis of the data.
-      Stored by Universidad de Los Andes under the Epiverse TRACE iniative.
+      Stored by Universidad de Los Andes under the Epiverse TRACE initiative.
     Output
            codigo_departamento               departamento  ano
       1                     05                  Antioquia 2010

@@ -200,10 +200,10 @@ download_climate_stations <- function(stations, start_date, end_date, tag) {
       format, or content, meaning the data does not reflect the official
       dataset. The package is developed independently, with no endorsement or
       involvement from these institutions or any Colombian government body. The
-      authors of  ColOpenData are not liable for how users utilize the data,
-      and users areresponsible for any outcomes from their use or analysis of
-      the data.",
-      "Stored by Universidad de Los Andes under the Epiverse TRACE iniative."
+      authors of ColOpenData are not liable for how users utilize the data, and
+      users are responsible for any outcomes from their use or analysis of the
+      data.",
+      "Stored by Universidad de Los Andes under the Epiverse TRACE initiative."
     )
   ))
 
