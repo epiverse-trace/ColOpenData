@@ -112,10 +112,16 @@ area.</p>
 <span class="r-in"><span><span class="va">geometry</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html" class="external-link">st_sfc</a></span><span class="op">(</span><span class="va">polygon</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">roi</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="va">geometry</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">ptpm</span> <span class="op">&lt;-</span> <span class="fu">download_climate_geom</span><span class="op">(</span><span class="va">roi</span>, <span class="st">"2022-11-14"</span>, <span class="st">"2022-11-20"</span>, <span class="st">"PTPM_CON"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Original data is retrieved from the Institute of Hydrology, Meteorology</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> and Environmental Studies (Instituto de Hidrología, Meteorología y</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Estudios Ambientales - IDEAM).</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Reformatted by package authors.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ColOpenData provides open data derived from Departamento Administrativo</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Nacional de Estadística (DANE), and Instituto de Hidrología,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Meteorología y Estudios Ambientales (IDEAM) but with modifications for</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> specific functional needs. These changes may alter the structure,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> format, or content, meaning the data does not reflect the official</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> dataset. The package is developed independently, with no endorsement or</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> involvement from these institutions or any Colombian government body.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The authors of ColOpenData are not liable for how users utilize the</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> data, and users areresponsible for any outcomes from their use or</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> analysis of the data.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Stored by Universidad de Los Andes under the Epiverse TRACE iniative.</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ptpm</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    station    longitude   latitude       date     hour      tag value</span>

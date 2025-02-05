@@ -98,8 +98,8 @@
     
 <div style="text-align: justify;">
 <p><strong>ColOpenData</strong> can be used to access open demographic
-data from Colombia. This demographic data is retrieved from the National
-Administrative Department of Statistics (DANE). The demographic module
+data from Colombia. This demographic data is retrieved from Departamento
+Administrativo Nacional de Estadística (DANE). The demographic module
 allows you to consult demographic data from the National Population and
 Dwelling Census (CNPV) of 2018 and Population Projections.</p>
 <p>The available CNPV information is divided in four categories:
@@ -170,10 +170,16 @@ will focus on a CNPV dataset.</p>
 </h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">public_services_d</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/download_demographic.html">download_demographic</a></span><span class="op">(</span>dataset <span class="op">=</span> <span class="st">"DANE_CNPVV_2018_8VD"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Original data is retrieved from the National Administrative Department</span></span>
-<span><span class="co">#&gt; of Statistics (Departamento Administrativo Nacional de Estadística -</span></span>
-<span><span class="co">#&gt; DANE).</span></span>
-<span><span class="co">#&gt; Reformatted by package authors.</span></span>
+<span><span class="co">#&gt; ColOpenData provides open data derived from Departamento Administrativo</span></span>
+<span><span class="co">#&gt; Nacional de Estadística (DANE), and Instituto de Hidrología,</span></span>
+<span><span class="co">#&gt; Meteorología y Estudios Ambientales (IDEAM) but with modifications for</span></span>
+<span><span class="co">#&gt; specific functional needs. These changes may alter the structure,</span></span>
+<span><span class="co">#&gt; format, or content, meaning the data does not reflect the official</span></span>
+<span><span class="co">#&gt; dataset. The package is developed independently, with no endorsement or</span></span>
+<span><span class="co">#&gt; involvement from these institutions or any Colombian government body.</span></span>
+<span><span class="co">#&gt; The authors of ColOpenData are not liable for how users utilize the</span></span>
+<span><span class="co">#&gt; data, and users areresponsible for any outcomes from their use or</span></span>
+<span><span class="co">#&gt; analysis of the data.</span></span>
 <span><span class="co">#&gt; Stored by Universidad de Los Andes under the Epiverse TRACE iniative.</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">public_services_d</span><span class="op">)</span></span>
