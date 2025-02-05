@@ -4,6 +4,7 @@
       download_geospatial(spatial_level = "department", simplified = TRUE,
         include_geom = TRUE, include_cnpv = FALSE)
     Message
+      This might take a while
       ColOpenData provides open data derived from Departamento Administrativo
       Nacional de Estadística (DANE), and Instituto de Hidrología,
       Meteorología y Estudios Ambientales (IDEAM) but with modifications for
@@ -51,6 +52,7 @@
       download_geospatial(spatial_level = "dpto", simplified = TRUE, include_geom = FALSE,
         include_cnpv = TRUE)
     Message
+      This might take a while
       ColOpenData provides open data derived from Departamento Administrativo
       Nacional de Estadística (DANE), and Instituto de Hidrología,
       Meteorología y Estudios Ambientales (IDEAM) but with modifications for

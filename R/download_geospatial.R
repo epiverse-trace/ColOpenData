@@ -54,6 +54,9 @@ download_geospatial <- function(spatial_level, simplified = TRUE,
   if (simplified) {
     dataset_path <- sub("\\.gpkg$", "_SIM.gpkg", dataset_path)
   }
+
+  message("This might take a while")
+
   geospatial_data <- sf::st_read(dataset_path, quiet = TRUE)
   geospatial_vars <- c("area", "latitud", "longitud")
   shape_vars <- c("shape_length", "shape_area")
