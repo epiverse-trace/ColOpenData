@@ -18,6 +18,10 @@ articles:
   navbar: Merge data
   contents:
   - merge_geo_demographic
+- title: Design Principles
+  navbar: Design Principles
+  contents:
+  - design_principles
 
 reference:
 - title: Demographic Data
