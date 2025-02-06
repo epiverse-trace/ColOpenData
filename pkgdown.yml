@@ -4,11 +4,12 @@ pkgdown_sha: ~
 articles:
   climate_data: climate_data.html
   demographic_data: demographic_data.html
+  design_principles: design_principles.html
   documentation_and_dictionaries: documentation_and_dictionaries.html
   geospatial_data: geospatial_data.html
   merge_geo_demographic: merge_geo_demographic.html
   population_projections: population_projections.html
-last_built: 2025-02-05T18:42Z
+last_built: 2025-02-06T12:05Z
 urls:
   reference: https://epiverse-trace.github.io/ColOpenData/reference
   article: https://epiverse-trace.github.io/ColOpenData/articles
