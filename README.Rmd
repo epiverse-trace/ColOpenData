@@ -82,7 +82,7 @@ Similar R packages are offered for international communities, allowing the user 
 
 ### Disclaimer
 
-ColOpenData stores and distributes open data originally obtained from Departamento Administrativo Nacional de Estad\u00edstica (DANE), and Instituto de Hidrolog\u00eda, Meteorolog\u00eda y Estudios Ambientales (IDEAM). It is important to note that the data retrieved from these sources has been processed, transformed, and adapted to meet the functional requirements of this package. These modifications may result in changes to the structure, format, or content of the original data, and as such, the data provided by this package does not represent the official datasets as maintained by IDEAM or DANE.
+ColOpenData stores and distributes open data originally obtained from Departamento Administrativo Nacional de Estadística (DANE), and Instituto de Hidrología, Meteorología y Estudios Ambientales (IDEAM). It is important to note that the data retrieved from these sources has been processed, transformed, and adapted to meet the functional requirements of this package. These modifications may result in changes to the structure, format, or content of the original data, and as such, the data provided by this package does not represent the official datasets as maintained by IDEAM or DANE.
 The development of this package is completely independent of these institutions, 
 and neither IDEAM, DANE, nor any other Colombian government body endorses, 
 sponsors, or is involved in the creation or maintenance of this package. 
