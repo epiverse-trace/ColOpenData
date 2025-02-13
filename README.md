@@ -104,25 +104,25 @@ the user to download census, geospatial and climate data.
 ### Disclaimer
 
 ColOpenData stores and distributes open data originally obtained from
-Departamento Administrativo Nacional de Estad0edstica (DANE), and
-Instituto de Hidrolog0eda, Meteorolog0eda y Estudios Ambientales
-(IDEAM). It is important to note that the data retrieved from these
-sources has been processed, transformed, and adapted to meet the
-functional requirements of this package. These modifications may result
-in changes to the structure, format, or content of the original data,
-and as such, the data provided by this package does not represent the
-official datasets as maintained by IDEAM or DANE. The development of
-this package is completely independent of these institutions, and
-neither IDEAM, DANE, nor any other Colombian government body endorses,
-sponsors, or is involved in the creation or maintenance of this package.
-Consequently, they bear no responsibility for the data as presented
-within this package. Furthermore, the authors of the ColOpenData assume
-no liability for any outcomes resulting from the use or misuse of the
-data provided. The user is solely responsible for how they utilize the
-data, and any conclusions drawn, analyses performed, or actions taken
-based on this data are the user’s responsibility. This package and its
-authors make no claims to represent or act on behalf of IDEAM, DANE, or
-any other official entity.
+Departamento Administrativo Nacional de Estadística (DANE), and
+Instituto de Hidrología, Meteorología y Estudios Ambientales (IDEAM). It
+is important to note that the data retrieved from these sources has been
+processed, transformed, and adapted to meet the functional requirements
+of this package. These modifications may result in changes to the
+structure, format, or content of the original data, and as such, the
+data provided by this package does not represent the official datasets
+as maintained by IDEAM or DANE. The development of this package is
+completely independent of these institutions, and neither IDEAM, DANE,
+nor any other Colombian government body endorses, sponsors, or is
+involved in the creation or maintenance of this package. Consequently,
+they bear no responsibility for the data as presented within this
+package. Furthermore, the authors of the ColOpenData assume no liability
+for any outcomes resulting from the use or misuse of the data provided.
+The user is solely responsible for how they utilize the data, and any
+conclusions drawn, analyses performed, or actions taken based on this
+data are the user’s responsibility. This package and its authors make no
+claims to represent or act on behalf of IDEAM, DANE, or any other
+official entity.
 
 ### Lifecycle
 
