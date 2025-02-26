@@ -1,3 +1,13 @@
+# ColOpenData 1.0.0
+
+## Documentation
+
+-   Updated disclaimers regarding official data sources.
+
+-   Added a **Design** **Vignette** to provide information regarding the package's design decisions.
+
+-   Updated lifecycle status to **Stable**.
+
 # ColOpenData 0.3.1
 
 # 0.3.0
