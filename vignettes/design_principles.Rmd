@@ -4,7 +4,7 @@ output:
   rmarkdown::html_vignette:
     df_print: tibble
 vignette: >
-  %\VignetteIndexEntry{Population Projections with ColOpenData}
+  %\VignetteIndexEntry{Design Principles for {ColOpenData}}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
